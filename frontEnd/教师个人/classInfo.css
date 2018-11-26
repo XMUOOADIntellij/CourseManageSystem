@@ -1,0 +1,26 @@
+
+
+@media screen and (max-width: 480px){
+
+    .card-row-details{
+    margin-left: 10%;
+    }
+
+    .margin-horizon{
+        margin-right:10%;
+    }
+
+    .text-underline{
+        text-decoration: underline;
+    }
+
+    .separator-dark{
+        margin-left: 12%;
+        width:76%;
+        margin-right: 12%;
+    }
+
+    .btn-giant{
+        width:84.44%;
+    }
+}

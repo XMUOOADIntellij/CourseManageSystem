@@ -1,0 +1,85 @@
+
+
+@media screen and (max-width: 480px){
+
+    .card{
+        background-color: #f6f7f8;
+    }
+    .card-head{
+        background-color: #f6f7f8;
+    }
+
+    .card-head-content{
+        height: 25px;
+        width: 96%;
+    }
+
+    .card-row-details{
+        padding-top: 15px;
+        padding-left: 7.5%;
+        height: 45px;
+        line-height: 45px;
+        padding-bottom: 5px;
+    }
+
+    .card-text-title{
+        width:90%;
+        padding-top: 20px;
+        padding-left: 5%;
+        padding-bottom:20px;
+    }
+
+    .double-line-text{
+        padding-left: 5%;
+        padding-bottom: 20px;
+        width:  80%;
+        height: 55px;
+        background-color: #f6f7f8;
+        float: left;
+    }
+    .single-line-text{
+        padding-top: 5px;
+        width:  80%;
+        height: 20px;
+        background-color: #f6f7f8;
+    }
+
+    .double-line-text2{
+        padding-left: 5%;
+        padding-bottom: 40px;
+        width:  70%;
+        height: 55px;
+        background-color: #f6f7f8;
+        float: left;
+    }
+    .single-line-text2{
+        padding-top: 5px;
+        width:  60%;
+        height: 20px;
+        background-color: #f6f7f8;
+        float:left;
+    }
+
+    .dialog-row{
+        width: 95%;
+        padding-left: 5%;
+        line-height: 60px;
+        height:60px;
+        width: 25%;
+        padding-left: 0%;
+        line-height: 55px;
+        height:55px;
+        float:left;
+    }
+    .selector{
+        float: right;
+        width: 60%;
+        height: 30px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        margin-right: 0%;
+        border-radius: 5px;
+        border: none;
+        float:left;
+    }
+}

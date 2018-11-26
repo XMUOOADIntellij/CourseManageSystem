@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./courseManagement.css" />
+</head>
+<body>
+
+<div class="topBar">
+    <div class="content-icon"><img class="icon" src="../icon/shutdown_white.png"/></div>
+    <div class="content text text-light">新建课程</div>
+</div>
+
+<div class="form">
+    <div>
+        <span class="text text-small text-bold myMarginLeft">名称</span>
+        <div class="myMargin"></div>
+        <input class="input text-smaller text-grey" type="text" placeholder=" 填写课程名称">
+    </div>
+</div>
+
+<div class="form">
+    <div>
+        <span class="text text-small text-bold myMarginLeft">课程简介</span>
+        <div class="myMargin"></div>
+        <textarea class="inputs text-smaller text-grey" rows="3" cols="20"  placeholder="填写课程简介"></textarea>
+    </div>
+</div>
+
+<div class="form">
+    <div>
+        <span class="text text-small text-bold myMarginLeft">成绩计算规则</span>
+        <div class="myMargin"></div>
+    </div>
+
+    <div class="dialog-row">
+        <span class="text-smaller">课堂展示：</span>
+        <select class="selector">
+            <option>25%</option>
+            <option>50%</option>
+            <option>75%</option>
+            <option>100%</option>
+        </select>
+    </div>
+
+    <div class="dialog-row">
+        <span class="text-smaller">课堂提问：</span>
+        <select class="selector">
+            <option>10%</option>
+            <option>20%</option>
+            <option>30%</option>
+            <option>40%</option>
+        </select>
+    </div>
+
+    <div class="dialog-row">
+        <span class="text-smaller">书面报告：</span>
+        <select class="selector">
+            <option>10%</option>
+            <option>20%</option>
+            <option>30%</option>
+            <option>40%</option>
+        </select>
+    </div>
+</div>
+
+<div class="form">
+    <div>
+        <span class="text text-small text-bold myMarginLeft">设置分组规则</span>
+        <div class="myMargin"></div>
+    </div>
+
+    <div class="dialog-row">
+        <span class="text-smaller">最少人数：</span>
+        <select class="selector">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+    </div>
+
+    <div class="dialog-row">
+        <span class="text-smaller">最多人数：</span>
+        <select class="selector">
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+    </div>
+</div>
+
+<div class="form">
+    <div>
+        <span class="text text-small text-bold myMarginLeft">分组时间</span>
+        <div class="myMargin"></div>
+    </div>
+
+    <div class="dialog-row">
+        <span class="text text-smaller">组队开始时间：</span>
+        <input class="dateSelector text text-smallest textRight" type="date" value="2018-09-01"/>
+    </div>
+
+    <div class="dialog-row">
+        <span class="text text-smaller">组队结束时间：</span>
+        <input class="dateSelector text text-smallest textRight " type="date" value="2018-09-01"/>
+    </div>
+</div>
+
+<div class="myBigMargin">
+    <input class="btn btn-giant btn-green" type="button" value="提交">
+</div>
+</body>
+</html>
