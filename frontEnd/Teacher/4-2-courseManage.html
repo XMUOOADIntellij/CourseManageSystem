@@ -9,93 +9,137 @@
     <link rel="stylesheet" type="text/css" media="screen" href="courseManagement.css"/>
     <script src="../jquery-1.10.2.js"></script>
     <script src="../js.cookie-2.2.0.min.js"></script>
-<script src="../teacher.js"></script></head>
+  <!--  <script src="../teacher.js"></script>-->
+</head>
 <!--<body onload="getCourseList()">-->
 <body>
 <div class="topBar">
-    <div class="content-icon"><img alt=""  class="icon" src="../icon/Left_white.png"/></div>
+    <div class="content-icon" onclick="goBack()">
+        <img alt="" class="icon" src="../icon/Left_white.png"/>
+    </div>
     <div class="content text text-light">课程管理</div>
-    <div class="content-icon"
-         id="myReturn"><img alt=""  class="icon" src="../icon/Add_white.png"/></div>
+    <div class="content-icon" id="myReturn">
+        <img alt="" class="icon" src="../icon/Add_white.png"/>
+    </div>
 </div>
-<div class="card">
+<div class="card" id="OOAD">
     <div class="card-head">
         <span class="card-head-content text-large text-light">OOAD(主)</span>
-        <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_white.png"/></div>
+        <div class="content-icon">
+            <img alt="" class="icon" src="../icon/Right_white.png"/>
+        </div>
     </div>
     <div class="panel">
-        <div class="card-head card-head-secondary">
+        <div class="card-head card-head-secondary" onclick="onStuGrade()">
             <span class="card-head-content text">学生成绩</span>
-            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+            <div class="content-icon">
+                <img alt="" class="icon" src="../icon/Right_black.png"/>
+            </div>
         </div>
-        <div class="separator-dark"></div>
-        <div class="card-head card-head-secondary">
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onTeam()">
             <span class="card-head-content text">学生组队</span>
-            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+            <div class="content-icon">
+                <img alt="" class="icon" src="../icon/Right_black.png"/>
+            </div>
         </div>
-        <div class="separator-dark"></div>
-        <div class="card-head card-head-secondary">
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onCourseInfo()">
             <span class="card-head-content text">课程信息</span>
-            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+            <div class="content-icon">
+                <img alt="" class="icon" src="../icon/Right_black.png"/>
+            </div>
         </div>
-        <div class="separator-dark"></div>
-        <div class="card-head card-head-secondary">
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onClassInfo()">
             <span class="card-head-content text">班级信息</span>
-            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+            <div class="content-icon">
+                <img alt="" class="icon" src="../icon/Right_black.png"/>
+            </div>
         </div>
-        <div class="separator-dark"></div>
-        <div class="card-head card-head-secondary">
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onSemRound()">
             <span class="card-head-content text">讨论课轮次</span>
-            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+            <div class="content-icon">
+                <img alt="" class="icon" src="../icon/Right_black.png"/>
+            </div>
         </div>
-        <div class="separator-dark"></div>
-        <div class="card-head card-head-secondary">
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onShareSet()">
             <span class="card-head-content text">共享设置</span>
-            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+            <div class="content-icon">
+                <img alt="" class="icon" src="../icon/Right_black.png"/>
+            </div>
         </div>
     </div>
 </div>
-<div class="card">
+<div class="card" id="J2EE">
     <div class="card-head">
         <span class="card-head-content text-large text-light">J2EE</span>
-        <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_white.png"/></div>
+        <div class="content-icon">
+            <img alt="" class="icon" src="../icon/Right_white.png"/>
+        </div>
     </div>
     <div class="panel">
-        <div class="card-head card-head-secondary">
+        <div class="card-head card-head-secondary" onclick="onStuGrade()">
             <span class="card-head-content text">学生成绩</span>
-            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+            <div class="content-icon">
+                <img alt="" class="icon" src="../icon/Right_black.png"/>
+            </div>
         </div>
-        <div class="separator-dark"></div>
-        <div class="card-head card-head-secondary">
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onTeam()">
             <span class="card-head-content text">学生组队</span>
-            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+            <div class="content-icon">
+                <img alt="" class="icon" src="../icon/Right_black.png"/>
+            </div>
         </div>
-        <div class="separator-dark"></div>
-        <div class="card-head card-head-secondary">
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onCourseInfo()">
             <span class="card-head-content text">课程信息</span>
-            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+            <div class="content-icon">
+                <img alt="" class="icon" src="../icon/Right_black.png"/>
+            </div>
         </div>
-        <div class="separator-dark"></div>
-        <div class="card-head card-head-secondary">
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onClassInfo()">
             <span class="card-head-content text">班级信息</span>
-            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+            <div class="content-icon">
+                <img alt="" class="icon" src="../icon/Right_black.png"/>
+            </div>
         </div>
-        <div class="separator-dark"></div>
-        <div class="card-head card-head-secondary">
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onSemRound()">
             <span class="card-head-content text">讨论课轮次</span>
-            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+            <div class="content-icon">
+                <img alt="" class="icon" src="../icon/Right_black.png"/>
+            </div>
         </div>
-        <div class="separator-dark"></div>
-        <div class="card-head card-head-secondary">
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onShareSet()">
             <span class="card-head-content text">共享设置</span>
-            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+            <div class="content-icon">
+                <img alt="" class="icon" src="../icon/Right_black.png"/>
+            </div>
         </div>
     </div>
 </div>
 <div class="card" id="cardadd">
-    <div class="card-head" id="btnAddCourse">
+    <div class="card-head" id="btnAddCourse" onclick="addCourse()">
         <span class="card-head-content text-large text-light">新建课程</span>
-        <div class="content-icon"><img alt=""  class="icon" src="../icon/Add_circle_outline_white.png"/></div>
+        <div class="content-icon">
+            <img alt="" class="icon" src="../icon/Add_circle_outline_white.png"/>
+        </div>
     </div>
 </div>
 </body>
@@ -114,13 +158,30 @@
             }
         });
     }
-    $("#myReturn").click(function () {
+    function goBack() {
         window.location.href="4-teacherHome.html";//test
-    });
-    $("#btnAddCourse").click(function () {
+    }
+    function addCourse() {
         window.location.href = "4-2-1-createCourse.html";//test
-    });
-
+    }
+    function onStuGrade() {
+        window.location.href = "4-2-2-studentScore.html";//test
+    }
+    function onTeam() {
+        window.location.href = "4-2-2-studentGroup.html";//test
+    }
+    function onShareSet() {
+        window.location.href = "4-2-6-shareInfo.html";//test
+    }
+    function onCourseInfo() {
+        window.location.href = "4-2-4-courseInfo.html";//test
+    }
+    function onClassInfo() {
+        window.location.href = "4-2-5-classInfo.html";//test
+    }
+    function onSemRound() {
+        window.location.href = "4-2-1-createCourse.html";//test
+    }
     function getCourseList() {
         $.ajax({
             type: 'get',
@@ -130,12 +191,17 @@
             success: function (data, textStatus, xhr) {
                 if (xhr.status === 200) {
                     var content = document.getElementById("topbar");
-                    var str = "";
+                    var strVar = "";
                     for (var i = 0; i < data.length; i++) {
-                        str += "";
+                        strVar +=
+                            "<div class=\"card\" id=\"" + data[i].name + "\"><div class=\"card-head\"><span class=\"card-head-content text-large text-light\">" + data[i].name + "<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../icon/Right_white.png\"><\/div><\/div><div class=\"panel\"><div class=\"card-head card-head-secondary\" onclick=\"onStuGrade()\"><span class=\"card-head-content text\">学生成绩<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../icon/Right_black.png\"><\/div><\/div><div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onTeam()\"><span class=\"card-head-content text\">学生组队<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../icon/Right_black.png\"><\/div><\/div><div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onCourseInfo()\"><span class=\"card-head-content text\">课程信息<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../icon/Right_black.png\"><\/div><\/div><div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onClasInfo()\"><span class=\"card-head-content text\">班级信息<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../icon/Right_black.png\"><\/div><\/div><div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onSemRound()\"><span class=\"card-head-content text\">讨论课轮次<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../icon/Right_black.png\"><\/div><\/div>";
+                        if (data[i].isShare == true)
+                            strVar += "<div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onShareSet()\"><span class=\"card-head-content text\">共享设置<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../icon/Right_black.png\"><\/div><\/div><\/div><\/div>";
+                        else
+                            strVar += "<\/div><\/div>";
                     }
-                    str += "";
-                    content.insertAdjacentHTML('afterend', str);
+                    strVar += "<div class=\"card\" id=\"cardadd\"><div class=\"card-head\" id=\"btnAddCourse\"><span class=\"card-head-content text-large text-light\">新建课程<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../icon/Add_circle_outline_white.png\"><\/div><\/div><\/div>";
+                    content.insertAdjacentHTML('afterend', strVar);
                 }
             },
             statusCode: {
@@ -145,6 +211,5 @@
             }
         })
     };
-
 </script>
 </html>
