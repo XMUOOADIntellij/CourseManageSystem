@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../style.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="courseManagement.css"/>
+    <script src="../jquery-1.10.2.js"></script>
+    <script src="../js.cookie-2.2.0.min.js"></script>
+<script src="../teacher.js"></script></head>
+<!--<body onload="getCourseList()">-->
+<body>
+<div class="topBar">
+    <div class="content-icon"><img alt=""  class="icon" src="../icon/Left_white.png"/></div>
+    <div class="content text text-light">课程管理</div>
+    <div class="content-icon"
+         id="myReturn"><img alt=""  class="icon" src="../icon/Add_white.png"/></div>
+</div>
+<div class="card">
+    <div class="card-head">
+        <span class="card-head-content text-large text-light">OOAD(主)</span>
+        <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_white.png"/></div>
+    </div>
+    <div class="panel">
+        <div class="card-head card-head-secondary">
+            <span class="card-head-content text">学生成绩</span>
+            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+        </div>
+        <div class="separator-dark"></div>
+        <div class="card-head card-head-secondary">
+            <span class="card-head-content text">学生组队</span>
+            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+        </div>
+        <div class="separator-dark"></div>
+        <div class="card-head card-head-secondary">
+            <span class="card-head-content text">课程信息</span>
+            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+        </div>
+        <div class="separator-dark"></div>
+        <div class="card-head card-head-secondary">
+            <span class="card-head-content text">班级信息</span>
+            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+        </div>
+        <div class="separator-dark"></div>
+        <div class="card-head card-head-secondary">
+            <span class="card-head-content text">讨论课轮次</span>
+            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+        </div>
+        <div class="separator-dark"></div>
+        <div class="card-head card-head-secondary">
+            <span class="card-head-content text">共享设置</span>
+            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-head">
+        <span class="card-head-content text-large text-light">J2EE</span>
+        <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_white.png"/></div>
+    </div>
+    <div class="panel">
+        <div class="card-head card-head-secondary">
+            <span class="card-head-content text">学生成绩</span>
+            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+        </div>
+        <div class="separator-dark"></div>
+        <div class="card-head card-head-secondary">
+            <span class="card-head-content text">学生组队</span>
+            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+        </div>
+        <div class="separator-dark"></div>
+        <div class="card-head card-head-secondary">
+            <span class="card-head-content text">课程信息</span>
+            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+        </div>
+        <div class="separator-dark"></div>
+        <div class="card-head card-head-secondary">
+            <span class="card-head-content text">班级信息</span>
+            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+        </div>
+        <div class="separator-dark"></div>
+        <div class="card-head card-head-secondary">
+            <span class="card-head-content text">讨论课轮次</span>
+            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+        </div>
+        <div class="separator-dark"></div>
+        <div class="card-head card-head-secondary">
+            <span class="card-head-content text">共享设置</span>
+            <div class="content-icon"><img alt=""  class="icon" src="../icon/Right_black.png"/></div>
+        </div>
+    </div>
+</div>
+<div class="card" id="cardadd">
+    <div class="card-head" id="btnAddCourse">
+        <span class="card-head-content text-large text-light">新建课程</span>
+        <div class="content-icon"><img alt=""  class="icon" src="../icon/Add_circle_outline_white.png"/></div>
+    </div>
+</div>
+</body>
+<script>
+    var acc = document.getElementsByClassName("card-head");
+    for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+                $(this).find('.content-icon').children('img').attr('src', '../icon/Right_white.png');
+            } else {
+                panel.style.display = "block";
+                $(this).find('.content-icon').children('img').attr('src', '../icon/Up_white.png');
+            }
+        });
+    }
+    $("#myReturn").click(function () {
+        window.location.href="4-teacherHome.html";//test
+    });
+    $("#btnAddCourse").click(function () {
+        window.location.href = "4-2-1-createCourse.html";//test
+    });
+
+    function getCourseList() {
+        $.ajax({
+            type: 'get',
+            url: '',
+            dataType: "json",
+            contentType: "application/json;",
+            success: function (data, textStatus, xhr) {
+                if (xhr.status === 200) {
+                    var content = document.getElementById("topbar");
+                    var str = "";
+                    for (var i = 0; i < data.length; i++) {
+                        str += "";
+                    }
+                    str += "";
+                    content.insertAdjacentHTML('afterend', str);
+                }
+            },
+            statusCode: {
+                401: function () {//statuscode unknown
+                    alert("获取信息失败");
+                }
+            }
+        })
+    };
+
+</script>
+</html>

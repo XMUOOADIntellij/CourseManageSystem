@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../style.css"/>
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="log.css"/>
+    <script src="../jquery-1.10.2.js"></script>
+   <script src="../teacher.js"></script>
+<body>
+<div class="topBar">
+    <div class="content-icon"><img alt=""  class="icon"
+                                   src="../icon/close_white.png"/></div>
+    <div class="content text text-light">登录</div>
+</div>
+<div class="tips">
+    <span class="text text-large  text-bold">欢迎使用</span>
+</div>
+<div class="form">
+    <div>
+        <input class="input text text-small"
+               type="text"
+               id="usernumber"
+               placeholder="输入您的账户"> <span class="text text-smallest text-grey myMarginLeft">学号/教工号</span>
+    </div>
+    <div class="myMargin"></div>
+    <div>
+        <input class="input text text-small"
+               type="text"
+               id="userPassword"
+               placeholder="输入您的密码"> <span class="text text-smallest  text-red myMarginLeft">初始密码为123456</span>
+    </div>
+    <div class="btnContainer">
+        <button class="btn btn-big btn-white"
+                id="btnSignUp"
+                value="注册"></button>
+        <button class="btn btn-big btn-green right"
+                id="btnSignIn"
+                value="登录"></button>
+    </div>
+</div>
+<div class="tips">
+    <a href="1.3_forget.html"
+       class="myLink text-smaller">忘记了密码</a>
+</div>
+</body>
+<script>
+    $(function () {
+        $("#btnSignIn").click(function () {
+            window.location.href = "../Teacher/4-teacherHome.html";
+/*
+            var jname = $("#userName").val();
+            var jpassword = $("#userPassword").val();
+            var jdata = {id: jname, password: jpassword};
+            $.ajax({
+                type: 'post',
+                url: '',
+                dataType: "json",
+                data: JSON.stringify(jdata),
+                contentType: "application/json",
+                success: function (data, textStatus, xhr) {
+                    if (xhr.status === 200) {//状态码存疑
+                        updateCookie('username', data.name); //store username in cookie
+                        window.localStorage.setItem("jwt", data.jwt);
+                        if (data.type === "student")
+                            window.location.href = "/student/home";
+                        else
+                            window.location.href = "/teacher/home";
+                    }
+                },
+                statusCode: {
+                    401: function () {
+                        $("#userPassword").val("");
+                        $("#userName").val("");
+                        alert("用户名或密码错误！");
+                    }
+                }
+            });
+*/
+        })
+    });
+
+</script>
+</html>
