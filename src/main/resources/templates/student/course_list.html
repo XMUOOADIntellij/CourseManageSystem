@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>学生主页</title>
+    <link href="/css/student/StudentCourseHomePage.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload="return classinfo();">
+    	<div class="top">
+        	<div class="font">
+        		课堂管理系统
+        	</div>
+        	<div class="icon">
+                <img src="/img/home.png"><a href="/student/profile">首页</a>
+                <img src="/img/help.png"><a>帮助</a>
+                <img src="/img/exit.png"><a href="#" onclick="logout();">退出</a>
+        	</div>
+        	<div class="clear"></div>
+    	</div>
+        <div class="body">
+            <div class="navigation">
+                <div class="title">导航</div>
+                <div class="line"></div>
+                <div class="courseIntroduction"><a class="guidefont" href="/student/profile">基本信息</a>
+                    <a class="guidefont" href="/student/courses">课程信息</a>
+                    <a class="guidefont" href="/student/course/select">选择课程</a>
+                </div>
+                </div>
+            <div class="content" id="classcontent">
+              <div class="title">课程信息</div>
+              <hr class="line"/>
+
+        
+            </div>
+            
+           
+            <div class="clear"></div>
+        </div>
+    <!-- jquery.js-->
+    <script src ="/js/jquery-1.10.2.js"></script>
+    <!-- student.js -->
+    <script src ="/js/student.js"></script>
+        <!--jwt.js-->
+        <script src="/js/jwt.js"></script>
+</body>
+</html>
