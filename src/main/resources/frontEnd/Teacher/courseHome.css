@@ -1,0 +1,14 @@
+@media screen and (max-width: 480px) {
+    .content-icon-right {
+        width: 9%;
+        padding-left: 1%;
+        text-align: center;
+        float: right;
+        margin-top: 10px;
+        padding-right: 5%;
+        line-height: normal;
+    }
+    .card-head-warning {
+        background-color: #7B7C7D;
+    }
+}
