@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+/**
+ * @author Y Jiang
+ * 2018/11/28
+ */
 @Controller
 public class TestController {
 
