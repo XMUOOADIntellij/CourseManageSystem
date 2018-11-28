@@ -64,7 +64,7 @@
             dataType: "json",
             contentType: "application/json;",
             success: function (data, textStatus, xhr) {
-                if (xhr.status == 200) {
+                if (xhr.status === 200) {
                     var content = document.getElementById("card");   //获取外围容器
                     var str = "";
                     for (var i = 0; i < data.length; i++) {

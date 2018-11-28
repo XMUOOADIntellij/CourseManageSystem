@@ -14,7 +14,7 @@
     .input {
         width: 75%;
         margin-left: 2%;
-        height: 50px;
+        height: 30px;
         background-color: #FFFFFF;
         border: none;
     }
@@ -30,9 +30,9 @@
     .dateSelector {
         width: 40%;
         height: 30px;
-        margin: 15px 5% 15px 2%;
         border-radius: 5px;
         border: none;
+        text-align: left;
     }
     .textCenter {
         text-align: center;
@@ -51,5 +51,21 @@
     }
     .inputfile {
         box-shadow: none;
+    }
+
+    span{
+        margin-left: 2%;
+        margin-right: 2%;
+
+    }
+    .dateSelector
+    {
+        margin: 0px;
+        padding: 0px;
+    }
+    .dialog-row
+    {
+        height:30px;
+        margin-left: 10px;
     }
 }
