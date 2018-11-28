@@ -17,18 +17,6 @@ import java.util.Properties;
 public class CourseTest {
 
     private CourseDao mapper;
-    public static void main(String[] args) {
-       // SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build();
-        //SqlSession sqlSession= SqlSessionFactory;
-        //CourseMapper courseMapper=sqlSession.getMapper(CourseMapper.class);
-
-        //Course course=new Course("3","00BD","MingQiu","Haiyun303");
-       // Course result=courseMapper.add(course);
-       // sqlSession.commit();
-
-       // System.out.println(result.getName());
-
-    }
 
 
  //根据id查询课
