@@ -165,21 +165,33 @@
         window.location.href = "4-2-1-createCourse.html";//test
     }
     function onStuGrade() {
+    	var currentCourse = $(this).parent().parent().attr('id').toString();
+        updateCookie("curCourse", currentCourse);
         window.location.href = "4-2-2-studentScore.html";//test
     }
     function onTeam() {
+		var currentCourse = $(this).parent().parent().attr('id').toString();
+		updateCookie("curCourse", currentCourse);
         window.location.href = "4-2-2-studentGroup.html";//test
     }
     function onShareSet() {
+		var currentCourse = $(this).parent().parent().attr('id').toString();
+		updateCookie("curCourse", currentCourse);
         window.location.href = "4-2-6-shareInfo.html";//test
     }
     function onCourseInfo() {
+		var currentCourse = $(this).parent().parent().attr('id').toString();
+		updateCookie("curCourse", currentCourse);
         window.location.href = "4-2-4-courseInfo.html";//test
     }
     function onClassInfo() {
+		var currentCourse = $(this).parent().parent().attr('id').toString();
+		updateCookie("curCourse", currentCourse);
         window.location.href = "4-2-5-classInfo.html";//test
     }
     function onSemRound() {
+		var currentCourse = $(this).parent().parent().attr('id').toString();
+		updateCookie("curCourse", currentCourse);
         window.location.href = "4-2-1-createCourse.html";//test
     }
     function getCourseList() {
@@ -210,6 +222,6 @@
                 }
             }
         })
-    };
+    }
 </script>
 </html>
