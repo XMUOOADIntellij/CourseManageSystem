@@ -7,27 +7,27 @@
     <resultMap id="courseResultMap" type="com.group12.course.entity.Course">
         <id property="id" column="id" />
         <result property="name" column="name"/>
-        <result property="teacher_name" column="teacher_name"/>
+        <result property="teacherName" column="teacherName"/>
         <result property="location" column="location"/>
     </resultMap>
 
 
     <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
     <!--获得所有课程 -->
-    <select id="getAllcourses" resultType="com.group12.course.entity.Course">
-        select id,name,teacher_name,location from courses
+    <select id="getAllCourses" resultType="com.group12.course.entity.Course">
+        select id,name,teacherName,location from courses
     </select>
 
     <!--获得课程对象通过编号 -->
     <select id="getCourseNameById" resultType="com.group12.course.entity.Course">
-        select id,name,teacher_name,location from courses
+        select id,name,teacherName,location from courses
         where id=#{id}
     </select>
 
     <!-- 增加 -->
     <insert id="add">
-        insert into courses(id,name,teacher_name,location)
-        values(#{id},#{name},#{teacher_name},#{location})
+        insert into courses(id,name,teacherName,location)
+        values(#{id},#{name},#{teacherName},#{location})
     </insert>
 
     <!-- 删除 -->
@@ -37,7 +37,7 @@
 
     <!-- 更新 -->
     <update id="update">
-        update courses set name = #{name},teacher_name = #{teacher_name},location = #{location}
+        update courses set name = #{name},teacherName = #{teacherName},location = #{location}
         where id=#{id}
     </update>
 </mapper>

@@ -35,7 +35,6 @@ public class CourseController {
     @GetMapping(value="/getall",produces = "application/json")
     public List<Course> getAllCourse() {
         //返回所有课程的List
-
         return courseService.getAllCourses();
     }
 
