@@ -1,11 +1,16 @@
 package com.group12.course.entity;
 
+/**
+ * @author Y Jiang
+ * 2018/11/28
+ */
 public class Course {
 
-    private String id;				//课程id
-    private String name;			//课程名称
-    private String teacherName;	//教师名称
-    private String location;		//上课地点
+    private String id;
+    private String name;
+    private String teacherName;
+    private String location;
+
     public Course(){}
     public Course(String id, String name, String teacherName, String location) {
         this.id = id;

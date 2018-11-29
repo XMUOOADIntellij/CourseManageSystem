@@ -1,4 +1,4 @@
-package com.group12.course.dao.daoImpl;
+package com.group12.course.dao.daoimpl;
 
 import com.group12.course.dao.CourseDao;
 import com.group12.course.entity.Course;
@@ -9,42 +9,68 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+/**
+ * @author Y Jiang
+ * 2018/11/28
+ */
 @Component
 public class CourseDaoImpl implements CourseDao {
     @Autowired
     private CourseMapper courseMapper;
 
-    // 获得所有课程
+    /**
+     * 获得所有课程
+     *
+     * @return List<Course>
+     */
     @Override
-    public List<Course> getAllCourses(){
+    public List<Course> listCourses() {
         return courseMapper.getAllCourses();
     }
 
-    // 根据课程id获得课程
+    /**
+     * 根据课程id获得课程
+     *
+     * @param id int
+     * @return Course
+     */
     @Override
     public Course getCourseNameById(int id) {
         return courseMapper.getCourseNameById(id);
     }
 
 
-    // 添加课程
+    /**
+     * 增加课程
+     *
+     * @param  entity Course
+     * @return Course
+     */
     @Override
-    public Course add(Course entity){
+    public Course add(Course entity) {
         return courseMapper.add(entity);
     }
 
-    // 删除课程
+    /**
+     * 删除课程
+     *
+     * @param id int
+     * @return Course
+     */
     @Override
-    public Course remove(int id){
+    public Course remove(int id) {
         return courseMapper.remove(id);
     }
 
-    // 更新课程
+    /**
+     * 更新课程
+     *
+     * @param  entity Course
+     * @return Course
+     */
     @Override
-    public Course update(Course entity){
+    public Course update(Course entity) {
         return courseMapper.update(entity);
     }
-
 }
 

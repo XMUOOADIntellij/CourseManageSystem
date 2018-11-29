@@ -1,4 +1,4 @@
-package com.group12.course.service.serviceImpl;
+package com.group12.course.service.serviceimpl;
 
 import com.group12.course.dao.CourseDao;
 import com.group12.course.entity.Course;
@@ -8,49 +8,66 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author Y Jiang
+ * 2018/11/28
+ */
 @Service
 public class CourseServiceImpl implements CourseService {
 
         @Autowired
         CourseDao courseDao;
 
-        //通过id来获取课程的函数
+        /**
+         * 获得所有课程
+         * @return List<Course>
+         */
+        @Override
+        public List<Course> listCourses(){
+                return courseDao.listCourses();
+        }
+
+        /**
+         * 根据课程id获得课程
+         * @param id int
+         * @return Course
+         */
         @Override
         public Course getCourseNameById(int id) {
             return courseDao.getCourseNameById(id);
         }
 
-        //添加课程
+        /**
+         * 增加课程
+         * @param  course Course
+         * @return Course
+         */
         @Override
         public Course addCourse(Course course) {
             return courseDao.add(course);
 
         }
 
-        //删除课程
+        /**
+         * 删除课程
+         * @param id int
+         * @return Course
+         */
         @Override
         public Course deleteCourse(int id) {
             return courseDao.remove(id);
         }
 
-        //更新课程
+        /**
+         * 更新课程
+         * @param  course Course
+         * @return Course
+         */
         @Override
         public Course updateCourse(Course course){
-//		    Course update=courses.get(id);
-//		    update.setId(course.getId());
-//            update.setName(course.getName());
-//            update.setteacherName(course.getteacherName());
-//            update.setLocation(course.getLocation());
-//            return update;
-
             return courseDao.update(course);
         }
 
-        //以List形式,获取所有的课程
-        @Override
-        public List<Course> getAllCourses(){
-            return courseDao.getAllCourses();
-        }
 
 
 }
