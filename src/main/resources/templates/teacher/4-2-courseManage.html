@@ -8,8 +8,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/courseManagement.css"/>
     <script src="../../static/js/jquery-1.10.2.js"></script>
-
-  <!--  <script src="../../static/js/teacher.js"></script>-->
+    <!--  <script src="../../static/js/teacher.js"></script>-->
 </head>
 <!--<body onload="getCourseList()">-->
 <body>
@@ -86,7 +85,7 @@
         </div>
     </div>
     <div class="panel">
-        <div class="card-head card-head-secondary" onclick="onStuGrade()">
+        <div class="card-head card-head-secondary" onclick="onStuScore()">
             <span class="card-head-content text">学生成绩</span>
             <div class="content-icon">
                 <img alt="" class="icon" src="../../static/img/Right_black.png"/>
@@ -94,7 +93,7 @@
         </div>
         <div class="separator-dark">
         </div>
-        <div class="card-head card-head-secondary" onclick="onTeam()">
+        <div class="card-head card-head-secondary" onclick="onGroup()">
             <span class="card-head-content text">学生组队</span>
             <div class="content-icon">
                 <img alt="" class="icon" src="../../static/img/Right_black.png"/>
@@ -143,81 +142,82 @@
     </div>
 </div>
 </body>
-<script>const acc = document.getElementsByClassName("card-head");
-for (let i = 0; i < acc.length; i++) {
-	acc[i].addEventListener("click", function() {
-		this.classList.toggle("active");
-		let panel = this.nextElementSibling;
-		if (panel.style.display === "block") {
-			panel.style.display = "none";
-			$(this).find('.content-icon').children('img').attr('src', '../../static/img/Right_white.png')
-		} else {
-			panel.style.display = "block";
-			$(this).find('.content-icon').children('img').attr('src', '../../static/img/Up_white.png')
-		}
-	})
-}
-function goBack() {
-	window.location.href = "4-teacherHome.html"
-}
-function addCourse() {
-	window.location.href = "4-2-1-createCourse.html"
-}
-function onStuGrade() {
-	let currentCourse = $(this).parent().parent().attr('id').toString();
-	updateCookie("curCourse", currentCourse);
-	window.location.href = "4-2-2-studentScore.html"
-}
-function onTeam() {
-	let currentCourse = $(this).parent().parent().attr('id').toString();
-	updateCookie("curCourse", currentCourse);
-	window.location.href = "4-2-2-studentGroup.html"
-}
-function onShareSet() {
-	let currentCourse = $(this).parent().parent().attr('id').toString();
-	updateCookie("curCourse", currentCourse);
-	window.location.href = "4-2-6-shareInfo.html"
-}
-function onCourseInfo() {
-	let currentCourse = $(this).parent().parent().attr('id').toString();
-	updateCookie("curCourse", currentCourse);
-	window.location.href = "4-2-4-courseInfo.html"
-}
-function onClassInfo() {
-	let currentCourse = $(this).parent().parent().attr('id').toString();
-	updateCookie("curCourse", currentCourse);
-	window.location.href = "4-2-5-classInfo.html"
-}
-function onSemRound() {
-	let currentCourse = $(this).parent().parent().attr('id').toString();
-	updateCookie("curCourse", currentCourse);
-	window.location.href = "4-2-1-createCourse.html"
-}
-function getCourseList() {
-	$.ajax({
-		type: 'get',
-		url: '',
-		dataType: "json",
-		contentType: "application/json;",
-		success: function(data, textStatus, xhr) {
-			if (xhr.status === 200) {
-				const content = document.getElementById("topbar");
-				let strVar = "";
-				for (let i = 0; i < data.length; i++) {
-					strVar += "<div class=\"card\" id=\"" + data[i].name + "\"><div class=\"card-head\"><span class=\"card-head-content text-large text-light\">" + data[i].name + "<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_white.png\"><\/div><\/div><div class=\"panel\"><div class=\"card-head card-head-secondary\" onclick=\"onStuGrade()\"><span class=\"card-head-content text\">学生成绩<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_black.png\"><\/div><\/div><div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onTeam()\"><span class=\"card-head-content text\">学生组队<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_black.png\"><\/div><\/div><div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onCourseInfo()\"><span class=\"card-head-content text\">课程信息<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_black.png\"><\/div><\/div><div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onClassInfo()\"><span class=\"card-head-content text\">班级信息<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_black.png\"><\/div><\/div><div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onSemRound()\"><span class=\"card-head-content text\">讨论课轮次<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_black.png\"><\/div><\/div>";
-					if (data[i].isShare === true) strVar += "<div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onShareSet()\"><span class=\"card-head-content text\">共享设置<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_black.png\"><\/div><\/div><\/div><\/div>";
-					else strVar += "<\/div><\/div>"
-				}
-				strVar += "<div class=\"card\" id=\"cardadd\"><div class=\"card-head\" id=\"btnAddCourse\"><span class=\"card-head-content text-large text-light\">新建课程<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Add_circle_outline_white.png\"><\/div><\/div><\/div>";
-				content.insertAdjacentHTML('afterend', strVar)
-			}
-		},
-		statusCode: {
-			401: function() {
-				alert("获取信息失败")
-			}
-		}
-	})
-}
+<script>
+    const acc = document.getElementsByClassName("card-head");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+                $(this).find('.content-icon').children('img').attr('src', '../../static/img/Right_white.png')
+            } else {
+                panel.style.display = "block";
+                $(this).find('.content-icon').children('img').attr('src', '../../static/img/Up_white.png')
+            }
+        })
+    }
+    function goBack() {
+        window.location.href = "4-teacherHome.html"
+    }
+    function addCourse() {
+        window.location.href = "4-2-1-createCourse.html"
+    }
+    function onStuScore() {
+        let currentCourse = $(this).parent().parent().attr('id').toString();
+        updateCookie("curCourse", currentCourse);
+        window.location.href = "4-2-2-studentScore.html"
+    }
+    function onGroup() {
+        let currentCourse = $(this).parent().parent().attr('id').toString();
+        updateCookie("curCourse", currentCourse);
+        window.location.href = "4-2-2-studentGroup.html"
+    }
+    function onShareSet() {
+        let currentCourse = $(this).parent().parent().attr('id').toString();
+        updateCookie("curCourse", currentCourse);
+        window.location.href = "4-2-6-shareInfo.html"
+    }
+    function onCourseInfo() {
+        let currentCourse = $(this).parent().parent().attr('id').toString();
+        updateCookie("curCourse", currentCourse);
+        window.location.href = "4-2-4-courseInfo.html"
+    }
+    function onClassInfo() {
+        let currentCourse = $(this).parent().parent().attr('id').toString();
+        updateCookie("curCourse", currentCourse);
+        window.location.href = "4-2-5-classInfo.html"
+    }
+    function onSemRound() {
+        let currentCourse = $(this).parent().parent().attr('id').toString();
+        updateCookie("curCourse", currentCourse);
+        window.location.href = "4-2-1-createCourse.html"
+    }
+    function getCourseList() {
+        $.ajax({
+            type: 'get',
+            url: '',
+            dataType: "json",
+            contentType: "application/json;",
+            success: function(data, textStatus, xhr) {
+                if (xhr.status === 200) {
+                    const content = document.getElementById("topbar");
+                    let strVar = "";
+                    for (let i = 0; i < data.length; i++) {
+                        strVar += "<div class=\"card\" id=\"" + data[i].name + "\"><div class=\"card-head\"><span class=\"card-head-content text-large text-light\">" + data[i].name + "<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_white.png\"><\/div><\/div><div class=\"panel\"><div class=\"card-head card-head-secondary\" onclick=\"onStuGrade()\"><span class=\"card-head-content text\">学生成绩<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_black.png\"><\/div><\/div><div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onTeam()\"><span class=\"card-head-content text\">学生组队<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_black.png\"><\/div><\/div><div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onCourseInfo()\"><span class=\"card-head-content text\">课程信息<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_black.png\"><\/div><\/div><div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onClassInfo()\"><span class=\"card-head-content text\">班级信息<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_black.png\"><\/div><\/div><div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onSemRound()\"><span class=\"card-head-content text\">讨论课轮次<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_black.png\"><\/div><\/div>";
+                        if (data[i].isShare === true) strVar += "<div class=\"separator-dark\"><\/div><div class=\"card-head card-head-secondary\" onclick=\"onShareSet()\"><span class=\"card-head-content text\">共享设置<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_black.png\"><\/div><\/div><\/div><\/div>";
+                        else strVar += "<\/div><\/div>"
+                    }
+                    strVar += "<div class=\"card\" id=\"cardadd\"><div class=\"card-head\" id=\"btnAddCourse\"><span class=\"card-head-content text-large text-light\">新建课程<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Add_circle_outline_white.png\"><\/div><\/div><\/div>";
+                    content.insertAdjacentHTML('afterend', strVar)
+                }
+            },
+            statusCode: {
+                401: function() {
+                    alert("获取信息失败")
+                }
+            }
+        })
+    }
 </script>
 </html>

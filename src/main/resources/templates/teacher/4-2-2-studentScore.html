@@ -363,7 +363,7 @@
 							strVar = "<div class=\"card-head\"><span class=\"card-head-content text text-light\">第" + data[i].round + "轮<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_white.png\"><\/div><\/div><div class=\"panel\" id=\"round" + data.round + "\"><\/div><div class=\"separator-blank\"><\/div>";
 							topcontent.insertAdjacentHTML('beforeend', strVar);
 							middlecontent = document.getElementById("round" + data[i].round);
-							i--
+							i--;
 						} else {
 							if (data[i].teamid !== teamNumber) {
 								if (teamNumber !== 0) {
@@ -371,12 +371,12 @@
 									bottomcontent.insertAdjacentHTML('beforeend', strVar)
 								}
 								teamNumber = data[i].teamid;
-								strVar = "<div><div class=\"card-head card-head-secondary\"><span class=\"card-head-content text text-light\"><span>" + data[i].teamid + "<\/span> <span class=\"text-left-margin\">5.0分<\/span><\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_white.png\"><\/div><\/div><div class=\"panel\" id=\"team" + data[i].teamid + "\"><\/div><\/div><div class=\"myMargin\"><\/div>\n";
+								strVar = "<div><div class=\"card-head card-head-secondary\"><span class=\"card-head-content text text-light\"><span>" + data[i].teamid + "<\/span> <span class=\"text-left-margin\">5.0分<\/span><\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_white.png\"><\/div><\/div><div class=\"panel\" id=\"team" + data[i].teamid + "\"><\/div><\/div><div class=\"myMargin\"><\/div>";
 								middlecontent.insertAdjacentHTML('beforeend', strVar);
-								bottomcontent = document.getElementById("team" + data[i].teamid)
+								bottomcontent = document.getElementById("team" + data[i].teamid);
 							} else {
 								strVar = "<div class=\"card-body center\"><div class=\"card-row-details\"><span class=\"text text-small text-bold\">" + data[i].seminarName + "<\/span><\/div><div><div class=\"card-row-details\"><span class=\"text text-smaller\">展示:<\/span> <span class=\"text score text-left-margin\">" + data[i].presentScore + "<\/span> <span class=\"text text-smaller text-left-margin\">提问:<\/span> <span class=\"text score text-left-margin\">" + data[i].questionScore + "<\/span> <span class=\"text text-smaller text-left-margin\">书面报告:<\/span> <span class=\"text score text-left-margin\">" + data[i].reportScore + "<\/span><\/div><\/div><\/div><div class=\"separator-dark\"><\/div>";
-								bottomcontent.insertAdjacentHTML('beforeend', strVar)
+								bottomcontent.insertAdjacentHTML('beforeend', strVar);
 							}
 						}
 					}
