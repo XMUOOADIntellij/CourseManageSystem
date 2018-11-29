@@ -1,4 +1,4 @@
-package course.test;
+package com.group12.course;
 
 import com.group12.course.dao.CourseDao;
 import com.group12.course.entity.Course;
