@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.group12.course.mapper.UserMapper">
+
+    <!-- 获得账号获取用户 -->
+    <select id="getUserByAccout" resultType="com.group12.course.entity.User">
+        select account,password,email,name,valid from user
+        where account=#{account}
+    </select>
+
+</mapper>
