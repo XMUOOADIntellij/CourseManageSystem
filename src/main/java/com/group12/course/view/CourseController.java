@@ -34,7 +34,6 @@ public class CourseController {
         return courseService.listCourses();
     }
 
-
     /**
      * 把要查询的课程id直接放在请求url后面，用@PathVariable注解将url中的id值绑定到方法的参数上
      *

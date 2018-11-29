@@ -72,6 +72,5 @@ public class CourseDaoImpl implements CourseDao {
     public Course update(Course entity) {
         return courseMapper.update(entity);
     }
-
 }
 
