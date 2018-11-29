@@ -1,8 +1,10 @@
-/*
-* @author XuGang
- */
-
 package com.group12.course.entity;
+
+/**
+ * User 实体对象
+ * @author Xu Gang
+ * @date 2018年11月29日
+ */
 
 public class User{
 

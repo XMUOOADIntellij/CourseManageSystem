@@ -1,4 +1,4 @@
-package com.group12.course.dao.daoImpl;
+package com.group12.course.dao.daoimpl;
 
 import com.group12.course.dao.UserDao;
 import com.group12.course.entity.User;
@@ -6,7 +6,7 @@ import com.group12.course.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/*
+/**
  * User dao 层对应接口的实现
  * @author Xu Gang
  * @date 2018年11月29日
