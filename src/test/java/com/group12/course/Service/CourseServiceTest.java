@@ -1,4 +1,4 @@
-package com.group12.course;
+package com.group12.course.Service;
 
 import com.group12.course.entity.Course;
 import com.group12.course.service.CourseService;
