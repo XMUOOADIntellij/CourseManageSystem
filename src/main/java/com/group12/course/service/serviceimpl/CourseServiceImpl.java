@@ -43,7 +43,7 @@ public class CourseServiceImpl implements CourseService {
          * @return Course
          */
         @Override
-        public Course addCourse(Course course) {
+        public boolean addCourse(Course course) {
             return courseDao.add(course);
 
         }
@@ -54,7 +54,7 @@ public class CourseServiceImpl implements CourseService {
          * @return Course
          */
         @Override
-        public Course deleteCourse(int id) {
+        public boolean deleteCourse(int id) {
             return courseDao.remove(id);
         }
 
@@ -64,7 +64,7 @@ public class CourseServiceImpl implements CourseService {
          * @return Course
          */
         @Override
-        public Course updateCourse(Course course){
+        public boolean updateCourse(Course course){
             return courseDao.update(course);
         }
 

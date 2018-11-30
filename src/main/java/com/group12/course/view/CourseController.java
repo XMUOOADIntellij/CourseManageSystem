@@ -58,7 +58,7 @@ public class CourseController {
      * @return Course
      */
     @PostMapping(value = "/add", consumes = "application/json")
-    public Course addCourse(@RequestBody Course course) {
+    public boolean addCourse(@RequestBody Course course) {
         //返回刚添加的课程信息
         return courseService.addCourse(course);
     }
@@ -69,7 +69,7 @@ public class CourseController {
      * @return Course
      */
     @PutMapping(value = "/update/{id}")
-    public Course updateCourse(@RequestBody Course course, @PathVariable int id) {
+    public boolean updateCourse(@RequestBody Course course, @PathVariable int id) {
         try {
             return courseService.updateCourse(course);
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class CourseController {
      * @return
      */
     @DeleteMapping(value = "/delete/{id}")
-    public Course getAllCourse(@PathVariable int id) {
+    public boolean getAllCourse(@PathVariable int id) {
         try {
             return courseService.deleteCourse(id);
         } catch (Exception e) {
