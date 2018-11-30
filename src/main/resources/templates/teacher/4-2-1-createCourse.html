@@ -12,10 +12,9 @@
 <script src="../../static/js/common.js"></script>
 <!--<script src="../../static/js/teacher.js"></script>--></head>
 <body>
-
 <div class="topBar">
     <div class="content-icon">
-        <img alt="" class="icon" src="../../static/img/close_white.png"/>
+        <img alt="" class="icon" src="../../static/img/close_white.png" onclick="onClose()"/>
     </div>
     <div class="content text text-light">新建课程</div>
 </div>
@@ -110,8 +109,52 @@
         <span class="text-smaller">组队结束时间：</span> <input class="dateSelector text text-smallest textRight " type="date" value="2018-09-01"/>
     </div>
 </div>
-<div class="myBigMargin">
-    <input class="btn btn-giant btn-warning" type="button" value="提交">
+    <div class="form">
+        <div class="myBigMargin">
+            <input class="btn btn-giant btn-success " type="button" id="btnSubmit" value="提交">
+        </div>
+    </div>
 </div>
 </body>
+<script>
+    function createCourse() {
+        var ata = {
+            grade: $("#classgrade").val(),
+            name: $("#classname").val(),
+            site: $("#classsite").val(),
+            time: $("#classtime").val(),
+            file: $("#classfile").val(),
+        };
+        // alert("55");
+        $.ajax({
+            type: 'post',
+            url: '/course/' + getCookie("courseDetail") + '/class',
+            // url: '/course/'+getcoursedetail()+'/class',
+            dataType: "json",
+            contentType: "application/json;",
+            data: JSON.stringify(ata),
+            success: function (data, textStatus, xhr) {
+                if (xhr.status == 201) {
+                    alert("创建成功!");
+                    backtocourse();  //返回显示课程下的班级列表/讨论课列表
+                }
+            },
+            statusCode: {
+                403: function () {
+                    alert("用户权限不足");
+                },
+                404: function () {
+                    alert("未找到课程");
+                }
+            }
+        });
+    }
+    $("#btnSubmit").click(function () {
+        window.location.href = "4-2-courseManage.html"
+        // createCourse();
+    });
+    function onClose() {
+        window.location.href = "4-2-courseManage.html"
+    }
+</script>
 </html>

@@ -54,10 +54,9 @@
     <div class="separator-blank"></div>
 </div>
 <div class="card">
-    <div class="card-head">
+    <div class="card-head" onclick="onAdd()">
         <span class="card-head-content text-large text-light">新增共享</span>
-        <div class="content-icon"><img alt=""  class="icon"
-                                       src="../../static/img/Add_white.png"/></div>
+        <div class="content-icon"><img alt=""  class="icon" src="../../static/img/Add_white.png"/></div>
     </div>
 </div>
 </body>
@@ -75,6 +74,9 @@
                 $(this).find('.content-icon').children('img').attr('src', '../../static/img/Up_white.png')
             }
         })
+    }
+    function onAdd() {
+        window.location.href = "4-2-6-3-addShare.html";
     }
     function goBack() {
         window.location.href = "4-2-courseManage.html"

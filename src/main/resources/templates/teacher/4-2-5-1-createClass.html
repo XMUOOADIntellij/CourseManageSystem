@@ -8,14 +8,13 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/createClass.css"/>
     <script src="../../static/js/jquery-1.10.2.js"></script>
-
     <script src="../../static/js/common.js"></script>
 <!--<script src="../../static/js/teacher.js"></script>-->
 </head>
 <body>
 <div class="topBar">
     <div class="content-icon">
-        <img alt="" class="icon" src="../../static/img/close_white.png"/>
+        <img alt="" class="icon" src="../../static/img/close_white.png" onclick="onClose()"/>
     </div>
     <div class="content text text-light">新建班级</div>
 </div>
@@ -44,7 +43,7 @@
         <div class="myMargin"></div>
     </div>
     <div class="dialog-row">
-        <input class="dateSelector text text-smallest" type="date" value="2018-09-01"/>
+        <input class="dateSelector text text-smallest" id="classtime" type="date" value="2018-09-01"/>
     </div>
 </div>
 
@@ -59,7 +58,7 @@
 </div>
 <div class="form">
     <div class="myBigMargin">
-        <input class="btn btn-giant btn-warning " type="button" id="btnSubmit" value="提交">
+        <input class="btn btn-giant btn-success " type="button" id="btnSubmit" value="提交">
     </div>
 </div>
 </body>
@@ -100,5 +99,8 @@
         window.location.href = "4-2-5-classInfo.html";
         // createClass();
     });
+    function onClose() {
+        window.location.href = "4-2-5-classInfo.html"
+    }
 </script>
 </html>
