@@ -22,4 +22,9 @@ public class UserDaoImpl implements UserDao {
     public User getUserByAccount(String account) {
         return userMapper.getUserByAccout(account);
     }
+
+    @Override
+    public Boolean setUserPasswordByAccount(User user){
+        return userMapper.setUserPasswordByAccount(user.getAccount(),user.getPassword());
+    }
 }

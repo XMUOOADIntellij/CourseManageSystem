@@ -19,6 +19,7 @@ public interface UserMapper {
     * @param account 用户账号
     * @return User对象
     */
-
     User getUserByAccout(String account);
+
+    Boolean setUserPasswordByAccount(String account,String password);
 }

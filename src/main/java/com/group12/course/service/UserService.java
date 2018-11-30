@@ -11,11 +11,19 @@ import com.group12.course.entity.User;
 public interface UserService {
 
     /**
-     * 通过账户获取用户对象
-     * @param account 用户账户
-     * @return User
+     * 通过账户，判断密码是否正确，获取用户对象
+     * @param account password 用户账户，用户输入的密码
+     * @return User 若用户输入正确，则返回正确的用户对象，
+     * 若用户输入错误，则返回一个临时生成的用户对象
      */
-    User getUserByAccount(String account);
+    User checkUser(String account,String password);
+
+    /**
+     * 通过传入的用户信息，修改密码
+     * @param user 用户
+     * @return 若修改成功，返回 true，失败则 false
+     */
+    Boolean changePassword(User user);
 
     /*
     * TODO
