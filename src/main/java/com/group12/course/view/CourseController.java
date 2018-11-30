@@ -29,7 +29,7 @@ public class CourseController {
      * value定义网页访问路径
      * produces表明这个方法只会处理Accept头部信息包含"application/json"的请求
      */
-    @GetMapping(value = "/getall", produces = "application/json")
+    @GetMapping(value = "/getAll", produces = "application/json")
     public List<Course> getAllCourse() {
         return courseService.listCourses();
     }
