@@ -27,7 +27,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User checkUser(String account,String password) {
         User user = userDao.getUserByAccount(account);
-        if (user.getPassword().equals(password)){
+
+        // 若该用户在数据库中不存在，则 user == null，要剔除这种情况
+        if ( user != null && user.getPassword().equals(password)){
             return user;
         }
         else{
