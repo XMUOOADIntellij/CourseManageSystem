@@ -9,4 +9,8 @@
         where account=#{account}
     </select>
 
+    <!-- 修改用户密码 -->
+    <update id="setUserPasswordByAccount">
+        update user set password = #{password} where account=#{account}
+    </update>
 </mapper>
