@@ -8,8 +8,9 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/studentScore.css"/>
     <script src="../../static/js/jquery-1.10.2.js"></script>
-
-    <script src="../../static/js/teacher.js"></script>
+    <script src="../../static/js/common.js"></script></head>
+    <script src="../../static/js/common.js"></script>
+<!--<script src="../../static/js/teacher.js"></script>-->
 </head>
 <!--<body onload="return getRoundScore();">-->
 <body>
@@ -93,7 +94,7 @@
                 <div class="separator-blank">
                 </div>
                 <div class="card-row-details">
-                    <input class="btn-orange btn" type="button" value="修改">
+                    <input class="btn-warning btn" type="button" value="修改">
                 </div>
             </div>
         </div>
@@ -160,7 +161,7 @@
                 <div class="separator-blank">
                 </div>
                 <div class="card-row-details">
-                    <input class="btn-orange btn" type="button" value="修改">
+                    <input class="btn-warning btn" type="button" value="修改">
                 </div>
             </div>
         </div>
@@ -237,7 +238,7 @@
                 <div class="separator-blank">
                 </div>
                 <div class="card-row-details">
-                    <input class="btn-orange btn" type="button" value="修改">
+                    <input class="btn-warning btn" type="button" value="修改">
                 </div>
             </div>
         </div>
@@ -305,7 +306,7 @@
                 <div class="separator-blank">
                 </div>
                 <div class="card-row-details">
-                    <input class="btn-orange btn" type="button" value="修改">
+                    <input class="btn-warning btn" type="button" value="修改">
                 </div>
             </div>
         </div>
@@ -343,6 +344,9 @@
 			}
 		})
 	}
+    function goBack() {
+        window.location.href = "4-2-courseManage.html"
+    }
 	function getRoundScore() {
 		$.ajax({
 			type: 'get',
@@ -367,7 +371,7 @@
 						} else {
 							if (data[i].teamid !== teamNumber) {
 								if (teamNumber !== 0) {
-									strVar = "<div class=\"card-row-details\"><input class=\"btn-orange btn\" type=\"button\" value=\"修改\"><\/div>";
+									strVar = "<div class=\"card-row-details\"><input class=\"btn-warning btn\" type=\"button\" value=\"修改\"><\/div>";
 									bottomcontent.insertAdjacentHTML('beforeend', strVar)
 								}
 								teamNumber = data[i].teamid;

@@ -8,7 +8,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/courseManagement.css"/>
     <script src="../../static/js/jquery-1.10.2.js"></script>
-    <!--  <script src="../../static/js/teacher.js"></script>-->
+    <script src="../../static/js/common.js"></script>
+<!--<script src="../../static/js/teacher.js"></script>-->
 </head>
 <!--<body onload="getCourseList()">-->
 <body>
@@ -29,7 +30,7 @@
         </div>
     </div>
     <div class="panel">
-        <div class="card-head card-head-secondary" onclick="onStuGrade()">
+        <div class="card-head card-head-secondary" onclick="onStuScore()">
             <span class="card-head-content text">学生成绩</span>
             <div class="content-icon">
                 <img alt="" class="icon" src="../../static/img/Right_black.png"/>
@@ -37,7 +38,7 @@
         </div>
         <div class="separator-dark">
         </div>
-        <div class="card-head card-head-secondary" onclick="onTeam()">
+        <div class="card-head card-head-secondary" onclick="onGroup()">
             <span class="card-head-content text">学生组队</span>
             <div class="content-icon">
                 <img alt="" class="icon" src="../../static/img/Right_black.png"/>
@@ -85,7 +86,7 @@
         </div>
     </div>
     <div class="panel">
-        <div class="card-head card-head-secondary" onclick="onStuScore()">
+        <div class="card-head card-head-secondary" onclick="onStuScore("J2EE")">
             <span class="card-head-content text">学生成绩</span>
             <div class="content-icon">
                 <img alt="" class="icon" src="../../static/img/Right_black.png"/>
@@ -157,6 +158,7 @@
             }
         })
     }
+
     function goBack() {
         window.location.href = "4-teacherHome.html"
     }
@@ -164,33 +166,24 @@
         window.location.href = "4-2-1-createCourse.html"
     }
     function onStuScore() {
-        let currentCourse = $(this).parent().parent().attr('id').toString();
-        updateCookie("curCourse", currentCourse);
-        window.location.href = "4-2-2-studentScore.html"
+        let courseid=$(this).closest('.card');
+        console.log(courseid);
+        updateCookie('courseCurrent',courseid);
+      //  window.location.href = "4-2-2-studentScore.html"
     }
     function onGroup() {
-        let currentCourse = $(this).parent().parent().attr('id').toString();
-        updateCookie("curCourse", currentCourse);
         window.location.href = "4-2-2-studentGroup.html"
     }
     function onShareSet() {
-        let currentCourse = $(this).parent().parent().attr('id').toString();
-        updateCookie("curCourse", currentCourse);
         window.location.href = "4-2-6-shareInfo.html"
     }
     function onCourseInfo() {
-        let currentCourse = $(this).parent().parent().attr('id').toString();
-        updateCookie("curCourse", currentCourse);
         window.location.href = "4-2-4-courseInfo.html"
     }
     function onClassInfo() {
-        let currentCourse = $(this).parent().parent().attr('id').toString();
-        updateCookie("curCourse", currentCourse);
         window.location.href = "4-2-5-classInfo.html"
     }
     function onSemRound() {
-        let currentCourse = $(this).parent().parent().attr('id').toString();
-        updateCookie("curCourse", currentCourse);
         window.location.href = "4-2-1-createCourse.html"
     }
     function getCourseList() {
