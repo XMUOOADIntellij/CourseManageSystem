@@ -41,20 +41,20 @@ public interface CourseMapper {
      * @param entity  Course
      * @return Course
      */
-    Course add(Course entity);
+    boolean add(Course entity);
 
     /**
      * 删除课程
      * @param id int
      * @return Course
      */
-    Course remove(int id);
+    boolean remove(int id);
 
     /**
      * 更新课程
      * @param entity  Course
      * @return Course
      */
-    Course update(Course entity);
+    boolean update(Course entity);
 
 }
