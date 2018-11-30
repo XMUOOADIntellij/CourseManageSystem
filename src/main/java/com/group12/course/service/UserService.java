@@ -12,7 +12,8 @@ public interface UserService {
 
     /**
      * 通过账户，判断密码是否正确，获取用户对象
-     * @param account password 用户账户，用户输入的密码
+     * @param account 用户账户
+     * @param password 用户输入的密码
      * @return User 若用户输入正确，则返回正确的用户对象，
      * 若用户输入错误，则返回一个临时生成的用户对象
      */

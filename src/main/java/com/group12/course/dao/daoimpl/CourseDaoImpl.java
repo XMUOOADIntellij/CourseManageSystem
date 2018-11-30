@@ -47,7 +47,7 @@ public class CourseDaoImpl implements CourseDao {
      * @return Course
      */
     @Override
-    public Course add(Course entity) {
+    public boolean add(Course entity) {
         return courseMapper.add(entity);
     }
 
@@ -58,7 +58,7 @@ public class CourseDaoImpl implements CourseDao {
      * @return Course
      */
     @Override
-    public Course remove(int id) {
+    public boolean remove(int id) {
         return courseMapper.remove(id);
     }
 
@@ -69,7 +69,7 @@ public class CourseDaoImpl implements CourseDao {
      * @return Course
      */
     @Override
-    public Course update(Course entity) {
+    public boolean update(Course entity) {
         return courseMapper.update(entity);
     }
 }

@@ -35,7 +35,7 @@ public interface CourseService {
      * @param course Course
      * @return Course
      */
-    Course addCourse(Course course);
+    boolean addCourse(Course course);
 
     /**
      * 删除课程
@@ -43,7 +43,7 @@ public interface CourseService {
      * @param id int
      * @return Course
      */
-    Course deleteCourse(int id);
+    boolean deleteCourse(int id);
 
     /**
      * 更新课程
@@ -51,7 +51,7 @@ public interface CourseService {
      * @param course Course
      * @return Course
      */
-    Course updateCourse(Course course);
+    boolean updateCourse(Course course);
 
 
 }
