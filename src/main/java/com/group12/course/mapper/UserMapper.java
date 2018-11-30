@@ -21,5 +21,11 @@ public interface UserMapper {
     */
     User getUserByAccout(String account);
 
+    /**
+     * 判断用户密码是否正确
+     * @param account 用户账号
+     * @param password 用户输入的账号
+     * @return User对象
+     */
     Boolean setUserPasswordByAccount(String account,String password);
 }
