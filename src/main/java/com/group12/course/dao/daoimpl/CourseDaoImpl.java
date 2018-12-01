@@ -25,7 +25,7 @@ public class CourseDaoImpl implements CourseDao {
      */
     @Override
     public List<Course> listCourses() {
-        return courseMapper.getAllCourses();
+        return courseMapper.listCourses();
     }
 
     /**
