@@ -14,7 +14,7 @@
 
     <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
     <!--获得所有课程 -->
-    <select id="getAllCourses" resultType="com.group12.course.entity.Course">
+    <select id="listCourses" resultType="com.group12.course.entity.Course">
         select id,name,teacherName,location from courses
     </select>
 

@@ -27,7 +27,7 @@ public interface CourseMapper {
      * 获得所有课程
      * @return List<Course>
      */
-    List<Course> getAllCourses();
+    List<Course> listCourses();
 
     /**
      * 根据课程id获得课程
