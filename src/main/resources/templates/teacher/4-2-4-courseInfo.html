@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible"
@@ -14,23 +14,23 @@
     <link rel="stylesheet"
           type="text/css"
           media="screen"
-          href="../../static/css/teacher/courseManagement.css"/>
+          href="../../static/css/teacher/courseInfo.css"/>
     <script src="../../static/js/jquery-1.10.2.js"></script>
 
-<script src="../../static/js/common.js"></script>
-<!--<script src="../../static/js/teacher.js"></script>--></head>
+    <script src="../../static/js/common.js"></script>
+    <!--<body onload="courseInfo()">-->
 <body>
 <div class="topBar">
-    <div class="content-icon"><img alt=""  class="icon"
-                                   src="../../static/img/shutdown_white.png"/></div>
+    <div class="content-icon"
+         id="myReturn"><img alt=""  class="icon" src="../../static/img/Left_white.png" onclick="goBack()"/></div>
     <div class="content text text-light">课程信息</div>
 </div>
 <div class="card card-text-title">
     <span class="text text-large text-bold ">课程要求</span>
 </div>
 <div class="form">
-    <div>
-        <span class="text text-small text-bold myMarginLeft">成绩计算规则</span>
+    <div class="dialog-row">
+        <span class="text text-small text-bold ">成绩计算规则</span>
         <div class="myMargin"></div>
     </div>
     <div class="dialog-row">
@@ -44,8 +44,8 @@
     </div>
 </div>
 <div class="form">
-    <div>
-        <span class="text text-small text-bold myMarginLeft">设置分组规则</span>
+    <div class="dialog-row">
+        <span class="text text-small text-bold ">设置分组规则</span>
         <div class="myMargin"></div>
     </div>
     <div class="dialog-row">
@@ -56,21 +56,40 @@
     </div>
 </div>
 <div class="form">
-    <div>
-        <span class="text text-small text-bold myMarginLeft">分组时间</span>
+    <div class="dialog-row">
+        <span class="text text-small text-bold ">分组时间</span>
         <div class="myMargin"></div>
     </div>
     <div class="dialog-row">
-        <span class="text text-smaller">组队开始时间：</span> <span class="text text-smaller">2018-09-01 12:00</span>
+        <span class="text text-smaller ">组队开始时间：</span> <span class="text text-smaller">2018-09-01 12:00</span>
     </div>
     <div class="dialog-row">
-        <span class="text text-smaller">组队结束时间：</span> <span class="text text-smaller">2018-09-01 12:00</span>
+        <span class="text text-smaller ">组队结束时间：</span> <span class="text text-smaller">2018-09-01 12:00</span>
     </div>
 </div>
-<div class="myBigMargin">
-    <input class="btn btn-giant btn-danger"
-           type="button"
-           value="删除课程">
+<div class="form">
+    <div class="card-row-details">
+        <input class="btn btn-danger btn-giant"
+               type="button"  onclick="onDelete()"
+               value="删除班级">
+    </div>
 </div>
 </body>
+<script>
+    function goBack() {
+        window.location.href = "4-2-courseManage.html"
+    }
+    function courseInfo() {
+        $.ajax({
+            type: 'get',
+            url: '',
+            dataType: "json",
+            contentType: "application/json;",
+            success: function (data, textStatus, xhr) {
+
+                }
+
+        });
+    }
+</script>
 </html>

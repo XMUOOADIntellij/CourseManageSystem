@@ -22,12 +22,14 @@
     <script src="../../static/js/jquery-1.10.2.js"></script>
 
 <script src="../../static/js/common.js"></script>
-<!--<script src="../../static/js/teacher.js"></script>--></head>
-<body onload="classlist()">
+<!--<script src="../../static/js/teacher.js"></script>-->
+
+</head>
+<!--<body onload="classlist()">-->
+<body>
 <div class="topBar">
     <div class="content-icon"
-         id="myReturn"><img alt=""  class="icon"
-                            src="../../static/img/Left_white.png"/></div>
+         id="myReturn"><img alt=""  class="icon" src="../../static/img/Left_white.png" onclick="goBack()"/></div>
     <div class="content text text-light">班级信息</div>
 </div>
 <div class="card">
@@ -100,29 +102,25 @@
     </div>
     <div class="separator-blank"></div>
 </div>
-<div class="myMargin"></div>
-<div class="card"
-     id="myAdd">
-    <div class="card-orange">
-        <div class="content-icon"><img alt=""  class="icon"
-                                       src="../../static/img/Add_white.png"/></div>
+<div class="card" onclick="onAdd()">
+    <div class="card-head">
+        <div class="content-icon">
+            <img alt="" class="icon" src="../../static/img/Add_white.png"/></div>
         <span class="card-head-content text-large text-light">新建班级</span>
     </div>
 </div>
 <div class="myMargin"></div>
-S
+
 </body>
 <script>
-    $(document).ready(function () {
-        classlist();
-    });
-    $("#myAdd").click(function () {
+
+    function onAdd() {
         window.location.href = "4-2-5-1-createClass.html";
-    });
-    $("#myReturn").click(function () {
-        window.location.href = "4-2-courseManage.html";
-        // createClass();
-    });
+    }
+    function goBack() {
+        window.location.href = "4-2-courseManage.html"
+    }
+
     function classlist() {
         $.ajax({
             type: 'get',
