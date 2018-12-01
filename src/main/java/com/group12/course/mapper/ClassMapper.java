@@ -12,9 +12,9 @@ import java.util.List;
  * 2018年11月30日
  * Class Mapper 层接口
  * 获得所有班级
- * 根据id获取班级
+ * 根据ClassId获取班级
  * 增加班级
- * 删除班级
+ * 根据ClassId删除班级
  * 更新班级
  */
 @Mapper
@@ -31,7 +31,7 @@ public interface ClassMapper {
      * @param id int
      * @return Class
      */
-    Class getClassNameById(@Param("id") int id);
+    Class getClassByClassId(@Param("id") int id);
 
     /**
      * 增加班级

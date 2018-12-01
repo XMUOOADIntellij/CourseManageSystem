@@ -33,8 +33,8 @@ public class ClassDaoImpl implements ClassDao {
      * @return Class
      */
     @Override
-    public Class getClassNameById(int id) {
-        return classMapper.getClassNameById(id);
+    public Class getClassByClassId(int id) {
+        return classMapper.getClassByClassId(id);
     }
 
     /**

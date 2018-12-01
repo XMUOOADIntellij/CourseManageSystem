@@ -10,7 +10,7 @@ import java.util.List;
  * 2018年11月30日
  * ClassService 接口
  * 获得所有班级
- * 根据id获取班级
+ * 根据获取班级
  * 增加班级
  * 删除班级
  * 更新班级
@@ -27,7 +27,7 @@ public interface ClassService {
      * @param id int
      * @return Class
      */
-    Class getClassNameById(int id);
+    Class getClassByClassId(int id);
 
     /**
      * 增加班级

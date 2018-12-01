@@ -33,8 +33,8 @@ public class ClassServiceImpl implements ClassService {
      * @return Class
      */
     @Override
-    public Class getClassNameById(int id) {
-        return classDao.getClassNameById(id);
+    public Class getClassByClassId(int id) {
+        return classDao.getClassByClassId(id);
     }
 
     /**
@@ -64,6 +64,6 @@ public class ClassServiceImpl implements ClassService {
      */
     @Override
     public boolean updateClass(Class entity) {
-        return false;
+        return classDao.update(entity);
     }
 }

@@ -27,7 +27,7 @@ public interface  ClassDao {
      * @param id int
      * @return Class
      */
-    Class getClassNameById(int id);
+    Class getClassByClassId(int id);
 
     /**
      * 增加班级
