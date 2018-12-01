@@ -27,5 +27,7 @@ public interface UserMapper {
      * @param password 用户输入的账号
      * @return User对象
      */
-    Boolean setUserPasswordByAccount(String account,String password);
+    int setUserPasswordByAccount(String account,String password);
+
+    int addUser(User user);
 }

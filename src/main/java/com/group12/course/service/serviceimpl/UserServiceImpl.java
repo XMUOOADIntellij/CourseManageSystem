@@ -43,7 +43,17 @@ public class UserServiceImpl implements UserService {
      * @return 若修改成功，返回 true，失败则 false
      */
     @Override
-    public Boolean changePassword(User user){
+    public int changePassword(User user){
         return userDao.setUserPasswordByAccount(user);
+    }
+
+    @Override
+    public int addUser(User user){
+        if(user.getAccount()==null||user.getPassword()==null){
+            return 0;
+        }
+        else {
+            return userDao.addUser(user);
+        }
     }
 }

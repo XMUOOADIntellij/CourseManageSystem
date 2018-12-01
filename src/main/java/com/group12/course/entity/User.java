@@ -16,13 +16,15 @@ public class User{
     /**
      * 0代表未激活，1代表激活
       */
-    private int active;
+    private Integer active;
 
     public User(){}
 
     public User(String account, String password) {
         this.account = account;
         this.password = password;
+        this.email = "";
+        this.name = "";
         this.active = 0;
     }
 
@@ -31,7 +33,7 @@ public class User{
         this.password = password;
         this.email = email;
         this.name = name;
-        this.active=0;
+        this.active = 0;
     }
 
     @Override

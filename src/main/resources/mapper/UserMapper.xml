@@ -5,7 +5,7 @@
 
     <!-- 获得账号获取用户 -->
     <select id="getUserByAccout" resultType="com.group12.course.entity.User">
-        select account,password,email,name,valid from user
+        select account,password,email,name,is_active from user
         where account=#{account}
     </select>
 
@@ -13,4 +13,10 @@
     <update id="setUserPasswordByAccount">
         update user set password = #{password} where account=#{account}
     </update>
+
+    <!-- 添加用户 -->
+    <insert id="addUser" >
+        insert into user(account,password,email,name,is_active)
+        values (#{account},#{password},#{email},#{name},#{active})
+    </insert>
 </mapper>

@@ -27,10 +27,7 @@ public class UserServiceTest {
     @Before
     public void initTestUser(){
         testUser=new User("11111","123456");
-        /**
-         * TODO
-         * 等待添加用户方可测试
-         * */
+        userService.addUser(testUser);
     }
 
     @Test

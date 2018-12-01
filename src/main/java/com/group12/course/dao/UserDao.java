@@ -22,8 +22,9 @@ public interface UserDao {
      * @param user 用户账户对象
      * @return user 返回修改操作后的用户
      */
-    Boolean setUserPasswordByAccount(User user);
+    int setUserPasswordByAccount(User user);
 
+    int addUser(User user);
     /**
       * 其余等待实现
       */

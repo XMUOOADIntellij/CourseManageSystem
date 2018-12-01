@@ -24,7 +24,9 @@ public interface UserService {
      * @param user 用户
      * @return 若修改成功，返回 true，失败则 false
      */
-    Boolean changePassword(User user);
+    int changePassword(User user);
+
+    int addUser(User user);
 
     /*
     * TODO

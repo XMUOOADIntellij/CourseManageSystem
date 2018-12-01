@@ -3,6 +3,8 @@ package com.group12.course.view;
 import com.group12.course.entity.User;
 import com.group12.course.service.UserService;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import jdk.nashorn.internal.ir.debug.JSONWriter;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +28,7 @@ public class UserController {
     /**
      * 通过前端传来的账号密码，判断密码是否符合
      * @param user 通过前端传入的数据组成的 user 对象
-     * @return  若用户输入正确，则返回正确的用户对象的JSON，状态码200，
+     * @return  若用户输入正确，则返回状态码200，
      * 若用户输入错误，则返回状态码410
      */
     @PostMapping(value = "/login")
@@ -37,7 +39,6 @@ public class UserController {
         }
         else{
             response.setStatus(200);
-            response.getWriter().write("{\"username\":\"zhang\",\"passwd\":\"123\"}");
         }
 
         /**
@@ -51,9 +52,20 @@ public class UserController {
      * @return 若修改成功，返回 200，失败则 410
      */
     @PostMapping(value = "changePassword")
-    public void changePassword(@RequestBody User user,HttpServletResponse response)throws IOException{
-        Boolean modifyStatus=userService.changePassword(user);
-        if (modifyStatus){
+    public void changePassword(@RequestBody User user,HttpServletResponse response){
+        int modifyStatus=userService.changePassword(user);
+        if (modifyStatus!=0){
+            response.setStatus(200);
+        }
+        else {
+            response.setStatus(410);
+        }
+    }
+
+    @PostMapping(value = "addUser")
+    public void addUser(@RequestBody User user,HttpServletResponse response){
+        int status=userService.addUser(user);
+        if (status!=0){
             response.setStatus(200);
         }
         else {

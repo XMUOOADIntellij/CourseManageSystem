@@ -24,7 +24,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Boolean setUserPasswordByAccount(User user){
+    public int setUserPasswordByAccount(User user){
         return userMapper.setUserPasswordByAccount(user.getAccount(),user.getPassword());
+    }
+
+    @Override
+    public int addUser(User user){
+        return userMapper.addUser(user);
     }
 }

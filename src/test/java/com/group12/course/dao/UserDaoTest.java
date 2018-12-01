@@ -27,7 +27,7 @@ public class UserDaoTest {
 
     @Test
     @Rollback
-    public void testUserDaoGetUserByAccount(){
+    public void testGetUserByAccount(){
         User testUser =new User("24320162202934","123456","277030573@qq.com","xg");
         Assert.assertEquals("Get User By account Error",
                 testUser.getAccount(),
@@ -36,14 +36,21 @@ public class UserDaoTest {
 
     @Test
     @Rollback
-    public void testUserDaoSetUserPasswordByAccount(){
+    public void testSetUserPasswordByAccount(){
         User testUser =new User("24320162202934","123456","277030573@qq.com","xg");
         testUser.setPassword("456789");
         Assert.assertTrue("Set User Password By account Error",
-                userMapper.setUserPasswordByAccount(testUser.getAccount(),testUser.getPassword()));
+                1 == userMapper.setUserPasswordByAccount(testUser.getAccount(),testUser.getPassword()));
         Assert.assertTrue("Set User Password By account failed, password",
                 userMapper.getUserByAccout(testUser.getAccount()).getPassword().equals(testUser.getPassword()));
 
+    }
+
+    @Test
+    @Rollback
+    public void testAddUser(){
+        User testUser=new User("1111","1111","1111@qq.cpm","name");
+        Assert.assertEquals("insert Error",1,userMapper.addUser(testUser));
     }
 
 }
