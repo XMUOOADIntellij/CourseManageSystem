@@ -1,33 +1,11 @@
+function updateCookie(name, value) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() + 6 * 24 * 60 * 60 * 1000); //6天过期
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+    return true;
+}
 
-
-$(function () {
-    $("#btnSignIn").click(function () {
-        window.location.href = "../Teacher/4-teacherHome.html";
-
-        var jname=$("#userName").val();
-        var jpassword=$("#userPassword").val();
-        var jdata={id:jname,password:jpassword};
-        $.ajax({
-            type:'post',
-            url: '',
-            dataType: "json",
-            data: JSON.stringify(jdata),
-            contentType: "application/json",
-            success: function (data,textStatus,xhr) {
-                if(xhr.status == 200){//状态码存疑
-                    window.localStorage.setItem("jwt", data.jwt);
-                    if(data.type == "student")
-                        window.location.href="/student/home";
-                    else
-                        window.location.href="/teacher/home";
-                }
-            },
-            statusCode:{
-                401: function () {
-                    $("#userPassword").val("");
-                    $("#userName").val("");
-                    alert("用户名或密码错误！");
-                }
-            }
-        });
-});
+function getCookie(name) {
+    var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+    if (arr != null) return unescape(arr[2]); return null;
+}

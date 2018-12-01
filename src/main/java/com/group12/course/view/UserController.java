@@ -51,7 +51,7 @@ public class UserController {
      * @return 若修改成功，返回 200，失败则 410
      */
     @PostMapping(value = "changePassword")
-    public void changPassword(@RequestBody User user,HttpServletResponse response)throws IOException{
+    public void changePassword(@RequestBody User user,HttpServletResponse response)throws IOException{
         Boolean modifyStatus=userService.changePassword(user);
         if (modifyStatus){
             response.setStatus(200);

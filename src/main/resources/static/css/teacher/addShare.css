@@ -6,6 +6,9 @@
         width: 90%;
         border-radius: 5px;
     }
+    .myBigMargin {
+        margin-top: 10%;
+        }
     .inputs {
         width: 96%;
         margin-left: 2%;
@@ -18,7 +21,7 @@
         margin-bottom: 2%;
     }
     .myMarginLeft {
-        margin-left: 2%;
+        margin-left: 3%;
     }
     .text-center {
         text-align: center;
@@ -41,6 +44,9 @@
     .selector {
         width: 40%;
     }
+    .btn-giant {
+        width :93%;
+        }
     .btn-big {
         width: 30%;
     }
@@ -59,19 +65,33 @@
         border-radius: 5px;
     }
     .dialog-row {
-        width: 95%;
-        padding-left: 5%;
-        line-height: 60px;
-        height: 60px;
+        width: 100%;
+        line-height: 45px;
+        height: 45px;
     }
-    .selector {
+    .conflict {
         float: right;
         width: 40%;
-        height: 30px;
-        margin-top: 15px;
-        margin-bottom: 15px;
+        margin-top: 4%;
         margin-right: 5%;
         border-radius: 5px;
         border: none;
     }
+    .selector {
+        float: right;
+        width: 40%;
+        margin-top: 2%;
+        margin-right: 5%;
+        border-radius: 5px;
+        border: none;
+        }
+    .card-row-details {
+        margin-left  : 5%;
+        margin-right : 5%;
+        }
+    .btn-warning{
+        width:44%;
+        }
+
+
 }
