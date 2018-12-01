@@ -33,8 +33,8 @@ public class UserServiceTest {
 
     @Test
     public void testCheckUser(){
-        Assert.assertEquals("checkUser Error",testUser,
-                userService.checkUser(testUser.getAccount(),testUser.getPassword()));
+        Assert.assertEquals("checkUser Error",testUser.getAccount(),
+                userService.checkUser(testUser.getAccount(),testUser.getPassword()).getAccount());
     }
 
     @Test

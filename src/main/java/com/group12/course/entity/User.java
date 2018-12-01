@@ -77,11 +77,11 @@ public class User{
         this.name = name;
     }
 
-    public int getActive() {
-        return active;
+    public Integer getActive() {
+        return active==null?0:active;
     }
 
-    public void setActive(int active) {
+    public void setActive(Integer active) {
         this.active = active;
     }
 }

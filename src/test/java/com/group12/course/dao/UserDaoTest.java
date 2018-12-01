@@ -47,10 +47,10 @@ public class UserDaoTest {
     }
 
     @Test
+    @Rollback
     public void testAddUser(){
         User testUser=new User("1111","1111","1111@qq.cpm","name");
-        userMapper.addUser(testUser);
-        Assert.assertEquals("insert Error",testUser,userMapper.getUserByAccout(testUser.getAccount()));
+        Assert.assertEquals("insert Error",1,userMapper.addUser(testUser));
     }
 
     @Test
