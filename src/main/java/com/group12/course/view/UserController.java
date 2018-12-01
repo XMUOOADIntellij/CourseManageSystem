@@ -32,7 +32,7 @@ public class UserController {
      * 若用户输入错误，则返回状态码410
      */
     @PostMapping(value = "/login")
-    public void checkUser(@RequestBody User user,HttpServletResponse response) throws IOException {
+    public void checkUser(@RequestBody User user,HttpServletResponse response) {
         User returnUser = userService.checkUser(user.getAccount(),user.getPassword());
         if (!user.getAccount().equals(returnUser.getAccount())){
             response.setStatus(410);
@@ -40,10 +40,6 @@ public class UserController {
         else{
             response.setStatus(200);
         }
-
-        /**
-         * TODO
-         * 异常处理*/
     }
 
     /**
@@ -51,7 +47,7 @@ public class UserController {
      * @param user 用户
      * @return 若修改成功，返回 200，失败则 410
      */
-    @PostMapping(value = "changePassword")
+    @PostMapping(value = "/changePassword")
     public void changePassword(@RequestBody User user,HttpServletResponse response){
         int modifyStatus=userService.changePassword(user);
         if (modifyStatus!=0){
@@ -62,9 +58,32 @@ public class UserController {
         }
     }
 
-    @PostMapping(value = "addUser")
+    /**
+     * 添加用户
+     * @param user 用户
+     * @return 若成功创建，返回200
+     * 若创建失败，返回410
+     * */
+    @PostMapping(value = "/addUser")
     public void addUser(@RequestBody User user,HttpServletResponse response){
         int status=userService.addUser(user);
+        if (status!=0){
+            response.setStatus(200);
+        }
+        else {
+            response.setStatus(410);
+        }
+    }
+
+    /**
+     * 删除用户
+     * @param account 用户账号
+     * @return 若成功删除，返回200
+     * 若创建失败，返回410
+     * */
+    @GetMapping(value = "/deleteUser/{account}")
+    public void deleteUser(@PathVariable String account,HttpServletResponse response){
+        int status=userService.deleteUser(account);
         if (status!=0){
             response.setStatus(200);
         }

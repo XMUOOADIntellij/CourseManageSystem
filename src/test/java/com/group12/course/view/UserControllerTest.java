@@ -121,9 +121,9 @@ public class UserControllerTest {
         Map<String,String> rightAccount = new TreeMap<String, String>();
         rightAccount.put("account","24320162202985");
         rightAccount.put("password","123456");
-        rightAccount.put("email","1234@qq.com");
-        rightAccount.put("name","name");
-        rightAccount.put("active","1");
+//        rightAccount.put("email","1234@qq.com");
+//        rightAccount.put("name","name");
+//        rightAccount.put("active","1");
         MvcResult rightResult =
                 mvc.perform(MockMvcRequestBuilders.post("/user/addUser")
                         // 设置请求内容为JSON格式

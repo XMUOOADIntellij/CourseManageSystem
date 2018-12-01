@@ -16,18 +16,29 @@ public interface UserService {
      * @param password 用户输入的密码
      * @return User 若用户输入正确，则返回正确的用户对象，
      * 若用户输入错误，则返回一个临时生成的用户对象
-     */
+     * */
     User checkUser(String account,String password);
 
     /**
      * 通过传入的用户信息，修改密码
      * @param user 用户
-     * @return 若修改成功，返回 true，失败则 false
-     */
+     * @return 返回修改数量（0代表修改失败）
+     * */
     int changePassword(User user);
 
+    /**
+     * 添加用户
+     * @param user 新用户对象
+     * @return 添加数量（0代表失败，1代表成功）
+     * */
     int addUser(User user);
 
+    /**
+     * 删除用户
+     * @param account 被删除账号
+     * @return 删除数量（0代表删除失败）
+     * */
+    int deleteUser(String account);
     /*
     * TODO
     * 目前只做了登陆部分，其他部分还没做

@@ -24,7 +24,20 @@ public interface UserDao {
      */
     int setUserPasswordByAccount(User user);
 
+    /**
+     * 添加用户
+     * @param user 用户对象
+     * @return 添加个数
+     * */
     int addUser(User user);
+
+    /**
+     * 删除用户
+     * @param account 被删除的用户账号
+     * @return 删除个数
+     * */
+    int deleteUser(String account);
+
     /**
       * 其余等待实现
       */

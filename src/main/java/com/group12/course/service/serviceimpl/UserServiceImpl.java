@@ -47,6 +47,11 @@ public class UserServiceImpl implements UserService {
         return userDao.setUserPasswordByAccount(user);
     }
 
+    /**
+     * 添加用户
+     * @param user 新用户对象
+     * @return 添加数量（0代表失败，1代表成功）
+     * */
     @Override
     public int addUser(User user){
         if(user.getAccount()==null||user.getPassword()==null){
@@ -55,5 +60,15 @@ public class UserServiceImpl implements UserService {
         else {
             return userDao.addUser(user);
         }
+    }
+
+    /**
+     * 删除用户
+     * @param account 被删除账号
+     * @return 删除数量（0代表删除失败）
+     * */
+    @Override
+    public int deleteUser(String account){
+        return userDao.deleteUser(account);
     }
 }

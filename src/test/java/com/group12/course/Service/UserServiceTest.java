@@ -4,6 +4,7 @@ package com.group12.course.Service;
 import com.group12.course.entity.User;
 import com.group12.course.service.UserService;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,22 +33,20 @@ public class UserServiceTest {
 
     @Test
     public void testCheckUser(){
-        /**
-         * TODO
-         * */
+        Assert.assertEquals("checkUser Error",testUser,
+                userService.checkUser(testUser.getAccount(),testUser.getPassword()));
     }
 
     @Test
     public void testChangePassword(){
-        /**
-         * TODO
-         * */
+        String newPassword=new String("9876543");
+        testUser.setPassword(newPassword);
+        Assert.assertEquals("changePassword Error",1,
+                userService.changePassword(testUser));
     }
 
     @After
     public void removeTestUser(){
-        /**
-         * TODO
-         * 待移除用户方可测试*/
+        userService.deleteUser(testUser.getAccount());
     }
 }

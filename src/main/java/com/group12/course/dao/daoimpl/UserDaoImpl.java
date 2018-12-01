@@ -32,4 +32,9 @@ public class UserDaoImpl implements UserDao {
     public int addUser(User user){
         return userMapper.addUser(user);
     }
+
+    @Override
+    public int deleteUser(String account){
+        return userMapper.deleteUser(account);
+    }
 }

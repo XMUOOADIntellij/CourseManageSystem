@@ -18,22 +18,20 @@ public class User{
       */
     private Integer active;
 
-    public User(){}
-
-    public User(String account, String password) {
-        this.account = account;
-        this.password = password;
-        this.email = "";
-        this.name = "";
-        this.active = 0;
-    }
-
     public User(String account, String password, String email, String name) {
         this.account = account;
         this.password = password;
         this.email = email;
         this.name = name;
-        this.active = 0;
+        this.active = new Integer(0);
+    }
+
+    public User(String account, String password) {
+        this(account,password,"","");
+    }
+
+    public User(){
+        this("","");
     }
 
     @Override

@@ -19,4 +19,9 @@
         insert into user(account,password,email,name,is_active)
         values (#{account},#{password},#{email},#{name},#{active})
     </insert>
+
+    <!-- 删除用户 -->
+    <delete id="deleteUser">
+        delete from user where account=#{account}
+    </delete>
 </mapper>
