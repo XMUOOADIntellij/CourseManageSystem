@@ -40,7 +40,7 @@
                              targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        
+
         <!--生成对应表及类名-->
         <table tableName="seminar" domainObjectName="Seminar"
                enableCountByExample="false"
