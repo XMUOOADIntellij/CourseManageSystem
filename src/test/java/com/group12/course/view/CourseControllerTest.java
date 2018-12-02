@@ -69,7 +69,7 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
      @Test
     public void testDeleteCourse() throws Exception {
          MvcResult result =
-                 mvc.perform(MockMvcRequestBuilders.delete("/delete/1").)
+                 mvc.perform(MockMvcRequestBuilders.delete("/delete/1"))
                          .andExpect(handler().handlerType(CourseController.class))
                          //验证执行的控制器方法名
                          .andExpect(handler().methodName("deleteCourses"))
