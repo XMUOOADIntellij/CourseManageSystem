@@ -78,7 +78,6 @@ public class UserControllerTest {
     }
 
     @Test
-    @Rollback
     public void testChangPassword() throws Exception{
         Map<String,String> rightAccount = new TreeMap<String, String>();
         rightAccount.put("account","24320162202934");
@@ -116,7 +115,6 @@ public class UserControllerTest {
     }
 
     @Test
-    @Rollback
     public void testAddUser()throws Exception{
         Map<String,String> rightAccount = new TreeMap<String, String>();
         rightAccount.put("account","24320162202985");
@@ -136,6 +134,42 @@ public class UserControllerTest {
                         .andExpect(handler().methodName("addUser"))
                         // 验证状态码
                         .andExpect(status().is(200))
+                        .andReturn();
+    }
+
+    @Test
+    public void testGetVerifyCode()throws Exception{
+        Map<String,String> rightAccount = new TreeMap<String, String>();
+        rightAccount.put("account","24320162202985");
+        rightAccount.put("email","277030573@qq.com");
+        MvcResult rightResult =
+                mvc.perform(MockMvcRequestBuilders.post("/user/getVerifyCode")
+                        // 设置请求内容为JSON格式
+                        .contentType(MediaType.APPLICATION_JSON)
+                        // 将请求内容传入
+                        .content(JSONObject.toJSONString(rightAccount)))
+                        // 验证执行的控制器类型
+                        .andExpect(handler().handlerType(UserController.class))
+                        // 验证执行的控制器方法名
+                        .andExpect(handler().methodName("getVerifyCode"))
+                        // 验证状态码
+                        .andExpect(status().is(200))
+                        .andReturn();
+
+        Map<String,String> wrongAccount = new TreeMap<String, String>();
+        wrongAccount.put("account","24320162202985");
+        MvcResult wrongResult =
+                mvc.perform(MockMvcRequestBuilders.post("/user/getVerifyCode")
+                        // 设置请求内容为JSON格式
+                        .contentType(MediaType.APPLICATION_JSON)
+                        // 将请求内容传入
+                        .content(JSONObject.toJSONString(wrongAccount)))
+                        // 验证执行的控制器类型
+                        .andExpect(handler().handlerType(UserController.class))
+                        // 验证执行的控制器方法名
+                        .andExpect(handler().methodName("getVerifyCode"))
+                        // 验证状态码
+                        .andExpect(status().is(410))
                         .andReturn();
     }
 }

@@ -1,7 +1,9 @@
 package com.group12.course.Service;
 
 
+import com.group12.course.entity.Mail;
 import com.group12.course.entity.User;
+import com.group12.course.entity.VerificationCode;
 import com.group12.course.service.UserService;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -39,11 +41,28 @@ public class UserServiceTest {
         testUser.setAccount("243");
         testUser.setPassword("123");
         userService.addUser(testUser);
+
         String newPassword=new String("9876543");
         testUser.setPassword(newPassword);
         Assert.assertEquals("changePassword Error",1,
                 userService.changePassword(testUser));
+
         userService.deleteUser(testUser.getAccount());
     }
 
+    @Test
+    public void testGetVerificationCode(){
+        User testUser =new User();
+        testUser.setAccount("243");
+        testUser.setPassword("123");
+
+        Assert.assertEquals("error","email is empty"
+                ,userService.getVerificationCode(testUser));
+        testUser.setEmail("277030573@qq.com");
+
+        String code=userService.getVerificationCode(testUser);
+        System.out.println(code);
+
+        userService.deleteUser(testUser.getAccount());
+    }
 }
