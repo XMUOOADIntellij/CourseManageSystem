@@ -27,7 +27,9 @@ public class UserServiceTest {
 
     @Before
     public void initTestUser(){
-        testUser=new User("11111","123456");
+        User testUser =new User();
+        testUser.setAccount("243");
+        testUser.setPassword("123");
         userService.addUser(testUser);
     }
 

@@ -3,36 +3,18 @@ package com.group12.course.entity;
 /**
  * User 实体对象
  * @author Xu Gang
- * @date 2018年11月29日
+ * @date 2018年12月2日
  */
-
-public class User{
-
+public class User {
     private String account;
+
     private String password;
+
     private String email;
+
     private String name;
 
-    /**
-     * 0代表未激活，1代表激活
-      */
-    private Integer active;
-
-    public User(String account, String password, String email, String name) {
-        this.account = account;
-        this.password = password;
-        this.email = email;
-        this.name = name;
-        this.active = new Integer(0);
-    }
-
-    public User(String account, String password) {
-        this(account,password,"","");
-    }
-
-    public User(){
-        this("","");
-    }
+    private Boolean isActive;
 
     @Override
     public String toString() {
@@ -41,7 +23,7 @@ public class User{
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
-                ", active=" + active +
+                ", isActive=" + isActive +
                 '}';
     }
 
@@ -50,7 +32,7 @@ public class User{
     }
 
     public void setAccount(String account) {
-        this.account = account;
+        this.account = account == null ? null : account.trim();
     }
 
     public String getPassword() {
@@ -58,7 +40,7 @@ public class User{
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
     public String getEmail() {
@@ -66,7 +48,7 @@ public class User{
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email == null ? null : email.trim();
     }
 
     public String getName() {
@@ -74,14 +56,14 @@ public class User{
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
-    public Integer getActive() {
-        return active==null?0:active;
+    public Boolean getActive() {
+        return isActive;
     }
 
-    public void setActive(Integer active) {
-        this.active = active;
+    public void setActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 }

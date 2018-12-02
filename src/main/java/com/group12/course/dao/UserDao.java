@@ -15,14 +15,14 @@ public interface UserDao {
      * @param account 用户账户
      * @return User 用户
      */
-    User getUserByAccount(String account);
+    User getUser(String account);
 
     /**
-     * 修改用户密码
+     * 修改用户信息
      * @param user 用户账户对象
      * @return user 返回修改操作后的用户
      */
-    int setUserPasswordByAccount(User user);
+    int updateUser(User user);
 
     /**
      * 添加用户
