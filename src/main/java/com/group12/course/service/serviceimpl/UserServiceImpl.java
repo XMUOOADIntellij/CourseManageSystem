@@ -1,7 +1,9 @@
 package com.group12.course.service.serviceimpl;
 
 import com.group12.course.dao.UserDao;
+import com.group12.course.entity.Mail;
 import com.group12.course.entity.User;
+import com.group12.course.entity.VerificationCode;
 import com.group12.course.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -124,6 +126,25 @@ public class UserServiceImpl implements UserService {
         else {
             user.setActive(true);
             return userDao.updateUser(user);
+        }
+    }
+
+    /**
+     * 发送验证码
+     * @param user 要含有邮箱的用户信息
+     * @return 是否发送成功
+     * */
+    @Override
+    public String getVerificationCode(User user){
+        if (user.getEmail()==null){
+            return new String("email is empty");
+        }
+        else{
+            Mail mail = new Mail();
+            VerificationCode generator=new VerificationCode();
+            String code = generator.generateCode();
+            Boolean sendStatus=mail.sendMail(user.getEmail(),code);
+            return sendStatus?code:"fail to send";
         }
     }
 }

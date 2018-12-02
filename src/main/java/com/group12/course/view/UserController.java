@@ -1,5 +1,6 @@
 package com.group12.course.view;
 
+import com.alibaba.fastjson.JSON;
 import com.group12.course.entity.User;
 import com.group12.course.service.UserService;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * User controller
@@ -137,6 +140,31 @@ public class UserController {
         }
         else {
             response.setStatus(410);
+        }
+    }
+
+    /**
+     * 发送验证码
+     * @param user 要含有邮箱的用户信息
+     * @return 是否发送成功
+     * */
+    @PostMapping(value = "/getVerifyCode")
+    public void getVerifyCode(@RequestBody User user,HttpServletResponse response)throws IOException{
+        String status=userService.getVerificationCode(user);
+        final int codeLength=6;
+        if (status.length()==codeLength){
+            Map map=new HashMap(1);
+            map.put("code",status);
+            String  param= JSON.toJSONString(map);
+            response.setStatus(200);
+            response.getWriter().write(param);
+        }
+        else {
+            Map map=new HashMap(1);
+            map.put("errMsg",status);
+            String param= JSON.toJSONString(map);
+            response.setStatus(410);
+            response.getWriter().write(param);
         }
     }
 }

@@ -60,4 +60,11 @@ public interface UserService {
      * @return 返回激活数量
      * */
     int changeActiveStatus(User user);
+
+    /**
+     * 发送验证码
+     * @param user 要含有邮箱的用户信息
+     * @return 是否发送成功
+     * */
+    String getVerificationCode(User user);
 }
