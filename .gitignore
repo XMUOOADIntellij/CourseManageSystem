@@ -2,3 +2,4 @@
 out/
 target/
 *.MF
+mybatis-generator.xml
