@@ -1,43 +1,151 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.group12.course.entity.Course" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="courseName" property="courseName" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="pre_percentage" property="prePercentage" jdbcType="INTEGER" />
+    <result column="report_percentage" property="reportPercentage" jdbcType="INTEGER" />
+    <result column="ques_percentage" property="quesPercentage" jdbcType="INTEGER" />
+    <result column="team_start_date" property="teamStartDate" jdbcType="TIMESTAMP" />
+    <result column="team_end_date" property="teamEndDate" jdbcType="TIMESTAMP" />
+      <result column="teacher_id" property="teacherId" jdbcType="BIGINT"/>
+  </resultMap>
 
-<!--命名空间应该是对应接口的包名+接口名 -->
-<mapper namespace="com.group12.course.mapper.CourseMapper">
+  <sql id="Base_Column_List" >
+    id, courseName, introduction, pre_percentage, report_percentage, ques_percentage,
+    team_start_date, team_end_date,teacher_id
+  </sql>
 
-    <resultMap id="courseResultMap" type="com.group12.course.entity.Course">
-        <id property="id" column="id" />
-        <result property="name" column="name"/>
-        <result property="teacherName" column="teacherName"/>
-        <result property="location" column="location"/>
-    </resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from course
+    where id = #{id,jdbcType=BIGINT}
+  </select>
 
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from course
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
 
-    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
-    <!--获得所有课程 -->
-    <select id="listCourses" resultType="com.group12.course.entity.Course">
-        select id,name,teacherName,location from courses
-    </select>
+  <insert id="insert" parameterType="com.group12.course.entity.Course" >
+    insert into course (id, courseName, introduction, 
+      pre_percentage, report_percentage, ques_percentage,
+      team_start_date, team_end_date,teacher_id)
+    values (#{id,jdbcType=BIGINT}, #{courseName,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR},
+      #{prePercentage,jdbcType=INTEGER}, #{reportPercentage,jdbcType=INTEGER}, #{quesPercentage,jdbcType=INTEGER},
+      #{teamStartDate,jdbcType=TIMESTAMP}, #{teamEndDate,jdbcType=TIMESTAMP},#{teacherId,jdbcType=BIGINT})
+  </insert>
 
-    <!--获得课程对象通过编号 -->
-    <select id="getCourseNameById" resultType="com.group12.course.entity.Course">
-        select id,name,teacherName,location from courses
-        where id=#{id}
-    </select>
+  <insert id="insertSelective" parameterType="com.group12.course.entity.Course" >
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+        <if test="teacherId != null" >
+            teacher_id,
+        </if>
+      <if test="courseName != null" >
+        courseName,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="prePercentage != null" >
+        pre_percentage,
+      </if>
+      <if test="reportPercentage != null" >
+        report_percentage,
+      </if>
+      <if test="quesPercentage != null" >
+        ques_percentage,
+      </if>
+      <if test="teamStartDate != null" >
+        team_start_date,
+      </if>
+      <if test="teamEndDate != null" >
+        team_end_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+        <if test="id != null" >
+            #{teacherId,jdbcType=BIGINT},
+        </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="prePercentage != null" >
+        #{prePercentage,jdbcType=INTEGER},
+      </if>
+      <if test="reportPercentage != null" >
+        #{reportPercentage,jdbcType=INTEGER},
+      </if>
+      <if test="quesPercentage != null" >
+        #{quesPercentage,jdbcType=INTEGER},
+      </if>
+      <if test="teamStartDate != null" >
+        #{teamStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teamEndDate != null" >
+        #{teamEndDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
 
-    <!-- 增加 -->
-    <insert id="add">
-        insert into courses(id,name,teacherName,location)
-        values(#{id},#{name},#{teacherName},#{location})
-    </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group12.course.entity.Course" >
+    update course
+    <set >
+      <if test="courseName != null" >
+        courseName = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="prePercentage != null" >
+        pre_percentage = #{prePercentage,jdbcType=INTEGER},
+      </if>
+      <if test="reportPercentage != null" >
+        report_percentage = #{reportPercentage,jdbcType=INTEGER},
+      </if>
+      <if test="quesPercentage != null" >
+        ques_percentage = #{quesPercentage,jdbcType=INTEGER},
+      </if>
+      <if test="teamStartDate != null" >
+        team_start_date = #{teamStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teamEndDate != null" >
+        team_end_date = #{teamEndDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 
-    <!-- 删除 -->
-    <delete id="remove">
-        delete from courses where id=#{id}
-    </delete>
+  <update id="updateByPrimaryKey" parameterType="com.group12.course.entity.Course" >
+    update course
+    set courseName = #{courseName,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      pre_percentage = #{prePercentage,jdbcType=INTEGER},
+      report_percentage = #{reportPercentage,jdbcType=INTEGER},
+      ques_percentage = #{quesPercentage,jdbcType=INTEGER},
+      team_start_date = #{teamStartDate,jdbcType=TIMESTAMP},
+      team_end_date = #{teamEndDate,jdbcType=TIMESTAMP},
+      teacher_id = #{teacherId}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 
-    <!-- 更新 -->
-    <update id="update">
-        update courses set name = #{name},teacherName = #{teacherName},location = #{location}
-        where id=#{id}
-    </update>
+  <select id="listCourses" parameterType="java.lang.Long" resultType="com.group12.course.entity.Course">
+      select
+      <include refid="Base_Column_List" />
+      from course
+      where teacher_id = #{teacherId,jdbcType=BIGINT}
+  </select>
 </mapper>

@@ -56,4 +56,5 @@ public interface SeminarMapper {
      * @return int
      */
     int updateByPrimaryKey(Seminar record);
+
 }

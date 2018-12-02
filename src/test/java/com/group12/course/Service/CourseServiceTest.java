@@ -8,7 +8,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.time.LocalDateTime;
+import java.time.Month;
+
 
 /**
  * @author Y Jiang
@@ -17,29 +22,66 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CourseServiceTest {
+public class CourseServiceTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     private CourseService courseService;
-    private Course  testCourse;
+    private Course testCourse;
 
     @Before
-    public void initiateCourse(){
+    public void initialTestCourse(){
         testCourse = new Course();
-        testCourse.setId("1000");
-        testCourse.setName("Test");
-        testCourse.setteacherName("TestTeacher");
-        testCourse.setLocation("TestLocation");
+        testCourse.setId(new Long(2));
+        testCourse.setTeacherId(new Long(1));
+        testCourse.setCourseName("OOAD");
+        testCourse.setIntroduction("OOAD的简介");
+        testCourse.setPrePercentage(40);
+        testCourse.setReportPercentage(30);
+        testCourse.setQuesPercentage(30);
+        testCourse.setTeamStartDate(LocalDateTime.of(2018, Month.DECEMBER,1,23,59,59));
+        testCourse.setTeamEndDate(LocalDateTime.of(2018,Month.DECEMBER,6,23,59,59));
+    }
+
+
+    @Test
+    public void testGetCourseById(){
+        courseService.deleteCourse(testCourse.getId());
+        //courseService.addCourse(testCourse);
+
+        Assert.assertEquals(LocalDateTime.of(2018,Month.DECEMBER,1,23,59,59),
+                courseService.getCourseById(testCourse.getId()).getTeamStartDate());
     }
 
     @Test
-    public void CourseCRUDTest(){
-        Assert.assertTrue("Add Course Error",courseService.addCourse(testCourse));
-        Assert.assertTrue("Get Course By Id Error",
-                courseService.getCourseNameById(Integer.valueOf(testCourse.getId())).getName().equals("Test"));
-        testCourse.setName("updateTest");
-        Assert.assertTrue("Update Course Error",courseService.updateCourse(testCourse));
-        Assert.assertTrue("Delete Course Error",courseService.deleteCourse(Integer.valueOf(testCourse.getId())));
+    public void testAddCourse(){
+        courseService.deleteCourse(testCourse.getId());
+        //Assert.assertEquals(1,courseService.addCourse(testCourse));
+        Assert.assertEquals("OOAD",courseService.getCourseById(testCourse.getId()).getCourseName());
     }
 
+    @Test
+    public  void testDeleteCourse(){
+        courseService.deleteCourse(testCourse.getId());
+        Assert.assertEquals(0,courseService.deleteCourse(testCourse.getId()));
+        //courseService.addCourse(testCourse);
+        Assert.assertEquals(1,courseService.deleteCourse(testCourse.getId()));
+    }
+
+    @Test
+    public void testUpdateCourse(){
+        courseService.deleteCourse(testCourse.getId());
+      // courseService.addCourse(testCourse);
+
+       testCourse.setQuesPercentage(20);
+       testCourse.setCourseName(null);
+
+       Assert.assertEquals(1,courseService.updateCourse(testCourse));
+       Assert.assertEquals("OOAD",courseService.getCourseById(testCourse.getId()).getCourseName());
+       Assert.assertEquals(20,courseService.getCourseById(testCourse.getId()).getQuesPercentage().intValue());
+    }
+
+    @Test
+    public void testListCourses(){
+        Assert.assertEquals("OOAD",courseService.listCourses(testCourse.getTeacherId()));
+    }
 }

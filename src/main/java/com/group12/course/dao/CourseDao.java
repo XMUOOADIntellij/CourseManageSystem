@@ -1,53 +1,68 @@
 package com.group12.course.dao;
 
 import com.group12.course.entity.Course;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 
 /**
- * @author Y Jiang
- * 2018/11/28
+ *
  * CourseDao  课程Dao接口
- * 获得所有课程
- * 根据id获取课程
- * 增加课程
- * 删除课程
- * 更新课程
+ * @author Y Jiang
+ * @date 2018/11/28
  */
+
+@Component
 public interface CourseDao {
 
     /**
-     * 获得所有课程
-     * @return List<Course>
+     * 找到当前老師的所有课程
+     * @param teacherId String
+     * @return List  List<Course>
      */
-    List<Course> listCourses();
+    List<Course> listCourses(Long teacherId);
 
     /**
-     * 根据课程id获得课程
-     * @param id int
-     * @return Course
+     * 通过课程ID 删除课程
+     * @param id Integer
+     * @return int
      */
-    Course getCourseNameById(int id);
+    int deleteByPrimaryKey(Long id);
 
     /**
-     * 增加课程
-     * @param entity  Course
-     * @return Course
+     * 插入课程
+     * @param record Course
+     * @return int
      */
-    boolean add(Course entity);
+    int insert(Course record);
 
     /**
-     * 删除课程
-     * @param id int
+     * 插入课程 Selective
+     * @param record Course
+     * @return int
+     */
+    int insertSelective(Course record);
+
+    /**
+     * 根据课程Id查找单个课程
+     * @param id Integer
      * @return Course
      */
-    boolean remove(int id);
+    Course selectByPrimaryKey(Long id);
+
+    /**
+     * 更新课程 Selective
+     * @param record Course
+     * @return int
+     */
+    int updateByPrimaryKeySelective(Course record);
 
     /**
      * 更新课程
-     * @param entity  Course
-     * @return Course
+     * @param record Course
+     * @return int
      */
-    boolean update(Course entity);
+    int updateByPrimaryKey(Course record);
 
 }
