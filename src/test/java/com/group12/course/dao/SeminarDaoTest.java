@@ -1,6 +1,5 @@
 package com.group12.course.dao;
 
-
 import com.group12.course.entity.Seminar;
 import com.group12.course.mapper.SeminarMapper;
 import org.junit.Assert;
@@ -15,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @MybatisTest
@@ -24,18 +22,18 @@ public class SeminarDaoTest {
 
     @Autowired
     SeminarMapper seminarMapper;
-    Seminar seminar;
+    private Seminar seminar;
 
     @Before
     public void initialTestSeminar(){
         seminar = new Seminar();
         seminar.setId(new Long(1));
-        seminar.setTheme(new String("需求分析"));
-        seminar.setContent(new String("讨论课需求分析的内容"));
-        seminar.setSerial(new Integer(1));
-        seminar.setMaxteam(new Integer(5));
-        seminar.setIsordered(new Boolean(false));
-        seminar.setIsVisible(new Boolean(false));
+        seminar.setTheme("需求分析");
+        seminar.setContent("讨论课需求分析的内容");
+        seminar.setSerial(1);
+        seminar.setMaxteam(5);
+        seminar.setIsordered(false);
+        seminar.setIsVisible(false);
         seminar.setEnrollStartDate(LocalDateTime.of(2018, Month.DECEMBER,1,23,59,59));
         seminar.setEnrollEndDate(LocalDateTime.of(2018,Month.DECEMBER,2,23,59,59));
     }
@@ -71,7 +69,7 @@ public class SeminarDaoTest {
         seminarMapper.deleteByPrimaryKey(seminar.getId());
         seminarMapper.insert(seminar);
 
-        seminar.setSerial(new Integer(99));
+        seminar.setSerial(99);
         seminar.setContent(null);
         seminar.setTheme(null);
         Assert.assertEquals(1,seminarMapper.updateByPrimaryKey(seminar));
@@ -85,7 +83,7 @@ public class SeminarDaoTest {
         seminarMapper.deleteByPrimaryKey(seminar.getId());
         seminarMapper.insert(seminar);
 
-        seminar.setSerial(new Integer(99));
+        seminar.setSerial(99);
         seminar.setContent(null);
         seminar.setTheme(null);
 
