@@ -31,17 +31,22 @@ public class UserController {
     /**
      * 通过前端传来的账号密码，判断密码是否符合
      * @param user 通过前端传入的数据组成的 user 对象
-     * @return  若用户输入正确，则返回状态码200，
-     * 若用户输入错误，则返回状态码410
+     * @return  若用户输入正确，则返回状态码 200，并且返回 JSON 数据，
+     * key 为 isActive，value 值为 false 或 true
+     * 若用户输入错误，则返回状态码 410
      */
     @PostMapping(value = "/login")
-    public void checkUser(@RequestBody User user,HttpServletResponse response) {
+    public void checkUser(@RequestBody User user,HttpServletResponse response)throws IOException {
         User returnUser = userService.checkUser(user.getAccount(),user.getPassword());
         if (!user.getAccount().equals(returnUser.getAccount())){
             response.setStatus(410);
         }
         else{
+            Map map=new HashMap(1);
+            map.put("isActive",returnUser.getActive());
+            String  param= JSON.toJSONString(map);
             response.setStatus(200);
+            response.getWriter().write(param);
         }
     }
 
@@ -147,6 +152,10 @@ public class UserController {
      * 发送验证码
      * @param user 要含有邮箱的用户信息
      * @return 是否发送成功
+     * 发送成功返回状态码 200，并且返回 JSON 格式数据
+     * 其中 key 为 code，value 为验证码的值
+     * 若失败则返回状态码 410，并且返回 JSON 格式数据
+     * 其中 key 为 errMsg，value 为错误信息
      * */
     @PostMapping(value = "/getVerifyCode")
     public void getVerifyCode(@RequestBody User user,HttpServletResponse response)throws IOException{
