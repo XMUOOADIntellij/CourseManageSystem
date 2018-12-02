@@ -39,8 +39,25 @@ public interface UserService {
      * @return 删除数量（0代表删除失败）
      * */
     int deleteUser(String account);
-    /*
-    * TODO
-    * 目前只做了登陆部分，其他部分还没做
-    */
+
+    /**
+     * 修改用户
+     * @param user 用户 包含邮箱
+     * @return 返回修改的数量
+     * */
+    int changeEmail(User user);
+
+    /**
+     * 修改姓名
+     * @param user 用户信息 包含姓名
+     * @return 返回修改的数量
+     * */
+    int changeName(User user);
+
+    /**
+     * 激活用户
+     * @param user 用户信息
+     * @return 返回激活数量
+     * */
+    int changeActiveStatus(User user);
 }

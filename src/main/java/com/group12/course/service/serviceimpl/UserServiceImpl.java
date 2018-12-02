@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User checkUser(String account,String password) {
         User user = userDao.getUser(account);
-
         // 若该用户在数据库中不存在，则 user == null，要剔除这种情况
         if ( user != null && user.getPassword().equals(password)){
             return user;
@@ -44,7 +43,12 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int changePassword(User user){
-        return userDao.updateUser(user);
+        if (user.getPassword()==null||user.getPassword()==null){
+            return 0;
+        }
+        else {
+            return userDao.updateUser(user);
+        }
     }
 
     /**
@@ -69,6 +73,57 @@ public class UserServiceImpl implements UserService {
      * */
     @Override
     public int deleteUser(String account){
-        return userDao.deleteUser(account);
+        if (account==null){
+            return 0;
+        }
+        else {
+            return userDao.deleteUser(account);
+        }
+    }
+
+    /**
+     * 修改用户
+     * @param user 用户 包含邮箱
+     * @return 返回修改的数量
+     * */
+    @Override
+    public int changeEmail(User user){
+        if(user.getAccount()==null||user.getEmail()==null){
+            return 0;
+        }
+        else {
+            return userDao.updateUser(user);
+        }
+    }
+
+    /**
+     * 修改姓名
+     * @param user 用户信息 包含姓名
+     * @return 返回修改的数量
+     * */
+    @Override
+    public int changeName(User user){
+        if(user.getAccount()==null||user.getName()==null){
+            return 0;
+        }
+        else {
+            return userDao.updateUser(user);
+        }
+    }
+
+    /**
+     * 激活用户
+     * @param user 用户信息
+     * @return 返回激活数量
+     * */
+    @Override
+    public int changeActiveStatus(User user){
+        if(user.getAccount()==null){
+            return 0;
+        }
+        else {
+            user.setActive(true);
+            return userDao.updateUser(user);
+        }
     }
 }

@@ -1,10 +1,13 @@
 package com.group12.course.entity;
 
+import org.springframework.stereotype.Component;
+
 /**
  * User 实体对象
  * @author Xu Gang
  * @date 2018年12月2日
  */
+@Component
 public class User {
     private String account;
 
@@ -15,6 +18,10 @@ public class User {
     private String name;
 
     private Boolean isActive;
+
+    public User() {
+        this.isActive = false;
+    }
 
     @Override
     public String toString() {

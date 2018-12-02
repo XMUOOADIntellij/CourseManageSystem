@@ -91,4 +91,52 @@ public class UserController {
             response.setStatus(410);
         }
     }
+
+    /**
+     * 通过传入的用户信息，修改邮箱
+     * @param user 用户
+     * @return 若修改成功，返回 200，失败则 410
+     */
+    @PostMapping(value = "/changeEmail")
+    public void changeEmail(@RequestBody User user,HttpServletResponse response){
+        int modifyStatus=userService.changeEmail(user);
+        if (modifyStatus!=0){
+            response.setStatus(200);
+        }
+        else {
+            response.setStatus(410);
+        }
+    }
+
+    /**
+     * 通过传入的用户信息，修改姓名
+     * @param user 用户
+     * @return 若修改成功，返回 200，失败则 410
+     */
+    @PostMapping(value = "/changeName")
+    public void changeName(@RequestBody User user,HttpServletResponse response){
+        int modifyStatus=userService.changeName(user);
+        if (modifyStatus!=0){
+            response.setStatus(200);
+        }
+        else {
+            response.setStatus(410);
+        }
+    }
+
+    /**
+     * 通过传入的用户信息，修改激活状态
+     * @param user 用户
+     * @return 若修改成功，返回 200，失败则 410
+     */
+    @PostMapping(value = "/changeStatus")
+    public void changeActiveStatus(@RequestBody User user,HttpServletResponse response){
+        int modifyStatus=userService.changeActiveStatus(user);
+        if (modifyStatus!=0){
+            response.setStatus(200);
+        }
+        else {
+            response.setStatus(410);
+        }
+    }
 }
