@@ -6,64 +6,46 @@ import com.group12.course.mapper.ClassMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 /**
+ * Class Dao层接口实现
  * @author Tan Xue
- * 2018年11月30日
+ * @date 2018/11/30
  */
+
 @Component
 public class ClassDaoImpl implements ClassDao {
 
     @Autowired
     ClassMapper classMapper;
 
-    /**
-     * 获得所有班级
-     * @return List<Class>
-     */
+
     @Override
-    public List<Class> listClasses() {
-        return classMapper.getAllClasses();
+    public int deleteByPrimaryKey(String id) {
+        return classMapper.deleteByPrimaryKey(id);
     }
 
-    /**
-     * 根据班级id获得班级
-     * @param id int
-     * @return Class
-     */
     @Override
-    public Class getClassByClassId(int id) {
-        return classMapper.getClassByClassId(id);
+    public int insert(Class record) {
+        return classMapper.insert(record);
     }
 
-    /**
-     * 增加班级
-     * @param entity  Class
-     * @return Class
-     */
     @Override
-    public boolean add(Class entity) {
-        return classMapper.add(entity);
+    public int insertSelective(Class record) {
+        return classMapper.insertSelective(record);
     }
 
-    /**
-     * 删除班级
-     * @param id int
-     * @return Class
-     */
     @Override
-    public boolean remove(int id) {
-        return classMapper.remove(id);
+    public Class selectByPrimaryKey(String id) {
+        return classMapper.selectByPrimaryKey(id);
     }
 
-    /**
-     * 更新班级
-     * @param entity  Class
-     * @return Class
-     */
     @Override
-    public boolean update(Class entity) {
-        return classMapper.update(entity);
+    public int updateByPrimaryKeySelective(Class record) {
+        return classMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(Class record) {
+        return classMapper.updateByPrimaryKey(record);
     }
 }

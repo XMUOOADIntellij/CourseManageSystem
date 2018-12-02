@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
+ * Class service层接口实现
  * @author Tan Xue
- * 2018年11月30日
+ * @date 2018/11/30
  */
 @Service
 public class ClassServiceImpl implements ClassService {
@@ -19,51 +20,38 @@ public class ClassServiceImpl implements ClassService {
     ClassDao classDao;
 
     /**
-     * 获取所有班级
-     * @return List<Class>
+     * 通过班级id获取班级
+     * @param id 班级号
+     * @return Class对象
      */
-    @Override
-    public List<Class> listClasses() {
-        return classDao.listClasses();
+    public Class getClassById(String id){
+        return classDao.selectByPrimaryKey(id);
     }
 
     /**
-     * 根据班级id获取班级
-     * @param id int
-     * @return Class
+     * 添加班级
+     * @param record 班级
+     * @return 添加的班级数
      */
-    @Override
-    public Class getClassByClassId(int id) {
-        return classDao.getClassByClassId(id);
+    public int addClass(Class record){
+        return classDao.updateByPrimaryKey(record);
     }
 
     /**
-     * 增加班级
-     * @param entity Class
-     * @return Class
+     * 修改班级
+     * @param record 班级
+     * @return 修改个数
      */
-    @Override
-    public boolean addClass(Class entity) {
-        return classDao.add(entity);
+    public int updateClass(Class record){
+        return classDao.updateByPrimaryKey(record);
     }
 
     /**
-     * 删除班级
-     * @param id int
-     * @return Class
+     * 通过班级id删除班级
+     * @param id 班级号
+     * @return 删除个数
      */
-    @Override
-    public boolean deleteClass(int id) {
-        return classDao.remove(id);
-    }
-
-    /**
-     * 更新班级
-     * @param entity Class
-     * @return Class
-     */
-    @Override
-    public boolean updateClass(Class entity) {
-        return classDao.update(entity);
+    public int deleteClass(String id){
+        return classDao.deleteByPrimaryKey(id);
     }
 }
