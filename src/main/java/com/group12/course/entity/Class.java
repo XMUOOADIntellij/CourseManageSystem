@@ -1,11 +1,13 @@
 package com.group12.course.entity;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Class 实体对象
  * @author Tan Xue
  * @date 2018/11/30
  */
-
+@Component
 public class Class {
     private String id;
     private String name;

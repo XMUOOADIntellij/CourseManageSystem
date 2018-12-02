@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @RestController
-@RequestMapping("/Class")
+@RequestMapping("/class")
 public class ClassController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class ClassController {
      * @param id 班级号
      * @return Class 对象
      */
-    @GetMapping(value = "query/{id}")
+    @GetMapping(value = "/query/{id}")
     public Class getClassByClassId(@PathVariable String id,HttpServletResponse response) {
         Class status = classService.getClassById(id);
         if(status.equals(null)){
