@@ -5,48 +5,51 @@ import com.group12.course.entity.Class;
 import java.util.List;
 
 /**
+ * Class Dao层接口
  * @author Tan Xue
- * 2018年11月30日
- * Class dao 层对应接口
- * 获得所有班级
- * 根据id获取班级
- * 增加班级
- * 删除班级
- * 更新班级
+ * 2018年11月30
  */
-public interface  ClassDao {
+public interface ClassDao {
 
     /**
-     * 获得所有班级
-     * @return List<Class>
+     * 通过班级id删除班级
+     * @param id 班级号
+     * @return 删除个数
      */
-    List<Class> listClasses();
+    int deleteByPrimaryKey(String id);
 
     /**
-     * 根据课程id获得班级
-     * @param id int
-     * @return Class
+     * 添加班级
+     * @param record 班级
+     * @return 添加的班级数
      */
-    Class getClassByClassId(int id);
+    int insert(Class record);
 
     /**
-     * 增加班级
-     * @param entity  Class
-     * @return Class
+     * 添加班级，只插入不为null的字段，不会影响有默认值的字段
+     * @param record 班级
+     * @return 添加的班级数
      */
-    boolean add(Class entity);
+    int insertSelective(Class record);
 
     /**
-     * 删除班级
-     * @param id int
-     * @return Class
+     * 通过班级id获取班级
+     * @param id 班级号
+     * @return Class对象
      */
-    boolean remove(int id);
+    Class selectByPrimaryKey(String id);
 
     /**
-     * 更新班级
-     * @param entity  Class
-     * @return Class
+     * 修改班级对应字段
+     * @param record 班级
+     * @return 修改个数
      */
-    boolean update(Class entity);
+    int updateByPrimaryKeySelective(Class record);
+
+    /**
+     * 修改班级
+     * @param record 班级
+     * @return 修改个数
+     */
+    int updateByPrimaryKey(Class record);
 }

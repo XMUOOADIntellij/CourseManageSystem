@@ -1,52 +1,40 @@
 package com.group12.course.service;
 
-
 import com.group12.course.entity.Class;
 
-import java.util.List;
-
 /**
+ * Class service层接口
  * @author Tan Xue
- * 2018年11月30日
- * ClassService 接口
- * 获得所有班级
- * 根据获取班级
- * 增加班级
- * 删除班级
- * 更新班级
+ * @date 2018/11/30
  */
+
 public interface ClassService {
-    /**
-     * 获得所有班级
-     * @return List<Class>
-     */
-    List<Class> listClasses();
 
     /**
-     * 根据班级id获得班级
-     * @param id int
-     * @return Class
+     * 通过班级id获取班级
+     * @param id 班级号
+     * @return Class对象
      */
-    Class getClassByClassId(int id);
+    Class getClassById(String id);
 
     /**
-     * 增加班级
-     * @param entity Class
-     * @return Class
+     * 添加班级
+     * @param record 班级
+     * @return 添加的班级数
      */
-    boolean addClass(Class entity);
+    int addClass(Class record);
 
     /**
-     * 删除班级
-     * @param id int
-     * @return Class
+     * 修改班级
+     * @param record 班级
+     * @return 修改个数
      */
-    boolean deleteClass(int id);
+    int updateClass(Class record);
 
     /**
-     * 更新班级
-     * @param entity Class
-     * @return Class
+     * 通过班级id删除班级
+     * @param id 班级号
+     * @return 删除个数
      */
-    boolean updateClass(Class entity);
+    int deleteClass(String id);
 }
