@@ -2,55 +2,57 @@ package com.group12.course.mapper;
 
 import com.group12.course.entity.Class;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 /**
+ * Class Mapper接口
  * @author Tan Xue
- * 2018年11月30日
- * Class Mapper 层接口
- * 获得所有班级
- * 根据ClassId获取班级
- * 增加班级
- * 根据ClassId删除班级
- * 更新班级
+ * @date 2018/11/30
  */
+
 @Mapper
 @Component
 public interface ClassMapper {
-    /**
-     * 获得所有班级
-     * @return List<Class>
-     */
-    List<Class> getAllClasses();
 
     /**
-     * 根据课程id获得班级
-     * @param id int
-     * @return Class
+     * 通过班级id删除班级
+     * @param id 班级号
+     * @return 删除个数
      */
-    Class getClassByClassId(@Param("id") int id);
+    int deleteByPrimaryKey(String id);
 
     /**
-     * 增加班级
-     * @param entity  Class
-     * @return Class
+     * 添加班级
+     * @param record 班级
+     * @return 添加的班级数
      */
-    boolean add(Class entity);
+    int insert(Class record);
 
     /**
-     * 删除班级
-     * @param id int
-     * @return Class
+     * 添加班级，只插入不为null的字段，不会影响有默认值的字段
+     * @param record 班级
+     * @return 添加的班级数
      */
-    boolean remove(int id);
+    int insertSelective(Class record);
 
     /**
-     * 更新班级
-     * @param entity  Class
-     * @return Class
+     * 通过班级id获取班级
+     * @param id 班级号
+     * @return Class对象
      */
-    boolean update(Class entity);
+    Class selectByPrimaryKey(String id);
+
+    /**
+     * 修改班级对应字段
+     * @param record 班级
+     * @return 修改个数
+     */
+    int updateByPrimaryKeySelective(Class record);
+
+    /**
+     * 修改班级
+     * @param record 班级
+     * @return 修改个数
+     */
+    int updateByPrimaryKey(Class record);
 }
