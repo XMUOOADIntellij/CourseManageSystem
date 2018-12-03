@@ -1,14 +1,15 @@
 package com.group12.course.Service;
 
 
+import com.group12.course.entity.Mail;
 import com.group12.course.entity.User;
+import com.group12.course.entity.VerificationCode;
 import com.group12.course.service.UserService;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -18,39 +19,51 @@ import org.springframework.test.context.junit4.SpringRunner;
  * */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceTest {
+public class UserServiceTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
-    private UserService userService;
-    private User testUser;
+    private  UserService userService;
 
-    @Before
-    public void initTestUser(){
-        testUser=new User("11111","123456");
-        /**
-         * TODO
-         * 等待添加用户方可测试
-         * */
-    }
 
     @Test
     public void testCheckUser(){
-        /**
-         * TODO
-         * */
+        User testUser =new User();
+        testUser.setAccount("243");
+        testUser.setPassword("123");
+        userService.addUser(testUser);
+        Assert.assertEquals("checkUser Error",testUser.getAccount(),
+                userService.checkUser(testUser.getAccount(),testUser.getPassword()).getAccount());
+        userService.deleteUser(testUser.getAccount());
     }
 
     @Test
     public void testChangePassword(){
-        /**
-         * TODO
-         * */
+        User testUser =new User();
+        testUser.setAccount("243");
+        testUser.setPassword("123");
+        userService.addUser(testUser);
+
+        String newPassword=new String("9876543");
+        testUser.setPassword(newPassword);
+        Assert.assertEquals("changePassword Error",1,
+                userService.changePassword(testUser));
+
+        userService.deleteUser(testUser.getAccount());
     }
 
-    @After
-    public void removeTestUser(){
-        /**
-         * TODO
-         * 待移除用户方可测试*/
+    @Test
+    public void testGetVerificationCode(){
+        User testUser =new User();
+        testUser.setAccount("243");
+        testUser.setPassword("123");
+
+        Assert.assertEquals("error","email is empty"
+                ,userService.getVerificationCode(testUser));
+        testUser.setEmail("277030573@qq.com");
+
+        String code=userService.getVerificationCode(testUser);
+        System.out.println(code);
+
+        userService.deleteUser(testUser.getAccount());
     }
 }

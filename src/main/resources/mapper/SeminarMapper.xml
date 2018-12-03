@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.SeminarMapper" >
+  <resultMap id="BaseResultMap" type="com.group12.course.entity.Seminar" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="theme" property="theme" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="serial" property="serial" jdbcType="INTEGER" />
+    <result column="maxTeam" property="maxTeam" jdbcType="INTEGER" />
+    <result column="is_ordered" property="ordered" jdbcType="BIT" />
+    <result column="is_visible" property="visible" jdbcType="BIT" />
+    <result column="enroll_start_date" property="enrollStartDate" jdbcType="TIMESTAMP" />
+    <result column="enroll_end_date" property="enrollEndDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, theme, content, serial, maxTeam, is_ordered, is_visible, enroll_start_date, enroll_end_date
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from seminar
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from seminar
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.group12.course.entity.Seminar" >
+    insert into seminar (id, theme, content, 
+      serial, maxTeam, is_ordered, 
+      is_visible, enroll_start_date, enroll_end_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{theme,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{serial,jdbcType=INTEGER}, #{maxTeam,jdbcType=INTEGER}, #{ordered,jdbcType=BIT},
+      #{visible,jdbcType=BIT}, #{enrollStartDate,jdbcType=TIMESTAMP}, #{enrollEndDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.group12.course.entity.Seminar" >
+    insert into seminar
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="theme != null" >
+        theme,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="serial != null" >
+        serial,
+      </if>
+      <if test="maxTeam != null" >
+        maxTeam,
+      </if>
+      <if test="ordered != null" >
+        is_ordered,
+      </if>
+      <if test="visible != null" >
+        is_visible,
+      </if>
+      <if test="enrollStartDate != null" >
+        enroll_start_date,
+      </if>
+      <if test="enrollEndDate != null" >
+        enroll_end_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="theme != null" >
+        #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="serial != null" >
+        #{serial,jdbcType=INTEGER},
+      </if>
+      <if test="maxTeam != null" >
+        #{maxTeam,jdbcType=INTEGER},
+      </if>
+      <if test="ordered != null" >
+        #{ordered,jdbcType=BIT},
+      </if>
+      <if test="visible != null" >
+        #{visible,jdbcType=BIT},
+      </if>
+      <if test="enrollStartDate != null" >
+        #{enrollStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enrollEndDate != null" >
+        #{enrollEndDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.group12.course.entity.Seminar" >
+    update seminar
+    <set >
+      <if test="theme != null" >
+        theme = #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="serial != null" >
+        serial = #{serial,jdbcType=INTEGER},
+      </if>
+      <if test="maxTeam != null" >
+        maxTeam = #{maxTeam,jdbcType=INTEGER},
+      </if>
+      <if test="ordered != null" >
+        is_ordered = #{ordered,jdbcType=BIT},
+      </if>
+      <if test="visible != null" >
+        is_visible = #{visible,jdbcType=BIT},
+      </if>
+      <if test="enrollStartDate != null" >
+        enroll_start_date = #{enrollStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enrollEndDate != null" >
+        enroll_end_date = #{enrollEndDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.group12.course.entity.Seminar" >
+    update seminar
+    set theme = #{theme,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      serial = #{serial,jdbcType=INTEGER},
+      maxTeam = #{maxTeam,jdbcType=INTEGER},
+      is_ordered = #{ordered,jdbcType=BIT},
+      is_visible = #{visible,jdbcType=BIT},
+      enroll_start_date = #{enrollStartDate,jdbcType=TIMESTAMP},
+      enroll_end_date = #{enrollEndDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

@@ -19,12 +19,22 @@ public class UserDaoImpl implements UserDao {
     UserMapper userMapper;
 
     @Override
-    public User getUserByAccount(String account) {
-        return userMapper.getUserByAccout(account);
+    public User getUser(String account) {
+        return userMapper.getUserByAccount(account);
     }
 
     @Override
-    public Boolean setUserPasswordByAccount(User user){
-        return userMapper.setUserPasswordByAccount(user.getAccount(),user.getPassword());
+    public int updateUser(User user){
+        return userMapper.updateUser(user);
+    }
+
+    @Override
+    public int addUser(User user){
+        return userMapper.addUser(user);
+    }
+
+    @Override
+    public int deleteUser(String account){
+        return userMapper.deleteUser(account);
     }
 }

@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -28,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class UserControllerTest {
+public class UserControllerTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     private WebApplicationContext context;
@@ -41,7 +43,7 @@ public class UserControllerTest {
 
     @Test
     public void testCheckUser() throws Exception{
-        Map<String,String> rightAccount = new TreeMap<String, String>();
+        Map<String,String> rightAccount = new TreeMap<>();
         rightAccount.put("account","24320162202934");
         rightAccount.put("password","123456");
         MvcResult rightResult =
@@ -58,7 +60,7 @@ public class UserControllerTest {
                         .andExpect(status().is(200))
                         .andReturn();
 
-        Map<String,String> wrongAccount = new TreeMap<String, String>();
+        Map<String,String> wrongAccount = new TreeMap<>();
         wrongAccount.put("account","24320162202934");
         wrongAccount.put("password","1234567");
         MvcResult wrongResult =
@@ -97,7 +99,7 @@ public class UserControllerTest {
 
         Map<String,String> wrongAccount = new TreeMap<String, String>();
         wrongAccount.put("account","243201622029345");
-        wrongAccount.put("password","123456");
+        wrongAccount.put("password","1234568");
         MvcResult wrongResult =
                 mvc.perform(MockMvcRequestBuilders.post("/user/changePassword")
                         // 设置请求内容为JSON格式
@@ -108,6 +110,65 @@ public class UserControllerTest {
                         .andExpect(handler().handlerType(UserController.class))
                         // 验证执行的控制器方法名
                         .andExpect(handler().methodName("changePassword"))
+                        // 验证状态码
+                        .andExpect(status().is(410))
+                        .andReturn();
+    }
+
+    @Test
+    public void testAddUser()throws Exception{
+        Map<String,String> rightAccount = new TreeMap<String, String>();
+        rightAccount.put("account","24320162202985");
+        rightAccount.put("password","123456");
+//        rightAccount.put("email","1234@qq.com");
+//        rightAccount.put("name","name");
+//        rightAccount.put("active","1");
+        MvcResult rightResult =
+                mvc.perform(MockMvcRequestBuilders.post("/user/addUser")
+                        // 设置请求内容为JSON格式
+                        .contentType(MediaType.APPLICATION_JSON)
+                        // 将请求内容传入
+                        .content(JSONObject.toJSONString(rightAccount)))
+                        // 验证执行的控制器类型
+                        .andExpect(handler().handlerType(UserController.class))
+                        // 验证执行的控制器方法名
+                        .andExpect(handler().methodName("addUser"))
+                        // 验证状态码
+                        .andExpect(status().is(200))
+                        .andReturn();
+    }
+
+    @Test
+    public void testGetVerifyCode()throws Exception{
+        Map<String,String> rightAccount = new TreeMap<String, String>();
+        rightAccount.put("account","24320162202985");
+        rightAccount.put("email","277030573@qq.com");
+        MvcResult rightResult =
+                mvc.perform(MockMvcRequestBuilders.post("/user/getVerifyCode")
+                        // 设置请求内容为JSON格式
+                        .contentType(MediaType.APPLICATION_JSON)
+                        // 将请求内容传入
+                        .content(JSONObject.toJSONString(rightAccount)))
+                        // 验证执行的控制器类型
+                        .andExpect(handler().handlerType(UserController.class))
+                        // 验证执行的控制器方法名
+                        .andExpect(handler().methodName("getVerifyCode"))
+                        // 验证状态码
+                        .andExpect(status().is(200))
+                        .andReturn();
+
+        Map<String,String> wrongAccount = new TreeMap<String, String>();
+        wrongAccount.put("account","24320162202985");
+        MvcResult wrongResult =
+                mvc.perform(MockMvcRequestBuilders.post("/user/getVerifyCode")
+                        // 设置请求内容为JSON格式
+                        .contentType(MediaType.APPLICATION_JSON)
+                        // 将请求内容传入
+                        .content(JSONObject.toJSONString(wrongAccount)))
+                        // 验证执行的控制器类型
+                        .andExpect(handler().handlerType(UserController.class))
+                        // 验证执行的控制器方法名
+                        .andExpect(handler().methodName("getVerifyCode"))
                         // 验证状态码
                         .andExpect(status().is(410))
                         .andReturn();

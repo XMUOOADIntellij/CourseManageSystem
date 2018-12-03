@@ -1,16 +1,27 @@
 package com.group12.course.view;
 
+
+import net.minidev.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -22,33 +33,53 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class CourseControllerTest {
+
+public class CourseControllerTest extends AbstractTransactionalJUnit4SpringContextTests {
      @Autowired
      private WebApplicationContext context;
      private MockMvc mvc;
 
      @Before
-    public void setUp() throws  Exception{
+    public void setUp(){
          mvc = MockMvcBuilders.webAppContextSetup(context).build();
      }
 
      @Test
-    public void testGetAllCoursesController()throws Exception{
+    public void testGetAllCourses()throws Exception{
+         Map<String,String> request = new TreeMap<>();
+         request.put("id","1");
          MvcResult mvcResult =
-                 mvc.perform(MockMvcRequestBuilders.get("/course/getAll"))
+                 mvc.perform(MockMvcRequestBuilders.get("/course/getall")
+                         .contentType(MediaType.APPLICATION_JSON_UTF8)
+                         .content(JSONObject.toJSONString(request)))
                          //验证执行的控制器类型
                          .andExpect(handler().handlerType(CourseController.class))
                          //验证执行的控制器方法名
-                         .andExpect(handler().methodName("getAllCourse"))
+                         .andExpect(handler().methodName("listCourses"))
                          //验证状态码
                          .andExpect(status().isOk())
                          //验证contentType
                          .andExpect(content().contentType("application/json;charset=UTF-8"))
                          // 可以打印结果
-                         // .andDo(print())
+                         //.andDo(print())
                          .andReturn();
 
      }
 
+     @Test
+    public void testDeleteCourse() throws Exception {
+         MvcResult result =
+                 mvc.perform(MockMvcRequestBuilders.delete("/delete/1"))
+                         .andExpect(handler().handlerType(CourseController.class))
+                         //验证执行的控制器方法名
+                         .andExpect(handler().methodName("deleteCourses"))
+                         //验证状态码
+                         .andExpect(status().isOk())
+                         //验证contentType
+                         .andExpect(content().contentType("application/json;charset=UTF-8"))
+                         // 可以打印结果
+                         //.andDo(print())
+                         .andReturn();
+     }
 
 }

@@ -1,6 +1,6 @@
 function updateCookie(name, value) {
     var exp = new Date();
-    exp.setTime(exp.getTime() + 6 * 24 * 60 * 60 * 1000); //6Ìì¹ýÆÚ
+    exp.setTime(exp.getTime() + 6 * 24 * 60 * 60 * 1000); //6ï¿½ï¿½ï¿½ï¿½ï¿½
     document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
     return true;
 }
@@ -15,33 +15,33 @@ function getCookie(name) {
 //4-0-accountSetting
 
 
-function jumpcourse(cid){  //µã»÷ÐÞ¸Ä¿Î³ÌÊ±£¬½«¿Î³ÌidºÅ´æ´¢ÔÚcookieÖÐ
+function jumpcourse(cid){  //ï¿½ï¿½ï¿½ï¿½Þ¸Ä¿Î³ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Î³ï¿½idï¿½Å´æ´¢ï¿½ï¿½cookieï¿½ï¿½
     updateCookie('courseCurrent',cid);
-    window.location.href='/teacher/course/'+cid+'/update'; //Ò³ÃæÌø×ª
+    window.location.href='/teacher/course/'+cid+'/update'; //Ò³ï¿½ï¿½ï¿½ï¿½×ª
 }
 
-function jumpcoursedetail(cid){  //½ÌÊ¦¿Î³ÌÁÐ±íÒ³Ãæµã»÷¿Î³ÌÀ¶¿ò->Ìø×ªµ½Ä³¸ö¾ßÌå¿Î³ÌÒ³ÃæÊ±µ÷ÓÃ£¬ÓÃcookie´æ¿Î³ÌId
+function jumpcoursedetail(cid){  //ï¿½ï¿½Ê¦ï¿½Î³ï¿½ï¿½Ð±ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Î³ï¿½ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½×ªï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î³ï¿½Ò³ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½cookieï¿½ï¿½Î³ï¿½Id
     updateCookie('courseDetail',cid);
     window.location.href='/teacher/course/'+cid;
 }
 
 function jumpclassdetail(cid){
     updateCookie('classDetail',cid);
-    window.location.href='/teacher/course/'+getCookie('courseDetail')+'/class/'+cid;  //½øÈë°à¼¶ÏêÇéÒ³Ãæ
+    window.location.href='/teacher/course/'+getCookie('courseDetail')+'/class/'+cid;  //ï¿½ï¿½ï¿½ï¿½à¼¶ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 }
 
 function jumpseminardetail(cid){
     // alert("hi");
     updateCookie('seminarDetail',cid);
-    window.location.href='/teacher/course/'+getCookie('seminarDetail')+'/seminar/'+cid;  //½øÈëÌÖÂÛ¿ÎÏêÇéÒ³Ãæ
+    window.location.href='/teacher/course/'+getCookie('seminarDetail')+'/seminar/'+cid;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 }
 function jumptopic(cid){
     updateCookie('topicDetail',cid);
-    window.location.href='/teacher/course/'+getCookie('courseDetail')+'/seminar/'+getCookie('seminarDetail')+'/topic/'+cid;  //½øÈë»°ÌâÏêÇéÒ³Ãæ
+    window.location.href='/teacher/course/'+getCookie('courseDetail')+'/seminar/'+getCookie('seminarDetail')+'/topic/'+cid;  //ï¿½ï¿½ï¿½ë»°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 }
 function jumpreportdetail(rid){
     updateCookie('groupDetail',rid);
-    window.location.href='/teacher/course/'+getCookie('courseDetail')+'/seminar/'+getCookie('seminarDetail')+'/score/score'; //½øÈëÆÀ·ÖÒ³Ãæ
+    window.location.href='/teacher/course/'+getCookie('courseDetail')+'/seminar/'+getCookie('seminarDetail')+'/score/score'; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 }
 /*---------------------------- teacher/bind--------------------------------------*/
 function teabind(){
@@ -62,13 +62,13 @@ function teabind(){
         data: JSON.stringify(ata),
         success: function (data,textStatus,xhr) {
             if(xhr.status==204){
-                alert("³É¹¦!");
-                window.location.href='/teacher/home'; //Ìø×ªµ½½ÌÊ¦ÐÅÏ¢µÄÄÇ¸öÒ³
+                alert("ï¿½É¹ï¿½!");
+                window.location.href='/teacher/home'; //ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ê¦ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ç¸ï¿½Ò³
             }
         },
         statusCode:{
             400: function (){
-                alert("ÐÅÏ¢²»ºÏ·¨");
+                alert("ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ï·ï¿½");
             }
         }
     });
@@ -103,13 +103,13 @@ function teainfomod(){
         data: JSON.stringify(ata),
         success: function (data,textStatus,xhr) {
             if(xhr.status==204){
-                alert("ÐÞ¸Ä³É¹¦!");
+                alert("ï¿½Þ¸Ä³É¹ï¿½!");
                 window.location.href='/teacher/home';
             }
         },
         statusCode:{
             400: function (){
-                alert("ÐÅÏ¢²»ºÏ·¨");
+                alert("ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ï·ï¿½");
             }
         }
     });
@@ -131,23 +131,23 @@ function deletecourse(cid){
         },
         success: function (data,textStatus,xhr){
             if(xhr.status == 204){
-                alert("³É¹¦");
+                alert("ï¿½É¹ï¿½");
                 document.fe
             }
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             403: function () {
-                alert("ÓÃ»§È¨ÏÞ²»×ã");
+                alert("ï¿½Ã»ï¿½È¨ï¿½Þ²ï¿½ï¿½ï¿½");
             },
             404: function () {
-                alert("Î´ÕÒµ½¿Î³Ì");
+                alert("Î´ï¿½Òµï¿½ï¿½Î³ï¿½");
             }
         }
     });
-    // courselist();  //É¾³ýÍêÔÙ¼ÓÔØ
+    // courselist();  //É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ù¼ï¿½ï¿½ï¿½
     window.location.reload();
 }
 
@@ -155,7 +155,7 @@ function deletecourse(cid){
 
 function createcourse(){    //TeacherCreateCourse
     var ata = {
-        name:$("#coursename").val(),
+        name:$("#courseName").val(),
         description:$("#description").val(),
         startTime:$("#begintime").val(),
         endTime:$("#endtime").val(),
@@ -176,14 +176,14 @@ function createcourse(){    //TeacherCreateCourse
         data: JSON.stringify(ata),
         success: function (data,textStatus,xhr) {
             if(xhr.status== 201){
-                alert("´´½¨³É¹¦!");
-                window.location.href="/teacher/courses";  //·µ»ØÕ¹Ê¾ÀÏÊ¦¿Î³ÌlistµÄÒ³Ãæ
-                return "23";  //APIÉÏËµ·µ»ØÐÂ½¨¿Î³ÌµÄID£¬²»ÖªµÀ¸ÃÈçºÎ·ÖÅäµÃµ½¿Î³ÌµÄID
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½!");
+                window.location.href="/teacher/courses";  //ï¿½ï¿½ï¿½ï¿½Õ¹Ê¾ï¿½ï¿½Ê¦ï¿½Î³ï¿½listï¿½ï¿½Ò³ï¿½ï¿½
+                return "23";  //APIï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½Î³Ìµï¿½IDï¿½ï¿½ï¿½ï¿½Öªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î·ï¿½ï¿½ï¿½Ãµï¿½ï¿½Î³Ìµï¿½ID
             }
         },
         statusCode: {
             403: function () {  //statuscode unknown
-                alert("ÓÃ»§È¨ÏÞ²»×ã");
+                alert("ï¿½Ã»ï¿½È¨ï¿½Þ²ï¿½ï¿½ï¿½");
             }
         }
     });
@@ -206,7 +206,7 @@ function getcourseinfo(){  //get course information when updating it
         },
         statusCode:{
             401: function (){ //statuscode unknown
-                alert("»ñÈ¡ÐÅÏ¢Ê§°Ü");
+                alert("ï¿½ï¿½È¡ï¿½ï¿½Ï¢Ê§ï¿½ï¿½");
             }
         }
     });
@@ -235,13 +235,13 @@ function courseinfomod(){
         data: JSON.stringify(ata),
         success: function (data,textStatus,xhr) {
             if(xhr.status==204){
-                alert("ÐÞ¸Ä³É¹¦!");
+                alert("ï¿½Þ¸Ä³É¹ï¿½!");
                 window.location.href="/teacher/courses";
             }
         },
         statusCode: {
             403: function () {
-                alert("ÓÃ»§È¨ÏÞ²»×ã");
+                alert("ï¿½Ã»ï¿½È¨ï¿½Þ²ï¿½ï¿½ï¿½");
             }
         }
     });
@@ -257,17 +257,17 @@ function courseintroduce(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status == 200){
-                // alert("»ñÈ¡³É¹¦");
+                // alert("ï¿½ï¿½È¡ï¿½É¹ï¿½");
                 $("#courseName").html(data.name);
                 $("#courseIntroduction").html(data.description);
             }
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½¿Î³Ì");
+                alert("Î´ï¿½Òµï¿½ï¿½Î³ï¿½");
             }
         }
     });
@@ -280,35 +280,35 @@ function classlist(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status == 200){
-                // alert("»ñÈ¡³É¹¦");
-                var content=document.getElementById("classcontent");   //»ñÈ¡ÍâÎ§ÈÝÆ÷
+                // alert("ï¿½ï¿½È¡ï¿½É¹ï¿½");
+                var content=document.getElementById("classcontent");   //ï¿½ï¿½È¡ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½
                 var str="";
-                str+='<div class=\"title\">¿Î³Ì°à¼¶</div>'
-                    +'<div class=\"returnButton\"  onclick=\"window.location.href=\'/teacher/courses\'\">·µ»ØÉÏÒ»Ò³</div>'
+                str+='<div class=\"title\">ï¿½Î³Ì°à¼¶</div>'
+                    +'<div class=\"returnButton\"  onclick=\"window.location.href=\'/teacher/courses\'\">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ò³</div>'
                     +'<div class=\"line\"></div>'
                     +'<div class=\"blockBody\" id=\"classtitle\">'
                 for(var i=0;i<data.length;i++){
                     // if(i==0){
-                    // str+='<div class=\"title\">¿Î³Ì°à¼¶</div>'
-                    // +'<div class=\"returnButton\"  onclick=\"window.location.href=\'/teacher/courses\'\">·µ»ØÉÏÒ»Ò³</div>'
+                    // str+='<div class=\"title\">ï¿½Î³Ì°à¼¶</div>'
+                    // +'<div class=\"returnButton\"  onclick=\"window.location.href=\'/teacher/courses\'\">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ò³</div>'
                     // +'<div class=\"line\"></div>'
                     // +'<div class=\"blockBody\" id=\"classtitle\">'
                     // }
                     str+='<div class=\"block\" id=\"'+data[i].id+'\" onclick=\"jumpclassdetail(this.id)\"><div class=\"blockFont\">'+data[i].name+'</div></div>'
                     // if(i==data.length-1){
-                    //     str+='<div class="block" onclick=\"window.location.href=\'/teacher/course/'+getCookie("courseDetail")+'/class/create\'\"><img class="addImg" src="/img/smalladd.png" alt="Ìí¼Ó" ></div>'
+                    //     str+='<div class="block" onclick=\"window.location.href=\'/teacher/course/'+getCookie("courseDetail")+'/class/create\'\"><img class="addImg" src="/img/smalladd.png" alt="ï¿½ï¿½ï¿½" ></div>'
                     // }
                 }
-                str+='<div class="block" onclick=\"window.location.href=\'/teacher/course/'+getCookie("courseDetail")+'/class/create\'\"><img class="addImg" src="/img/smalladd.png" alt="Ìí¼Ó" ></div>'
+                str+='<div class="block" onclick=\"window.location.href=\'/teacher/course/'+getCookie("courseDetail")+'/class/create\'\"><img class="addImg" src="/img/smalladd.png" alt="ï¿½ï¿½ï¿½" ></div>'
                 content.innerHTML=str;
             }
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½¿Î³Ì");
+                alert("Î´ï¿½Òµï¿½ï¿½Î³ï¿½");
             }
         }
     });
@@ -324,30 +324,30 @@ function seminarlist(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status == 200){
-                // alert("»ñÈ¡³É¹¦");
-                var content=document.getElementById("seminarcontent");   //»ñÈ¡ÍâÎ§ÈÝÆ÷
+                // alert("ï¿½ï¿½È¡ï¿½É¹ï¿½");
+                var content=document.getElementById("seminarcontent");   //ï¿½ï¿½È¡ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½
                 var str="";
-                str+='<div class="title">ÌÖÂÛ¿Î</div><div class="line"></div><div class="blockBody">';
+                str+='<div class="title">ï¿½ï¿½ï¿½Û¿ï¿½</div><div class="line"></div><div class="blockBody">';
                 for(var i=0;i<data.length;i++){
                     // if(i==0){
-                    //  str+='<div class="title">ÌÖÂÛ¿Î</div><div class="line"></div><div class="blockBody">'
+                    //  str+='<div class="title">ï¿½ï¿½ï¿½Û¿ï¿½</div><div class="line"></div><div class="blockBody">'
                     // }
                     // alert(data[i].name);
                     str+='<div class="block"  id=\"'+data[i].id+'\" onclick=\"jumpseminardetail(this.id)\"><div class="blockFont">'+data[i].name+'</div></div>'
                     // if(i==data.length-1){
-                    //      str+=' <div class="block" onclick=\"window.location.href=\'/teacher/course/'+getCookie("courseDetail")+'/seminar/create\'\"><img class="addImg" src="/img/smalladd.png" alt="Ìí¼Ó" ></div>\'
+                    //      str+=' <div class="block" onclick=\"window.location.href=\'/teacher/course/'+getCookie("courseDetail")+'/seminar/create\'\"><img class="addImg" src="/img/smalladd.png" alt="ï¿½ï¿½ï¿½" ></div>\'
                     // }
                 }
-                str+='<div class="block" onclick=\"window.location.href=\'/teacher/course/'+getCookie("courseDetail")+'/seminar/create\'\"><img class="addImg" src="/img/smalladd.png" alt="Ìí¼Ó" ></div>';
+                str+='<div class="block" onclick=\"window.location.href=\'/teacher/course/'+getCookie("courseDetail")+'/seminar/create\'\"><img class="addImg" src="/img/smalladd.png" alt="ï¿½ï¿½ï¿½" ></div>';
                 content.innerHTML=str;
             }
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½¿Î³Ì");
+                alert("Î´ï¿½Òµï¿½ï¿½Î³ï¿½");
             }
         }
     });
@@ -384,42 +384,42 @@ function createclass(){
         data: JSON.stringify(ata),
         success: function (data,textStatus,xhr) {
             if(xhr.status== 201){
-                alert("´´½¨³É¹¦!");
-                backtocourse();  //·µ»ØÏÔÊ¾¿Î³ÌÏÂµÄ°à¼¶ÁÐ±í/ÌÖÂÛ¿ÎÁÐ±í
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½!");
+                backtocourse();  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½Î³ï¿½ï¿½ÂµÄ°à¼¶ï¿½Ð±ï¿½/ï¿½ï¿½ï¿½Û¿ï¿½ï¿½Ð±ï¿½
             }
         },
         statusCode: {
             403: function () {
-                alert("ÓÃ»§È¨ÏÞ²»×ã");
+                alert("ï¿½Ã»ï¿½È¨ï¿½Þ²ï¿½ï¿½ï¿½");
             },
             404: function () {
-                alert("Î´ÕÒµ½¿Î³Ì");
+                alert("Î´ï¿½Òµï¿½ï¿½Î³ï¿½");
             }
         }
     });
 
 }
 
-$(function(){  //Ñ¡ÔñÉÏ¿ÎÊ±¼äselect¼¶ÁªÏÔÊ¾(class_updateÓëclass_createÒ³Ãæ¶¼ÓÃµ½Õâ¸ö)
+$(function(){  //Ñ¡ï¿½ï¿½ï¿½Ï¿ï¿½Ê±ï¿½ï¿½selectï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾(class_updateï¿½ï¿½class_createÒ³ï¿½æ¶¼ï¿½Ãµï¿½ï¿½ï¿½ï¿½)
     $(".smallSelect2").change(function() {
         var selected_value = $(this).val();
-        if(selected_value == "ÉÏÎç"){
+        if(selected_value == "ï¿½ï¿½ï¿½ï¿½"){
             $(".smallSelect3").empty();
-            var option = $("<option>").val("Ò»¶þ½Ú").text("Ò»¶þ½Ú");
+            var option = $("<option>").val("Ò»ï¿½ï¿½ï¿½ï¿½").text("Ò»ï¿½ï¿½ï¿½ï¿½");
             $(".smallSelect3").append(option);
-            option=$("<option>").val("ÈýËÄ½Ú").text("ÈýËÄ½Ú");
+            option=$("<option>").val("ï¿½ï¿½ï¿½Ä½ï¿½").text("ï¿½ï¿½ï¿½Ä½ï¿½");
             $(".smallSelect3").append(option);
         }
-        else if(selected_value == "ÏÂÎç"){
+        else if(selected_value == "ï¿½ï¿½ï¿½ï¿½"){
             $(".smallSelect3").empty();
-            var option = $("<option>").val("ÎåÁù½Ú").text("ÎåÁù½Ú");
+            var option = $("<option>").val("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½").text("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
             $(".smallSelect3").append(option);
-            option=$("<option>").val("Æß°Ë½Ú").text("Æß°Ë½Ú");
+            option=$("<option>").val("ï¿½ß°Ë½ï¿½").text("ï¿½ß°Ë½ï¿½");
             $(".smallSelect3").append(option);
         }
         else{
             $(".smallSelect3").empty();
-            var option = $("<option>").val("¾ÅÊ®½Ú").text("¾ÅÊ®½Ú");
+            var option = $("<option>").val("ï¿½ï¿½Ê®ï¿½ï¿½").text("ï¿½ï¿½Ê®ï¿½ï¿½");
             $(".smallSelect3").append(option);
         }
     });
@@ -442,13 +442,13 @@ function createseminar(){
         data: JSON.stringify(ata),
         success: function (data,textStatus,xhr) {
             if(xhr.status== 201){
-                alert("´´½¨³É¹¦!");
-                backtocourse(); //·µ»ØÏÔÊ¾¿Î³ÌÏÂµÄ°à¼¶ÁÐ±í/ÌÖÂÛ¿ÎÁÐ±í
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½!");
+                backtocourse(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½Î³ï¿½ï¿½ÂµÄ°à¼¶ï¿½Ð±ï¿½/ï¿½ï¿½ï¿½Û¿ï¿½ï¿½Ð±ï¿½
             }
         },
         statusCode: {
             403: function () {
-                alert("ÓÃ»§È¨ÏÞ²»×ã");
+                alert("ï¿½Ã»ï¿½È¨ï¿½Þ²ï¿½ï¿½ï¿½");
             }
         }
     });
@@ -462,7 +462,7 @@ function classinfo(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status == 200){
-                // alert("»ñÈ¡³É¹¦");
+                // alert("ï¿½ï¿½È¡ï¿½É¹ï¿½");
                 $("#upclassname").html(data.name);
                 $("#classname").html(data.name);
                 $("#site").html(data.site);
@@ -477,10 +477,10 @@ function classinfo(){
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½°à¼¶");
+                alert("Î´ï¿½Òµï¿½ï¿½à¼¶");
             }
         }
     });
@@ -495,19 +495,19 @@ function deleteclass(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr){
             if(xhr.status == 204){
-                alert("É¾³ý³É¹¦");
-                backtocourse();  //Ò³ÃæÌø×ª
+                alert("É¾ï¿½ï¿½ï¿½É¹ï¿½");
+                backtocourse();  //Ò³ï¿½ï¿½ï¿½ï¿½×ª
             }
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             403: function () {
-                alert("ÓÃ»§È¨ÏÞ²»×ã");
+                alert("ï¿½Ã»ï¿½È¨ï¿½Þ²ï¿½ï¿½ï¿½");
             },
             404: function () {
-                alert("Î´ÕÒµ½°à¼¶");
+                alert("Î´ï¿½Òµï¿½ï¿½à¼¶");
             }
         }
     });
@@ -529,14 +529,14 @@ function getclassdetail(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status==200){
-                // alert("»ñÈ¡³É¹¦");
+                // alert("ï¿½ï¿½È¡ï¿½É¹ï¿½");
                 $("input[name='className']").attr("value",data.name);
                 $("input[name='numStudent']").attr("value",data.numStudent);
                 var week,day,jie;
-                week=data.time[0]+data.time[1]+data.time[2];  //ÕÒµ½ÐÇÆÚ¼¸µÄ×Ö·û
-                day=data.time[3]+data.time[4];//ÕÒµ½ÉÏÎç/ÏÂÎçµÄ×Ö·û
-                jie=data.time[5]+data.time[6]+data.time[7]; //ÕÒµ½½Ú´Î(jie)µÄ×Ö·û
-                $(".smallSelect1").val(week);  //´Ë´¦ÐÞ¸ÄÁËcssµÄÀàÃû
+                week=data.time[0]+data.time[1]+data.time[2];  //ï¿½Òµï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
+                day=data.time[3]+data.time[4];//ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
+                jie=data.time[5]+data.time[6]+data.time[7]; //ï¿½Òµï¿½ï¿½Ú´ï¿½(jie)ï¿½ï¿½ï¿½Ö·ï¿½
+                $(".smallSelect1").val(week);  //ï¿½Ë´ï¿½ï¿½Þ¸ï¿½ï¿½ï¿½cssï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 $(".smallSelect2").val(day);
                 $(".smallSelect3").val(jie);
                 $("input[name='site']").attr("value",data.site);
@@ -549,10 +549,10 @@ function getclassdetail(){
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½°à¼¶");
+                alert("Î´ï¿½Òµï¿½ï¿½à¼¶");
             }
         }
     });
@@ -584,16 +584,16 @@ function classinfomod(){
         data: JSON.stringify(ata),
         success: function (data,textStatus,xhr) {
             if(xhr.status==204){
-                alert("ÐÞ¸Ä³É¹¦!");
+                alert("ï¿½Þ¸Ä³É¹ï¿½!");
                 window.location.href='/teacher/course/'+getCookie("courseDetail")+'/class/'+getCookie("classDetail");
             }
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½°à¼¶");
+                alert("Î´ï¿½Òµï¿½ï¿½à¼¶");
             }
         }
     });
@@ -601,15 +601,15 @@ function classinfomod(){
 
 /*----------------------------teacher/seminar-------------------------------*/
 function judge_end(end_time){
-    var endTime=new Date(end_time);  //°Ñ×Ö·û´®×ª»»³ÉÈÕÆÚ¸ñÊ½
-    var currentTime=new Date();  //»ñÈ¡ÏµÍ³Ê±¼ä
+    var endTime=new Date(end_time);  //ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½Ê½
+    var currentTime=new Date();  //ï¿½ï¿½È¡ÏµÍ³Ê±ï¿½ï¿½
     if(endTime>currentTime){
         $("#score").hide();
-        // alert("ÌÖÂÛ¿Î»¹Ã»½áÊø");
+        // alert("ï¿½ï¿½ï¿½Û¿Î»ï¿½Ã»ï¿½ï¿½ï¿½ï¿½");
     }
     else{
         $("#viewtopic").hide();
-        // alert("ÌÖÂÛ¿ÎÒÑ¾­½áÊø");
+        // alert("ï¿½ï¿½ï¿½Û¿ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½");
     }
 }
 function seminarinfo(){
@@ -620,22 +620,22 @@ function seminarinfo(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status == 200){
-                // alert("»ñÈ¡³É¹¦");
+                // alert("ï¿½ï¿½È¡ï¿½É¹ï¿½");
                 $("#seminarname").html(data.name);
                 $("#description").html(data.description);
                 $("#groupingMethod").html(data.groupingMethod);
                 $("#startTime").html(data.startTime);
                 $("#endTime").html(data.endTime);
                 judge_end(data.endTime);
-                $("#seminartitle").html(data.name);  //±êÌâÀ¸»ñÈ¡
+                $("#seminartitle").html(data.name);  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡
             }
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½ÌÖÂÛ¿Î");
+                alert("Î´ï¿½Òµï¿½ï¿½ï¿½ï¿½Û¿ï¿½");
             }
         }
     });
@@ -648,22 +648,22 @@ function gettopiclist(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status == 200){
-                // alert("»ñÈ¡³É¹¦");
-                var content=document.getElementById("topiccontent");   //»ñÈ¡ÍâÎ§ÈÝÆ÷
+                // alert("ï¿½ï¿½È¡ï¿½É¹ï¿½");
+                var content=document.getElementById("topiccontent");   //ï¿½ï¿½È¡ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½
                 var str="";
                 for(var i=0;i<data.length;i++){
                     str+='<div class="topicBlock" id=\"'+data[i].id+'\" onclick=\"jumptopic(this.id);\"><div class="topicBlockFont">'+data[i].serial+'</div></div>'
                 }
-                str+=' <div class="topicBlock" onclick=\"window.location.href=\'/teacher/course/'+getCookie("courseDetail")+'/seminar/'+getCookie("seminarDetail")+'/topic/create\'\"><img class="addImg" src="/img/smalladd.png" alt="Ìí¼Ó"></div></div>'
+                str+=' <div class="topicBlock" onclick=\"window.location.href=\'/teacher/course/'+getCookie("courseDetail")+'/seminar/'+getCookie("seminarDetail")+'/topic/create\'\"><img class="addImg" src="/img/smalladd.png" alt="ï¿½ï¿½ï¿½"></div></div>'
                 content.innerHTML=str;
             }
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½ÌÖÂÛ¿Î");
+                alert("Î´ï¿½Òµï¿½ï¿½ï¿½ï¿½Û¿ï¿½");
             }
         }
     });
@@ -678,19 +678,19 @@ function deleteseminar(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr){
             if(xhr.status == 204){
-                alert("É¾³ý³É¹¦");
-                backtocourse();  //Ò³ÃæÌø×ª
+                alert("É¾ï¿½ï¿½ï¿½É¹ï¿½");
+                backtocourse();  //Ò³ï¿½ï¿½ï¿½ï¿½×ª
             }
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             403: function () {
-                alert("ÓÃ»§È¨ÏÞ²»×ã");
+                alert("ï¿½Ã»ï¿½È¨ï¿½Þ²ï¿½ï¿½ï¿½");
             },
             404: function () {
-                alert("Î´ÕÒµ½°à¼¶");
+                alert("Î´ï¿½Òµï¿½ï¿½à¼¶");
             }
         }
     });
@@ -717,7 +717,7 @@ function getseminardetail(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status==200){
-                // alert("»ñÈ¡³É¹¦");
+                // alert("ï¿½ï¿½È¡ï¿½É¹ï¿½");
                 $("input[name='seminarName']").attr("value",data.name);
                 $("input[name='description']").attr("value",data.description);
                 $("input[name='groupingMethod']").attr("value",data.groupingMethod);
@@ -727,10 +727,10 @@ function getseminardetail(){
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½ÌÖÂÛ¿Î");
+                alert("Î´ï¿½Òµï¿½ï¿½ï¿½ï¿½Û¿ï¿½");
             }
         }
     });
@@ -752,16 +752,16 @@ function seminarinfomod(){
         data: JSON.stringify(ata),
         success: function (data,textStatus,xhr) {
             if(xhr.status==204){
-                alert("ÐÞ¸Ä³É¹¦!");
+                alert("ï¿½Þ¸Ä³É¹ï¿½!");
                 window.location.href='/teacher/course/'+getCookie("courseDetail")+'/seminar/'+getCookie("seminarDetail");
             }
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½ÌÖÂÛ¿Î");
+                alert("Î´ï¿½Òµï¿½ï¿½ï¿½ï¿½Û¿ï¿½");
             }
         }
     });
@@ -775,7 +775,7 @@ function topicinfo(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status == 200){
-                // alert("»ñÈ¡³É¹¦");
+                // alert("ï¿½ï¿½È¡ï¿½É¹ï¿½");
                 $('#topicserial').html(data.serial);
                 $("#topicname").html(data.name);
                 $("#description").html(data.description);
@@ -786,10 +786,10 @@ function topicinfo(){
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½»°Ìâ");
+                alert("Î´ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½");
             }
         }
     });
@@ -807,19 +807,19 @@ function deletetopic(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr){
             if(xhr.status == 204){
-                alert("É¾³ý³É¹¦");
-                backtoseminar();  //Ò³ÃæÌø×ª
+                alert("É¾ï¿½ï¿½ï¿½É¹ï¿½");
+                backtoseminar();  //Ò³ï¿½ï¿½ï¿½ï¿½×ª
             }
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             403: function () {
-                alert("ÓÃ»§È¨ÏÞ²»×ã");
+                alert("ï¿½Ã»ï¿½È¨ï¿½Þ²ï¿½ï¿½ï¿½");
             },
             404: function () {
-                alert("Î´ÕÒµ½°à¼¶");
+                alert("Î´ï¿½Òµï¿½ï¿½à¼¶");
             }
         }
     });
@@ -840,7 +840,7 @@ function gettopicdetail(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status == 200){
-                // alert("»ñÈ¡³É¹¦");
+                // alert("ï¿½ï¿½È¡ï¿½É¹ï¿½");
                 $("#topicname").val(data.name);
                 $("#description").html(data.description);
                 $("#groupLimit").val(data.groupLimit);
@@ -849,10 +849,10 @@ function gettopicdetail(){
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½»°Ìâ");
+                alert("Î´ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½");
             }
         }
     });
@@ -874,7 +874,7 @@ function updatetopic(){
         data: JSON.stringify(ata),
         success: function (data,textStatus,xhr) {
             if(xhr.status==204){
-                alert("ÐÞ¸Ä³É¹¦!");
+                alert("ï¿½Þ¸Ä³É¹ï¿½!");
                 // alert(getCookie("courseDetail"));
                 // alert(getCookie("seminarDetail"));
                 backtotopic();
@@ -882,10 +882,10 @@ function updatetopic(){
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½»°Ìâ");
+                alert("Î´ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½");
             }
         }
     });
@@ -909,13 +909,13 @@ function createtopic(){
         data: JSON.stringify(ata),
         success: function (data,textStatus,xhr) {
             if(xhr.status== 201){
-                alert("´´½¨³É¹¦!");
-                backtoseminar();  //Ò³ÃæÌø×ª
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½!");
+                backtoseminar();  //Ò³ï¿½ï¿½ï¿½ï¿½×ª
             }
         },
         statusCode: {
             403: function () {
-                alert("ÓÃ»§È¨ÏÞ²»×ã");
+                alert("ï¿½Ã»ï¿½È¨ï¿½Þ²ï¿½ï¿½ï¿½");
             }
         }
     });
@@ -929,8 +929,8 @@ function getreportlist(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status == 200){
-                // alert("»ñÈ¡³É¹¦");
-                var content=document.getElementById("reportcontent");   //»ñÈ¡ÍâÎ§ÈÝÆ÷
+                // alert("ï¿½ï¿½È¡ï¿½É¹ï¿½");
+                var content=document.getElementById("reportcontent");   //ï¿½ï¿½È¡ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½
                 var str="";
                 for(var i=0;i<data.length;i++){
                     str+="  <tr>\n" +
@@ -938,12 +938,12 @@ function getreportlist(){
                         "                    <td>" + data[i].groupName + "</td>\n" +
                         "                    <td>"+data[i].leaderName+"</td>\n" +
                         "                    <td>"+data[i].presentationGrade+"</td>\n" +
-                        "                    <td>ÒÑÌá½»</td>\n" +
+                        "                    <td>ï¿½ï¿½ï¿½á½»</td>\n" +
                         "                    <td>"+data[i].reportGrade+"</td>\n" +
                         "                    <td>"+data[i].grade+"</td>\n" +
                         "                    <td>\n" +
-                        "                         <img src=\"/img/view.png\" alt=\"Ô¤ÀÀ\" name='report' id=" + data[i].groupName + " onclick='jumpreportdetail(this.id)'>\n" +
-                        "                        <img src=\"/img/download.png\" alt=\"ÏÂÔØ\" name='download' id=" + data[i].groupName + " onclick='jumpreportdetail(this.id)'>\n" +
+                        "                         <img src=\"/img/view.png\" alt=\"Ô¤ï¿½ï¿½\" name='report' id=" + data[i].groupName + " onclick='jumpreportdetail(this.id)'>\n" +
+                        "                        <img src=\"/img/download.png\" alt=\"ï¿½ï¿½ï¿½ï¿½\" name='download' id=" + data[i].groupName + " onclick='jumpreportdetail(this.id)'>\n" +
                         "                    </td>\n" +
                         "                </tr>"
                 }
@@ -951,14 +951,14 @@ function getreportlist(){
             }
         },
         error: function (data,textStatus,xhr) {
-            alert("´íÎó");
+            alert("ï¿½ï¿½ï¿½ï¿½");
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½Ð¡×é");
+                alert("Î´ï¿½Òµï¿½Ð¡ï¿½ï¿½");
             }
         }
     });
@@ -973,7 +973,7 @@ function find_groupinseminar(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status==200){
-                // alert("»ñÈ¡³É¹¦");
+                // alert("ï¿½ï¿½È¡ï¿½É¹ï¿½");
                 var content=document.getElementById("groupinseminar");
                 var str="";
                 for(var i=0;i<data.length;i++){
@@ -988,10 +988,10 @@ function find_groupinseminar(){
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             404: function () {
-                alert("Î´ÕÒµ½»°Ìâ");
+                alert("Î´ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½");
             }
         }
     });
@@ -1009,19 +1009,19 @@ function score_report(){
         contentType: "application/json;",
         success: function (data,textStatus,xhr) {
             if(xhr.status==204){
-                alert("´ò·Ö³É¹¦");
+                alert("ï¿½ï¿½Ö³É¹ï¿½");
                 window.location.href='/teacher/course/'+getCookie('courseDetail')+'/seminar/'+getCookie('seminarDetail')+'/score'
             }
         },
         statusCode: {
             400: function () {
-                alert("´íÎóµÄID¸ñÊ½");
+                alert("ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ê½");
             },
             403: function () {
-                alert("È¨ÏÞ²»×ã");
+                alert("È¨ï¿½Þ²ï¿½ï¿½ï¿½");
             },
             404: function () {
-                alert("Î´ÕÒµ½Ð¡×é");
+                alert("Î´ï¿½Òµï¿½Ð¡ï¿½ï¿½");
             }
         }
     });

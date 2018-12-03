@@ -1,6 +1,7 @@
 package com.group12.course.service;
 
 import com.group12.course.entity.Course;
+
 import java.util.List;
 
 /**
@@ -17,25 +18,25 @@ import java.util.List;
 public interface CourseService {
 
     /**
-     * 获得所有课程
+     * 获得当前用户所有课程
      * @return List<Course>
+     * @param teacherId 老师ID
      */
-    List<Course> listCourses();
+    List<Course> listCourses(Long teacherId);
 
     /**
      * 根据课程id获得课程
      * @param id int
      * @return Course
      */
-    Course getCourseNameById(int id);
+    Course getCourseById(Long id);
 
     /**
      * 增加课程
-     *
      * @param course Course
      * @return Course
      */
-    boolean addCourse(Course course);
+    int addCourse(Course course);
 
     /**
      * 删除课程
@@ -43,7 +44,7 @@ public interface CourseService {
      * @param id int
      * @return Course
      */
-    boolean deleteCourse(int id);
+    int deleteCourse(Long id);
 
     /**
      * 更新课程
@@ -51,7 +52,6 @@ public interface CourseService {
      * @param course Course
      * @return Course
      */
-    boolean updateCourse(Course course);
-
+    int updateCourse(Course course);
 
 }

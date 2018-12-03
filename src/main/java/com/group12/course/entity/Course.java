@@ -1,46 +1,131 @@
 package com.group12.course.entity;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 /**
+ * Course ENTITY
  * @author Y Jiang
- * 2018/11/28
+ * @date 2018/12/1
+ *
  */
 public class Course {
+    private Long id;
 
-    private String id;
-    private String name;
-    private String teacherName;
-    private String location;
+    private Long teacherId;
 
-    public Course(){}
-    public Course(String id, String name, String teacherName, String location) {
-        this.id = id;
-        this.name = name;
-        this.teacherName = teacherName;
-        this.location = location;
+    private String courseName;
+
+    private String introduction;
+
+    private Integer prePercentage;
+
+    private Integer reportPercentage;
+
+    private Integer quesPercentage;
+
+    private LocalDateTime teamStartDate;
+
+    private LocalDateTime teamEndDate;
+
+    public Course(){
+
     }
-    public String getId() {
+    public Course(Long id, Long teacherId, String courseName, String introduction, Integer prePercentage, Integer reportPercentage, Integer quesPercentage, LocalDateTime teamStartDate, LocalDateTime teamEndDate) {
+        this.id = id;
+        this.teacherId = teacherId;
+        this.courseName = courseName;
+        this.introduction = introduction;
+        this.prePercentage = prePercentage;
+        this.reportPercentage = reportPercentage;
+        this.quesPercentage = quesPercentage;
+        this.teamStartDate = teamStartDate;
+        this.teamEndDate = teamEndDate;
+    }
+
+    public Long getId() {
         return id;
     }
-    public void setId(String id) {
+
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getteacherName() {
-        return teacherName;
-    }
-    public void setteacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-    public String getLocation() {
-        return location;
-    }
-    public void setLocation(String location) {
-        this.location = location;
+
+    public Long getTeacherId() {
+        return teacherId;
     }
 
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName == null ? null : courseName.trim();
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction == null ? null : introduction.trim();
+    }
+
+    public Integer getPrePercentage() {
+        return prePercentage;
+    }
+
+    public void setPrePercentage(Integer prePercentage) {
+        this.prePercentage = prePercentage;
+    }
+
+    public Integer getReportPercentage() {
+        return reportPercentage;
+    }
+
+    public void setReportPercentage(Integer reportPercentage) {
+        this.reportPercentage = reportPercentage;
+    }
+
+    public Integer getQuesPercentage() {
+        return quesPercentage;
+    }
+
+    public void setQuesPercentage(Integer quesPercentage) {
+        this.quesPercentage = quesPercentage;
+    }
+
+    public LocalDateTime getTeamStartDate() {
+        return teamStartDate;
+    }
+
+    public void setTeamStartDate(LocalDateTime teamStartDate) {
+        this.teamStartDate = teamStartDate;
+    }
+
+    public LocalDateTime getTeamEndDate() {
+        return teamEndDate;
+    }
+
+    public void setTeamEndDate(LocalDateTime teamEndDate) {
+        this.teamEndDate = teamEndDate;
+    }
+
+    @Override
+    public String toString(){
+        return "Course{" +
+                "courseName='" + courseName + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", prePercentage='" + prePercentage + '\'' +
+                ", reportPercentage=" + reportPercentage + '\'' +
+                ", quesPercentage=" + quesPercentage + '\'' +
+                ", teamStartDate=" + teamStartDate + '\'' +
+                ", teamEndDate=" + teamEndDate + '\'' +
+                ", teamStartDate=" + reportPercentage +
+                '}';
+    }
 }
