@@ -14,7 +14,7 @@ body {
 }
 
 .topBar {
-    background-color: #2c3e50;
+    background-color: #263238;
     width: 100%;
     height: 45px;
 }
@@ -86,7 +86,7 @@ body {
 .card-head {
     width: 100%;
     height: 45px;
-    background-color: #34495e;
+    background-color: #455A64;
     border-radius: 5px;
 }
 
@@ -107,10 +107,14 @@ body {
 }
 
 .card-head-secondary {
-    background-color: #CFD8DC;
+    background-color: #829CA9;
     margin-top: 10px;
 }
-
+.card-head-tertiary
+{
+    background-color: #BAC9D0;
+    margin-top: 10px;
+    }
 .card-body {
     /* background-color: #C6F1E7; */
 }
