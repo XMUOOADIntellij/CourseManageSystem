@@ -46,7 +46,7 @@ public class CourseServiceTest extends AbstractTransactionalJUnit4SpringContextT
     @Test
     public void testGetCourseById(){
         courseService.deleteCourse(testCourse.getId());
-        //courseService.addCourse(testCourse);
+        courseService.addCourse(testCourse);
 
         Assert.assertEquals(LocalDateTime.of(2018,Month.DECEMBER,1,23,59,59),
                 courseService.getCourseById(testCourse.getId()).getTeamStartDate());
@@ -55,7 +55,7 @@ public class CourseServiceTest extends AbstractTransactionalJUnit4SpringContextT
     @Test
     public void testAddCourse(){
         courseService.deleteCourse(testCourse.getId());
-        //Assert.assertEquals(1,courseService.addCourse(testCourse));
+        Assert.assertEquals(1,courseService.addCourse(testCourse));
         Assert.assertEquals("OOAD",courseService.getCourseById(testCourse.getId()).getCourseName());
     }
 
@@ -63,14 +63,14 @@ public class CourseServiceTest extends AbstractTransactionalJUnit4SpringContextT
     public  void testDeleteCourse(){
         courseService.deleteCourse(testCourse.getId());
         Assert.assertEquals(0,courseService.deleteCourse(testCourse.getId()));
-        //courseService.addCourse(testCourse);
+        courseService.addCourse(testCourse);
         Assert.assertEquals(1,courseService.deleteCourse(testCourse.getId()));
     }
 
     @Test
     public void testUpdateCourse(){
         courseService.deleteCourse(testCourse.getId());
-      // courseService.addCourse(testCourse);
+        courseService.addCourse(testCourse);
 
        testCourse.setQuesPercentage(20);
        testCourse.setCourseName(null);
@@ -82,6 +82,6 @@ public class CourseServiceTest extends AbstractTransactionalJUnit4SpringContextT
 
     @Test
     public void testListCourses(){
-        Assert.assertEquals("OOAD",courseService.listCourses(testCourse.getTeacherId()));
+        Assert.assertFalse(courseService.listCourses(testCourse.getTeacherId()).isEmpty());
     }
 }
