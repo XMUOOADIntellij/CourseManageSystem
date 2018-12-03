@@ -6,6 +6,8 @@ import com.group12.course.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
  * Class service层接口实现
@@ -17,6 +19,15 @@ public class ClassServiceImpl implements ClassService {
 
     @Autowired
     ClassDao classDao;
+
+    /**
+     * 找到当前课程的所有班级
+     * @param courseId String
+     * @return List  班级列表
+     */
+    public List<Class> getAllClasses(Long courseId){
+        return classDao.listClasses(courseId);
+    }
 
     /**
      * 通过班级id获取班级

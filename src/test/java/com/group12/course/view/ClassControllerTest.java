@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,7 +20,6 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,6 +50,7 @@ public class ClassControllerTest extends AbstractTransactionalJUnit4SpringContex
         class1.put("name",new String("OOAD"));
         class1.put("time",new String("周一三四节"));
         class1.put("location",new String("公寓306"));
+        class1.put("courseId",new String("1"));
         MvcResult rightResult =
                 mvc.perform(MockMvcRequestBuilders.post("/class/add")
                         // 设置请求内容为JSON格式
@@ -92,6 +91,7 @@ public class ClassControllerTest extends AbstractTransactionalJUnit4SpringContex
         class1.put("name",new String("OOAD"));
         class1.put("time",new String("周一三四节"));
         class1.put("location",new String("海韵202"));
+        class1.put("courseId",new String("1"));
         MvcResult rightResult =
                 mvc.perform(MockMvcRequestBuilders.put("/class/update")
                         // 设置请求内容为JSON格式

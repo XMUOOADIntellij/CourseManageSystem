@@ -36,6 +36,14 @@ public class ClassDaoTest {
         class1.setName(new String("OOAD"));
         class1.setTime(new String("周一三四节"));
         class1.setLocation(new String("公寓305"));
+        class1.setCourseId(new Long(1));
+    }
+
+    @Test
+    @Rollback
+    public void testListClasses(){
+        classMapper.insert(class1);
+        Assert.assertFalse(classMapper.listClasses(class1.getCourseId()).isEmpty());
     }
 
     @Test
