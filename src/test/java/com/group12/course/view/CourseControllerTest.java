@@ -69,10 +69,10 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
      @Test
     public void testDeleteCourse() throws Exception {
          MvcResult result =
-                 mvc.perform(MockMvcRequestBuilders.delete("/delete/1").)
+                 mvc.perform(MockMvcRequestBuilders.delete("/course/delete/{id}", 1))
                          .andExpect(handler().handlerType(CourseController.class))
                          //验证执行的控制器方法名
-                         .andExpect(handler().methodName("deleteCourses"))
+                         .andExpect(handler().methodName("deleteCourse"))
                          //验证状态码
                          .andExpect(status().isOk())
                          //验证contentType
@@ -82,4 +82,62 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
                          .andReturn();
      }
 
+     @Test
+    public  void testUpdateCourse() throws Exception{
+         Map<String,String> requestBody = new TreeMap<>();
+         requestBody.put("id", "2");
+         requestBody.put("teacherId","1");
+         requestBody.put("courseName", "J3EE");
+         requestBody.put("introduction", "J2EE introduction");
+         requestBody.put("prePercentage", "30");
+         requestBody.put("reportPercentage", "40");
+         requestBody.put( "quesPercentage", "30");
+         requestBody.put("teamStartDate", "2018-12-13T07:48:00");
+         requestBody.put("teamEndDate", "2018-12-30T07:48:04");
+
+        MvcResult result =
+              mvc.perform(MockMvcRequestBuilders.put("/course/update")
+                      .contentType(MediaType.APPLICATION_JSON_UTF8)
+                      .content(JSONObject.toJSONString(requestBody)))
+                      .andExpect(handler().handlerType(CourseController.class))
+                      //验证执行的控制器方法名
+                      .andExpect(handler().methodName("updateCourse"))
+                      //验证状态码
+                      .andExpect(status().isOk())
+                      //验证contentType
+                      .andExpect(content().contentType("application/json;charset=UTF-8"))
+                      // 可以打印结果
+                      //.andDo(print())
+                      .andReturn();
+
+     }
+
+     @Test
+    public  void testInsertCourse() throws  Exception{
+         Map<String,String> requestBody = new TreeMap<>();
+         requestBody.put("id", "9");
+         requestBody.put("teacherId","1");
+         requestBody.put("courseName", "J3EE");
+         requestBody.put("introduction", "J2EE introduction");
+         requestBody.put("prePercentage", "30");
+         requestBody.put("reportPercentage", "40");
+         requestBody.put( "quesPercentage", "30");
+         requestBody.put("teamStartDate", "2018-12-13T07:48:00");
+         requestBody.put("teamEndDate", "2018-12-30T07:48:04");
+
+         MvcResult result =
+                 mvc.perform(MockMvcRequestBuilders.post("/course/add")
+                         .contentType(MediaType.APPLICATION_JSON_UTF8)
+                         .content(JSONObject.toJSONString(requestBody)))
+                         .andExpect(handler().handlerType(CourseController.class))
+                         //验证执行的控制器方法名
+                         .andExpect(handler().methodName("addCourse"))
+                         //验证状态码
+                         .andExpect(status().isOk())
+                         //验证contentType
+                         .andExpect(content().contentType("application/json;charset=UTF-8"))
+                         // 可以打印结果
+                         //.andDo(print())
+                         .andReturn();
+     }
 }
