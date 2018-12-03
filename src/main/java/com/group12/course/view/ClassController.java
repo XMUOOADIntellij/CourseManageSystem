@@ -26,7 +26,7 @@ public class ClassController {
      * @param course 课程
      * @return List  班级列表
      */
-    @GetMapping(value = "/getAll",produces = "application/json")
+    @GetMapping(value = "/getall",produces = "application/json")
     public List<Class> getAllClasses(@RequestBody Course course){
         return classService.getAllClasses(course.getId());
     }
