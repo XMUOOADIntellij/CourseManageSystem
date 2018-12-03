@@ -38,6 +38,7 @@ public class ClassServiceTest extends AbstractTransactionalJUnit4SpringContextTe
 
     @Test
     public void testGetAllClasses(){
+        classService.deleteClass(class1.getId());
         classService.addClass(class1);
         Assert.assertFalse(classService.getAllClasses(class1.getCourseId()).isEmpty());
     }

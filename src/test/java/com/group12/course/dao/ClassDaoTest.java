@@ -42,6 +42,7 @@ public class ClassDaoTest {
     @Test
     @Rollback
     public void testListClasses(){
+        classMapper.deleteByPrimaryKey(class1.getId());
         classMapper.insert(class1);
         Assert.assertFalse(classMapper.listClasses(class1.getCourseId()).isEmpty());
     }
