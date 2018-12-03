@@ -34,7 +34,7 @@ public class CourseDaoTest {
     @Before
     public void initialTestCourse(){
         course = new Course();
-        course.setId(new Long(1));
+        //course.setId(new Long(1));
         course.setTeacherId(new Long(1));
         course.setCourseName(new String("OOAD"));
         course.setIntroduction(new String("OOAD的简介"));
@@ -48,7 +48,6 @@ public class CourseDaoTest {
     @Test
     @Rollback
     public void testInsert(){
-        courseMapper.deleteByPrimaryKey(course.getId());
         Assert.assertEquals(1,courseMapper.insert(course));
     }
 
@@ -58,7 +57,6 @@ public class CourseDaoTest {
     public void testInsertSelective(){
         course.setCourseName(null);
 
-        courseMapper.deleteByPrimaryKey(course.getId());
         Assert.assertEquals(1,courseMapper.insertSelective(course));
         Assert.assertEquals(null,courseMapper.selectByPrimaryKey(course.getId()).getCourseName());
 
@@ -67,7 +65,6 @@ public class CourseDaoTest {
     @Test
     @Rollback
     public  void testDeleteByPrimaryKey(){
-        courseMapper.deleteByPrimaryKey(course.getId());
         courseMapper.insert(course);
         Assert.assertEquals(1,courseMapper.deleteByPrimaryKey(course.getId()));
         Assert.assertEquals(0,courseMapper.deleteByPrimaryKey(course.getId()));
@@ -77,9 +74,7 @@ public class CourseDaoTest {
     @Test
     @Rollback
     public  void testUpdateByPrimaryKey(){
-        courseMapper.deleteByPrimaryKey(course.getId());
         courseMapper.insert(course);
-
         course.setCourseName(null);
         course.setTeamStartDate(null);
         Assert.assertEquals(1,courseMapper.updateByPrimaryKey(course));
@@ -90,9 +85,8 @@ public class CourseDaoTest {
     @Test
     @Rollback
     public  void testUpdateByPrimaryKeySelective(){
-        courseMapper.deleteByPrimaryKey(course.getId());
-        courseMapper.insert(course);
 
+        courseMapper.insert(course);
         course.setCourseName(null);
         course.setTeamStartDate(null);
         Assert.assertEquals(1,courseMapper.updateByPrimaryKeySelective(course));
@@ -102,16 +96,10 @@ public class CourseDaoTest {
     @Test
     @Rollback
     public void testSelectByPrimaryKey(){
-        courseMapper.deleteByPrimaryKey(course.getId());
         courseMapper.insert(course);
 
         Assert.assertEquals(LocalDateTime.of(2018,Month.DECEMBER,1,23,59,59),
                 courseMapper.selectByPrimaryKey(course.getId()).getTeamStartDate());
     }
 
-    @Test
-    @Rollback
-    public void testSelectCourseByTeacherId(){
-     //System.out.println(courseMapper.listCourses(new Long(1)));
-    }
 }

@@ -19,10 +19,10 @@ public interface CourseMapper {
 
     /**
      * 找到当前用户的所有课程
-     * @param teacherId String
+     * @param teacherNum String
      * @return List  List<Course>
      */
-    List<Course> listCourses(Long teacherId);
+    List<Course> listCourses(Long teacherNum);
 
     /**
      * 通过课程ID 删除课程
