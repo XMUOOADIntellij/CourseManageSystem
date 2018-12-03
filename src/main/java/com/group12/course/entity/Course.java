@@ -55,7 +55,7 @@ public class Course {
         return teacherNum;
     }
 
-    public void setTeacherId(Long teacherNum) {
+    public void setTeacherNum(Long teacherNum) {
         this.teacherNum = teacherNum;
     }
 

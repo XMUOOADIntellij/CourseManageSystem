@@ -115,13 +115,13 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
     @Test
     public  void testAddCourse() throws  Exception{
         Map<String,String> requestBody = new TreeMap<>();
-        //requestBody.put("id", "9");
+        // requestBody.put("id", "9");
         requestBody.put("teacherNum","1");
         requestBody.put("courseName", "J3EE");
         requestBody.put("introduction", "J2EE introduction");
         requestBody.put("prePercentage", "30");
         requestBody.put("reportPercentage", "40");
-        requestBody.put( "quesPercentage", "30");
+        requestBody.put("quesPercentage", "30");
         requestBody.put("teamStartDate", "2018-12-13T07:48:00");
         requestBody.put("teamEndDate", "2018-12-30T07:48:04");
 
@@ -137,7 +137,7 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
                         //验证contentType
                         .andExpect(content().contentType("application/json;charset=UTF-8"))
                         // 可以打印结果
-                        .andDo(print())
+                        //.andDo(print())
                         .andReturn();
     }
 

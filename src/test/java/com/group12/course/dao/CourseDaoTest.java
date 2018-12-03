@@ -35,7 +35,7 @@ public class CourseDaoTest {
     public void initialTestCourse(){
         course = new Course();
         //course.setId(new Long(1));
-        course.setTeacherId(new Long(1));
+        course.setTeacherNum(new Long(1));
         course.setCourseName(new String("OOAD"));
         course.setIntroduction(new String("OOAD的简介"));
         course.setPrePercentage(new Integer(40));
