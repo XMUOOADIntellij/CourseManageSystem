@@ -27,7 +27,7 @@ public class SeminarDaoTest {
     @Before
     public void initialTestSeminar(){
         seminar = new Seminar();
-        seminar.setId(new Long(1));
+        //seminar.setId(new Long(1));
         seminar.setTheme("需求分析");
         seminar.setContent("讨论课需求分析的内容");
         seminar.setSerial(1);

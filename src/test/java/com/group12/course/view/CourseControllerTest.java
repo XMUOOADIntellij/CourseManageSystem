@@ -86,7 +86,7 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
     public  void testUpdateCourse() throws Exception{
         Map<String,String> requestBody = new TreeMap<>();
         requestBody.put("id", "2");
-        requestBody.put("teacherId","1");
+        requestBody.put("teacherNum","1");
         requestBody.put("courseName", "J3EE");
         requestBody.put("introduction", "J2EE introduction");
         requestBody.put("prePercentage", "30");
@@ -113,10 +113,10 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
     }
 
     @Test
-    public  void testInsertCourse() throws  Exception{
+    public  void testAddCourse() throws  Exception{
         Map<String,String> requestBody = new TreeMap<>();
-        requestBody.put("id", "9");
-        requestBody.put("teacherId","1");
+        //requestBody.put("id", "9");
+        requestBody.put("teacherNum","1");
         requestBody.put("courseName", "J3EE");
         requestBody.put("introduction", "J2EE introduction");
         requestBody.put("prePercentage", "30");
@@ -137,7 +137,22 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
                         //验证contentType
                         .andExpect(content().contentType("application/json;charset=UTF-8"))
                         // 可以打印结果
-                        //.andDo(print())
+                        .andDo(print())
                         .andReturn();
+    }
+
+    @Test
+    public void testGetCourses() throws Exception{
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/course/{id}",1))
+                .andExpect(handler().handlerType(CourseController.class))
+                //验证执行的控制器方法名
+                .andExpect(handler().methodName("getCourse"))
+                //验证状态码
+                .andExpect(status().isOk())
+                //验证contentType
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                // 可以打印结果
+                //.andDo(print())
+                .andReturn();
     }
 }

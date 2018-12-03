@@ -20,9 +20,9 @@ public interface CourseService {
     /**
      * 获得当前用户所有课程
      * @return List<Course>
-     * @param teacherId 老师ID
+     * @param teacherNum 老师ID
      */
-    List<Course> listCourses(Long teacherId);
+    List<Course> listCourses(Long teacherNum);
 
     /**
      * 根据课程id获得课程

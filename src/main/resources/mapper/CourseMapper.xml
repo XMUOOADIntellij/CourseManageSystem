@@ -10,12 +10,12 @@
     <result column="ques_percentage" property="quesPercentage" jdbcType="INTEGER" />
     <result column="team_start_date" property="teamStartDate" jdbcType="TIMESTAMP" />
     <result column="team_end_date" property="teamEndDate" jdbcType="TIMESTAMP" />
-      <result column="teacher_id" property="teacherId" jdbcType="BIGINT"/>
+      <result column="teacher_num" property="teacherNum" jdbcType="BIGINT"/>
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, courseName, introduction, pre_percentage, report_percentage, ques_percentage,
-    team_start_date, team_end_date,teacher_id
+    team_start_date, team_end_date,teacher_num
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -30,23 +30,20 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" parameterType="com.group12.course.entity.Course" >
-    insert into course (id, courseName, introduction, 
+  <insert id="insert" parameterType="com.group12.course.entity.Course" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into course (courseName, introduction,
       pre_percentage, report_percentage, ques_percentage,
-      team_start_date, team_end_date,teacher_id)
-    values (#{id,jdbcType=BIGINT}, #{courseName,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR},
+      team_start_date, team_end_date,teacher_num)
+    values (#{courseName,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR},
       #{prePercentage,jdbcType=INTEGER}, #{reportPercentage,jdbcType=INTEGER}, #{quesPercentage,jdbcType=INTEGER},
-      #{teamStartDate,jdbcType=TIMESTAMP}, #{teamEndDate,jdbcType=TIMESTAMP},#{teacherId,jdbcType=BIGINT})
+      #{teamStartDate,jdbcType=TIMESTAMP}, #{teamEndDate,jdbcType=TIMESTAMP},#{teacherNum,jdbcType=BIGINT})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.group12.course.entity.Course" >
+  <insert id="insertSelective" parameterType="com.group12.course.entity.Course" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     insert into course
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-        <if test="teacherId != null" >
-            teacher_id,
+        <if test="teacherNum != null" >
+            teacher_num,
         </if>
       <if test="courseName != null" >
         courseName,
@@ -71,11 +68,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-        <if test="id != null" >
-            #{teacherId,jdbcType=BIGINT},
+        <if test="teacherNum != null" >
+            #{teacherNum,jdbcType=BIGINT},
         </if>
       <if test="courseName != null" >
         #{courseName,jdbcType=VARCHAR},
@@ -138,7 +132,7 @@
       ques_percentage = #{quesPercentage,jdbcType=INTEGER},
       team_start_date = #{teamStartDate,jdbcType=TIMESTAMP},
       team_end_date = #{teamEndDate,jdbcType=TIMESTAMP},
-      teacher_id = #{teacherId}
+      teacher_num = #{teacherNum}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
@@ -146,6 +140,6 @@
       select
       <include refid="Base_Column_List" />
       from course
-      where teacher_id = #{teacherId,jdbcType=BIGINT}
+      where teacher_num = #{teacherNum,jdbcType=BIGINT}
   </select>
 </mapper>

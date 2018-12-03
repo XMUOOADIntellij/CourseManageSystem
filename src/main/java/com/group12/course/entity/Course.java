@@ -12,7 +12,7 @@ import java.util.Date;
 public class Course {
     private Long id;
 
-    private Long teacherId;
+    private Long teacherNum;
 
     private String courseName;
 
@@ -31,9 +31,9 @@ public class Course {
     public Course(){
 
     }
-    public Course(Long id, Long teacherId, String courseName, String introduction, Integer prePercentage, Integer reportPercentage, Integer quesPercentage, LocalDateTime teamStartDate, LocalDateTime teamEndDate) {
+    public Course(Long id, Long teacherNum, String courseName, String introduction, Integer prePercentage, Integer reportPercentage, Integer quesPercentage, LocalDateTime teamStartDate, LocalDateTime teamEndDate) {
         this.id = id;
-        this.teacherId = teacherId;
+        this.teacherNum = teacherNum;
         this.courseName = courseName;
         this.introduction = introduction;
         this.prePercentage = prePercentage;
@@ -52,11 +52,11 @@ public class Course {
     }
 
     public Long getTeacherId() {
-        return teacherId;
+        return teacherNum;
     }
 
-    public void setTeacherId(Long teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacherId(Long teacherNum) {
+        this.teacherNum = teacherNum;
     }
 
     public String getCourseName() {
