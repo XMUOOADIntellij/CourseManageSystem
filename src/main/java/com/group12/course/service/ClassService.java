@@ -2,6 +2,8 @@ package com.group12.course.service;
 
 import com.group12.course.entity.Class;
 
+import java.util.List;
+
 /**
  * Class service层接口
  * @author Tan Xue
@@ -9,6 +11,13 @@ import com.group12.course.entity.Class;
  */
 
 public interface ClassService {
+
+    /**
+     * 找到当前课程的所有班级
+     * @param courseId String
+     * @return List  班级列表
+     */
+    List<Class> getAllClasses(Long courseId);
 
     /**
      * 通过班级id获取班级

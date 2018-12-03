@@ -6,9 +6,10 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="time" property="time" jdbcType="VARCHAR" />
     <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, time, location
+    id, name, time, location, course_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -22,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.group12.course.entity.Class" >
     insert into class (id, name, time, 
-      location)
+      location, course_id)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, 
-      #{location,jdbcType=VARCHAR})
+      #{location,jdbcType=VARCHAR}, #{courseId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.group12.course.entity.Class" >
     insert into class
@@ -41,6 +42,9 @@
       <if test="location != null" >
         location,
       </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -54,6 +58,9 @@
       </if>
       <if test="location != null" >
         #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -69,6 +76,9 @@
       <if test="location != null" >
         location = #{location,jdbcType=VARCHAR},
       </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -76,7 +86,14 @@
     update class
     set name = #{name,jdbcType=VARCHAR},
       time = #{time,jdbcType=VARCHAR},
-      location = #{location,jdbcType=VARCHAR}
+      location = #{location,jdbcType=VARCHAR},
+      course_id = #{courseId,jdbcType=BIGINT}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="listClasses" parameterType="java.lang.Long" resultType="com.group12.course.entity.Class">
+    select
+    <include refid="Base_Column_List" />
+    from class
+    where course_id = #{courseId,jdbcType=BIGINT}
+  </select>
 </mapper>

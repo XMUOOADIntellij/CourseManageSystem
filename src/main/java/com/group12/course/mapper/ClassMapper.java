@@ -4,6 +4,8 @@ import com.group12.course.entity.Class;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Class Mapper接口
  * @author Tan Xue
@@ -13,6 +15,13 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface ClassMapper {
+
+    /**
+     * 找到当前课程的所有班级
+     * @param courseId String
+     * @return List  班级列表
+     */
+    List<Class> listClasses(Long courseId);
 
     /**
      * 通过班级id删除班级

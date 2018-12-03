@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -34,8 +33,14 @@ public class ClassServiceTest extends AbstractTransactionalJUnit4SpringContextTe
         class1.setName("OOAD");
         class1.setTime("周一三四节");
         class1.setLocation("公寓305");
+        class1.setCourseId(new Long(1));
     }
 
+    @Test
+    public void testGetAllClasses(){
+        classService.addClass(class1);
+        Assert.assertFalse(classService.getAllClasses(class1.getCourseId()).isEmpty());
+    }
 
     @Test
     public void testAddClass() {
