@@ -40,15 +40,14 @@ public class CourseController {
 
     /**
      * @param course Course
-     * @param id     int
      * @return Course
      */
-    @PutMapping(value = "/update/{id}")
-    public boolean updateCourse(@RequestBody Course course, @PathVariable int id) {
+    @PutMapping(value = "/update")
+    public boolean updateCourse(@RequestBody Course course) {
         try {
             return courseService.updateCourse(course)!=0;
         } catch (Exception e) {
-            throw new CourseNotFoundException(id);
+            throw new CourseNotFoundException(course.getId().intValue());
         }
     }
 
