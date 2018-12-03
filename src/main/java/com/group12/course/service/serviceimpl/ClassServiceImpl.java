@@ -6,7 +6,6 @@ import com.group12.course.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 /**
  * Class service层接口实现
@@ -34,7 +33,7 @@ public class ClassServiceImpl implements ClassService {
      * @return 添加的班级数
      */
     public int addClass(Class record){
-        return classDao.updateByPrimaryKey(record);
+        return classDao.insert(record);
     }
 
     /**

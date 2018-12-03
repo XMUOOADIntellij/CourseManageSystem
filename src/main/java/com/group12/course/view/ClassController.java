@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @RestController
-@RequestMapping("/Class")
+@RequestMapping("/class")
 public class ClassController {
 
     @Autowired
@@ -26,17 +26,10 @@ public class ClassController {
      * @param id 班级号
      * @return Class 对象
      */
-    @GetMapping(value = "query/{id}")
-    public Class getClassByClassId(@PathVariable String id,HttpServletResponse response) {
+    @GetMapping(value = "/{id}",produces = "application/json")
+    public Class getClassByClassId(@PathVariable String id) {
         Class status = classService.getClassById(id);
-        if(status.equals(null)){
-            response.setStatus(410);
-            return null;
-        }
-        else{
-            response.setStatus(200);
-            return status;
-        }
+        return status;
     }
 
     /**
