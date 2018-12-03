@@ -160,7 +160,7 @@
     }
 
     function goBack() {
-        window.location.href = "4-teacherHome.html"
+        window.location.href = "4-0-0-teacherHome.html"
     }
     function addCourse() {
         window.location.href = "4-2-1-createCourse.html"
@@ -178,7 +178,7 @@
     function onShareSet(e) {
         let courseid=$(e).closest('.card').attr("id");
         updateCookie('courseCurrent',courseid);
-        window.location.href = "4-2-6-shareInfo.html"
+        window.location.href = "4-2-7-shareInfo.html"
     }
     function onCourseInfo(e) {
         let courseid=$(e).closest('.card').attr("id");
@@ -193,7 +193,7 @@
     function onSemRound(e) {
         let courseid=$(e).closest('.card').attr("id");
         updateCookie('courseCurrent',courseid);
-        window.location.href = "4-2-1-createCourse.html"
+        window.location.href = "4-2-6-seminarRound.html"
     }
     function getCourseList() {
         $.ajax({

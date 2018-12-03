@@ -75,7 +75,7 @@
                         if (data.type === "student")
                             window.location.href = "/student/home";
                         else if (data.password === jpassword)
-                            window.location.href = "../teacher/4-teacherHome.html";//  window.location.href = "/teacher/home";
+                            window.location.href = "../teacher/4-0-0-teacherHome.html";//  window.location.href = "/teacher/home";
                         alert("用户名或密码正确！");
                     }
                 },
@@ -100,7 +100,7 @@
                 success: function (data){
                     if(data.password===jpassword) {
                         updateCookie('username', data.name);
-                        window.location.href = "../teacher/4-teacherHome.html";}
+                        window.location.href = "../teacher/4-0-0-teacherHome.html";}
                     else
                     {
                         $("#userPassword").val("");
