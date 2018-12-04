@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/class")
+@RequestMapping("/api/class")
 public class ClassController {
 
     @Autowired
