@@ -47,7 +47,7 @@ public class ClassControllerTest extends AbstractTransactionalJUnit4SpringContex
         Map<String,String> request = new TreeMap<>();
         request.put("id","1");
         MvcResult mvcResult =
-                mvc.perform(MockMvcRequestBuilders.get("/api/class/getall")
+                mvc.perform(MockMvcRequestBuilders.get("/api/class/getAll")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(JSONObject.toJSONString(request)))
                         //验证执行的控制器类型
@@ -65,7 +65,7 @@ public class ClassControllerTest extends AbstractTransactionalJUnit4SpringContex
     }
 
     @Test
-    public void testAddClass() throws Exception {
+    public void testCreateClass() throws Exception {
         Map<String,String> class1 = new TreeMap<String,String>();
         class1.put("id",new String("2"));
         class1.put("name",new String("OOAD"));
@@ -81,7 +81,7 @@ public class ClassControllerTest extends AbstractTransactionalJUnit4SpringContex
                         // 验证执行的控制器类型
                         .andExpect(handler().handlerType(ClassController.class))
                         // 验证执行的控制器方法名
-                        .andExpect(handler().methodName("addClass"))
+                        .andExpect(handler().methodName("createClass"))
                         // 验证状态码
                         .andExpect(status().is(200))
                         .andReturn();
