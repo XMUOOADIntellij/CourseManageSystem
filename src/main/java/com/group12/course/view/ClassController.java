@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/class")
+@RequestMapping("/api/class")
 public class ClassController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class ClassController {
      * @param course 课程
      * @return List  班级列表
      */
-    @GetMapping(value = "/getall",produces = "application/json")
+    @GetMapping(value = "/getAll",produces = "application/json")
     public List<Class> getAllClasses(@RequestBody Course course){
         return classService.getAllClasses(course.getId());
     }
@@ -44,14 +44,14 @@ public class ClassController {
     }
 
     /**
-     * 添加班级
+     * 新建班级
      * RequestBody注解表示告诉Spring查找一个消息转换器，将来自客户端的资源表述转换为对象
      * @param class1 班级
      * 若添加成功，返回200
      *  若添加失败，则返回410
      */
     @PostMapping(value = "/add")
-    public void addClass(@RequestBody Class class1,HttpServletResponse response) {
+    public void createClass(@RequestBody Class class1,HttpServletResponse response) {
         int status = classService.addClass(class1);
         if(status!=0){
             response.setStatus(200);
