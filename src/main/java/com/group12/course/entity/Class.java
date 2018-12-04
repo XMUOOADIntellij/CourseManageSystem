@@ -1,40 +1,23 @@
 package com.group12.course.entity;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Class 实体对象
  * @author Tan Xue
  * @date 2018/11/30
  */
-
+@Component
 public class Class {
     private String id;
+
     private String name;
+
     private String time;
+
     private String location;
 
-    public Class() {
-        this.id = null;
-        this.name = null;
-        this.time = null;
-        this.location = null;
-    }
-
-    public Class(String id, String name, String time, String location) {
-        this.id = id;
-        this.name = name;
-        this.time = time;
-        this.location = location;
-    }
-
-    @Override
-    public String toString() {
-        return "Class{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", time='" + time + '\'' +
-                ", location='" + location + '\'' +
-                '}';
-    }
+    private Long courseId;
 
     public String getId() {
         return id;
@@ -66,5 +49,24 @@ public class Class {
 
     public void setLocation(String location) {
         this.location = location == null ? null : location.trim();
+    }
+
+    public Long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
+    }
+
+    @Override
+    public String toString() {
+        return "Class{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", time='" + time + '\'' +
+                ", location='" + location + '\'' +
+                ", courseId=" + courseId +
+                '}';
     }
 }

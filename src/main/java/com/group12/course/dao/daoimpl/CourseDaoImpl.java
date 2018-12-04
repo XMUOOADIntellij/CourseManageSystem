@@ -20,8 +20,8 @@ public class CourseDaoImpl implements CourseDao {
 
 
     @Override
-    public List<Course> listCourses(Long teacherId){
-        return courseMapper.listCourses(teacherId);
+    public List<Course> listCourses(Long teacherNum){
+        return courseMapper.listCourses(teacherNum);
     }
 
     @Override

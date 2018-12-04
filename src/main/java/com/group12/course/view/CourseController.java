@@ -21,34 +21,39 @@ import static org.apache.logging.log4j.message.MapMessage.MapFormat.JSON;
  */
 
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/api/course")
 public class CourseController {
 
     @Autowired
     private CourseService courseService;
 
+    @GetMapping(value = "/{id}",produces = "application/json")
+    public Course getCourse(@PathVariable Long id){
+        return courseService.getCourseById(id);
+    }
+
     @GetMapping(value = "/getall", produces = "application/json")
     public List<Course> listCourses(@RequestBody Teacher teacher) {
-        return courseService.listCourses(teacher.getId());
+        return courseService.listCourses(teacher.getTeacherNum());
     }
 
 
     @PostMapping(value = "/add", consumes = "application/json")
-    public boolean addCourse(@RequestBody Course course) {
-        return courseService.addCourse(course)!=0;
+    public Long addCourse(@RequestBody Course course) {
+        courseService.addCourse(course);
+        return course.getId();
     }
 
     /**
      * @param course Course
-     * @param id     int
      * @return Course
      */
-    @PutMapping(value = "/update/{id}")
-    public boolean updateCourse(@RequestBody Course course, @PathVariable int id) {
+    @PutMapping(value = "/update")
+    public boolean updateCourse(@RequestBody Course course) {
         try {
             return courseService.updateCourse(course)!=0;
         } catch (Exception e) {
-            throw new CourseNotFoundException(id);
+            throw new CourseNotFoundException(course.getId().intValue());
         }
     }
 
@@ -56,7 +61,9 @@ public class CourseController {
     public boolean deleteCourse(@PathVariable Long id) {
             return courseService.deleteCourse(id)!=0;
     }
-//
+
+
+
 //    /**
 //     * ExceptionHandler可以用在控制器中，处理特定的异常
 //     * ResponseEntity可以包含响应的相关的元数据（如头部信息，状态码）以及要转换成资源表述的对象
@@ -69,7 +76,7 @@ public class CourseController {
 //    public ResponseEntity<MyError> courseNotFound(CourseNotFoundException e) {
 //        int courseId = e.getId();
 //        MyError error = new MyError(404, "courseID " + courseId + " NOT FOUND");
-//        return new ResponseEntity<MyError>(error, HttpStatus.NOT_FOUND);
+//        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 //    }
 }
 

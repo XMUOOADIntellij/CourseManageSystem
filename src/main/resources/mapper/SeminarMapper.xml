@@ -28,23 +28,20 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" parameterType="com.group12.course.entity.Seminar" >
-    insert into seminar (id, theme, content, 
+  <insert id="insert" parameterType="com.group12.course.entity.Seminar" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into seminar (theme, content,
       serial, maxTeam, is_ordered, 
       is_visible, enroll_start_date, enroll_end_date
       )
-    values (#{id,jdbcType=BIGINT}, #{theme,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+    values ( #{theme,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
       #{serial,jdbcType=INTEGER}, #{maxTeam,jdbcType=INTEGER}, #{ordered,jdbcType=BIT},
       #{visible,jdbcType=BIT}, #{enrollStartDate,jdbcType=TIMESTAMP}, #{enrollEndDate,jdbcType=TIMESTAMP}
       )
   </insert>
 
-  <insert id="insertSelective" parameterType="com.group12.course.entity.Seminar" >
+  <insert id="insertSelective" parameterType="com.group12.course.entity.Seminar" useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
     insert into seminar
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="theme != null" >
         theme,
       </if>
@@ -71,9 +68,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="theme != null" >
         #{theme,jdbcType=VARCHAR},
       </if>

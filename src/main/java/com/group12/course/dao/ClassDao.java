@@ -12,6 +12,13 @@ import java.util.List;
 public interface ClassDao {
 
     /**
+     * 找到当前课程的所有班级
+     * @param courseId String
+     * @return List  班级列表
+     */
+    List<Class> listClasses(Long courseId);
+
+    /**
      * 通过班级id删除班级
      * @param id 班级号
      * @return 删除个数

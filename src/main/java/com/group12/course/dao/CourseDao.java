@@ -18,10 +18,10 @@ public interface CourseDao {
 
     /**
      * 找到当前老師的所有课程
-     * @param teacherId String
+     * @param teacherNum String
      * @return List  List<Course>
      */
-    List<Course> listCourses(Long teacherId);
+    List<Course> listCourses(Long teacherNum);
 
     /**
      * 通过课程ID 删除课程
@@ -33,14 +33,14 @@ public interface CourseDao {
     /**
      * 插入课程
      * @param record Course
-     * @return int
+     * @return int  自增主键CourseId
      */
     int insert(Course record);
 
     /**
      * 插入课程 Selective
      * @param record Course
-     * @return int
+     * @return int   自增主键CourseId
      */
     int insertSelective(Course record);
 

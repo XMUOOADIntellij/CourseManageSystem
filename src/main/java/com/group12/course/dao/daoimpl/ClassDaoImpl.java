@@ -6,6 +6,8 @@ import com.group12.course.mapper.ClassMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Class Dao层接口实现
  * @author Tan Xue
@@ -18,6 +20,8 @@ public class ClassDaoImpl implements ClassDao {
     @Autowired
     ClassMapper classMapper;
 
+    @Override
+    public List<Class> listClasses(Long courseId){return classMapper.listClasses(courseId);}
 
     @Override
     public int deleteByPrimaryKey(String id) {

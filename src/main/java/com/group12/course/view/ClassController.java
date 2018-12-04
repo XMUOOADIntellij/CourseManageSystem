@@ -1,10 +1,12 @@
 package com.group12.course.view;
 
 import com.group12.course.entity.Class;
+import com.group12.course.entity.Course;
 import com.group12.course.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Class controller
@@ -13,11 +15,21 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @RestController
-@RequestMapping("/Class")
+@RequestMapping("/class")
 public class ClassController {
 
     @Autowired
     private ClassService classService;
+
+    /**
+     * 找到当前课程的所有班级
+     * @param course 课程
+     * @return List  班级列表
+     */
+    @GetMapping(value = "/getall",produces = "application/json")
+    public List<Class> getAllClasses(@RequestBody Course course){
+        return classService.getAllClasses(course.getId());
+    }
 
     /**
      * 根据班级Id获得班级
@@ -26,17 +38,9 @@ public class ClassController {
      * @param id 班级号
      * @return Class 对象
      */
-    @GetMapping(value = "query/{id}")
-    public Class getClassByClassId(@PathVariable String id,HttpServletResponse response) {
-        Class status = classService.getClassById(id);
-        if(status.equals(null)){
-            response.setStatus(410);
-            return null;
-        }
-        else{
-            response.setStatus(200);
-            return status;
-        }
+    @GetMapping(value = "/{id}",produces = "application/json")
+    public Class getClassByClassId(@PathVariable String id) {
+        return classService.getClassById(id);
     }
 
     /**
