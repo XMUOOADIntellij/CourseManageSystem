@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!--指定特定数据库的jdbc驱动jar包的位置千万千万要指定正确,不然就创建不了文件-->
-    <classPathEntry location="C:\Users\Y Jiang\.m2\repository\mysql\mysql-connector-java\8.0.13\mysql-connector-java-8.0.13.jar"/>
+    <classPathEntry location="C:\Users\30275\.m2\repository\mysql\mysql-connector-java\8.0.13\mysql-connector-java-8.0.13.jar"/>
 
     <!-- 别删。导出包要用
     <classPathEntry location="C:\Users\27703\.m2\repository\mysql\mysql-connector-java\8.0.13\mysql-connector-java-8.0.13.jar"/>-->
@@ -45,7 +45,7 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名-->
-        <table tableName="round" domainObjectName="Round"
+        <table tableName="class" domainObjectName="Class"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
