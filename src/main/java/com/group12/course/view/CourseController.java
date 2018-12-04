@@ -21,7 +21,7 @@ import static org.apache.logging.log4j.message.MapMessage.MapFormat.JSON;
  */
 
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/api/course")
 public class CourseController {
 
     @Autowired

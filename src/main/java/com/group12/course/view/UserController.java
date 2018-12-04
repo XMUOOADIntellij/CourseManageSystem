@@ -19,7 +19,7 @@ import java.util.Map;
 
 @RestController
 
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class UserController {
     /**
      * 通过前端传来的账号密码，判断密码是否符合
      * @param user 通过前端传入的数据组成的 user 对象
-     * @return  若用户输入正确，则返回状态码 200，并且返回 JSON 数据，
+     * 若用户输入正确，则返回状态码 200，并且返回 JSON 数据，
      * key 为 isActive，value 值为 false 或 true
      * 若用户输入错误，则返回状态码 410
      */
@@ -50,7 +50,7 @@ public class UserController {
     /**
      * 通过传入的用户信息，修改密码
      * @param user 用户
-     * @return 若修改成功，返回 200，失败则 410
+     * 若修改成功，返回 200，失败则 410
      */
     @PostMapping(value = "/changePassword")
     public void changePassword(@RequestBody User user,HttpServletResponse response){
@@ -66,7 +66,7 @@ public class UserController {
     /**
      * 添加用户
      * @param user 用户
-     * @return 若成功创建，返回200
+     * 若成功创建，返回200
      * 若创建失败，返回410
      * */
     @PostMapping(value = "/addUser")
@@ -83,7 +83,7 @@ public class UserController {
     /**
      * 删除用户
      * @param account 用户账号
-     * @return 若成功删除，返回200
+     * 若成功删除，返回200
      * 若创建失败，返回410
      * */
     @GetMapping(value = "/deleteUser/{account}")
@@ -100,7 +100,7 @@ public class UserController {
     /**
      * 通过传入的用户信息，修改邮箱
      * @param user 用户
-     * @return 若修改成功，返回 200，失败则 410
+     * 若修改成功，返回 200，失败则 410
      */
     @PostMapping(value = "/changeEmail")
     public void changeEmail(@RequestBody User user,HttpServletResponse response){
@@ -116,7 +116,7 @@ public class UserController {
     /**
      * 通过传入的用户信息，修改姓名
      * @param user 用户
-     * @return 若修改成功，返回 200，失败则 410
+     * 若修改成功，返回 200，失败则 410
      */
     @PostMapping(value = "/changeName")
     public void changeName(@RequestBody User user,HttpServletResponse response){
@@ -132,7 +132,7 @@ public class UserController {
     /**
      * 通过传入的用户信息，修改激活状态
      * @param user 用户
-     * @return 若修改成功，返回 200，失败则 410
+     * 若修改成功，返回 200，失败则 410
      */
     @PostMapping(value = "/changeStatus")
     public void changeActiveStatus(@RequestBody User user,HttpServletResponse response){
@@ -148,7 +148,7 @@ public class UserController {
     /**
      * 发送验证码
      * @param user 要含有邮箱的用户信息
-     * @return 是否发送成功
+     * 是否发送成功
      * 发送成功返回状态码 200，并且返回 JSON 格式数据
      * 其中 key 为 code，value 为验证码的值
      * 若失败则返回状态码 410，并且返回 JSON 格式数据

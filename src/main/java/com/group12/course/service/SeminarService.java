@@ -1,7 +1,10 @@
 package com.group12.course.service;
 
 import com.group12.course.entity.Seminar;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -19,10 +22,17 @@ public interface SeminarService {
 
     /**
      *
-     * @param courseId
-     * @return
+     * @param file MultipartFile file
+     * @return String
      */
-    List<Seminar> listCourseSeminars(Long courseId);
+    String uploadPresentation(MultipartFile file);
 
+
+    /**
+     * 下载讨论课报告
+     * @return String
+     */
+
+    String downloadPresentation(HttpServletRequest request, HttpServletResponse response);
 
 }
