@@ -5,8 +5,16 @@ import com.group12.course.entity.Mail;
 import com.group12.course.entity.User;
 import com.group12.course.entity.VerificationCode;
 import com.group12.course.service.UserService;
+import jxl.Workbook;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * User service 层对应接口的实现
@@ -150,5 +158,47 @@ public class UserServiceImpl implements UserService {
             Boolean sendStatus=mail.sendMail(user.getEmail(),code);
             return sendStatus?code:"fail to send";
         }
+    }
+
+    /**
+     * 获取用户信息
+     * @param user 要获取的用户 account
+     * @return user 用户全部信息
+     * */
+    @Override
+    public User getUserInfo(User user){
+        return userDao.getUser(user.getAccount());
+    }
+
+    /**
+     * 上传学生名单
+     * @param file 学生名单文件
+     * @return 是否上传成功
+     * */
+    @Override
+    public Boolean uploadStudentList(MultipartFile file){
+        if(file.isEmpty()){
+            return false;
+        }
+
+        String fileName = file.getOriginalFilename();
+        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+
+        if (!("xlsx".equals(suffixName)||suffixName.equals("xls"))){
+            return false;
+        }
+
+        try {
+            InputStream inputStream = file.getInputStream();
+            Workbook workbook = Workbook.getWorkbook(inputStream);
+        }
+        catch (Exception e){
+            System.out.println(e.getStackTrace());
+            System.out.println(e.getMessage());
+        }
+
+
+
+        return false;
     }
 }

@@ -83,6 +83,13 @@
         </dependency>
         <!-- 热部署模块 -->
 
+        <!-- jxl 依赖，提供 excel 处理功能 -->
+        <dependency>
+            <groupId>net.sourceforge.jexcelapi</groupId>
+            <artifactId>jxl</artifactId>
+            <version>2.6.12</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>

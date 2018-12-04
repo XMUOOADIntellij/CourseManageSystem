@@ -1,6 +1,7 @@
 package com.group12.course.service;
 
 import com.group12.course.entity.User;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * User service 层对应接口
@@ -67,4 +68,18 @@ public interface UserService {
      * @return 是否发送成功
      * */
     String getVerificationCode(User user);
+
+    /**
+     * 获取用户信息
+     * @param user 要获取的用户 account
+     * @return user 用户全部信息
+     * */
+    User getUserInfo(User user);
+
+    /**
+     * 上传学生名单
+     * @param file 学生名单文件
+     * @return 是否上传成功
+     * */
+    Boolean uploadStudentList(MultipartFile file);
 }
