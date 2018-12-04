@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.GroupMapper" >
+  <resultMap id="BaseResultMap" type="com.group12.course.entity.Group" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="group_num" property="groupNum" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="is_valid" property="isValid" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, group_num, name, course_id, is_valid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from group
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from group
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.group12.course.entity.Group" >
+    insert into group (id, group_num, name, 
+      course_id, is_valid)
+    values (#{id,jdbcType=VARCHAR}, #{groupNum,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{courseId,jdbcType=BIGINT}, #{isValid,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.group12.course.entity.Group" >
+    insert into group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="groupNum != null" >
+        group_num,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="groupNum != null" >
+        #{groupNum,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group12.course.entity.Group" >
+    update group
+    <set >
+      <if test="groupNum != null" >
+        group_num = #{groupNum,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group12.course.entity.Group" >
+    update group
+    set group_num = #{groupNum,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      course_id = #{courseId,jdbcType=BIGINT},
+      is_valid = #{isValid,jdbcType=BIT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="listGroups" parameterType="java.lang.Long" resultType="com.group12.course.entity.Group">
+    select
+    <include refid="Base_Column_List" />
+    from group
+    where teacher_num = #{teacherNum,jdbcType=BIGINT}
+  </select>
+</mapper>
