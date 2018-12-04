@@ -1,0 +1,123 @@
+
+.round{
+    width: 100%;
+    float: left;
+}
+
+.tip{
+    float: left;
+    width: 40%;
+    margin-left: 8%;
+    height: 100%;
+    font-size: large;
+}
+
+#round{
+    float: right;
+    width: 40%;
+    font-size: large;
+}
+
+.topic{
+    width: 98%;
+    background-color: #dfdcdc;
+    border-radius: 10px;
+    margin-left: 1%;
+    font-size: large;
+    float: left;
+}
+
+#topic{
+    float: right;
+    width: 40%;
+    font-size: large;
+}
+
+.serial{
+    width: 100%;
+    float: left;
+
+    font-size: large;
+
+}
+
+#serial{
+    float: right;
+    width: 40%;
+    font-size: large;
+}
+
+.requirement{
+    width: 98%;
+    float: left;
+    border-radius: 10px;
+    margin-left: 1%;
+    margin-top: 5%;
+    background-color: #dfdcdc;
+}
+
+#requirement{
+    width: 50%;
+    float: right;
+}
+
+.status{
+    width: 100%;
+    float: left;
+
+
+}
+
+#status{
+    float: left;
+    width: 30%;
+    margin-left: 20%;
+    font-size: large;
+
+}
+
+.check{
+    width: 30%;
+    height: 50%;
+    margin-left: 10%;
+}
+
+.enter_seminar{
+    color: #ffffff;
+    background-color: #27AE60;
+    width: 80%;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10%;
+    height: 60px;
+    margin-left: 10%;
+
+
+}
+
+.enter_report{
+    color: #ffffff;
+    background-color: #27AE60;
+    width: 80%;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10%;
+    height: 60px;
+    margin-left: 10%;
+    display: none;
+}
+
+.enter_score{
+    color: #ffffff;
+    background-color: #27AE60;
+    width: 80%;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10%;
+    height: 60px;
+    margin-left: 10%;
+    display: none;
+}
