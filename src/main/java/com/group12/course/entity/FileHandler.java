@@ -26,14 +26,17 @@ public class FileHandler {
                 if (i<2){
                     continue;
                 }
-                /**
-                 * TODO
-                 * 修复空格 bug*/
                 User tempUser= new User();
                 DataFormatter dataFormatter = new DataFormatter();
-                System.out.println(sheet.getRow(i).getCell(0));
-                System.out.println(dataFormatter.formatCellValue(sheet.getRow(i).getCell(0)));
-                tempUser.setAccount(dataFormatter.formatCellValue(sheet.getRow(i).getCell(0)).trim());
+                tempUser.setAccount(dataFormatter.formatCellValue(
+                        sheet.getRow(i).getCell(0))
+                        .trim().replaceAll("\\u00a0",""));
+                /**
+                 * 这个替换掉的是一个 excel 自带的不可见的空白符
+                 * 无法用 trim() 去除
+                 * 只能人工去掉
+                 * I love excel :)
+                 * */
                 tempUser.setPassword("123456");
                 tempUser.setName(sheet.getRow(i).getCell(1).getStringCellValue());
                 userlist.add(tempUser);
@@ -41,8 +44,9 @@ public class FileHandler {
             return userlist;
         }
         catch (Exception e){
-            System.out.println(e.getStackTrace());
-            System.out.println(e.getMessage());
+            /**
+             * 异常记录
+             * */
         }
         ArrayList<User> users= new ArrayList<User>();
         return users;
