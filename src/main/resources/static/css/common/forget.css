@@ -34,11 +34,14 @@
     }
     .btnContainer {
         margin-top: 10%;
-        padding-left: 10%;
-        padding-right: 10%;
-        width: 80%;
+        padding-left: 0%;
+        padding-right: 0%;
+        width: 100%;
     }
     .btn-big {
-        width:40%;
+
+        padding-left: 5%;
+        padding-right: 5%;
         }
-}
+
+    }

@@ -16,38 +16,36 @@
           media="screen"
           href="../../static/css/common/forget.css"/>
 <script src="../../static/js/jquery-1.10.2.js"></script>
-   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
    <script src="../../static/js/common.js"></script>
 <!--<script src="../../static/js/teacher.js"></script>--></head>
 <body>
 <div class="topBar">
     <div class="content-icon" onclick="goBack()">
-        <img alt="" class="icon" src="../../static/img/Left_white.png"/>
+        <img alt="" class="icon" src="../../static/img/Close_white.png"/>
     </div>
     <div class="content text text-light">找回密码</div>
 </div>
 <div class="tips">
-    <span class="text text-large  text-bold">验证身份</span>
+    <span class="text text-large  text-bold">设置新的密码</span>
 </div>
 <div class="form">
     <div>
         <input class="input text text-small"
                type="text"
+               id="usernumber"
+               placeholder="填写新的密码"> <span class="text text-smallest text-grey myMarginLeft">密码长度8-32位，须包含数字、字母、符号至少2种号</span>
+    </div>
+    <div class="myMargin"></div>
+    <div>
+        <input class="input text text-small"
+               type="text"
                id="userPassword"
-               placeholder="输入您的学号/职工号"> <span class="text text-smallest  text-red myMarginLeft"></span>
-    </div>
-    <div id="validForm">
-        <span class="text text-smallest  text-red myMarginLeft">发送验证码到邮箱：user@host.domainnames</span>
+               placeholder="再次输入以确认"> <span class="text text-smallest  text-red myMarginLeft"></span>
 
-        <div>
-            <input class="valid-input text text-small"
-                   type="text"  placeholder="输入验证码" />
-            <input class="btn btn-valid" id="btnSend" type="button" value="发送验证码" />
-        </div>
-    </div>
     <div class="btnContainer">
+
         <button class="btn btn-big btn-success right"
-                id="btnNext" disabled="disabled">下一步</button>
+                id="btnSubmit">确认提交</button>
     </div>
 </div>
 
@@ -57,10 +55,10 @@
         window.location.href = "1.0_log.html"
     }
         $("#btnSend").click(function () {
-            $("#btnNext").removeAttr("disabled");
+            $("#btnSubmit").removeAttr("disabled");
         });
-        $("#btnNext").click(function () {
-            window.location.href = "1.4_forget.html";
+        $("#btnSubmit").click(function () {
+            window.location.href = "../common/1.0_log.html";
         });
 </script>
 </html>

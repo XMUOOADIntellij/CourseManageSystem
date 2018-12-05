@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/seminarOn.css" />
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+   <script src="../../static/js/common.js"></script>
+    <!--<script src="../../static/js/teacher.js"></script>
+    -->
+    <script src="../../static/js/common.js"></script>
+    <!--<script src="../../static/js/teacher.js"></script>
+    -->
+</head>
+<!--<body onload="return getRoundScore();">-->
+
+<body>
+<!-- 这个是顶部栏，直接复制这段代码就行，记得放在body结点后面第一个 -->
+<div class="topBar">
+    <div class="content-icon" onclick="goBack()">
+        <img alt="" class="icon" src="../../static/img/Left_white.png" />
+    </div>
+    <div class="content text text-light"> 讨论课管理 </div>
+    <div class="content-icon" id="myReturn">
+        <img alt="" class="icon" src="../../static/img/Add_white.png" />
+    </div>
+</div>
+<div class="secondBar">
+    <div class="content-icon">
+    </div>
+    <div class="content text text-light"> 业务流程分析 </div>
+</div>
+<div>
+    <div class="tab left">
+        <div class="tabTitle"> 展示队列 </div>
+        <div class="tabLinks" onclick="openCity(event, 'London')" id="defaultOpen"> 1-1 </div>
+        <div class="tabLinks" onclick="openCity(event, 'Paris')"> 1-2 </div>
+        <div class="tabLinks" onclick="openCity(event, 'Tokyo')"> 1-3 </div>
+        <div class="tabLinks" onclick="openCity(event, 'London')"> 1-4 </div>
+        <div class="tabLinks" onclick="openCity(event, 'Paris')"> 1-5 </div>
+        <div class="tabLinks" onclick="openCity(event, 'Tokyo')"> 1-6 </div>
+        <div class="tabRest">
+        </div>
+
+    </div>
+    <div class="tab right">
+
+        <div class="tabTitle">提问队列</div>
+        <div class="tabLinks" onclick="openCity(event, 'London')"> London </div>
+        <div class="tabLinks" onclick="openCity(event, 'Paris')"> Paris </div>
+        <div class="tabLinks" onclick="openCity(event, 'Tokyo')"> Tokyo </div>
+    </div>
+
+    <div class="card">
+        <div class="myMargin">
+        </div>
+        <div class="card-head">
+            <div class="card-head-content">
+                <span class="text-large text-light">展示打分</span>
+
+            </div>
+        </div>
+        <div class="myMargin">
+        </div>
+        <div class="card-row-details">
+
+            <input class="timeSquare" type="text" value="00:00:00" readonly>
+            <button class="btn btn-big btn-success right" onclick="score()">开始</button>
+        </div>
+        <div class="myMargin">
+        <div class="card-head">
+            <div class="card-head-content">
+                <span class="text-large text-light">展示打分</span>
+
+            </div>
+        </div>
+        <div class="myMargin">
+        </div>
+        <div class="card-row-details">
+            <button class="btn btn-big btn-info">1-1:</button>
+            <select class="selector">
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <span class="text-bold">.</span>
+            <select class="selector">
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <button class="btn btn-big btn-warning right" onclick="score()">修改</button>
+        </div>
+        <div class="myMargin">
+        </div>
+        <div class="card-head">
+            <div class="card-head-content">
+                <span class="text-large text-light">提问打分</span>
+
+            </div>
+        </div>
+        <div class="myMargin">
+        </div>
+        <div class="card-row-details">
+            <button class="btn btn-big btn-info">1-1:</button>
+            <select class="selector">
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <span class="text-bold">.</span>
+            <select class="selector">
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <button class="btn btn-big btn-warning right" onclick="score()">提交</button>
+        </div>
+
+        <div class="myBigMargin">
+        </div>
+        <div class="card-row-details">
+            <input class="btn btn-success btn-giant" type="button" onclick="" value="抽取提问">
+        </div>
+            <div class="myMargin">
+            </div>
+            <div class="card-row-details">
+                <input class="btn btn-danger btn-giant" type="button" onclick="" value="下一组">
+            </div>
+
+    </div>
+</div>
+</body>
+<script>
+    const acc = document.getElementsByClassName("card-head card-head-secondary");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            let panel = this.nextSibling("panel");
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+                $(this).find('.icon').children('img').attr('src', '../../static/img/Right_white.png')
+            } else {
+                panel.style.display = "block";
+                $(this).find('.icon').children('img').attr('src', '../../static/img/Up_white.png')
+            }
+        })
+    }
+    const acctop = document.getElementsByClassName("card-head");
+    for (let i = 0; i < acc.length; i++) {
+        acctop[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+                $(this).find('.icon').attr('src', '../../static/img/Right_white.png')
+            } else {
+                panel.style.display = "block";
+                $(this).find('.icon').attr('src', '../../static/img/Up_white.png')
+            }
+        })
+    }
+    function goBack() {
+        window.location.href = "4-0-0-teacherHome.html"
+    }
+
+
+</script>
+
+</html>

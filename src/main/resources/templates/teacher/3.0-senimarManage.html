@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/senimarManage.css"/>
-    <script src="../../static/js/jquery-1.10.2.js"></script>
-<script src="../../static/js/common.js"></script>
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+   <script src="../../static/js/common.js"></script>
 <!--<script src="../../static/js/teacher.js"></script>--><script src="../../static/js/common.js"></script>
 <!--<script src="../../static/js/teacher.js"></script>--></head>
 <!--<body onload="return getRoundScore();">-->
@@ -64,9 +65,8 @@
     function courselist() {
         $.ajax({
             type: 'get',
-            url: '',
-            dataType: "json",
-            contentType: "application/json;",
+            url: 'api/course/getall',
+            data:getCookie('username'),
             success: function (data, textStatus, xhr) {
                 if (xhr.status === 200) {
                     var content = document.getElementById("card");   //获取外围容器

@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible"
           content="IE=edge">
-    <title>Page Title</title>
+    <title>注册</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1">
     <link rel="stylesheet"
@@ -14,45 +14,32 @@
     <link rel="stylesheet"
           type="text/css"
           media="screen"
-          href="../../static/css/common/log.css"/>
+          href="../../static/css/common/signUp.css"/>
 <script src="../../static/js/jquery-1.10.2.js"></script>
    <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
    <script src="../../static/js/common.js"></script>
 <!--<script src="../../static/js/teacher.js"></script>-->
 <body>
 <div class="topBar">
-   <div class="content-icon"><img alt=""  class="icon"
-                                   src="../../static/img/Help_white.png"/></div>
-    <div class="content text text-light">登录</div>
+    <div class="content-icon" onclick="onClose()">
+        <img alt="" class="icon" src="../../static/img/Close_white.png"/>
+    </div>
+    <div class="content text text-light">注册</div>
 </div>
 <div class="tips">
-    <span class="text text-large  text-bold">欢迎使用</span>
+    <span class="text text-large  text-bold">确认您的身份</span>
 </div>
 <div class="form">
     <div>
         <input class="input text text-small"
                type="text"
                id="usernumber"
-               placeholder="输入您的账户"> <span class="text text-smallest text-grey myMarginLeft">学号/教工号</span>
-    </div>
-    <div class="myMargin"></div>
-    <div>
-        <input class="input text text-small"
-               type="text"
-               id="userPassword"
-               placeholder="输入您的密码"> <span class="text text-smallest  text-red myMarginLeft">初始密码为123456</span>
+               placeholder="输入您的学号/教工号"> <span class="text text-smallest text-grey myMarginLeft"></span>
     </div>
     <div class="btnContainer">
-        <button class="btn btn-big btn-white"
-                id="btnSignUp">注册</button>
         <button class="btn btn-big btn-success right"
-                id="btnSignIn">登录</button>
+                id="btnNext">下一步</button>
     </div>
-</div>
-
-<div class="tips">
-    <a href="1.3_forget.html"
-       class="text-smaller">忘记了密码</a>
 </div>
 </body>
 <script>
@@ -93,40 +80,35 @@
     */
 
         $("#btnSignIn").click(function () {
-
             let jname = $("#usernumber").val();
             let jpassword = $("#userPassword").val();
-            let jdata = {account: jname, password: jpassword};
             $.ajax({
-                type:'post',
-                url: "http://47.107.81.51:8080/api/user/login",
-                dataType: "json",
-                data: JSON.stringify(jdata),
-                contentType: "application/json",
+                type:'get',
+                url: "/user/login/"+jname,
                 success: function (data){
-                    if(data.isActive===true) {
-                        Cookies.set('account', jname);
-                        console.log(Cookies.get('account'));
-                        window.location.href = "../teacher/4-0-0-teacherHome.html";
-                    }
+                    if(data.password===jpassword) {
+                        setCookie('username', data.name);
+                        window.location.href = "../teacher/4-0-0-teacherHome.html";}
                     else
                     {
-                        window.location.href = "1.2_signUp.html";
-                        alert("用户未激活！");
+                        $("#userPassword").val("");
+                        $("#usernumber").val("");
+                        alert("用户名或密码错误！");
                     }
                 },
-                error: function (data) {
+                error: function () {
                     $("#userPassword").val("");
                     $("#usernumber").val("");
                     alert("用户名或密码错误！");
-                    console.log(data);
                 }
-
             });
 
         });
-    $("#btnSignUp").click(function () {
-        window.location.href = "1.1_signUp.html";
+    function onClose() {
+        window.location.href = "1.0_log.html"
+    }
+    $("#btnNext").click(function () {
+        window.location.href = "1.2_signUp.html";
     });
 
 </script>
