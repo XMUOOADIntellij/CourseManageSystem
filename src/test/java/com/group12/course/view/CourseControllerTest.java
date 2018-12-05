@@ -49,7 +49,7 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
         Map<String,String> request = new TreeMap<>();
         request.put("id","1");
         MvcResult mvcResult =
-                mvc.perform(MockMvcRequestBuilders.get("/course/getall")
+                mvc.perform(MockMvcRequestBuilders.get("/api/course/getall")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(JSONObject.toJSONString(request)))
                         //验证执行的控制器类型
@@ -69,7 +69,7 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
     @Test
     public void testDeleteCourse() throws Exception {
         MvcResult result =
-                mvc.perform(MockMvcRequestBuilders.delete("/course/delete/{id}", 1))
+                mvc.perform(MockMvcRequestBuilders.delete("/api/course/delete/{id}", 1))
                         .andExpect(handler().handlerType(CourseController.class))
                         //验证执行的控制器方法名
                         .andExpect(handler().methodName("deleteCourse"))
@@ -96,7 +96,7 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
         requestBody.put("teamEndDate", "2018-12-30T07:48:04");
 
         MvcResult result =
-                mvc.perform(MockMvcRequestBuilders.put("/course/update")
+                mvc.perform(MockMvcRequestBuilders.put("/api/course/update")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(JSONObject.toJSONString(requestBody)))
                         .andExpect(handler().handlerType(CourseController.class))
@@ -126,7 +126,7 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
         requestBody.put("teamEndDate", "2018-12-30T07:48:04");
 
         MvcResult result =
-                mvc.perform(MockMvcRequestBuilders.post("/course/add")
+                mvc.perform(MockMvcRequestBuilders.post("/api/course/add")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(JSONObject.toJSONString(requestBody)))
                         .andExpect(handler().handlerType(CourseController.class))
@@ -143,7 +143,7 @@ public class CourseControllerTest extends AbstractTransactionalJUnit4SpringConte
 
     @Test
     public void testGetCourses() throws Exception{
-        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/course/{id}",1))
+        MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/api/course/{id}",1))
                 .andExpect(handler().handlerType(CourseController.class))
                 //验证执行的控制器方法名
                 .andExpect(handler().methodName("getCourse"))

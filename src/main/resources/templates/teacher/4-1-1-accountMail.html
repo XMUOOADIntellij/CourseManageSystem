@@ -7,13 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/account.css"/>
-    <script src="../../static/js/jquery-1.10.2.js"></script>
-
-<script src="../../static/js/common.js"></script>
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+   <script src="../../static/js/common.js"></script>
 <!--<script src="../../static/js/teacher.js"></script>--></head>
 <body>
 <div class="topBar">
-    <div class="content-icon"><img alt=""  class="icon" src="../../static/img/Left_white.png"/></div>
+    <div class="content-icon" onclick="goBack()">
+        <img alt="" class="icon" src="../../static/img/Left_white.png"/>
+    </div>
     <div class="content text text-light">修改邮箱</div>
 </div>
 <div class="tips">
@@ -34,6 +36,9 @@
 </div>
 </body>
 <script>
+    function goBack() {
+        window.location.href = "4-0-1-accountSetting.html"
+    }
     $("#btnSubmit").click(function () {
         window.location.href = "4-0-1-accountSetting.html";
         // createClass();

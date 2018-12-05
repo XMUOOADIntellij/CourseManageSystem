@@ -5,6 +5,7 @@ import com.group12.course.entity.User;
 import com.group12.course.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -172,5 +173,23 @@ public class UserController {
             response.setStatus(410);
             response.getWriter().write(param);
         }
+    }
+
+    /**
+     * 返回用户信息
+     * */
+    @PostMapping(value = "/getUserInfo")
+    public User getUserInfo(@RequestBody User user,HttpServletResponse response)throws IOException{
+        response.setStatus(200);
+        return userService.getUserInfo(user);
+    }
+
+
+    /**
+     * 上传学生名单
+     * */
+    @PostMapping(value = "/uploadStudentList")
+    public void uploadStudentList(@RequestParam("file") MultipartFile file,HttpServletResponse response){
+        response.setStatus(userService.uploadStudentList(file)?200:410);
     }
 }

@@ -8,6 +8,7 @@
         background-color: #FFFFFF;
         border: none;
         border-radius: 5px;
+        padding-left: 2%;
     }
     .myMargin {
         margin-bottom: 5%;
@@ -33,5 +34,11 @@
     }
     .btnContainer {
         margin-top: 10%;
+        padding-left: 10%;
+        padding-right: 10%;
+        width: 80%;
     }
+    .btn-big {
+        width:40%;
+        }
 }

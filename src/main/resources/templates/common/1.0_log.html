@@ -15,13 +15,14 @@
           type="text/css"
           media="screen"
           href="../../static/css/common/log.css"/>
-    <script src="../../static/js/jquery-1.10.2.js"></script>
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
    <script src="../../static/js/common.js"></script>
 <!--<script src="../../static/js/teacher.js"></script>-->
 <body>
 <div class="topBar">
-    <div class="content-icon"><img alt=""  class="icon"
-                                   src="../../static/img/close_white.png"/></div>
+   <div class="content-icon"><img alt=""  class="icon"
+                                   src="../../static/img/Help_white.png"/></div>
     <div class="content text text-light">登录</div>
 </div>
 <div class="tips">
@@ -57,7 +58,7 @@
 <script>
 
     /*
-    $(function () {
+
         $("#btnSignIn").click(function () {
             var jname = $("#userName").val();
             var jpassword = $("#userPassword").val();
@@ -70,7 +71,7 @@
                 contentType: "application/json",
                 success: function (data){//success: function (data, textStatus, xhr) {
                     if (xhr.status === 200) {//状态码存疑
-                        updateCookie('username', data.name); //store username in cookie
+                        setCookie('username', data.name); //store username in cookie
                         window.localStorage.setItem("jwt", data.jwt);
                         if (data.type === "student")
                             window.location.href = "/student/home";
@@ -87,35 +88,46 @@
                 }
             });
 
-        })
-    });
+        });
+
     */
-    $(function () {
+
         $("#btnSignIn").click(function () {
-            var jname = $("#usernumber").val();
-            var jpassword = $("#userPassword").val();
+            window.location.href = "../teacher/4-0-0-teacherHome.html";
+            /*
+            let jname = $("#usernumber").val();
+            let jpassword = $("#userPassword").val();
+            let jdata = {account: jname, password: jpassword};
             $.ajax({
-                type:'get',
-                url: "http://47.107.81.51:8080/user/login/"+jname,
+                type:'post',
+                url: "http://47.107.81.51:8080/api/user/login",
+                dataType: "json",
+                data: JSON.stringify(jdata),
+                contentType: "application/json",
                 success: function (data){
-                    if(data.password===jpassword) {
-                        updateCookie('username', data.name);
-                        window.location.href = "../teacher/4-0-0-teacherHome.html";}
+                    if(data.isActive===true) {
+                        Cookies.set('account', jname);
+                        console.log(Cookies.get('account'));
+                        window.location.href = "../teacher/4-0-0-teacherHome.html";
+                    }
                     else
                     {
-                        $("#userPassword").val("");
-                        $("#usernumber").val("");
-                        alert("用户名或密码错误！");
+                        window.location.href = "1.2_signUp.html";
+                        alert("用户未激活！");
                     }
                 },
-                error: function () {
+                error: function (data) {
                     $("#userPassword").val("");
                     $("#usernumber").val("");
                     alert("用户名或密码错误！");
+                    console.log(data);
                 }
-            });
 
-        })
+            });
+*/
+        });
+    $("#btnSignUp").click(function () {
+        window.location.href = "1.1_signUp.html";
     });
 
 </script>

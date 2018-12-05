@@ -47,7 +47,7 @@ public class UserControllerTest extends AbstractTransactionalJUnit4SpringContext
         rightAccount.put("account","24320162202934");
         rightAccount.put("password","123456");
         MvcResult rightResult =
-                mvc.perform(MockMvcRequestBuilders.post("/user/login")
+                mvc.perform(MockMvcRequestBuilders.post("/api/user/login")
                         // 设置请求内容为JSON格式
                         .contentType(MediaType.APPLICATION_JSON)
                         // 将请求内容传入
@@ -64,7 +64,7 @@ public class UserControllerTest extends AbstractTransactionalJUnit4SpringContext
         wrongAccount.put("account","24320162202934");
         wrongAccount.put("password","1234567");
         MvcResult wrongResult =
-                mvc.perform(MockMvcRequestBuilders.post("/user/login")
+                mvc.perform(MockMvcRequestBuilders.post("/api/user/login")
                         // 设置请求内容为JSON格式
                         .contentType(MediaType.APPLICATION_JSON)
                         // 将请求内容传入
@@ -84,7 +84,7 @@ public class UserControllerTest extends AbstractTransactionalJUnit4SpringContext
         rightAccount.put("account","24320162202934");
         rightAccount.put("password","123456");
         MvcResult rightResult =
-                mvc.perform(MockMvcRequestBuilders.post("/user/changePassword")
+                mvc.perform(MockMvcRequestBuilders.post("/api/user/changePassword")
                         // 设置请求内容为JSON格式
                         .contentType(MediaType.APPLICATION_JSON)
                         // 将请求内容传入
@@ -101,7 +101,7 @@ public class UserControllerTest extends AbstractTransactionalJUnit4SpringContext
         wrongAccount.put("account","243201622029345");
         wrongAccount.put("password","1234568");
         MvcResult wrongResult =
-                mvc.perform(MockMvcRequestBuilders.post("/user/changePassword")
+                mvc.perform(MockMvcRequestBuilders.post("/api/user/changePassword")
                         // 设置请求内容为JSON格式
                         .contentType(MediaType.APPLICATION_JSON)
                         // 将请求内容传入
@@ -124,7 +124,7 @@ public class UserControllerTest extends AbstractTransactionalJUnit4SpringContext
 //        rightAccount.put("name","name");
 //        rightAccount.put("active","1");
         MvcResult rightResult =
-                mvc.perform(MockMvcRequestBuilders.post("/user/addUser")
+                mvc.perform(MockMvcRequestBuilders.post("/api/user/addUser")
                         // 设置请求内容为JSON格式
                         .contentType(MediaType.APPLICATION_JSON)
                         // 将请求内容传入
@@ -144,7 +144,7 @@ public class UserControllerTest extends AbstractTransactionalJUnit4SpringContext
         rightAccount.put("account","24320162202985");
         rightAccount.put("email","277030573@qq.com");
         MvcResult rightResult =
-                mvc.perform(MockMvcRequestBuilders.post("/user/getVerifyCode")
+                mvc.perform(MockMvcRequestBuilders.post("/api/user/getVerifyCode")
                         // 设置请求内容为JSON格式
                         .contentType(MediaType.APPLICATION_JSON)
                         // 将请求内容传入
@@ -160,7 +160,7 @@ public class UserControllerTest extends AbstractTransactionalJUnit4SpringContext
         Map<String,String> wrongAccount = new TreeMap<String, String>();
         wrongAccount.put("account","24320162202985");
         MvcResult wrongResult =
-                mvc.perform(MockMvcRequestBuilders.post("/user/getVerifyCode")
+                mvc.perform(MockMvcRequestBuilders.post("/api/user/getVerifyCode")
                         // 设置请求内容为JSON格式
                         .contentType(MediaType.APPLICATION_JSON)
                         // 将请求内容传入
