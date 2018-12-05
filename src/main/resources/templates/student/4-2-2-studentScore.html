@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/studentScore.css"/>
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+   <script src="../../static/js/common.js"></script></head>
+    <script src="../../static/js/common.js"></script>
+<!--<script src="../../static/js/teacher.js"></script>-->
+</head>
+<!--<body onload="return getRoundScore();">-->
+<body>
+<div class="topBar">
+    <div class="content-icon" onclick="goBack()">
+        <img alt="" class="icon" src="../../static/img/Left_white.png"/>
+    </div>
+    <div class="content text text-light">课程管理</div>
+    <div class="content-icon" id="myReturn">
+        <img alt="" class="icon" src="../../static/img/Add_white.png"/>
+    </div>
+</div>
+<div class="card">
+    <div class="card-head">
+        <span class="card-head-content text text-light">第一轮</span>
+       <div class="content-icon right">
+            <img alt="" class="icon" src="../../static/img/Right_white.png"/>
+        </div>
+    </div>
+    <div class="panel">
+        <div>
+            <div class="card-head card-head-secondary">
+				<span class="card-head-content text text-light">
+				<span>1-1</span>
+				<span class="text-left-margin">5.0分</span>
+				</span>
+               <div class="content-icon right">
+                    <img alt="" class="icon" src="../../static/img/Right_white.png"/>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="card-body center">
+                    <div class="card-row-details">
+                        <span class="text text-small text-bold">用例分析</span>
+                    </div>
+                    <div>
+                        <div class="card-row-details">
+                            <span class="text text-smaller">展示:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">提问:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">书面报告:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator-dark">
+                </div>
+                <div class="card-body center">
+                    <div class="card-row-details">
+                        <span class="text text-small text-bold">界面原型</span>
+                    </div>
+                    <div>
+                        <div class="card-row-details">
+                            <span class="text text-smaller">展示:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">提问:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">书面报告:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator-dark">
+                </div>
+                <div class="card-body center">
+                    <div class="card-row-details">
+                        <span class="text text-small text-bold">总成绩</span>
+                    </div>
+                    <div>
+                        <div class="card-row-details">
+                            <span class="text text-smaller">展示:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">提问:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">书面报告:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator-blank">
+                </div>
+                <div class="card-row-details">
+                    <input class="btn-warning btn" type="button" value="修改">
+                </div>
+            </div>
+        </div>
+        <div class="myMargin"></div>
+
+    </div>
+    <div class="separator-blank">
+    </div>
+    <div class="card-head">
+        <span class="card-head-content text text-light">第二轮</span>
+       <div class="content-icon right">
+            <img alt="" class="icon" src="../../static/img/Right_white.png"/>
+        </div>
+    </div>
+    <div class="panel">
+        <div>
+            <div class="card-head card-head-secondary">
+				<span class="card-head-content text text-light">
+				<span>1-1</span>
+				<span class="text-left-margin">5.0分</span>
+				</span>
+               <div class="content-icon right">
+                    <img alt="" class="icon" src="../../static/img/Right_white.png"/>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="card-body center">
+                    <div class="card-row-details">
+                        <span class="text text-small text-bold">用例分析</span>
+                    </div>
+                    <div>
+                        <div class="card-row-details">
+                            <span class="text text-smaller">展示:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">提问:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">书面报告:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator-dark">
+                </div>
+                <div class="card-body center">
+                    <div class="card-row-details">
+                        <span class="text text-small text-bold">界面原型</span>
+                    </div>
+                    <div>
+                        <div class="card-row-details">
+                            <span class="text text-smaller">展示:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">提问:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">书面报告:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator-dark">
+                </div>
+                <div class="card-body center">
+                    <div class="card-row-details">
+                        <span class="text text-small text-bold">总成绩</span>
+                    </div>
+                    <div>
+                        <div class="card-row-details">
+                            <span class="text text-smaller">展示:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">提问:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">书面报告:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator-blank">
+                </div>
+                <div class="card-row-details">
+                    <input class="btn-warning btn" type="button" value="修改">
+                </div>
+            </div>
+        </div>
+        <div class="myMargin"></div>
+        <div>
+            <div class="card-head card-head-secondary">
+				<span class="card-head-content text text-light">
+				<span>1-2</span>
+				<span class="text-left-margin">5.0分</span>
+				</span>
+               <div class="content-icon right">
+                    <img alt="" class="icon" src="../../static/img/Right_white.png"/>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="card-body center">
+                    <div class="card-row-details">
+                        <span class="text text-small text-bold">用例分析</span>
+                    </div>
+                    <div>
+                        <div class="card-row-details">
+                            <span class="text text-smaller">展示:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">提问:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">书面报告:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator-dark">
+                </div>
+                <div class="card-body center">
+                    <div class="card-row-details">
+                        <span class="text text-small text-bold">界面原型</span>
+                    </div>
+                    <div>
+                        <div class="card-row-details">
+                            <span class="text text-smaller">展示:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">提问:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">书面报告:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator-dark">
+                </div>
+                <div class="card-body center">
+                    <div class="card-row-details">
+                        <span class="text text-small text-bold">总成绩</span>
+                    </div>
+                    <div>
+                        <div class="card-row-details">
+                            <span class="text text-smaller">展示:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">提问:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                            <span class="text text-smaller text-left-margin">书面报告:</span>
+                            <span class="text score text-left-margin">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator-blank">
+                </div>
+                <div class="card-row-details">
+                    <input class="btn-warning btn" type="button" value="修改">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="separator-blank">
+    </div>
+</div>
+</body>
+<script>
+	const acc = document.getElementsByClassName("card-head card-head-secondary");
+	for (let i = 0; i < acc.length; i++) {
+		acc[i].addEventListener("click", function() {
+			this.classList.toggle("active");
+			let panel = this.nextSibling("panel");
+			if (panel.style.display === "block") {
+				panel.style.display = "none";
+				$(this).find('.content-icon').children('img').attr('src', '../../static/img/Right_white.png')
+			} else {
+				panel.style.display = "block";
+				$(this).find('.content-icon').children('img').attr('src', '../../static/img/Up_white.png')
+			}
+		})
+	}
+	const acctop = document.getElementsByClassName("card-head");
+	for (let i = 0; i < acc.length; i++) {
+		acctop[i].addEventListener("click", function() {
+			this.classList.toggle("active");
+			let panel = this.nextElementSibling;
+			if (panel.style.display === "block") {
+				panel.style.display = "none";
+				$(this).find('.content-icon').children('img').attr('src', '../../static/img/Right_white.png')
+			} else {
+				panel.style.display = "block";
+				$(this).find('.content-icon').children('img').attr('src', '../../static/img/Up_white.png')
+			}
+		})
+	}
+    function goBack() {
+        window.location.href = "4-2-0-courseManage.html"
+    }
+	function getRoundScore() {
+		$.ajax({
+			type: 'get',
+			url: '',
+			dataType: "json",
+			contentType: "application/json;",
+			success: function(data, textStatus, xhr) {
+				if (xhr.status === 200) {
+					let middlecontent;
+					let bottomcontent;
+					const topcontent = document.getElementsByClassName("card");
+					let strVar = "";
+					let roundNumber = 0;
+					let teamNumber = 0;
+					for (let i = 0; i < data.length; i++) {
+						if (data[i].round !== roundNumber) {
+							roundNumber = data[i].round;
+							strVar = "<div class=\"card-head\"><span class=\"card-head-content text text-light\">第" + data[i].round + "轮<\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_white.png\"><\/div><\/div><div class=\"panel\" id=\"round" + data.round + "\"><\/div><div class=\"separator-blank\"><\/div>";
+							topcontent.insertAdjacentHTML('beforeend', strVar);
+							middlecontent = document.getElementById("round" + data[i].round);
+							i--;
+						} else {
+							if (data[i].teamid !== teamNumber) {
+								if (teamNumber !== 0) {
+									strVar = "<div class=\"card-row-details\"><input class=\"btn-warning btn\" type=\"button\" value=\"修改\"><\/div>";
+									bottomcontent.insertAdjacentHTML('beforeend', strVar)
+								}
+								teamNumber = data[i].teamid;
+								strVar = "<div><div class=\"card-head card-head-secondary\"><span class=\"card-head-content text text-light\"><span>" + data[i].teamid + "<\/span> <span class=\"text-left-margin\">5.0分<\/span><\/span><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Right_white.png\"><\/div><\/div><div class=\"panel\" id=\"team" + data[i].teamid + "\"><\/div><\/div><div class=\"myMargin\"><\/div>";
+								middlecontent.insertAdjacentHTML('beforeend', strVar);
+								bottomcontent = document.getElementById("team" + data[i].teamid);
+							} else {
+								strVar = "<div class=\"card-body center\"><div class=\"card-row-details\"><span class=\"text text-small text-bold\">" + data[i].seminarName + "<\/span><\/div><div><div class=\"card-row-details\"><span class=\"text text-smaller\">展示:<\/span> <span class=\"text score text-left-margin\">" + data[i].presentScore + "<\/span> <span class=\"text text-smaller text-left-margin\">提问:<\/span> <span class=\"text score text-left-margin\">" + data[i].questionScore + "<\/span> <span class=\"text text-smaller text-left-margin\">书面报告:<\/span> <span class=\"text score text-left-margin\">" + data[i].reportScore + "<\/span><\/div><\/div><\/div><div class=\"separator-dark\"><\/div>";
+								bottomcontent.insertAdjacentHTML('beforeend', strVar);
+							}
+						}
+					}
+				}
+			},
+			statusCode: {
+				401: function() {
+					alert("获取信息失败")
+				}
+			}
+		})
+	}
+</script>
+</html>
