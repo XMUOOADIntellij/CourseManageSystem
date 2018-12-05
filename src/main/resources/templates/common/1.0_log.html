@@ -93,7 +93,11 @@
     */
 
         $("#btnSignIn").click(function () {
+            let jname = $("#usernumber").val();
+            if(jname==="123456")
             window.location.href = "../teacher/4-0-0-teacherHome.html";
+            else
+                window.location.href = "../student/4-studentHome.html";
             /*
             let jname = $("#usernumber").val();
             let jpassword = $("#userPassword").val();
