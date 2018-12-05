@@ -14,6 +14,8 @@ public class Group {
 
     private Long courseId;
 
+    private String leaderId;
+
     private Boolean isValid;
 
     public Group(){
@@ -52,6 +54,14 @@ public class Group {
         this.courseId = courseId;
     }
 
+    public String getLeaderId() {
+        return leaderId;
+    }
+
+    public void setLeaderId(String leaderId) {
+        this.leaderId = leaderId == null ? null : leaderId.trim();
+    }
+
     public Boolean getIsValid() {
         return isValid;
     }
@@ -67,6 +77,7 @@ public class Group {
                 ", groupNum='" + groupNum + '\'' +
                 ", name='" + name + '\'' +
                 ", courseId=" + courseId +
+                ", leaderId='" + leaderId + '\'' +
                 ", isValid=" + isValid +
                 '}';
     }

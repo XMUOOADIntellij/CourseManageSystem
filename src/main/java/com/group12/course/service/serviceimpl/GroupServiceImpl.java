@@ -39,7 +39,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public int disbandGroup(String groupId) {
-        return 0;
+        return groupDao.deleteByPrimaryKey(groupId);
     }
 
     @Override
