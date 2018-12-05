@@ -1,0 +1,24 @@
+.row{
+    width: 100%;
+    padding: 5%;
+    float: left;
+}
+
+.serial{
+    float: left;
+    width: 20%;
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.file{
+    width: 70%;
+    float: right;
+    font-size: large;
+    font-weight: bold;
+    color: #96c864;
+    text-decoration: underline;
+}
+
+
