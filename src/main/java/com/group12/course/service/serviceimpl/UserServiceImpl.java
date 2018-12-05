@@ -1,20 +1,27 @@
 package com.group12.course.service.serviceimpl;
 
 import com.group12.course.dao.UserDao;
+import com.group12.course.entity.FileHandler;
 import com.group12.course.entity.Mail;
 import com.group12.course.entity.User;
 import com.group12.course.entity.VerificationCode;
 import com.group12.course.service.UserService;
-import jxl.Workbook;
+import com.sun.rowset.internal.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 /**
  * User service 层对应接口的实现
@@ -178,27 +185,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean uploadStudentList(MultipartFile file){
         if(file.isEmpty()){
+            System.out.println("empty");
             return false;
         }
 
         String fileName = file.getOriginalFilename();
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
 
-        if (!("xlsx".equals(suffixName)||suffixName.equals("xls"))){
+        final String[] excelSuffixs={".xlsx",".xls"};
+
+        if (!(excelSuffixs[0].equals(suffixName)||excelSuffixs[1].equals(suffixName))){
+            System.out.println(suffixName);
+            System.out.println("not excel");
             return false;
         }
 
-        try {
-            InputStream inputStream = file.getInputStream();
-            Workbook workbook = Workbook.getWorkbook(inputStream);
+        FileHandler fileHandler =new FileHandler();
+        ArrayList<User> users=fileHandler.handlerStudentList(file);
+
+        for (User user:users) {
+            System.out.println(user);
+            userDao.addUser(user);
         }
-        catch (Exception e){
-            System.out.println(e.getStackTrace());
-            System.out.println(e.getMessage());
-        }
+        return !users.isEmpty();
 
-
-
-        return false;
     }
 }
