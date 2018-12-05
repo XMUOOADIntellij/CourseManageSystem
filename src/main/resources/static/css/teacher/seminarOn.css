@@ -5,14 +5,28 @@
 
     .tab {
         width: 20%;
-
-        background-color: transparent;
-        height: 500px;
+        margin-top: 0%;
+        background-color: #dff1f9;
+        height: 600px;
         color: #394B54;
+
         }
 
-
-
+.btn-giant{
+    margin-top: 5%;
+}
+    .btn-success:disabled {
+        color: #ffffff;
+        background-color: #BDC3C7;
+    }
+    .btn-warning:disabled {
+        color: #ffffff;
+        background-color: #BDC3C7;
+    }
+    .btn-danger:disabled {
+        color: #ffffff;
+        background-color: #BDC3C7;
+    }
     .tabRest {
 
         }
@@ -21,23 +35,48 @@
         padding-top: 15%;
         height: 35px;
         text-align: center;
+        background-color: #829CA9;
+        color: #ffffff;
         }
 
-    .tabLinks:active {
-        background-color: #455a64;
-        }
+    /* Change background color of buttons on hover */
+    .tabLinks:hover {
+        background-color: #ffffff;
+        color:red;
+    }
 
+    /* Create an active/current "tab button" class */
+    .tabLinks.active {
+        background-color: #ffffff;
+        color:#232F34;
+    }
 
     .tabLinks {
-padding-top: 20%;
+        padding-top: 20%;
         width: 100%;
         height: 35px;
         text-align: center;
         }
+    .tabLinksRight:hover {
+        background-color: #ffffff;
+        color:red;
+    }
 
+    /* Create an active/current "tab button" class */
+    .tabLinksRight.active {
+        background-color: #ffffff;
+        color:#232F34;
+    }
+
+    .tabLinksRight {
+        padding-top: 20%;
+        width: 100%;
+        height: 35px;
+        text-align: center;
+    }
     .card {
 
-        margin-left: 28%;
+        margin-left: 25%;
         width: 50%;
         }
 

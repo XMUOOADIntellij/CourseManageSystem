@@ -168,7 +168,14 @@ body {
     color: #ffffff;
     background-color: #BDC3C7;
     }
-
+.btn-warning:disabled {
+    color: #ffffff;
+    background-color: #BDC3C7;
+}
+.btn-danger:disabled {
+    color: #ffffff;
+    background-color: #BDC3C7;
+}
 .btn-warning {
     color: #ffffff;
     background-color: #f39c12;
