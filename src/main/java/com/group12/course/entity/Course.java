@@ -51,7 +51,7 @@ public class Course {
         this.id = id;
     }
 
-    public Long getTeacherId() {
+    public Long getTeacherNum() {
         return teacherNum;
     }
 
