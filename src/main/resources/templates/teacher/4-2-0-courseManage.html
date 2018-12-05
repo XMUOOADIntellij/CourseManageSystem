@@ -12,7 +12,7 @@
    <script src="../../static/js/common.js"></script>
 <!--<script src="../../static/js/teacher.js"></script>-->
 </head>
-<body onload="getCourseList()">
+<!--<body onload="getCourseList()">-->
 
 
 <div class="topBar">
@@ -203,7 +203,7 @@
         let jdata={"teacherNum":"1"};
       $.ajax({
             type:'GET',
-            processData:false,
+            dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(jdata),
             url: "http://47.107.81.51:8080/api/course/getall",
