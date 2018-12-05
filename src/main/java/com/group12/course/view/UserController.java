@@ -189,7 +189,7 @@ public class UserController {
      * 上传学生名单
      * */
     @PostMapping(value = "/uploadStudentList")
-    public void uploadStudentList(@RequestParam("file")MultipartFile file){
-        /***/
+    public void uploadStudentList(@RequestParam("file") MultipartFile file,HttpServletResponse response){
+        response.setStatus(userService.uploadStudentList(file)?200:410);
     }
 }
