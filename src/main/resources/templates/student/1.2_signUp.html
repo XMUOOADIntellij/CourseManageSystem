@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible"
           content="IE=edge">
-    <title>Page Title</title>
+    <title>激活</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1">
     <link rel="stylesheet"
@@ -14,21 +14,24 @@
     <link rel="stylesheet"
           type="text/css"
           media="screen"
-          href="../../static/css/common/forget.css"/>
+          href="../../static/css/common/signUp.css"/>
 <script src="../../static/js/jquery-1.10.2.js"></script>
-   <script src="../../static/js/common.js"></script>
-<!--<script src="../../static/js/teacher.js"></script>--></head>
+   <script src="../../static/js/common.js"></script><script src="../../static/js/jquery-1.10.2.js"></script>
+
+<!--<script src="../../static/js/teacher.js"></script>-->
+<!--<body onload="return getteamail();">-->
 <body>
 <div class="topBar">
     <div class="content-icon" onclick="goBack()">
-        <img alt="" class="icon" src="../../static/img/Close_white.png"/>
+        <img alt="" class="icon" src="../../static/img/Left_white.png"/>
     </div>
-    <div class="content text text-light">找回密码</div>
+    <div class="content text text-light">激活</div>
 </div>
 <div class="tips">
-    <span class="text text-large  text-bold">设置新的密码</span>
+    <span class="text text-large  text-bold">设置您的密码</span>
 </div>
 <div class="form">
+
     <div>
         <input class="input text text-small"
                type="text"
@@ -41,25 +44,35 @@
                type="text"
                id="userPassword"
                placeholder="再次输入以确认"> <span class="text text-smallest  text-red myMarginLeft"></span>
+    </div>
 
+    <div id="validForm">
+        <span class="text text-smallest  text-red myMarginLeft">发送验证码到邮箱：user@host.domainnames</span>
+
+        <div>
+            <input class="valid-input text text-small"
+                           type="text"  placeholder="输入验证码" />
+            <input class="btn btn-valid" id="btnSend" type="button" value="发送验证码" />
+        </div>
+    </div>
     <div class="btnContainer">
 
         <button class="btn btn-big btn-success right"
-                id="btnSubmit">确认提交</button>
+                id="btnSubmit" disabled="disabled">确认提交</button>
     </div>
 </div>
-</div>
-
 </body>
 <script>
+
     function goBack() {
-        window.location.href = "1.0_log.html"
+        window.location.href = "1.1_signUp.html"
     }
-        $("#btnSend").click(function () {
-            $("#btnSubmit").removeAttr("disabled");
-        });
-        $("#btnSubmit").click(function () {
-            window.location.href = "../common/1.0_log.html";
-        });
+    $("#btnSend").click(function () {
+        $("#btnSubmit").removeAttr("disabled");
+    });
+    $("#btnSubmit").click(function () {
+        window.location.href = "1.0_log.html";
+    });
+
 </script>
 </html>
