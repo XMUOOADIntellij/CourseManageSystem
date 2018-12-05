@@ -6,13 +6,14 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/student/team_up.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/courseManagement.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/student/team_up.css"/>
+
     <script src="../../static/js/jquery-1.10.2.js"></script>
 </head>
 <body>
 <div class="topBar">
-    <div class="content-icon"><img alt=""  class="icon" src="../../static/img/Left_white.png"/></div>
+    <div class="content-icon" id="back"><img alt=""  class="icon" src="../../static/img/Left_white.png"/></div>
     <div class="content text text-light">学生组队</div>
     <div class="content-icon"><img alt=""  class="icon" src="../../static/img/Add_white.png"/></div>
 </div>
@@ -77,4 +78,9 @@
 </div>
 </body>
 
+<script>
+    $("#back").click(function () {
+        window.location.href = "4-2-0-courseManage.html";//test
+    });
+</script>
 </html>
