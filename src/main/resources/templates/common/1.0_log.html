@@ -93,18 +93,15 @@
     */
 
         $("#btnSignIn").click(function () {
-            let jname = $("#usernumber").val();
-            if(jname==="24320162202873")
-                window.location.href = "../student/4-studentHome.html";
-            else
-                window.location.href = "../teacher/4-0-0-teacherHome.html";
-            /*
+
+
+
             let jname = $("#usernumber").val();
             let jpassword = $("#userPassword").val();
             let jdata = {account: jname, password: jpassword};
             $.ajax({
                 type:'post',
-                url: "http://47.107.81.51:8080/api/user/login",
+                url: "/api/user/login",
                 dataType: "json",
                 data: JSON.stringify(jdata),
                 contentType: "application/json",
@@ -112,7 +109,11 @@
                     if(data.isActive===true) {
                         Cookies.set('account', jname);
                         console.log(Cookies.get('account'));
-                        window.location.href = "../teacher/4-0-0-teacherHome.html";
+                        if(jname==="12345")
+                            window.location.href = "../teacher/4-0-0-teacherHome.html";
+                        else
+                            window.location.href = "../student/4-studentHome.html";
+
                     }
                     else
                     {
@@ -128,7 +129,7 @@
                 }
 
             });
-*/
+
         });
     $("#btnSignUp").click(function () {
         window.location.href = "1.1_signUp.html";
