@@ -31,4 +31,9 @@
     .btnContainer {
         margin-top: 10%;
     }
+    .btn-big{
+        padding-left: 8%;
+        padding-right: 8%;
+    }
+
 }

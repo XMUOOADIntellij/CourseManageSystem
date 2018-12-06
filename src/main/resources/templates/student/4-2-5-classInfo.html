@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/common/style.css"/>
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/teacher/courseManagement.css"/>
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/teacher/classInfo.css"/>
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+   <script src="../../static/js/common.js"></script>
+<!--<script src="../../static/js/teacher.js"></script>-->
+
+</head>
+<!--<body onload="classlist()">-->
+<body>
+<div class="topBar">
+    <div class="content-icon"
+         id="myReturn"><img alt=""  class="icon" src="../../static/img/Left_white.png" onclick="goBack()"/></div>
+    <div class="content text text-light">班级信息</div>
+</div>
+<div class="card">
+    <div class="card-head">
+        <span class="card-head-content text-large text-light ">2016-1</span>
+    </div>
+    <div class="separator-blank"></div>
+    <div class="card-head card-head-secondary ">
+        <div class="card-row-details">
+            <span class="text text-small">讨论课时间</span> <span class="text text-small margin-horizon right">周三 7/8节</span>
+        </div>
+    </div>
+    <div class="separator-dark"></div>
+    <div class="card-head card-head-secondary ">
+        <div class="card-row-details">
+            <span class="text text-small">讨论课地点</span> <span class="text text-small margin-horizon right">海韵101</span>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+<script>
+
+    function onAdd() {
+        window.location.href = "4-2-5-1-createClass.html";
+    }
+    function goBack() {
+        window.location.href = "4-2-0-courseManage.html"
+    }
+
+    function classlist() {
+        $.ajax({
+            type: 'get',
+            url: '/course/' + getCookie("courseDetail") + '/class',
+            dataType: "json",
+            contentType: "application/json;",
+            success: function (data, textStatus, xhr) {
+                if (xhr.status == 200) {
+                    // alert("获取成功");
+                    var content = document.getElementById("classcontent");   //获取外围容器
+                    var str = "";
+                    str += '<div class=\"title\">课程班级</div>'
+                        + '<div class=\"returnButton\"  onclick=\"window.location.href=\'/teacher/courses\'\">返回上一页</div>'
+                        + '<div class=\"line\"></div>'
+                        + '<div class=\"blockBody\" id=\"classtitle\">';
+                    for (var i = 0; i < data.length; i++) {
+                        // if(i==0){
+                        // str+='<div class=\"title\">课程班级</div>'
+                        // +'<div class=\"returnButton\"  onclick=\"window.location.href=\'/teacher/courses\'\">返回上一页</div>'
+                        // +'<div class=\"line\"></div>'
+                        // +'<div class=\"blockBody\" id=\"classtitle\">'
+                        // }
+                        str += '<div class=\"block\" id=\"' + data[i].id + '\" onclick=\"jumpclassdetail(this.id)\"><div class=\"blockFont\">' + data[i].name + '</div></div>'
+                        // if(i==data.length-1){
+                        //     str+='<div class="block" onclick=\"window.location.href=\'/teacher/course/'+getCookie("courseDetail")+'/class/create\'\"><img alt=""  class="addImg" src="/img/smalladd.png" alt="添加" ></div>'
+                        // }
+                    }
+                    str += '<div class="block" onclick=\"window.location.href=\'/teacher/course/' + getCookie("courseDetail") + '/class/create\'\"><img alt=""  class="addImg" src="/img/smalladd.png" alt="添加" ></div>';
+                    content.innerHTML = str;
+                }
+            },
+            statusCode: {
+                400: function () {
+                    alert("错误的ID格式");
+                },
+                404: function () {
+                    alert("未找到课程");
+                }
+            }
+        });
+    }
+</script>
+</html>
