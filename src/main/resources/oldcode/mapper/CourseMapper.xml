@@ -14,8 +14,8 @@
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id, courseName, introduction, pre_percentage, report_percentage, ques_percentage,
-    team_start_date, team_end_date,teacher_num
+    teacher_num ,id, courseName, introduction, pre_percentage, report_percentage, ques_percentage,
+    team_start_date, team_end_date
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >

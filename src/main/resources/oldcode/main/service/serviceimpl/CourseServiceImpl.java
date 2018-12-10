@@ -21,9 +21,9 @@ public class CourseServiceImpl implements CourseService {
 
 
         @Override
-        public List<Course> listCourses(Long userId){
+        public List<Course> listCourses(Long teacherNum){
 
-            return courseDao.listCourses(userId);
+            return courseDao.listCourses(teacherNum);
         }
 
         @Override

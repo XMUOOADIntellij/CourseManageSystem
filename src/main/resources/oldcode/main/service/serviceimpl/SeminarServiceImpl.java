@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
  *
@@ -48,16 +50,14 @@ public class SeminarServiceImpl implements SeminarService {
         }catch (IOException e){
             e.printStackTrace();
         }
-        return "Upload failed!";
+        return fileName+suffixName;
     }
 
     @Override
-    public String downloadPresentation(HttpServletRequest request, HttpServletResponse response){
-        String fileName = "test.txt";
+    public String downloadPresentation(HttpServletResponse response,String fileName,String filePath){
 
         if(fileName!=null){
-            String realPath ="E:/test/";
-            File file = new File(realPath,fileName);
+            File file = new File(filePath,fileName);
             if(file.exists()){
 
                 response.setContentType("application/force-download");
@@ -97,5 +97,78 @@ public class SeminarServiceImpl implements SeminarService {
             }
         }
         return null;
+    }
+
+    @Override
+    public void downloadAllPresentation(HttpServletRequest request, HttpServletResponse response){
+        String[] names = {"test.txt", "test1.txt", "test2.txt", "test3.txt"};
+        String[] paths = {"E:/test/", "E:/test/", "E:/test/", "E:/test/"};
+
+        String directory = "E:/test1/";
+        File directoryFile = new File(directory);
+        if (!directoryFile.isDirectory() && !directoryFile.exists()) {
+            directoryFile.mkdirs();
+        }
+
+        String zipFileName ="test" + ".zip";
+        String stringZipPath = directory + zipFileName;
+
+        //压缩文件输出流
+        ZipOutputStream zipOutputStream = null;
+        //文件输入流
+        FileInputStream fileInputStream = null;
+        //缓冲区
+        BufferedInputStream bufferedInputStream = null;
+        File zipFile = new File(stringZipPath);
+
+        try {
+            zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFile));
+            // OutputStream outputStream = response.getOutputStream();
+            for (int i = 0; i < paths.length; i++) {
+                //解码获取真实路径与文件名
+                String realFileName = java.net.URLDecoder.decode(names[i], "UTF-8");
+                String realFilePath = java.net.URLDecoder.decode(paths[i], "UTF-8");
+                File file = new File(realFilePath,realFileName);
+                //TODO:未对文件不存在时进行操作，后期优化。
+                if (file.exists()) {
+                    //将需要压缩的文件格式化为输入流
+                    fileInputStream = new FileInputStream(file);
+                    //在压缩目录中文件的名字
+                    ZipEntry zipEntry = new ZipEntry(realFileName);
+                    //定位该压缩条目位置，开始写入文件到压缩包中
+                    zipOutputStream.putNextEntry(zipEntry);
+                    bufferedInputStream = new BufferedInputStream(fileInputStream, 1024 * 10);
+                    int read = 0;
+                    byte[] buf = new byte[1024 * 10];
+                    int len = 1024*10;
+                    while ((read = bufferedInputStream.read(buf, 0, len)) != -1) {
+                        zipOutputStream.write(buf, 0, read);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            //关闭流
+            try {
+                if (null != bufferedInputStream) {
+                    bufferedInputStream.close();
+                }
+                if (null != zipOutputStream) {
+                    zipOutputStream.flush();
+                    zipOutputStream.close();
+                }
+                if (null != fileInputStream) {
+                    fileInputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(zipFile.exists()){
+            downloadPresentation(response,stringZipPath,zipFileName);
+            zipFile.delete();
+        }
     }
 }
