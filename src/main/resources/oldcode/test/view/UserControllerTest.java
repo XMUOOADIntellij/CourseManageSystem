@@ -44,8 +44,8 @@ public class UserControllerTest extends AbstractTransactionalJUnit4SpringContext
     @Test
     public void testCheckUser() throws Exception{
         Map<String,String> rightAccount = new TreeMap<>();
-        rightAccount.put("account","24320162202934");
-        rightAccount.put("password","123456");
+        rightAccount.put("account","987654321");
+        rightAccount.put("password","987654321");
         MvcResult rightResult =
                 mvc.perform(MockMvcRequestBuilders.post("/api/user/login")
                         // 设置请求内容为JSON格式
@@ -81,7 +81,7 @@ public class UserControllerTest extends AbstractTransactionalJUnit4SpringContext
     @Test
     public void testChangPassword() throws Exception{
         Map<String,String> rightAccount = new TreeMap<String, String>();
-        rightAccount.put("account","24320162202934");
+        rightAccount.put("account","987654321");
         rightAccount.put("password","123456");
         MvcResult rightResult =
                 mvc.perform(MockMvcRequestBuilders.post("/api/user/changePassword")
@@ -118,7 +118,7 @@ public class UserControllerTest extends AbstractTransactionalJUnit4SpringContext
     @Test
     public void testAddUser()throws Exception{
         Map<String,String> rightAccount = new TreeMap<String, String>();
-        rightAccount.put("account","24320162202985");
+        rightAccount.put("account","29320162202985");
         rightAccount.put("password","123456");
 //        rightAccount.put("email","1234@qq.com");
 //        rightAccount.put("name","name");
