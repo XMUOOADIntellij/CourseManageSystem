@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 /**
  * User 实体对象
  * @author Xu Gang
- * @date 2018年12月2日
+ * @date 2018年12月10日
  */
 @Component
 public class User {
