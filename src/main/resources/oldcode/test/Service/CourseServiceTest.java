@@ -79,6 +79,6 @@ public class CourseServiceTest extends AbstractTransactionalJUnit4SpringContextT
 
     @Test
     public void testListCourses(){
-        Assert.assertFalse(courseService.listCourses(testCourse.getTeacherId()).isEmpty());
+        Assert.assertFalse(courseService.listCourses(testCourse.getTeacherNum()).isEmpty());
     }
 }

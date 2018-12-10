@@ -30,9 +30,19 @@ public interface SeminarService {
 
     /**
      * 下载讨论课报告
+     * @param request ServletRequest
+     * @param response ServletResponse;
      * @return String
      */
 
-    String downloadPresentation(HttpServletRequest request, HttpServletResponse response);
+    String downloadPresentation(HttpServletResponse response,String fileName,String filePath);
 
+
+    /**
+     * 批量下载报告
+     * @param request
+     * @param response
+     * @return String
+     */
+    void downloadAllPresentation(HttpServletRequest request, HttpServletResponse response);
 }
