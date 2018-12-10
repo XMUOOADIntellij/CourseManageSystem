@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/seminarOn.css" />
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+   <script src="../../static/js/common.js"></script>
+    <!--<script src="../../static/js/teacher.js"></script>
+    -->
+    <script src="../../static/js/common.js"></script>
+    <!--<script src="../../static/js/teacher.js"></script>
+    -->
+</head>
+<!--<body onload="return getRoundScore();">-->
+
+<body>
+<!-- 这个是顶部栏，直接复制这段代码就行，记得放在body结点后面第一个 -->
+<div class="topBar">
+    <div class="content-icon" onclick="goBack()">
+        <img alt="" class="icon" src="../../static/img/Left_white.png" />
+    </div>
+    <div class="content text text-light"> 讨论课管理 </div>
+    <div class="content-icon" id="myReturn">
+
+    </div>
+</div>
+<div class="secondBar">
+    <div class="content-icon">
+    </div>
+    <div class="content text text-light"> 业务流程分析 </div>
+</div>
+<div>
+    <div class="tab left">
+        <div class="tabTitle"> 展示队列 </div>
+        <div class="tabLinks" onclick="openShowGroup(event, '1-9')"> 1-9 </div>
+        <div class="tabLinks" onclick="openShowGroup(event, '1-7')"> 1-7 </div>
+        <div class="tabLinks" onclick="openShowGroup(event, '1-2')" id="defaultOpen"> 1-2 </div>
+        <div class="tabLinks" onclick="openShowGroup(event, '1-6')"> 1-6 </div>
+        <div class="tabRest">
+        </div>
+
+    </div>
+    <div class="tab right" id="tabAsk">
+        <div class="tabTitle">提问队列</div>
+        <div class="tabLinksRight" onclick="openAskGroup(event, '1-3')">1-3</div>
+        <div class="tabLinksRight" onclick="openAskGroup(event, '1-1')" id="defaultAsk">1-1</div>
+    </div>
+
+    <div class="card" id="1-9">
+        <div class="myMargin">
+        </div>
+        <div class="card-head">
+            <div class="card-head-content">
+                <span class="text-large text-light">展示时间</span>
+
+            </div>
+        </div>
+        <div class="myMargin">
+        </div>
+        <div class="card-row-details">
+
+            <input class="timeSquare" type="text" value="08:50:10" readonly>
+            <button class="btn btn-big btn-success right" disabled="disabled" onclick="score()">开始</button>
+        </div>
+        <div class="myMargin">
+        <div class="card-head">
+            <div class="card-head-content">
+                <span class="text-large text-light">展示打分</span>
+
+            </div>
+        </div>
+        <div class="myMargin">
+        </div>
+        <div class="card-row-details">
+            <button class="btn btn-big btn-info">1-9:</button>
+            <select class="selector">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <span class="text-bold">.</span>
+            <select class="selector">
+                <option>0</option>
+                <option>5</option>
+            </select>
+            <button class="btn btn-big btn-warning right" onclick="score()">修改</button>
+        </div>
+        <div class="myMargin">
+        </div>
+
+
+        <div class="myBigMargin">
+        </div>
+
+
+    </div>
+</div>
+    <div class="card" id="1-7">
+        <div class="myMargin">
+        </div>
+        <div class="card-head">
+            <div class="card-head-content">
+                <span class="text-large text-light">展示时间</span>
+
+            </div>
+        </div>
+        <div class="myMargin">
+        </div>
+        <div class="card-row-details">
+
+            <input class="timeSquare" type="text" value="08:50:10" readonly>
+            <button class="btn btn-big btn-success right" disabled="disabled" onclick="score()">开始</button>
+        </div>
+        <div class="myMargin">
+            <div class="card-head">
+                <div class="card-head-content">
+                    <span class="text-large text-light">展示打分</span>
+
+                </div>
+            </div>
+            <div class="myMargin">
+            </div>
+            <div class="card-row-details">
+                <button class="btn btn-big btn-info">1-7:</button>
+                <select class="selector">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <span class="text-bold">.</span>
+                <select class="selector">
+                    <option>0</option>
+                    <option>5</option>
+                </select>
+                <button class="btn btn-big btn-warning right" onclick="score()">修改</button>
+            </div>
+            <div class="myMargin">
+            </div>
+
+
+            <div class="myBigMargin">
+            </div>
+
+
+        </div>
+    </div>
+    <div class="card" id="1-2">
+        <div class="myMargin">
+        </div>
+        <div class="card-head">
+            <div class="card-head-content">
+                <span class="text-large text-light">展示时间</span>
+
+            </div>
+        </div>
+        <div class="myMargin">
+        </div>
+        <div class="card-row-details">
+
+            <input class="timeSquare" type="text" value="00:00:00" readonly>
+            <button class="btn btn-big btn-success right" onclick="start()">开始</button>
+        </div>
+        <div class="myMargin">
+            <div class="card-head">
+                <div class="card-head-content">
+                    <span class="text-large text-light">展示打分</span>
+
+                </div>
+            </div>
+            <div class="myMargin">
+            </div>
+            <div class="card-row-details">
+                <button class="btn btn-big btn-info">1-2:</button>
+                <select class="selector">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <span class="text-bold">.</span>
+                <select class="selector">
+                    <option>0</option>
+                    <option>5</option>
+                </select>
+                <button class="btn btn-big btn-warning right" onclick="score()">修改</button>
+            </div>
+            <div class="myMargin">
+            </div>
+            <div class="card-head">
+                <div class="card-head-content">
+                    <span class="text-large text-light">提问打分</span>
+
+                </div>
+            </div>
+            <div class="myMargin">
+            </div>
+            <div class="card-row-details">
+                 <button class="btn btn-big btn-info btnAsk"><label class="askLabel">1-1</label></button>
+                <select class="selector">
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <span class="text-bold">.</span>
+                <select class="selector">
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <button class="btn btn-big btn-warning right" onclick="score()">提交</button>
+
+                <div class="myBigMargin">
+                </div>
+            </div>
+
+
+            <div class="myBigMargin">
+            </div>
+            <div class="card-row-details">
+                <input class="btn btn-success btn-giant" type="button" onclick="onRandom()" value="抽取提问">
+            </div>
+            <div class="myMargin">
+            </div>
+            <div class="card-row-details">
+                <input class="btn btn-danger btn-giant" type="button" onclick="onNext()" value="下一组">
+            </div>
+
+
+        </div>
+    </div>
+    <div class="card" id="1-6">
+        <div class="myMargin">
+        </div>
+        <div class="card-head">
+            <div class="card-head-content">
+                <span class="text-large text-light">展示时间</span>
+
+            </div>
+        </div>
+        <div class="myMargin">
+        </div>
+        <div class="card-row-details">
+
+            <input class="timeSquare" type="text" value="08:50:10" readonly>
+            <button class="btn btn-big btn-success right" onclick="score()">开始</button>
+        </div>
+        <div class="myMargin">
+            <div class="card-head">
+                <div class="card-head-content">
+                    <span class="text-large text-light">展示打分</span>
+
+                </div>
+            </div>
+            <div class="myMargin">
+            </div>
+            <div class="card-row-details">
+                <button class="btn btn-big btn-info">1-2:</button>
+                <select class="selector">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <span class="text-bold">.</span>
+                <select class="selector">
+                    <option>0</option>
+                    <option>5</option>
+                </select>
+                <button class="btn btn-big btn-warning right" onclick="score()"  disabled="disabled" >修改</button>
+            </div>
+            <div class="myMargin">
+            </div>
+            <div class="card-head">
+                <div class="card-head-content">
+                    <span class="text-large text-light">提问打分</span>
+
+                </div>
+            </div>
+            <div class="myMargin">
+            </div>
+            <div class="card-row-details">
+                <button class="btn btn-big btn-info btnAsk"><label class="askLabel">1-1</label></button>
+                <select class="selector">
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <span class="text-bold">.</span>
+                <select class="selector">
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <button class="btn btn-big btn-warning right" onclick="score()"  disabled="disabled" >提交</button>
+            </div>
+
+            <div class="myBigMargin">
+            </div>
+            <div class="card-row-details">
+                <input class="btn btn-success btn-giant" type="button" onclick="onRandom()"  disabled="disabled" value="抽取提问">
+            </div>
+            <div class="myMargin">
+            </div>
+            <div class="card-row-details">
+                <input class="btn btn-danger btn-giant" type="button" onclick="onNext()" disabled="disabled"  value="下一组">
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    const acc = document.getElementsByClassName("card-head card-head-secondary");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            let panel = this.nextSibling("panel");
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+                $(this).find('.icon').children('img').attr('src', '../../static/img/Right_white.png')
+            } else {
+                panel.style.display = "block";
+                $(this).find('.icon').children('img').attr('src', '../../static/img/Up_white.png')
+            }
+        })
+    }
+    const acctop = document.getElementsByClassName("card-head");
+    for (let i = 0; i < acc.length; i++) {
+        acctop[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+                $(this).find('.icon').attr('src', '../../static/img/Right_white.png')
+            } else {
+                panel.style.display = "block";
+                $(this).find('.icon').attr('src', '../../static/img/Up_white.png')
+            }
+        })
+    }
+    function goBack() {
+        window.location.href = "3.0-senimarManage.html"
+    }
+    function openShowGroup(evt, GroupName) {
+        let i, tabContent, tabLinks;
+        tabContent = document.getElementsByClassName("card");
+        for (i = 0; i < tabContent.length; i++) {
+            tabContent[i].style.display = "none";
+        }
+        tabLinks = document.getElementsByClassName("tabLinks");
+        for (i = 0; i < tabLinks.length; i++) {
+            tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+        }
+        document.getElementById(GroupName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    function openAskGroup(evt, GroupName) {
+        let i, tabContent, tabLinks;
+        tabContent = document.getElementsByClassName("askLabel");
+        for (i = 0; i < tabContent.length; i++) {
+            tabContent[i].innerText=GroupName;
+        }
+
+        tabLinks = document.getElementsByClassName("tabLinksRight");
+        for (i = 0; i < tabLinks.length; i++) {
+            tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+        }
+        evt.currentTarget.className += " active";
+    }
+
+    function onRandom(){
+        let tabList = document.getElementById("tabAsk");
+        tabList.innerHTML += " <div class=\"tabLinksRight\" onclick=\"openAskGroup(event, '1-4')\">1-4<\/div>";
+    }
+    function onNext(){
+        openShowGroup(event, '1-6');
+    }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    document.getElementById("defaultAsk").click();
+
+
+</script>
+
+</html>

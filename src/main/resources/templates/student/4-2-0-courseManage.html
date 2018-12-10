@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/courseManagement.css"/>
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+   <script src="../../static/js/common.js"></script>
+<!--<script src="../../static/js/teacher.js"></script>-->
+</head>
+<!--<body onload="getCourseList()">-->
+
+<body>
+<div class="topBar">
+    <div class="content-icon" onclick="goBack()">
+        <img alt="" class="icon" src="../../static/img/Left_white.png"/>
+    </div>
+    <div class="content text text-light">课程管理</div>
+    <div class="content-icon" id="myReturn">
+        <img alt="" class="icon" src="../../static/img/Add_white.png"/>
+    </div>
+</div>
+<div class="card" id="OOAD">
+    <div class="card-head">
+        <span class="card-head-content text-large text-light">OOAD</span>
+        <div class="content-icon right">
+            <img alt="" class="icon" src="../../static/img/Right_white.png"/>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="card-head card-head-secondary" onclick="onStuScore(this)">
+            <span class="card-head-content text">学生成绩</span>
+            <div class="content-icon right">
+                <img alt="" class="icon" src="../../static/img/Right_black.png"/>
+            </div>
+        </div>
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onGroup(this)">
+            <span class="card-head-content text">学生组队</span>
+            <div class="content-icon right">
+                <img alt="" class="icon" src="../../static/img/Right_black.png"/>
+            </div>
+        </div>
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onCourseInfo(this)">
+            <span class="card-head-content text">课程信息</span>
+            <div class="content-icon right">
+                <img alt="" class="icon" src="../../static/img/Right_black.png"/>
+            </div>
+        </div>
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onClassInfo(this)">
+            <span class="card-head-content text">班级信息</span>
+            <div class="content-icon right">
+                <img alt="" class="icon" src="../../static/img/Right_black.png"/>
+            </div>
+        </div>
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onSemRound(this)">
+            <span class="card-head-content text">讨论课轮次</span>
+            <div class="content-icon right">
+                <img alt="" class="icon" src="../../static/img/Right_black.png"/>
+            </div>
+        </div>
+        <div class="separator-dark">
+        </div>
+
+    </div>
+</div>
+<div class="card" id="J2EE">
+    <div class="card-head">
+        <span class="card-head-content text-large text-light">J2EE</span>
+        <div class="content-icon right">
+            <img alt="" class="icon" src="../../static/img/Right_white.png"/>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="card-head card-head-secondary" onclick="onStuScore(this)">
+            <span class="card-head-content text">学生成绩</span>
+            <div class="content-icon right">
+                <img alt="" class="icon" src="../../static/img/Right_black.png"/>
+            </div>
+        </div>
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onGroup(this)">
+            <span class="card-head-content text">学生组队</span>
+            <div class="content-icon right">
+                <img alt="" class="icon" src="../../static/img/Right_black.png"/>
+            </div>
+        </div>
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onCourseInfo(this)">
+            <span class="card-head-content text">课程信息</span>
+            <div class="content-icon right">
+                <img alt="" class="icon" src="../../static/img/Right_black.png"/>
+            </div>
+        </div>
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onClassInfo(this)">
+            <span class="card-head-content text">班级信息</span>
+            <div class="content-icon right">
+                <img alt="" class="icon" src="../../static/img/Right_black.png"/>
+            </div>
+        </div>
+        <div class="separator-dark">
+        </div>
+        <div class="card-head card-head-secondary" onclick="onSemRound(this)">
+            <span class="card-head-content text">讨论课轮次</span>
+            <div class="content-icon right">
+                <img alt="" class="icon" src="../../static/img/Right_black.png"/>
+            </div>
+        </div>
+        <div class="separator-dark">
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script>
+    const acc = document.getElementsByClassName("card-head");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+                $(this).find('.content-icon').children('img').attr('src', '../../static/img/Right_white.png')
+            } else {
+                panel.style.display = "block";
+                $(this).find('.content-icon').children('img').attr('src', '../../static/img/Up_white.png')
+            }
+        })
+    }
+
+    function goBack() {
+        window.location.href = "4-studentHome.html"
+    }
+    function addCourse() {
+        window.location.href = "4-2-1-createCourse.html"
+    }
+    function onStuScore(e) {
+        let courseid=$(e).closest('.card').attr("id");
+        setCookie('courseCurrent',courseid);
+        window.location.href = "4-2-2-studentScore.html"
+    }
+    function onGroup(e) {
+        let courseid=$(e).closest('.card').attr("id");
+        setCookie('courseCurrent',courseid);
+        window.location.href = "5-3-2-team_up_free_man.html"
+    }
+    function onShareSet(e) {
+        let courseid=$(e).closest('.card').attr("id");
+        setCookie('courseCurrent',courseid);
+        window.location.href = "4-2-7-shareInfo.html"
+    }
+    function onCourseInfo(e) {
+        let courseid=$(e).closest('.card').attr("id");
+        setCookie('courseCurrent',courseid);
+        window.location.href = "4-2-4-courseInfo.html"
+    }
+    function onClassInfo(e) {
+        let courseid=$(e).closest('.card').attr("id");
+        setCookie('courseCurrent',courseid);
+        window.location.href = "4-2-5-classInfo.html"
+    }
+    function onSemRound(e) {
+        let courseid=$(e).closest('.card').attr("id");
+        setCookie('courseCurrent',courseid);
+        window.location.href = "4-2-6-0-seminarRound.html"
+    }
+
+    function getCourseList() {
+        console.log(getCookie('account'));
+        let jdata={"teacherNum":"1"};
+      $.ajax({
+            type:'GET',
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(jdata),
+            url: "http://47.107.81.51:8080/api/course/getall",
+            success: function(data) {
+                console.log(data);
+                console.log("transfer finished");
+
+            },
+            error: function (data) {
+                console.log(data);
+                console.log("transfer error");
+            }
+
+        });
+
+    }
+</script>
+</html>
