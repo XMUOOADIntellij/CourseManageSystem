@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!--指定特定数据库的jdbc驱动jar包的位置千万千万要指定正确,不然就创建不了文件-->
-    <classPathEntry location="C:\Users\30275\.m2\repository\mysql\mysql-connector-java\8.0.13\mysql-connector-java-8.0.13.jar"/>
+    <classPathEntry location="C:\Users\27703\.m2\repository\mysql\mysql-connector-java\8.0.13\mysql-connector-java-8.0.13.jar"/>
 
     <!-- 别删。导出包要用
     <classPathEntry location="C:\Users\27703\.m2\repository\mysql\mysql-connector-java\8.0.13\mysql-connector-java-8.0.13.jar"/>-->
@@ -16,7 +16,7 @@
         </commentGenerator>
         <!--数据库链接地址账号密码-->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://47.107.81.51:3306/test?characterEncoding=UTF-8&amp;nullCatalogMeansCurrent=true"
+                        connectionURL="jdbc:mysql://47.107.81.51:3306/main?characterEncoding=UTF-8&amp;nullCatalogMeansCurrent=true"
                         userId="root"
                         password="mysql123456">
         </jdbcConnection>
@@ -45,7 +45,7 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名-->
-        <table tableName="group" domainObjectName="Group"
+        <table tableName="presentation" domainObjectName="Presentation"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

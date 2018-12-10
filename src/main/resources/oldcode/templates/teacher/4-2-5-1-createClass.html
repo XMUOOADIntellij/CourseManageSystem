@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/createClass.css"/>
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+   <script src="../../static/js/common.js"></script>
+<!--<script src="../../static/js/teacher.js"></script>-->
+</head>
+<body>
+<div class="topBar">
+   <div class="content-icon">
+        <img alt="" class="icon" src="../../static/img/Close_white.png" onclick="onClose()"/>
+    </div>
+    <div class="content text text-light">新建班级</div>
+</div>
+<div class="separator-blank">
+</div>
+<div class="form">
+    <div>
+        <span class="text text-small text-bold myMarginLeft">名称</span>
+        <div class="myMargin">
+        </div>
+        <input class="input text-smaller text-grey" id="classgrade" type="text" placeholder="输入年级"><input class="input text-smaller text-grey" id="classname" type="text" placeholder="输入班级">
+    </div>
+</div>
+<div class="form">
+    <div>
+        <span class="text text-small text-bold myMarginLeft">讨论课地点</span>
+        <div class="myMargin">
+        </div>
+        <input class="input text-smaller text-grey" id="classsite" type="text" placeholder="输入讨论课地点">
+    </div>
+</div>
+
+<div class="form">
+    <div>
+        <span class="text text-small text-bold myMarginLeft">讨论课时间</span>
+        <div class="myMargin"></div>
+    </div>
+    <div class="dialog-row">
+        <input class="dateSelector text text-smallest" id="classtime" type="date" value="2018-09-01"/>
+    </div>
+</div>
+
+
+<div class="form">
+    <div>
+        <span class="text text-small text-bold myMarginLeft">学生名单</span>
+        <div class="myMargin">
+        </div>
+        <span class="text text-smaller myMarginLeft">上传文件</span><input class="inputfile" type="file" id="classfile"/>
+    </div>
+</div>
+<div class="form">
+    <div class="myBigMargin">
+        <input class="btn btn-giant btn-success " type="button" id="btnSubmit" value="提交">
+    </div>
+</div>
+</body>
+<script>
+    function createClass() {
+        var ata = {
+            grade: $("#classgrade").val(),
+            name: $("#classname").val(),
+            site: $("#classsite").val(),
+            time: $("#classtime").val(),
+            file: $("#classfile").val(),
+        };
+        // alert("55");
+        $.ajax({
+            type: 'post',
+            url: '/course/' + getCookie("courseDetail") + '/class',
+            // url: '/course/'+getcoursedetail()+'/class',
+            dataType: "json",
+            contentType: "application/json;",
+            data: JSON.stringify(ata),
+            success: function (data, textStatus, xhr) {
+                if (xhr.status == 201) {
+                    alert("创建成功!");
+                    backtocourse();  //返回显示课程下的班级列表/讨论课列表
+                }
+            },
+            statusCode: {
+                403: function () {
+                    alert("用户权限不足");
+                },
+                404: function () {
+                    alert("未找到课程");
+                }
+            }
+        });
+    }
+    $("#btnSubmit").click(function () {
+        window.location.href = "4-2-5-classInfo.html";
+        // createClass();
+    });
+    function onClose() {
+        window.location.href = "4-2-5-classInfo.html"
+    }
+</script>
+</html>

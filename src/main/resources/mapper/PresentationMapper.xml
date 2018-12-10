@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.PresentationMapper" >
+  <resultMap id="BaseResultMap" type="com.group12.course.entity.Presentation" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="team_id" property="teamId" jdbcType="BIGINT" />
+    <result column="presentation_material_name" property="presentationMaterialName" jdbcType="VARCHAR" />
+    <result column="report_material_name" property="reportMaterialName" jdbcType="VARCHAR" />
+    <result column="presentation_material_url" property="presentationMaterialUrl" jdbcType="VARCHAR" />
+    <result column="report_material_url" property="reportMaterialUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, team_id, presentation_material_name, report_material_name, presentation_material_url, 
+    report_material_url, status, gmt_create, gmt_modified
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from presentation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from presentation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.group12.course.entity.Presentation" >
+    insert into presentation (id, team_id, presentation_material_name, 
+      report_material_name, presentation_material_url, 
+      report_material_url, status, gmt_create, 
+      gmt_modified)
+    values (#{id,jdbcType=BIGINT}, #{teamId,jdbcType=BIGINT}, #{presentationMaterialName,jdbcType=VARCHAR}, 
+      #{reportMaterialName,jdbcType=VARCHAR}, #{presentationMaterialUrl,jdbcType=VARCHAR}, 
+      #{reportMaterialUrl,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModified,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.group12.course.entity.Presentation" >
+    insert into presentation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="teamId != null" >
+        team_id,
+      </if>
+      <if test="presentationMaterialName != null" >
+        presentation_material_name,
+      </if>
+      <if test="reportMaterialName != null" >
+        report_material_name,
+      </if>
+      <if test="presentationMaterialUrl != null" >
+        presentation_material_url,
+      </if>
+      <if test="reportMaterialUrl != null" >
+        report_material_url,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="teamId != null" >
+        #{teamId,jdbcType=BIGINT},
+      </if>
+      <if test="presentationMaterialName != null" >
+        #{presentationMaterialName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportMaterialName != null" >
+        #{reportMaterialName,jdbcType=VARCHAR},
+      </if>
+      <if test="presentationMaterialUrl != null" >
+        #{presentationMaterialUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="reportMaterialUrl != null" >
+        #{reportMaterialUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.group12.course.entity.Presentation" >
+    update presentation
+    <set >
+      <if test="teamId != null" >
+        team_id = #{teamId,jdbcType=BIGINT},
+      </if>
+      <if test="presentationMaterialName != null" >
+        presentation_material_name = #{presentationMaterialName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportMaterialName != null" >
+        report_material_name = #{reportMaterialName,jdbcType=VARCHAR},
+      </if>
+      <if test="presentationMaterialUrl != null" >
+        presentation_material_url = #{presentationMaterialUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="reportMaterialUrl != null" >
+        report_material_url = #{reportMaterialUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.group12.course.entity.Presentation" >
+    update presentation
+    set team_id = #{teamId,jdbcType=BIGINT},
+      presentation_material_name = #{presentationMaterialName,jdbcType=VARCHAR},
+      report_material_name = #{reportMaterialName,jdbcType=VARCHAR},
+      presentation_material_url = #{presentationMaterialUrl,jdbcType=VARCHAR},
+      report_material_url = #{reportMaterialUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

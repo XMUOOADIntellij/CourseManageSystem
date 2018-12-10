@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <title>激活</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/common/style.css"/>
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/common/signUp.css"/>
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+   <script src="../../static/js/common.js"></script>
+<!--<script src="../../static/js/teacher.js"></script>-->
+<body>
+<div class="topBar">
+    <div class="content-icon" onclick="onClose()">
+        <img alt="" class="icon" src="../../static/img/Close_white.png"/>
+    </div>
+    <div class="content text text-light">激活</div>
+</div>
+<div class="tips">
+    <span class="text text-large  text-bold">确认您的身份</span>
+</div>
+<div class="form">
+    <div>
+        <input class="input text text-small"
+               type="text"
+               id="usernumber"
+               placeholder="输入您的学号/教工号"> <span class="text text-smallest text-grey myMarginLeft"></span>
+    </div>
+    <div class="btnContainer">
+        <button class="btn btn-big btn-success right"
+                id="btnNext">下一步</button>
+    </div>
+</div>
+</body>
+<script>
+
+    /*
+
+        $("#btnSignIn").click(function () {
+            var jname = $("#userName").val();
+            var jpassword = $("#userPassword").val();
+            var jdata = {id: jname, password: jpassword};
+            $.ajax({
+                type:'get',// type: 'post',
+                url: "http://47.107.81.51:8080/user/login/"+jname,
+                dataType: "json",
+                data: JSON.stringify(jdata),
+                contentType: "application/json",
+                success: function (data){//success: function (data, textStatus, xhr) {
+                    if (xhr.status === 200) {//状态码存疑
+                        setCookie('username', data.name); //store username in cookie
+                        window.localStorage.setItem("jwt", data.jwt);
+                        if (data.type === "student")
+                            window.location.href = "/student/home";
+                        else if (data.password === jpassword)
+                            window.location.href = "../teacher/4-0-0-teacherHome.html";//  window.location.href = "/teacher/home";
+                        alert("用户名或密码正确！");
+                    }
+                },
+                error: function () {
+                        $("#userPassword").val("");
+                        $("#userName").val("");
+                        alert("用户名或密码错误！");
+
+                }
+            });
+
+        });
+
+    */
+
+        $("#btnSignIn").click(function () {
+            let jname = $("#usernumber").val();
+            let jpassword = $("#userPassword").val();
+            $.ajax({
+                type:'get',
+                url: "/user/login/"+jname,
+                success: function (data){
+                    if(data.password===jpassword) {
+                        setCookie('username', data.name);
+                        window.location.href = "../teacher/4-0-0-teacherHome.html";}
+                    else
+                    {
+                        $("#userPassword").val("");
+                        $("#usernumber").val("");
+                        alert("用户名或密码错误！");
+                    }
+                },
+                error: function () {
+                    $("#userPassword").val("");
+                    $("#usernumber").val("");
+                    alert("用户名或密码错误！");
+                }
+            });
+
+        });
+    function onClose() {
+        window.location.href = "1.0_log.html"
+    }
+    $("#btnNext").click(function () {
+        let jname = $("#usernumber").val();
+        if(jname==='24320162202873')  window.location.href = "1.3_signUp.html";
+        else  window.location.href = "1.2_signUp.html";
+    });
+
+</script>
+</html>

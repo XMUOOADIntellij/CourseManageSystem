@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/common/style.css"/>
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/teacher/shareInfo.css"/>
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+   <script src="../../static/js/common.js"></script></head>
+<script src="../../static/js/common.js"></script>
+<!--<script src="../../static/js/teacher.js"></script>--></head>
+<body>
+<div class="topBar">
+    <div class="content-icon" onclick="goBack()"><img alt=""  class="icon" src="../../static/img/Left_white.png"/></div>
+    <div class="content text text-light">共享设置</div>
+   <div class="content-icon right"><img alt=""  class="icon"
+                                   src="../../static/img/Add_white.png"/></div>
+</div>
+<div class="card">
+    <div class="card-head">
+        <span class="card-head-content text-large text-light ">J2EE(刘老师）</span>
+       <div class="content-icon right"><img alt=""  class="icon"
+                                       src="../../static/img/Right-white.png"/></div>
+    </div>
+    <div class="panel">
+    <div class="separator-blank"></div>
+    <div class="card-head card-head-secondary ">
+        <div class="card-row-details">
+            <span class="text text-small">共享类型</span> <span class="text text-small margin-horizon right">共享讨论课</span>
+        </div>
+    </div>
+    <div class="card-head card-head-secondary ">
+        <div class="card-row-details">
+            <span class="text text-small">共享情况</span> <span class="text text-small margin-horizon right">主课程</span>
+        </div>
+    </div>
+    <div class="separator-blank"></div>
+    <div class="card-row-details">
+        <input class="btn btn-danger btn-giant"
+               type="button"
+               value="取消共享">
+    </div>
+</div>
+    <div class="separator-blank"></div>
+</div>
+<div class="card">
+    <div class="card-head" onclick="onAdd()">
+        <span class="card-head-content text-large text-light">新增共享</span>
+       <div class="content-icon right"><img alt=""  class="icon" src="../../static/img/Add_white.png"/></div>
+    </div>
+</div>
+</body>
+<script>
+    const acc = document.getElementsByClassName("card-head");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+                $(this).find('.content-icon').children('img').attr('src', '../../static/img/Right_white.png')
+            } else {
+                panel.style.display = "block";
+                $(this).find('.content-icon').children('img').attr('src', '../../static/img/Up_white.png')
+            }
+        })
+    }
+    function onAdd() {
+        window.location.href = "4-2-7-3-addShare.html";
+    }
+    function goBack() {
+        window.location.href = "4-2-0-courseManage.html"
+    }
+    function getShareInfo() {
+        $.ajax({
+            type: 'get',
+            url: '',
+            dataType: "json",
+            contentType: "application/json;",
+            success: function(data, textStatus, xhr) {
+                if (xhr.status === 200) {
+                    const topcontent = document.getElementsByClassName("card");
+                    let content;
+                    let strVar = "";
+                    let teamNumber = 0;
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].teamid !== teamNumber) {
+                            teamNumber = data[i].round;
+                            strVar = "<div class=\"card-head\"><div class=\"card-head-content\"><span class=\"text-large text-light\">1-1:<\/span> <span class=\"text-large text-light\">"+data[i].teamname+"<\/span><\/div><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Up_white.png\"><\/div><\/div><div class=\"panel\" id=\"team" + data[i].teamid + "\"><\/div><div class=\"separator-blank\"><\/div>";
+                            topcontent.insertAdjacentHTML('beforeend', strVar);
+                            content = document.getElementById("team" + data[i].teamid);
+                            i--;
+                        } else {
+                            strVar = "<div class=\"card-head-secondary text-left-margin\"><div class=\"card-row-details\"><span class=\"text-small text-left-margin\">" + data[i].name + "<\/span> <span class=\"text-small text-left-margin\">" + data[i].attr + "<\/span> <span class=\"text-small text-left-margin\">" + data[i].code + "<\/span> <span class=\"text-small text-left-margin text-green\">" + data[i].class + "<\/span><\/div><\/div>";
+                            content.insertAdjacentHTML('beforeend', strVar);
+                        }
+                    }
+                }
+            },
+            statusCode: {
+                401: function() {
+                    alert("获取信息失败");
+                }
+            }
+        })
+    }
+
+</script>
+</html>

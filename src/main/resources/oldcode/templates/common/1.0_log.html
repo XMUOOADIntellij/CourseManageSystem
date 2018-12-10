@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/common/style.css"/>
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/common/log.css"/>
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+   <script src="../../static/js/common.js"></script>
+<!--<script src="../../static/js/teacher.js"></script>-->
+<body>
+<div class="topBar">
+   <div class="content-icon"><img alt=""  class="icon"
+                                   src="../../static/img/Help_white.png"/></div>
+    <div class="content text text-light">登录</div>
+</div>
+<div class="tips">
+    <span class="text text-large  text-bold">欢迎使用</span>
+</div>
+<div class="form">
+    <div>
+        <input class="input text text-small"
+               type="text"
+               id="usernumber"
+               placeholder="输入您的账户"> <span class="text text-smallest text-grey myMarginLeft">学号/教工号</span>
+    </div>
+    <div class="myMargin"></div>
+    <div>
+        <input class="input text text-small"
+               type="text"
+               id="userPassword"
+               placeholder="输入您的密码"> <span class="text text-smallest  text-red myMarginLeft">初始密码为123456</span>
+    </div>
+    <div class="btnContainer">
+        <button class="btn btn-big btn-white"
+                id="btnSignUp">激活</button>
+        <button class="btn btn-big btn-success right"
+                id="btnSignIn">登录</button>
+    </div>
+</div>
+
+<div class="tips">
+    <a href="1.3_forget.html"
+       class="text-smaller">忘记了密码</a>
+</div>
+</body>
+<script>
+
+    /*
+
+        $("#btnSignIn").click(function () {
+            var jname = $("#userName").val();
+            var jpassword = $("#userPassword").val();
+            var jdata = {id: jname, password: jpassword};
+            $.ajax({
+                type:'get',// type: 'post',
+                url: "http://47.107.81.51:8080/user/login/"+jname,
+                dataType: "json",
+                data: JSON.stringify(jdata),
+                contentType: "application/json",
+                success: function (data){//success: function (data, textStatus, xhr) {
+                    if (xhr.status === 200) {//状态码存疑
+                        setCookie('username', data.name); //store username in cookie
+                        window.localStorage.setItem("jwt", data.jwt);
+                        if (data.type === "student")
+                            window.location.href = "/student/home";
+                        else if (data.password === jpassword)
+                            window.location.href = "../teacher/4-0-0-teacherHome.html";//  window.location.href = "/teacher/home";
+                        alert("用户名或密码正确！");
+                    }
+                },
+                error: function () {
+                        $("#userPassword").val("");
+                        $("#userName").val("");
+                        alert("用户名或密码错误！");
+
+                }
+            });
+
+        });
+
+    */
+
+        $("#btnSignIn").click(function () {
+
+
+
+            let jname = $("#usernumber").val();
+            let jpassword = $("#userPassword").val();
+            let jdata = {account: jname, password: jpassword};
+            $.ajax({
+                type:'post',
+                url: "/api/user/login",
+                dataType: "json",
+                data: JSON.stringify(jdata),
+                contentType: "application/json",
+                success: function (data){
+                    if(data.isActive===true) {
+                        Cookies.set('account', jname);
+                        console.log(Cookies.get('account'));
+                        if(jname==="12345")
+                            window.location.href = "../teacher/4-0-0-teacherHome.html";
+                        else
+                            window.location.href = "../student/4-studentHome.html";
+
+                    }
+                    else
+                    {
+                        window.location.href = "1.2_signUp.html";
+                        alert("用户未激活！");
+                    }
+                },
+                error: function (data) {
+                    $("#userPassword").val("");
+                    $("#usernumber").val("");
+                    alert("用户名或密码错误！");
+                    console.log(data);
+                }
+
+            });
+
+        });
+    $("#btnSignUp").click(function () {
+        window.location.href = "1.1_signUp.html";
+    });
+
+</script>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/studentGroup.css"/>
+     <script src="../../static/js/common.js"></script>
+<!--<script src="../../static/js/teacher.js"></script>-->
+</head>
+<!--<body onload="getGroupList()">-->
+<body>
+<div class="topBar">
+   <div class="content-icon"><img class="icon" src="../../static/img/Left_white.png" onclick="goBack()"/></div>
+    <div class="content text text-light">学生组队</div>
+   <div class="content-icon right"><img alt=""  class="icon" src="../../static/img/Add_white.png"/></div>
+</div>
+<div class="card">
+    <div class="card-head">
+        <div class="card-head-content">
+            <span class="text-large text-light">1-1:</span> <span class="text-large text-light">TeamName</span>
+        </div>
+       <div class="content-icon right"><img alt=""  class="icon" src="../../static/img/Right_white.png"/></div>
+    </div>
+    <div class="panel">
+    <div class="card-head-secondary text-left-margin">
+        <div class="card-row-details">
+            <span class="text-small text-left-margin">李刚</span> <span class="text-small text-left-margin">组长</span> <span
+                class="text-small text-left-margin">24320162202800</span> <span class="text-small text-left-margin text-green">J2EE</span>
+        </div>
+    </div>
+    <div class="card-head-secondary text-left-margin">
+        <div class="card-row-details">
+            <span class="text-small text-left-margin">李刚</span> <span class="text-small text-left-margin">组员</span> <span
+                class="text-small text-left-margin">24320162202800</span> <span class="text-small text-left-margin text-green">J2EE</span>
+        </div>
+    </div>
+    <div class="card-head-secondary text-left-margin">
+        <div class="card-row-details">
+            <span class="text-small text-left-margin">李刚</span> <span class="text-small text-left-margin">组员</span> <span
+                class="text-small text-left-margin">24320162202800</span> <span class="text-small text-left-margin text-green">J2EE</span>
+        </div>
+    </div>
+    <div class="card-head-secondary text-left-margin">
+        <div class="card-row-details ">
+            <span class="text-small text-left-margin">李刚</span> <span class="text-small text-left-margin">组员</span> <span
+                class="text-small text-left-margin">24320162202800</span> <span class="text-small text-left-margin text-green">J2EE</span>
+        </div>
+    </div>
+    </div>
+    <div class="separator-blank">
+    </div>
+    <div class="card-head">
+        <div class="card-head-content">
+            <span class="text-large text-light">1-2:</span> <span class="text-large text-light">TeamName</span>
+        </div>
+       <div class="content-icon right"><img alt=""  class="icon" src="../../static/img/Right_white.png"/></div>
+    </div>
+    <div class="panel">
+        <div class="card-head-secondary text-left-margin">
+            <div class="card-row-details">
+                <span class="text-small text-left-margin">李刚</span> <span class="text-small text-left-margin">组长</span> <span
+                    class="text-small text-left-margin">24320162202800</span> <span class="text-small text-left-margin text-green">J2EE</span>
+            </div>
+        </div>
+        <div class="card-head-secondary text-left-margin">
+            <div class="card-row-details">
+                <span class="text-small text-left-margin">李刚</span> <span class="text-small text-left-margin">组员</span> <span
+                    class="text-small text-left-margin">24320162202800</span> <span class="text-small text-left-margin text-green">J2EE</span>
+            </div>
+        </div>
+        <div class="card-head-secondary text-left-margin">
+            <div class="card-row-details">
+                <span class="text-small text-left-margin">李刚</span> <span class="text-small text-left-margin">组员</span> <span
+                    class="text-small text-left-margin">24320162202800</span> <span class="text-small text-left-margin text-green">J2EE</span>
+            </div>
+        </div>
+        <div class="card-head-secondary text-left-margin">
+            <div class="card-row-details ">
+                <span class="text-small text-left-margin">李刚</span> <span class="text-small text-left-margin">组员</span> <span
+                    class="text-small text-left-margin">24320162202800</span> <span class="text-small text-left-margin text-green">J2EE</span>
+            </div>
+        </div>
+    </div>
+    <div class="separator-blank">
+    </div>
+</div>
+
+
+</body>
+<script>
+    const acc = document.getElementsByClassName("card-head");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            let panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+                $(this).find('.content-icon').children('img').attr('src', '../../static/img/Right_white.png')
+            } else {
+                panel.style.display = "block";
+                $(this).find('.content-icon').children('img').attr('src', '../../static/img/Up_white.png')
+            }
+        })
+    }
+    function goBack() {
+        window.location.href = "4-2-0-courseManage.html"
+    }
+    function getRoundScore() {
+        $.ajax({
+            type:'get',
+            url: '',
+            dataType: "json",
+            contentType: "application/json;",
+            success: function(data, textStatus, xhr) {
+                if (xhr.status === 200) {
+                    const topcontent = document.getElementsByClassName("card");
+                    let content;
+                    let strVar = "";
+                    let teamNumber = 0;
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].teamid !== teamNumber) {
+                            teamNumber = data[i].round;
+                            strVar = "<div class=\"card-head\"><div class=\"card-head-content\"><span class=\"text-large text-light\">1-1:<\/span> <span class=\"text-large text-light\">"+data[i].teamname+"<\/span><\/div><div class=\"content-icon\"><img alt=\"\" class=\"icon\" src=\"../../static/img/Up_white.png\"><\/div><\/div><div class=\"panel\" id=\"team" + data[i].teamid + "\"><\/div><div class=\"separator-blank\"><\/div>";
+                            topcontent.insertAdjacentHTML('beforeend', strVar);
+                            content = document.getElementById("team" + data[i].teamid);
+                            i--;
+                        } else {
+                            strVar = "<div class=\"card-head-secondary text-left-margin\"><div class=\"card-row-details\"><span class=\"text-small text-left-margin\">" + data[i].name + "<\/span> <span class=\"text-small text-left-margin\">" + data[i].attr + "<\/span> <span class=\"text-small text-left-margin\">" + data[i].code + "<\/span> <span class=\"text-small text-left-margin text-green\">" + data[i].class + "<\/span><\/div><\/div>";
+                            content.insertAdjacentHTML('beforeend', strVar);
+                        }
+                    }
+                }
+            },
+            statusCode: {
+                401: function() {
+                    alert("获取信息失败");
+                }
+            }
+        })
+    }
+</script>
+</html>

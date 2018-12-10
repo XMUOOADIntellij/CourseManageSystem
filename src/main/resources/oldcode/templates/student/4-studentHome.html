@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/common/style.css"/>
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/teacher/teacherHome.css"/>
+    <script src="../../static/js/jquery-1.10.2.js"></script>
+
+<script src="../../static/js/teacher.js"></script></head>
+<body>
+<div class="topBar">
+    <div class="content-icon"
+         id="myAccount"><img alt=""  class="icon" src="../../static/img/Account_white.png"/></div>
+    <div class="content text text-light">我的首页</div>
+    <div class="content-icon"
+         id="myNotice"><img alt=""  class="icon" src="../../static/img/Mail_white.png"/></div>
+</div>
+<div class="card">
+    <div class="card-head"
+         id="myCourse">
+        <div class="content-icon"><img alt=""  class="icon" src="../../static/img/Class_white.png"/></div>
+        <span class="card-head-content text text-light">我的课程</span>
+        <div class="content-icon right"><img alt=""  class="icon" src="../../static/img/Right_white.png"/></div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-head"
+         id="mySenimar">
+        <div class="content-icon"><img alt=""  class="icon"
+                                       src="../../static/img/Setting_white.png"/></div>
+        <span class="card-head-content text text-light">我的讨论课</span>
+        <div class="content-icon right"><img alt=""  class="icon" src="../../static/img/Right_white.png"/></div>
+    </div>
+</div>
+</body>
+<script>
+    $("#myCourse").click(function () {
+        window.location.href = "4-2-0-courseManage.html";
+    });
+    $("#mySenimar").click(function () {
+        window.location.href = "3.0-senimarManage.html";
+    });
+    $("#myNotice").click(function () {
+        window.location.href = "notice.html";
+    });
+    $("#myAccount").click(function () {
+        window.location.href = "4-0-1-accountSetting.html";
+    });
+</script>
+</html>

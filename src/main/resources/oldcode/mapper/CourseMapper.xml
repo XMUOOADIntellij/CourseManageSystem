@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.group12.course.entity.Course" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="courseName" property="courseName" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="pre_percentage" property="prePercentage" jdbcType="INTEGER" />
+    <result column="report_percentage" property="reportPercentage" jdbcType="INTEGER" />
+    <result column="ques_percentage" property="quesPercentage" jdbcType="INTEGER" />
+    <result column="team_start_date" property="teamStartDate" jdbcType="TIMESTAMP" />
+    <result column="team_end_date" property="teamEndDate" jdbcType="TIMESTAMP" />
+      <result column="teacher_num" property="teacherNum" jdbcType="BIGINT"/>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    teacher_num ,id, courseName, introduction, pre_percentage, report_percentage, ques_percentage,
+    team_start_date, team_end_date
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from course
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from course
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.group12.course.entity.Course" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into course (courseName, introduction,
+      pre_percentage, report_percentage, ques_percentage,
+      team_start_date, team_end_date,teacher_num)
+    values (#{courseName,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR},
+      #{prePercentage,jdbcType=INTEGER}, #{reportPercentage,jdbcType=INTEGER}, #{quesPercentage,jdbcType=INTEGER},
+      #{teamStartDate,jdbcType=TIMESTAMP}, #{teamEndDate,jdbcType=TIMESTAMP},#{teacherNum,jdbcType=BIGINT})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.group12.course.entity.Course" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="teacherNum != null" >
+            teacher_num,
+        </if>
+      <if test="courseName != null" >
+        courseName,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="prePercentage != null" >
+        pre_percentage,
+      </if>
+      <if test="reportPercentage != null" >
+        report_percentage,
+      </if>
+      <if test="quesPercentage != null" >
+        ques_percentage,
+      </if>
+      <if test="teamStartDate != null" >
+        team_start_date,
+      </if>
+      <if test="teamEndDate != null" >
+        team_end_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="teacherNum != null" >
+            #{teacherNum,jdbcType=BIGINT},
+        </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="prePercentage != null" >
+        #{prePercentage,jdbcType=INTEGER},
+      </if>
+      <if test="reportPercentage != null" >
+        #{reportPercentage,jdbcType=INTEGER},
+      </if>
+      <if test="quesPercentage != null" >
+        #{quesPercentage,jdbcType=INTEGER},
+      </if>
+      <if test="teamStartDate != null" >
+        #{teamStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teamEndDate != null" >
+        #{teamEndDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.group12.course.entity.Course" >
+    update course
+    <set >
+      <if test="courseName != null" >
+        courseName = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="prePercentage != null" >
+        pre_percentage = #{prePercentage,jdbcType=INTEGER},
+      </if>
+      <if test="reportPercentage != null" >
+        report_percentage = #{reportPercentage,jdbcType=INTEGER},
+      </if>
+      <if test="quesPercentage != null" >
+        ques_percentage = #{quesPercentage,jdbcType=INTEGER},
+      </if>
+      <if test="teamStartDate != null" >
+        team_start_date = #{teamStartDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teamEndDate != null" >
+        team_end_date = #{teamEndDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.group12.course.entity.Course" >
+    update course
+    set courseName = #{courseName,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      pre_percentage = #{prePercentage,jdbcType=INTEGER},
+      report_percentage = #{reportPercentage,jdbcType=INTEGER},
+      ques_percentage = #{quesPercentage,jdbcType=INTEGER},
+      team_start_date = #{teamStartDate,jdbcType=TIMESTAMP},
+      team_end_date = #{teamEndDate,jdbcType=TIMESTAMP},
+      teacher_num = #{teacherNum}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="listCourses" parameterType="java.lang.Long" resultType="com.group12.course.entity.Course">
+      select
+      <include refid="Base_Column_List" />
+      from course
+      where teacher_num = #{teacherNum,jdbcType=BIGINT}
+  </select>
+</mapper>

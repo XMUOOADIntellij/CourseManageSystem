@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/common/style.css"/>
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="../../static/css/common/forget.css"/>
+<script src="../../static/js/jquery-1.10.2.js"></script>
+   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+   <script src="../../static/js/common.js"></script>
+<!--<script src="../../static/js/teacher.js"></script>--></head>
+<body>
+<div class="topBar">
+    <div class="content-icon" onclick="goBack()">
+        <img alt="" class="icon" src="../../static/img/Left_white.png"/>
+    </div>
+    <div class="content text text-light">找回密码</div>
+</div>
+<div class="tips">
+    <span class="text text-large  text-bold">验证身份</span>
+</div>
+<div class="form">
+    <div>
+        <input class="input text text-small"
+               type="text"
+               id="userPassword"
+               placeholder="输入您的学号/职工号"> <span class="text text-smallest  text-red myMarginLeft"></span>
+    </div>
+    <div id="validForm">
+        <span class="text text-smallest  text-red myMarginLeft">发送验证码到邮箱：user@host.domainnames</span>
+
+        <div>
+            <input class="valid-input text text-small"
+                   type="text"  placeholder="输入验证码" />
+            <input class="btn btn-valid" id="btnSend" type="button" value="发送验证码" />
+        </div>
+    </div>
+    <div class="btnContainer">
+        <button class="btn btn-big btn-success right"
+                id="btnNext" disabled="disabled">下一步</button>
+    </div>
+</div>
+
+</body>
+<script>
+    function goBack() {
+        window.location.href = "1.0_log.html"
+    }
+        $("#btnSend").click(function () {
+            $("#btnNext").removeAttr("disabled");
+        });
+        $("#btnNext").click(function () {
+            window.location.href = "1.4_forget.html";
+        });
+</script>
+</html>
