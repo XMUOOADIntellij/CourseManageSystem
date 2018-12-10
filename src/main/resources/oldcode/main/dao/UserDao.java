@@ -1,7 +1,5 @@
 package com.group12.course.dao;
 
-import com.group12.course.entity.User;
-
 /**
  * User dao 层对应接口
  * @author Xu Gang

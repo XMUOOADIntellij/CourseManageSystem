@@ -11,28 +11,24 @@
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
   </resultMap>
+
   <sql id="Base_Column_List" >
     account, password, email, name, is_active, notify_interval, gmt_create, gmt_modified
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+  <select id="getTeacher" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from teacher
     where account = #{account,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+
+  <delete id="deleteTeacher" parameterType="java.lang.Long" >
     delete from teacher
     where account = #{account,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.group12.course.entity.Teacher" >
-    insert into teacher (account, password, email, 
-      name, is_active, notify_interval, 
-      gmt_create, gmt_modified)
-    values (#{account,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{active,jdbcType=BIT}, #{notifyInterval,jdbcType=INTEGER},
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.group12.course.entity.Teacher" >
+
+  <insert id="addTeacher" parameterType="com.group12.course.entity.Teacher" >
     insert into teacher
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="account != null" >
@@ -87,7 +83,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.group12.course.entity.Teacher" >
+
+  <update id="updateTeacher" parameterType="com.group12.course.entity.Teacher" >
     update teacher
     <set >
       <if test="password != null" >
@@ -114,15 +111,5 @@
     </set>
     where account = #{account,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.group12.course.entity.Teacher" >
-    update teacher
-    set password = #{password,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      is_active = #{active,jdbcType=BIT},
-      notify_interval = #{notifyInterval,jdbcType=INTEGER},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
-    where account = #{account,jdbcType=BIGINT}
-  </update>
+
 </mapper>

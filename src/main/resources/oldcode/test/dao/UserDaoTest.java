@@ -1,6 +1,5 @@
 package com.group12.course.dao;
 
-import com.group12.course.entity.User;
 import com.group12.course.mapper.UserMapper;
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,6 +1,5 @@
 package com.group12.course.service;
 
-import com.group12.course.entity.User;
 import org.springframework.web.multipart.MultipartFile;
 
 /**

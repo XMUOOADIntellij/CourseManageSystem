@@ -1,7 +1,6 @@
 package com.group12.course.view;
 
 import com.alibaba.fastjson.JSON;
-import com.group12.course.entity.User;
 import com.group12.course.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

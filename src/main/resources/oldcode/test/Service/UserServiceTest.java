@@ -1,9 +1,6 @@
 package com.group12.course.Service;
 
 
-import com.group12.course.entity.Mail;
-import com.group12.course.entity.User;
-import com.group12.course.entity.VerificationCode;
 import com.group12.course.service.UserService;
 import org.junit.*;
 import org.junit.runner.RunWith;

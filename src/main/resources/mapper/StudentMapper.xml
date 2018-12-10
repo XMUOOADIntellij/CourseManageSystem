@@ -14,27 +14,21 @@
     <sql id="Base_Column_List" >
     account, password, email, is_active, is_in_team, notify_interval, gmt_create, gmt_modified
     </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+  <select id="getStudent" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from student
     where account = #{account,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+
+  <delete id="deleteStudent" parameterType="java.lang.Long" >
     delete from student
     where account = #{account,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" parameterType="com.group12.course.entity.Student" >
-    insert into student (account, password, email, 
-      is_active, is_in_team, notify_interval, 
-      gmt_create, gmt_modified)
-    values (#{account,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{active,jdbcType=BIT}, #{inTeam,jdbcType=BIT}, #{notifyInterval,jdbcType=INTEGER},
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP})
-  </insert>
 
-  <insert id="insertSelective" parameterType="com.group12.course.entity.Student" >
+  <insert id="addStudent" parameterType="com.group12.course.entity.Student" >
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="account != null" >
@@ -89,7 +83,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.group12.course.entity.Student" >
+
+  <update id="updateStudent" parameterType="com.group12.course.entity.Student" >
     update student
     <set >
       <if test="password != null" >
@@ -116,15 +111,5 @@
     </set>
     where account = #{account,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.group12.course.entity.Student" >
-    update student
-    set password = #{password,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      is_active = #{active,jdbcType=BIT},
-      is_in_team = #{inTeam,jdbcType=BIT},
-      notify_interval = #{notifyInterval,jdbcType=INTEGER},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
-    where account = #{account,jdbcType=BIGINT}
-  </update>
+
 </mapper>

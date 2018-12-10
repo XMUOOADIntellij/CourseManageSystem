@@ -1,7 +1,15 @@
 package com.group12.course.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
+/**
+ * Teacher 实体对象
+ * @author Xu Gang
+ * @date 2018年12月10日
+ */
+@Component
 public class Teacher {
     private Long account;
 
@@ -51,12 +59,12 @@ public class Teacher {
         this.name = name == null ? null : name.trim();
     }
 
-    public Boolean getIsActive() {
-        return isActive;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Integer getNotifyInterval() {

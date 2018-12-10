@@ -1,7 +1,15 @@
 package com.group12.course.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
+/**
+ * Team 实体对象
+ * @author Xu Gang
+ * @date 2018年12月10日
+ */
+@Component
 public class Team {
     private Long id;
 

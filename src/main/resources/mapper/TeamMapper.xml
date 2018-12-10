@@ -17,25 +17,19 @@
         id, course_id, leader_id, label, name, is_valid, gmt_create, gmt_modified
     </sql>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="getTeam" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from team
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+
+  <delete id="deleteTeam" parameterType="java.lang.Long" >
     delete from team
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.group12.course.entity.Team" >
-    insert into team (id, course_id, leader_id, 
-      label, name, is_valid, gmt_create, 
-      gmt_modified)
-    values (#{id,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, #{leaderId,jdbcType=BIGINT}, 
-      #{label,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{valid,jdbcType=BIT}, #{gmtCreate,jdbcType=TIMESTAMP},
-      #{gmtModified,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.group12.course.entity.Team" >
+
+  <insert id="addTeam" parameterType="com.group12.course.entity.Team" >
     insert into team
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -90,7 +84,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.group12.course.entity.Team" >
+
+  <update id="updateTeam" parameterType="com.group12.course.entity.Team" >
     update team
     <set >
       <if test="courseId != null" >
@@ -117,15 +112,5 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.group12.course.entity.Team" >
-    update team
-    set course_id = #{courseId,jdbcType=BIGINT},
-      leader_id = #{leaderId,jdbcType=BIGINT},
-      label = #{label,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      is_valid = #{valid,jdbcType=BIT},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+
 </mapper>

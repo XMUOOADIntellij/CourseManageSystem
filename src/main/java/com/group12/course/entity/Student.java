@@ -4,7 +4,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-
+/**
+ * Student 实体对象
+ * @author Xu Gang
+ * @date 2018年12月10日
+ */
+@Component
 public class Student {
     private Long account;
 
