@@ -22,7 +22,7 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @PostMapping(value = "/login", produces = "application/json; charset=utf-8")
+    /*@PostMapping(value = "/login", produces = "application/json; charset=utf-8")
     public void login(@RequestBody Student student, HttpServletResponse response)throws IOException {
         Student returnStudent = studentService.login(student);
         if (returnStudent.getAccount()==null){
@@ -38,5 +38,5 @@ public class StudentController {
             response.getWriter().write(obj);
             response.getWriter().write(param);
         }
-    }
+    }*/
 }
