@@ -28,7 +28,7 @@ public class Jwt {
     public static <T> String sign(T object, long maxAge) {
         try {
             final JWTSigner signer = new JWTSigner(SECRET);
-            final Map<String, Object> claims = new HashMap<String, Object>(16);
+            final Map<String, Object> claims = new HashMap<>(16);
             ObjectMapper mapper = new ObjectMapper();
             String jsonString = mapper.writeValueAsString(object);
             claims.put(PAYLOAD, jsonString);
@@ -40,11 +40,11 @@ public class Jwt {
     }
 
     /**
-     * 对传入的 jwt 编码解码
+     * 对传入的 jwt 编码解码S
      * @param jwt jwt编码
      * @param classT 生成的对象类型
      * */
-    public static<T> T unsign(String jwt, Class<T> classT) {
+    public static<T> T unSign(String jwt, Class<T> classT) {
         final JWTVerifier verifier = new JWTVerifier(SECRET);
         try {
             final Map<String,Object> claims= verifier.verify(jwt);
