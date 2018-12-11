@@ -1,12 +1,16 @@
 package com.group12.course.mapper;
 
 import com.group12.course.entity.Teacher;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 /**
  * Teacher Mapper 层接口
  * @author Xu Gang
  * @date 2018年12月10日
  */
+@Mapper
+@Component
 public interface TeacherMapper {
 
     /**
