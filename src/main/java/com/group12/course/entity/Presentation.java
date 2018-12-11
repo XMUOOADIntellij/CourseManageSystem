@@ -1,5 +1,6 @@
 package com.group12.course.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Presentation {
@@ -15,11 +16,13 @@ public class Presentation {
 
     private String reportMaterialUrl;
 
-    private Boolean status;
+    private Integer presentationOrder;
 
-    private Date gmtCreate;
+    private Boolean presented;
 
-    private Date gmtModified;
+    private LocalDateTime gmtCreate;
+
+    private LocalDateTime gmtModified;
 
     public Long getId() {
         return id;
@@ -42,7 +45,7 @@ public class Presentation {
     }
 
     public void setPresentationMaterialName(String presentationMaterialName) {
-        this.presentationMaterialName = presentationMaterialName == null ? null : presentationMaterialName.trim();
+        this.presentationMaterialName = presentationMaterialName;
     }
 
     public String getReportMaterialName() {
@@ -50,7 +53,7 @@ public class Presentation {
     }
 
     public void setReportMaterialName(String reportMaterialName) {
-        this.reportMaterialName = reportMaterialName == null ? null : reportMaterialName.trim();
+        this.reportMaterialName = reportMaterialName;
     }
 
     public String getPresentationMaterialUrl() {
@@ -58,7 +61,7 @@ public class Presentation {
     }
 
     public void setPresentationMaterialUrl(String presentationMaterialUrl) {
-        this.presentationMaterialUrl = presentationMaterialUrl == null ? null : presentationMaterialUrl.trim();
+        this.presentationMaterialUrl = presentationMaterialUrl;
     }
 
     public String getReportMaterialUrl() {
@@ -66,30 +69,38 @@ public class Presentation {
     }
 
     public void setReportMaterialUrl(String reportMaterialUrl) {
-        this.reportMaterialUrl = reportMaterialUrl == null ? null : reportMaterialUrl.trim();
+        this.reportMaterialUrl = reportMaterialUrl;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Integer getPresentationOrder() {
+        return presentationOrder;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setPresentationOrder(Integer presentationOrder) {
+        this.presentationOrder = presentationOrder;
     }
 
-    public Date getGmtCreate() {
+    public Boolean getPresented() {
+        return presented;
+    }
+
+    public void setPresented(Boolean presented) {
+        this.presented = presented;
+    }
+
+    public LocalDateTime getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(LocalDateTime gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
-    public Date getGmtModified() {
+    public LocalDateTime getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(Date gmtModified) {
+    public void setGmtModified(LocalDateTime gmtModified) {
         this.gmtModified = gmtModified;
     }
 }
