@@ -1,7 +1,7 @@
 package com.group12.course.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.group12.course.entity.JWT;
+import com.group12.course.entity.Jwt;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
 import com.group12.course.service.StudentService;
@@ -47,7 +47,7 @@ public class UserController {
                 response.setStatus(400);
             }
             else{
-                String token = JWT.sign(returnStudent,60L* 1000L* 30L);
+                String token = Jwt.sign(returnStudent,60L* 1000L* 30L);
                 response.setStatus(200);
                 Map map = new HashMap(1);
                 map.put("jwt",token);
@@ -63,7 +63,7 @@ public class UserController {
                 response.setStatus(400);
             }
             else{
-                String token = JWT.sign(returnTeacher,60L* 1000L* 30L);
+                String token = Jwt.sign(returnTeacher,60L* 1000L* 30L);
                 response.setStatus(200);
                 Map map = new HashMap(1);
                 map.put("jwt",token);

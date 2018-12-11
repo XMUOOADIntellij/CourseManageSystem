@@ -7,18 +7,28 @@ import com.auth0.jwt.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JWT {
+/**
+ * Jwt 工具类，用于将对象进行 jwt 编码
+ * @author Xu Gang
+ * @date 2018年12月11日
+ * */
+public class Jwt {
     private static final String SECRET = "XX#$%()(#*!()!KL<><MQLMNQNQJQK sdfkjsdrow32234545fdf>?N<:{LWPW";
 
     private static final String EXP = "exp";
 
     private static final String PAYLOAD = "payload";
 
-    // 加密，传入一个对象和有效期
+    /**
+     * 对传入的对象进行加密
+     * @param object 传入的对象
+     * @param maxAge 生存周期，以毫秒为单位
+     * @return 对象的 jwt 编码
+     * */
     public static <T> String sign(T object, long maxAge) {
         try {
             final JWTSigner signer = new JWTSigner(SECRET);
-            final Map<String, Object> claims = new HashMap<String, Object>();
+            final Map<String, Object> claims = new HashMap<String, Object>(16);
             ObjectMapper mapper = new ObjectMapper();
             String jsonString = mapper.writeValueAsString(object);
             claims.put(PAYLOAD, jsonString);
@@ -29,7 +39,11 @@ public class JWT {
         }
     }
 
-    // 解密，传入一个加密后的token字符串和解密后的类型
+    /**
+     * 对传入的 jwt 编码解码
+     * @param jwt jwt编码
+     * @param classT 生成的对象类型
+     * */
     public static<T> T unsign(String jwt, Class<T> classT) {
         final JWTVerifier verifier = new JWTVerifier(SECRET);
         try {

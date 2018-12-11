@@ -25,11 +25,11 @@ public class TeamDao {
         return teamMapper.deleteTeam(account);
     }
 
-    public int addTeam(Team Team){
-        return teamMapper.addTeam(Team);
+    public int addTeam(Team team){
+        return teamMapper.addTeam(team);
     }
 
-    public int changeTeam(Team Team){
-        return teamMapper.updateTeam(Team);
+    public int changeTeam(Team team){
+        return teamMapper.updateTeam(team);
     }
 }

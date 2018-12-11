@@ -5,6 +5,11 @@ import com.group12.course.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Student service 层
+ * @author Xu Gang
+ * @date 2018年12月11日
+ * */
 @Service
 public class StudentService {
 

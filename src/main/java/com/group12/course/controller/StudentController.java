@@ -1,21 +1,15 @@
 package com.group12.course.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.auth0.jwt.internal.org.bouncycastle.asn1.ocsp.ResponseData;
-import com.group12.course.entity.JWT;
-import com.group12.course.entity.Student;
 import com.group12.course.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
+/**
+ * Student Controller 层
+ * @author Xu Gang
+ * @date 2018年12月11日
+ * */
 @RestController
-
 @RequestMapping("/user")
 public class StudentController {
 

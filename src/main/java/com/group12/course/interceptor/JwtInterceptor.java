@@ -1,12 +1,17 @@
 package com.group12.course.interceptor;
 
-import com.group12.course.entity.JWT;
+import com.group12.course.entity.Jwt;
 import com.group12.course.entity.Teacher;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Jwt 过滤器
+ * @author Xu Gang
+ * @date 2018年12月11日
+ * */
 public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
@@ -16,7 +21,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         String token = request.getHeader("Authorization");
         //token不存在
         if(null != token) {
-            Teacher login = JWT.unsign(token, Teacher.class);
+            Teacher login = Jwt.unsign(token, Teacher.class);
             String loginId = request.getParameter("loginId");
             //解密token后的loginId与用户传来的loginId不一致，一般都是token过期
             System.out.println("jwt id :"+login.getAccount());

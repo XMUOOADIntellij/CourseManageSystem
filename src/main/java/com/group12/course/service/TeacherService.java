@@ -5,7 +5,11 @@ import com.group12.course.entity.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * Team service
+ * @author Xu Gang
+ * @date 2018年12月11日
+ * */
 @Service
 public class TeacherService {
 
