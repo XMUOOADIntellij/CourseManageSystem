@@ -17,6 +17,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * User Controller
+ * @author Xu Gang
+ * @date 2018年12月11日
+ * */
+
 @RestController
 
 @RequestMapping("/user")
@@ -31,7 +37,8 @@ public class UserController {
     @PostMapping(value = "/login", produces = "application/json; charset=utf-8")
     public void login(@RequestBody Teacher user, HttpServletResponse response)throws IOException {
 
-        if (user.getAccount().length()>=14){
+        final int studentAccountLength=14;
+        if (user.getAccount().length()>=studentAccountLength){
             Student tempStudent=new Student();
             tempStudent.setAccount(user.getAccount());
             tempStudent.setPassword(user.getPassword());
@@ -50,7 +57,6 @@ public class UserController {
                 response.getWriter().write(param);
             }
         }
-
         else {
             Teacher returnTeacher = teacherService.login(user);
             if (returnTeacher.getAccount()==null){
@@ -67,9 +73,7 @@ public class UserController {
                 response.getWriter().write(param);
             }
         }
-
-
-
-
     }
+
+
 }
