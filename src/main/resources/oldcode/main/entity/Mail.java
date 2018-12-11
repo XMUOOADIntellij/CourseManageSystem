@@ -75,9 +75,7 @@ public class Mail {
             return true;
         }
         catch (Exception e){
-            /**
-             * TODO
-             * 日志记录*/
+
             return false;
         }
     }
