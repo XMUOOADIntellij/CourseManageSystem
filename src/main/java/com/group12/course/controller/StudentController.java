@@ -31,7 +31,7 @@ public class StudentController {
         else{
             String token = JWT.sign(returnStudent,60L* 1000L* 30L);
             response.setStatus(200);
-            Map map = new HashMap();
+            Map map = new HashMap(1);
             map.put("jwt",token);
             String param= JSON.toJSONString(map);
             String obj = JSON.toJSONString(returnStudent);
