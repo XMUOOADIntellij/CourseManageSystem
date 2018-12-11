@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.SeminarMapper" >
+  <resultMap id="BaseResultMap" type="com.group12.course.entity.Seminar" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="round_id" property="roundId" jdbcType="BIGINT" />
+    <result column="seminar_name" property="seminarName" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="max_team" property="maxTeam" jdbcType="INTEGER" />
+    <result column="is_visible" property="visible" jdbcType="TINYINT" />
+    <result column="seminar_serial" property="seminarSerial" jdbcType="INTEGER" />
+    <result column="enroll_start_time" property="enrollStartTime" jdbcType="TIMESTAMP" />
+    <result column="enroll_end_time" property="enrollEndTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, course_id, round_id, seminar_name, introduction, max_team, is_visible, report_ddl, 
+    seminar_serial, enroll_start_time, enroll_end_time
+  </sql>
+
+  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from seminar
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from seminar
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.group12.course.entity.Seminar" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into seminar
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="roundId != null" >
+        round_id,
+      </if>
+      <if test="seminarName != null" >
+        seminar_name,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+      <if test="maxTeam != null" >
+        max_team,
+      </if>
+      <if test="visible != null" >
+        is_visible,
+      </if>
+      <if test="seminarSerial != null" >
+        seminar_serial,
+      </if>
+      <if test="enrollStartTime != null" >
+        enroll_start_time,
+      </if>
+      <if test="enrollEndTime != null" >
+        enroll_end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="roundId != null" >
+        #{roundId,jdbcType=BIGINT},
+      </if>
+      <if test="seminarName != null" >
+        #{seminarName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="maxTeam != null" >
+        #{maxTeam,jdbcType=INTEGER},
+      </if>
+      <if test="visible != null" >
+        #{visible,jdbcType=TINYINT},
+      </if>
+      <if test="seminarSerial != null" >
+        #{seminarSerial,jdbcType=INTEGER},
+      </if>
+      <if test="enrollStartTime != null" >
+        #{enrollStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enrollEndTime != null" >
+        #{enrollEndTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.group12.course.entity.Seminar" >
+    update seminar
+    <set >
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="roundId != null" >
+        round_id = #{roundId,jdbcType=BIGINT},
+      </if>
+      <if test="seminarName != null" >
+        seminar_name = #{seminarName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="maxTeam != null" >
+        max_team = #{maxTeam,jdbcType=INTEGER},
+      </if>
+      <if test="visible != null" >
+        is_visible = #{visible,jdbcType=TINYINT},
+      </if>
+      <if test="seminarSerial != null" >
+        seminar_serial = #{seminarSerial,jdbcType=INTEGER},
+      </if>
+      <if test="enrollStartTime != null" >
+        enroll_start_time = #{enrollStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enrollEndTime != null" >
+        enroll_end_time = #{enrollEndTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>
