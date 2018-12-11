@@ -19,7 +19,7 @@ public interface StudentMapper {
      * @param account 主键代表用户账号
      * @return 代表处理数量
      * */
-    int deleteStudent(Long account);
+    int deleteStudent(String account);
 
     /**
      * 在数据库中添加学生的记录
@@ -35,7 +35,7 @@ public interface StudentMapper {
      * @param account 主键代表用户账号
      * @return 代表获取到的学生对象
      * */
-    Student getStudent(Long account);
+    Student getStudent(String account);
 
     /**
      * 更新数据库中学生的记录

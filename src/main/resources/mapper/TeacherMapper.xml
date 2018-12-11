@@ -13,19 +13,19 @@
   </resultMap>
 
   <sql id="Base_Column_List" >
-    account, password, email, name, is_active, notify_interval, gmt_create, gmt_modified
+    id, account, password, email, name, is_active, notify_interval, gmt_create, gmt_modified
   </sql>
 
-  <select id="getTeacher" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="getTeacher" resultMap="BaseResultMap"  >
     select 
     <include refid="Base_Column_List" />
     from teacher
-    where account = #{account,jdbcType=BIGINT}
+    where account = #{account,jdbcType=VARCHAR}
   </select>
 
-  <delete id="deleteTeacher" parameterType="java.lang.Long" >
+  <delete id="deleteTeacher">
     delete from teacher
-    where account = #{account,jdbcType=BIGINT}
+    where account = #{account,jdbcType=VARCHAR}
   </delete>
 
   <insert id="addTeacher" parameterType="com.group12.course.entity.Teacher" >
@@ -58,7 +58,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="account != null" >
-        #{account,jdbcType=BIGINT},
+        #{account,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
@@ -109,7 +109,7 @@
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where account = #{account,jdbcType=BIGINT}
+    where account = #{account,jdbcType=VARCHAR}
   </update>
 
 </mapper>

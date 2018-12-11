@@ -27,11 +27,11 @@ public class StudentDao {
         }
     }
 
-    public Student getStudent(Long account){
+    public Student getStudent(String account){
         return studentMapper.getStudent(account);
     }
 
-    public int deleteStudent(Long account){
+    public int deleteStudent(String account){
         return studentMapper.deleteStudent(account);
     }
 

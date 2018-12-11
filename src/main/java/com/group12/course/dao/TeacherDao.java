@@ -16,11 +16,21 @@ public class TeacherDao {
     @Autowired
     TeacherMapper teacherMapper;
 
-    public Teacher getTeacher(Long account){
+    public Teacher login(Teacher teacher){
+        Teacher tempTeacher=teacherMapper.getTeacher(teacher.getAccount());
+        if (tempTeacher.getPassword().equals(teacher.getPassword())){
+            return tempTeacher;
+        }
+        else {
+            return new Teacher();
+        }
+    }
+
+    public Teacher getTeacher(String account){
         return teacherMapper.getTeacher(account);
     }
 
-    public int deleteTeacher(Long account){
+    public int deleteTeacher(String account){
         return teacherMapper.deleteTeacher(account);
     }
 

@@ -12,19 +12,19 @@
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
   </resultMap>
     <sql id="Base_Column_List" >
-    account, password, email, is_active, is_in_team, notify_interval, gmt_create, gmt_modified
+    id,account, password, email, is_active, is_in_team, notify_interval, gmt_create, gmt_modified
     </sql>
 
-  <select id="getStudent" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="getStudent" resultMap="BaseResultMap"  >
     select 
     <include refid="Base_Column_List" />
     from student
-    where account = #{account,jdbcType=BIGINT}
+    where account = #{account,jdbcType=VARCHAR}
   </select>
 
-  <delete id="deleteStudent" parameterType="java.lang.Long" >
+  <delete id="deleteStudent"  >
     delete from student
-    where account = #{account,jdbcType=BIGINT}
+    where account = #{account,jdbcType=VARCHAR}
   </delete>
 
 
@@ -58,7 +58,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="account != null" >
-        #{account,jdbcType=BIGINT},
+        #{account,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
@@ -109,7 +109,7 @@
         gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where account = #{account,jdbcType=BIGINT}
+    where account = #{account,jdbcType=VARCHAR}
   </update>
 
 </mapper>

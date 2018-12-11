@@ -45,7 +45,7 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名-->
-        <table tableName="presentation" domainObjectName="Presentation"
+        <table tableName="teacher" domainObjectName="tst"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
