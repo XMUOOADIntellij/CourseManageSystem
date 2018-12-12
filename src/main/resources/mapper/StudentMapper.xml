@@ -29,6 +29,13 @@
     from student
   </select>
 
+  <select id="getStudentByAccount" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where student_name = #{name,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteStudentByID">
     delete from student
     where id = #{id}
