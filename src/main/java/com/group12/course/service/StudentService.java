@@ -65,4 +65,34 @@ public class StudentService {
     public List<Student> getStudentByParam(String param){
         return studentDao.getStudentByParam(param);
     }
+
+    /**
+     * 更新数据库中学生的记录
+     *
+     * @param student 主键代表新的学生对象
+     * @return 代表处理数量
+     * */
+    public int changeStudentByID(Student student){
+        return studentDao.changeStudentByID(student);
+    }
+
+    /**
+     * 重置学生密码
+     *
+     * @param id 主键id
+     * @return 代表处理数量
+     * */
+    public int resetPassword(Long id){
+        return studentDao.resetPassword(id);
+    }
+
+    /**
+     * 删除数据库中学生的记录
+     *
+     * @param id 代表用户id
+     * @return 代表处理数量
+     * */
+    public int deleteStudent(Long id){
+        return studentDao.deleteStudent(id);
+    }
 }

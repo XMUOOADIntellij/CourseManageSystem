@@ -22,6 +22,7 @@ public class StudentDao {
     StudentMapper studentMapper;
 
     private static Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
+    final String defaultPassword = "123456";
 
     /**
      * 学生登陆
@@ -86,14 +87,46 @@ public class StudentDao {
         }
     }
 
-    public int deleteStudent(String account){
-        return studentMapper.deleteStudentByAccount(account);
+    /**
+     * 删除数据库中学生的记录
+     *
+     * @param id 代表用户id
+     * @return 代表处理数量
+     * */
+    public int deleteStudent(Long id){
+        return studentMapper.deleteStudentByID(id);
     }
 
     public int addStudent(Student student){
         return studentMapper.addStudent(student);
     }
 
+    /**
+     * 根据ID，更新数据库中学生的记录
+     *
+     * @param student 代表新的学生对象
+     * @return 代表处理数量
+     * */
+    public int changeStudentByID(Student student){
+        return studentMapper.updateStudentByID(student);
+    }
+
+    /**
+     * 重置学生密码
+     *
+     * @param id 主键id
+     * @return 代表处理数量
+     * */
+    public int resetPassword(Long id){
+        return changeStudentByID(new Student(id,defaultPassword));
+    }
+
+    /**
+     * 根据账号，更新数据库中学生的记录
+     *
+     * @param student 代表新的学生对象
+     * @return 代表处理数量
+     * */
     public int changeStudent(Student student){
         return studentMapper.updateStudent(student);
     }

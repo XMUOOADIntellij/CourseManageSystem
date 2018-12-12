@@ -29,9 +29,9 @@
     from student
   </select>
 
-  <delete id="deleteStudentByAccount">
+  <delete id="deleteStudentByID">
     delete from student
-    where account = #{account,jdbcType=VARCHAR}
+    where id = #{id}
   </delete>
 
   <insert id="addStudent" parameterType="com.group12.course.entity.Student" >
@@ -125,6 +125,37 @@
       </if>
     </set>
     where account = #{account,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateStudentByID" parameterType="com.group12.course.entity.Student" >
+    update student
+    <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="active != null" >
+        is_active = #{active,jdbcType=TINYINT},
+      </if>
+      <if test="studentName != null" >
+        student_name = #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id}
   </update>
 
 </mapper>
