@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.group12.course.mapper.KlassSeminarMapper" >
+
   <resultMap id="BaseResultMap" type="com.group12.course.entity.KlassSeminar" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="klass_id" property="klassId" jdbcType="BIGINT" />
-    <result column="seminar_id" property="seminarId" jdbcType="BIGINT" />
+
     <result column="report_ddl" property="reportDdl" jdbcType="TIMESTAMP" />
     <result column="seminar_status" property="seminarStatus" jdbcType="VARCHAR" />
+    <association property="seminar" column="seminar_id"
+                 select="com.group12.course.mapper.SeminarMapper.select"
+                 javaType="com.group12.course.entity.Seminar"/>
   </resultMap>
+
+  <select id="selectSeminar" resultType="com.group12.course.entity.Seminar" parameterType="java.lang.Long">
+    select * from seminar where id=#{id}
+  </select>
+
+
   <sql id="Base_Column_List" >
-    id, klass_id, seminar_id, report_ddl, seminar_status
+    id, seminar_id, report_ddl, seminar_status
   </sql>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from klass_seminar
@@ -23,13 +32,6 @@
     delete from klass_seminar
     where id = #{id,jdbcType=BIGINT}
   </delete>
-
-  <insert id="insert" parameterType="com.group12.course.entity.KlassSeminar" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-    insert into klass_seminar (id, klass_id, seminar_id, 
-      report_ddl, seminar_status)
-    values (#{id,jdbcType=BIGINT}, #{klassId,jdbcType=BIGINT}, #{seminarId,jdbcType=BIGINT}, 
-      #{reportDdl,jdbcType=TIMESTAMP}, #{seminarStatus,jdbcType=VARCHAR})
-  </insert>
 
   <insert id="insert" parameterType="com.group12.course.entity.KlassSeminar" >
     insert into klass_seminar

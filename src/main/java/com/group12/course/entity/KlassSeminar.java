@@ -7,7 +7,7 @@ public class KlassSeminar {
 
     private Long klassId;
 
-    private Long seminarId;
+    private Seminar seminar;
 
     private Date reportDdl;
 
@@ -29,12 +29,12 @@ public class KlassSeminar {
         this.klassId = klassId;
     }
 
-    public Long getSeminarId() {
-        return seminarId;
+    public Seminar getSeminar() {
+        return seminar;
     }
 
-    public void setSeminarId(Long seminarId) {
-        this.seminarId = seminarId;
+    public void setSeminar(Seminar seminar) {
+        this.seminar = seminar;
     }
 
     public Date getReportDdl() {
@@ -50,6 +50,6 @@ public class KlassSeminar {
     }
 
     public void setSeminarStatus(String seminarStatus) {
-        this.seminarStatus = seminarStatus == null ? null : seminarStatus.trim();
+        this.seminarStatus = seminarStatus;
     }
 }
