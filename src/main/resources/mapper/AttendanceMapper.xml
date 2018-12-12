@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.AttendanceMapper" >
+  <resultMap id="BaseResultMap" type="com.group12.course.entity.Attendance" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="klass_seminar_id" property="klassSeminarId" jdbcType="BIGINT" />
+    <result column="team_id" property="teamId" jdbcType="BIGINT" />
+    <result column="team_order" property="teamOrder" jdbcType="TINYINT" />
+    <result column="is_present" property="presented" jdbcType="TINYINT" />
+    <result column="report_name" property="reportName" jdbcType="VARCHAR" />
+    <result column="reprot_url" property="reprotUrl" jdbcType="VARCHAR" />
+    <result column="ppt_name" property="pptName" jdbcType="VARCHAR" />
+    <result column="ppt_url" property="pptUrl" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, klass_seminar_id, team_id, team_order, is_present, report_name, reprot_url, ppt_name, 
+    ppt_url
+  </sql>
+
+  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from attendance
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="delete" parameterType="java.lang.Long" >
+    delete from attendance
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.group12.course.entity.Attendance" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into attendance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="klassSeminarId != null" >
+        klass_seminar_id,
+      </if>
+      <if test="teamId != null" >
+        team_id,
+      </if>
+      <if test="teamOrder != null" >
+        team_order,
+      </if>
+      <if test="presented != null" >
+        is_present,
+      </if>
+      <if test="reportName != null" >
+        report_name,
+      </if>
+      <if test="reprotUrl != null" >
+        reprot_url,
+      </if>
+      <if test="pptName != null" >
+        ppt_name,
+      </if>
+      <if test="pptUrl != null" >
+        ppt_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="klassSeminarId != null" >
+        #{klassSeminarId,jdbcType=BIGINT},
+      </if>
+      <if test="teamId != null" >
+        #{teamId,jdbcType=BIGINT},
+      </if>
+      <if test="teamOrder != null" >
+        #{teamOrder,jdbcType=TINYINT},
+      </if>
+      <if test="presented != null" >
+        #{presented,jdbcType=TINYINT},
+      </if>
+      <if test="reportName != null" >
+        #{reportName,jdbcType=VARCHAR},
+      </if>
+      <if test="reprotUrl != null" >
+        #{reprotUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pptName != null" >
+        #{pptName,jdbcType=VARCHAR},
+      </if>
+      <if test="pptUrl != null" >
+        #{pptUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.group12.course.entity.Attendance" >
+    update attendance
+    <set >
+      <if test="klassSeminarId != null" >
+        klass_seminar_id = #{klassSeminarId,jdbcType=BIGINT},
+      </if>
+      <if test="teamId != null" >
+        team_id = #{teamId,jdbcType=BIGINT},
+      </if>
+      <if test="teamOrder != null" >
+        team_order = #{teamOrder,jdbcType=TINYINT},
+      </if>
+      <if test="presented != null" >
+        is_present = #{presented,jdbcType=TINYINT},
+      </if>
+      <if test="reportName != null" >
+        report_name = #{reportName,jdbcType=VARCHAR},
+      </if>
+      <if test="reprotUrl != null" >
+        reprot_url = #{reprotUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pptName != null" >
+        ppt_name = #{pptName,jdbcType=VARCHAR},
+      </if>
+      <if test="pptUrl != null" >
+        ppt_url = #{pptUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>
