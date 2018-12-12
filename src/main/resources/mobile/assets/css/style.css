@@ -24,3 +24,9 @@ li.nav-item{
     padding: 0.5rem 0;
     color: #9aa0ac;
     }
+.float-action-button{
+    right:5%;
+    position:fixed;
+    bottom:5%;
+    border-radius: 50%;
+    }

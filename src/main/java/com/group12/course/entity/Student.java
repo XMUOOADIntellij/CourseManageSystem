@@ -11,28 +11,53 @@ import java.util.Date;
  */
 @Component
 public class Student {
+    private Long id;
+
     private String account;
 
     private String password;
 
     private String email;
 
+    /**
+     * false 代表男，true 代表女
+     */
+    private Boolean sex;
+
     private Boolean active;
 
-    private Boolean inTeam;
-
-    private Integer notifyInterval;
+    private String studentName;
 
     private Date gmtCreate;
 
     private Date gmtModified;
+
+    public Student() {
+    }
+
+    public Student(String account) {
+        this.account = account;
+    }
+
+    public Student(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getAccount() {
         return account;
     }
 
     public void setAccount(String account) {
-        this.account = account;
+        this.account = account == null ? null : account.trim();
     }
 
     public String getPassword() {
@@ -51,6 +76,14 @@ public class Student {
         this.email = email == null ? null : email.trim();
     }
 
+    public Boolean getSex() {
+        return sex;
+    }
+
+    public void setSex(Boolean sex) {
+        this.sex = sex;
+    }
+
     public Boolean getActive() {
         return active;
     }
@@ -59,20 +92,12 @@ public class Student {
         this.active = active;
     }
 
-    public Boolean getInTeam() {
-        return inTeam;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setInTeam(Boolean inTeam) {
-        this.inTeam = inTeam;
-    }
-
-    public Integer getNotifyInterval() {
-        return notifyInterval;
-    }
-
-    public void setNotifyInterval(Integer notifyInterval) {
-        this.notifyInterval = notifyInterval;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName == null ? null : studentName.trim();
     }
 
     public Date getGmtCreate() {
