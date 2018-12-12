@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Klass Dao 层接口实现
+ * Klass Dao 层
  * @author Tan Xue
  * @date 2018/12/12
  */

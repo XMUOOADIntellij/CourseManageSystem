@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.RoundMapper" >
+  <resultMap id="BaseResultMap" type="com.group12.course.entity.Round" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="round_serial" property="roundSerial" jdbcType="BIT" />
+    <result column="presentation_score_method" property="presentationScoreMethod" jdbcType="BIT" />
+    <result column="report_score_method" property="reportScoreMethod" jdbcType="BIT" />
+    <result column="question_score_method" property="questionScoreMethod" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, course_id, round_serial, presentation_score_method, report_score_method, question_score_method
+  </sql>
+
+  <select id="getRound" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from round
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteRound" parameterType="java.lang.Long" >
+    delete from round
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="addRound" parameterType="com.group12.course.entity.Round" >
+    insert into round
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="roundSerial != null" >
+        round_serial,
+      </if>
+      <if test="presentationScoreMethod != null" >
+        presentation_score_method,
+      </if>
+      <if test="reportScoreMethod != null" >
+        report_score_method,
+      </if>
+      <if test="questionScoreMethod != null" >
+        question_score_method,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="roundSerial != null" >
+        #{roundSerial,jdbcType=BIT},
+      </if>
+      <if test="presentationScoreMethod != null" >
+        #{presentationScoreMethod,jdbcType=BIT},
+      </if>
+      <if test="reportScoreMethod != null" >
+        #{reportScoreMethod,jdbcType=BIT},
+      </if>
+      <if test="questionScoreMethod != null" >
+        #{questionScoreMethod,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateRound" parameterType="com.group12.course.entity.Round" >
+    update round
+    <set >
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="roundSerial != null" >
+        round_serial = #{roundSerial,jdbcType=BIT},
+      </if>
+      <if test="presentationScoreMethod != null" >
+        presentation_score_method = #{presentationScoreMethod,jdbcType=BIT},
+      </if>
+      <if test="reportScoreMethod != null" >
+        report_score_method = #{reportScoreMethod,jdbcType=BIT},
+      </if>
+      <if test="questionScoreMethod != null" >
+        question_score_method = #{questionScoreMethod,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>
