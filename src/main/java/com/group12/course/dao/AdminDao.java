@@ -16,6 +16,12 @@ public class AdminDao {
     @Autowired
     AdminMapper adminMapper;
 
+    /**
+     * 登陆，验证密码是否正确
+     * @param admin 传入的 admin 对象
+     * @return 若密码正确，返回数据库中的 admin对象
+     * 若密码错误，返回一个空对象
+     * */
     public Admin login(Admin admin){
         if (admin==null||admin.getAccount()==null||admin.getPassword()==null){
             // 传入数据有误

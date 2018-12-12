@@ -43,7 +43,7 @@ public class UserController {
                 response.setStatus(400);
             }
             else{
-                String token = Jwt.sign(returnStudent,60L* 1000L* 30L);
+                String token = Jwt.sign(returnStudent,60L* 1000L* 60L * 2L);
                 response.setStatus(200);
                 Map map = new HashMap(1);
                 map.put("jwt",token);
