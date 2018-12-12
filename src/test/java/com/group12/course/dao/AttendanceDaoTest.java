@@ -1,7 +1,7 @@
 package com.group12.course.dao;
 
-import com.group12.course.entity.Presentation;
-import com.group12.course.mapper.PresentationMapper;
+import com.group12.course.entity.Attendance;
+import com.group12.course.mapper.AttendanceMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,24 +14,25 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class PresentationDaoTest {
-
+public class AttendanceDaoTest {
     @Autowired
-    PresentationMapper presentationMapper;
-    Presentation presentation;
+    AttendanceMapper attendanceMapper;
+    Attendance attendance;
 
     @Before
     public void initial(){
-        presentation = new Presentation();
+        attendance = new Attendance();
     }
 
     @Test
     public void testEnrollPresentation(){
-        presentation.setTeamId(new Long(123));
-        presentation.setPresentationOrder(1);
-        presentation.setPresented(false);
-        Assert.assertEquals(1,presentationMapper.insertSelective(presentation));
-        Assert.assertNotNull(presentation.getId());
+        attendance.setTeamId(new Long(2));
+        attendance.setIsPresent(false);
+        attendance.setTeamOrder(6);
+        attendance.setKlassSeminarId(new Long(2));
+
+        Assert.assertEquals(1,attendanceMapper.insert(attendance));
+        Assert.assertNotNull(attendance.getId());
     }
 
 }

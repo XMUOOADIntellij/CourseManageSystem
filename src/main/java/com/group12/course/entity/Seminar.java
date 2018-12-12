@@ -16,7 +16,7 @@ public class Seminar {
 
     private Integer maxTeam;
 
-    private Byte visible;
+    private Boolean visible;
 
     private Integer seminarSerial;
 
@@ -72,11 +72,11 @@ public class Seminar {
         this.maxTeam = maxTeam;
     }
 
-    public Byte getIsVisible() {
+    public Boolean getIsVisible() {
         return visible;
     }
 
-    public void setIsVisible(Byte visible) {
+    public void setIsVisible(Boolean visible) {
         this.visible = visible;
     }
 

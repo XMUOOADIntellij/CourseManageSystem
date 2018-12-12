@@ -47,7 +47,7 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名-->
-        <table tableName="seminar" domainObjectName="Seminar"
+        <table tableName="seminar_score_table" domainObjectName="SeminarScore"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
