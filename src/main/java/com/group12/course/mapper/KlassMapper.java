@@ -4,6 +4,8 @@ import com.group12.course.entity.Klass;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Klass Mapper 层
  * @author Tan Xue
@@ -41,5 +43,12 @@ public interface KlassMapper {
      * @return 修改数量
      */
     int updateKlass(Klass record);
+
+    /**
+     * 查询某一课程下的所有班级
+     * @param courseId 课程ID
+     * @return 班级列表
+     */
+    List<Klass> getAllKlassByCourseId(Long courseId);
 
 }

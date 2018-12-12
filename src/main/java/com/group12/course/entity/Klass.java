@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 public class Klass {
     private Long id;
 
-    private Long courseId;
+    private Course course;
 
-    private Byte grade;
+    private Long grade;
 
-    private Byte klassSerial;
+    private Integer klassSerial;
 
     private String introduction;
 
@@ -28,27 +28,27 @@ public class Klass {
         this.id = id;
     }
 
-    public Long getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
+    public void setCourse(Long courseId) {
+        this.course = course;
     }
 
-    public Byte getGrade() {
+    public Long getGrade() {
         return grade;
     }
 
-    public void setGrade(Byte grade) {
+    public void setGrade(Long grade) {
         this.grade = grade;
     }
 
-    public Byte getKlassSerial() {
+    public Integer getKlassSerial() {
         return klassSerial;
     }
 
-    public void setKlassSerial(Byte klassSerial) {
+    public void setKlassSerial(Integer klassSerial) {
         this.klassSerial = klassSerial;
     }
 
