@@ -5,6 +5,10 @@ import com.group12.course.mapper.TeacherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+
 /**
  * Teacher dao 层对应接口的实现
  * @author Xu Gang
@@ -15,6 +19,9 @@ public class TeacherDao {
 
     @Autowired
     TeacherMapper teacherMapper;
+
+    private static Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
+    final String defaultPassword = "123456";
 
     /**
      * 教师登陆
@@ -52,15 +59,78 @@ public class TeacherDao {
         }
     }
 
+    /**
+     * 获取数据库中所有教师的记录
+     *
+     * @return 代表获取到的老师对象
+     * */
+    public List<Teacher> getAllTeacher(){
+        return teacherMapper.getAllTeacher();
+    }
+
+    /**
+     * 通过姓名或账号来获取老师记录
+     * @param param 老师姓名或账号
+     * @return 所有同名的老师
+     * */
+    public List<Teacher> getTeacherByParam(String param){
+        if (NUMBER_PATTERN.matcher(param).matches()){
+            List<Teacher> list = new ArrayList<>();
+            // 通过账号只会找到一个
+            list.add(getTeacher(param));
+            return list;
+        }
+        else {
+            return teacherMapper.getTeacherByName(param.trim());
+        }
+    }
+
+    /**
+     * 删除教师
+     * @param account 账号
+     * @return 处理数量
+     * 成功删除为1，否则为0
+     * */
     public int deleteTeacher(String account){
         return teacherMapper.deleteTeacherByAccount(account);
     }
 
+    /**
+     * 添加教师
+     * @param teacher 新教师对象
+     * @return 处理数量
+     * 成功添加为1，否则为0
+     * */
     public int addTeacher(Teacher teacher){
         return teacherMapper.addTeacher(teacher);
     }
 
+    /**
+     * 修改教师
+     * @param teacher 教师对象
+     * @return 处理数量
+     * 成功修改为1，否则为0
+     * */
     public int changeTeacher(Teacher teacher){
         return teacherMapper.updateTeacher(teacher);
+    }
+
+    /**
+     * 重设教师密码
+     * @param id 教师id
+     * @return 处理数量
+     * */
+    public int resetPassword(Long id){
+        return teacherMapper.updateTeacher(new Teacher(id,defaultPassword));
+    }
+
+    /**
+     * 删除教师
+     * @param id 账号
+     * @return 处理数量
+     * 成功删除为1，否则为0
+     * */
+    public int deleteTeacherById(Long id){
+        return teacherMapper.deleteTeacherByID(id);
     }
 }

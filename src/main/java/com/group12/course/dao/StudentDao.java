@@ -79,6 +79,7 @@ public class StudentDao {
     public List<Student> getStudentByParam(String param){
         if (NUMBER_PATTERN.matcher(param).matches()){
             List<Student> list = new ArrayList<>();
+            // 通过账号只会找到一个
             list.add(getStudent(param));
             return list;
         }

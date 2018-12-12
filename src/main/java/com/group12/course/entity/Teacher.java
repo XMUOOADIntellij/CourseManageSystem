@@ -30,6 +30,11 @@ public class Teacher {
     public Teacher() {
     }
 
+    public Teacher(Long id, String password) {
+        this.id = id;
+        this.password = password;
+    }
+
     public Teacher(String account) {
         this.account = account;
     }

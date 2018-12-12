@@ -7,7 +7,7 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
-    <result column="is_active" property="isActive" jdbcType="TINYINT" />
+    <result column="is_active" property="active" jdbcType="TINYINT" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -16,16 +16,34 @@
     id, account, password, email, teacher_name, is_active, gmt_create, gmt_modified
   </sql>
 
-  <select id="getTeacherByAccount" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="getTeacherByAccount" resultMap="BaseResultMap"  >
     select
     <include refid="Base_Column_List" />
     from teacher
     where account = #{account,jdbcType=VARCHAR}
   </select>
 
-  <delete id="deleteTeacherByAccount" parameterType="java.lang.Long" >
+  <select id="getAllTeacher" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from teacher
+  </select>
+
+  <select id="getTeacherByName" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from teacher
+    where teacher_name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteTeacherByAccount" >
     delete from teacher
     where account = #{account,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteTeacherByID" >
+    delete from teacher
+    where id = #{id}
   </delete>
 
   <insert id="addTeacher" parameterType="com.group12.course.entity.Teacher" >
