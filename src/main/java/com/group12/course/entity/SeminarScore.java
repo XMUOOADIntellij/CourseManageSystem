@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 public class SeminarScore {
     private Long klassSeminarId;
     private Long teamId;
+
     private BigDecimal presentationScore;
     private BigDecimal questionScore;
     private BigDecimal reportScore;
