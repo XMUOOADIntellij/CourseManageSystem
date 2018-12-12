@@ -23,7 +23,7 @@ public class SeminarServiceImpl implements SeminarService {
 
     @Override
     public List<Seminar> listRoundSeminars(Long roundId){
-        //TODO 讨论课列表
+        //讨论课列表
          return null;
     }
 
@@ -129,7 +129,7 @@ public class SeminarServiceImpl implements SeminarService {
                 String realFileName = java.net.URLDecoder.decode(names[i], "UTF-8");
                 String realFilePath = java.net.URLDecoder.decode(paths[i], "UTF-8");
                 File file = new File(realFilePath,realFileName);
-                //TODO:未对文件不存在时进行操作，后期优化。
+                //未对文件不存在时进行操作，后期优化。
                 if (file.exists()) {
                     //将需要压缩的文件格式化为输入流
                     fileInputStream = new FileInputStream(file);

@@ -7,10 +7,7 @@ import com.group12.course.entity.Teacher;
 import com.group12.course.service.StudentService;
 import com.group12.course.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -72,6 +69,26 @@ public class UserController {
                 response.getWriter().write(param);
             }
         }
+    }
+
+    @PutMapping(value = "/code",produces = "application/json; charset=utf-8")
+    public void active(@RequestBody Teacher user, HttpServletResponse response)throws IOException {
+        /*TODO*/
+    }
+
+    @GetMapping(value = "/infomation",produces = "application/json; charset=utf-8")
+    public void information(@RequestBody Teacher user, HttpServletResponse response)throws IOException {
+        /*TODO*/
+    }
+
+    @PutMapping(value = "/password",produces = "application/json; charset=utf-8")
+    public void password(@RequestBody Teacher user, HttpServletResponse response)throws IOException {
+        /*TODO*/
+    }
+
+    @PutMapping(value = "/login",produces = "application/json; charset=utf-8")
+    public void email(@RequestBody Teacher user, HttpServletResponse response)throws IOException {
+        /*TODO*/
     }
 
 
