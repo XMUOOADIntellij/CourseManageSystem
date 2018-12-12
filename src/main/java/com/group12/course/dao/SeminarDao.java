@@ -12,14 +12,20 @@ public class SeminarDao {
     SeminarMapper seminarMapper;
 
     public int createSeminar(Seminar record){
+        //TODO Seminar 表插入一条记录
+        //TODO courseId -> Course表找到班级->classSeminar表插入班级讨论课记录
+        //TODO 没有roundId  -> Round表(新建）
         return 0;
     }
 
     public int deleteSeminar(){
+        //TODO seminarId 删除class_seminar记录-》删除attendance
+        //TODO Seminar表删除记录
         return 0;
     }
 
-    public Seminar selectSeminar(){
+    public Seminar selectSeminar(Long id){
+        //
         return null;
     }
 
