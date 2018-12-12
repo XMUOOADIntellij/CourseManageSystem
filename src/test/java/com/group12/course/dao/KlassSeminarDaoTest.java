@@ -19,7 +19,7 @@ public class KlassSeminarDaoTest {
     @Test
     public void testSelectKlassSeminar(){
         KlassSeminar record = klassSeminarMapper.select(new Long(1));
-        System.out.println(record.getSeminar());
+        System.out.println(record.getSeminar().toString());
 
     }
 

@@ -5,7 +5,7 @@ import java.util.Date;
 public class KlassSeminar {
     private Long id;
 
-    private Long klassId;
+    private Klass klass;
 
     private Seminar seminar;
 
@@ -21,12 +21,12 @@ public class KlassSeminar {
         this.id = id;
     }
 
-    public Long getKlassId() {
-        return klassId;
+    public Klass getKlass() {
+        return klass;
     }
 
-    public void setKlassId(Long klassId) {
-        this.klassId = klassId;
+    public void setKlass(Klass klass) {
+        this.klass = klass;
     }
 
     public Seminar getSeminar() {
