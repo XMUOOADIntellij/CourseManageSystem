@@ -32,9 +32,6 @@
   <insert id="addTeam" parameterType="com.group12.course.entity.Team" >
     insert into team
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="courseId != null" >
         course_id,
       </if>
@@ -58,9 +55,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="courseId != null" >
         #{courseId,jdbcType=BIGINT},
       </if>
