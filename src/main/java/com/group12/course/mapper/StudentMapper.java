@@ -4,6 +4,8 @@ import com.group12.course.entity.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Student Mapper 层接口
  * @author Xu Gang
@@ -45,4 +47,17 @@ public interface StudentMapper {
      * */
     int updateStudent(Student record);
 
+    /**
+     * 获取所有学生的记录
+     *
+     * @return 返回所有的学生的列表
+     * */
+    List<Student> getAllStudent();
+
+    /**
+     * 通过姓名来获取学生记录
+     * @param name 学生姓名
+     * @return 所有同名的学生
+     * */
+    List<Student> getStudentByName(String name);
 }

@@ -7,7 +7,7 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="TINYINT" />
-    <result column="is_active" property="isActive" jdbcType="TINYINT" />
+    <result column="is_active" property="active" jdbcType="TINYINT" />
     <result column="student_name" property="studentName" jdbcType="VARCHAR" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
@@ -21,6 +21,12 @@
     <include refid="Base_Column_List" />
     from student
     where account = #{account,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getAllStudent" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from student
   </select>
 
   <delete id="deleteStudentByAccount">

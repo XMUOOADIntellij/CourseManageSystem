@@ -5,6 +5,10 @@ import com.group12.course.mapper.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+
 
 /**
  * Student dao 层对应接口的实现
@@ -17,6 +21,7 @@ public class StudentDao {
     @Autowired
     StudentMapper studentMapper;
 
+    private static Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+");
 
     /**
      * 学生登陆
@@ -42,6 +47,7 @@ public class StudentDao {
 
     /**
      * 获取个人信息
+     *
      * @param account 用户账户
      * @return 账户存在则返回该对象，否则则返回一个新对象
      * */
@@ -51,6 +57,32 @@ public class StudentDao {
         }
         else {
             return studentMapper.getStudentByAccount(account);
+        }
+    }
+
+    /**
+     * 获取所有学生的记录
+     *
+     * @return 返回所有的学生的列表
+     * */
+    public List<Student> getAllStudent(){
+        return studentMapper.getAllStudent();
+    }
+
+    /**
+     * 通过账号或者姓名获取学生信息
+     * @param param 可以是学生姓名或者账号
+     * @return 返回符合的学生的列表
+     * 当是通过账号查询时，列表只会包含一个
+     * */
+    public List<Student> getStudentByParam(String param){
+        if (NUMBER_PATTERN.matcher(param).matches()){
+            List<Student> list = new ArrayList<>();
+            list.add(getStudent(param));
+            return list;
+        }
+        else {
+            return studentMapper.getStudentByName(param.trim());
         }
     }
 
