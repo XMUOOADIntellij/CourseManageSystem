@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.KlassMapper" >
+  <resultMap id="BaseResultMap" type="com.group12.course.entity.Klass" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="course_id" property="courseId" jdbcType="BIGINT" />
+    <result column="grade" property="grade" jdbcType="TINYINT" />
+    <result column="klass_serial" property="klassSerial" jdbcType="TINYINT" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, course_id, grade, klass_serial, introduction
+  </sql>
+
+  <select id="getKlass" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from klass
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteKlass" parameterType="java.lang.Long" >
+    delete from klass
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="addKlass" parameterType="com.group12.course.entity.Klass" >
+    insert into klass
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="klassSerial != null" >
+        klass_serial,
+      </if>
+      <if test="introduction != null" >
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=TINYINT},
+      </if>
+      <if test="klassSerial != null" >
+        #{klassSerial,jdbcType=TINYINT},
+      </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateKlass" parameterType="com.group12.course.entity.Klass" >
+    update klass
+    <set >
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=TINYINT},
+      </if>
+      <if test="klassSerial != null" >
+        klass_serial = #{klassSerial,jdbcType=TINYINT},
+      </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>
