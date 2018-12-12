@@ -15,7 +15,7 @@ import java.util.Date;
 public class Course {
     private Long id;
 
-    private Long teacherId;
+    private Teacher teacher;
 
     private String courseName;
 
@@ -39,12 +39,12 @@ public class Course {
         this.id = id;
     }
 
-    public Long getTeacherId() {
-        return teacherId;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setTeacherId(Long teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     public String getCourseName() {

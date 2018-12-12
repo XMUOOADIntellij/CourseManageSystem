@@ -3,8 +3,6 @@ package com.group12.course.entity;
 public class Round {
     private Long id;
 
-    private Long teacherId;
-
     private Integer roundSerial;
 
     private Integer presentationScoreMethod;
@@ -21,14 +19,6 @@ public class Round {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Long teacherId) {
-        this.teacherId = teacherId;
     }
 
     public Integer getRoundSerial() {
