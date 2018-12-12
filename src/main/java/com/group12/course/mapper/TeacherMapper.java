@@ -19,7 +19,7 @@ public interface TeacherMapper {
      * @param account 主键代表用户账号
      * @return 代表处理数量
      * */
-    int deleteTeacher(String account);
+    int deleteTeacherByAccount(String account);
 
     /**
      * 在数据库中添加教师的记录
@@ -35,7 +35,7 @@ public interface TeacherMapper {
      * @param account 主键代表用户账号
      * @return 代表获取到的老师对象
      * */
-    Teacher getTeacher(String account);
+    Teacher getTeacherByAccount(String account);
 
     /**
      * 更新数据库中教师的记录

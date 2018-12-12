@@ -17,22 +17,45 @@ public class StudentDao {
     @Autowired
     StudentMapper studentMapper;
 
+
+    /**
+     * 学生登陆
+     *
+     * @param student 传入的学生对象
+     * @return 若密码符合，返回真实的学生对象
+     * 否则返回一个新对象
+     * */
     public Student login(Student student){
-        Student tempStudent=studentMapper.getStudent(student.getAccount());
-        if(tempStudent.getPassword().equals(student.getPassword())){
-            return tempStudent;
-        }
-        else {
+        if (student.getPassword()==null||student.getAccount()==null){
             return new Student();
+        }
+        else{
+            Student tempStudent=studentMapper.getStudentByAccount(student.getAccount());
+            if(tempStudent.getPassword().equals(student.getPassword())){
+                return tempStudent;
+            }
+            else {
+                return new Student();
+            }
         }
     }
 
+    /**
+     * 获取个人信息
+     * @param account 用户账户
+     * @return 账户存在则返回该对象，否则则返回一个新对象
+     * */
     public Student getStudent(String account){
-        return studentMapper.getStudent(account);
+        if (account==null){
+            return new Student();
+        }
+        else {
+            return studentMapper.getStudentByAccount(account);
+        }
     }
 
     public int deleteStudent(String account){
-        return studentMapper.deleteStudent(account);
+        return studentMapper.deleteStudentByAccount(account);
     }
 
     public int addStudent(Student student){
