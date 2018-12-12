@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 /**
- * Klass Mapper层接口
+ * Klass Mapper 层
  * @author Tan Xue
  * @date 2018/12/12
  */
