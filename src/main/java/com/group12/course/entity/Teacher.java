@@ -11,28 +11,48 @@ import java.util.Date;
  */
 @Component
 public class Teacher {
+    private Long id;
+
     private String account;
 
     private String password;
 
     private String email;
 
-    private String name;
+    private String teacherName;
 
     private Boolean active;
-
-    private Integer notifyInterval;
 
     private Date gmtCreate;
 
     private Date gmtModified;
+
+    public Teacher() {
+    }
+
+    public Teacher(String account) {
+        this.account = account;
+    }
+
+    public Teacher(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getAccount() {
         return account;
     }
 
     public void setAccount(String account) {
-        this.account = account;
+        this.account = account == null ? null : account.trim();
     }
 
     public String getPassword() {
@@ -51,12 +71,12 @@ public class Teacher {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getName() {
-        return name;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName == null ? null : teacherName.trim();
     }
 
     public Boolean getActive() {
@@ -65,14 +85,6 @@ public class Teacher {
 
     public void setActive(Boolean active) {
         this.active = active;
-    }
-
-    public Integer getNotifyInterval() {
-        return notifyInterval;
-    }
-
-    public void setNotifyInterval(Integer notifyInterval) {
-        this.notifyInterval = notifyInterval;
     }
 
     public Date getGmtCreate() {

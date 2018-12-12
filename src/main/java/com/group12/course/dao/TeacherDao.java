@@ -16,22 +16,44 @@ public class TeacherDao {
     @Autowired
     TeacherMapper teacherMapper;
 
+    /**
+     * 教师登陆
+     *
+     * @param teacher 传入的教师对象
+     * @return 若密码正确，返回该教师对象
+     * 否则返回一个新的教师对象
+     * */
     public Teacher login(Teacher teacher){
-        Teacher tempTeacher=teacherMapper.getTeacher(teacher.getAccount());
-        if (tempTeacher.getPassword().equals(teacher.getPassword())){
-            return tempTeacher;
+        if (teacher==null||teacher.getAccount()==null||teacher.getPassword()==null){
+            return new Teacher();
         }
         else {
-            return new Teacher();
+            Teacher tempTeacher=teacherMapper.getTeacherByAccount(teacher.getAccount());
+            if (tempTeacher.getPassword().equals(teacher.getPassword())){
+                return tempTeacher;
+            }
+            else {
+                return new Teacher();
+            }
         }
     }
 
+    /**
+     * 获取个人信息
+     * @param account 用户账户
+     * @return 账户存在则返回该对象，否则则返回一个新对象
+     * */
     public Teacher getTeacher(String account){
-        return teacherMapper.getTeacher(account);
+        if (account==null){
+            return new Teacher();
+        }
+        else {
+            return teacherMapper.getTeacherByAccount(account);
+        }
     }
 
     public int deleteTeacher(String account){
-        return teacherMapper.deleteTeacher(account);
+        return teacherMapper.deleteTeacherByAccount(account);
     }
 
     public int addTeacher(Teacher teacher){

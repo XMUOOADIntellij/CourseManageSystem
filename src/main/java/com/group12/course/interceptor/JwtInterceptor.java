@@ -21,7 +21,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         String token = request.getHeader("Authorization");
         // token不存在
         if(null != token) {
-            Teacher login = Jwt.unSign(token, Teacher.class);
+            Teacher login = Jwt.unSign(token,Teacher.class);
             String loginId = request.getParameter("loginId");
             // 解密token后的loginId与用户传来的loginId不一致，一般都是token过期
             System.out.println("jwt id :"+login.getAccount());
