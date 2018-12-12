@@ -103,4 +103,20 @@ public class Seminar {
     public void setEnrollEndTime(LocalDateTime enrollEndTime) {
         this.enrollEndTime = enrollEndTime;
     }
+
+
+    @Override
+    public String toString() {
+        return "id:"+this.getId()+"\n"+
+        "courseId:" +this.getCourseId()+"\n"+
+        "roundId:"  +this.getRoundId()+"\n"+
+        "seminarName:"+this.getSeminarName()+"\n"+
+        "introduction:"+this.getIntroduction()+"\n"+
+        "maxTeam:"+this.getMaxTeam()+"\n"+
+        "visible:"+this.getIsVisible()+"\n"+
+        "seminarSerial:"+this.getSeminarSerial()+"\n"+
+        "enrollStartTime:"+this.getEnrollStartTime()+"\n"+
+        "enrollEndTime:"+this.getEnrollEndTime();
+
+    }
 }

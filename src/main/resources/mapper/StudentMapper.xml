@@ -16,13 +16,6 @@
     id, account, password, email, sex, is_active, student_name, gmt_create, gmt_modified
   </sql>
 
-  <select id="getStudentByAccount" resultMap="BaseResultMap" >
-    select
-    <include refid="Base_Column_List" />
-    from student
-    where account = #{account,jdbcType=VARCHAR}
-  </select>
-
   <select id="getAllStudent" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
