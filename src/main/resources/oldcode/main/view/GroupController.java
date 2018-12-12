@@ -71,7 +71,7 @@ public class GroupController {
      */
     @DeleteMapping(value = "/deleteGroup")
     public void disbandGroup(String groupId,HttpServletResponse reponse){
-
+        groupService.disbandGroup(groupId);
     }
 
     /**
