@@ -22,15 +22,22 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    /**
+     * 新建课程
+     * @param course
+     * @param response
+     * @return
+     */
     @PostMapping(value = "", consumes = "application/json; charset=utf-8")
     public Long addCourse(@RequestBody Course course,HttpServletResponse response) {
         courseService.addCourse(course);
         return course.getId();
+        /** 有疑问:Course对象存不了所有信息 */
     }
 
     @GetMapping(value = "", produces = "application/json; charset=utf-8")
     public List<Course> listCourses(@RequestBody Teacher teacher,HttpServletResponse response) {
-        return courseService.listCourses(teacher.getTeacherId());
+        return courseService.listCourses(teacher.getId());
     }
 
     @GetMapping(value = "/{courseId}",produces = "application/json; charset=utf-8")
@@ -39,23 +46,16 @@ public class CourseController {
     }
 
 
-    }
-
-
-
 
     /**
-     * @param course Course
+     *
+     * @param
      * @return Course
      */
-    @PutMapping(value = "/update")
-    public boolean updateCourse(@RequestBody Course course) {
-        try {
-            return courseService.updateCourse(course)!=0;
-        } catch (Exception e) {
-            throw new CourseNotFoundException(course.getId().intValue());
-        }
-    }
+//    @PutMapping(value = "/update")
+//    public boolean updateCourse(@RequestBody Course course) {
+//        return
+//    }
 
     @DeleteMapping(value = "/delete/{id}")
     public boolean deleteCourse(@PathVariable Long id) {

@@ -3,15 +3,17 @@ package com.group12.course.entity;
 public class Round {
     private Long id;
 
-    private Long courseId;
+    private Long teacherId;
 
-    private Boolean roundSerial;
+    private Integer roundSerial;
 
-    private Boolean presentationScoreMethod;
+    private Integer presentationScoreMethod;
 
-    private Boolean reportScoreMethod;
+    private Integer reportScoreMethod;
 
-    private Boolean questionScoreMethod;
+    private Integer questionScoreMethod;
+
+    private Course course;
 
     public Long getId() {
         return id;
@@ -21,43 +23,52 @@ public class Round {
         this.id = id;
     }
 
-    public Long getCourseId() {
-        return courseId;
+    public Long getTeacherId() {
+        return teacherId;
     }
 
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public Boolean getRoundSerial() {
+    public Integer getRoundSerial() {
         return roundSerial;
     }
 
-    public void setRoundSerial(Boolean roundSerial) {
+    public void setRoundSerial(Integer roundSerial) {
         this.roundSerial = roundSerial;
     }
 
-    public Boolean getPresentationScoreMethod() {
+    public Integer getPresentationScoreMethod() {
         return presentationScoreMethod;
     }
 
-    public void setPresentationScoreMethod(Boolean presentationScoreMethod) {
+    public void setPresentationScoreMethod(Integer presentationScoreMethod) {
         this.presentationScoreMethod = presentationScoreMethod;
     }
 
-    public Boolean getReportScoreMethod() {
+    public Integer getReportScoreMethod() {
         return reportScoreMethod;
     }
 
-    public void setReportScoreMethod(Boolean reportScoreMethod) {
+    public void setReportScoreMethod(Integer reportScoreMethod) {
         this.reportScoreMethod = reportScoreMethod;
     }
 
-    public Boolean getQuestionScoreMethod() {
+    public Integer getQuestionScoreMethod() {
         return questionScoreMethod;
     }
 
-    public void setQuestionScoreMethod(Boolean questionScoreMethod) {
+    public void setQuestionScoreMethod(Integer questionScoreMethod) {
         this.questionScoreMethod = questionScoreMethod;
     }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
 }

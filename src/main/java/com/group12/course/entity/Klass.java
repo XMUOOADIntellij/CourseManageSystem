@@ -14,9 +14,9 @@ public class Klass {
 
     private Long courseId;
 
-    private Byte grade;
+    private Long grade;
 
-    private Byte klassSerial;
+    private Integer klassSerial;
 
     private String introduction;
 
@@ -36,19 +36,19 @@ public class Klass {
         this.courseId = courseId;
     }
 
-    public Byte getGrade() {
+    public Long getGrade() {
         return grade;
     }
 
-    public void setGrade(Byte grade) {
+    public void setGrade(Long grade) {
         this.grade = grade;
     }
 
-    public Byte getKlassSerial() {
+    public Integer getKlassSerial() {
         return klassSerial;
     }
 
-    public void setKlassSerial(Byte klassSerial) {
+    public void setKlassSerial(Integer klassSerial) {
         this.klassSerial = klassSerial;
     }
 
