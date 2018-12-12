@@ -81,4 +81,10 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
+  <select id="getAllKlassByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from klass
+    where course_id = #{coureId,jdbcType=BIGINT}
+  </select>
 </mapper>

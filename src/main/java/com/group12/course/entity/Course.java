@@ -2,6 +2,7 @@ package com.group12.course.entity;
 
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -14,21 +15,21 @@ import java.util.Date;
 public class Course {
     private Long id;
 
-    private Long teacherId;
+    private Teacher teacher;
 
     private String courseName;
 
     private String introduction;
 
-    private Boolean presentationPercentage;
+    private Integer presentationPercentage;
 
-    private Boolean questionPercentage;
+    private Integer questionPercentage;
 
-    private Boolean reportPercentage;
+    private Integer reportPercentage;
 
-    private Date teamStartTime;
+    private LocalDateTime teamStartTime;
 
-    private Date teamEndTime;
+    private LocalDateTime teamEndTime;
 
     public Long getId() {
         return id;
@@ -38,12 +39,12 @@ public class Course {
         this.id = id;
     }
 
-    public Long getTeacherId() {
-        return teacherId;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setTeacherId(Long teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     public String getCourseName() {
@@ -62,43 +63,43 @@ public class Course {
         this.introduction = introduction == null ? null : introduction.trim();
     }
 
-    public Boolean getPresentationPercentage() {
+    public Integer getPresentationPercentage() {
         return presentationPercentage;
     }
 
-    public void setPresentationPercentage(Boolean presentationPercentage) {
+    public void setPresentationPercentage(Integer presentationPercentage) {
         this.presentationPercentage = presentationPercentage;
     }
 
-    public Boolean getQuestionPercentage() {
+    public Integer getQuestionPercentage() {
         return questionPercentage;
     }
 
-    public void setQuestionPercentage(Boolean questionPercentage) {
+    public void setQuestionPercentage(Integer questionPercentage) {
         this.questionPercentage = questionPercentage;
     }
 
-    public Boolean getReportPercentage() {
+    public Integer getReportPercentage() {
         return reportPercentage;
     }
 
-    public void setReportPercentage(Boolean reportPercentage) {
+    public void setReportPercentage(Integer reportPercentage) {
         this.reportPercentage = reportPercentage;
     }
 
-    public Date getTeamStartTime() {
+    public LocalDateTime getTeamStartTime() {
         return teamStartTime;
     }
 
-    public void setTeamStartTime(Date teamStartTime) {
+    public void setTeamStartTime(LocalDateTime teamStartTime) {
         this.teamStartTime = teamStartTime;
     }
 
-    public Date getTeamEndTime() {
+    public LocalDateTime getTeamEndTime() {
         return teamEndTime;
     }
 
-    public void setTeamEndTime(Date teamEndTime) {
+    public void setTeamEndTime(LocalDateTime teamEndTime) {
         this.teamEndTime = teamEndTime;
     }
 }
