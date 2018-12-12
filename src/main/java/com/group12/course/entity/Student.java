@@ -44,6 +44,11 @@ public class Student {
         this.password = password;
     }
 
+    public Student(Long id, String password) {
+        this.id = id;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }

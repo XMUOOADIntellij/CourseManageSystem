@@ -5,6 +5,8 @@ import com.group12.course.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Student service 层
  * @author Xu Gang
@@ -43,5 +45,54 @@ public class StudentService {
      * */
     public Student getStudent(String account){
         return studentDao.getStudent(account);
+    }
+
+    /**
+     * 获取所有学生的记录
+     *
+     * @return 返回所有的学生的列表
+     * */
+    public List<Student> getAllStudent(){
+        return studentDao.getAllStudent();
+    }
+
+    /**
+     * 通过账号或者姓名获取学生信息
+     * @param param 可以是学生姓名或者账号
+     * @return 返回符合的学生的列表
+     * 当是通过账号查询时，列表只会包含一个
+     * */
+    public List<Student> getStudentByParam(String param){
+        return studentDao.getStudentByParam(param);
+    }
+
+    /**
+     * 更新数据库中学生的记录
+     *
+     * @param student 主键代表新的学生对象
+     * @return 代表处理数量
+     * */
+    public int changeStudentByID(Student student){
+        return studentDao.changeStudentByID(student);
+    }
+
+    /**
+     * 重置学生密码
+     *
+     * @param id 主键id
+     * @return 代表处理数量
+     * */
+    public int resetPassword(Long id){
+        return studentDao.resetPassword(id);
+    }
+
+    /**
+     * 删除数据库中学生的记录
+     *
+     * @param id 代表用户id
+     * @return 代表处理数量
+     * */
+    public int deleteStudent(Long id){
+        return studentDao.deleteStudent(id);
     }
 }
