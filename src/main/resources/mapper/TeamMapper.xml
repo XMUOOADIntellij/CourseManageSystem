@@ -17,7 +17,7 @@
         id, course_id, leader_id, label, name, is_valid, gmt_create, gmt_modified
     </sql>
 
-  <select id="getTeam" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="getTeamById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from team
