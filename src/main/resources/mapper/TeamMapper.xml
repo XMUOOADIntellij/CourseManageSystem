@@ -4,13 +4,15 @@
 
     <resultMap id="BaseResultMap" type="com.group12.course.entity.Team" >
         <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="course_id" property="courseId" jdbcType="BIGINT" />
         <result column="leader_id" property="leaderId" jdbcType="BIGINT" />
         <result column="label" property="label" jdbcType="VARCHAR" />
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="is_valid" property="valid" jdbcType="BIT" />
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                   column="course_id" javaType="com.group12.course.entity.Course"/>
     </resultMap>
 
     <sql id="Base_Column_List" >
