@@ -3,17 +3,20 @@
 <mapper namespace="com.group12.course.mapper.RoundMapper" >
   <resultMap id="BaseResultMap" type="com.group12.course.entity.Round" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="course_id" property="courseId" jdbcType="BIGINT" />
     <result column="round_serial" property="roundSerial" jdbcType="BIT" />
     <result column="presentation_score_method" property="presentationScoreMethod" jdbcType="BIT" />
     <result column="report_score_method" property="reportScoreMethod" jdbcType="BIT" />
     <result column="question_score_method" property="questionScoreMethod" jdbcType="BIT" />
+
+    <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                 column="course_id" javaType="com.group12.course.entity.Course"/>
+
   </resultMap>
   <sql id="Base_Column_List" >
     id, course_id, round_serial, presentation_score_method, report_score_method, question_score_method
   </sql>
 
-  <select id="getRound" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectRoundById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from round

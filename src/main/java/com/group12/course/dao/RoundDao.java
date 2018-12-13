@@ -17,7 +17,7 @@ public class RoundDao {
     RoundMapper roundMapper;
 
     public Round getRound(Long id){
-        return roundMapper.getRound(id);
+        return roundMapper.selectRoundById(id);
     }
 
     public int deleteRound(Long id){
