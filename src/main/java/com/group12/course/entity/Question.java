@@ -5,15 +5,27 @@ import java.math.BigDecimal;
 public class Question {
     private Long id;
 
-    private Long klassSeminarId;
+    /**
+     * 一个问题对应一节班级讨论课
+     */
+    private KlassSeminar klassSeminar;
 
-    private Long attendanceId;
+    /**
+     * 一个问题对应一个被提问的报名小组
+     */
+    private Attendance attendance;
 
-    private Long teamId;
+    /**
+     * 提问者对应一个小组
+     */
+    private Team team;
 
-    private Long studentId;
+    /**
+     * 一个问题对应一个提问的学生
+     */
+    private Student student;
 
-    private Boolean isSelected;
+    private Boolean selected;
 
     private BigDecimal score;
 
@@ -25,44 +37,44 @@ public class Question {
         this.id = id;
     }
 
-    public Long getKlassSeminarId() {
-        return klassSeminarId;
+    public KlassSeminar getKlassSeminar() {
+        return klassSeminar;
     }
 
-    public void setKlassSeminarId(Long klassSeminarId) {
-        this.klassSeminarId = klassSeminarId;
+    public void setKlassSeminar(KlassSeminar klassSeminar) {
+        this.klassSeminar = klassSeminar;
     }
 
-    public Long getAttendanceId() {
-        return attendanceId;
+    public Attendance getAttendance() {
+        return attendance;
     }
 
-    public void setAttendanceId(Long attendanceId) {
-        this.attendanceId = attendanceId;
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
     }
 
-    public Long getTeamId() {
-        return teamId;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
-    public Long getStudentId() {
-        return studentId;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public Boolean getIsSelected() {
-        return isSelected;
+    public Boolean getSelected() {
+        return selected;
     }
 
-    public void setIsSelected(Boolean isSelected) {
-        this.isSelected = isSelected;
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
     }
 
     public BigDecimal getScore() {
@@ -71,5 +83,17 @@ public class Question {
 
     public void setScore(BigDecimal score) {
         this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return
+        "id"+id+"\n"+
+        "klassSeminar"+klassSeminar.getId()+"\n"+
+        "attendance"+attendance.getId()+"\n"+
+        "team"+team.getId()+"\n"+
+        "student"+student.getId()+"\n"+
+        "selected"+selected+"\n"+
+        "score"+score+"\n";
     }
 }

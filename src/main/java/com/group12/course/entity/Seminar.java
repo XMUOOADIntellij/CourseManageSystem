@@ -1,14 +1,24 @@
 package com.group12.course.entity;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
+/**
+ * 讨论课实体
+ * @author Y Jiang
+ * @date  2018/12/13
+ */
 public class Seminar {
     private Long id;
 
-    private Long courseId;
+    /**
+     * 一节讨论课属于一个课程
+     */
+    private Course course;
 
-    private Long roundId;
+    /**
+     * 一节讨论课存在一轮下
+     */
+    private Round round;
 
     private String seminarName;
 
@@ -32,20 +42,20 @@ public class Seminar {
         this.id = id;
     }
 
-    public Long getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
-    public Long getRoundId() {
-        return roundId;
+    public Round getRound() {
+        return round;
     }
 
-    public void setRoundId(Long roundId) {
-        this.roundId = roundId;
+    public void setRound(Round round) {
+        this.round = round;
     }
 
     public String getSeminarName() {
@@ -53,7 +63,7 @@ public class Seminar {
     }
 
     public void setSeminarName(String seminarName) {
-        this.seminarName = seminarName == null ? null : seminarName.trim();
+        this.seminarName = seminarName;
     }
 
     public String getIntroduction() {
@@ -61,7 +71,7 @@ public class Seminar {
     }
 
     public void setIntroduction(String introduction) {
-        this.introduction = introduction == null ? null : introduction.trim();
+        this.introduction = introduction;
     }
 
     public Integer getMaxTeam() {
@@ -72,11 +82,11 @@ public class Seminar {
         this.maxTeam = maxTeam;
     }
 
-    public Boolean getIsVisible() {
+    public Boolean getVisible() {
         return visible;
     }
 
-    public void setIsVisible(Boolean visible) {
+    public void setVisible(Boolean visible) {
         this.visible = visible;
     }
 
@@ -104,16 +114,15 @@ public class Seminar {
         this.enrollEndTime = enrollEndTime;
     }
 
-
     @Override
     public String toString() {
         return "id:"+this.getId()+"\n"+
-        "courseId:" +this.getCourseId()+"\n"+
-        "roundId:"  +this.getRoundId()+"\n"+
+        "courseId:" +this.getCourse().getId()+"\n"+
+        "roundId:"  +this.getRound().getId()+"\n"+
         "seminarName:"+this.getSeminarName()+"\n"+
         "introduction:"+this.getIntroduction()+"\n"+
         "maxTeam:"+this.getMaxTeam()+"\n"+
-        "visible:"+this.getIsVisible()+"\n"+
+        "visible:"+this.getVisible()+"\n"+
         "seminarSerial:"+this.getSeminarSerial()+"\n"+
         "enrollStartTime:"+this.getEnrollStartTime()+"\n"+
         "enrollEndTime:"+this.getEnrollEndTime();
