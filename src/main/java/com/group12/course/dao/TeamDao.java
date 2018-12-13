@@ -17,7 +17,7 @@ public class TeamDao {
     @Autowired
     TeamMapper teamMapper;
 
-    public Team getTeam(Long account){
+    public Team getTeamById(Long account){
         return teamMapper.getTeam(account);
     }
 
