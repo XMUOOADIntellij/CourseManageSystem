@@ -2,35 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.group12.course.mapper.StudentMapper" >
   <resultMap id="BaseResultMap" type="com.group12.course.entity.Student" >
-    <id column="account" property="account" jdbcType="BIGINT" />
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="is_active" property="active" jdbcType="BIT" />
-    <result column="is_in_team" property="inTeam" jdbcType="BIT" />
-    <result column="notify_interval" property="notifyInterval" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="TINYINT" />
+    <result column="is_active" property="active" jdbcType="TINYINT" />
+    <result column="student_name" property="studentName" jdbcType="VARCHAR" />
     <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
   </resultMap>
-    <sql id="Base_Column_List" >
-    id,account, password, email, is_active, is_in_team, notify_interval, gmt_create, gmt_modified
-    </sql>
+  <sql id="Base_Column_List" >
+    id, account, password, email, sex, is_active, student_name, gmt_create, gmt_modified
+  </sql>
 
-  <select id="getStudent" resultMap="BaseResultMap"  >
-    select 
+  <select id="getAllStudent" resultMap="BaseResultMap" >
+    select
     <include refid="Base_Column_List" />
     from student
-    where account = #{account,jdbcType=VARCHAR}
   </select>
 
-  <delete id="deleteStudent"  >
-    delete from student
-    where account = #{account,jdbcType=VARCHAR}
-  </delete>
+  <select id="getStudentByAccount" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where student_name = #{name,jdbcType=VARCHAR}
+  </select>
 
+  <delete id="deleteStudentByID">
+    delete from student
+    where id = #{id}
+  </delete>
 
   <insert id="addStudent" parameterType="com.group12.course.entity.Student" >
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
       <if test="account != null" >
         account,
       </if>
@@ -40,14 +49,14 @@
       <if test="email != null" >
         email,
       </if>
+      <if test="sex != null" >
+        sex,
+      </if>
       <if test="active != null" >
         is_active,
       </if>
-      <if test="inTeam != null" >
-        is_in_team,
-      </if>
-      <if test="notifyInterval != null" >
-        notify_interval,
+      <if test="studentName != null" >
+        student_name,
       </if>
       <if test="gmtCreate != null" >
         gmt_create,
@@ -57,6 +66,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="account != null" >
         #{account,jdbcType=VARCHAR},
       </if>
@@ -66,14 +78,14 @@
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
       </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
       <if test="active != null" >
-        #{active,jdbcType=BIT},
+        #{active,jdbcType=TINYINT},
       </if>
-      <if test="inTeam != null" >
-        #{inTeam,jdbcType=BIT},
-      </if>
-      <if test="notifyInterval != null" >
-        #{notifyInterval,jdbcType=INTEGER},
+      <if test="studentName != null" >
+        #{studentName,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -87,20 +99,23 @@
   <update id="updateStudent" parameterType="com.group12.course.entity.Student" >
     update student
     <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
       </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
       <if test="active != null" >
-        is_active = #{active,jdbcType=BIT},
+        is_active = #{active,jdbcType=TINYINT},
       </if>
-      <if test="inTeam != null" >
-        is_in_team = #{inTeam,jdbcType=BIT},
-      </if>
-      <if test="notifyInterval != null" >
-        notify_interval = #{notifyInterval,jdbcType=INTEGER},
+      <if test="studentName != null" >
+        student_name = #{studentName,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
         gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -110,6 +125,37 @@
       </if>
     </set>
     where account = #{account,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateStudentByID" parameterType="com.group12.course.entity.Student" >
+    update student
+    <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="active != null" >
+        is_active = #{active,jdbcType=TINYINT},
+      </if>
+      <if test="studentName != null" >
+        student_name = #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null" >
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id}
   </update>
 
 </mapper>

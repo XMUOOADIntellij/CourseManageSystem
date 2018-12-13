@@ -5,9 +5,9 @@ import java.util.Date;
 public class KlassSeminar {
     private Long id;
 
-    private Long klassId;
+    private Klass klass;
 
-    private Long seminarId;
+    private Seminar seminar;
 
     private Date reportDdl;
 
@@ -21,20 +21,20 @@ public class KlassSeminar {
         this.id = id;
     }
 
-    public Long getKlassId() {
-        return klassId;
+    public Klass getKlass() {
+        return klass;
     }
 
-    public void setKlassId(Long klassId) {
-        this.klassId = klassId;
+    public void setKlass(Klass klass) {
+        this.klass = klass;
     }
 
-    public Long getSeminarId() {
-        return seminarId;
+    public Seminar getSeminar() {
+        return seminar;
     }
 
-    public void setSeminarId(Long seminarId) {
-        this.seminarId = seminarId;
+    public void setSeminar(Seminar seminar) {
+        this.seminar = seminar;
     }
 
     public Date getReportDdl() {
@@ -50,6 +50,6 @@ public class KlassSeminar {
     }
 
     public void setSeminarStatus(String seminarStatus) {
-        this.seminarStatus = seminarStatus == null ? null : seminarStatus.trim();
+        this.seminarStatus = seminarStatus;
     }
 }

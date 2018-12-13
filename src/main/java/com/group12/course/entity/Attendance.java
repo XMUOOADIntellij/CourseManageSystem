@@ -1,11 +1,18 @@
 package com.group12.course.entity;
 
+
+/**
+ * 班级讨论课展示信息
+ * @author Y Jiang
+ * @date 2018/12/12
+ */
+
 public class Attendance {
     private Long id;
 
-    private Long klassSeminarId;
+    private KlassSeminar klassSeminar;
 
-    private Long teamId;
+    private Team team;
 
     private Integer teamOrder;
 
@@ -27,20 +34,20 @@ public class Attendance {
         this.id = id;
     }
 
-    public Long getKlassSeminarId() {
-        return klassSeminarId;
+    public KlassSeminar getKlassSeminar() {
+        return klassSeminar;
     }
 
-    public void setKlassSeminarId(Long klassSeminarId) {
-        this.klassSeminarId = klassSeminarId;
+    public void setKlassSeminar(KlassSeminar klassSeminar) {
+        this.klassSeminar = klassSeminar;
     }
 
-    public Long getTeamId() {
-        return teamId;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public Integer getTeamOrder() {
@@ -51,11 +58,11 @@ public class Attendance {
         this.teamOrder = teamOrder;
     }
 
-    public Boolean getIsPresent() {
+    public Boolean getPresented() {
         return presented;
     }
 
-    public void setIsPresent(Boolean presented) {
+    public void setPresented(Boolean presented) {
         this.presented = presented;
     }
 
@@ -64,7 +71,7 @@ public class Attendance {
     }
 
     public void setReportName(String reportName) {
-        this.reportName = reportName == null ? null : reportName.trim();
+        this.reportName = reportName;
     }
 
     public String getReprotUrl() {
@@ -72,7 +79,7 @@ public class Attendance {
     }
 
     public void setReprotUrl(String reprotUrl) {
-        this.reprotUrl = reprotUrl == null ? null : reprotUrl.trim();
+        this.reprotUrl = reprotUrl;
     }
 
     public String getPptName() {
@@ -80,7 +87,7 @@ public class Attendance {
     }
 
     public void setPptName(String pptName) {
-        this.pptName = pptName == null ? null : pptName.trim();
+        this.pptName = pptName;
     }
 
     public String getPptUrl() {
@@ -88,6 +95,6 @@ public class Attendance {
     }
 
     public void setPptUrl(String pptUrl) {
-        this.pptUrl = pptUrl == null ? null : pptUrl.trim();
+        this.pptUrl = pptUrl;
     }
 }
