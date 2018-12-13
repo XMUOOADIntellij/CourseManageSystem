@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.group12.course.mapper.QuestionMapper" >
+
   <resultMap id="BaseResultMap" type="com.group12.course.entity.Question" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="klass_seminar_id" property="klassSeminarId" jdbcType="BIGINT" />
-    <result column="attendance_id" property="attendanceId" jdbcType="BIGINT" />
-    <result column="team_id" property="teamId" jdbcType="BIGINT" />
-    <result column="student_id" property="studentId" jdbcType="BIGINT" />
     <result column="is_selected" property="isSelected" jdbcType="BIT" />
     <result column="score" property="score" jdbcType="DECIMAL" />
+    <association property="klassSeminar" select="com.group12.course.mapper.KlassSeminarMapper.selectKlassSeminarById"
+                 column="klass_seminar_id" javaType="com.group12.course.entity.KlassSeminar"/>
+    <association property="attendance" select="com.group12.course.mapper.AttendanceMapper.selectAttendanceById"
+                 column="attendance_id" javaType="com.group12.course.entity.Attendance"/>
+    <association property="team" select="com.group12.course.mapper.TeamMapper.selectTeamById"
+                 column="team_id" javaType="com.group12.course.entity.Team"/>
+    <association property="student" select="com.group12.course.mapper.StudentMapper.selectStudentById"
+                 column="student_id" javaType="com.group12.course.entity.Student"/>
   </resultMap>
 
   <sql id="Base_Column_List" >

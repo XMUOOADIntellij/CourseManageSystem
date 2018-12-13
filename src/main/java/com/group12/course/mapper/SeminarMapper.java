@@ -33,7 +33,7 @@ public interface SeminarMapper {
      * @param id Long
      * @return Seminar
      */
-    Seminar select(Long id);
+    Seminar selectSeminarById(Long id);
 
     /**
      * 修改讨论课信息

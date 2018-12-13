@@ -20,7 +20,7 @@ public class CourseDao {
     CourseMapper courseMapper;
 
     public Course getCourse(Long id){
-        return courseMapper.getCourse(id);
+        return courseMapper.selectCourseById(id);
     }
 
     public int deleteCourse(Long id){

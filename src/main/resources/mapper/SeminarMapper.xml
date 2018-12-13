@@ -4,8 +4,7 @@
 
   <resultMap id="BaseResultMap" type="com.group12.course.entity.Seminar" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="course_id" property="courseId" jdbcType="BIGINT" />
-    <result column="round_id" property="roundId" jdbcType="BIGINT" />
+
     <result column="seminar_name" property="seminarName" jdbcType="VARCHAR" />
     <result column="introduction" property="introduction" jdbcType="VARCHAR" />
     <result column="max_team" property="maxTeam" jdbcType="INTEGER" />
@@ -13,14 +12,22 @@
     <result column="seminar_serial" property="seminarSerial" jdbcType="INTEGER" />
     <result column="enroll_start_time" property="enrollStartTime" jdbcType="TIMESTAMP" />
     <result column="enroll_end_time" property="enrollEndTime" jdbcType="TIMESTAMP" />
+
+    <!--
+    <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                 column="course_id" javaType="com.group12.course.entity.Course"/>
+
+    <association property="round" select="com.group12.course.mapper.RoundMapper.selectRoundById"
+                 column="round_id" javaType="com.group12.course.entity.Round"/>
+    -->
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id, course_id, round_id, seminar_name, introduction, max_team, is_visible, report_ddl, 
+    id, <!--course_id, round_id,--> seminar_name, introduction, max_team, is_visible, report_ddl,
     seminar_serial, enroll_start_time, enroll_end_time
   </sql>
 
-  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectSeminarById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from seminar

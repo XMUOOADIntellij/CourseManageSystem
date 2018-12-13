@@ -12,7 +12,7 @@ public interface KlassSeminarMapper {
 
     int insert(KlassSeminar record);
 
-    KlassSeminar select(Long id);
+    KlassSeminar selectKlassSeminarById(Long id);
 
     int update(KlassSeminar record);
 
