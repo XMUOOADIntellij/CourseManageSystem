@@ -24,5 +24,5 @@ public interface CourseMapper {
 
     int updateCourse(Course record);
 
-    List<Course> listCourses(Long teacherId);
+//    List<Course> listCourses(Long teacherId);
 }

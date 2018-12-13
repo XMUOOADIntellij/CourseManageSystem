@@ -35,7 +35,7 @@ public class CourseDao {
         return courseMapper.updateCourse(course);
     }
 
-    public List<Course> listCourses(Long teacherId){
-        return courseMapper.listCourses(teacherId);
-    }
+//    public List<Course> listCourses(Long teacherId){
+//        return courseMapper.listCourses(teacherId);
+//    }
 }
