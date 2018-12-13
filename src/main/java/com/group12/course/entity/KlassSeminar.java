@@ -1,7 +1,16 @@
 package com.group12.course.entity;
 
+import org.apache.ibatis.type.Alias;
+
 import java.util.Date;
 
+/**
+ * 班级讨论课
+ * @author Y Jiang
+ * @date 2018/12/13
+ */
+
+@Alias("klassSeminar")
 public class KlassSeminar {
     private Long id;
 

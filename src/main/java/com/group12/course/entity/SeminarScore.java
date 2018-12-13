@@ -9,20 +9,35 @@ import java.math.BigDecimal;
  * @date 2018/12/12
  */
 public class SeminarScore {
-    private Long klassSeminarId;
-    private Long teamId;
+
+    /**
+     * 一个分数对应一节班级讨论课
+     */
+    private KlassSeminar klassSeminar;
+    /**
+     * 一次分数对应一个队伍
+     */
+    private Team team;
 
     private BigDecimal presentationScore;
     private BigDecimal questionScore;
     private BigDecimal reportScore;
     private BigDecimal totalScore;
 
-    public Long getKlassSeminarId() {
-        return klassSeminarId;
+    public KlassSeminar getKlassSeminar() {
+        return klassSeminar;
     }
 
-    public Long getTeamId() {
-        return teamId;
+    public void setKlassSeminar(KlassSeminar klassSeminar) {
+        this.klassSeminar = klassSeminar;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public BigDecimal getPresentationScore() {
@@ -56,4 +71,6 @@ public class SeminarScore {
     public void setTotalScore(BigDecimal totalScore) {
         this.totalScore = totalScore;
     }
+
+
 }

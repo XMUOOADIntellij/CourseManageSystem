@@ -1,15 +1,13 @@
 package com.group12.course.mapper;
 
-import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.SeminarScore;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
+@Component
+@Mapper
 public interface SeminarScoreMapper {
 
-    int delete(Long id);
+    SeminarScore selectSeminarScoreById(Long id);
 
-    int insert(SeminarScore record);
-
-    SeminarScore select(Long id);
-
-    int update(SeminarScore record);
 }

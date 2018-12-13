@@ -10,14 +10,16 @@
     <result column="reprot_url" property="reprotUrl" jdbcType="VARCHAR" />
     <result column="ppt_name" property="pptName" jdbcType="VARCHAR" />
     <result column="ppt_url" property="pptUrl" jdbcType="VARCHAR" />
+
     <association property="klassSeminar" select="com.group12.course.mapper.KlassSeminarMapper.selectKlassSeminarById"
                    column="klass_seminar_id" javaType="com.group12.course.entity.KlassSeminar"/>
     <association property="team" select="com.group12.course.mapper.TeamMapper.selectTeamById"
                    column="team_id" javaType="com.group12.course.entity.Team"/>
+
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id, klass_seminar_id, team_id, team_order, is_present, report_name, reprot_url, ppt_name, 
+    id, klass_seminar_id, team_id, team_order, is_present, report_name, reprot_url, ppt_name,
     ppt_url
   </sql>
 
