@@ -10,8 +10,14 @@ package com.group12.course.entity;
 public class Attendance {
     private Long id;
 
+    /**
+     * 一次报名展示对应一节讨论课
+     */
     private KlassSeminar klassSeminar;
 
+    /**
+     * 一次报名展示对应一个小组
+     */
     private Team team;
 
     private Integer teamOrder;

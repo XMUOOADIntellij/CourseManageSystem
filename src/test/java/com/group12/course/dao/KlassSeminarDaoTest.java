@@ -2,6 +2,8 @@ package com.group12.course.dao;
 
 import com.group12.course.entity.KlassSeminar;
 import com.group12.course.mapper.KlassSeminarMapper;
+import org.apache.ibatis.session.SqlSession;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -18,9 +20,8 @@ public class KlassSeminarDaoTest {
 
     @Test
     public void testSelectKlassSeminar(){
-        KlassSeminar record = klassSeminarMapper.select(new Long(1));
-        System.out.println(record.getSeminar().toString());
-
+        KlassSeminar record = klassSeminarMapper.selectKlassSeminarById(new Long(1));
+        Assert.assertNotNull(record.getSeminar());
     }
 
 }
