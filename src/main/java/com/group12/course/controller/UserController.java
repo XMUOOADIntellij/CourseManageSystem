@@ -1,7 +1,7 @@
 package com.group12.course.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.group12.course.entity.Jwt;
+import com.group12.course.tools.Jwt;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
 import com.group12.course.service.StudentService;

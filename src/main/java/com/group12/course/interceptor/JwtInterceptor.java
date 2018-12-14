@@ -1,6 +1,6 @@
 package com.group12.course.interceptor;
 
-import com.group12.course.entity.Jwt;
+import com.group12.course.tools.Jwt;
 import com.group12.course.entity.Teacher;
 import org.springframework.web.servlet.HandlerInterceptor;
 
