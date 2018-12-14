@@ -28,6 +28,8 @@ public class TeamDaoTest {
     @Test
     @Rollback
     public void testAddTeam(){
+        Team testTeam = new Team();
+        //testTeam.setCourseId(new Long(111));
         Jedis jedis = new Jedis("47.107.81.51");
         jedis.auth("123456");
         System.out.println("success");
@@ -42,6 +44,7 @@ public class TeamDaoTest {
         *//*testTeam.setCourseId(new Long(111));
         testTeam.setGmtCreate(new Date());
         testTeam.setGmtModified(new Date());
+        //testTeam.setLeaderId(new Long(122));
         testTeam.setLeaderId(new Long(122));*//*
         testTeam.setValid(true);
         testTeam.setLabel("aaa");
