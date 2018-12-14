@@ -35,7 +35,7 @@ public interface KlassMapper {
      * @param id 班级编号
      * @return 班级
      */
-    Klass getKlass(Long id);
+    Klass selectKlassById(Long id);
 
     /**
      * 修改班级信息
