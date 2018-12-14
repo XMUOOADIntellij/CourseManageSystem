@@ -13,9 +13,9 @@ import java.util.Date;
 public class Team {
     private Long id;
 
-    private Long courseId;
+    private Course course;
 
-    private Long leaderId;
+    private Teacher leader;
 
     private String label;
 
@@ -35,20 +35,20 @@ public class Team {
         this.id = id;
     }
 
-    public Long getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
-    public Long getLeaderId() {
-        return leaderId;
+    public Teacher getLeader() {
+        return leader;
     }
 
-    public void setLeaderId(Long leaderId) {
-        this.leaderId = leaderId;
+    public void setLeader(Teacher leader) {
+        this.leader = leader;
     }
 
     public String getLabel() {

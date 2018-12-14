@@ -20,9 +20,9 @@ public interface CourseMapper {
 
     int addCourse(Course record);
 
-    Course getCourse(Long id);
+    Course selectCourseById(Long id);
 
     int updateCourse(Course record);
 
-    List<Course> listCourses(Long teacherId);
+//    List<Course> listCourses(Long teacherId);
 }

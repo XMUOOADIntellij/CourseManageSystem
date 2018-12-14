@@ -3,7 +3,6 @@
 <mapper namespace="com.group12.course.mapper.CourseMapper" >
   <resultMap id="BaseResultMap" type="com.group12.course.entity.Course" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="teacher_id" property="teacherId" jdbcType="BIGINT" />
     <result column="course_name" property="courseName" jdbcType="VARCHAR" />
     <result column="introduction" property="introduction" jdbcType="VARCHAR" />
     <result column="presentation_percentage" property="presentationPercentage" jdbcType="BIT" />
@@ -11,13 +10,19 @@
     <result column="report_percentage" property="reportPercentage" jdbcType="BIT" />
     <result column="team_start_time" property="teamStartTime" jdbcType="TIMESTAMP" />
     <result column="team_end_time" property="teamEndTime" jdbcType="TIMESTAMP" />
+    <!--
+    <association property="teacher" select="com.group12.course.mapper.TeacherMapper.selectTeacherById"
+                 column="teacher_id" javaType="com.group12.course.entity.Teacher"/>
+    -->
   </resultMap>
+
   <sql id="Base_Column_List" >
-    id, teacher_id, course_name, introduction, presentation_percentage, question_percentage, 
+    id, <!--teacher_id,--> course_name, introduction, presentation_percentage, question_percentage,
     report_percentage, team_start_time, team_end_time
   </sql>
 
-  <select id="getCourse" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+  <select id="selectCourseById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from course
@@ -122,10 +127,12 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
+  <!--
   <select id="listCourses" parameterType="java.lang.Long" resultType="com.group12.course.entity.Course">
     select
     <include refid="Base_Column_List" />
     from course
     where teacher_id = #{teacherId,jdbcType=BIGINT}
   </select>
+  -->
 </mapper>

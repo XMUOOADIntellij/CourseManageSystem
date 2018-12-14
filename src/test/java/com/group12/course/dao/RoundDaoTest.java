@@ -1,9 +1,9 @@
 package com.group12.course.dao;
 
-import com.group12.course.entity.KlassSeminar;
-import com.group12.course.mapper.KlassSeminarMapper;
-import org.apache.ibatis.session.SqlSession;
+import com.group12.course.entity.Round;
+import com.group12.course.mapper.RoundMapper;
 import org.junit.Assert;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -14,14 +14,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class KlassSeminarDaoTest {
+public class RoundDaoTest {
     @Autowired
-    KlassSeminarMapper klassSeminarMapper;
+    RoundMapper roundMapper;
 
     @Test
-    public void testSelectKlassSeminar(){
-        KlassSeminar record = klassSeminarMapper.selectKlassSeminarById(new Long(1));
-        Assert.assertNotNull(record.getSeminar());
+    public void testSelectRound(){
+        Round record =  roundMapper.selectRoundById(new Long(1));
+        Assert.assertNotNull(record.getCourse());
     }
 
 }

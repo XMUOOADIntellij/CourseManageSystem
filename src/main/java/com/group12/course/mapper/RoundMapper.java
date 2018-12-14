@@ -18,7 +18,7 @@ public interface RoundMapper {
 
     int addRound(Round record);
 
-    Round getRound(Long id);
+    Round selectRoundById(Long id);
 
     int updateRound(Round record);
 }
