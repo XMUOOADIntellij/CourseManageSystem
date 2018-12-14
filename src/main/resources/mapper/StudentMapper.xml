@@ -6,14 +6,11 @@
     <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="TINYINT" />
     <result column="is_active" property="active" jdbcType="TINYINT" />
     <result column="student_name" property="studentName" jdbcType="VARCHAR" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, account, password, email, sex, is_active, student_name, gmt_create, gmt_modified
+    id, account, password, email, is_active, student_name
   </sql>
 
   <cache type="com.group12.course.tools.MybatisRedisCache" />
@@ -24,11 +21,18 @@
     from student
   </select>
 
-  <select id="getStudentByAccount" resultMap="BaseResultMap" >
+  <select id="selectStudentByAccount" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from student
     where student_name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectStudentById" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where id = #{id}
   </select>
 
   <delete id="deleteStudentByID">
@@ -51,20 +55,11 @@
       <if test="email != null" >
         email,
       </if>
-      <if test="sex != null" >
-        sex,
-      </if>
       <if test="active != null" >
         is_active,
       </if>
       <if test="studentName != null" >
         student_name,
-      </if>
-      <if test="gmtCreate != null" >
-        gmt_create,
-      </if>
-      <if test="gmtModified != null" >
-        gmt_modified,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -80,20 +75,11 @@
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=TINYINT},
-      </if>
       <if test="active != null" >
         #{active,jdbcType=TINYINT},
       </if>
       <if test="studentName != null" >
         #{studentName,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null" >
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null" >
-        #{gmtModified,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -110,20 +96,11 @@
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=TINYINT},
-      </if>
       <if test="active != null" >
         is_active = #{active,jdbcType=TINYINT},
       </if>
       <if test="studentName != null" >
         student_name = #{studentName,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null" >
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
     </set>
     where account = #{account,jdbcType=VARCHAR}
@@ -141,20 +118,11 @@
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=TINYINT},
-      </if>
       <if test="active != null" >
         is_active = #{active,jdbcType=TINYINT},
       </if>
       <if test="studentName != null" >
         student_name = #{studentName,jdbcType=VARCHAR},
-      </if>
-      <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null" >
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id}

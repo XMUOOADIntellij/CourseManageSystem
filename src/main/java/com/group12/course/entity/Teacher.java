@@ -23,10 +23,6 @@ public class Teacher {
 
     private Boolean active;
 
-    private Date gmtCreate;
-
-    private Date gmtModified;
-
     public Teacher() {
     }
 
@@ -92,19 +88,4 @@ public class Teacher {
         this.active = active;
     }
 
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
-    }
 }

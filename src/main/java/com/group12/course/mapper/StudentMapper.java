@@ -32,12 +32,20 @@ public interface StudentMapper {
     int addStudent(Student record);
 
     /**
-     * 获取数据库中学生的记录
+     * 通过账号获取数据库中学生的记录
      *
      * @param account 代表用户账号
      * @return 代表获取到的学生对象
      * */
-    Student getStudentByAccount(String account);
+    Student selectStudentByAccount(String account);
+
+    /**
+     * 通过id获取数据库中学生的记录
+     *
+     * @param id 代表用户账号id
+     * @return 代表获取到的学生对象
+     * */
+    Student selectStudentById(Long id);
 
     /**
      * 更新数据库中学生的记录

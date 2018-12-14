@@ -23,18 +23,9 @@ public class Student implements Serializable {
 
     private String email;
 
-    /**
-     * false 代表男，true 代表女
-     */
-    private Boolean sex;
-
     private Boolean active;
 
     private String studentName;
-
-    private Date gmtCreate;
-
-    private Date gmtModified;
 
     public Student() {
     }
@@ -85,14 +76,6 @@ public class Student implements Serializable {
         this.email = email == null ? null : email.trim();
     }
 
-    public Boolean getSex() {
-        return sex;
-    }
-
-    public void setSex(Boolean sex) {
-        this.sex = sex;
-    }
-
     public Boolean getActive() {
         return active;
     }
@@ -107,21 +90,5 @@ public class Student implements Serializable {
 
     public void setStudentName(String studentName) {
         this.studentName = studentName == null ? null : studentName.trim();
-    }
-
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
     }
 }

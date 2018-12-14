@@ -36,7 +36,7 @@ public class StudentDao {
             return new Student();
         }
         else{
-            Student tempStudent=studentMapper.getStudentByAccount(student.getAccount());
+            Student tempStudent=studentMapper.selectStudentByAccount(student.getAccount());
             if(tempStudent.getPassword().equals(student.getPassword())){
                 return tempStudent;
             }
@@ -57,7 +57,7 @@ public class StudentDao {
             return new Student();
         }
         else {
-            return studentMapper.getStudentByAccount(account);
+            return studentMapper.selectStudentByAccount(account);
         }
     }
 

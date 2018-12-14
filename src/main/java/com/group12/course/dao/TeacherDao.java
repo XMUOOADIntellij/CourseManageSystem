@@ -35,7 +35,7 @@ public class TeacherDao {
             return new Teacher();
         }
         else {
-            Teacher tempTeacher=teacherMapper.getTeacherByAccount(teacher.getAccount());
+            Teacher tempTeacher=teacherMapper.selectTeacherByAccount(teacher.getAccount());
             if (tempTeacher.getPassword().equals(teacher.getPassword())){
                 return tempTeacher;
             }
@@ -55,7 +55,7 @@ public class TeacherDao {
             return new Teacher();
         }
         else {
-            return teacherMapper.getTeacherByAccount(account);
+            return teacherMapper.selectTeacherByAccount(account);
         }
     }
 
@@ -81,7 +81,7 @@ public class TeacherDao {
             return list;
         }
         else {
-            return teacherMapper.getTeacherByName(param.trim());
+            return teacherMapper.selectTeacherByName(param.trim());
         }
     }
 

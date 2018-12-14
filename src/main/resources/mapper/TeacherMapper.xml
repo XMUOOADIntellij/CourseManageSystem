@@ -8,19 +8,24 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
     <result column="is_active" property="active" jdbcType="TINYINT" />
-    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id, account, password, email, teacher_name, is_active, gmt_create, gmt_modified
+    id, account, password, email, teacher_name, is_active
   </sql>
 
-  <select id="getTeacherByAccount" resultMap="BaseResultMap"  >
+  <select id="selectTeacherByAccount" resultMap="BaseResultMap"  >
     select
     <include refid="Base_Column_List" />
     from teacher
     where account = #{account,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectTeacherById" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from teacher
+    where id = #{id}
   </select>
 
   <select id="getAllTeacher" resultMap="BaseResultMap" >
@@ -29,7 +34,7 @@
     from teacher
   </select>
 
-  <select id="getTeacherByName" resultMap="BaseResultMap"  >
+  <select id="selectTeacherByName" resultMap="BaseResultMap"  >
     select
     <include refid="Base_Column_List" />
     from teacher
@@ -67,12 +72,6 @@
       <if test="active != null" >
         is_active,
       </if>
-      <if test="gmtCreate != null" >
-        gmt_create,
-      </if>
-      <if test="gmtModified != null" >
-        gmt_modified,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -92,12 +91,6 @@
       </if>
       <if test="active != null" >
         #{active,jdbcType=TINYINT},
-      </if>
-      <if test="gmtCreate != null" >
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null" >
-        #{gmtModified,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -119,12 +112,6 @@
       </if>
       <if test="active != null" >
         is_active = #{active,jdbcType=TINYINT},
-      </if>
-      <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null" >
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       </if>
     </set>
     where account = #{account,jdbcType=VARCHAR}
