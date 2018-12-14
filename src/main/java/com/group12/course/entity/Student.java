@@ -2,15 +2,19 @@ package com.group12.course.entity;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Student 实体对象
+ * 因为要存入 redis 中
+ * 实现了 serializable 接口
+ *
  * @author Xu Gang
  * @date 2018年12月10日
  */
 @Component
-public class Student {
+public class Student implements Serializable {
     private Long id;
 
     private String account;

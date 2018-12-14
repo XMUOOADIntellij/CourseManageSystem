@@ -16,6 +16,8 @@
     id, account, password, email, sex, is_active, student_name, gmt_create, gmt_modified
   </sql>
 
+  <cache type="com.group12.course.tools.MybatisRedisCache" />
+
   <select id="getAllStudent" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />

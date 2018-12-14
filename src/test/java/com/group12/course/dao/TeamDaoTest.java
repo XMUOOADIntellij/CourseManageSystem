@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
 
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @MybatisTest
@@ -27,12 +30,25 @@ public class TeamDaoTest {
     public void testAddTeam(){
         Team testTeam = new Team();
         //testTeam.setCourseId(new Long(111));
+        Jedis jedis = new Jedis("47.107.81.51");
+        jedis.auth("123456");
+        System.out.println("success");
+        System.out.println("at "+jedis.ping());
+        Set<String> keys = jedis.keys("*");
+        Iterator<String> it=keys.iterator() ;
+        while(it.hasNext()){
+            String key = it.next();
+            System.out.println(key);
+        }
+        /*Team testTeam = new Team();
+        *//*testTeam.setCourseId(new Long(111));
         testTeam.setGmtCreate(new Date());
         testTeam.setGmtModified(new Date());
         //testTeam.setLeaderId(new Long(122));
+        testTeam.setLeaderId(new Long(122));*//*
         testTeam.setValid(true);
         testTeam.setLabel("aaa");
         testTeam.setName("asa");
-        Assert.assertEquals("add Error",1,teamMapper.addTeam(testTeam));
+        Assert.assertEquals("add Error",1,teamMapper.addTeam(testTeam));*/
     }
 }

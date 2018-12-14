@@ -1,4 +1,4 @@
-package com.group12.course.entity;
+package com.group12.course.tools;
 
 import com.auth0.jwt.JWTSigner;
 import com.auth0.jwt.JWTVerifier;
