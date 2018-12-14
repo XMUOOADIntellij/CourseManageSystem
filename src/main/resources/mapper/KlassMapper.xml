@@ -3,13 +3,17 @@
 <mapper namespace="com.group12.course.mapper.KlassMapper" >
   <resultMap id="BaseResultMap" type="com.group12.course.entity.Klass" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="course_id" property="courseId" jdbcType="BIGINT" />
     <result column="grade" property="grade" jdbcType="TINYINT" />
     <result column="klass_serial" property="klassSerial" jdbcType="TINYINT" />
-    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="klass_time" property="klassTime" jdbcType="VARCHAR" />
+    <result column="klass_location" property="klassLocation" jdbcType="VARCHAR" />
+
+    <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                 column="course_id" javaType="com.group12.course.entity.Course"/>
+
   </resultMap>
   <sql id="Base_Column_List" >
-    id, course_id, grade, klass_serial, introduction
+    id, course_id, grade, klass_serial, klass_time, klass_location
   </sql>
 
   <select id="selectKlassById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -39,8 +43,11 @@
       <if test="klassSerial != null" >
         klass_serial,
       </if>
-      <if test="introduction != null" >
-        introduction,
+      <if test="klassTime != null" >
+        klass_time,
+      </if>
+      <if test="klassLocation != null" >
+        klass_location,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -56,8 +63,11 @@
       <if test="klassSerial != null" >
         #{klassSerial,jdbcType=TINYINT},
       </if>
-      <if test="introduction != null" >
-        #{introduction,jdbcType=VARCHAR},
+      <if test="klassTime != null" >
+        #{klass_time,jdbcType=VARCHAR},
+      </if>
+      <if test="klassLocation != null" >
+        #{klass_Location,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -74,8 +84,11 @@
       <if test="klassSerial != null" >
         klass_serial = #{klassSerial,jdbcType=TINYINT},
       </if>
-      <if test="introduction != null" >
-        introduction = #{introduction,jdbcType=VARCHAR},
+      <if test="klassTime != null" >
+        klass_time = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="klassLocation != null" >
+        klass_location = #{introduction,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}

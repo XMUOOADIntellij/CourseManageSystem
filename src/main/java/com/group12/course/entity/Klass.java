@@ -18,7 +18,10 @@ public class Klass {
 
     private Integer klassSerial;
 
-    private String introduction;
+    private String klassTime;
+
+    private String klassLocation;
+
 
     public Long getId() {
         return id;
@@ -32,7 +35,7 @@ public class Klass {
         return course;
     }
 
-    public void setCourse(Long courseId) {
+    public void setCourse(Course course) {
         this.course = course;
     }
 
@@ -52,11 +55,19 @@ public class Klass {
         this.klassSerial = klassSerial;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    public String getKlassTime() {
+        return klassTime;
     }
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction == null ? null : introduction.trim();
+    public void setKlassTime(String klassTime) {
+        this.klassTime = klassTime;
+    }
+
+    public String getKlassLocation() {
+        return klassLocation;
+    }
+
+    public void setKlassLocation(String klassLocation) {
+        this.klassLocation = klassLocation;
     }
 }

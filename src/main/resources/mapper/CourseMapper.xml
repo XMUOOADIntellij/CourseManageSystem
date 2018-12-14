@@ -127,12 +127,11 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <!--
   <select id="listCourses" parameterType="java.lang.Long" resultType="com.group12.course.entity.Course">
     select
     <include refid="Base_Column_List" />
     from course
     where teacher_id = #{teacherId,jdbcType=BIGINT}
   </select>
-  -->
+
 </mapper>
