@@ -16,16 +16,6 @@ public class AttendanceController {
     AttendanceService attendanceService;
 
     /**
-     * 获得班级讨论课某个展示信息
-     * @param attendanceId id
-     */
-    @GetMapping(value="/{attendanceId}")
-    public void getAttendance(@PathVariable Long attendanceId){
-        //TODO 获得班级讨论课某个展示信息
-        return;
-    }
-
-    /**
      * 更改报名的次序
      * @param record Attendance
      */

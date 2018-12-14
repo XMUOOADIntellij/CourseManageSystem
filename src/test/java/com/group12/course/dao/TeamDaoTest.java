@@ -26,10 +26,10 @@ public class TeamDaoTest {
     @Rollback
     public void testAddTeam(){
         Team testTeam = new Team();
-        testTeam.setCourseId(new Long(111));
+        //testTeam.setCourseId(new Long(111));
         testTeam.setGmtCreate(new Date());
         testTeam.setGmtModified(new Date());
-        testTeam.setLeaderId(new Long(122));
+        //testTeam.setLeaderId(new Long(122));
         testTeam.setValid(true);
         testTeam.setLabel("aaa");
         testTeam.setName("asa");

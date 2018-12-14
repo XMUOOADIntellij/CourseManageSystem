@@ -1,9 +1,10 @@
 package com.group12.course.dao;
 
-import com.group12.course.entity.Attendance;
-import com.group12.course.mapper.AttendanceMapper;
+
+import com.group12.course.entity.SeminarScore;
+import com.group12.course.mapper.SeminarMapper;
+import com.group12.course.mapper.SeminarScoreMapper;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -14,24 +15,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class AttendanceDaoTest {
+public class ScoreDaoTest {
     @Autowired
-    AttendanceMapper attendanceMapper;
-    Attendance attendance;
-
-    @Before
-    public void initial(){
-        attendance = new Attendance();
-    }
+    SeminarScoreMapper seminarScoreMapper;
 
     @Test
-    public void testEnrollPresentation(){
+    public void testSelectSeminarScore(){
+        SeminarScore record = seminarScoreMapper.selectSeminarScoreById(new Long(1));
     }
-
-    @Test
-    public void testGetAttendance(){
-        Assert.assertNotNull(attendanceMapper.selectAttendance(new Long(1),new Long(3)));
-    }
-
 
 }

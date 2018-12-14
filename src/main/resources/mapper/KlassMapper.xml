@@ -12,7 +12,7 @@
     id, course_id, grade, klass_serial, introduction
   </sql>
 
-  <select id="getKlass" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectKlassById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from klass

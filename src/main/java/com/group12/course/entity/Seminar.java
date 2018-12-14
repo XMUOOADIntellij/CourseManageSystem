@@ -1,5 +1,7 @@
 package com.group12.course.entity;
 
+import org.apache.ibatis.type.Alias;
+
 import java.time.LocalDateTime;
 
 /**
@@ -7,6 +9,8 @@ import java.time.LocalDateTime;
  * @author Y Jiang
  * @date  2018/12/13
  */
+
+@Alias("seminar")
 public class Seminar {
     private Long id;
 

@@ -11,15 +11,19 @@
 
     <association property="seminar" column="seminar_id"
                  select="com.group12.course.mapper.SeminarMapper.selectSeminarById"
-                 javaType="com.group12.course.entity.Seminar"/>
+                 javaType="seminar"/>
 
-    <!--
     <association property="klass" column="klass_id"
                  select="selectKlass"
                  javaType="com.group12.course.entity.Klass"/>
-    -->
   </resultMap>
 
+
+  <resultMap id="KlassSeminarResultMap" type="com.group12.course.dto.KlassSeminarDto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="report_ddl" property="reportDdl" jdbcType="TIMESTAMP" />
+    <result column="seminar_status" property="seminarStatus" jdbcType="VARCHAR" />
+  </resultMap>
 
   <sql id="Base_Column_List" >
     id, seminar_id, <!--klass_id,--> report_ddl, seminar_status
@@ -30,6 +34,14 @@
     <include refid="Base_Column_List" />
     from klass_seminar
     where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectKlassSeminar" resultType="com.group12.course.dto.KlassSeminarDto" >
+    select
+    id, report_ddl, seminar_status
+    from klass_seminar
+    where klass_id = #{classId,jdbcType=BIGINT}
+    and   seminar_id = #{seminarId,jdbcType=BIGINT}
   </select>
 
   <delete id="delete" parameterType="java.lang.Long" >

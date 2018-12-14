@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.ScoreMapper" >
+
+
+    <resultMap id="BaseResultMap" type="com.group12.course.entity.SeminarScore" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+
+        <result column="presentation_score" property="presentationScore" jdbcType="DECIMAL" />
+        <result column="question_score" property="questionScore" jdbcType="DECIMAL" />
+        <result column="report_score" property="reportScore" jdbcType="DECIMAL" />
+        <result column="total_score" property="totalScore" jdbcType="DECIMAL" />
+
+
+        <association property="klassSeminar" column="klass_seminar_id"
+                     select="com.group12.course.mapper.KlassSeminarMapper.selectKlassSeminarById"
+                     javaType="com.group12.course.entity.KlassSeminar"/>
+
+        <association property="team" column="team_id"
+                     select="com.group12.course.mapper.TeamMapper.selectTeamById"
+                     javaType="com.group12.course.entity.Team"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, klass_seminar_id, team_id,presentation_score,report_score,question_score,total_score
+    </sql>
+    
+    <select id="selectSeminarScoreById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from seminar_score_table
+        where id=#{id,jdbcType=BIGINT}
+    </select>
+
+</mapper>

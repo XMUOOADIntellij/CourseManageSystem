@@ -3,6 +3,7 @@ package com.group12.course.controller;
 import com.group12.course.entity.Attendance;
 import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Seminar;
+import com.group12.course.service.AttendanceService;
 import com.group12.course.service.SeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SeminarController {
     @Autowired
     SeminarService seminarService;
+    AttendanceService attendanceService;
 
     /**
      * 创建讨论课
@@ -76,15 +78,19 @@ public class SeminarController {
 
 
     /**
-     * ① 获得当前班级讨论课的展示报名
-     * ② 获得当前班级讨论课正在展示的小组
+     ① 获得当前班级讨论课的展示报名
+     ② 获得当前班级讨论课正在展示的小组     status
+     ③ 某一小组获得当前班级讨论课报名的展示  teamId
      * @param seminarId 课程讨论课
      * @param classId   班级id
      * @param presented 当前是否正在展示
+     * @param teamId    找到某一小组报名的展示
      * @return Attendance
      */
     @GetMapping(value="/{seminarId}/class/{classId}/attendance")
-    public Attendance  getSeminarAttendance(@PathVariable Long seminarId, @PathVariable Long classId,@RequestParam(value = "presented") Boolean presented){
+    public Attendance getSeminarAttendance(@PathVariable Long seminarId, @PathVariable Long classId,
+                                           @RequestParam(value = "presented") Boolean presented,
+                                           @RequestParam(value="teamId") Long teamId){
         //TODO
         return null;
     }

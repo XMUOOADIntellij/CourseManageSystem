@@ -18,8 +18,11 @@ public interface AttendanceMapper {
 
     int insert(Attendance record);
 
-    Attendance select(Long id);
+    Attendance selectAttendenceById(Long id);
+
+    Attendance selectAttendance(Long klassSeminarId,Long teamId);
 
     int update(Attendance record);
+
 
 }
