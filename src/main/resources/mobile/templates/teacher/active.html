@@ -2,8 +2,7 @@
 <html dir="ltr" lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-          name="viewport">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport">
     <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <meta content="en" http-equiv="Content-Language"/>
     <meta content="#2d89ef" name="msapplication-TileColor">
@@ -42,26 +41,39 @@
         <div class="container">
             <div class="row">
                 <div class="col col-login mx-auto">
-                    <div class="text-center mb-6">
-                        <img alt="" class="h-9" src="../../assets/images/brand.png">
-                    </div>
-                    <form action="../teacher/active.html" class="card" method="post" onsubmit="return createPassword();">
+                    <form action="home.html" class="card" method="post" onsubmit="return createUser();">
                         <div class="card-body p-6">
-                            <div class="card-title">忘记密码</div>
+                            <div class="card-title">激活账户</div>
                             <div class="form-group">
-                                <label class="form-label">重新设置密码</label>
+                                <label class="form-label">设置密码<span class="form-required">*</span></label>
                                 <input class="form-control" placeholder="不少于6位" type="email">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">确认密码</label>
+                                <label class="form-label">确认密码<span class="form-required">*</span></label>
                                 <input class="form-control" placeholder="重新输入密码" type="password">
                             </div>
+                            <!--<p class="text-muted">Enter your email address and your password will be reset and emailed to you
+                            .</p>-->
+                            <div class="form-group">
+                                <label class="form-label">验证邮箱<span class="form-required">*</span></label>
+                                <input class="form-control" placeholder="可用的邮箱地址" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">验证身份<span class="form-required">*</span></label>
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="发送验证码至邮箱" type="text">
+                                    <span class="input-group-append">
+                              <button class="btn btn-secondary" type="button">获取验证码</button>
+                            </span>
+                                </div>
+                            </div>
                             <div class="form-footer">
-                                <button class="btn btn-primary btn-block" type="submit">确认提交</button>
+                                <button class="btn btn-primary btn-block" id="btn-active-submit" type="submit">激活
+                                </button>
                             </div>
                         </div>
                     </form>
-                    <div class="text-center text-muted">想起密码, <a href="login.html">返回</a> 登录界面
+                    <div class="text-center text-muted">已有账户? <a href="../common/login.html">返回登录界面</a>
                     </div>
                 </div>
             </div>

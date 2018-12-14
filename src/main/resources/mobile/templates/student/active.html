@@ -41,9 +41,22 @@
         <div class="container">
             <div class="row">
                 <div class="col col-login mx-auto">
-                    <form action="../teacher/home.html" class="card" method="post" onsubmit="return createUser();">
+                    <form action="home.html" class="card" method="post" onsubmit="return createUser();">
                         <div class="card-body p-6">
                             <div class="card-title">激活账户</div>
+                            <div class="form-group">
+                                <div class="form-label">用户性别<span class="form-required">*</span></div>
+                                <div class="custom-controls-stacked">
+                                    <label class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" name="example-inline-radios" value="option1" checked="">
+                                        <span class="custom-control-label">男</span>
+                                    </label>
+                                    <label class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" name="example-inline-radios" value="option2">
+                                        <span class="custom-control-label">女</span>
+                                    </label>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="form-label">设置密码<span class="form-required">*</span></label>
                                 <input class="form-control" placeholder="不少于6位" type="email">
@@ -73,7 +86,7 @@
                             </div>
                         </div>
                     </form>
-                    <div class="text-center text-muted">已有账户? <a href="login.html">返回登录界面</a>
+                    <div class="text-center text-muted">已有账户? <a href="../common/login.html">返回登录界面</a>
                     </div>
                 </div>
             </div>
