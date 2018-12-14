@@ -28,4 +28,5 @@ public interface AttendanceMapper {
 
     List<Attendance> selectAllAttendance(Long klassSeminarId);
 
+    Integer updateOrder(Long id,Integer teamOrder);
 }

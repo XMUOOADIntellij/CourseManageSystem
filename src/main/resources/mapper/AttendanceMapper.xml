@@ -138,4 +138,14 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
+
+    <update id="updateOrder">
+        update attendance
+        <set>
+            <if test="teamOrder != null" >
+                team_order = #{teamOrder,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

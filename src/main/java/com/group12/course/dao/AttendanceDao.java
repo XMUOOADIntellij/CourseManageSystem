@@ -20,4 +20,8 @@ public class AttendanceDao {
     public List<Attendance> getAllAttendance(Long klassSeminarId){
         return attendanceMapper.selectAllAttendance(klassSeminarId);
     }
+
+    public Integer changeAttendanceOrder(Long attendanceId,Integer teamOrder){
+        return attendanceMapper.updateOrder(attendanceId,teamOrder);
+    }
 }

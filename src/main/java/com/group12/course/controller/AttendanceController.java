@@ -18,11 +18,11 @@ public class AttendanceController {
     /**
      * 更改报名的次序
      * @param record Attendance
+     * @return  //TODO 规范返回
      */
     @PutMapping(value="/{attendanceId}")
-    public void changeOrder(@PathVariable Long attendanceId,@RequestBody Attendance record){
-        //TODO 更改报名的次序
-        return;
+    public Integer changeOrder(@PathVariable Long attendanceId,@RequestBody Attendance record){
+        return attendanceService.changeAttendanceOrder(attendanceId,record.getTeamOrder());
     }
 
     /**

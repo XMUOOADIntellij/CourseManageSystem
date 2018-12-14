@@ -59,7 +59,8 @@ public class AttendanceService {
         }
     }
 
-
-
+    public Integer changeAttendanceOrder(Long attendanceId,Integer teamOrder){
+        return attendanceDao.changeAttendanceOrder(attendanceId,teamOrder);
+    }
 
 }
