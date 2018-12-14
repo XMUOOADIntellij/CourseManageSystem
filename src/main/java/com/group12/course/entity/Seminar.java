@@ -2,6 +2,7 @@ package com.group12.course.entity;
 
 import org.apache.ibatis.type.Alias;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
  */
 
 @Alias("seminar")
-public class Seminar {
+public class Seminar  {
     private Long id;
 
     /**
@@ -121,8 +122,8 @@ public class Seminar {
     @Override
     public String toString() {
         return "id:"+this.getId()+"\n"+
-        "courseId:" +this.getCourse().getId()+"\n"+
-        "roundId:"  +this.getRound().getId()+"\n"+
+//        "courseId:" +this.getCourse().getId()+"\n"+
+ //       "roundId:"  +this.getRound().getId()+"\n"+
         "seminarName:"+this.getSeminarName()+"\n"+
         "introduction:"+this.getIntroduction()+"\n"+
         "maxTeam:"+this.getMaxTeam()+"\n"+

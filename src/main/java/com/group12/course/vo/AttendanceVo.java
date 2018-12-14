@@ -1,29 +1,13 @@
-package com.group12.course.entity;
+package com.group12.course.vo;
 
+import com.group12.course.entity.Attendance;
 
-import org.apache.ibatis.type.Alias;
+public class AttendanceVo {
 
-import java.io.Serializable;
-
-/**
- * 班级讨论课展示信息
- * @author Y Jiang
- * @date 2018/12/12
- */
-
-@Alias("attendance")
-public class Attendance {
+    /**
+     * Attendance 的属性
+     */
     private Long id;
-
-    /**
-     * 一次报名展示对应一节讨论课
-     */
-    private KlassSeminar klassSeminar;
-
-    /**
-     * 一次报名展示对应一个小组
-     */
-    private Team team;
 
     private Integer teamOrder;
 
@@ -37,28 +21,18 @@ public class Attendance {
 
     private String pptUrl;
 
+    /**
+     * 添加的属性
+     */
+    private Integer classGrade;
+    private Integer classSerial;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public KlassSeminar getKlassSeminar() {
-        return klassSeminar;
-    }
-
-    public void setKlassSeminar(KlassSeminar klassSeminar) {
-        this.klassSeminar = klassSeminar;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
     }
 
     public Integer getTeamOrder() {
@@ -109,4 +83,33 @@ public class Attendance {
         this.pptUrl = pptUrl;
     }
 
+    public Integer getClassGrade() {
+        return classGrade;
+    }
+
+    public void setClassGrade(Integer classGrade) {
+        this.classGrade = classGrade;
+    }
+
+    public Integer getClassSerial() {
+        return classSerial;
+    }
+
+    public void setClassSerial(Integer classSerial) {
+        this.classSerial = classSerial;
+    }
+
+    public AttendanceVo(){}
+    public AttendanceVo(Attendance attendance) {
+
+        this.id = attendance.getId();
+        this.pptName = attendance.getPptName();
+        this.pptUrl = attendance.getPptUrl();
+        this.reportName =attendance.getReportName();
+        this.reportUrl=attendance.getReportUrl();
+        this.presented=attendance.getPresented();
+        this.teamOrder=attendance.getTeamOrder();
+        this.classGrade=attendance.getKlassSeminar().getKlass().getGrade().intValue();
+        this.classSerial=attendance.getKlassSeminar().getKlass().getKlassSerial();
+    }
 }

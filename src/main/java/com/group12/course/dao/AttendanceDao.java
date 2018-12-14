@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class AttendanceDao {
     @Autowired
@@ -15,5 +17,7 @@ public class AttendanceDao {
         return attendanceMapper.selectAttendance(klassSeminarId,teamId);
     }
 
-    //TODO 
+    public List<Attendance> getAllAttendance(Long klassSeminarId){
+        return attendanceMapper.selectAllAttendance(klassSeminarId);
+    }
 }
