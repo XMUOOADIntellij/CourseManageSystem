@@ -14,7 +14,7 @@
                  javaType="seminar"/>
 
     <association property="klass" column="klass_id"
-                 select="selectKlass"
+                 select="com.group12.course.mapper.KlassMapper.selectKlassById"
                  javaType="com.group12.course.entity.Klass"/>
   </resultMap>
 

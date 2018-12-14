@@ -19,7 +19,7 @@ public class KlassDao {
     KlassMapper klassMapper;
 
     public Klass getKlass(Long id){
-        return klassMapper.getKlass(id);
+        return klassMapper.selectKlassById(id);
     }
 
     public int deleteKlass(Long id){
