@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.group12.course.mapper.AttendanceMapper" >
 
-    <resultMap id="BaseResultMap" type="com.group12.course.entity.Attendance" >
+  <resultMap id="BaseResultMap" type="attendance" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="team_order" property="teamOrder" jdbcType="TINYINT" />
     <result column="is_present" property="presented" jdbcType="TINYINT" />
@@ -10,18 +10,34 @@
     <result column="reprot_url" property="reprotUrl" jdbcType="VARCHAR" />
     <result column="ppt_name" property="pptName" jdbcType="VARCHAR" />
     <result column="ppt_url" property="pptUrl" jdbcType="VARCHAR" />
-
     <association property="klassSeminar" select="com.group12.course.mapper.KlassSeminarMapper.selectKlassSeminarById"
                    column="klass_seminar_id" javaType="com.group12.course.entity.KlassSeminar"/>
     <association property="team" select="com.group12.course.mapper.TeamMapper.selectTeamById"
                    column="team_id" javaType="com.group12.course.entity.Team"/>
+  </resultMap>
 
+  <resultMap id="AttendanceResultMap" type="attendance">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="team_order" property="teamOrder" jdbcType="TINYINT" />
+    <result column="is_present" property="presented" jdbcType="TINYINT" />
+    <result column="report_name" property="reportName" jdbcType="VARCHAR" />
+    <result column="reprot_url" property="reprotUrl" jdbcType="VARCHAR" />
+    <result column="ppt_name" property="pptName" jdbcType="VARCHAR" />
+    <result column="ppt_url" property="pptUrl" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, klass_seminar_id, team_id, team_order, is_present, report_name, reprot_url, ppt_name,
     ppt_url
   </sql>
+
+  <select id="selectAttendance" resultMap="AttendanceResultMap">
+    select
+     id, team_order, is_present, report_name, reprot_url, ppt_name,ppt_url
+    from attendance
+    where klass_seminar_id = #{klassSeminarId,jdbcType=BIGINT}
+    and   team_id = #{teamId,jdbcType=BIGINT}
+  </select>
 
   <select id="selectAttendanceById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 

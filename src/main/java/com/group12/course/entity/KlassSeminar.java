@@ -2,7 +2,8 @@ package com.group12.course.entity;
 
 import org.apache.ibatis.type.Alias;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 /**
  * 班级讨论课
@@ -18,7 +19,7 @@ public class KlassSeminar {
 
     private Seminar seminar;
 
-    private Date reportDdl;
+    private LocalDateTime reportDdl;
 
     private String seminarStatus;
 
@@ -46,11 +47,11 @@ public class KlassSeminar {
         this.seminar = seminar;
     }
 
-    public Date getReportDdl() {
+    public LocalDateTime getReportDdl() {
         return reportDdl;
     }
 
-    public void setReportDdl(Date reportDdl) {
+    public void setReportDdl(LocalDateTime reportDdl) {
         this.reportDdl = reportDdl;
     }
 
@@ -60,5 +61,23 @@ public class KlassSeminar {
 
     public void setSeminarStatus(String seminarStatus) {
         this.seminarStatus = seminarStatus;
+    }
+
+    public KlassSeminar() {}
+
+    public KlassSeminar(Long id, LocalDateTime reportDdl, String seminarStatus) {
+        this.id = id;
+        this.reportDdl = reportDdl;
+        this.seminarStatus = seminarStatus;
+    }
+
+    @Override
+    public String toString() {
+        return
+        "id:"+id+"\n"+
+        "klass:"+klass+"\n"+
+        "seminar:"+seminar+"\n"+
+        "reportDdl:"+reportDdl+"\n"+
+        "seminarStatus:"+seminarStatus;
     }
 }

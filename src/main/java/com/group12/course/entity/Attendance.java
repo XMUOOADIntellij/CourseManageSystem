@@ -1,12 +1,15 @@
 package com.group12.course.entity;
 
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 班级讨论课展示信息
  * @author Y Jiang
  * @date 2018/12/12
  */
 
+@Alias("attendance")
 public class Attendance {
     private Long id;
 

@@ -1,16 +1,22 @@
 package com.group12.course.service;
 
 import com.group12.course.dao.AttendanceDao;
+import com.group12.course.dao.KlassSeminarDao;
+import com.group12.course.dto.KlassSeminarDto;
 import com.group12.course.entity.Attendance;
+import com.group12.course.entity.KlassSeminar;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Component
 public class AttendanceService {
     @Autowired
     AttendanceDao attendanceDao;
+    KlassSeminarDao klassSeminarDao;
 
     /**
      * 获得当前班级讨论课的展示报名
@@ -20,7 +26,7 @@ public class AttendanceService {
      */
     public List<Attendance> getAllAttendance(Long classId, Long seminarId){
         //TODO 获得当前班级讨论课的展示报名
-        
+
         return null;
     }
 
@@ -44,7 +50,14 @@ public class AttendanceService {
      * @return
      */
     public Attendance getAttendance(Long classId, Long seminarId,Long teamId){
-        //TODO 某一小组获得当前班级讨论课报名的展示
-        return null;
+
+      KlassSeminarDto klassSeminar = klassSeminarDao.getKlassSeminar(seminarId,classId);
+      if(klassSeminar!=null){
+       return attendanceDao.getAttendace(klassSeminar.getId(),teamId);
+       }
+        else {
+            return null;
+        }
     }
+
 }

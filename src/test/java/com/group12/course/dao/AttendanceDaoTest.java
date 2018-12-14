@@ -28,4 +28,10 @@ public class AttendanceDaoTest {
     public void testEnrollPresentation(){
     }
 
+    @Test
+    public void testGetAttendance(){
+        Assert.assertNotNull(attendanceMapper.selectAttendance(new Long(1),new Long(3)));
+    }
+
+
 }
