@@ -1,227 +1,317 @@
-<!doctype html>
+<!DOCTYPE html>
 <html dir="ltr" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport">
-    <meta content="ie=edge" http-equiv="X-UA-Compatible">
-    <meta content="en" http-equiv="Content-Language"/>
-    <meta content="#2d89ef" name="msapplication-TileColor">
-    <meta content="#4188c9" name="theme-color">
-    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="yes" name="mobile-web-app-capable">
-    <meta content="True" name="HandheldFriendly">
-    <meta content="320" name="MobileOptimized">
-    <link href="../favicon.ico" rel="icon" type="image/x-icon"/>
-    <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+      name="viewport"
+    />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <meta content="en" http-equiv="Content-Language" />
+    <meta content="#2d89ef" name="msapplication-TileColor" />
+    <meta content="#4188c9" name="theme-color" />
+    <meta
+      content="black-translucent"
+      name="apple-mobile-web-app-status-bar-style"
+    />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="yes" name="mobile-web-app-capable" />
+    <meta content="True" name="HandheldFriendly" />
+    <meta content="320" name="MobileOptimized" />
+    <link href="../favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Generated: 2018-04-16 09:29:05 +0200 -->
-    <title>Login</title>
+    <title>新建共享</title>
     <!-- Font -->
-    <link href="../../assets/css/fontawesome.min.css" rel="stylesheet">
+    <link href="../../assets/css/fontawesome.min.css" rel="stylesheet" />
     <!-- Require.js -->
     <script src="../../assets/js/require.min.js"></script>
     <!-- Dashboard Core -->
-    <link href="../../assets/css/dashboard.css" rel="stylesheet"/>
+    <link href="../../assets/css/dashboard.css" rel="stylesheet" />
     <script src="../../assets/js/dashboard.js"></script>
     <!-- c3.js Charts Plugin -->
-    <link href="../../assets/plugins/charts-c3/plugin.css" rel="stylesheet"/>
+    <link href="../../assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
     <script src="../../assets/plugins/charts-c3/plugin.js"></script>
     <!-- Google Maps Plugin -->
-    <link href="../../assets/plugins/maps-google/plugin.css" rel="stylesheet"/>
+    <link href="../../assets/plugins/maps-google/plugin.css" rel="stylesheet" />
     <script src="../../assets/plugins/maps-google/plugin.js"></script>
     <!-- Input Mask Plugin -->
     <script src="../../assets/plugins/input-mask/plugin.js"></script>
     <!-- Customize -->
-    <link href="../../assets/css/style.css" rel="stylesheet"/>
+    <link href="../../assets/css/style.css" rel="stylesheet" />
     <script src="../../assets/js/common.js"></script>
-</head>
-<body>
-<div class="page">
-    <div class="page-main">
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-main">
         <div class="header py-4">
-            <div class="container">
-                <div class="d-flex">
-                    <a class="header-brand ml-1" href="./home.html">
-                        <img alt="logo" class="header-brand-img" src="../../assets/images/brand.png">Cms
+          <div class="container">
+            <div class="d-flex">
+              <a class="header-brand ml-1" href="./home.html">
+                <img
+                  alt="logo"
+                  class="header-brand-img"
+                  src="../../assets/images/brand.png"
+                />Cms
+              </a>
+              <div class="d-flex order-lg-2 ml-auto">
+                <div class="dropdown d-none d-md-flex">
+                  <a class="nav-link icon" data-toggle="dropdown">
+                    <i class="fe fe-bell"></i> <span class="nav-unread"></span>
+                  </a>
+                  <div
+                    class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                  >
+                    <a class="dropdown-item d-flex" href="#">
+                      <span
+                        class="avatar mr-3 align-self-center"
+                        style="background-image: url(../../demo/faces/male/41.jpg)"
+                      ></span>
+                      <div>
+                        <strong>Nathan</strong> pushed new commit: Fix page load
+                        performance issue.
+                        <div class="small text-muted">10 minutes ago</div>
+                      </div>
                     </a>
-                    <div class="d-flex order-lg-2 ml-auto">
-                        <div class="dropdown d-none d-md-flex">
-                            <a class="nav-link icon" data-toggle="dropdown">
-                                <i class="fe fe-bell"></i>
-                                <span class="nav-unread"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                <a class="dropdown-item d-flex" href="#">
-                                    <span class="avatar mr-3 align-self-center"
-                                            style="background-image: url(../../demo/faces/male/41.jpg)"></span>
-                                    <div>
-                                        <strong>Nathan</strong> pushed new commit: Fix page load performance issue.
-                                        <div class="small text-muted">10 minutes ago</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex" href="#">
-                                    <span class="avatar mr-3 align-self-center"
-                                            style="background-image: url(../../demo/faces/female/1.jpg)"></span>
-                                    <div>
-                                        <strong>Alice</strong> started new task: Tabler UI design.
-                                        <div class="small text-muted">1 hour ago</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex" href="#">
-                                    <span class="avatar mr-3 align-self-center"
-                                            style="background-image: url(../../demo/faces/female/18.jpg)"></span>
-                                    <div>
-                                        <strong>Rose</strong> deployed new version of NodeJS REST Api V3
-                                        <div class="small text-muted">2 hours ago</div>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center text-muted-dark" href="#">Mark all as read</a>
-                            </div>
-                        </div>
-                        <div class="dropdown">
-                            <a class="nav-link pr-0 leading-none" data-toggle="dropdown" href="#">
-                                <span class="avatar"
-                                        style="background-image: url(../../assets/images/male.png)"></span>
-                                <span class="ml-2 d-none d-lg-block">
-                                    <span class="text-default">Jane Pearson</span>
-                                    <small class="text-muted d-block mt-1">Administrator</small>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                <a class="dropdown-item" href="account-setting.html">
-                                    <i class="dropdown-icon fe fe-settings"></i> 个人设置
-                                </a>
-                                <a class="dropdown-item" href="todo-list.html">
-                                    <span class="float-right"><span class="badge badge-primary">6</span></span>
-                                    <i class="dropdown-icon fe fe-mail"></i> 待办事项
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../common/help.html">
-                                    <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
-                                </a>
-                                <a class="dropdown-item" href="../common/login.html">
-                                    <i class="dropdown-icon fe fe-log-out"></i> 切换账户
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="header-toggler d-lg-none ml-3 ml-lg-0" data-target="#headerMenuCollapse" data-toggle="collapse"
-                            href="#">
-                        <span class="header-toggler-icon"></span>
+                    <a class="dropdown-item d-flex" href="#">
+                      <span
+                        class="avatar mr-3 align-self-center"
+                        style="background-image: url(../../demo/faces/female/1.jpg)"
+                      ></span>
+                      <div>
+                        <strong>Alice</strong> started new task: Tabler UI
+                        design.
+                        <div class="small text-muted">1 hour ago</div>
+                      </div>
                     </a>
+                    <a class="dropdown-item d-flex" href="#">
+                      <span
+                        class="avatar mr-3 align-self-center"
+                        style="background-image: url(../../demo/faces/female/18.jpg)"
+                      ></span>
+                      <div>
+                        <strong>Rose</strong> deployed new version of NodeJS
+                        REST Api V3
+                        <div class="small text-muted">2 hours ago</div>
+                      </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a
+                      class="dropdown-item text-center text-muted-dark"
+                      href="#"
+                      >Mark all as read</a
+                    >
+                  </div>
                 </div>
+                <div class="dropdown">
+                  <a
+                    class="nav-link pr-0 leading-none"
+                    data-toggle="dropdown"
+                    href="#"
+                  >
+                    <span
+                      class="avatar"
+                      style="background-image: url(../../assets/images/male.png)"
+                    ></span>
+                    <span class="ml-2 d-none d-lg-block">
+                      <span class="text-default">Jane Pearson</span>
+                      <small class="text-muted d-block mt-1"
+                        >Administrator</small
+                      >
+                    </span>
+                  </a>
+                  <div
+                    class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                  >
+                    <a class="dropdown-item" href="account-setting.html">
+                      <i class="dropdown-icon fe fe-settings"></i> 个人设置
+                    </a>
+                    <a class="dropdown-item" href="todo-list.html">
+                      <span class="float-right"
+                        ><span class="badge badge-primary">6</span></span
+                      >
+                      <i class="dropdown-icon fe fe-mail"></i> 待办事项
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../common/help.html">
+                      <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
+                    </a>
+                    <a class="dropdown-item" href="../common/login.html">
+                      <i class="dropdown-icon fe fe-log-out"></i> 切换账户
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <a
+                class="header-toggler d-lg-none ml-3 ml-lg-0"
+                data-target="#headerMenuCollapse"
+                data-toggle="collapse"
+                href="#"
+              >
+                <span class="header-toggler-icon"></span>
+              </a>
             </div>
+          </div>
         </div>
         <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 ml-auto">
-                        <form class="input-icon my-3 my-lg-0">
-                            <input class="form-control header-search" placeholder="Search&hellip;" tabindex="1"
-                                    type="search">
-                            <div class="input-icon-addon">
-                                <i class="fe fe-search"></i>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg order-lg-first">
-                        <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
-                            <li class="nav-item pl-5">
-                                <a class="nav-link" href="./home.html"><i class="fe fe-home"></i>
-                                    我的主页</a>
-                            </li>
-                            <li class="nav-item pl-5">
-                                <a class="nav-link" href="./course-home.html"><i class="fe fe-book"></i>
-                                    我的课程</a>
-                            </li>
-                            <li class="nav-item pl-5">
-                                <a class="nav-link" href="./seminar-home.html"><i class="fe fe-book-open"></i>
-                                    我的讨论课</a>
-                            </li>
-                            <li class="nav-item pl-5">
-                                <a class="nav-link" href="./seminar-going.html"><i class="fe fe-play-circle"></i>
-                                    正在进行中</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg-3 ml-auto">
+                <form class="input-icon my-3 my-lg-0">
+                  <input
+                    class="form-control header-search"
+                    placeholder="Search&hellip;"
+                    tabindex="1"
+                    type="search"
+                  />
+                  <div class="input-icon-addon">
+                    <i class="fe fe-search"></i>
+                  </div>
+                </form>
+              </div>
+              <div class="col-lg order-lg-first">
+                <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="./home.html"
+                      ><i class="fe fe-home"></i> 我的主页</a
+                    >
+                  </li>
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="./course-home.html"
+                      ><i class="fe fe-book"></i> 我的课程</a
+                    >
+                  </li>
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="./seminar-home.html"
+                      ><i class="fe fe-book-open"></i> 我的讨论课</a
+                    >
+                  </li>
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="./seminar-going.html"
+                      ><i class="fe fe-play-circle"></i> 正在进行中</a
+                    >
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
         </div>
         <div class="my-3 my-md-5">
-            <div class="container">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="./course-home.html">我的课程</a></li>
-                        <li class="breadcrumb-item"><a href="./course-share.html">共享设置</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">新建共享</li>
-                    </ol>
-                </nav>
-                <div class="row">
-                    <div class="col-12">
-                        <form action="./course-share.html" class="card" method="post" onsubmit="return createShare();">
-                                <div class="card-header">
-                                    <h3 class="card-title">新建共享</h3>
-                                </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <div class="form-label mb-3">共享类型</div>
-                                            <div class="custom-controls-stacked">
-                                                <label class="custom-control custom-radio custom-control-inline">
-                                                    <input checked="" class="custom-control-input" name="example-inline-radios" type="radio" value="option1">
-                                                    <span class="custom-control-label ">共享分组</span>
-                                                </label>
-                                                <label class="custom-control custom-radio custom-control-inline">
-                                                    <input class="custom-control-input" name="example-inline-radios" type="radio" value="option2">
-                                                    <span class="custom-control-label ">共享讨论课</span>
-                                                </label>
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">共享对象</label>
-                                            <div class="row gutters-xs">
-                                                <div class="col-6">
-                                                    <select class="form-control custom-select" name="share[course]">
-                                                        <option value="">J2ee</option>
-                                                        <option value="1">.Net</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-6">
-                                                    <select class="form-control custom-select" name="share[teacher]">
-                                                        <option value="">王美红</option>
-                                                        <option value="1">邱明</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+          <div class="container">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="./course-home.html">我的课程</a>
+                </li>
+                <li class="breadcrumb-item">
+                  <a href="./course-share.html">共享设置</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  新建共享
+                </li>
+              </ol>
+            </nav>
+            <div class="row">
+              <div class="col-12">
+                <form
+                  action="./course-share.html"
+                  class="card"
+                  method="post"
+                  onsubmit="return createShare();"
+                >
+                  <div class="card-header">
+                    <h3 class="card-title">新建共享</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group">
+                          <div class="form-label mb-3">共享类型</div>
+                          <div class="custom-controls-stacked">
+                            <label
+                              class="custom-control custom-radio custom-control-inline"
+                            >
+                              <input
+                                checked=""
+                                class="custom-control-input"
+                                name="example-inline-radios"
+                                type="radio"
+                                value="option1"
+                              />
+                              <span class="custom-control-label "
+                                >共享分组</span
+                              >
+                            </label>
+                            <label
+                              class="custom-control custom-radio custom-control-inline"
+                            >
+                              <input
+                                class="custom-control-input"
+                                name="example-inline-radios"
+                                type="radio"
+                                value="option2"
+                              />
+                              <span class="custom-control-label "
+                                >共享讨论课</span
+                              >
+                            </label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">共享对象</label>
+                          <div class="row gutters-xs">
+                            <div class="col-6">
+                              <select
+                                class="form-control custom-select"
+                                name="share[course]"
+                              >
+                                <option value="">J2ee</option>
+                                <option value="1">.Net</option>
+                              </select>
                             </div>
-                            <div class="card-footer text-right">
-                                <div class="d-flex">
-                                    <a class="btn btn-link" href="./course-share.html">取消</a>
-                                    <button class="btn btn-primary ml-auto" type="submit">确认共享</button>
-                                </div>
+                            <div class="col-6">
+                              <select
+                                class="form-control custom-select"
+                                name="share[teacher]"
+                              >
+                                <option value="">王美红</option>
+                                <option value="1">邱明</option>
+                              </select>
                             </div>
-                        </form>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                </div>
+                  </div>
+                  <div class="card-footer text-right">
+                    <div class="d-flex">
+                      <a class="btn btn-link" href="./course-share.html"
+                        >取消</a
+                      >
+                      <button class="btn btn-primary ml-auto" type="submit">
+                        确认共享
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
 
-<footer class="footer">
-    <div class="container">
+    <footer class="footer">
+      <div class="container">
         <div class="row align-items-center flex-row-reverse">
-            <div class="col-12 col-lg-auto mt-0 mt-lg-0 text-center">
-                Copyright © 2018 <a href="https://github.com/XMUOOADIntellij/CourseManageSystem">Cms</a>.
-            </div>
+          <div class="col-12 col-lg-auto mt-0 mt-lg-0 text-center">
+            Copyright © 2018
+            <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
+              >Cms</a
+            >.
+          </div>
         </div>
-    </div>
-</footer>
-</body>
+      </div>
+    </footer>
+  </body>
 </html>

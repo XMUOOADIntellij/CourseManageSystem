@@ -1,84 +1,127 @@
-<!doctype html>
+<!DOCTYPE html>
 <html dir="ltr" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport">
-    <meta content="ie=edge" http-equiv="X-UA-Compatible">
-    <meta content="en" http-equiv="Content-Language"/>
-    <meta content="#2d89ef" name="msapplication-TileColor">
-    <meta content="#4188c9" name="theme-color">
-    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="yes" name="mobile-web-app-capable">
-    <meta content="True" name="HandheldFriendly">
-    <meta content="320" name="MobileOptimized">
-    <link href="../favicon.ico" rel="icon" type="image/x-icon"/>
-    <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+      name="viewport"
+    />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <meta content="en" http-equiv="Content-Language" />
+    <meta content="#2d89ef" name="msapplication-TileColor" />
+    <meta content="#4188c9" name="theme-color" />
+    <meta
+      content="black-translucent"
+      name="apple-mobile-web-app-status-bar-style"
+    />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="yes" name="mobile-web-app-capable" />
+    <meta content="True" name="HandheldFriendly" />
+    <meta content="320" name="MobileOptimized" />
+    <link href="../favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Generated: 2018-04-16 09:29:05 +0200 -->
-    <title>Login</title>
+    <title>账户激活</title>
     <!-- Font -->
-    <link href="../../assets/css/fontawesome.min.css" rel="stylesheet">
+    <link href="../../assets/css/fontawesome.min.css" rel="stylesheet" />
     <!-- Require.js -->
     <script src="../../assets/js/require.min.js"></script>
     <!-- Dashboard Core -->
-    <link href="../../assets/css/dashboard.css" rel="stylesheet"/>
+    <link href="../../assets/css/dashboard.css" rel="stylesheet" />
     <script src="../../assets/js/dashboard.js"></script>
     <!-- c3.js Charts Plugin -->
-    <link href="../../assets/plugins/charts-c3/plugin.css" rel="stylesheet"/>
+    <link href="../../assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
     <script src="../../assets/plugins/charts-c3/plugin.js"></script>
     <!-- Google Maps Plugin -->
-    <link href="../../assets/plugins/maps-google/plugin.css" rel="stylesheet"/>
+    <link href="../../assets/plugins/maps-google/plugin.css" rel="stylesheet" />
     <script src="../../assets/plugins/maps-google/plugin.js"></script>
     <!-- Input Mask Plugin -->
     <script src="../../assets/plugins/input-mask/plugin.js"></script>
     <!-- Customize -->
-    <link href="../../assets/css/style.css" rel="stylesheet"/>
+    <link href="../../assets/css/style.css" rel="stylesheet" />
     <script src="../../assets/js/common.js"></script>
-</head>
-<body class="">
-<div class="page">
-    <div class="page-single">
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-single">
         <div class="container">
-            <div class="row">
-                <div class="col col-login mx-auto">
-                    <form action="home.html" class="card" method="post" onsubmit="return createUser();">
-                        <div class="card-body p-6">
-                            <div class="card-title">激活账户</div>
-                            <div class="form-group">
-                                <label class="form-label">设置密码<span class="form-required">*</span></label>
-                                <input class="form-control" placeholder="不少于6位" type="email">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">确认密码<span class="form-required">*</span></label>
-                                <input class="form-control" placeholder="重新输入密码" type="password">
-                            </div>
-                            <!--<p class="text-muted">Enter your email address and your password will be reset and emailed to you
+          <div class="row">
+            <div class="col col-login mx-auto">
+              <form
+                action="home.html"
+                class="card"
+                method="post"
+                onsubmit="return createUser();"
+              >
+                <div class="card-body p-6">
+                  <div class="card-title">激活账户</div>
+                  <div class="form-group">
+                    <label class="form-label"
+                      >设置密码<span class="form-required">*</span></label
+                    >
+                    <input
+                      class="form-control"
+                      placeholder="不少于6位"
+                      type="email"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"
+                      >确认密码<span class="form-required">*</span></label
+                    >
+                    <input
+                      class="form-control"
+                      placeholder="重新输入密码"
+                      type="password"
+                    />
+                  </div>
+                  <!--<p class="text-muted">Enter your email address and your password will be reset and emailed to you
                             .</p>-->
-                            <div class="form-group">
-                                <label class="form-label">验证邮箱<span class="form-required">*</span></label>
-                                <input class="form-control" placeholder="可用的邮箱地址" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">验证身份<span class="form-required">*</span></label>
-                                <div class="input-group">
-                                    <input class="form-control" placeholder="发送验证码至邮箱" type="text">
-                                    <span class="input-group-append">
-                              <button class="btn btn-secondary" type="button">获取验证码</button>
-                            </span>
-                                </div>
-                            </div>
-                            <div class="form-footer">
-                                <button class="btn btn-primary btn-block" id="btn-active-submit" type="submit">激活
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="text-center text-muted">已有账户? <a href="../common/login.html">返回登录界面</a>
+                  <div class="form-group">
+                    <label class="form-label"
+                      >验证邮箱<span class="form-required">*</span></label
+                    >
+                    <input
+                      class="form-control"
+                      placeholder="可用的邮箱地址"
+                      type="text"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"
+                      >验证身份<span class="form-required">*</span></label
+                    >
+                    <div class="input-group">
+                      <input
+                        class="form-control"
+                        placeholder="发送验证码至邮箱"
+                        type="text"
+                      />
+                      <span class="input-group-append">
+                        <button class="btn btn-secondary" type="button">
+                          获取验证码
+                        </button>
+                      </span>
                     </div>
+                  </div>
+                  <div class="form-footer">
+                    <button
+                      class="btn btn-primary btn-block"
+                      id="btn-active-submit"
+                      type="submit"
+                    >
+                      激活
+                    </button>
+                  </div>
                 </div>
+              </form>
+              <div class="text-center text-muted">
+                已有账户? <a href="../common/login.html">返回登录界面</a>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>
