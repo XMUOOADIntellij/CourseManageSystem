@@ -25,9 +25,12 @@ public interface TeamMapper {
      * 在数据库中添加队伍的记录
      *
      * @param record 待添加的队伍
+     * @param courseId
+     * @param klassId
+     * @param leaderId
      * @return 代表处理数量
      * */
-    int addTeam(Team record);
+    int addTeam(Team record,Long courseId,Long klassId,Long leaderId);
 
     /**
      * 获取数据库中队伍的记录

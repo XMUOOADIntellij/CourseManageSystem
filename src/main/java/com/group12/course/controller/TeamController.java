@@ -35,8 +35,9 @@ public class TeamController {
         String[] params = request.getParameterValues("members");
         System.out.println(request.getParameterNames());
         System.out.println(params);
-
-        System.out.println(request);
+        System.out.println(jsonStr);
+        System.out.println(request.getContentLength());
+        System.out.println(request.getParameterMap());
         //存储需要insert的项目人员关系信息
         List<Student> members=new ArrayList<Student>();
 

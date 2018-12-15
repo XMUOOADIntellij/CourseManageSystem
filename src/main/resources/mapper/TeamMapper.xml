@@ -4,19 +4,20 @@
 
     <resultMap id="BaseResultMap" type="com.group12.course.entity.Team" >
         <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="leader_id" property="leaderId" jdbcType="BIGINT" />
-        <result column="label" property="label" jdbcType="VARCHAR" />
-        <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="is_valid" property="valid" jdbcType="BIT" />
-        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
-        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP" />
+        <result column="team_name" property="teamName" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="BIT" />
+        <result column="team_serial" property="teamSerial" jdbcType="BIT" />
 
+        <association property="klass" select="com.group12.course.mapper.klassMapper.selectKlassById"
+                   column="klass_id" javaType="com.group12.course.entity.Klass"/>
         <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
                    column="course_id" javaType="com.group12.course.entity.Course"/>
+        <association property="leader" select="com.group12.course.mapper.StudentMapper.selectStudentById"
+                   column="leader_id" javaType="com.group12.course.entity.Student"/>
     </resultMap>
 
     <sql id="Base_Column_List" >
-        id, course_id, leader_id, label, name, is_valid, gmt_create, gmt_modified
+        id, course_id,klass_id, leader_id, team_name, team_serial,status
     </sql>
 
   <select id="getTeamById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -31,7 +32,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="addTeam" parameterType="com.group12.course.entity.Team" >
+  <insert id="addTeam" >
     insert into team
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="courseId != null" >
@@ -40,43 +41,37 @@
       <if test="leaderId != null" >
         leader_id,
       </if>
-      <if test="label != null" >
-        label,
+      <if test="klassId != null" >
+        klass_id,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="teamName != null" >
+        team_name,
       </if>
-      <if test="valid != null" >
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="teamSerial != null" >
         is_valid,
-      </if>
-      <if test="gmtCreate != null" >
-        gmt_create,
-      </if>
-      <if test="gmtModified != null" >
-        gmt_modified,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="courseId != null" >
-        #{courseId,jdbcType=BIGINT},
+        #{course_id},
       </if>
       <if test="leaderId != null" >
-        #{leaderId,jdbcType=BIGINT},
+        #{leader_id},
       </if>
-      <if test="label != null" >
-        #{label,jdbcType=VARCHAR},
+      <if test="klassId != null" >
+        #{klass_id},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="teamName != null" >
+        #{team_name},
       </if>
-      <if test="valid != null" >
-        #{valid,jdbcType=BIT},
+      <if test="status != null" >
+        #{status},
       </if>
-      <if test="gmtCreate != null" >
-        #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null" >
-        #{gmtModified,jdbcType=TIMESTAMP},
+      <if test="teamSerial != null" >
+        #{team_serial},
       </if>
     </trim>
   </insert>
@@ -84,26 +79,17 @@
   <update id="updateTeam" parameterType="com.group12.course.entity.Team" >
     update team
     <set >
-      <if test="courseId != null" >
-        course_id = #{courseId,jdbcType=BIGINT},
+      <if test="klassId != null" >
+        klass_id = #{klassId},
       </if>
-      <if test="leaderId != null" >
-        leader_id = #{leaderId,jdbcType=BIGINT},
+      <if test="teamName != null" >
+        team_name = #{teamName},
       </if>
-      <if test="label != null" >
-        label = #{label,jdbcType=VARCHAR},
+      <if test="status != null" >
+        status = #{status},
       </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="valid != null" >
-        is_valid = #{valid,jdbcType=BIT},
-      </if>
-      <if test="gmtCreate != null" >
-        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="gmtModified != null" >
-        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      <if test="teamSerial != null" >
+        team_serial = #{teamSerial},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
