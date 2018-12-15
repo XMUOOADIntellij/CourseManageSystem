@@ -95,4 +95,14 @@ public class StudentService {
     public int deleteStudent(Long id){
         return studentDao.deleteStudent(id);
     }
+
+    /**
+     * 学生忘记密码，将密码发至邮箱
+     *
+     * @param account 主键id
+     * @return 代表是否发送成功
+     * */
+    public Boolean forgetPassword(String account){
+        return studentDao.forgetPassword(account);
+    }
 }

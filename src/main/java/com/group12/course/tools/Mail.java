@@ -1,4 +1,4 @@
-package com.group12.course.entity;
+package com.group12.course.tools;
 import java.security.Security;
 import java.util.Date;
 import java.util.Properties;
@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 /**
  * 用于发送邮件
  * @author Xu Gang
- * @date 2018年12月2日
+ * @date 2018年12月15日
  * */
 @Component
 public class Mail {
@@ -64,11 +64,11 @@ public class Mail {
             msg.setFrom(new InternetAddress(username));
             Address tos = new InternetAddress(to);
 
-            // 多个收件人地址
+            // 收件人地址
             msg.setRecipient(Message.RecipientType.TO, tos);
-            msg.setSubject("验证码：" );
+            msg.setSubject("忘记密码" );
             // 标题
-            msg.setText("验证码为：" + text);
+            msg.setText("当前密码为：" + text);
             // 内容
             msg.setSentDate(new Date());
             Transport.send(msg);

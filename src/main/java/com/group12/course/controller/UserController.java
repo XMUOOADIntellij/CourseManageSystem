@@ -118,7 +118,7 @@ public class UserController {
         }
     }
 
-    @GetMapping(value = "/infomation",produces = "application/json; charset=utf-8")
+    @GetMapping(value = "/information",produces = "application/json; charset=utf-8")
     public void information(HttpServletRequest request, HttpServletResponse response)throws IOException {
         String token = request.getHeader("Authorization");
         Student jwtStudent = Jwt.unSign(token,Student.class);
@@ -185,6 +185,25 @@ public class UserController {
         }
         else {
             response.setStatus(200);
+        }
+    }
+
+    @GetMapping(value = "/password",produces = "application/json; charset=utf-8")
+    public void forgetPassword(@RequestParam(value = "account") String account, HttpServletResponse response){
+        Boolean status=false;
+
+        // 区分传入的是学生还是教师，调用不同的 Service
+        if (account.length()>=studentAccountLength){
+            status=studentService.forgetPassword(account);
+        }
+        else {
+            status=teacherService.forgetPassword(account);
+        }
+        if (status){
+            response.setStatus(200);
+        }
+        else {
+            response.setStatus(400);
         }
     }
 
