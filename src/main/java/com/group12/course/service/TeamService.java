@@ -1,6 +1,8 @@
 package com.group12.course.service;
 
 import com.group12.course.dao.TeamDao;
+import com.group12.course.entity.Student;
+import com.group12.course.entity.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,4 +17,7 @@ public class TeamService {
     @Autowired
     TeamDao teamDao;
 
+    /*public int createTeam(Team team, Student student){
+        teamDao.addTeam(team);
+    }*/
 }

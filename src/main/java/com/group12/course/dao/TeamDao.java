@@ -26,7 +26,7 @@ public class TeamDao {
     }
 
     public int addTeam(Team team){
-        return teamMapper.addTeam(team);
+        return teamMapper.addTeam(team,team.getCourse().getId(),team.getKlass().getId(),team.getLeader().getId());
     }
 
     public int changeTeam(Team team){

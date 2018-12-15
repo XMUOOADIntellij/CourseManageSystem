@@ -6,6 +6,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Team;
 import com.group12.course.service.TeamService;
+import com.group12.course.vo.TeamVO;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STUnderline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,28 +32,8 @@ public class TeamController {
     TeamService teamService;
 
     @PostMapping(value = "",produces = "application/json; charset=utf-8")
-    public void createTeam(HttpServletRequest request, HttpServletResponse response)throws IOException {
-        String jsonStr = request.getParameter("members");
-        String[] params = request.getParameterValues("members");
-        System.out.println(request.getParameterNames());
-        System.out.println(params);
-        System.out.println(jsonStr);
-        System.out.println(request.getContentLength());
-        System.out.println(request.getParameterMap());
-        //存储需要insert的项目人员关系信息
-        List<Student> members=new ArrayList<Student>();
-
-        Student member=null;
-        JSONArray jsonArray = JSON.parseArray(jsonStr);
-        for(Object ob : jsonArray){
-            JSONObject jObject = (JSONObject) ob;
-            member=new Student();
-            member.setId(jObject.getLong("id"));
-            member.setStudentName(jObject.getString("name"));
-            members.add(member);
-        }
-
-        response.getWriter().write(JSON.toJSONString(members));
+    public void createTeam(@RequestBody TeamVO team, HttpServletResponse response)throws IOException {
+        /*TODO*/
     }
 
     @GetMapping(value = "/{teamId}",produces = "application/json; charset=utf-8")
