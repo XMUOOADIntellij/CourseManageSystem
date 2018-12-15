@@ -2,6 +2,7 @@ package com.group12.course.entity;
 
 import org.apache.ibatis.type.Alias;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
  */
 
 @Alias("klassSeminar")
-public class KlassSeminar {
+public class KlassSeminar  {
     private Long id;
 
     private Klass klass;

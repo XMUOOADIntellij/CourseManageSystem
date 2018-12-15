@@ -20,7 +20,7 @@
         id, course_id,klass_id, leader_id, team_name, team_serial,status
     </sql>
 
-  <select id="getTeamById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectTeamById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from team

@@ -3,6 +3,8 @@ package com.group12.course.entity;
 
 import org.apache.ibatis.type.Alias;
 
+import java.io.Serializable;
+
 /**
  * 班级讨论课展示信息
  * @author Y Jiang
@@ -29,7 +31,7 @@ public class Attendance {
 
     private String reportName;
 
-    private String reprotUrl;
+    private String reportUrl;
 
     private String pptName;
 
@@ -83,12 +85,12 @@ public class Attendance {
         this.reportName = reportName;
     }
 
-    public String getReprotUrl() {
-        return reprotUrl;
+    public String getReportUrl() {
+        return reportUrl;
     }
 
-    public void setReprotUrl(String reprotUrl) {
-        this.reprotUrl = reprotUrl;
+    public void setReportUrl(String reportUrl) {
+        this.reportUrl = reportUrl;
     }
 
     public String getPptName() {
@@ -106,4 +108,5 @@ public class Attendance {
     public void setPptUrl(String pptUrl) {
         this.pptUrl = pptUrl;
     }
+
 }

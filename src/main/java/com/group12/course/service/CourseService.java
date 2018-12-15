@@ -19,14 +19,14 @@ public class CourseService {
     @Autowired
     CourseDao courseDao;
 
-//    /**
-//     * 获得当前用户所有课程
-//     * @return List<Course>
-//     * @param  teacherId 老师ID
-//     */
-//    public List<Course> listCourses(Long teacherId){
-//        return courseDao.listCourses(teacherId);
-//    }
+    /**
+     * 获得当前用户所有课程
+     * @return List<Course>
+     * @param  teacherId 老师ID
+     */
+    public List<Course> listCourses(Long teacherId){
+        return courseDao.listCourses(teacherId);
+    }
 
     /**
      * 根据课程id获得课程

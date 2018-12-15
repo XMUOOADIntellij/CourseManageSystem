@@ -1,0 +1,12 @@
+.form-label {
+    display: block;
+    margin-bottom: .375rem;
+    font-weight: 400;
+    font-size: 0.9375rem;
+}
+.btn {
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 0.9375rem;
+    min-width: 2.375rem;
+}

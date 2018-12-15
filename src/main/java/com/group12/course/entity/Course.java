@@ -102,4 +102,26 @@ public class Course {
     public void setTeamEndTime(LocalDateTime teamEndTime) {
         this.teamEndTime = teamEndTime;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", teacher=" + teacher +
+                ", courseName='" + courseName + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", presentationPercentage=" + presentationPercentage +
+                ", questionPercentage=" + questionPercentage +
+                ", reportPercentage=" + reportPercentage +
+                ", teamStartTime=" + teamStartTime +
+                ", teamEndTime=" + teamEndTime +
+                '}';
+    }
+
+    public Course(){
+
+    }
+    public Course(Long id) {
+        this.id = id;
+    }
 }

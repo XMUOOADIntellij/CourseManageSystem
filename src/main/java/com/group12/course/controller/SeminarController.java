@@ -1,14 +1,20 @@
 package com.group12.course.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.group12.course.entity.Attendance;
 import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Seminar;
 import com.group12.course.service.AttendanceService;
 import com.group12.course.service.SeminarService;
+import com.group12.course.vo.AttendanceVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 讨论课部分的 Controller
@@ -20,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SeminarController {
     @Autowired
     SeminarService seminarService;
+    @Autowired
     AttendanceService attendanceService;
 
     /**
@@ -29,8 +36,9 @@ public class SeminarController {
      */
     @PostMapping(value= "" , produces = "application/json; charset=utf-8")
     public int createSeminar(@RequestBody Seminar seminar){
-        //TODO
-       return 0;
+
+
+        return 0;
     }
 
     /**
@@ -79,8 +87,8 @@ public class SeminarController {
 
     /**
      ① 获得当前班级讨论课的展示报名
-     ② 获得当前班级讨论课正在展示的小组     status
-     ③ 某一小组获得当前班级讨论课报名的展示  teamId
+     ② 获得当前班级讨论课正在展示的小组      presented
+     ③ 某一小组获得当前班级讨论课报名的展示   teamId
      * @param seminarId 课程讨论课
      * @param classId   班级id
      * @param presented 当前是否正在展示
@@ -88,11 +96,21 @@ public class SeminarController {
      * @return Attendance
      */
     @GetMapping(value="/{seminarId}/class/{classId}/attendance")
-    public Attendance getSeminarAttendance(@PathVariable Long seminarId, @PathVariable Long classId,
-                                           @RequestParam(value = "presented") Boolean presented,
-                                           @RequestParam(value="teamId") Long teamId){
-        //TODO
-        return null;
+    public List<AttendanceVo> getSeminarAttendance(@PathVariable Long seminarId, @PathVariable Long classId,
+                                                   @RequestParam(value ="presented",required = false) Boolean presented,
+                                                   @RequestParam(value="teamId",required = false) Long teamId) throws Exception{
+
+         // TODO Present Socket解决？ Exception
+        List<AttendanceVo> result = new ArrayList<>();
+        if(teamId!=null){
+            result.add(new AttendanceVo(attendanceService.getAttendance(classId,seminarId,teamId)));
+        }
+        else{
+            for(Attendance list:attendanceService.getAllAttendance(classId, seminarId)){
+                result.add(new AttendanceVo(list));
+            }
+        }
+        return result;
     }
 
     /**

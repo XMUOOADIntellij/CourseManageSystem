@@ -1,6 +1,5 @@
 package com.group12.course.mapper;
 
-import com.group12.course.dto.KlassSeminarDto;
 import com.group12.course.entity.KlassSeminar;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ public interface KlassSeminarMapper {
 
     KlassSeminar selectKlassSeminarById(Long id);
 
-    KlassSeminarDto selectKlassSeminar(Long seminarId, Long classId);
+    KlassSeminar selectKlassSeminar(Long seminarId, Long classId);
 
     int update(KlassSeminar record);
 
