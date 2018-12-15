@@ -36,8 +36,9 @@ public class SeminarController {
      */
     @PostMapping(value= "" , produces = "application/json; charset=utf-8")
     public int createSeminar(@RequestBody Seminar seminar){
-        //TODO 创建讨论课，应该放在course
-       return 0;
+
+
+        return 0;
     }
 
     /**

@@ -117,4 +117,11 @@ public class Course {
                 ", teamEndTime=" + teamEndTime +
                 '}';
     }
+
+    public Course(){
+
+    }
+    public Course(Long id) {
+        this.id = id;
+    }
 }

@@ -29,4 +29,9 @@ public class AttendanceServiveTest extends AbstractTransactionalJUnit4SpringCont
         //Assert.assertNotNull(attendanceService.getAttendance(new Long(3),new Long(4),new Long(3)));
         Assert.assertNotNull(attendance.getKlassSeminar().getKlass().getGrade());
     }
+
+    @Test
+    public  void testCancelAttendance(){
+        Assert.assertEquals(Long.valueOf(1),attendanceService.cancelAttendance(new Long(1)));
+    }
 }
