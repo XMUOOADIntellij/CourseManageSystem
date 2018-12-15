@@ -85,6 +85,16 @@ public class TeacherService {
     }
 
     /**
+     * 教师忘记密码，将密码发至邮箱
+     *
+     * @param account 主键id
+     * @return 代表是否发送成功
+     * */
+    public Boolean forgetPassword(String account){
+        return teacherDao.forgetPassword(account);
+    }
+
+    /**
      * 删除教师
      * @param id 账号
      * @return 处理数量

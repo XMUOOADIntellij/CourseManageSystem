@@ -1,7 +1,10 @@
 package com.group12.course.dao;
 
+import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
+import com.group12.course.entity.Team;
 import com.group12.course.mapper.TeacherMapper;
+import com.group12.course.tools.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +38,7 @@ public class TeacherDao {
             return new Teacher();
         }
         else {
-            Teacher tempTeacher=teacherMapper.getTeacherByAccount(teacher.getAccount());
+            Teacher tempTeacher=teacherMapper.selectTeacherByAccount(teacher.getAccount());
             if (tempTeacher.getPassword().equals(teacher.getPassword())){
                 return tempTeacher;
             }
@@ -55,7 +58,7 @@ public class TeacherDao {
             return new Teacher();
         }
         else {
-            return teacherMapper.getTeacherByAccount(account);
+            return teacherMapper.selectTeacherByAccount(account);
         }
     }
 
@@ -81,7 +84,7 @@ public class TeacherDao {
             return list;
         }
         else {
-            return teacherMapper.getTeacherByName(param.trim());
+            return teacherMapper.selectTeacherByName(param.trim());
         }
     }
 
@@ -122,6 +125,23 @@ public class TeacherDao {
      * */
     public int resetPassword(Long id){
         return teacherMapper.updateTeacher(new Teacher(id,defaultPassword));
+    }
+
+    /**
+     * 教师忘记密码，将密码发至邮箱
+     *
+     * @param account 主键id
+     * @return 代表是否发送成功
+     * */
+    public Boolean forgetPassword(String account){
+        Teacher forgetteacher = teacherMapper.selectTeacherByAccount(account);
+        Mail mail = new Mail();
+        String email = forgetteacher.getEmail();
+        String password = forgetteacher.getPassword();
+        if (email==null||password==null){
+            return false;
+        }
+        return mail.sendMail(email,password);
     }
 
     /**

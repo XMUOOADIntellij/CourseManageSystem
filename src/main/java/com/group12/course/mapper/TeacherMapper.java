@@ -45,7 +45,7 @@ public interface TeacherMapper {
      * @param account 主键代表用户账号
      * @return 代表获取到的老师对象
      * */
-    Teacher getTeacherByAccount(String account);
+    Teacher selectTeacherByAccount(String account);
 
     /**
      * 更新数据库中教师的记录
@@ -67,5 +67,5 @@ public interface TeacherMapper {
      * @param name 老师姓名
      * @return 所有同名的老师
      * */
-    List<Teacher> getTeacherByName(String name);
+    List<Teacher> selectTeacherByName(String name);
 }

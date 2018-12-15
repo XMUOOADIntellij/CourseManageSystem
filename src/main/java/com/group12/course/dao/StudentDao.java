@@ -2,6 +2,7 @@ package com.group12.course.dao;
 
 import com.group12.course.entity.Student;
 import com.group12.course.mapper.StudentMapper;
+import com.group12.course.tools.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +37,7 @@ public class StudentDao {
             return new Student();
         }
         else{
-            Student tempStudent=studentMapper.getStudentByAccount(student.getAccount());
+            Student tempStudent=studentMapper.selectStudentByAccount(student.getAccount());
             if(tempStudent.getPassword().equals(student.getPassword())){
                 return tempStudent;
             }
@@ -57,7 +58,7 @@ public class StudentDao {
             return new Student();
         }
         else {
-            return studentMapper.getStudentByAccount(account);
+            return studentMapper.selectStudentByAccount(account);
         }
     }
 
@@ -120,6 +121,23 @@ public class StudentDao {
      * */
     public int resetPassword(Long id){
         return changeStudentByID(new Student(id,defaultPassword));
+    }
+
+    /**
+     * 学生忘记密码，将密码发至邮箱
+     *
+     * @param account 主键id
+     * @return 代表是否发送成功
+     * */
+    public Boolean forgetPassword(String account){
+        Student forgetStudent = studentMapper.selectStudentByAccount(account);
+        Mail mail = new Mail();
+        String email = forgetStudent.getEmail();
+        String password = forgetStudent.getPassword();
+        if (email==null||password==null){
+            return false;
+        }
+        return mail.sendMail(email,password);
     }
 
     /**

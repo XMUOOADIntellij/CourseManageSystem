@@ -2,8 +2,6 @@ package com.group12.course.entity;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-
 /**
  * Team 实体对象
  * @author Xu Gang
@@ -15,17 +13,15 @@ public class Team {
 
     private Course course;
 
-    private Teacher leader;
+    private Klass klass;
 
-    private String label;
+    private Student leader;
 
-    private String name;
+    private String teamName;
 
-    private Boolean valid;
+    private Integer status;
 
-    private Date gmtCreate;
-
-    private Date gmtModified;
+    private Integer teamSerial;
 
     public Long getId() {
         return id;
@@ -43,51 +39,43 @@ public class Team {
         this.course = course;
     }
 
-    public Teacher getLeader() {
+    public Klass getKlass() {
+        return klass;
+    }
+
+    public void setKlass(Klass klass) {
+        this.klass = klass;
+    }
+
+    public Student getLeader() {
         return leader;
     }
 
-    public void setLeader(Teacher leader) {
+    public void setLeader(Student leader) {
         this.leader = leader;
     }
 
-    public String getLabel() {
-        return label;
+    public String getTeamName() {
+        return teamName;
     }
 
-    public void setLabel(String label) {
-        this.label = label == null ? null : label.trim();
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
-    public String getName() {
-        return name;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public Boolean getValid() {
-        return valid;
+    public Integer getTeamSerial() {
+        return teamSerial;
     }
 
-    public void setValid(Boolean valid) {
-        this.valid = valid;
-    }
-
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
+    public void setTeamSerial(Integer teamSerial) {
+        this.teamSerial = teamSerial;
     }
 }
