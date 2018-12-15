@@ -19,14 +19,14 @@ public interface SeminarMapper {
      * @param id Long
      * @return int
      */
-    int delete(Long id);
+    int deleteSeminarById(Long id);
 
     /**
      * 新建讨论课
      * @param record Seminar
      * @return int
      */
-    int insert(Seminar record);
+    int insertSeminar(Seminar record);
 
     /**
      * 根据id获取单个讨论课对象
@@ -38,7 +38,8 @@ public interface SeminarMapper {
     /**
      * 修改讨论课信息
      * @param record Seminar
+     * @param id  讨论课id
      * @return int
      */
-    int update(Seminar record);
+    int updateSeminar(Seminar record,Long id);
 }
