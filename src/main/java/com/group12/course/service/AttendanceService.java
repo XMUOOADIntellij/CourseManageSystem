@@ -60,7 +60,11 @@ public class AttendanceService {
     }
 
     public Integer changeAttendanceOrder(Long attendanceId,Integer teamOrder){
-        return attendanceDao.changeAttendanceOrder(attendanceId,teamOrder);
+        return attendanceDao.updateAttendanceOrder(attendanceId,teamOrder);
+    }
+
+    public  Integer cancelAttendance(Long attendanceId){
+        return attendanceDao.deleteAttendance(attendanceId);
     }
 
 }

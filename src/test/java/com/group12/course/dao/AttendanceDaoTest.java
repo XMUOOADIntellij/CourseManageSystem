@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class AttendanceDaoTest {
     @Autowired
     AttendanceMapper attendanceMapper;
@@ -32,6 +33,12 @@ public class AttendanceDaoTest {
     public void testGetAttendance(){
         Assert.assertNotNull(attendanceMapper.selectAttendance(new Long(1),new Long(3)));
     }
+
+    @Test
+    public void testDeleteAttendance(){
+        Assert.assertEquals(1,attendanceMapper.delete(new Long(1)));
+    }
+
 
 
 }

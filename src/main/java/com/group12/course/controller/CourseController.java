@@ -1,13 +1,11 @@
 package com.group12.course.controller;
 
-import com.group12.course.entity.Course;
-import com.group12.course.entity.Teacher;
-import com.group12.course.service.CourseService;
+
+import com.group12.course.entity.Seminar;
+import com.group12.course.service.SeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * Course Controller 层
@@ -19,8 +17,7 @@ import java.util.List;
 @RequestMapping("/course")
 public class CourseController {
 
-
-    }
+}
 
 
 

@@ -21,7 +21,11 @@ public class AttendanceDao {
         return attendanceMapper.selectAllAttendance(klassSeminarId);
     }
 
-    public Integer changeAttendanceOrder(Long attendanceId,Integer teamOrder){
+    public Integer updateAttendanceOrder(Long attendanceId,Integer teamOrder){
         return attendanceMapper.updateOrder(attendanceId,teamOrder);
+    }
+
+    public Integer deleteAttendance(Long attendanceId){
+        return  attendanceMapper.delete(attendanceId);
     }
 }
