@@ -17,7 +17,7 @@ public class TeamService {
     @Autowired
     TeamDao teamDao;
 
-    /*public int createTeam(Team team, Student student){
-        teamDao.addTeam(team);
-    }*/
+    public int createTeam(Team team){
+        return teamDao.addTeam(team);
+    }
 }

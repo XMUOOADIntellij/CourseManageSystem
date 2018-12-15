@@ -1,6 +1,8 @@
 package com.group12.course.vo;
 
 import java.util.List;
+
+import com.group12.course.entity.Student;
 import com.group12.course.vo.StudentVO;
 
 public class TeamVO {
@@ -13,7 +15,7 @@ public class TeamVO {
 
     private StudentVO leader;
 
-    private List<StudentVO> members;
+    private List<Student> members;
 
     @Override
     public String toString() {
@@ -58,12 +60,11 @@ public class TeamVO {
         this.leader = leader;
     }
 
-    public List<StudentVO> getMembers() {
+    public List<Student> getMembers() {
         return members;
     }
 
-    public void setMembers(List<StudentVO> members) {
+    public void setMembers(List<Student> members) {
         this.members = members;
     }
-
 }

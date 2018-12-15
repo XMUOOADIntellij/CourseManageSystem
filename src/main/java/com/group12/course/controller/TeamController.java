@@ -3,6 +3,7 @@ package com.group12.course.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.group12.course.entity.Course;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Team;
 import com.group12.course.service.TeamService;
@@ -32,8 +33,15 @@ public class TeamController {
     TeamService teamService;
 
     @PostMapping(value = "",produces = "application/json; charset=utf-8")
-    public void createTeam(@RequestBody TeamVO team, HttpServletResponse response)throws IOException {
-        /*TODO*/
+    public void createTeam(@RequestBody TeamVO teamVO, HttpServletResponse response)throws IOException {
+        Team team=new Team(teamVO);
+        int status=teamService.createTeam(team);
+        if (status==0){
+            response.setStatus(400);
+        }
+        else {
+            response.setStatus(200);
+        }
     }
 
     @GetMapping(value = "/{teamId}",produces = "application/json; charset=utf-8")

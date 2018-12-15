@@ -32,7 +32,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="addTeam" >
+  <insert id="addTeam" useGeneratedKeys="true" keyProperty="record.id">
     insert into team
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="courseId != null" >
@@ -44,34 +44,66 @@
       <if test="klassId != null" >
         klass_id,
       </if>
-      <if test="teamName != null" >
+      <if test="record.teamName != null" >
         team_name,
       </if>
-      <if test="status != null" >
+      <if test="record.status != null" >
         status,
       </if>
-      <if test="teamSerial != null" >
+      <if test="record.teamSerial != null" >
         is_valid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="courseId != null" >
-        #{course_id},
+        #{courseId},
       </if>
       <if test="leaderId != null" >
-        #{leader_id},
+        #{leaderId},
       </if>
       <if test="klassId != null" >
-        #{klass_id},
+        #{klassId},
       </if>
-      <if test="teamName != null" >
-        #{team_name},
+      <if test="record.teamName != null" >
+        #{record.teamName},
       </if>
-      <if test="status != null" >
-        #{status},
+      <if test="record.status != null" >
+        #{record.status},
       </if>
-      <if test="teamSerial != null" >
-        #{team_serial},
+      <if test="record.teamSerial != null" >
+        #{record.teamSerial},
+      </if>
+    </trim>
+  </insert>
+
+  <insert id="addTeamMembers">
+    insert into klass_student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="klassId != null" >
+        klass_id,
+      </if>
+      <if test="teamId != null" >
+        team_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        #{courseId},
+      </if>
+      <if test="studentId != null" >
+        #{studentId},
+      </if>
+      <if test="klassId != null" >
+        #{klassId},
+      </if>
+      <if test="teamId != null" >
+        #{teamId},
       </if>
     </trim>
   </insert>
