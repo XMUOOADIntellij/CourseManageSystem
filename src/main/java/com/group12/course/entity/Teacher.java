@@ -2,6 +2,7 @@ package com.group12.course.entity;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  * @date 2018年12月10日
  */
 @Component
-public class Teacher {
+public class Teacher implements Serializable {
     private Long id;
 
     private String account;

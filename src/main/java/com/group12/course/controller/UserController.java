@@ -36,6 +36,7 @@ public class UserController {
 
     /**
      * 用户登陆
+     *
      * @param user 前端传入的用户对象
      * 若登陆成功，返回 200
      * 若登陆失败，返回 400
@@ -82,42 +83,21 @@ public class UserController {
             map.put("account",temp.getAccount());
             map.put("role",isTeacher?"teacher":"student");
             map.put("name",temp.getTeacherName());
-            map.put("isActive",temp.getActive());
+            map.put("isActive",temp.getActive()==null?false:temp.getActive());
             map.put("jwt",token);
             String json = JSON.toJSONString(map);
             response.getWriter().write(json);
         }
     }
 
-    @PutMapping(value = "/active",produces = "application/json; charset=utf-8")
-    public void active(@RequestBody Teacher user,HttpServletRequest request, HttpServletResponse response)throws IOException {
-        int modifyCount=0;
-        String token = request.getHeader("Authorization");
-        Student jwtStudent = Jwt.unSign(token,Student.class);
-        Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
-        // 区分传入的是学生还是教师，调用不同的 Service
-        if (jwtStudent!=null){
-            Student tempStudent=new Student(jwtStudent.getAccount());
-            tempStudent.setPassword(user.getPassword());
-            tempStudent.setEmail(user.getEmail());
-            tempStudent.setActive(true);
-            modifyCount = studentService.updateStudent(tempStudent);
-        }
-        else {
-            Teacher tempTeacher=new Teacher(jwtTeacher.getAccount());
-            tempTeacher.setPassword(user.getPassword());
-            tempTeacher.setEmail(user.getEmail());
-            tempTeacher.setActive(true);
-            modifyCount = teacherService.updateTeacher(tempTeacher);
-        }
-        if (modifyCount==0){
-            response.setStatus(400);
-        }
-        else {
-            response.setStatus(200);
-        }
-    }
 
+    /**
+     * 获取用户信息
+     *
+     * @param request 请求头中存储着 jwt 信息
+     * 若激活成功，返回 200
+     * 若激活失败，返回 400
+     * */
     @GetMapping(value = "/information",produces = "application/json; charset=utf-8")
     public void information(HttpServletRequest request, HttpServletResponse response)throws IOException {
         String token = request.getHeader("Authorization");
@@ -163,6 +143,14 @@ public class UserController {
         }
     }
 
+    /**
+     * 修改密码
+     *
+     * @param request 请求头中存储着 jwt 信息
+     * @param user 前端请求的 json 映射成的对象，只包修改后的 password
+     * 若修改成功，返回 200
+     * 若修改失败，返回 400
+     * */
     @PutMapping(value = "/password",produces = "application/json; charset=utf-8")
     public void password(@RequestBody Teacher user,HttpServletRequest request, HttpServletResponse response)throws IOException {
         int modifyCount=0;
@@ -188,6 +176,13 @@ public class UserController {
         }
     }
 
+    /**
+     * 忘记密码，将密码发至邮箱
+     *
+     * @param account 忘记密码的账号
+     * 若发送邮件成功，返回 200
+     * 若发送邮件失败，返回 400
+     * */
     @GetMapping(value = "/password",produces = "application/json; charset=utf-8")
     public void forgetPassword(@RequestParam(value = "account") String account, HttpServletResponse response){
         Boolean status=false;
@@ -207,6 +202,14 @@ public class UserController {
         }
     }
 
+    /**
+     * 修改邮箱
+     *
+     * @param request 请求头中存储着 jwt 信息
+     * @param user 前端请求的 json 映射成的对象，只包修改后的 email
+     * 若修改成功，返回 200
+     * 若修改失败，返回 400
+     * */
     @PutMapping(value = "/email",produces = "application/json; charset=utf-8")
     public void email(@RequestBody Teacher user,HttpServletRequest request, HttpServletResponse response)throws IOException {
         int modifyCount=0;

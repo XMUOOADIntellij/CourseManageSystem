@@ -4,10 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
 import com.group12.course.service.StudentService;
+import com.group12.course.tools.Jwt;
+import com.group12.course.vo.StudentVO;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STUnderline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,22 +68,16 @@ public class StudentController {
      * 失败则只返回404
      * */
     @PutMapping(value = "/{studentId}/information",produces = "application/json; charset=utf-8")
-    public void changeInformation(@PathVariable Long studentId, @RequestBody Student student,HttpServletResponse response)throws IOException {
+    public StudentVO changeInformation(@PathVariable Long studentId, @RequestBody StudentVO student, HttpServletResponse response)throws IOException {
         student.setId(studentId);
-        int count= studentService.changeStudentByID(student);
+        int count= studentService.changeStudentByID(new Student(student));
         if (count==0){
             response.setStatus(404);
+            return null;
         }
         else {
             response.setStatus(200);
-            Map map = new HashMap(6);
-            map.put("id",student.getId());
-            map.put("account",student.getAccount());
-            map.put("role","teacher");
-            map.put("name",student.getStudentName());
-            map.put("email",student.getEmail());
-            String json = JSON.toJSONString(map);
-            response.getWriter().write(json);
+            return student;
         }
     }
 
@@ -116,6 +113,34 @@ public class StudentController {
         int count = studentService.deleteStudent(studentId);
         if (count==0){
             response.setStatus(404);
+        }
+        else {
+            response.setStatus(200);
+        }
+    }
+
+    /**
+     * 用户激活
+     *
+     * @param user 前端传入的用户对象
+     * 若激活成功，返回 200
+     * 若激活失败，返回 400
+     * */
+    @PutMapping(value = "/active",produces = "application/json; charset=utf-8")
+    public void active(@RequestBody Student user, HttpServletRequest request, HttpServletResponse response)throws IOException {
+        int modifyCount=0;
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        // 区分传入的是学生还是教师，调用不同的 Service
+        if (jwtStudent!=null){
+            Student tempStudent=new Student(jwtStudent.getAccount());
+            tempStudent.setPassword(user.getPassword());
+            tempStudent.setEmail(user.getEmail());
+            tempStudent.setActive(true);
+            modifyCount = studentService.updateStudent(tempStudent);
+        }
+        if (modifyCount==0){
+            response.setStatus(400);
         }
         else {
             response.setStatus(200);

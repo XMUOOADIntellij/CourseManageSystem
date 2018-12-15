@@ -4,13 +4,19 @@ public class StudentVO {
 
     private Long id;
 
+    private String account;
+
     private String name;
+
+    private String email;
 
     @Override
     public String toString() {
         return "StudentVO{" +
                 "id=" + id +
+                ", account='" + account + '\'' +
                 ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 
@@ -28,5 +34,21 @@ public class StudentVO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -21,11 +21,18 @@
     from student
   </select>
 
-  <select id="selectStudentByAccount" resultMap="BaseResultMap" >
+  <select id="selectStudentByName" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from student
     where student_name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectStudentByAccount" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where account = #{account,jdbcType=VARCHAR}
   </select>
 
   <select id="selectStudentById" resultMap="BaseResultMap" >

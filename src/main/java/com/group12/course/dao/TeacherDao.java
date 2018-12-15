@@ -39,7 +39,7 @@ public class TeacherDao {
         }
         else {
             Teacher tempTeacher=teacherMapper.selectTeacherByAccount(teacher.getAccount());
-            if (tempTeacher.getPassword().equals(teacher.getPassword())){
+            if (tempTeacher!=null&&tempTeacher.getPassword().equals(teacher.getPassword())){
                 return tempTeacher;
             }
             else {
@@ -134,10 +134,13 @@ public class TeacherDao {
      * @return 代表是否发送成功
      * */
     public Boolean forgetPassword(String account){
-        Teacher forgetteacher = teacherMapper.selectTeacherByAccount(account);
+        Teacher forgetTeacher = teacherMapper.selectTeacherByAccount(account);
         Mail mail = new Mail();
-        String email = forgetteacher.getEmail();
-        String password = forgetteacher.getPassword();
+        if (forgetTeacher==null){
+            return false;
+        }
+        String email = forgetTeacher.getEmail();
+        String password = forgetTeacher.getPassword();
         if (email==null||password==null){
             return false;
         }

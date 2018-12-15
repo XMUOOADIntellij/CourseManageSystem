@@ -2,6 +2,8 @@ package com.group12.course.entity;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Team 实体对象
  * @author Xu Gang
@@ -22,6 +24,8 @@ public class Team {
     private Integer status;
 
     private Integer teamSerial;
+
+    private List<Student> members;
 
     public Long getId() {
         return id;
@@ -49,6 +53,14 @@ public class Team {
 
     public Student getLeader() {
         return leader;
+    }
+
+    public List<Student> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<Student> members) {
+        this.members = members;
     }
 
     public void setLeader(Student leader) {

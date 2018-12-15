@@ -10,6 +10,8 @@
     <result column="is_active" property="active" jdbcType="TINYINT" />
   </resultMap>
 
+  <cache type="com.group12.course.tools.MybatisRedisCache" />
+
   <sql id="Base_Column_List" >
     id, account, password, email, teacher_name, is_active
   </sql>
