@@ -1,0 +1,134 @@
+<%@ Master Language="C#" %>
+<%
+if (Session["USER_ID"] == null || Session["USER_ID"].ToString() == "")
+{
+Response.Redirect("~/view/login.aspx");
+}
+%>
+
+<!DOCTYPE html>
+
+<script runat="server">
+
+</script>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>津桥学院学费管理登陆后台</title>
+    <link href="../static/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link href="../static/bootstrap/css/bootstrap-reboot.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../static/style/css/nav.css" />
+    <link rel="stylesheet" type="text/css" href="../static/style/css/iconfont.css" />
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="../static/style/js/jquery-3.3.1.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="../static/bootstrap/js/bootstrap-table.js"></script>
+    <link href="../static/bootstrap/css/bootstrap-table.css" rel="stylesheet"/>
+    <script src="../static/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+    <script type="text/javascript" src="../static/style/js/nav.js"></script>
+
+    <style type="text/css">
+        @media (min-width: 768px) {
+            #accordion{
+                width: 200px;
+                height: 100%;
+                margin-top: 0px;
+                position: absolute;
+                z-index: 1;
+            }
+            .page_admin{
+                margin-left: 225px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- 导航 -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <!-- <img class="mb-2" src="/static/bootstrap-4.0.0-dist/images/jqlogo.jpg" alt="" width="72" height="72"> -->
+    <a class="navbar-brand text-info" href="#">昆明理工大学津桥学院学费管理平台</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupprotedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse navbar-nav mr-auto " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+        </ul>
+        <span class="text-danger">当前用户：
+            <a class="navbar-brand text-white"><%=Session["USER_Name"].ToString()%></a>
+        </span>
+        <form class="form-inline my-2 my-lg-0">
+            <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
+            <button class="btn btn-outline-info my-2 my-sm-0" onclick="logout()">退出登陆</button>
+        </form>
+    </div>
+</nav>
+
+<!-- 菜单栏 -->
+<div id="accordion">
+    <div class="nav" >
+        <ul>
+
+            <li class="nav-item">
+                <a href="home.aspx"><i class="glyphicon glyphicon-th-large"></i>首页 </a>
+                <a href="javascript:;"><i class="my-icon nav-icon icon_3"></i><span>账单管理</span><i class="my-icon nav-more"></i></a>
+                <ul>
+                    <li><a href="BillQuery.aspx"><span>收费</span></a></li>
+                    <li><a href="javascript:;"><span>查询</span></a></li>
+                    <li><a href="Charge_Statistical.aspx"><span>统计</span></a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:;"><i class="my-icon nav-icon icon_2"></i><span>银行委托</span><i class="my-icon nav-more"></i></a>
+                <ul>
+                    <li><a href="CreateBill.aspx"><span>成功扣款查询</span></a></li>
+                    <li><a href="index.aspx"><span>失败扣款查询</span></a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:;"><i class="my-icon nav-icon icon_2"></i><span>生源地贷款</span><i class="my-icon nav-more"></i></a>
+                <ul>
+                    <li><a href="CreateBill.aspx"><span>贷款录入</span></a></li>
+                    <li><a href="index.aspx"><span>贷款到账确认</span></a></li>
+                    <li><a href="index.aspx"><span>贷款查询</span></a></li>
+                </ul>
+            </li>
+            <li class="nav-item" style="width: 210px">
+                <a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>系统配置</span><i class="my-icon nav-more"></i></a>
+                <ul>
+                    <li><a href="UserManage.aspx"><span>用户管理</span></a></li>
+                    <li><a href="javascript:;"><span>日志管理</span></a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--center内容-->
+<div class="page_admin bg-light">
+    <div id="myManu">
+        <div class="container-fluid">
+            <asp:ContentPlaceHolder ID="TestContentPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <%-- <nav class="navbar fixed-bottom navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">信息科中心</a>
+    </nav>--%>
+    </div>
+</div>
+<script>
+    function logout() {
+        var sUrl = "/BI/logout.ashx";
+
+        $.ajax({
+            url: sUrl, success: function (result) {
+                window.location.href = "login.aspx";
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -9,10 +9,11 @@ import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@MybatisTest
+@SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class AttendanceDaoTest {
     @Autowired
@@ -32,6 +33,12 @@ public class AttendanceDaoTest {
     public void testGetAttendance(){
         Assert.assertNotNull(attendanceMapper.selectAttendance(new Long(1),new Long(3)));
     }
+
+    @Test
+    public void testDeleteAttendance(){
+        Assert.assertEquals(1,attendanceMapper.delete(new Long(1)));
+    }
+
 
 
 }

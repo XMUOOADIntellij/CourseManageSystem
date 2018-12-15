@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.group12.course.mapper.KlassSeminarMapper" >
 
-
   <resultMap id="BaseResultMap" type="com.group12.course.entity.KlassSeminar" >
     <id column="id" property="id" jdbcType="BIGINT" />
 
@@ -18,15 +17,8 @@
                  javaType="com.group12.course.entity.Klass"/>
   </resultMap>
 
-
-  <resultMap id="KlassSeminarResultMap" type="com.group12.course.dto.KlassSeminarDto" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="report_ddl" property="reportDdl" jdbcType="TIMESTAMP" />
-    <result column="seminar_status" property="seminarStatus" jdbcType="VARCHAR" />
-  </resultMap>
-
   <sql id="Base_Column_List" >
-    id, seminar_id, <!--klass_id,--> report_ddl, seminar_status
+    id, seminar_id, klass_id ,report_ddl, seminar_status
   </sql>
 
   <select id="selectKlassSeminarById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -36,9 +28,9 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="selectKlassSeminar" resultType="com.group12.course.dto.KlassSeminarDto" >
+  <select id="selectKlassSeminar" resultMap="BaseResultMap" >
     select
-    id, report_ddl, seminar_status
+    <include refid="Base_Column_List" />
     from klass_seminar
     where klass_id = #{classId,jdbcType=BIGINT}
     and   seminar_id = #{seminarId,jdbcType=BIGINT}

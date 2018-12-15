@@ -14,15 +14,16 @@ public class AttendanceController {
 
     @Autowired
     AttendanceService attendanceService;
+    //TODO 规范返回
 
     /**
      * 更改报名的次序
      * @param record Attendance
+     * @return
      */
     @PutMapping(value="/{attendanceId}")
-    public void changeOrder(@PathVariable Long attendanceId,@RequestBody Attendance record){
-        //TODO 更改报名的次序
-        return;
+    public Integer changeOrder(@PathVariable Long attendanceId,@RequestBody Attendance record){
+        return attendanceService.changeAttendanceOrder(attendanceId,record.getTeamOrder());
     }
 
     /**
@@ -30,9 +31,8 @@ public class AttendanceController {
      * @param attendanceId
      */
     @DeleteMapping(value="/{attendanceId}")
-    public void cancelAttendance(@PathVariable Long attendanceId){
-        //TODO 取消报名班级讨论课
-        return;
+    public Integer cancelAttendance(@PathVariable Long attendanceId){
+        return attendanceService.cancelAttendance(attendanceId);
     }
 
     /**

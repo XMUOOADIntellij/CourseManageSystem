@@ -2,6 +2,7 @@ package com.group12.course.sevice;
 
 import com.group12.course.dao.AttendanceDao;
 import com.group12.course.dao.KlassSeminarDao;
+import com.group12.course.entity.Attendance;
 import com.group12.course.entity.KlassSeminar;
 import com.group12.course.service.AttendanceService;
 import org.junit.Assert;
@@ -17,15 +18,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class AttendanceServiveTest extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
     AttendanceService attendanceService;
-    KlassSeminarDao klassSeminarDao;
-    AttendanceDao attendanceDao;
+//    @Autowired
+//    KlassSeminarDao klassSeminarDao;
+//    @Autowired
+//    AttendanceDao attendanceDao;
 
     @Test
     public void testGetAttendance(){
+        Attendance attendance = attendanceService.getAttendance(new Long(3),new Long(4),new Long(3));
         //Assert.assertNotNull(attendanceService.getAttendance(new Long(3),new Long(4),new Long(3)));
-        //Assert.assertNull(attendanceService.getAttendance(new Long(4),new Long(3),new Long(7)));
-        //KlassSeminar klassSeminar = klassSeminarDao.getKlassSeminar(Long.valueOf(4),Long.valueOf(3));
-        //Assert.assertEquals(1,klassSeminar.getId().longValue());
-        //Assert.assertNotNull(attendanceDao.getAttendace(klassSeminar.getId(),Long.valueOf(3)));
+        Assert.assertNotNull(attendance.getKlassSeminar().getKlass().getGrade());
+    }
+
+    @Test
+    public  void testCancelAttendance(){
+        Assert.assertEquals(Long.valueOf(1),attendanceService.cancelAttendance(new Long(1)));
     }
 }

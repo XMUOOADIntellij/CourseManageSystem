@@ -61,4 +61,10 @@ public class Round {
         this.course = course;
     }
 
+    public Round(){
+
+    }
+    public Round(Long id) {
+        this.id = id;
+    }
 }
