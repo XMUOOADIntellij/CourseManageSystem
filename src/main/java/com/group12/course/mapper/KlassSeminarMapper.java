@@ -4,18 +4,25 @@ import com.group12.course.entity.KlassSeminar;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Mapper
 @Component
 public interface KlassSeminarMapper {
 
-    int delete(Long id);
+    Integer deleteById(Long id);
 
-    int insert(KlassSeminar record);
+    Integer deleteBySeminarId(Long seminarId);
+
+    Integer insert(KlassSeminar record);
 
     KlassSeminar selectKlassSeminarById(Long id);
 
-    KlassSeminar selectKlassSeminar(Long seminarId, Long classId);
+    KlassSeminar selectKlassSeminarBySeminarIdAndKlassId(Long seminarId, Long classId);
 
-    int update(KlassSeminar record);
+    List<KlassSeminar> selectKlassSeminarBySeminarId(Long seminarId);
 
+    Integer updateKlassSeminar(KlassSeminar record,Long id);
+
+    Integer insertByList(List<KlassSeminar> list);
 }

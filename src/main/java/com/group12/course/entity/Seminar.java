@@ -1,5 +1,6 @@
 package com.group12.course.entity;
 
+import com.group12.course.vo.SeminarVo;
 import org.apache.ibatis.type.Alias;
 
 import java.io.Serializable;
@@ -131,6 +132,16 @@ public class Seminar  {
         "seminarSerial:"+this.getSeminarSerial()+"\n"+
         "enrollStartTime:"+this.getEnrollStartTime()+"\n"+
         "enrollEndTime:"+this.getEnrollEndTime();
+    }
 
+    public Seminar(){}
+    public Seminar(SeminarVo seminarVo){
+        this.seminarName = seminarVo.getSeminarName();
+        this.introduction = seminarVo.getIntroduction();
+        this.maxTeam = seminarVo.getMaxTeam();
+        this.visible =seminarVo.getVisible();
+        this.seminarSerial = seminarVo.getSeminarSerial();
+        this.enrollStartTime = seminarVo.getEnrollStartTime();
+        this.enrollEndTime = seminarVo.getEnrollEndTime();
     }
 }

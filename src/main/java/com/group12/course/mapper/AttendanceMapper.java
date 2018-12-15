@@ -16,7 +16,9 @@ import java.util.List;
 @Component
 public interface AttendanceMapper {
 
-    int delete(Long id);
+    Integer deleteAttendanceById(Long id);
+
+    Integer deleteAttendanceByKlassSeminarId(Long klassSeminarId);
 
     int insert(Attendance record);
 
