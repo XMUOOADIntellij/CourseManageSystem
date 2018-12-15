@@ -47,7 +47,6 @@ public class AdminController {
             String token = Jwt.sign(returnAdmin,tokenLifeCycle);
             Map map = new HashMap(4);
             map.put("id",returnAdmin.getId());
-            map.put("account",returnAdmin.getAccount());
             map.put("jwt",token);
             String json = JSON.toJSONString(map);
             response.getWriter().write(json);
