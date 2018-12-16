@@ -18,19 +18,8 @@ public class SeminarService {
     @Autowired
     SeminarDao seminarDao;
     @Autowired
-    CourseDao courseDao;
-    @Autowired
-    KlassDao klassDao;
-    @Autowired
     KlassSeminarDao klassSeminarDao;
-    @Autowired
-    RoundDao roundDao;
-    @Autowired
-    AttendanceDao attendanceDao;
-    @Autowired
-    QuestionDao questionDao;
-    @Autowired
-    SeminarScoreDao seminarScoreDao;
+
 
     /**
      * 新建讨论课 Service层
@@ -39,34 +28,7 @@ public class SeminarService {
      * @return 讨论课Id
      */
     public Long createSeminar(Seminar record){
-        List<Klass> classRecord;
-        List<KlassSeminar> klassSeminarsRecord = new ArrayList<>();
-        // 判断当前课程存在
-        if(courseDao.getCourse(record.getCourse().getId())!=null){
-            //Seminar表插入记录
-            seminarDao.createSeminar(record);
-            //寻找该课程下的班级
-            classRecord = klassDao.getAllKlassByCourseId(record.getCourse().getId());
-            //生成班级讨论课的记录
-            for(Klass klass : classRecord){
-                KlassSeminar tempKlassSeminar = new KlassSeminar();
-                tempKlassSeminar.setKlass(klass);
-                tempKlassSeminar.setSeminar(record);
-                tempKlassSeminar.setReportDdl(null);
-                tempKlassSeminar.setSeminarStatus(0);
-                klassSeminarsRecord.add(tempKlassSeminar);
-            }
-            //插入班级讨论课记录
-            klassSeminarDao.insertByList(klassSeminarsRecord);
-            if(record.getRound()==null){
-                //TODO 若没有轮，默认新建
-            }
-            return null;
-
-        }
-        else{
-            return null;
-        }
+        return  seminarDao.createSeminar(record);
     }
 
 
@@ -76,29 +38,7 @@ public class SeminarService {
      * @return 1成功 0失败
      */
     public Integer deleteSeminar(Long seminarId){
-        //TODO 返回值
-        if(seminarDao.selectSeminarById(seminarId)!=null) {
-            List<KlassSeminar> klassSeminarList;
-            klassSeminarList = klassSeminarDao.getKlassSeminarBySeminarId(seminarId);
-
-            /**
-             *  根据找到的classseminar
-             *  删除attendance
-             *  删除question
-             *  删除seminar_score
-             */
-            for (KlassSeminar item : klassSeminarList) {
-                Long klassSeminarId = item.getId();
-                questionDao.deleteQuestionByKlassSeminarId(klassSeminarId);
-                attendanceDao.deleteAttendanceByKlassSeminarId(klassSeminarId);
-                seminarScoreDao.deleteSeminarScoreByKlassSeminarId(klassSeminarId);
-            }
-            //然后删除class_seminar
-            klassSeminarDao.deleteKlassSeminarBySeminarId(seminarId);
-            //删除讨论课
-            return seminarDao.deleteSeminarById(seminarId);
-        }
-        return null;
+      return seminarDao.deleteSeminarById(seminarId);
     }
 
 

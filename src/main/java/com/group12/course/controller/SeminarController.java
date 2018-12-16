@@ -32,12 +32,13 @@ public class SeminarController {
 
     /**
      * 创建讨论课
-     * @param seminar 讨论课信息
+     * @param seminarVo 讨论课信息
      * @return 讨论课id
      */
     @PostMapping(value= "" , produces = "application/json; charset=utf-8")
-    public Long createSeminar(@RequestBody Seminar seminar){
+    public Long createSeminar(@RequestBody SeminarVo seminarVo){
         //TODO if(seminar name/maxteam/isvisible/serial/courseId 信息不完整
+        Seminar seminar = new Seminar(seminarVo);
         return  seminarService.createSeminar(seminar);
     }
 
@@ -64,7 +65,8 @@ public class SeminarController {
 
     /**
      * 修改课程下的讨论课
-     * @param seminar
+     * @param seminarVo 讨论课传输实体
+     * @param seminarId 讨论课id
      */
     @PutMapping(value="/{seminarId}",produces = "application/json")
     public Integer modifySeminar(@RequestBody SeminarVo seminarVo,@PathVariable Long seminarId){
@@ -75,8 +77,9 @@ public class SeminarController {
 
     /**
      * 更改某班级讨论课（报告截止时间）
-     * @param seminarId
-     * @param classId
+     * @param seminarId 讨论课id
+     * @param classId   班级id
+     * @param
      */
     @PutMapping(value="/{seminarId}/class/{classId}",produces = "application/json")
     public Integer modifyKlassSeminar(@PathVariable Long seminarId, @PathVariable Long classId,@RequestBody SeminarVo seminarVo){
@@ -101,7 +104,7 @@ public class SeminarController {
                                                    @RequestParam(value ="presented",required = false) Boolean presented,
                                                    @RequestParam(value="teamId",required = false) Long teamId) throws Exception{
 
-         // TODO Present Socket解决？ Exception
+        //TODO Present Socket解决？ Exception
         List<AttendanceVo> result = new ArrayList<>();
         if(teamId!=null){
             result.add(new AttendanceVo(attendanceService.getAttendance(classId,seminarId,teamId)));
@@ -139,7 +142,7 @@ public class SeminarController {
     /**
      * 报名某班级讨论课
      * @param seminarId  课程讨论课id
-     * @param classId 班级id
+     * @param classId    班级id
      */
     @PostMapping(value="/{seminarId}/class/{classId}/attendance")
     public void enrollAttendance(@PathVariable Long seminarId, @PathVariable Long classId){
@@ -147,12 +150,5 @@ public class SeminarController {
         //TODO
         return;
     }
-
-
-
-
-
-
-
 
 }
