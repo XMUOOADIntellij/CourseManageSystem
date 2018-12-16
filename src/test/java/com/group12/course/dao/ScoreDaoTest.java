@@ -21,7 +21,7 @@ public class ScoreDaoTest {
 
     @Test
     public void testSelectSeminarScore(){
-        SeminarScore record = seminarScoreMapper.selectSeminarScoreById(new Long(1));
+        //SeminarScore record = seminarScoreMapper.selectSeminarScoreById(new Long(1));
     }
 
 }
