@@ -116,7 +116,7 @@
         is_active = #{active,jdbcType=TINYINT},
       </if>
     </set>
-    where account = #{account,jdbcType=VARCHAR}
+    where id = #{id}
   </update>
 
 </mapper>
