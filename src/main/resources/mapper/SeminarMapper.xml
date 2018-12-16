@@ -13,17 +13,15 @@
     <result column="enroll_start_time" property="enrollStartTime" jdbcType="TIMESTAMP" />
     <result column="enroll_end_time" property="enrollEndTime" jdbcType="TIMESTAMP" />
 
-    <!--
     <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
                  column="course_id" javaType="com.group12.course.entity.Course"/>
 
     <association property="round" select="com.group12.course.mapper.RoundMapper.selectRoundById"
                  column="round_id" javaType="com.group12.course.entity.Round"/>
-    -->
   </resultMap>
 
   <sql id="Base_Column_List" >
-    id, <!--course_id, round_id,--> seminar_name, introduction, max_team, is_visible, report_ddl,
+    id, course_id, round_id, seminar_name, introduction, max_team, is_visible,
     seminar_serial, enroll_start_time, enroll_end_time
   </sql>
 
@@ -34,34 +32,22 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <delete id="delete" parameterType="java.lang.Long" >
+  <delete id="deleteSeminarById" parameterType="java.lang.Long" >
     delete from seminar
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" parameterType="com.group12.course.entity.Seminar" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+  <insert id="insertSeminar" parameterType="com.group12.course.entity.Seminar" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     insert into seminar
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="courseId != null" >
         course_id,
-      </if>
-      <if test="roundId != null" >
         round_id,
-      </if>
-      <if test="seminarName != null" >
         seminar_name,
-      </if>
-      <if test="introduction != null" >
-        introduction,
-      </if>
-      <if test="maxTeam != null" >
         max_team,
-      </if>
-      <if test="visible != null" >
         is_visible,
-      </if>
-      <if test="seminarSerial != null" >
         seminar_serial,
+      <if test="introduction !=null">
+        introduction,
       </if>
       <if test="enrollStartTime != null" >
         enroll_start_time,
@@ -71,26 +57,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="courseId != null" >
-        #{courseId,jdbcType=BIGINT},
-      </if>
-      <if test="roundId != null" >
-        #{roundId,jdbcType=BIGINT},
-      </if>
-      <if test="seminarName != null" >
+        #{course.id,jdbcType=BIGINT},
+        #{round.id,jdbcType=BIGINT},
         #{seminarName,jdbcType=VARCHAR},
-      </if>
+        #{maxTeam,jdbcType=INTEGER},
+        #{visible,jdbcType=TINYINT},
+        #{seminarSerial,jdbcType=INTEGER},
       <if test="introduction != null" >
         #{introduction,jdbcType=VARCHAR},
-      </if>
-      <if test="maxTeam != null" >
-        #{maxTeam,jdbcType=INTEGER},
-      </if>
-      <if test="visible != null" >
-        #{visible,jdbcType=TINYINT},
-      </if>
-      <if test="seminarSerial != null" >
-        #{seminarSerial,jdbcType=INTEGER},
       </if>
       <if test="enrollStartTime != null" >
         #{enrollStartTime,jdbcType=TIMESTAMP},
@@ -101,35 +75,42 @@
     </trim>
   </insert>
 
-  <update id="update" parameterType="com.group12.course.entity.Seminar" >
+  <update id="updateSeminar">
     update seminar
     <set >
-      <if test="courseId != null" >
-        course_id = #{courseId,jdbcType=BIGINT},
+
+      <if test="record.course!=null">
+      <if test="record.course.id != null" >
+        course_id = #{record.course.id,jdbcType=BIGINT},
       </if>
-      <if test="roundId != null" >
-        round_id = #{roundId,jdbcType=BIGINT},
       </if>
-      <if test="seminarName != null" >
-        seminar_name = #{seminarName,jdbcType=VARCHAR},
+
+      <if test="record.round!=null">
+      <if test="record.round.id!= null" >
+        round_id = #{record.round.id,jdbcType=BIGINT},
       </if>
-      <if test="introduction != null" >
-        introduction = #{introduction,jdbcType=VARCHAR},
       </if>
-      <if test="maxTeam != null" >
-        max_team = #{maxTeam,jdbcType=INTEGER},
+
+      <if test="record.seminarName != null" >
+        seminar_name = #{record.seminarName,jdbcType=VARCHAR},
       </if>
-      <if test="visible != null" >
-        is_visible = #{visible,jdbcType=TINYINT},
+      <if test="record.introduction != null" >
+        introduction = #{record.introduction,jdbcType=VARCHAR},
       </if>
-      <if test="seminarSerial != null" >
-        seminar_serial = #{seminarSerial,jdbcType=INTEGER},
+      <if test="record.maxTeam != null" >
+        max_team = #{record.maxTeam,jdbcType=INTEGER},
       </if>
-      <if test="enrollStartTime != null" >
-        enroll_start_time = #{enrollStartTime,jdbcType=TIMESTAMP},
+      <if test="record.visible != null" >
+        is_visible = #{record.visible,jdbcType=TINYINT},
       </if>
-      <if test="enrollEndTime != null" >
-        enroll_end_time = #{enrollEndTime,jdbcType=TIMESTAMP},
+      <if test="record.seminarSerial != null" >
+        seminar_serial = #{record.seminarSerial,jdbcType=INTEGER},
+      </if>
+      <if test="record.enrollStartTime != null" >
+        enroll_start_time = #{record.enrollStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enrollEndTime != null" >
+        enroll_end_time = #{record.enrollEndTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}

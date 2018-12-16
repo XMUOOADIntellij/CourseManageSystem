@@ -36,7 +36,7 @@ public class AttendanceDaoTest {
 
     @Test
     public void testDeleteAttendance(){
-        Assert.assertEquals(1,attendanceMapper.delete(new Long(1)));
+        Assert.assertEquals(1,attendanceMapper.deleteAttendanceById(new Long(1)).longValue());
     }
 
 

@@ -5,16 +5,18 @@ import com.group12.course.entity.KlassSeminar;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class KlassSeminarDaoTest {
+public class KlassSeminarDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
     //KlassSeminarMapper klassSeminarMapper;
     @Autowired
     KlassSeminarDao klassSeminarDao;
@@ -25,10 +27,24 @@ public class KlassSeminarDaoTest {
     }
 
     @Test
+    public void testSelectKlassSeminarBySeminarId(){
+        List<KlassSeminar> record = klassSeminarDao.getKlassSeminarBySeminarId(new Long(4));
+        Assert.assertEquals(2,record.size());
+
+    }
+
+    @Test
     public void testSelectKlassSeminar(){
-        KlassSeminar klassSeminar = klassSeminarDao.getKlassSeminar(new Long(4),new Long(3));
+        KlassSeminar klassSeminar = klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(new Long(4),new Long(3));
         Assert.assertNotNull(klassSeminar);
         Assert.assertNotNull(klassSeminar.getKlass().getGrade());
     }
+
+    @Test
+    public void testDeleteBySeminarId(){
+        Assert.assertEquals(2,klassSeminarDao.deleteKlassSeminarBySeminarId(new Long(4)).intValue());
+    }
+
+
 
 }

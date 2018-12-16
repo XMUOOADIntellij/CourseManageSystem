@@ -6,7 +6,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
 
     <result column="report_ddl" property="reportDdl" jdbcType="TIMESTAMP" />
-    <result column="seminar_status" property="seminarStatus" jdbcType="VARCHAR" />
+    <result column="seminar_status" property="seminarStatus" jdbcType="TINYINT" />
 
     <association property="seminar" column="seminar_id"
                  select="com.group12.course.mapper.SeminarMapper.selectSeminarById"
@@ -28,7 +28,7 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="selectKlassSeminar" resultMap="BaseResultMap" >
+  <select id="selectKlassSeminarBySeminarIdAndKlassId" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from klass_seminar
@@ -36,60 +36,68 @@
     and   seminar_id = #{seminarId,jdbcType=BIGINT}
   </select>
 
-  <delete id="delete" parameterType="java.lang.Long" >
+  <select id="selectKlassSeminarBySeminarId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from klass_seminar
+    where seminar_id = #{seminarId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.Long" >
     delete from klass_seminar
     where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteBySeminarId" parameterType="java.lang.Long" >
+    delete from klass_seminar
+    where seminar_id = #{seminarId,jdbcType=BIGINT}
   </delete>
 
   <insert id="insert" parameterType="com.group12.course.entity.KlassSeminar" >
     insert into klass_seminar
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="klassId != null" >
         klass_id,
-      </if>
-      <if test="seminarId != null" >
         seminar_id,
-      </if>
-      <if test="reportDdl != null" >
         report_ddl,
-      </if>
-      <if test="seminarStatus != null" >
         seminar_status,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="klassId != null" >
         #{klassId,jdbcType=BIGINT},
-      </if>
-      <if test="seminarId != null" >
         #{seminarId,jdbcType=BIGINT},
-      </if>
-      <if test="reportDdl != null" >
         #{reportDdl,jdbcType=TIMESTAMP},
-      </if>
-      <if test="seminarStatus != null" >
-        #{seminarStatus,jdbcType=VARCHAR},
-      </if>
+        #{seminarStatus,jdbcType=TINYINT},
     </trim>
   </insert>
 
-  <update id="update" parameterType="com.group12.course.entity.KlassSeminar" >
+  <update id="updateKlassSeminar"  >
     update klass_seminar
     <set >
-      <if test="klassId != null" >
-        klass_id = #{klassId,jdbcType=BIGINT},
+      <if test="record.reportDdl != null" >
+        report_ddl = #{record.reportDdl,jdbcType=TIMESTAMP},
       </if>
-      <if test="seminarId != null" >
-        seminar_id = #{seminarId,jdbcType=BIGINT},
-      </if>
-      <if test="reportDdl != null" >
-        report_ddl = #{reportDdl,jdbcType=TIMESTAMP},
-      </if>
-      <if test="seminarStatus != null" >
-        seminar_status = #{seminarStatus,jdbcType=VARCHAR},
+      <if test="record.seminarStatus != null" >
+        seminar_status = #{record.seminarStatus,jdbcType=TINYINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
 
+  <insert id="insertByList" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    insert into klass_seminar
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      klass_id,
+      seminar_id,
+      report_ddl,
+      seminar_status,
+    </trim>
+    values
+      <foreach collection="list" item="item" index="index" separator=",">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          #{item.klass.id},
+          #{item.seminar.id},
+          #{item.reportDdl},
+          #{item.seminarStatus},
+        </trim>
+      </foreach>
+  </insert>
 </mapper>

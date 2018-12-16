@@ -1,5 +1,6 @@
 package com.group12.course.entity;
 
+import com.group12.course.vo.SeminarVo;
 import org.apache.ibatis.type.Alias;
 
 import java.io.Serializable;
@@ -22,7 +23,10 @@ public class KlassSeminar  {
 
     private LocalDateTime reportDdl;
 
-    private String seminarStatus;
+    /**
+     * 论课所处状态，未开始0，正在进行1，已结束2，暂停3
+     */
+    private Integer seminarStatus;
 
     public Long getId() {
         return id;
@@ -56,20 +60,25 @@ public class KlassSeminar  {
         this.reportDdl = reportDdl;
     }
 
-    public String getSeminarStatus() {
+    public Integer getSeminarStatus() {
         return seminarStatus;
     }
 
-    public void setSeminarStatus(String seminarStatus) {
+    public void setSeminarStatus(Integer seminarStatus) {
         this.seminarStatus = seminarStatus;
     }
 
     public KlassSeminar() {}
 
-    public KlassSeminar(Long id, LocalDateTime reportDdl, String seminarStatus) {
+    public KlassSeminar(Long id, LocalDateTime reportDdl, Integer seminarStatus) {
         this.id = id;
         this.reportDdl = reportDdl;
         this.seminarStatus = seminarStatus;
+    }
+
+    public  KlassSeminar(SeminarVo seminarVo){
+        this.seminarStatus = seminarVo.getSeminarStatus();
+        this.reportDdl=seminarVo.getReportDdl();
     }
 
     @Override
