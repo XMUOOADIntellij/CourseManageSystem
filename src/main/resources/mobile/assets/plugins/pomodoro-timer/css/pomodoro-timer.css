@@ -1,6 +1,6 @@
 .timer-time {
-  line-height: 1em;
-  font-size: 6em;
+    line-height:1em;
+    font-size: 6em;
 }
 
 .timer-container {
@@ -25,4 +25,5 @@
 }
 
 .footer .container {
+
 }
