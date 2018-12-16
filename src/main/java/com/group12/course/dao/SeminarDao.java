@@ -1,5 +1,6 @@
 package com.group12.course.dao;
 
+import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Seminar;
 import com.group12.course.mapper.SeminarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,22 +12,31 @@ public class SeminarDao {
     @Autowired
     SeminarMapper seminarMapper;
 
-    public int createSeminar(Seminar record){
-        //TODO Seminar 表插入一条记录
-        //TODO courseId -> Course表找到班级->classSeminar表插入班级讨论课记录
-        //TODO 没有roundId  -> Round表(新建）
-        return 0;
+    /**
+     * 创建课程讨论课
+     * @param record 讨论课记录
+     * @return  id
+     */
+    public Long createSeminar(Seminar record){
+        seminarMapper.insertSeminar(record);
+        return record.getId();
     }
 
-    public int deleteSeminar(){
-        //TODO seminarId 删除class_seminar记录-》删除attendance
-        //TODO Seminar表删除记录
-        return 0;
+    /**
+     * 根据id删除课程讨论课
+     * @param seminarId 讨论课id
+     * @return 1成功 0失败
+     */
+    public Integer deleteSeminarById(Long seminarId){
+        return seminarMapper.deleteSeminarById(seminarId);
     }
 
-    public Seminar selectSeminar(Long id){
-        //
-        return null;
+    public Seminar selectSeminarById(Long id){
+        return seminarMapper.selectSeminarById(id);
+    }
+
+    public Integer updateSeminar(Seminar seminar,Long seminarId){
+        return seminarMapper.updateSeminar(seminar,seminarId);
     }
 
 }

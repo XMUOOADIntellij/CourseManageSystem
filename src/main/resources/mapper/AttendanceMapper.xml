@@ -46,9 +46,14 @@
   </select>
 
 
-  <delete id="delete" parameterType="java.lang.Long" >
+  <delete id="deleteAttendanceById" parameterType="java.lang.Long" >
     delete from attendance
     where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteAttendanceByKlassSeminarId" parameterType="java.lang.Long" >
+    delete from attendance
+    where klass_seminar_id = #{klassSeminarId,jdbcType=BIGINT}
   </delete>
 
   <insert id="insert" parameterType="com.group12.course.entity.Attendance" useGeneratedKeys="true" keyProperty="id" keyColumn="id">

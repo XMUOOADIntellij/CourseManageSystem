@@ -10,4 +10,5 @@ public interface SeminarScoreMapper {
 
     SeminarScore selectSeminarScoreById(Long id);
 
+    Integer deleteSeminarScoreByKlassSeminarId(Long klassSeminarId);
 }

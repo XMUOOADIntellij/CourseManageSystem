@@ -24,19 +24,25 @@
     <title>我的讨论课</title>
     <!-- Font -->
     <link href="../../assets/css/fontawesome.min.css" rel="stylesheet" />
-    <!-- Require.js -->
-    <script src="../../assets/js/require.min.js"></script>
-    <!-- Dashboard Core -->
+
+    <!--Dashboard Core-->
     <link href="../../assets/css/dashboard.css" rel="stylesheet" />
-    <script src="../../assets/js/dashboard.js"></script>
+    <script src="../../assets/js/vendors/jquery-3.2.1.min.js"></script>
+    <script src="../../assets/js/vendors/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="../../assets/js/vendors/jquery-jvectormap-de-merc.js"></script>
+    <script src="../../assets/js/vendors/jquery-jvectormap-world-mill.js"></script>
+    <script src="../../assets/js/vendors/jquery.sparkline.min.js"></script>
+    <script src="../../assets/js/vendors/jquery.tablesorter.min.js"></script>
+    <script src="../../assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/vendors/chart.bundle.min.js"></script>
+    <script src="../../assets/js/vendors/selectize.min.js"></script>
+    <script src="../../assets/js/core.js"></script>
+    <link href="../../assets/css/dashboard.css" rel="stylesheet" />
     <!-- c3.js Charts Plugin -->
     <link href="../../assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
-    <script src="../../assets/plugins/charts-c3/plugin.js"></script>
-    <!-- Google Maps Plugin -->
-    <link href="../../assets/plugins/maps-google/plugin.css" rel="stylesheet" />
-    <script src="../../assets/plugins/maps-google/plugin.js"></script>
-    <!-- Input Mask Plugin -->
-    <script src="../../assets/plugins/input-mask/plugin.js"></script>
+
+    <!--Pomodoro-timer-->
+    <link href="../../assets/css/pomodoro-timer.css" rel="stylesheet" />
     <!-- Customize -->
     <link href="../../assets/css/style.css" rel="stylesheet" />
     <script src="../../assets/js/common.js"></script>
@@ -47,8 +53,12 @@
         <div class="header py-4">
           <div class="container">
             <div class="d-flex">
-              <a class="nav-link icon d-lg-none" href="./home.html">
-                <i class="fe fe-arrow-left-circle"></i>
+              <a class="header-brand ml-1" href="./home.html">
+                <img
+                  alt="logo"
+                  class="header-brand-img"
+                  src="../../assets/images/brand.png"
+                />Cms
               </a>
               <div class="d-flex order-lg-2 ml-auto">
                 <div class="dropdown d-none d-md-flex">
@@ -61,7 +71,7 @@
                     <a class="dropdown-item d-flex" href="#">
                       <span
                         class="avatar mr-3 align-self-center"
-                        style="background-image: url(../../demo/faces/male/41.jpg)"
+                        style="background-image: url(../../assets/images/male.png)"
                       ></span>
                       <div>
                         <strong>Nathan</strong> pushed new commit: Fix page load
@@ -72,7 +82,7 @@
                     <a class="dropdown-item d-flex" href="#">
                       <span
                         class="avatar mr-3 align-self-center"
-                        style="background-image: url(../../demo/faces/female/1.jpg)"
+                        style="background-image: url(../../assets/images/male.png)"
                       ></span>
                       <div>
                         <strong>Alice</strong> started new task: Tabler UI
@@ -83,7 +93,7 @@
                     <a class="dropdown-item d-flex" href="#">
                       <span
                         class="avatar mr-3 align-self-center"
-                        style="background-image: url(../../demo/faces/female/18.jpg)"
+                        style="background-image: url(../../assets/images/male.png)"
                       ></span>
                       <div>
                         <strong>Rose</strong> deployed new version of NodeJS
@@ -173,17 +183,17 @@
                     >
                   </li>
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="./home.html"
+                    <a class="nav-link" href="./course-home.html"
                       ><i class="fe fe-book"></i> 我的课程</a
                     >
                   </li>
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="./home.html"
-                      ><i class="fe fe-codepen"></i> 我的讨论课</a
+                    <a class="nav-link" href="./seminar-home.html"
+                      ><i class="fe fe-book-open"></i> 我的讨论课</a
                     >
                   </li>
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="./home.html"
+                    <a class="nav-link" href="going.html"
                       ><i class="fe fe-play-circle"></i> 正在进行中</a
                     >
                   </li>
@@ -192,7 +202,7 @@
             </div>
           </div>
         </div>
-        <div class="my-3 my-md-5">
+        <div class="my-3 my-md-5 mt-5">
           <div class="container">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
@@ -202,66 +212,93 @@
               </ol>
             </nav>
             <div class="row">
-              <div class="col-md-6 col-xl-4">
+              <div class="col-sm-6 col-lg-3">
                 <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Built card</h3>
-                    <div class="card-options">
+                  <div class="card-body text-center">
+                    <div class="card-category">OOAD</div>
+                    <ul class="list-unstyled leading-loose">
+                      <li><strong>主课程</strong></li>
+                      <li>
+                        <i
+                          aria-hidden="true"
+                          class="fe fe-check-circle text-gray mr-2"
+                        ></i>
+                        已完成
+                      </li>
+                    </ul>
+                    <div class="text-center mt-6">
                       <a
-                        class="card-options-collapse"
-                        data-toggle="card-collapse"
-                        href="#"
-                        ><i class="fe fe-chevron-up"></i
-                      ></a>
-                      <a
-                        class="card-options-remove"
-                        data-toggle="card-remove"
-                        href="#"
-                        ><i class="fe fe-x"></i
-                      ></a>
+                        class="btn btn-secondary btn-block"
+                        href="./seminar-detail.html"
+                        >查看详情</a
+                      >
                     </div>
                   </div>
-                  <div class="card-body p-0">
-                    <div class="list-group">
+                </div>
+              </div>
+              <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                  <div class="card-status bg-green"></div>
+                  <div class="card-body text-center">
+                    <div class="card-category">J2ee</div>
+                    <ul class="list-unstyled leading-loose">
+                      <li><strong>次课程</strong></li>
+                      <li>
+                        <i
+                          aria-hidden="true"
+                          class="fe fe-play-circle text-success mr-2"
+                        ></i>
+                        正在进行
+                      </li>
+                    </ul>
+                    <div class="text-center mt-6">
                       <a
-                        href="./"
-                        class="list-group-item list-group-item-action"
+                        class="btn btn-green btn-block"
+                        href="./seminar-detail.html"
+                        >查看详情</a
                       >
-                        <i class="fe fe-mail"></i>学生
-                        <i class="fe fe-mail float-right"></i>
-                      </a>
-                      <a href="#" class="list-group-item list-group-item-action"
-                        >Morbi leo risus</a
-                      >
-                      <a href="#" class="list-group-item list-group-item-action"
-                        >Porta ac consectetur ac</a
-                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <div class="card-category">.Net</div>
+                    <ul class="list-unstyled leading-loose">
+                      <li><strong>主课程</strong></li>
+                      <li>
+                        <i
+                          aria-hidden="true"
+                          class="fe fe-clock text-danger mr-2"
+                        ></i>
+                        未开始
+                      </li>
+                    </ul>
+                    <div class="text-center mt-6">
                       <a
-                        href="#"
-                        class="list-group-item list-group-item-action disabled"
-                        >Vestibulum at eros</a
+                        class="btn btn-secondary btn-block"
+                        href="./seminar-detail.html"
+                        >查看详情</a
                       >
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="position-fixed">
+              <a
+                href="./course-create.html"
+                class="btn btn-green float-action-button shadow-lg"
+                ><i class="fe fe-plus"></i
+              ></a>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="row align-items-center flex-row-reverse">
-          <div class="col-12 col-lg-auto mt-0 mt-lg-0 text-center">
-            Copyright © 2018
-            <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
-              >Cms</a
-            >.
-          </div>
-        </div>
-      </div>
-    </footer>
+
   </body>
 </html>
