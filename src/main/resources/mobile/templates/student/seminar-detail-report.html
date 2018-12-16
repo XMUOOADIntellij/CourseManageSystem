@@ -21,7 +21,7 @@
     <link href="../favicon.ico" rel="icon" type="image/x-icon" />
     <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Generated: 2018-04-16 09:29:05 +0200 -->
-    <title>讨论课详情</title>
+    <title>讨论课报告</title>
     <!-- Font -->
     <link href="../../assets/css/fontawesome.min.css" rel="stylesheet" />
 
@@ -47,18 +47,21 @@
     <link href="../../assets/css/style.css" rel="stylesheet" />
     <script src="../../assets/js/common.js"></script>
   </head>
-  <body class="">
+  <body>
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
           <div class="container">
             <div class="d-flex">
-              <a class="header-brand ml-1" href="./home.html">
+              <a class="header-brand ml-1 d-none d-lg-flex" href="./home.html">
                 <img
                   alt="logo"
                   class="header-brand-img"
                   src="../../assets/images/brand.png"
-                />Cms
+                />
+              </a>
+              <a class="nav-link icon d-lg-none" href="./home.html">
+                <i class="fe fe-arrow-left-circle"></i>
               </a>
               <div class="d-flex order-lg-2 ml-auto">
                 <div class="dropdown d-none d-md-flex">
@@ -202,153 +205,186 @@
             </div>
           </div>
         </div>
-        <div class="my-3 my-md-5">
+        <div class="my-3 my-md-5 mt-5">
           <div class="container">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="./seminar-home.html">我的讨论课</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  讨论课详情
-                </li>
-              </ol>
-            </nav>
-            <div class="row row-cards">
-              <div class="col-md-6 col-lg-4">
+            <div class="row">
+              <div class="col-md-6 col-xl-4">
                 <div class="card">
-                  <div class="card-body text-center">
-                    <div class="h4">正在进行</div>
-                    <div class="display-4 font-weight-bold my-5">62</div>
-                    <div class="progress progress-sm my-1">
-                      <div
-                        class="progress-bar bg-green"
-                        style="width: 62%"
-                      ></div>
+                  <div class="card-header">
+                    <h3 class="card-title">OOAD</h3>
+                    <div class="card-options">
+                      <a
+                        class="card-options-collapse"
+                        data-toggle="card-collapse"
+                        href="#"
+                        ><i class="fe fe-chevron-up mr-1"></i
+                      ></a>
                     </div>
                   </div>
-                  <div class="card-footer text-right">
-	                  <a
-		                  class="btn btn-primary btn-block my-0"
-		                  href="going.html" hidden
-	                  >开始课堂</a
-	                  >
-                    <a
-                      class="btn btn-primary btn-block my-0"
-                      href="going.html"
-                      >进入课堂</a
-                    >
-                  </div>
-                </div>
-
-                <div class="card p-3" >
-                  <div class="d-flex align-items-center">
-                    <span class="stamp stamp-md bg-blue mr-3">
-                      <i class="fe fe-file-text"></i>
-                    </span>
-                    <div>
-                      <h4 class="m-0">
-                        <a href="./seminar-detail-report.html">书面报告 </a>
-                      </h4>
-                      <small class="text-muted">12 个新的提交</small>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card p-3" >
-                  <div class="d-flex align-items-center">
-                    <span class="stamp stamp-md bg-blue mr-3">
-                      <i class="fe fe-clipboard"></i>
-                    </span>
-                    <div>
-                      <h4 class="m-0">
-                        <a href="./seminar-detail-score.html">讨论课成绩 </a>
-                      </h4>
-                      <small class="text-muted">12 项待评分</small>
+                  <div class="card-body p-0">
+                    <div class="list-group">
+                      <a
+                        href="./course-info.html"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-book mr-3"></i> 课程信息
+                        </span>
+                      </a>
+                      <a
+                        href="./course-class.html"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-briefcase mr-3"></i> 班级信息
+                        </span>
+                      </a>
+                      <a
+                        href="course-round.html"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-book-open mr-3"></i> 讨论课设置
+                        </span>
+                      </a>
+                      <a
+                        href="./course-group.html"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-slack mr-3"></i> 学生组队
+                        </span>
+                      </a>
+                      <a
+                        href="./course-grade.html"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-clipboard mr-3"></i> 学生成绩
+                        </span>
+                      </a>
+                      <a
+                        href="./course-share.html"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-send mr-3"></i> 共享设置
+                        </span>
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-8">
-                <div class="row">
-                  <div class="col-12">
-                    <form
-                      action=""
-                      class="card"
-                      method="post"
-                      onsubmit="return updateSeminar();"
-                    >
-                      <div class="card-header">
-                        <h3 class="card-title">讨论课详情</h3>
-                      </div>
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="form-group">
-                              <label class="form-label">主题</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                name="example-disabled-input"
-                                placeholder="Disabled.."
-                                value="Well, how'd you become king, then?"
-                              />
-                            </div>
-                            <div class="form-group">
-                              <label class="form-label"
-                                >要求
-                                <span class="form-label-small"
-                                  >56/100</span
-                                ></label
-                              >
-                              <textarea
-                                class="form-control"
-                                name="example-textarea-input"
-                                rows="2"
-                                placeholder="Content.."
-                              >
-Oh! Come and see the violence inherent in the system! Help, help, I'm being repressed! We shall say 'Ni' again to you, if you do not appease us. I'm not a witch. I'm not a witch. Camelot!</textarea
-                              >
-                            </div>
-                          </div>
-                          <div class="col-md-6 col-lg-4">
-                            <div class="form-group">
-                              <label class="form-label">轮次</label>
-                              <select class="form-control custom-select">
-                                <option value="1" selected="selected"
-                                  >第一轮</option
-                                >
-                                <option value="2">第二轮</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="col-md-6 col-lg-4">
-                            <div class="form-group">
-                              <label class="form-label">课次</label>
-                              <select class="form-control custom-select">
-                                <option value="1" selected="selected"
-                                  >第一次</option
-                                >
-                                <option value="2">第二次</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="card-footer text-right">
-                        <div class="d-flex">
-                          <a href="javascript:void(0)" class="btn btn-link"
-                            >取消</a
-                          >
-                          <button type="submit" class="btn btn-primary ml-auto">
-                            确认修改
-                          </button>
-                        </div>
-                      </div>
-                    </form>
+              <div class="col-md-6 col-xl-4">
+                <div class="card card-collapsed">
+                  <div class="card-header">
+                    <h3 class="card-title">J2ee</h3>
+                    <div class="card-options">
+                      <a
+                        class="card-options-collapse"
+                        data-toggle="card-collapse"
+                        href="#"
+                        ><i class="fe fe-chevron-up mr-1"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="card-body p-0">
+                    <div class="list-group">
+                      <a
+                        href="./"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-book mr-3"></i> 课程信息
+                        </span>
+                      </a>
+                      <a
+                        href="./"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-briefcase mr-3"></i> 班级信息
+                        </span>
+                      </a>
+                      <a
+                        href="./"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-book-open mr-3"></i> 讨论课设置
+                        </span>
+                      </a>
+                      <a
+                        href="./"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-slack mr-3"></i> 学生组队
+                        </span>
+                      </a>
+                      <a
+                        href="./"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-clipboard mr-3"></i> 学生成绩
+                        </span>
+                      </a>
+                      <a
+                        href="./"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-send mr-3"></i> 共享设置
+                        </span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="position-fixed">
+              <a
+                href="./course-create.html"
+                class="btn btn-green float-action-button"
+                ><i class="fe fe-plus"></i
+              ></a>
             </div>
           </div>
         </div>
@@ -362,7 +398,7 @@ Oh! Come and see the violence inherent in the system! Help, help, I'm being repr
 			    </div>
 		    </div>
 	    </footer>
-
     </div>
+
   </body>
 </html>
