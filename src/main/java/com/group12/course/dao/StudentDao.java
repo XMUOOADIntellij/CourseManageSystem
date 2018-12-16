@@ -81,11 +81,14 @@ public class StudentDao {
         if (NUMBER_PATTERN.matcher(param).matches()){
             List<Student> list = new ArrayList<>();
             // 通过账号只会找到一个
-            list.add(getStudent(param));
+            Student student = getStudent(param);
+            if (student!=null){
+                list.add(student);
+            }
             return list;
         }
         else {
-            return studentMapper.getStudentByName(param.trim());
+            return studentMapper.selectStudentByName(param.trim());
         }
     }
 

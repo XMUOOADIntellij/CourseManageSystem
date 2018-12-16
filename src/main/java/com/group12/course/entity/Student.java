@@ -1,5 +1,6 @@
 package com.group12.course.entity;
 
+import com.group12.course.vo.StudentVO;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -42,6 +43,13 @@ public class Student implements Serializable {
     public Student(Long id, String password) {
         this.id = id;
         this.password = password;
+    }
+
+    public Student(StudentVO studentVO){
+        this.id=studentVO.getId();
+        this.account=studentVO.getAccount();
+        this.studentName=studentVO.getName();
+        this.email=studentVO.getEmail();
     }
 
     public Long getId() {

@@ -1,7 +1,9 @@
 package com.group12.course.entity;
 
+import com.group12.course.vo.TeacherVO;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Date;
  * @date 2018年12月10日
  */
 @Component
-public class Teacher {
+public class Teacher implements Serializable {
     private Long id;
 
     private String account;
@@ -38,6 +40,13 @@ public class Teacher {
     public Teacher(String account, String password) {
         this.account = account;
         this.password = password;
+    }
+
+    public Teacher(TeacherVO teacherVO){
+        this.id=teacherVO.getId();
+        this.account=teacherVO.getAccount();
+        this.email=teacherVO.getEmail();
+        this.teacherName=teacherVO.getName();
     }
 
     public Long getId() {

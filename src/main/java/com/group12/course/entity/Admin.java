@@ -2,13 +2,15 @@ package com.group12.course.entity;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /**
  * Admin 对象
  * @author Xu Gang
  * @date 2018年12月12日
  * */
 @Component
-public class Admin {
+public class Admin implements Serializable {
     private Long id;
 
     private String account;

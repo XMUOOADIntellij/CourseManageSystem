@@ -1,9 +1,13 @@
 package com.group12.course.dao;
 
+import com.group12.course.entity.Student;
+import com.group12.course.entity.Teacher;
 import com.group12.course.entity.Team;
 import com.group12.course.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Iterator;
 
 
 /**
@@ -26,7 +30,47 @@ public class TeamDao {
     }
 
     public int addTeam(Team team){
-        return teamMapper.addTeam(team,team.getCourse().getId(),team.getKlass().getId(),team.getLeader().getId());
+        Long courseId,klassId,leaderId;
+        try {
+            courseId = team.getCourse().getId();
+            klassId = team.getKlass().getId();
+            leaderId = team.getLeader().getId();
+        }
+        catch (NullPointerException e){
+            System.out.println(e.getStackTrace());
+            System.out.println(e.getMessage());
+            return 0;
+        }
+        team.setStatus(0);
+
+        int addTeamCount=teamMapper.addTeam(team,courseId,klassId,leaderId);
+        if (addTeamCount==0){
+            return 0;
+        }
+        Iterator<Student> members = team.getMembers().iterator();
+        while (members.hasNext()){
+            addTeamMembers(team,members.next());
+        }
+
+        return addTeamCount;
+    }
+
+    public int addTeamMembers(Team team,Student member){
+        Long courseId,klassId,teamId;
+        courseId = team.getCourse().getId();
+        klassId = team.getKlass().getId();
+        teamId = team.getId();
+        try {
+
+        }
+        catch (NullPointerException e){
+            return 0;
+        }
+        int temp=teamMapper.addTeamMembers(teamId,courseId,klassId,member.getId());
+        if (temp==0){
+            System.out.println("error insert team members:"+member.getId()+" at team:"+team.getId());
+        }
+        return temp;
     }
 
     public int changeTeam(Team team){

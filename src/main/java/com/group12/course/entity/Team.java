@@ -1,6 +1,9 @@
 package com.group12.course.entity;
 
+import com.group12.course.vo.TeamVO;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * Team 实体对象
@@ -22,6 +25,23 @@ public class Team {
     private Integer status;
 
     private Integer teamSerial;
+
+    private List<Student> members;
+
+    public Team() {
+    }
+
+    public Team(TeamVO teamVO) {
+        Course tempCourse=new Course();
+        tempCourse.setId(teamVO.getCourseId());
+        Klass tempKlass=new Klass();
+        tempKlass.setId(teamVO.getClassId());
+        this.course=tempCourse;
+        this.teamName=teamVO.getName();
+        this.klass=tempKlass;
+        this.leader=new Student(teamVO.getLeader());
+        this.members=teamVO.getMembers();
+    }
 
     public Long getId() {
         return id;
@@ -49,6 +69,14 @@ public class Team {
 
     public Student getLeader() {
         return leader;
+    }
+
+    public List<Student> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<Student> members) {
+        this.members = members;
     }
 
     public void setLeader(Student leader) {

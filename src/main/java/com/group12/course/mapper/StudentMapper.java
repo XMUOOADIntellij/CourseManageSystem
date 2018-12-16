@@ -75,5 +75,5 @@ public interface StudentMapper {
      * @param name 学生姓名
      * @return 所有同名的学生
      * */
-    List<Student> getStudentByName(String name);
+    List<Student> selectStudentByName(String name);
 }

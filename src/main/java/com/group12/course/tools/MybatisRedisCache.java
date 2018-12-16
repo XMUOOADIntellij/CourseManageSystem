@@ -20,7 +20,15 @@ import redis.clients.jedis.JedisPoolConfig;
 public class MybatisRedisCache implements Cache {
 
     private static Logger logger = LoggerFactory.getLogger(MybatisRedisCache.class);
-    private Jedis redisClient = createReids();
+
+    private Jedis redisClient = createRedis();
+
+    /**
+     * 默认两个小时后会在 redis 中被删除
+     * 最终上线后可以去除这个限制
+     */
+    private final int expireTime = 60*60*2;
+
     /**
      * The ReadWriteLock.
      */
@@ -51,6 +59,9 @@ public class MybatisRedisCache implements Cache {
     public void putObject(Object key, Object value) {
         logger.debug(">>>>>>>>>>>>>>>>>>>>>>>>putObject:" + key + "=" + value);
         redisClient.set(SerializeUtil.serialize(key.toString()), SerializeUtil.serialize(value));
+
+        // 设置过期时间
+        redisClient.expire(SerializeUtil.serialize(key.toString()),expireTime);
     }
 
     @Override
@@ -75,7 +86,7 @@ public class MybatisRedisCache implements Cache {
         return readWriteLock;
     }
 
-    protected static Jedis createReids() {
+    protected static Jedis createRedis() {
         JedisPool pool = new JedisPool(new JedisPoolConfig(), "47.107.81.51",6379,2000,"123456");
         return pool.getResource();
     }
