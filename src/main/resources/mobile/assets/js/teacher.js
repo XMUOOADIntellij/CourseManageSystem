@@ -1,42 +1,44 @@
-function bindUser() {
+function createClass() {
   // jquery 表单提交
   alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
-function createUser() {
+function createCourse() {
   // jquery 表单提交
   alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
-
-function createPassword() {
+function createSeminar() {
   // jquery 表单提交
   alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
-function editPassword() {
-  // jquery 表单提交
-  getVerCode();
-  updatePassword();
-  return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
-}
-function editEmail() {
-  // jquery 表单提交
-  getVerCode();
-  updateEmail();
-  return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
-}
-function updatePassword() {
+function createRound() {
   // jquery 表单提交
   alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
-function updateEmail() {
+function createShare() {
   // jquery 表单提交
   alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
-function getVerCode() {
+function updateSeminar() {
+  // jquery 表单提交
+  alert("success");
+  return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+}
+function updateRound() {
+  // jquery 表单提交
+  alert("success");
+  return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+}
+function updateClass() {
+  // jquery 表单提交
+  alert("success");
+  return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+}
+function deleteCourse() {
   // jquery 表单提交
   alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
