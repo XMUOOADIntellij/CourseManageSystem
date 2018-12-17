@@ -43,6 +43,20 @@ public class Team {
         this.members=teamVO.getMembers();
     }
 
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", course=" + course +
+                ", klass=" + klass +
+                ", leader=" + leader +
+                ", teamName='" + teamName + '\'' +
+                ", status=" + status +
+                ", teamSerial=" + teamSerial +
+                ", members=" + members +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
@@ -106,4 +120,5 @@ public class Team {
     public void setTeamSerial(Integer teamSerial) {
         this.teamSerial = teamSerial;
     }
+
 }

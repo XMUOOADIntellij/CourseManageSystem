@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -22,11 +23,28 @@ public class TeamDao {
     TeamMapper teamMapper;
 
     public Team getTeamById(Long account){
-        return teamMapper.getTeam(account);
+        return teamMapper.selectTeamById(account);
     }
 
-    public int deleteTeam(Long account){
-        return teamMapper.deleteTeam(account);
+    public Team getTeamByLeaderId(Long id){
+        return teamMapper.selectTeamByLeaderId(id);
+    }
+
+    public Long getTeamByMembersId(Long id){
+        return teamMapper.selectTeamIdByMembersId(id);
+    }
+
+    public int deleteTeamById(Long teamId){
+        int deleteTeamCount=teamMapper.deleteTeam(teamId);
+        if (deleteTeamCount==1){
+            int deleteTeamMembersCount = teamMapper.deleteTeamMembers(teamId);
+            return deleteTeamMembersCount;
+        }
+        return -1;
+    }
+
+    public int deleteTeamMember(Team team,Student member){
+        return teamMapper.deleteTeamMembers(member.getId());
     }
 
     public int addTeam(Team team){
@@ -75,5 +93,29 @@ public class TeamDao {
 
     public int changeTeam(Team team){
         return teamMapper.updateTeam(team);
+    }
+
+    public Team getTeamByStudentId(Long id){
+        Team teamByLeader = getTeamByLeaderId(id);
+        if (teamByLeader==null){
+            Long teamIdByMembers = getTeamByMembersId(id);
+            if (teamIdByMembers==null){
+                return new Team();
+            }
+            else {
+                Team teamByMember = teamMapper.selectTeamById(teamIdByMembers);
+
+                return getMembers(teamByMember);
+            }
+        }
+        else {
+            return getMembers(teamByLeader);
+        }
+    }
+
+    public Team getMembers(Team team){
+        List<Student> members = teamMapper.selectTeamMembersByTeamId(team.getId());
+        team.setMembers(members);
+        return team;
     }
 }

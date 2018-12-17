@@ -24,6 +24,17 @@ public class Klass  {
 
     private String klassLocation;
 
+    @Override
+    public String toString() {
+        return "Klass{" +
+                "id=" + id +
+                ", course=" + course +
+                ", grade=" + grade +
+                ", klassSerial=" + klassSerial +
+                ", klassTime='" + klassTime + '\'' +
+                ", klassLocation='" + klassLocation + '\'' +
+                '}';
+    }
 
     public Long getId() {
         return id;

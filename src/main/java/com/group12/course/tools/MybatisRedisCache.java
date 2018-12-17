@@ -27,7 +27,7 @@ public class MybatisRedisCache implements Cache {
      * 默认两个小时后会在 redis 中被删除
      * 最终上线后可以去除这个限制
      */
-    private final int expireTime = 60*60*2;
+    private final int expireTime = 5;
 
     /**
      * The ReadWriteLock.
@@ -61,7 +61,7 @@ public class MybatisRedisCache implements Cache {
         redisClient.set(SerializeUtil.serialize(key.toString()), SerializeUtil.serialize(value));
 
         // 设置过期时间
-        redisClient.expire(SerializeUtil.serialize(key.toString()),expireTime);
+        //redisClient.expire(SerializeUtil.serialize(key.toString()),expireTime);
     }
 
     @Override

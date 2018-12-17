@@ -1,11 +1,17 @@
 package com.group12.course.vo;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.group12.course.entity.Course;
+import com.group12.course.entity.Klass;
 import com.group12.course.entity.Student;
+import com.group12.course.entity.Team;
 import com.group12.course.vo.StudentVO;
 
-public class TeamVO {
+public class TeamVO implements Serializable {
 
     private String name;
 
@@ -17,6 +23,21 @@ public class TeamVO {
 
     private List<Student> members;
 
+    private Integer status;
+
+    private Integer teamSerial;
+
+    public TeamVO() {
+    }
+
+    public TeamVO(Team team) {
+        this.name = team.getTeamName();
+        this.leader = new StudentVO(team.getLeader());
+        this.members = team.getMembers();
+        this.status = team.getStatus();
+        this.teamSerial = team.getTeamSerial();
+    }
+
     @Override
     public String toString() {
         return "TeamVO{" +
@@ -25,6 +46,8 @@ public class TeamVO {
                 ", classId=" + classId +
                 ", leader=" + leader +
                 ", members=" + members +
+                ", status=" + status +
+                ", teamSerial=" + teamSerial +
                 '}';
     }
 
@@ -66,5 +89,22 @@ public class TeamVO {
 
     public void setMembers(List<Student> members) {
         this.members = members;
+    }
+
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getTeamSerial() {
+        return teamSerial;
+    }
+
+    public void setTeamSerial(Integer teamSerial) {
+        this.teamSerial = teamSerial;
     }
 }
