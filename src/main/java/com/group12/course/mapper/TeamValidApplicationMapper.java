@@ -4,6 +4,8 @@ import com.group12.course.entity.application.TeamValidApplication;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * TeamValidApplication Mapper 层接口
  * @author Xu Gang
@@ -14,4 +16,8 @@ import org.springframework.stereotype.Component;
 public interface TeamValidApplicationMapper {
 
     TeamValidApplication selectTeamValidApplicationById(Long id);
+
+    List<TeamValidApplication> selectTeamValidApplicationByTeacherId(Long id);
+
+    int addTeamValidApplication(TeamValidApplication record);
 }

@@ -32,5 +32,43 @@
         where id=#{id,jdbcType=BIGINT}
     </select>
 
+    <select id="selectTeamValidApplicationByTeacherId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from team_valid_application
+        where teacher_id=#{id,jdbcType=BIGINT}
+    </select>
+
+    <insert id="addTeamValidApplication" useGeneratedKeys="true" keyProperty="id" parameterType="com.group12.course.entity.application.TeamValidApplication">
+        insert into team_valid_application
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="team.id != null" >
+                team_id,
+            </if>
+            <if test="teacher.id != null" >
+                teacher_id,
+            </if>
+            <if test="reason != null" >
+                reason,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="team.id != null" >
+                #{team.id},
+            </if>
+            <if test="teacher.id != null" >
+                #{teacher.id},
+            </if>
+            <if test="reason != null" >
+                #{reason},
+            </if>
+            <if test="status != null" >
+                #{status},
+            </if>
+        </trim>
+    </insert>
 
 </mapper>

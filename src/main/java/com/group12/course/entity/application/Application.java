@@ -1,11 +1,22 @@
 package com.group12.course.entity.application;
 
 public class Application {
+
     private Integer id;
 
+    /**
+     * 队伍状态有三种
+     * 0为审核中
+     * 1为合法
+     * 2为不合法
+     * */
     private Integer status;
 
     public Application() {
+    }
+
+    public Application(Integer status) {
+        this.status = status;
     }
 
     public Application(Integer id, Integer status) {

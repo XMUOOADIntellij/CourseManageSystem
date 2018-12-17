@@ -21,6 +21,13 @@ public class TeamValidApplication extends Application {
     public TeamValidApplication() {
     }
 
+    public TeamValidApplication(Integer status, Team team, Teacher teacher, String reason) {
+        super(status);
+        this.team = team;
+        this.teacher = teacher;
+        this.reason = reason;
+    }
+
     public TeamValidApplication(Integer id, Integer status, Team team, Teacher teacher, String reason) {
         super(id, status);
         this.team = team;
