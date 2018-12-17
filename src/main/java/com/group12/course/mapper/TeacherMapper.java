@@ -48,6 +48,14 @@ public interface TeacherMapper {
     Teacher selectTeacherByAccount(String account);
 
     /**
+     * 获取数据库中教师的记录
+     *
+     * @param id 主键代表用户账号
+     * @return 代表获取到的老师对象
+     * */
+    Teacher selectTeacherById(Long id);
+
+    /**
      * 更新数据库中教师的记录
      *
      * @param record 主键代表新的教师对象

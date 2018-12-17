@@ -20,4 +20,24 @@ public class TeamService {
     public int createTeam(Team team){
         return teamDao.addTeam(team);
     }
+
+    public Team getTeamByStudentId(Long id){
+        return teamDao.getTeamByStudentId(id);
+    }
+
+    public Team getTeamByTeamId(Long id){
+        return teamDao.getTeamById(id);
+    }
+
+    public int deleteTeamByTeamId(Long teamId){
+        return teamDao.deleteTeamById(teamId);
+    }
+
+    public int addMember(Team team,Student student){
+        return teamDao.addTeamMembers(team,student);
+    }
+
+    public int deleteTeamMember(Team team,Student student){
+        return teamDao.deleteTeamMember(team,student);
+    }
 }

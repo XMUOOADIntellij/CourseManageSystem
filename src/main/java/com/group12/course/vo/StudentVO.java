@@ -1,5 +1,8 @@
 package com.group12.course.vo;
 
+import com.group12.course.entity.Student;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STUnderline;
+
 public class StudentVO {
 
     private Long id;
@@ -18,6 +21,13 @@ public class StudentVO {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    public StudentVO(Student student) {
+        this.id=student.getId();
+        this.account=student.getAccount();
+        this.email=student.getEmail();
+        this.name=student.getStudentName();
     }
 
     public Long getId() {

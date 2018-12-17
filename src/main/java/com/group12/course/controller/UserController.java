@@ -186,7 +186,6 @@ public class UserController {
     @GetMapping(value = "/password",produces = "application/json; charset=utf-8")
     public void forgetPassword(@RequestParam(value = "account") String account, HttpServletResponse response){
         Boolean status=false;
-
         // 区分传入的是学生还是教师，调用不同的 Service
         if (account.length()>=studentAccountLength){
             status=studentService.forgetPassword(account);

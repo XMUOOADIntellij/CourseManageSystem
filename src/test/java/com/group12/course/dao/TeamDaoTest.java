@@ -1,7 +1,9 @@
 package com.group12.course.dao;
 
 
+import com.group12.course.entity.Klass;
 import com.group12.course.entity.Team;
+import com.group12.course.mapper.KlassMapper;
 import com.group12.course.mapper.TeamMapper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,10 +27,13 @@ public class TeamDaoTest {
     @Autowired
     private TeamMapper teamMapper;
 
+    @Autowired
+    private KlassMapper klassMapper;
+
     @Test
     @Rollback
     public void testAddTeam(){
-        Team testTeam = new Team();
+        /*Team testTeam = new Team();
         //testTeam.setCourseId(new Long(111));
         Jedis jedis = new Jedis("47.107.81.51");
         jedis.auth("123456");
@@ -39,7 +44,9 @@ public class TeamDaoTest {
         while(it.hasNext()){
             String key = it.next();
             System.out.println(key);
-        }
+        }*/
+        Klass klass = klassMapper.selectKlassById(1L);
+        System.out.println(klass);
         /*Team testTeam = new Team();
         *//*testTeam.setCourseId(new Long(111));
         testTeam.setGmtCreate(new Date());
