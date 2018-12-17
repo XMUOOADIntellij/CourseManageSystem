@@ -2,8 +2,11 @@ package com.group12.course.service;
 
 import com.group12.course.dao.AttendanceDao;
 import com.group12.course.dao.KlassSeminarDao;
+import com.group12.course.dao.TeamDao;
 import com.group12.course.entity.Attendance;
 import com.group12.course.entity.KlassSeminar;
+import com.group12.course.entity.Student;
+import com.group12.course.entity.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,8 @@ public class AttendanceService {
     AttendanceDao attendanceDao;
     @Autowired
     KlassSeminarDao klassSeminarDao;
+    @Autowired
+    TeamDao teamDao;
 
     /**
      * 获得当前班级讨论课的展示报名
@@ -64,9 +69,32 @@ public class AttendanceService {
         return attendanceDao.updateAttendance(attendance);
     }
 
-    public Integer cancelAttendance(Long attendanceId){
-        return attendanceDao.deleteAttendanceById(attendanceId);
+    public Integer cancelAttendance(Long attendanceId, Student student){
+
+        Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+        Team team = teamDao.getTeamByStudentId(student.getId());
+
+        if(attendance!=null){
+            if(team!=null){
+                if(attendance.getTeam().getId().equals(team.getId())) {
+                    return attendanceDao.deleteAttendanceById(attendanceId);
+                }
+                else{
+                    //TODO 越权
+                    return null;
+                }
+            }
+            else{
+                //TODO teamNotFound
+                return null;
+            }
+        }
+        else{
+            //TODO attendanceNotFound
+            return null;
+        }
     }
+
 
     public Long enrollAttendance(Attendance attendance){
         return attendanceDao.insertAttendance(attendance);

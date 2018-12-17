@@ -4,6 +4,7 @@ import com.group12.course.dao.AttendanceDao;
 import com.group12.course.dao.KlassSeminarDao;
 import com.group12.course.entity.Attendance;
 import com.group12.course.entity.KlassSeminar;
+import com.group12.course.entity.Student;
 import com.group12.course.service.AttendanceService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -41,5 +42,12 @@ public class AttendanceServiveTest extends AbstractTransactionalJUnit4SpringCont
         attendance.setId(new Long(2));
         attendance.setTeamOrder(3);
         attendanceService.changeAttendanceOrder(attendance);
+    }
+
+    @Test
+    public void cancelAttendance(){
+        Student student = new Student();
+        student.setId(new Long(1));
+        Assert.assertNull(attendanceService.cancelAttendance(new Long(2),student));
     }
 }

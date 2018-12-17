@@ -32,7 +32,7 @@ public class AttendanceController {
      */
     @DeleteMapping(value="/{attendanceId}")
     public Integer cancelAttendance(@PathVariable Long attendanceId){
-        return attendanceService.cancelAttendance(attendanceId);
+        return null;
     }
 
     /**

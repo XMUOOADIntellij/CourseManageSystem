@@ -24,7 +24,7 @@ public interface AttendanceMapper {
 
     int updateAttendance(Attendance record);
 
-    Attendance selectAttendenceById(Long id);
+    Attendance selectAttendanceById(Long id);
 
     Attendance selectAttendanceByKlassSeminarIdAndTeamId(Long klassSeminarId,Long teamId);
 

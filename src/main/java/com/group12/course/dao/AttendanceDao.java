@@ -26,6 +26,9 @@ public class AttendanceDao {
         return attendanceMapper.selectAttendanceByKlassSeminarId(klassSeminarId);
     }
 
+    public Attendance selectAttendanceById(Long attendanceId){
+        return attendanceMapper.selectAttendanceById(attendanceId);
+    }
     public Integer updateAttendance(Attendance attendance){
         return attendanceMapper.updateAttendance(attendance);
     }
