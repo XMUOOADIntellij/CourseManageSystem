@@ -16,6 +16,8 @@
                    column="leader_id" javaType="com.group12.course.entity.Student"/>
     </resultMap>
 
+    <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
+
     <sql id="Base_Column_List" >
         id, course_id,klass_id, leader_id, team_name, team_serial,status
     </sql>
@@ -27,9 +29,35 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
+  <select id="selectTeamByLeaderId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from team
+    where leader_id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectTeamIdByMembersId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    select
+    team_id
+    from klass_student
+    where student_id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectTeamMembersByTeamId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    select
+    student_id
+    from klass_student
+    where team_id = #{id,jdbcType=BIGINT}
+  </select>
+
   <delete id="deleteTeam" parameterType="java.lang.Long" >
     delete from team
     where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteTeamMembers" parameterType="java.lang.Long" >
+    delete from klass_student
+    where team_id = #{id,jdbcType=BIGINT}
   </delete>
 
   <insert id="addTeam" useGeneratedKeys="true" keyProperty="record.id">
