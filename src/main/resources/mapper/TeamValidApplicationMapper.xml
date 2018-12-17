@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.TeamValidApplicationMapper" >
+
+
+    <resultMap id="BaseResultMap" type="com.group12.course.entity.application.TeamValidApplication" >
+
+        <id column="id" property="id" jdbcType="BIGINT" />
+
+        <result column="reason" property="reason" jdbcType="VARCHAR" />
+
+        <result column="status" property="status" jdbcType="BIT" />
+
+        <association property="team" column="team_id"
+                     select="com.group12.course.mapper.TeamMapper.selectTeamById"
+                     javaType="com.group12.course.entity.Team"/>
+
+        <association property="teacher" column="teacher_id"
+                     select="com.group12.course.mapper.TeacherMapper.selectTeacherById"
+                     javaType="com.group12.course.entity.Teacher"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,team_id,teacher_id,reason,status
+    </sql>
+
+    <select id="selectTeamValidApplicationById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from team_valid_application
+        where id=#{id,jdbcType=BIGINT}
+    </select>
+
+
+</mapper>

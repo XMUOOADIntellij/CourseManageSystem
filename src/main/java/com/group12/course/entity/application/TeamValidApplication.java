@@ -2,7 +2,14 @@ package com.group12.course.entity.application;
 
 import com.group12.course.entity.Teacher;
 import com.group12.course.entity.Team;
+import org.springframework.stereotype.Component;
 
+/**
+ * 队伍申请对象
+ * @author Xu Gang
+ * @date 2018年12月17日
+ */
+@Component
 public class TeamValidApplication extends Application {
 
     private Team team;
@@ -19,6 +26,15 @@ public class TeamValidApplication extends Application {
         this.team = team;
         this.teacher = teacher;
         this.reason = reason;
+    }
+
+    @Override
+    public String toString() {
+        return "TeamValidApplication{" +
+                "team=" + team +
+                ", teacher=" + teacher +
+                ", reason='" + reason + '\'' +
+                '}';
     }
 
     public Team getTeam() {

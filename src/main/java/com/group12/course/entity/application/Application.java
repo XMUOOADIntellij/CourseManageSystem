@@ -13,6 +13,14 @@ public class Application {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Application{" +
+                "id=" + id +
+                ", status=" + status +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }
