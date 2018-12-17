@@ -134,9 +134,9 @@ public class SeminarController {
      * @param classId 班级id
      */
     @GetMapping(value="/{seminarId}/class/{classId}/ppt")
-    public void downloadAllPPT(@PathVariable Long seminarId, @PathVariable Long classId, HttpServletResponse response){
-        //TODO
-        return;
+    public void downloadAllPPT(@PathVariable Long seminarId, @PathVariable Long classId,
+                               HttpServletResponse response) {
+       // attendanceService.downloadAllPpt(seminarId,classId,response);
     }
 
     /**
