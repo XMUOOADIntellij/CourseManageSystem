@@ -1,9 +1,8 @@
 package com.group12.course.entity;
 
 
+import com.group12.course.vo.AttendanceVo;
 import org.apache.ibatis.type.Alias;
-
-import java.io.Serializable;
 
 /**
  * 班级讨论课展示信息
@@ -109,4 +108,16 @@ public class Attendance {
         this.pptUrl = pptUrl;
     }
 
+
+    public Attendance(){}
+    public Attendance(AttendanceVo attendanceVo){
+        this.id =attendanceVo.getId();
+        this.pptName = attendanceVo.getPptName();
+        this.reportName =attendanceVo.getReportName();
+        this.pptUrl = attendanceVo.getPptUrl();
+        this.reportUrl =attendanceVo.getReportUrl();
+        this.presented =attendanceVo.getPresented();
+        this.teamOrder =attendanceVo.getTeamOrder();
+
+    }
 }

@@ -26,7 +26,7 @@ public class AttendanceService {
      * @return List
      */
     public List<Attendance> getAllAttendance(Long classId, Long seminarId){
-        return attendanceDao.getAllAttendance(klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId).getId());
+        return attendanceDao.selectAttendanceByKlassSeminarId(klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId).getId());
     }
 
     /**
@@ -52,7 +52,7 @@ public class AttendanceService {
 
       KlassSeminar klassSeminar = klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId);
       if(klassSeminar!=null){
-       return attendanceDao.getAttendace(klassSeminar.getId(),teamId);
+       return attendanceDao.selectAttendanceByKlassSeminarIdAndTeamId(klassSeminar.getId(),teamId);
        }
         else {
             return null;
@@ -63,8 +63,11 @@ public class AttendanceService {
         return attendanceDao.updateAttendanceOrder(attendanceId,teamOrder);
     }
 
-    public  Integer cancelAttendance(Long attendanceId){
+    public Integer cancelAttendance(Long attendanceId){
         return attendanceDao.deleteAttendanceById(attendanceId);
     }
 
+    public Long enrollAttendance(Attendance attendance){
+        return attendanceDao.insertAttendance(attendance);
+    }
 }

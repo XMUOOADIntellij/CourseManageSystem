@@ -110,8 +110,8 @@ public class SeminarController {
             result.add(new AttendanceVo(attendanceService.getAttendance(classId,seminarId,teamId)));
         }
         else{
-            for(Attendance list:attendanceService.getAllAttendance(classId, seminarId)){
-                result.add(new AttendanceVo(list));
+            for(Attendance item:attendanceService.getAllAttendance(classId, seminarId)){
+                result.add(new AttendanceVo(item));
             }
         }
         return result;

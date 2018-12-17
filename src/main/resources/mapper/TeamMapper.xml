@@ -8,7 +8,7 @@
         <result column="status" property="status" jdbcType="BIT" />
         <result column="team_serial" property="teamSerial" jdbcType="BIT" />
 
-        <association property="klass" select="com.group12.course.mapper.klassMapper.selectKlassById"
+        <association property="klass" select="com.group12.course.mapper.KlassMapper.selectKlassById"
                    column="klass_id" javaType="com.group12.course.entity.Klass"/>
         <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
                    column="course_id" javaType="com.group12.course.entity.Course"/>
