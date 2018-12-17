@@ -39,7 +39,7 @@ public class CourseController {
      * @param  teacherId 老师ID
      */
     @GetMapping(value="",produces = "application/json; charset=utf-8")
-    public List<Course> listCourses(Long teacherId,HttpServletResponse response){
+    public List<CourseVO> listCourses(Long teacherId,HttpServletResponse response){
         return courseService.listCourses(teacherId);
     }
 
@@ -49,7 +49,7 @@ public class CourseController {
      * @return Course
      */
     @GetMapping(value="/{courseId}",produces = "application/json; charset=utf-8")
-    public Course getCourseById(@PathVariable Long courseId,HttpServletResponse response){
+    public CourseVO getCourseById(@PathVariable Long courseId,HttpServletResponse response){
         return courseService.getCourseById(courseId);
     }
 
@@ -60,17 +60,6 @@ public class CourseController {
      */
     @PostMapping(value="",produces = "application/json; charset=utf-8")
     public void createCourse(@RequestParam Long teacherId,@RequestBody CourseVO courseVO, HttpServletResponse response){
-        Course course = new Course();
-        course.setCourseName(courseVO.getCourseName());
-        course.setIntroduction(courseVO.getIntroduction());
-        course.setPresentationPercentage(courseVO.getPresentationPercentage());
-        course.setQuestionPercentage(courseVO.getQuestionPercentage());
-        course.setReportPercentage(courseVO.getReportPercentage());
-        course.setTeamStartTime(courseVO.getTeamStartTime());
-        course.setTeamEndTime(courseVO.getTeamEndTime());
-
-        int status = courseService.addCourse(teacherId,course);
-        Long courseId = course.getId();
 
 
         return;

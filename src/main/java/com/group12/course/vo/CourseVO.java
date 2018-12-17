@@ -6,6 +6,9 @@ import com.group12.course.entity.Teacher;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ *
+ */
 public class CourseVO {
 
     private Long id;
