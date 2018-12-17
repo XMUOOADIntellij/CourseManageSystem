@@ -34,7 +34,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="addCourse" parameterType="com.group12.course.entity.Course" >
+  <insert id="addCourse" useGeneratedKeys="true" keyProperty="course.id" >
     insert into course
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

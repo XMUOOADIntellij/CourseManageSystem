@@ -27,8 +27,8 @@ public class CourseDao {
         return courseMapper.deleteCourse(id);
     }
 
-    public int addCourse(Course course){
-        return courseMapper.addCourse(course);
+    public int addCourse(Long teacherId,Course course){
+        return courseMapper.addCourse(teacherId,course);
     }
 
     public int updateCourse(Course course){

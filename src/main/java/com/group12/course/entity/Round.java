@@ -1,5 +1,10 @@
 package com.group12.course.entity;
 
+/**
+ * Round 实体对象
+ * @author Tan Xue
+ * @date 2018/12/12
+ */
 public class Round {
     private Long id;
 

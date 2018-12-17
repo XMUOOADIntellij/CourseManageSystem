@@ -2,9 +2,11 @@ package com.group12.course.service;
 
 import com.group12.course.dao.CourseDao;
 import com.group12.course.entity.Course;
+import com.group12.course.vo.CourseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,26 +26,41 @@ public class CourseService {
      * @return List<Course>
      * @param  teacherId 老师ID
      */
-    public List<Course> listCourses(Long teacherId){
-        return courseDao.listCourses(teacherId);
+    public List<CourseVO> listCourses(Long teacherId){
+        /*TODO*/
+        return new ArrayList<>();
     }
 
     /**
      * 根据课程id获得课程
-     * @param id int
+     * @param courseId int
      * @return Course
      */
-    public Course getCourseById(Long id){
-        return courseDao.getCourse(id);
+    public CourseVO getCourseById(Long courseId){
+
+        return new CourseVO();
     }
 
     /**
      * 增加课程
-     * @param course Course
+     * @param courseVO
      * @return Course
      */
-    public int addCourse(Course course){
-        return courseDao.addCourse(course);
+    public int addCourse(Long teacherId,CourseVO courseVO){
+        Course course = new Course();
+        course.setCourseName(courseVO.getCourseName());
+        course.setIntroduction(courseVO.getIntroduction());
+        course.setPresentationPercentage(courseVO.getPresentationPercentage());
+        course.setQuestionPercentage(courseVO.getQuestionPercentage());
+        course.setReportPercentage(courseVO.getReportPercentage());
+        course.setTeamStartTime(courseVO.getTeamStartTime());
+        course.setTeamEndTime(courseVO.getTeamEndTime());
+
+        int status = courseDao.addCourse(teacherId,course);
+        Long courseId = course.getId();
+
+        /*TODO：组队人数+冲突课程*/
+        return 1;
     }
 
     /**
