@@ -1,6 +1,8 @@
 package com.group12.course.dao;
 
 import com.group12.course.entity.Attendance;
+import com.group12.course.entity.KlassSeminar;
+import com.group12.course.entity.Team;
 import com.group12.course.mapper.AttendanceMapper;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,13 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class AttendanceDaoTest {
     @Autowired
-    AttendanceMapper attendanceMapper;
-    Attendance attendance;
-
-    @Before
-    public void initial(){
-        attendance = new Attendance();
-    }
+    AttendanceDao attendanceDao;
 
     @Test
     public void testEnrollPresentation(){
@@ -31,14 +27,25 @@ public class AttendanceDaoTest {
 
     @Test
     public void testGetAttendance(){
-        Assert.assertNotNull(attendanceMapper.selectAttendance(new Long(1),new Long(3)));
+        Assert.assertNotNull(attendanceDao.selectAttendanceByKlassSeminarIdAndTeamId(new Long(1),new Long(3)));
     }
 
     @Test
     public void testDeleteAttendance(){
-       // Assert.assertEquals(1,attendanceMapper.deleteAttendanceById(new Long(1)).longValue());
+        // Assert.assertEquals(1,attendanceMapper.deleteAttendanceById(new Long(1)).longValue());
     }
 
-
+    @Test
+    public void testInsertAttendance(){
+        Attendance attendance = new Attendance();
+        attendance.setTeam(new Team());
+        attendance.getTeam().setId(new Long(1));
+        attendance.setKlassSeminar(new KlassSeminar());
+        attendance.getKlassSeminar().setId(new Long(1));
+        attendance.setPresented(false);
+        attendance.setTeamOrder(3);
+        attendanceDao.insertAttendance(attendance);
+        Assert.assertNotNull(attendance.getId());
+    }
 
 }

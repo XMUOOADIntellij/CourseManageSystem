@@ -24,8 +24,9 @@ public class AttendanceVo {
     /**
      * 添加的属性
      */
-    private Integer classGrade;
     private Integer classSerial;
+    private Integer teamSerial;
+
 
     public Long getId() {
         return id;
@@ -83,12 +84,12 @@ public class AttendanceVo {
         this.pptUrl = pptUrl;
     }
 
-    public Integer getClassGrade() {
-        return classGrade;
+    public Integer getTeamSerial() {
+        return teamSerial;
     }
 
-    public void setClassGrade(Integer classGrade) {
-        this.classGrade = classGrade;
+    public void setTeamSerial(Integer teamSerial) {
+        this.teamSerial = teamSerial;
     }
 
     public Integer getClassSerial() {
@@ -101,7 +102,6 @@ public class AttendanceVo {
 
     public AttendanceVo(){}
     public AttendanceVo(Attendance attendance) {
-
         this.id = attendance.getId();
         this.pptName = attendance.getPptName();
         this.pptUrl = attendance.getPptUrl();
@@ -109,7 +109,7 @@ public class AttendanceVo {
         this.reportUrl=attendance.getReportUrl();
         this.presented=attendance.getPresented();
         this.teamOrder=attendance.getTeamOrder();
-        this.classGrade=attendance.getKlassSeminar().getKlass().getGrade().intValue();
         this.classSerial=attendance.getKlassSeminar().getKlass().getKlassSerial();
+        this.teamSerial = attendance.getTeam().getTeamSerial();
     }
 }

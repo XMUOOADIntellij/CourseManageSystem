@@ -2,14 +2,25 @@ package com.group12.course.service;
 
 import com.group12.course.dao.AttendanceDao;
 import com.group12.course.dao.KlassSeminarDao;
+import com.group12.course.dao.TeamDao;
 import com.group12.course.entity.Attendance;
 import com.group12.course.entity.KlassSeminar;
+import com.group12.course.entity.Student;
+import com.group12.course.entity.Team;
+import com.group12.course.tools.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * 讨论课展示 Service层
+ * @author Y Jiang
+ * @date 2018/12/17
+ */
 @Component
 @Service
 public class AttendanceService {
@@ -18,6 +29,8 @@ public class AttendanceService {
     AttendanceDao attendanceDao;
     @Autowired
     KlassSeminarDao klassSeminarDao;
+    @Autowired
+    TeamDao teamDao;
 
     /**
      * 获得当前班级讨论课的展示报名
@@ -25,8 +38,9 @@ public class AttendanceService {
      * @param seminarId 讨论课ID
      * @return List
      */
-    public List<Attendance> getAllAttendance(Long classId, Long seminarId){
-        return attendanceDao.getAllAttendance(klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId).getId());
+    public List<Attendance> getKlassSeminarAttendance(Long classId, Long seminarId){
+        return attendanceDao.selectAttendanceByKlassSeminarId(
+                klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId).getId());
     }
 
     /**
@@ -52,19 +66,133 @@ public class AttendanceService {
 
       KlassSeminar klassSeminar = klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId);
       if(klassSeminar!=null){
-       return attendanceDao.getAttendace(klassSeminar.getId(),teamId);
+       return attendanceDao.selectAttendanceByKlassSeminarIdAndTeamId(klassSeminar.getId(),teamId);
        }
         else {
             return null;
         }
     }
 
-    public Integer changeAttendanceOrder(Long attendanceId,Integer teamOrder){
-        return attendanceDao.updateAttendanceOrder(attendanceId,teamOrder);
+    public Integer changeAttendanceOrder(Attendance attendance){
+        //TODO 顺序没有被报
+        return attendanceDao.updateAttendance(attendance);
     }
 
-    public  Integer cancelAttendance(Long attendanceId){
-        return attendanceDao.deleteAttendanceById(attendanceId);
+    public Integer cancelAttendance(Long attendanceId, Student student){
+
+        Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+        Team team = teamDao.getTeamByStudentId(student.getId());
+
+        if(attendance!=null){
+            if(team!=null){
+                if(attendance.getTeam().getId().equals(team.getId())) {
+                    return attendanceDao.deleteAttendanceById(attendanceId);
+                }
+                else{
+                    //TODO 越权
+                    return null;
+                }
+            }
+            else{
+                //TODO teamNotFound
+                return null;
+            }
+        }
+        else{
+            //TODO attendanceNotFound
+            return null;
+        }
     }
 
+    public Long enrollAttendance(Attendance attendance,Student student){
+        Team team = teamDao.getTeamByStudentId(student.getId());
+            if(team!=null){
+                attendance.setTeam(team);
+                attendance.setPresented(false);
+                return attendanceDao.insertAttendance(attendance);
+            }
+            else{
+                //TODO TeamNotFoundException
+                return null;
+            }
+    }
+
+    public String uploadReport(Long attendanceId,MultipartFile file,Student student){
+        Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+        Team team = teamDao.getTeamByStudentId(student.getId());
+        if(attendance!=null){
+            if(team.getId().equals(attendance.getTeam().getId())){
+            //TODO path 服务器
+            String filePath = "E:/report/"+attendance.getKlassSeminar().getId()+"/";
+            String fileName = file.getOriginalFilename();
+            try{
+                FileUtil.uploadFile(file,filePath);
+            }catch (Exception e){
+                return null;
+            }
+            attendance.setReportName(fileName);
+            attendance.setReportUrl(filePath+fileName);
+            attendanceDao.updateAttendance(attendance);
+            return filePath+fileName;
+            }
+            else{
+                //TODO 权限
+                return null;
+            }
+        }
+        else{
+            //TODO AttendanceNotFound
+            return null;
+        }
+    }
+
+    public String uploadPpt(Long attendanceId,MultipartFile file,Student student){
+        Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+        Team team = teamDao.getTeamByStudentId(student.getId());
+
+        if(attendance!=null){
+            if(team.getId().equals(attendance.getTeam().getId())){
+                //TODO path 服务器
+                String filePath = "E:/ppt/"+attendance.getKlassSeminar().getId()+"/";
+                String fileName = file.getOriginalFilename();
+                try{
+                    FileUtil.uploadFile(file,filePath);
+                }catch (Exception e){
+                    return null;
+                }
+                attendance.setPptName(fileName);
+                attendance.setPptUrl(filePath+fileName);
+                attendanceDao.updateAttendance(attendance);
+                return filePath+fileName;
+            }
+            else{
+                //TODO 权限
+                return null;
+            }
+        }
+        else{
+            //TODO AttendanceNotFound
+            return null;
+        }
+    }
+
+    public void downloadReport(Long attendanceId, HttpServletResponse response){
+        Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+        String fileUrl = attendance.getReportUrl();
+        try{
+        FileUtil.downloadFile(response,fileUrl);}
+        catch (Exception e){
+            return;
+        }
+    }
+
+    public void downloadPpt(Long attendanceId, HttpServletResponse response){
+        Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+        String fileUrl = attendance.getPptUrl();
+        try{
+            FileUtil.downloadFile(response,fileUrl);}
+        catch (Exception e){
+            return;
+        }
+    }
 }
