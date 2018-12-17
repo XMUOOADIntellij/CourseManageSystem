@@ -96,15 +96,9 @@
     </trim>
   </insert>
 
-  <update id="update" parameterType="com.group12.course.entity.Attendance" >
+  <update id="updateAttendance" parameterType="com.group12.course.entity.Attendance" >
     update attendance
     <set >
-      <if test="klassSeminarId != null" >
-        klass_seminar_id = #{klassSeminarId,jdbcType=BIGINT},
-      </if>
-      <if test="teamId != null" >
-        team_id = #{teamId,jdbcType=BIGINT},
-      </if>
       <if test="teamOrder != null" >
         team_order = #{teamOrder,jdbcType=TINYINT},
       </if>
@@ -128,13 +122,4 @@
   </update>
 
 
-    <update id="updateOrder">
-        update attendance
-        <set>
-            <if test="teamOrder != null" >
-                team_order = #{teamOrder,jdbcType=TINYINT},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
 </mapper>

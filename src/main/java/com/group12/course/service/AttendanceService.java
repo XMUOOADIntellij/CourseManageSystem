@@ -59,8 +59,9 @@ public class AttendanceService {
         }
     }
 
-    public Integer changeAttendanceOrder(Long attendanceId,Integer teamOrder){
-        return attendanceDao.updateAttendanceOrder(attendanceId,teamOrder);
+    public Integer changeAttendanceOrder(Attendance attendance){
+        //TODO 顺序没有被报
+        return attendanceDao.updateAttendance(attendance);
     }
 
     public Integer cancelAttendance(Long attendanceId){

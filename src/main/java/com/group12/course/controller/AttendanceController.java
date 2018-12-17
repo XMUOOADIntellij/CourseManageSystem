@@ -23,7 +23,7 @@ public class AttendanceController {
      */
     @PutMapping(value="/{attendanceId}")
     public Integer changeOrder(@PathVariable Long attendanceId,@RequestBody Attendance record){
-        return attendanceService.changeAttendanceOrder(attendanceId,record.getTeamOrder());
+        return null;
     }
 
     /**

@@ -22,7 +22,7 @@ public interface AttendanceMapper {
 
     int insert(Attendance record);
 
-    int update(Attendance record);
+    int updateAttendance(Attendance record);
 
     Attendance selectAttendenceById(Long id);
 
@@ -30,5 +30,4 @@ public interface AttendanceMapper {
 
     List<Attendance> selectAttendanceByKlassSeminarId(Long klassSeminarId);
 
-    Integer updateOrder(Long id,Integer teamOrder);
 }

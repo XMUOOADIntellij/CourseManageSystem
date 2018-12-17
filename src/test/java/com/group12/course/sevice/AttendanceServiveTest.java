@@ -34,4 +34,12 @@ public class AttendanceServiveTest extends AbstractTransactionalJUnit4SpringCont
     public  void testCancelAttendance(){
         //Assert.assertEquals(Long.valueOf(1),attendanceService.cancelAttendance(new Long(1)));
     }
+
+    @Test
+    public void testChangeAttendanceOrder(){
+        Attendance attendance = new Attendance();
+        attendance.setId(new Long(2));
+        attendance.setTeamOrder(3);
+        attendanceService.changeAttendanceOrder(attendance);
+    }
 }
