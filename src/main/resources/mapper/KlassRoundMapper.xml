@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.KlassRoundMapper" >
+    <resultMap id="BaseResultMap" type="com.group12.course.entity.KlassRound" >
+        <result column="enroll_number" property="enrollNumber" jdbcType="TINYINT" />
+
+        <association property="klass" select="com.group12.course.mapper.KlassMapper.selectKlassById"
+                     column="klass_id" javaType="com.group12.course.entity.Klass"/>
+        <association property="round" select="com.group12.course.mapper.RoundMapper.selectRoundById"
+                     column="round_id" javaType="com.group12.course.entity.Round"/>
+
+    </resultMap>
+    <sql id="Base_Column_List" >
+    klass_id, round_id,enroll_number
+  </sql>
+
+    <select id="selectKlassRoundById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from klass_round
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteKlassRound" parameterType="java.lang.Long" >
+    delete from klass_round
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="addKlassRound" parameterType="com.group12.course.entity.KlassRound" >
+        insert into klass_round
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="klass != null" >
+                klass_id,
+            </if>
+            <if test="round != null" >
+                round_id,
+            </if>
+            <if test="enrollNumber != null">
+                enroll_number,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="klass != null" >
+                #{klass.id,jdbcType=BIGINT},
+            </if>
+            <if test="round != null" >
+                #{round.id,jdbcType=BIGINT},
+            </if>
+            <if test="enrollNumber != null">
+                #{enrollNumber,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateKlassRound" parameterType="com.group12.course.entity.KlassRound" >
+        update klass_round
+        <set >
+            <if test="klass != null" >
+                #{klass.id,jdbcType=BIGINT},
+            </if>
+            <if test="round != null" >
+                #{round.id,jdbcType=BIGINT},
+            </if>
+            <if test="enrollNumber != null">
+                #{enrollNumber,jdbcType=TINYINT},
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>

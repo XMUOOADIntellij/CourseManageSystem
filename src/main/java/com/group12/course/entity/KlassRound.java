@@ -3,7 +3,7 @@ package com.group12.course.entity;
 import org.springframework.stereotype.Component;
 
 /**
- * KlassRound 实体对象
+ * KlassRoundDao 实体对象
  * @author Tan Xue
  * @date 2018/12/17
  */
