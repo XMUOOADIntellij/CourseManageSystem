@@ -95,7 +95,7 @@ public class TeamDao {
         return teamMapper.updateTeam(team);
     }
 
-    public Team getTeamStudentId(Long id){
+    public Team getTeamByStudentId(Long id){
         Team teamByLeader = getTeamByLeaderId(id);
         if (teamByLeader==null){
             Long teamIdByMembers = getTeamByMembersId(id);
