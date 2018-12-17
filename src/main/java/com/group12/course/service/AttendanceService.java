@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -119,7 +120,6 @@ public class AttendanceService {
     public String uploadReport(Long attendanceId,MultipartFile file,Student student){
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
         Team team = teamDao.getTeamByStudentId(student.getId());
-
         if(attendance!=null){
             if(team.getId().equals(attendance.getTeam().getId())){
             //TODO path 服务器
@@ -173,6 +173,26 @@ public class AttendanceService {
         else{
             //TODO AttendanceNotFound
             return null;
+        }
+    }
+
+    public void downloadReport(Long attendanceId, HttpServletResponse response){
+        Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+        String fileUrl = attendance.getReportUrl();
+        try{
+        FileUtil.downloadFile(response,fileUrl);}
+        catch (Exception e){
+            return;
+        }
+    }
+
+    public void downloadPpt(Long attendanceId, HttpServletResponse response){
+        Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+        String fileUrl = attendance.getPptUrl();
+        try{
+            FileUtil.downloadFile(response,fileUrl);}
+        catch (Exception e){
+            return;
         }
     }
 }

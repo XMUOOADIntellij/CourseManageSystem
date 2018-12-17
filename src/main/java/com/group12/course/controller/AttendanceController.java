@@ -45,8 +45,7 @@ public class AttendanceController {
      */
     @GetMapping(value="/{attendanceId}/report")
     public void downloadReport(@PathVariable Long attendanceId, HttpServletResponse response){
-        //TODO 下载某个展示报告
-        return;
+        attendanceService.downloadReport(attendanceId,response);
     }
 
     /**
@@ -83,8 +82,7 @@ public class AttendanceController {
      */
     @GetMapping(value="/{attendanceId}/ppt")
     public void downloadPPT(@PathVariable Long attendanceId, HttpServletResponse response){
-        //TODO 下载某个展示ppt
-        return;
+        attendanceService.downloadPpt(attendanceId,response);
     }
 
     /**
