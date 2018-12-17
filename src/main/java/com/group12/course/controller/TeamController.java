@@ -45,51 +45,61 @@ public class TeamController {
         }
         else {
             response.setStatus(200);
+            /**
+             * TODO
+             * 返回 id
+             * */
         }
     }
 
-  /**
-   *
-   * */
     @GetMapping(value = "",produces = "application/json; charset=utf-8")
     public void getTeam(HttpServletRequest request, HttpServletResponse response)throws IOException {
         String token = request.getHeader("Authorization");
         Student jwtStudent = Jwt.unSign(token,Student.class);
-        // 区分传入的是学生还是教师，调用不同的 Service
         if (jwtStudent!=null){
             Team team = teamService.getTeamByStudentId(jwtStudent.getId());
             if (team==null){
-
+                response.setStatus(404);
             }
             else {
                 response.setStatus(200);
-                TeamVO teamVO = new TeamVO(team);
-                //System.out.println(teamVO);
-                String jsson= JSONObject.toJSONString(teamVO);
-                //System.out.println(jsson);
-                response.getWriter().write(jsson);
-                /*ObjectMapper mapper = new ObjectMapper();
-                mapper.configure(SerializationConfig.Feature.INDENT_OUTPUT, Boolean.TRUE);
-                String json = mapper.writeValueAsString(teamVO);
-                System.out.println("Java2Json: "+json);*/
-                //return teamVO;
+                String json= JSONObject.toJSONString(team);
+                response.getWriter().write(json);
             }
         }
         else {
-            //return new TeamVO();
+            response.setStatus(403);
+        }
+    }
+
+    @GetMapping(value = "/{teamId}",produces = "application/json; charset=utf-8")
+    public void getTeamByTeamId(@PathVariable Long teamId, HttpServletResponse response)throws IOException {
+        Team returnTeam = teamService.getTeamByTeamId(teamId);
+        if (returnTeam==null){
+            response.setStatus(404);
+        }
+        else {
+            response.setStatus(200);
+            String json = JSONObject.toJSONString(returnTeam);
+            response.getWriter().write(json);
         }
     }
 
     @PutMapping(value = "/{teamId}",produces = "application/json; charset=utf-8")
-    public Team updateTeam(@RequestBody Team team,@PathVariable String teamId, HttpServletResponse response)throws IOException {
-        /*TODO*/
+    public Team updateTeam(@RequestBody TeamVO teamVO,@PathVariable String teamId, HttpServletResponse response)throws IOException {
+        /*暂时不实现了。不存在这个 api */
         return new Team();
     }
 
     @DeleteMapping(value = "/{teamId}",produces = "application/json; charset=utf-8")
-    public Team deleteTeam(@RequestBody Team team,@PathVariable String teamId, HttpServletResponse response)throws IOException {
-        /*TODO*/
-        return new Team();
+    public void deleteTeam(@PathVariable Long teamId, HttpServletResponse response)throws IOException {
+        int count = teamService.deleteTeamByTeamId(teamId);
+        if (count==-1){
+            response.setStatus(404);
+        }
+        else {
+            response.setStatus(200);
+        }
     }
 
     @PutMapping(value = "/{teamId}/add",produces = "application/json; charset=utf-8")

@@ -19,11 +19,7 @@ public class TeamVO implements Serializable {
 
     private Long classId;
 
-    private Course course;
-
     private StudentVO leader;
-
-    private Klass klass;
 
     private List<Student> members;
 
@@ -36,19 +32,11 @@ public class TeamVO implements Serializable {
 
     public TeamVO(Team team) {
         this.name = team.getTeamName();
-        this.course = team.getCourse();
-        this.klass = team.getKlass();
-        this.courseId=this.course.getId();
-        this.classId = this.klass.getId();
         this.leader = new StudentVO(team.getLeader());
         this.members = team.getMembers();
         this.status = team.getStatus();
         this.teamSerial = team.getTeamSerial();
     }
-
-//    public String toJSON(){
-//        Map map = new HashMap(16);
-//    }
 
     @Override
     public String toString() {
@@ -56,8 +44,6 @@ public class TeamVO implements Serializable {
                 "name='" + name + '\'' +
                 ", courseId=" + courseId +
                 ", classId=" + classId +
-                ", course=" + course +
-                ", klass=" + klass +
                 ", leader=" + leader +
                 ", members=" + members +
                 ", status=" + status +
@@ -105,21 +91,6 @@ public class TeamVO implements Serializable {
         this.members = members;
     }
 
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public Klass getKlass() {
-        return klass;
-    }
-
-    public void setKlass(Klass klass) {
-        this.klass = klass;
-    }
 
     public Integer getStatus() {
         return status;

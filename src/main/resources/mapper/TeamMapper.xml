@@ -55,6 +55,11 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
+  <delete id="deleteTeamMembers" parameterType="java.lang.Long" >
+    delete from klass_student
+    where team_id = #{id,jdbcType=BIGINT}
+  </delete>
+
   <insert id="addTeam" useGeneratedKeys="true" keyProperty="record.id">
     insert into team
     <trim prefix="(" suffix=")" suffixOverrides="," >

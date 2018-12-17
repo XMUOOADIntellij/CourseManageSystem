@@ -34,8 +34,13 @@ public class TeamDao {
         return teamMapper.selectTeamIdByMembersId(id);
     }
 
-    public int deleteTeam(Long account){
-        return teamMapper.deleteTeam(account);
+    public int deleteTeamById(Long teamId){
+        int deleteTeamCount=teamMapper.deleteTeam(teamId);
+        if (deleteTeamCount==1){
+            int deleteTeamMembersCount = teamMapper.deleteTeamMembers(teamId);
+            return deleteTeamMembersCount;
+        }
+        return -1;
     }
 
     public int addTeam(Team team){

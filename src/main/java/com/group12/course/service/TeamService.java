@@ -24,4 +24,12 @@ public class TeamService {
     public Team getTeamByStudentId(Long id){
         return teamDao.getTeamStudentId(id);
     }
+
+    public Team getTeamByTeamId(Long id){
+        return teamDao.getTeamById(id);
+    }
+
+    public int deleteTeamByTeamId(Long teamId){
+        return teamDao.deleteTeamById(teamId);
+    }
 }
