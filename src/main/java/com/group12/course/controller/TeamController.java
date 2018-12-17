@@ -9,6 +9,7 @@ import com.group12.course.entity.Teacher;
 import com.group12.course.entity.Team;
 import com.group12.course.service.TeamService;
 import com.group12.course.tools.Jwt;
+import com.group12.course.vo.StudentVO;
 import com.group12.course.vo.TeamVO;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
@@ -103,15 +104,29 @@ public class TeamController {
     }
 
     @PutMapping(value = "/{teamId}/add",produces = "application/json; charset=utf-8")
-    public Team addTeam(@RequestBody Team team,@PathVariable String teamId, HttpServletResponse response)throws IOException {
-        /*TODO*/
-        return new Team();
+    public void addTeam(@RequestBody Student student, @PathVariable Long teamId, HttpServletResponse response)throws IOException {
+        Team team=new Team();
+        team.setId(teamId);
+        int count = teamService.addMember(team,student);
+        if (count==1){
+            response.setStatus(200);
+        }
+        else {
+            response.setStatus(400);
+        }
     }
 
-    @PutMapping(value = "/{teamId}/remove",produces = "application/json; charset=utf-8")
-    public Team removeTeammate(@RequestBody Team team,@PathVariable String teamId, HttpServletResponse response)throws IOException {
-        /*TODO*/
-        return new Team();
+    @PutMapping(value = "/{teamId}/add",produces = "application/json; charset=utf-8")
+    public void removeTeammate(@RequestBody Student student, @PathVariable Long teamId, HttpServletResponse response)throws IOException {
+        Team team=new Team();
+        team.setId(teamId);
+        int count = teamService.deleteTeamMember(team,student);
+        if (count==1){
+            response.setStatus(200);
+        }
+        else {
+            response.setStatus(400);
+        }
     }
 
     @PostMapping(value = "/{teamId}/teamvalidrequest",produces = "application/json; charset=utf-8")

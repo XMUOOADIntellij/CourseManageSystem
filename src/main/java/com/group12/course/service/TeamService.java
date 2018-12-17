@@ -32,4 +32,12 @@ public class TeamService {
     public int deleteTeamByTeamId(Long teamId){
         return teamDao.deleteTeamById(teamId);
     }
+
+    public int addMember(Team team,Student student){
+        return teamDao.addTeamMembers(team,student);
+    }
+
+    public int deleteTeamMember(Team team,Student student){
+        return teamDao.deleteTeamMember(team,student);
+    }
 }

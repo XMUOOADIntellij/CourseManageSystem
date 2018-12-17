@@ -43,6 +43,10 @@ public class TeamDao {
         return -1;
     }
 
+    public int deleteTeamMember(Team team,Student member){
+        return teamMapper.deleteTeamMembers(member.getId());
+    }
+
     public int addTeam(Team team){
         Long courseId,klassId,leaderId;
         try {
