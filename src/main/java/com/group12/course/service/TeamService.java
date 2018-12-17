@@ -22,7 +22,7 @@ public class TeamService {
     }
 
     public Team getTeamByStudentId(Long id){
-        return teamDao.getTeamStudentId(id);
+        return teamDao.getTeamByStudentId(id);
     }
 
     public Team getTeamByTeamId(Long id){
