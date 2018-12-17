@@ -116,7 +116,7 @@ public class TeamController {
         }
     }
 
-    @PutMapping(value = "/{teamId}/add",produces = "application/json; charset=utf-8")
+    @PutMapping(value = "/{teamId}/remove",produces = "application/json; charset=utf-8")
     public void removeTeammate(@RequestBody Student student, @PathVariable Long teamId, HttpServletResponse response)throws IOException {
         Team team=new Team();
         team.setId(teamId);
