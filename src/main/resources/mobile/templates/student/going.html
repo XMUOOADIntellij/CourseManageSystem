@@ -46,11 +46,12 @@
       rel="stylesheet"
     />
     <script src="../../assets/plugins/pomodoro-timer/js/pomodoro-timer.js"></script>
-	  <!--Input-spinner-->
-	  <script src="../../assets/plugins/spinner/input-spinner.js"></script>
+    <!--Input-spinner-->
+    <script src="../../assets/plugins/spinner/input-spinner.js"></script>
     <!-- Customize -->
     <link href="../../assets/css/style.css" rel="stylesheet" />
     <script src="../../assets/js/common.js"></script>
+    <script src="../../assets/js/teacher.js"></script>
   </head>
   <body>
     <div class="page">
@@ -211,37 +212,35 @@
           <div class="container">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="">正在进行</a>
-                </li>
+                <li class="breadcrumb-item"><a href="">正在进行</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
                   业务流程分析
                 </li>
               </ol>
             </nav>
             <div class="row">
-              <div class="col-3 col-md-2">
+              <div class="col-3 col-md-2 pr-0">
                 <div>
                   <div class="mb-3">
                     <span class="btn btn-secondary btn-block">展示</span>
                   </div>
                   <div class="list-group list-group-transparent mb-0">
                     <a
-                      class="list-group-item list-group-item-action d-flex align-items-center active px-0 py-3"
+                      class="list-group-item list-group-item-action d-flex align-items-center active px-1 py-3"
                       href="#"
                     >
                       <span class="icon mr-3"><i class="fe fe-inbox"></i></span
                       >1-1 <span class="ml-auto badge badge-primary"></span>
                     </a>
                     <a
-                      class="list-group-item list-group-item-action d-flex align-items-center px-0 py-3"
+                      class="list-group-item list-group-item-action d-flex align-items-center px-1 py-3"
                       href="#"
                     >
                       <span class="icon mr-3"><i class="fe fe-send"></i></span
                       >1-2
                     </a>
                     <a
-                      class="list-group-item list-group-item-action d-flex align-items-center px-0 py-3"
+                      class="list-group-item list-group-item-action d-flex align-items-center px-1 py-3"
                       href="#"
                     >
                       <span class="icon mr-3"
@@ -249,21 +248,21 @@
                       >1-3 <span class="ml-auto badge badge-secondary">3</span>
                     </a>
                     <a
-                      class="list-group-item list-group-item-action d-flex align-items-center px-0 py-3"
+                      class="list-group-item list-group-item-action d-flex align-items-center px-1 py-3"
                       href="#"
                     >
                       <span class="icon mr-3"><i class="fe fe-star"></i></span
                       >1-4
                     </a>
                     <a
-                      class="list-group-item list-group-item-action d-flex align-items-center px-0 py-3"
+                      class="list-group-item list-group-item-action d-flex align-items-center px-1 py-3"
                       href="#"
                     >
                       <span class="icon mr-3"><i class="fe fe-file"></i></span
                       >1-5
                     </a>
                     <a
-                      class="list-group-item list-group-item-action d-flex align-items-center px-0 py-3"
+                      class="list-group-item list-group-item-action d-flex align-items-center px-1 py-3"
                       href="#"
                     >
                       <span class="icon mr-3"><i class="fe fe-tag"></i></span
@@ -273,162 +272,128 @@
                 </div>
               </div>
               <div class="col-9 col-md-10">
-	              <div class="row">
-		              <div class="col-md-8">
-			              <div class="card">
-				              <div class="card-header">
-					              <h3 class="card-title">展示时间</h3>
-				              </div>
-				              <div class="card-body">
-							              <div class="content-heading mb-3">
-								              <h2 class="text-center m-0">
-							      <span>
-							        <button id="pomodoroButton" class="btn btn-default mx-lg-3 px-lg-6" type="submit" onclick="onPomodoroTimer()" >开始展示</button>
-							        <button id="longButton" class="btn btn-default mx-lg-3 px-lg-6" type="submit" onclick="onLongTimer()">下一组</button>
-							      </span>
-								              </h2>
-							              </div>
-							              <div class="panel panel-default">
-								              <div class="panel-body text-center">
-									              <div class="timer-time timer-container mb-3">
-										              <div class="timer-time-set timer-box" id="currentTime">
-											              <span id="hoursValue">00</span><span>:</span><span id="minutesValue">00</span><span>:</span><span id="secondsValue">00</span>
-										              </div>
-										              <div class="timer-time-set timer-box" id="nextTime">
-											              <span id="hoursNext">00</span><span>:</span><span id="minutesNext">00</span><span>:</span><span id="secondsNext">00</span>
-										              </div>
-									              </div>
-									              <div>
-										              <button id="restartButton" class="btn btn-warning btn-lg mx-lg-3 px-lg-5" type="submit" onclick="onResetTimer()">
-											              <i class="fe fe-rotate-ccw" aria-hidden="true"></i>
-										              </button>
-										              <button id="startButton" class="btn btn-primary btn-lg mx-lg-3 px-lg-5" type="submit" onclick="onStartTimer()"> <i class="fe fe-play" aria-hidden="true"></i>
-										              </button>
-										              <button id="stopButton" class="btn btn-danger btn-lg mx-lg-3 px-lg-5" type="submit" onclick="onStopTimer()">
-											              <i class="fe fe-pause" aria-hidden="true"></i>
-										              </button>
-									              </div>
-								              </div>
-							              </div>
-						              </div>
-					              </div>
-				              </div>
-		              <div class="col-md-4">
-			              <div class="card">
-				              <div class="card-header">
-					              <h3 class="card-title">展示打分</h3>
-				              </div>
-				              <div class="card-body">
-							              <div class="form-group">
-								              <input type="number" value="5" min="0" max="5" step="0.5"
-									              data-decimals="1">
-							              </div>
-						              </div>
-				              <div class="card-footer" hidden>
-					              <div class="d-flex">
-						              <a class="btn btn-link" href="./course-home.html">取消</a>
-						              <button class="btn btn-primary ml-auto" type="submit">确认修改</button>
-					              </div>
-				              </div>
-			              </div>
-			              </div>
-	              </div>
-	              <div class="row mt-3">
-				              <div class="col-md-8">
-					              <div class="card">
-						              <div class="card-header">
-							              <h3 class="card-title">提问队列</h3>
-						              </div>
-						              <div class="card-body">
-							              <div>
-								              <div class="mb-3">
-									              <button class="btn btn-secondary btn-block">抽取提问</button>
-								              </div>
-								              <div class="list-group list-group-transparent mb-0">
-									              <a
-										              class="list-group-item list-group-item-action d-flex align-items-center active px-0"
-										              href="#"
-									              >
-                      <span class="icon mr-3"><i class="fe fe-inbox"></i></span
-                      >1-1 <span class="ml-auto badge badge-primary"></span>
-									              </a>
-									              <a
-										              class="list-group-item list-group-item-action d-flex align-items-center px-0"
-										              href="#"
-									              >
-                      <span class="icon mr-3"><i class="fe fe-send"></i></span
-                      >1-2
-									              </a>
-									              <a
-										              class="list-group-item list-group-item-action d-flex align-items-center px-0"
-										              href="#"
-									              >
-                      <span class="icon mr-3"
-                      ><i class="fe fe-alert-circle"></i></span
-                      >1-3 <span class="ml-auto badge badge-secondary">3</span>
-									              </a>
-									              <a
-										              class="list-group-item list-group-item-action d-flex align-items-center px-0"
-										              href="#"
-									              >
-                      <span class="icon mr-3"><i class="fe fe-star"></i></span
-                      >1-4
-									              </a>
-									              <a
-										              class="list-group-item list-group-item-action d-flex align-items-center px-0"
-										              href="#"
-									              >
-                      <span class="icon mr-3"><i class="fe fe-file"></i></span
-                      >1-5
-									              </a>
-									              <a
-										              class="list-group-item list-group-item-action d-flex align-items-center px-0"
-										              href="#"
-									              >
-                      <span class="icon mr-3"><i class="fe fe-tag"></i></span
-                      >1-6
-									              </a>
-								              </div>
-							              </div>
-						              </div>
-					              </div>
-				              </div>
-				              <div class="col-md-4">
-					              <div class="card">
-						              <div class="card-header">
-							              <h3 class="card-title">提问打分</h3>
-						              </div>
-						              <div class="card-body">
-							              <div class="form-group">
-								              <input type="number" value="5" min="0" max="5" step="0.5"
-									              data-decimals="1">
-							              </div>
-						              </div>
-						              <div class="card-footer" hidden>
-							              <div class="d-flex">
-								              <a class="btn btn-link" href="./course-home.html">取消</a>
-								              <button class="btn btn-primary ml-auto" type="submit">确认修改</button>
-							              </div>
-						              </div>
-					              </div>
-				              </div>
-	              </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">展示时间</h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="panel panel-default">
+                          <div class="panel-body text-center">
+                            <div class="timer-time timer-container mb-3">
+                              <div
+                                class="timer-time-set timer-box"
+                                id="currentTime"
+                              >
+                                <span id="hoursValue">00</span><span>:</span
+                                ><span id="minutesValue">00</span><span>:</span
+                                ><span id="secondsValue">00</span>
+                              </div>
+                              <div
+                                class="timer-time-set timer-box"
+                                id="nextTime"
+                              >
+                                <span id="hoursNext">00</span><span>:</span
+                                ><span id="minutesNext">00</span><span>:</span
+                                ><span id="secondsNext">00</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">提问队列</h3>
+                      </div>
+                      <div class="card-body">
+                        <div>
+                          <div class="mb-3">
+                            <button class="btn btn-secondary btn-block">
+                              提问
+                            </button>
+                          </div>
+                          <div class="list-group list-group-transparent mb-0">
+                            <a
+                              class="list-group-item list-group-item-action d-flex align-items-center active px-1"
+                              href="#"
+                            >
+                              <span class="icon mr-3"
+                                ><i class="fe fe-inbox"></i></span
+                              >1-1
+                              <span class="ml-auto badge badge-primary"></span>
+                            </a>
+                            <a
+                              class="list-group-item list-group-item-action d-flex align-items-center px-1"
+                              href="#"
+                            >
+                              <span class="icon mr-3"
+                                ><i class="fe fe-send"></i></span
+                              >1-2
+                            </a>
+                            <a
+                              class="list-group-item list-group-item-action d-flex align-items-center px-1"
+                              href="#"
+                            >
+                              <span class="icon mr-3"
+                                ><i class="fe fe-alert-circle"></i></span
+                              >1-3
+                              <span class="ml-auto badge badge-secondary"
+                                >3</span
+                              >
+                            </a>
+                            <a
+                              class="list-group-item list-group-item-action d-flex align-items-center px-1"
+                              href="#"
+                            >
+                              <span class="icon mr-3"
+                                ><i class="fe fe-star"></i></span
+                              >1-4
+                            </a>
+                            <a
+                              class="list-group-item list-group-item-action d-flex align-items-center px-1"
+                              href="#"
+                            >
+                              <span class="icon mr-3"
+                                ><i class="fe fe-file"></i></span
+                              >1-5
+                            </a>
+                            <a
+                              class="list-group-item list-group-item-action d-flex align-items-center px-1"
+                              href="#"
+                            >
+                              <span class="icon mr-3"
+                                ><i class="fe fe-tag"></i></span
+                              >1-6
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
             </div>
           </div>
         </div>
-	    <footer class="footer">
-		    <div class="container">
-			    <div class="row align-items-center flex-row-reverse">
-				    <div class="col-12 col-lg-auto mt-0 mt-lg-0 text-center">
-					    Copyright © 2018 <a href="https://github.com/XMUOOADIntellij/CourseManageSystem">Cms</a>.
-				    </div>
-			    </div>
-		    </div>
-	    </footer>
       </div>
-
-
+      <footer class="footer">
+        <div class="container">
+          <div class="row align-items-center flex-row-reverse">
+            <div class="col-12 mt-0 mt-lg-0 text-center">
+              Copyright © 2018
+              <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
+                >Cms</a
+              >.
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
