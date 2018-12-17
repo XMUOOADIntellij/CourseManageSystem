@@ -1,8 +1,11 @@
 package com.group12.course.mapper;
 
+import com.group12.course.entity.Student;
 import com.group12.course.entity.Team;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * Team Mapper 层接口
@@ -49,7 +52,31 @@ public interface TeamMapper {
      * @param id 主键代表队伍id
      * @return 代表获取到的队伍对象
      * */
-    Team getTeam(Long id);
+    Team selectTeamById(Long id);
+
+    /**
+     * 根据队长 id 获取数据库中队伍的记录
+     *
+     * @param id 主键代表队长id
+     * @return 代表获取到的队伍对象
+     * */
+    Team selectTeamByLeaderId(Long id);
+
+    /**
+     * 根据队伍 id 获取数据库中队伍的记录
+     *
+     * @param id 主键代表队伍id
+     * @return 代表获取到的队伍对象
+     * */
+    List<Student> selectTeamMembersByTeamId(Long id);
+
+    /**
+     * 根据队员 id 获取数据库中队伍的 id
+     *
+     * @param id 主键代表队员id
+     * @return 代表获取到的队伍 id
+     * */
+    Long selectTeamIdByMembersId(Long id);
 
     /**
      * 更新数据库中学生的记录

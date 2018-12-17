@@ -5,9 +5,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.group12.course.entity.Course;
 import com.group12.course.entity.Student;
+import com.group12.course.entity.Teacher;
 import com.group12.course.entity.Team;
 import com.group12.course.service.TeamService;
+import com.group12.course.tools.Jwt;
 import com.group12.course.vo.TeamVO;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STUnderline;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +48,36 @@ public class TeamController {
         }
     }
 
-    @GetMapping(value = "/{teamId}",produces = "application/json; charset=utf-8")
-    public Team getTeam(@RequestBody Team team,@PathVariable String teamId, HttpServletResponse response)throws IOException {
-        /*TODO*/
-        return new Team();
+  /**
+   *
+   * */
+    @GetMapping(value = "",produces = "application/json; charset=utf-8")
+    public void getTeam(HttpServletRequest request, HttpServletResponse response)throws IOException {
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        // 区分传入的是学生还是教师，调用不同的 Service
+        if (jwtStudent!=null){
+            Team team = teamService.getTeamByStudentId(jwtStudent.getId());
+            if (team==null){
+
+            }
+            else {
+                response.setStatus(200);
+                TeamVO teamVO = new TeamVO(team);
+                //System.out.println(teamVO);
+                String jsson= JSONObject.toJSONString(teamVO);
+                //System.out.println(jsson);
+                response.getWriter().write(jsson);
+                /*ObjectMapper mapper = new ObjectMapper();
+                mapper.configure(SerializationConfig.Feature.INDENT_OUTPUT, Boolean.TRUE);
+                String json = mapper.writeValueAsString(teamVO);
+                System.out.println("Java2Json: "+json);*/
+                //return teamVO;
+            }
+        }
+        else {
+            //return new TeamVO();
+        }
     }
 
     @PutMapping(value = "/{teamId}",produces = "application/json; charset=utf-8")

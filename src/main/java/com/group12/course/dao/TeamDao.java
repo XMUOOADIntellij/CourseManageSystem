@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -22,7 +23,15 @@ public class TeamDao {
     TeamMapper teamMapper;
 
     public Team getTeamById(Long account){
-        return teamMapper.getTeam(account);
+        return teamMapper.selectTeamById(account);
+    }
+
+    public Team getTeamByLeaderId(Long id){
+        return teamMapper.selectTeamByLeaderId(id);
+    }
+
+    public Long getTeamByMembersId(Long id){
+        return teamMapper.selectTeamIdByMembersId(id);
     }
 
     public int deleteTeam(Long account){
@@ -75,5 +84,29 @@ public class TeamDao {
 
     public int changeTeam(Team team){
         return teamMapper.updateTeam(team);
+    }
+
+    public Team getTeamStudentId(Long id){
+        Team teamByLeader = getTeamByLeaderId(id);
+        if (teamByLeader==null){
+            Long teamIdByMembers = getTeamByMembersId(id);
+            if (teamIdByMembers==null){
+                return new Team();
+            }
+            else {
+                Team teamByMember = teamMapper.selectTeamById(teamIdByMembers);
+
+                return getMembers(teamByMember);
+            }
+        }
+        else {
+            return getMembers(teamByLeader);
+        }
+    }
+
+    public Team getMembers(Team team){
+        List<Student> members = teamMapper.selectTeamMembersByTeamId(team.getId());
+        team.setMembers(members);
+        return team;
     }
 }

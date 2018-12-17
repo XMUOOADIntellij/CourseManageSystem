@@ -8,13 +8,15 @@
         <result column="status" property="status" jdbcType="BIT" />
         <result column="team_serial" property="teamSerial" jdbcType="BIT" />
 
-        <association property="klass" select="com.group12.course.mapper.klassMapper.selectKlassById"
+        <association property="klass" select="com.group12.course.mapper.KlassMapper.selectKlassById"
                    column="klass_id" javaType="com.group12.course.entity.Klass"/>
         <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
                    column="course_id" javaType="com.group12.course.entity.Course"/>
         <association property="leader" select="com.group12.course.mapper.StudentMapper.selectStudentById"
                    column="leader_id" javaType="com.group12.course.entity.Student"/>
     </resultMap>
+
+    <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
     <sql id="Base_Column_List" >
         id, course_id,klass_id, leader_id, team_name, team_serial,status
@@ -25,6 +27,27 @@
     <include refid="Base_Column_List" />
     from team
     where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectTeamByLeaderId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from team
+    where leader_id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectTeamIdByMembersId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    select
+    team_id
+    from klass_student
+    where student_id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectTeamMembersByTeamId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    select
+    student_id
+    from klass_student
+    where team_id = #{id,jdbcType=BIGINT}
   </select>
 
   <delete id="deleteTeam" parameterType="java.lang.Long" >

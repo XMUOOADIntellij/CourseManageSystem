@@ -20,4 +20,8 @@ public class TeamService {
     public int createTeam(Team team){
         return teamDao.addTeam(team);
     }
+
+    public Team getTeamByStudentId(Long id){
+        return teamDao.getTeamStudentId(id);
+    }
 }
