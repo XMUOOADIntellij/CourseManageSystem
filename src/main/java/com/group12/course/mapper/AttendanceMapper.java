@@ -20,9 +20,9 @@ public interface AttendanceMapper {
 
     Integer deleteAttendanceByKlassSeminarId(Long klassSeminarId);
 
-    int insert(Attendance record);
+    Integer insertAttendance(Attendance record);
 
-    int updateAttendance(Attendance record);
+    Integer updateAttendance(Attendance record);
 
     Attendance selectAttendanceById(Long id);
 

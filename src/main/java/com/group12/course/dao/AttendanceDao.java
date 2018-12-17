@@ -53,7 +53,7 @@ public class AttendanceDao {
                         //TODO order已经存在Exception
                     }
                 }
-                attendanceMapper.insert(attendance);
+                attendanceMapper.insertAttendance(attendance);
             }
             else{
                 //TODO klassSeminar not found

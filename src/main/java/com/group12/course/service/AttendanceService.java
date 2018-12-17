@@ -30,8 +30,9 @@ public class AttendanceService {
      * @param seminarId 讨论课ID
      * @return List
      */
-    public List<Attendance> getAllAttendance(Long classId, Long seminarId){
-        return attendanceDao.selectAttendanceByKlassSeminarId(klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId).getId());
+    public List<Attendance> getKlassSeminarAttendance(Long classId, Long seminarId){
+        return attendanceDao.selectAttendanceByKlassSeminarId(
+                klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId).getId());
     }
 
     /**
@@ -64,6 +65,7 @@ public class AttendanceService {
         }
     }
 
+
     public Integer changeAttendanceOrder(Attendance attendance){
         //TODO 顺序没有被报
         return attendanceDao.updateAttendance(attendance);
@@ -95,8 +97,16 @@ public class AttendanceService {
         }
     }
 
-
-    public Long enrollAttendance(Attendance attendance){
-        return attendanceDao.insertAttendance(attendance);
+    public Long enrollAttendance(Attendance attendance,Student student){
+        Team team = teamDao.getTeamByStudentId(student.getId());
+            if(team!=null){
+                attendance.setTeam(team);
+                attendance.setPresented(false);
+                return attendanceDao.insertAttendance(attendance);
+            }
+            else{
+                //TODO TeamNotFoundException
+                return null;
+            }
     }
 }
