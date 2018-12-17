@@ -2,6 +2,7 @@ package com.group12.course.mapper;
 
 import com.group12.course.entity.Course;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface CourseMapper {
 
     int deleteCourse(Long id);
 
-    int addCourse(Course record);
+    int addCourse(@Param("teacherId") Long teacherId,@Param("course") Course record);
 
     Course selectCourseById(Long id);
 

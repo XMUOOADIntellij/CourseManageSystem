@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.MemberLimitStrategyMapper" >
+    <resultMap id="BaseResultMap" type="com.group12.course.entity.strategy.MemberLimitStrategy" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="min_member" property="minMember" jdbcType="TINYINT"/>
+        <result column="max_member" property="maxMember" jdbcType="TINYINT"/>
+
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, min_member,max_member
+  </sql>
+
+    <select id="selectMemberLimitStrategyById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from member_limit_strategy
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteMemberLimitStrategy" parameterType="java.lang.Long" >
+    delete from member_limit_strategy
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="addMemberLimitStrategy" useGeneratedKeys="true" keyProperty="memberLimitStrategy.id" >
+        insert into member_limit_strategy
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="minMember != null" >
+                min_member,
+            </if>
+            <if test="maxMember != null" >
+                max_member,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="minMember != null" >
+                #{minMember,jdbcType=TINYINT},
+            </if>
+            <if test="maxMember != null" >
+                #{maxMember,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateMemberLimitStrategy" parameterType="com.group12.course.entity.strategy.MemberLimitStrategy" >
+        update member_limit_strategy
+        <set >
+            <if test="courseFirst != null" >
+                course_id = #{course.id,jdbcType=BIGINT},
+            </if>
+            <if test="minMember != null" >
+                min_member = #{minMember,jdbcType=TINYINT},
+            </if>
+            <if test="maxMember !=null">
+                max_member = #{maxMember,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>

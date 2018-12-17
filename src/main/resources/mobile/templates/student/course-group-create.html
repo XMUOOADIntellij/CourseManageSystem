@@ -21,7 +21,7 @@
     <link href="../favicon.ico" rel="icon" type="image/x-icon" />
     <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Generated: 2018-04-16 09:29:05 +0200 -->
-    <title>新建共享</title>
+    <title>新建组队</title>
     <!-- Font -->
     <link href="../../assets/css/fontawesome.min.css" rel="stylesheet" />
 
@@ -40,12 +40,12 @@
     <link href="../../assets/css/dashboard.css" rel="stylesheet" />
     <!-- c3.js Charts Plugin -->
     <link href="../../assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
-
     <!--Pomodoro-timer-->
     <link href="../../assets/css/pomodoro-timer.css" rel="stylesheet" />
     <!-- Customize -->
     <link href="../../assets/css/style.css" rel="stylesheet" />
     <script src="../../assets/js/common.js"></script>
+    <script src="../../assets/js/student.js"></script>
   </head>
   <body>
     <div class="page">
@@ -202,7 +202,7 @@
             </div>
           </div>
         </div>
-        <div class="my-3 my-md-5">
+        <div class="my-3 my-md-5 mt-5">
           <div class="container">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
@@ -210,112 +210,216 @@
                   <a href="./course-home.html">我的课程</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a href="./course-share.html">共享设置</a>
+                  <a href="./course-home.html">我的组队</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  新建共享
+                  新建组队
                 </li>
               </ol>
             </nav>
             <div class="row">
               <div class="col-12">
                 <form
-                  action="./course-share.html"
+                  action="./course-home.html"
                   class="card"
                   method="post"
-                  onsubmit="return createShare();"
+                  onsubmit="return createGroup();"
                 >
                   <div class="card-header">
-                    <h3 class="card-title">新建共享</h3>
+                    <h3 class="card-title">新建小组</h3>
                   </div>
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-12">
+                      <div class="col-md-3">
                         <div class="form-group">
-                          <div class="form-label mb-3">共享类型</div>
-                          <div class="custom-controls-stacked">
-                            <label
-                              class="custom-control custom-radio custom-control-inline"
-                            >
-                              <input
-                                checked=""
-                                class="custom-control-input"
-                                name="example-inline-radios"
-                                type="radio"
-                                value="option1"
-                              />
-                              <span class="custom-control-label "
-                                >共享分组</span
-                              >
-                            </label>
-                            <label
-                              class="custom-control custom-radio custom-control-inline"
-                            >
-                              <input
-                                class="custom-control-input"
-                                name="example-inline-radios"
-                                type="radio"
-                                value="option2"
-                              />
-                              <span class="custom-control-label "
-                                >共享讨论课</span
-                              >
-                            </label>
-                          </div>
+                          <label class="form-label">小组名</label>
+                          <input
+                            class="form-control"
+                            name="example-text-input"
+                            placeholder="Text.."
+                            type="text"
+                          />
                         </div>
                         <div class="form-group">
-                          <label class="form-label">共享对象</label>
+                          <label class="form-label">所属班级</label>
                           <div class="row gutters-xs">
-                            <div class="col-6">
-                              <select
-                                class="form-control custom-select"
-                                name="share[course]"
-                              >
-                                <option value="">J2ee</option>
-                                <option value="1">.Net</option>
-                              </select>
-                            </div>
-                            <div class="col-6">
-                              <select
-                                class="form-control custom-select"
-                                name="share[teacher]"
-                              >
-                                <option value="">王美红</option>
-                                <option value="1">邱明</option>
+                            <div class="col-12">
+                              <select  class="form-control custom-select">
+                                <option value="1">1班</option>
+                                <option value="2">2班</option>
+                                <option value="3">3班</option>
+                                <option value="4">4班</option>
+                                <option value="5">5班</option>
+                                <option selected="selected" value="6"
+                                  >6班</option
+                                >
+                                <option value="7">7班</option>
+                                <option value="8">8班</option>
+                                <option value="9">9班</option>
+                                <option value="10">10班</option>
+                                <option value="11">11班</option>
+                                <option value="12">12班</option>
                               </select>
                             </div>
                           </div>
                         </div>
                       </div>
+                      <div class="col-md-9">
+                        <div class="form-group">
+                          <label class="form-label">未组队学生</label>
+                          <div class="card" style="max-height:15rem">
+                            <div class="table-responsive">
+                              <table
+                                class="table card-table table-vcenter text-nowrap"
+                              >
+                                <thead>
+                                  <tr>
+                                    <th class="w-auto"></th>
+                                    <th>学号</th>
+                                    <th>姓名</th>
+                                    <th>性别</th>
+                                    <th>所属课程</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>
+                                      <label
+                                        class="custom-control custom-checkbox"
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          class="custom-control-input"
+                                          name="example-checkbox1"
+                                          value="option1"
+                                          checked=""
+                                        />
+                                        <span
+                                          class="custom-control-label"
+                                        ></span>
+                                      </label>
+                                    </td>
+                                    <td>
+                                      <span class="text-muted"
+                                        >24320162202888</span
+                                      >
+                                    </td>
+                                    <td>牛晓彤</td>
+                                    <td>女</td>
+                                    <td>
+                                      <span
+                                        class="status-icon bg-orange"
+                                      ></span>
+                                      J2ee
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <label
+                                        class="custom-control custom-checkbox"
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          class="custom-control-input"
+                                          name="example-checkbox1"
+                                          value="option1"
+                                          checked=""
+                                        />
+                                        <span
+                                          class="custom-control-label"
+                                        ></span>
+                                      </label>
+                                    </td>
+                                    <td>
+                                      <span class="text-muted"
+                                        >24320162202888</span
+                                      >
+                                    </td>
+                                    <td>牛晓彤</td>
+                                    <td>女</td>
+                                    <td>
+                                      <span
+                                        class="status-icon bg-orange"
+                                      ></span>
+                                      J2ee
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <label
+                                        class="custom-control custom-checkbox"
+                                      >
+                                        <input
+                                          type="checkbox"
+                                          class="custom-control-input"
+                                          name="example-checkbox1"
+                                          value="option1"
+                                          checked=""
+                                        />
+                                        <span
+                                          class="custom-control-label"
+                                        ></span>
+                                      </label>
+                                    </td>
+                                    <td>
+                                      <span class="text-muted"
+                                        >24320162202888</span
+                                      >
+                                    </td>
+                                    <td>牛晓彤</td>
+                                    <td>女</td>
+                                    <td>
+                                      <span
+                                        class="status-icon bg-orange"
+                                      ></span>
+                                      J2ee
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="card-footer text-right">
-                    <div class="d-flex">
-                      <a class="btn btn-link" href="./course-share.html"
-                        >取消</a
-                      >
-                      <button class="btn btn-primary ml-auto" type="submit">
-                        确认共享
-                      </button>
+                    <div class="card-footer text-right">
+                      <div class="d-flex">
+                        <a class="btn btn-link" href="./course-group.html"
+                          >取消</a
+                        >
+                        <button class="btn btn-primary ml-auto" type="submit">
+                          确认发布
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </form>
               </div>
             </div>
+
+            <div class="position-fixed">
+              <a
+                href="./course-group-create.html"
+                class="btn btn-green float-action-button shadow-lg"
+                ><i class="fe fe-plus"></i
+              ></a>
+            </div>
           </div>
         </div>
       </div>
-	    <footer class="footer">
-		    <div class="container">
-			    <div class="row align-items-center flex-row-reverse">
-				    <div class="col-12 col-lg-auto mt-0 mt-lg-0 text-center">
-					    Copyright © 2018 <a href="https://github.com/XMUOOADIntellij/CourseManageSystem">Cms</a>.
-				    </div>
-			    </div>
-		    </div>
-	    </footer>
     </div>
-
-
+    <footer class="footer">
+      <div class="container">
+        <div class="row align-items-center flex-row-reverse">
+          <div class="col-12 col-lg-auto mt-0 mt-lg-0 text-center">
+            Copyright © 2018
+            <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
+              >Cms</a
+            >.
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

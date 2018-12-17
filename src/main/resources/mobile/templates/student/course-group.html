@@ -1,430 +1,520 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<meta
-		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-		name="viewport"
-	/>
-	<meta content="ie=edge" http-equiv="X-UA-Compatible" />
-	<meta content="en" http-equiv="Content-Language" />
-	<meta content="#2d89ef" name="msapplication-TileColor" />
-	<meta content="#4188c9" name="theme-color" />
-	<meta
-		content="black-translucent"
-		name="apple-mobile-web-app-status-bar-style"
-	/>
-	<meta content="yes" name="apple-mobile-web-app-capable" />
-	<meta content="yes" name="mobile-web-app-capable" />
-	<meta content="True" name="HandheldFriendly" />
-	<meta content="320" name="MobileOptimized" />
-	<link href="../favicon.ico" rel="icon" type="image/x-icon" />
-	<link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
-	<!-- Generated: 2018-04-16 09:29:05 +0200 -->
-	<title>学生组队</title>
-	<!-- Font -->
-	<link href="../../assets/css/fontawesome.min.css" rel="stylesheet" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+      name="viewport"
+    />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <meta content="en" http-equiv="Content-Language" />
+    <meta content="#2d89ef" name="msapplication-TileColor" />
+    <meta content="#4188c9" name="theme-color" />
+    <meta
+      content="black-translucent"
+      name="apple-mobile-web-app-status-bar-style"
+    />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="yes" name="mobile-web-app-capable" />
+    <meta content="True" name="HandheldFriendly" />
+    <meta content="320" name="MobileOptimized" />
+    <link href="../favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <!-- Generated: 2018-04-16 09:29:05 +0200 -->
+    <title>我的小组</title>
+    <!-- Font -->
+    <link href="../../assets/css/fontawesome.min.css" rel="stylesheet" />
 
-	<!--Dashboard Core-->
-	<link href="../../assets/css/dashboard.css" rel="stylesheet" />
-	<script src="../../assets/js/vendors/jquery-3.2.1.min.js"></script>
-	<script src="../../assets/js/vendors/jquery-jvectormap-2.0.3.min.js"></script>
-	<script src="../../assets/js/vendors/jquery-jvectormap-de-merc.js"></script>
-	<script src="../../assets/js/vendors/jquery-jvectormap-world-mill.js"></script>
-	<script src="../../assets/js/vendors/jquery.sparkline.min.js"></script>
-	<script src="../../assets/js/vendors/jquery.tablesorter.min.js"></script>
-	<script src="../../assets/js/vendors/bootstrap.bundle.min.js"></script>
-	<script src="../../assets/js/vendors/chart.bundle.min.js"></script>
-	<script src="../../assets/js/vendors/selectize.min.js"></script>
-	<script src="../../assets/js/core.js"></script>
-	<link href="../../assets/css/dashboard.css" rel="stylesheet" />
-	<!-- c3.js Charts Plugin -->
-	<link href="../../assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
-	<!--Pomodoro-timer-->
-	<link href="../../assets/css/pomodoro-timer.css" rel="stylesheet">
-	<!-- Customize -->
-	<link href="../../assets/css/style.css" rel="stylesheet" />
-	<script src="../../assets/js/common.js"></script>
-</head>
-    <body>
-      <div class="page">
-        <div class="page-main">
-          <div class="header py-4">
-            <div class="container">
-              <div class="d-flex">
-                <a class="header-brand ml-1" href="./home.html">
-                  <img
-                    alt="logo"
-                    class="header-brand-img"
-                    src="../../assets/images/brand.png"
-                  />Cms
-                </a>
-                <div class="d-flex order-lg-2 ml-auto">
-                  <div class="dropdown d-none d-md-flex">
-                    <a class="nav-link icon" data-toggle="dropdown">
-                      <i class="fe fe-bell"></i>
-                      <span class="nav-unread"></span>
-                    </a>
-                    <div
-                      class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
-                    >
-                      <a class="dropdown-item d-flex" href="#">
-                        <span
-                          class="avatar mr-3 align-self-center"
-                          style="background-image: url(../../assets/images/male.png)"
-                        ></span>
-                        <div>
-                          <strong>Nathan</strong> pushed new commit: Fix page
-                          load performance issue.
-                          <div class="small text-muted">10 minutes ago</div>
-                        </div>
-                      </a>
-                      <a class="dropdown-item d-flex" href="#">
-                        <span
-                          class="avatar mr-3 align-self-center"
-                          style="background-image: url(../../assets/images/male.png)"
-                        ></span>
-                        <div>
-                          <strong>Alice</strong> started new task: Tabler UI
-                          design.
-                          <div class="small text-muted">1 hour ago</div>
-                        </div>
-                      </a>
-                      <a class="dropdown-item d-flex" href="#">
-                        <span
-                          class="avatar mr-3 align-self-center"
-                          style="background-image: url(../../assets/images/male.png)"
-                        ></span>
-                        <div>
-                          <strong>Rose</strong> deployed new version of NodeJS
-                          REST Api V3
-                          <div class="small text-muted">2 hours ago</div>
-                        </div>
-                      </a>
-                      <div class="dropdown-divider"></div>
-                      <a
-                        class="dropdown-item text-center text-muted-dark"
-                        href="#"
-                        >Mark all as read</a
-                      >
-                    </div>
-                  </div>
-                  <div class="dropdown">
-                    <a
-                      class="nav-link pr-0 leading-none"
-                      data-toggle="dropdown"
-                      href="#"
-                    >
+    <!--Dashboard Core-->
+    <link href="../../assets/css/dashboard.css" rel="stylesheet" />
+    <script src="../../assets/js/vendors/jquery-3.2.1.min.js"></script>
+    <script src="../../assets/js/vendors/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="../../assets/js/vendors/jquery-jvectormap-de-merc.js"></script>
+    <script src="../../assets/js/vendors/jquery-jvectormap-world-mill.js"></script>
+    <script src="../../assets/js/vendors/jquery.sparkline.min.js"></script>
+    <script src="../../assets/js/vendors/jquery.tablesorter.min.js"></script>
+    <script src="../../assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/vendors/chart.bundle.min.js"></script>
+    <script src="../../assets/js/vendors/selectize.min.js"></script>
+    <script src="../../assets/js/core.js"></script>
+    <link href="../../assets/css/dashboard.css" rel="stylesheet" />
+    <!-- c3.js Charts Plugin -->
+    <link href="../../assets/plugins/charts-c3/plugin.css" rel="stylesheet" />
+    <!--Pomodoro-timer-->
+    <link href="../../assets/css/pomodoro-timer.css" rel="stylesheet" />
+    <!-- Customize -->
+    <link href="../../assets/css/style.css" rel="stylesheet" />
+    <script src="../../assets/js/common.js"></script>
+    <script src="../../assets/js/student.js"></script>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-main">
+        <div class="header py-4">
+          <div class="container">
+            <div class="d-flex">
+              <a class="header-brand ml-1" href="./home.html">
+                <img
+                  alt="logo"
+                  class="header-brand-img"
+                  src="../../assets/images/brand.png"
+                />Cms
+              </a>
+              <div class="d-flex order-lg-2 ml-auto">
+                <div class="dropdown d-none d-md-flex">
+                  <a class="nav-link icon" data-toggle="dropdown">
+                    <i class="fe fe-bell"></i> <span class="nav-unread"></span>
+                  </a>
+                  <div
+                    class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                  >
+                    <a class="dropdown-item d-flex" href="#">
                       <span
-                        class="avatar"
+                        class="avatar mr-3 align-self-center"
                         style="background-image: url(../../assets/images/male.png)"
                       ></span>
-                      <span class="ml-2 d-none d-lg-block">
-                        <span class="text-default">Jane Pearson</span>
-                        <small class="text-muted d-block mt-1"
-                          >Administrator</small
-                        >
-                      </span>
+                      <div>
+                        <strong>Nathan</strong> pushed new commit: Fix page load
+                        performance issue.
+                        <div class="small text-muted">10 minutes ago</div>
+                      </div>
                     </a>
-                    <div
-                      class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                    <a class="dropdown-item d-flex" href="#">
+                      <span
+                        class="avatar mr-3 align-self-center"
+                        style="background-image: url(../../assets/images/male.png)"
+                      ></span>
+                      <div>
+                        <strong>Alice</strong> started new task: Tabler UI
+                        design.
+                        <div class="small text-muted">1 hour ago</div>
+                      </div>
+                    </a>
+                    <a class="dropdown-item d-flex" href="#">
+                      <span
+                        class="avatar mr-3 align-self-center"
+                        style="background-image: url(../../assets/images/male.png)"
+                      ></span>
+                      <div>
+                        <strong>Rose</strong> deployed new version of NodeJS
+                        REST Api V3
+                        <div class="small text-muted">2 hours ago</div>
+                      </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a
+                      class="dropdown-item text-center text-muted-dark"
+                      href="#"
+                      >Mark all as read</a
                     >
-                      <a class="dropdown-item" href="account-setting.html">
-                        <i class="dropdown-icon fe fe-settings"></i> 个人设置
-                      </a>
-                      <a class="dropdown-item" href="todo-list.html">
-                        <span class="float-right"
-                          ><span class="badge badge-primary">6</span></span
-                        >
-                        <i class="dropdown-icon fe fe-mail"></i> 待办事项
-                      </a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="../common/help.html">
-                        <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
-                      </a>
-                      <a class="dropdown-item" href="../common/login.html">
-                        <i class="dropdown-icon fe fe-log-out"></i> 切换账户
-                      </a>
-                    </div>
                   </div>
                 </div>
-                <a
-                  class="header-toggler d-lg-none ml-3 ml-lg-0"
-                  data-target="#headerMenuCollapse"
-                  data-toggle="collapse"
-                  href="#"
-                >
-                  <span class="header-toggler-icon"></span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
-            <div class="container">
-              <div class="row align-items-center">
-                <div class="col-lg-3 ml-auto">
-                  <form class="input-icon my-3 my-lg-0">
-                    <input
-                      class="form-control header-search"
-                      placeholder="Search&hellip;"
-                      tabindex="1"
-                      type="search"
-                    />
-                    <div class="input-icon-addon">
-                      <i class="fe fe-search"></i>
-                    </div>
-                  </form>
-                </div>
-                <div class="col-lg order-lg-first">
-                  <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
-                    <li class="nav-item pl-5">
-                      <a class="nav-link" href="./home.html"
-                        ><i class="fe fe-home"></i> 我的主页</a
+                <div class="dropdown">
+                  <a
+                    class="nav-link pr-0 leading-none"
+                    data-toggle="dropdown"
+                    href="#"
+                  >
+                    <span
+                      class="avatar"
+                      style="background-image: url(../../assets/images/male.png)"
+                    ></span>
+                    <span class="ml-2 d-none d-lg-block">
+                      <span class="text-default">Jane Pearson</span>
+                      <small class="text-muted d-block mt-1"
+                        >Administrator</small
                       >
-                    </li>
-                    <li class="nav-item pl-5">
-                      <a class="nav-link" href="./course-home.html"
-                        ><i class="fe fe-book"></i> 我的课程</a
+                    </span>
+                  </a>
+                  <div
+                    class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                  >
+                    <a class="dropdown-item" href="account-setting.html">
+                      <i class="dropdown-icon fe fe-settings"></i> 个人设置
+                    </a>
+                    <a class="dropdown-item" href="todo-list.html">
+                      <span class="float-right"
+                        ><span class="badge badge-primary">6</span></span
                       >
-                    </li>
-                    <li class="nav-item pl-5">
-                      <a class="nav-link" href="./seminar-home.html"
-                        ><i class="fe fe-book-open"></i> 我的讨论课</a
-                      >
-                    </li>
-                    <li class="nav-item pl-5">
-                      <a class="nav-link" href="going.html"
-                        ><i class="fe fe-play-circle"></i> 正在进行中</a
-                      >
-                    </li>
-                  </ul>
+                      <i class="dropdown-icon fe fe-mail"></i> 待办事项
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../common/help.html">
+                      <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
+                    </a>
+                    <a class="dropdown-item" href="../common/login.html">
+                      <i class="dropdown-icon fe fe-log-out"></i> 切换账户
+                    </a>
+                  </div>
                 </div>
               </div>
+              <a
+                class="header-toggler d-lg-none ml-3 ml-lg-0"
+                data-target="#headerMenuCollapse"
+                data-toggle="collapse"
+                href="#"
+              >
+                <span class="header-toggler-icon"></span>
+              </a>
             </div>
           </div>
-          <div class="my-3 my-md-5 mt-5">
-            <div class="container">
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item">
-                    <a href="./course-home.html">我的课程</a>
+        </div>
+        <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg-3 ml-auto">
+                <form class="input-icon my-3 my-lg-0">
+                  <input
+                    class="form-control header-search"
+                    placeholder="Search&hellip;"
+                    tabindex="1"
+                    type="search"
+                  />
+                  <div class="input-icon-addon">
+                    <i class="fe fe-search"></i>
+                  </div>
+                </form>
+              </div>
+              <div class="col-lg order-lg-first">
+                <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="./home.html"
+                      ><i class="fe fe-home"></i> 我的主页</a
+                    >
                   </li>
-                  <li class="breadcrumb-item active" aria-current="page">
-                    学生组队
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="./course-home.html"
+                      ><i class="fe fe-book"></i> 我的课程</a
+                    >
                   </li>
-                </ol>
-              </nav>
-              <div class="row">
-                <div class="col-lg-4">
-                  <div class="card">
-                    <div class="card-header">
-                      <div class="d-flex align-items-center">
-                        <span class="stamp stamp-md bg-blue ml-1 mr-4"
-                          >1-1</span
-                        >
-                        <div>
-                          <h4 class="m-0"><small>Intellij</small></h4>
-                          <small class="text-danger">Invalid</small>
-                        </div>
-                      </div>
-                      <div class="card-options">
-                        <a
-                          class="card-options-collapse"
-                          data-toggle="card-collapse"
-                          href="#"
-                          ><i class="fe fe-chevron-up mr-1"></i
-                        ></a>
-                      </div>
-                    </div>
-                    <div class="card-body p-0">
-                      <div class="table-responsive">
-                        <table
-                          class="table card-table table-striped table-vcenter"
-                        >
-                          <tbody>
-                            <tr>
-                              <td class="w-1"><span class="avatar">L</span></td>
-                              <td class="text-nowrap">林晓明</td>
-                              <td>24320162202xxx</td>
-                              <td>组长</td>
-                            </tr>
-                            <tr>
-                              <td><span class="avatar">N</span></td>
-                              <td class="text-nowrap">牛晓彤</td>
-                              <td>24320162202xxx</td>
-                              <td>组员</td>
-                            </tr>
-                            <tr>
-                              <td><span class="avatar">J</span></td>
-
-                              <td class="text-nowrap">蒋耀</td>
-                              <td>24320162202xxx</td>
-                              <td>组员</td>
-                            </tr>
-                            <tr>
-                              <td><span class="avatar">X</span></td>
-
-                              <td class="text-nowrap">徐刚</td>
-                              <td>24320162202xxx</td>
-                              <td>组员</td>
-                            </tr>
-                            <tr>
-                              <td><span class="avatar">T</span></td>
-                              <td class="text-nowrap">谈雪</td>
-                              <td>24320162202xxx</td>
-                              <td>组员</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="card card-collapsed">
-                    <div class="card-header">
-                      <div class="d-flex align-items-center">
-                        <span class="stamp stamp-md bg-blue ml-1 mr-4"
-                          >1-1</span
-                        >
-                        <div>
-                          <h4 class="m-0"><small>Intellij</small></h4>
-                          <small class="text-danger"></small>
-                        </div>
-                      </div>
-                      <div class="card-options">
-                        <a
-                          class="card-options-collapse"
-                          data-toggle="card-collapse"
-                          href="#"
-                          ><i class="fe fe-chevron-up mr-1"></i
-                        ></a>
-                      </div>
-                    </div>
-                    <div class="card-body p-0">
-                      <div class="table-responsive">
-                        <table
-                          class="table card-table table-striped table-vcenter"
-                        >
-                          <tbody>
-                            <tr>
-                              <td class="w-1"><span class="avatar">L</span></td>
-                              <td class="text-nowrap">林晓明</td>
-                              <td>24320162202xxx</td>
-                              <td>组长</td>
-                            </tr>
-                            <tr>
-                              <td><span class="avatar">N</span></td>
-                              <td class="text-nowrap">牛晓彤</td>
-                              <td>24320162202xxx</td>
-                              <td>组员</td>
-                            </tr>
-                            <tr>
-                              <td><span class="avatar">J</span></td>
-
-                              <td class="text-nowrap">蒋耀</td>
-                              <td>24320162202xxx</td>
-                              <td>组员</td>
-                            </tr>
-                            <tr>
-                              <td><span class="avatar">X</span></td>
-
-                              <td class="text-nowrap">徐刚</td>
-                              <td>24320162202xxx</td>
-                              <td>组员</td>
-                            </tr>
-                            <tr>
-                              <td><span class="avatar">T</span></td>
-                              <td class="text-nowrap">谈雪</td>
-                              <td>24320162202xxx</td>
-                              <td>组员</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="card card-collapsed">
-                    <div class="card-header">
-                      <div class="d-flex align-items-center">
-                        <span class="stamp stamp-md bg-blue ml-1 mr-4"
-                          >1-1</span
-                        >
-                        <div>
-                          <h4 class="m-0"><small>Intellij</small></h4>
-                          <small class="text-danger"></small>
-                        </div>
-                      </div>
-                      <div class="card-options">
-                        <a
-                          class="card-options-collapse"
-                          data-toggle="card-collapse"
-                          href="#"
-                          ><i class="fe fe-chevron-up mr-1"></i
-                        ></a>
-                      </div>
-                    </div>
-                    <div class="card-body p-0">
-                      <div class="table-responsive">
-                        <table
-                          class="table card-table table-striped table-vcenter"
-                        >
-                          <tbody>
-                            <tr>
-                              <td class="w-1"><span class="avatar">L</span></td>
-                              <td class="text-nowrap">林晓明</td>
-                              <td>24320162202xxx</td>
-                              <td>组长</td>
-                            </tr>
-                            <tr>
-                              <td><span class="avatar">N</span></td>
-                              <td class="text-nowrap">牛晓彤</td>
-                              <td>24320162202xxx</td>
-                              <td>组员</td>
-                            </tr>
-                            <tr>
-                              <td><span class="avatar">J</span></td>
-
-                              <td class="text-nowrap">蒋耀</td>
-                              <td>24320162202xxx</td>
-                              <td>组员</td>
-                            </tr>
-                            <tr>
-                              <td><span class="avatar">X</span></td>
-
-                              <td class="text-nowrap">徐刚</td>
-                              <td>24320162202xxx</td>
-                              <td>组员</td>
-                            </tr>
-                            <tr>
-                              <td><span class="avatar">T</span></td>
-                              <td class="text-nowrap">谈雪</td>
-                              <td>24320162202xxx</td>
-                              <td>组员</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="./seminar-home.html"
+                      ><i class="fe fe-book-open"></i> 我的讨论课</a
+                    >
+                  </li>
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="going.html"
+                      ><i class="fe fe-play-circle"></i> 正在进行中</a
+                    >
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <footer class="footer">
-	      <div class="container">
-		      <div class="row align-items-center flex-row-reverse">
-			      <div class="col-12 col-lg-auto mt-0 mt-lg-0 text-center">
-				      Copyright © 2018 <a href="https://github.com/XMUOOADIntellij/CourseManageSystem">Cms</a>.
-			      </div>
-		      </div>
-	      </div>
-      </footer>
+        <div class="my-3 my-md-5 mt-5">
+          <div class="container">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="./course-home.html">我的课程</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  我的小组
+                </li>
+              </ol>
+            </nav>
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="card">
+                      <div class="card-header">
+                        <div class="d-flex align-items-center">
+                          <span class="stamp stamp-md bg-blue ml-1 mr-4"
+                            >1-1</span
+                          >
+                          <div>
+                            <h4 class="m-0"><small>Intellij</small></h4>
+                            <small class="text-danger">Invalid</small>
+                          </div>
+                        </div>
+                        <div class="card-options">
+                          <a
+                            href="./course-group-setting.html"
+                            class="card-options-delete"
+                            ><i class="fe fe-settings"></i
+                          ></a>
+	                        <a
+		                        href="./course-group-setting.html"
+		                        class="card-options-delete"
+	                        ><i class="fe fe-trash"></i
+	                        ></a>
+                          <a
+                            class="card-options-collapse"
+                            data-toggle="card-collapse"
+                            href="#"
+                            ><i class="fe fe-chevron-up mr-1"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <div class="card-body p-0">
+                        <div class="table-responsive">
+                          <table
+                            class="table card-table table-striped table-vcenter"
+                          >
+                            <tbody>
+                              <tr>
+                                <td class="w-1">
+                                  <span class="avatar">L</span>
+                                </td>
+                                <td class="text-nowrap">林晓明</td>
+                                <td>24320162202xxx</td>
+                                <td>组长</td>
+                              </tr>
+                              <tr>
+                                <td><span class="avatar">N</span></td>
+                                <td class="text-nowrap">牛晓彤</td>
+                                <td>24320162202xxx</td>
+                                <td>组员</td>
+                              </tr>
+                              <tr>
+                                <td><span class="avatar">J</span></td>
 
-    </body>
-  </html>
+                                <td class="text-nowrap">蒋耀</td>
+                                <td>24320162202xxx</td>
+                                <td>组员</td>
+                              </tr>
+                              <tr>
+                                <td><span class="avatar">X</span></td>
+
+                                <td class="text-nowrap">徐刚</td>
+                                <td>24320162202xxx</td>
+                                <td>组员</td>
+                              </tr>
+                              <tr>
+                                <td><span class="avatar">T</span></td>
+                                <td class="text-nowrap">谈雪</td>
+                                <td>24320162202xxx</td>
+                                <td>组员</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="card card-collapsed">
+                      <div class="card-header">
+                        <div class="d-flex align-items-center">
+                          <span class="stamp stamp-md bg-blue ml-1 mr-4"
+                            >1-1</span
+                          >
+                          <div>
+                            <h4 class="m-0"><small>Intellij</small></h4>
+                            <small class="text-danger"></small>
+                          </div>
+                        </div>
+                        <div class="card-options">
+                          <a
+                            class="card-options-collapse"
+                            data-toggle="card-collapse"
+                            href="#"
+                            ><i class="fe fe-chevron-up mr-1"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <div class="card-body p-0">
+                        <div class="table-responsive">
+                          <table
+                            class="table card-table table-striped table-vcenter"
+                          >
+                            <tbody>
+                              <tr>
+                                <td class="w-1">
+                                  <span class="avatar">L</span>
+                                </td>
+                                <td class="text-nowrap">林晓明</td>
+                                <td>24320162202xxx</td>
+                                <td>组长</td>
+                              </tr>
+                              <tr>
+                                <td><span class="avatar">N</span></td>
+                                <td class="text-nowrap">牛晓彤</td>
+                                <td>24320162202xxx</td>
+                                <td>组员</td>
+                              </tr>
+                              <tr>
+                                <td><span class="avatar">J</span></td>
+
+                                <td class="text-nowrap">蒋耀</td>
+                                <td>24320162202xxx</td>
+                                <td>组员</td>
+                              </tr>
+                              <tr>
+                                <td><span class="avatar">X</span></td>
+
+                                <td class="text-nowrap">徐刚</td>
+                                <td>24320162202xxx</td>
+                                <td>组员</td>
+                              </tr>
+                              <tr>
+                                <td><span class="avatar">T</span></td>
+                                <td class="text-nowrap">谈雪</td>
+                                <td>24320162202xxx</td>
+                                <td>组员</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="card card-collapsed">
+                      <div class="card-header">
+                        <div class="d-flex align-items-center">
+                          <span class="stamp stamp-md bg-blue ml-1 mr-4"
+                            >1-1</span
+                          >
+                          <div>
+                            <h4 class="m-0"><small>Intellij</small></h4>
+                            <small class="text-danger"></small>
+                          </div>
+                        </div>
+                        <div class="card-options">
+                          <a
+                            class="card-options-collapse"
+                            data-toggle="card-collapse"
+                            href="#"
+                            ><i class="fe fe-chevron-up mr-1"></i
+                          ></a>
+                        </div>
+                      </div>
+                      <div class="card-body p-0">
+                        <div class="table-responsive">
+                          <table
+                            class="table card-table table-striped table-vcenter"
+                          >
+                            <tbody>
+                              <tr>
+                                <td class="w-1">
+                                  <span class="avatar">L</span>
+                                </td>
+                                <td class="text-nowrap">林晓明</td>
+                                <td>24320162202xxx</td>
+                                <td>组长</td>
+                              </tr>
+                              <tr>
+                                <td><span class="avatar">N</span></td>
+                                <td class="text-nowrap">牛晓彤</td>
+                                <td>24320162202xxx</td>
+                                <td>组员</td>
+                              </tr>
+                              <tr>
+                                <td><span class="avatar">J</span></td>
+
+                                <td class="text-nowrap">蒋耀</td>
+                                <td>24320162202xxx</td>
+                                <td>组员</td>
+                              </tr>
+                              <tr>
+                                <td><span class="avatar">X</span></td>
+
+                                <td class="text-nowrap">徐刚</td>
+                                <td>24320162202xxx</td>
+                                <td>组员</td>
+                              </tr>
+                              <tr>
+                                <td><span class="avatar">T</span></td>
+                                <td class="text-nowrap">谈雪</td>
+                                <td>24320162202xxx</td>
+                                <td>组员</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="d-flex align-items-center">
+                      <span class="stamp stamp-md bg-red ml-1 mr-4 px-3"
+                        >未组队</span
+                      >
+                    </div>
+                    <div class="card-options">
+                      <a
+                        class="card-options-collapse"
+                        data-toggle="card-collapse"
+                        href="#"
+                        ><i class="fe fe-chevron-up mr-1"></i
+                      ></a>
+                    </div>
+                  </div>
+                  <div class="card-body p-0">
+                    <div class="table-responsive">
+                      <table
+                        class="table card-table table-striped table-vcenter"
+                      >
+                        <tbody>
+                          <tr>
+                            <td class="w-1"><span class="avatar">L</span></td>
+                            <td class="text-nowrap">林晓明</td>
+                            <td>24320162202xxx</td>
+                            <td>组长</td>
+                          </tr>
+                          <tr>
+                            <td><span class="avatar">N</span></td>
+                            <td class="text-nowrap">牛晓彤</td>
+                            <td>24320162202xxx</td>
+                            <td>组员</td>
+                          </tr>
+                          <tr>
+                            <td><span class="avatar">J</span></td>
+
+                            <td class="text-nowrap">蒋耀</td>
+                            <td>24320162202xxx</td>
+                            <td>组员</td>
+                          </tr>
+                          <tr>
+                            <td><span class="avatar">X</span></td>
+
+                            <td class="text-nowrap">徐刚</td>
+                            <td>24320162202xxx</td>
+                            <td>组员</td>
+                          </tr>
+                          <tr>
+                            <td><span class="avatar">T</span></td>
+                            <td class="text-nowrap">谈雪</td>
+                            <td>24320162202xxx</td>
+                            <td>组员</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--如果已创建小组 则hidden-->
+            <div class="position-fixed">
+              <a
+                href="./course-group-create.html"
+                class="btn btn-green float-action-button shadow-lg"
+                ><i class="fe fe-plus"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="row align-items-center flex-row-reverse">
+          <div class="col-12 mt-0 mt-lg-0 text-center">
+            Copyright © 2018
+            <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
+              >Cms</a
+            >.
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
