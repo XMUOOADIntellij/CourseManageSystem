@@ -42,8 +42,8 @@ public class CourseService {
      * @param course Course
      * @return Course
      */
-    public int addCourse(Course course){
-        return courseDao.addCourse(course);
+    public int addCourse(Long teacherId,Course course){
+        return courseDao.addCourse(teacherId,course);
     }
 
     /**
