@@ -7,12 +7,19 @@ import com.group12.course.entity.Attendance;
 import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Team;
+import com.group12.course.tools.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+/**
+ * 讨论课展示 Service层
+ * @author Y Jiang
+ * @date 2018/12/17
+ */
 @Component
 @Service
 public class AttendanceService {
@@ -65,7 +72,6 @@ public class AttendanceService {
         }
     }
 
-
     public Integer changeAttendanceOrder(Attendance attendance){
         //TODO 顺序没有被报
         return attendanceDao.updateAttendance(attendance);
@@ -108,5 +114,65 @@ public class AttendanceService {
                 //TODO TeamNotFoundException
                 return null;
             }
+    }
+
+    public String uploadReport(Long attendanceId,MultipartFile file,Student student){
+        Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+        Team team = teamDao.getTeamByStudentId(student.getId());
+
+        if(attendance!=null){
+            if(team.getId().equals(attendance.getTeam().getId())){
+            //TODO path 服务器
+            String filePath = "E:/report/"+attendance.getKlassSeminar().getId()+"/";
+            String fileName = file.getOriginalFilename();
+            try{
+                FileUtil.uploadFile(file,filePath);
+            }catch (Exception e){
+                return null;
+            }
+            attendance.setReportName(fileName);
+            attendance.setReportUrl(filePath+fileName);
+            attendanceDao.updateAttendance(attendance);
+            return filePath+fileName;
+            }
+            else{
+                //TODO 权限
+                return null;
+            }
+        }
+        else{
+            //TODO AttendanceNotFound
+            return null;
+        }
+    }
+
+    public String uploadPpt(Long attendanceId,MultipartFile file,Student student){
+        Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+        Team team = teamDao.getTeamByStudentId(student.getId());
+
+        if(attendance!=null){
+            if(team.getId().equals(attendance.getTeam().getId())){
+                //TODO path 服务器
+                String filePath = "E:/ppt/"+attendance.getKlassSeminar().getId()+"/";
+                String fileName = file.getOriginalFilename();
+                try{
+                    FileUtil.uploadFile(file,filePath);
+                }catch (Exception e){
+                    return null;
+                }
+                attendance.setPptName(fileName);
+                attendance.setPptUrl(filePath+fileName);
+                attendanceDao.updateAttendance(attendance);
+                return filePath+fileName;
+            }
+            else{
+                //TODO 权限
+                return null;
+            }
+        }
+        else{
+            //TODO AttendanceNotFound
+            return null;
+        }
     }
 }
