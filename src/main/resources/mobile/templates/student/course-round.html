@@ -46,6 +46,7 @@
     <!-- Customize -->
     <link href="../../assets/css/style.css" rel="stylesheet" />
     <script src="../../assets/js/common.js"></script>
+    <script src="../../assets/js/teacher.js"></script>
   </head>
   <body>
     <div class="page">
@@ -207,80 +208,20 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="./course-home.html">我的课程</a>
+                  <!--我的课程/讨论课-->
+                  <a href="./seminar-home.html">我的讨论课</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  讨论课设置
+                  轮次设置
                 </li>
               </ol>
             </nav>
             <div class="row">
-              <div class="col-12">
-                <div class="panel panel-default">
-                  <div class="panel-body text-center">
-                    <div class="timer-time timer-container">
-                      <div class="timer-time-set timer-box" id="currentTime">
-                        <span id="hoursValue">00</span><span>:</span
-                        ><span id="minutesValue">00</span><span>:</span
-                        ><span id="secondsValue">00</span>
-                      </div>
-                      <div class="timer-time-set timer-box" id="nextTime">
-                        <span id="hoursNext">00</span><span>:</span
-                        ><span id="minutesNext">00</span><span>:</span
-                        ><span id="secondsNext">00</span>
-                      </div>
-                    </div>
-                    <div>
-                      <button
-                        id="restartButton"
-                        class="btn btn-warning btn-lg"
-                        type="submit"
-                        onclick="onResetTimer()"
-                      >
-                        <span
-                          class="glyphicon glyphicon-step-backward"
-                          aria-hidden="true"
-                        ></span>
-                        Reset
-                      </button>
-                      <button
-                        id="startButton"
-                        class="btn btn-primary btn-lg"
-                        type="submit"
-                        onclick="onStartTimer()"
-                      >
-                        <span
-                          class="glyphicon glyphicon-play"
-                          aria-hidden="true"
-                        ></span>
-                        Start
-                      </button>
-                      <button
-                        id="stopButton"
-                        class="btn btn-danger btn-lg"
-                        type="submit"
-                        onclick="onStopTimer()"
-                      >
-                        <span
-                          class="glyphicon glyphicon-stop"
-                          aria-hidden="true"
-                        ></span>
-                        Stop
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div class="col-md-6 col-lg-4">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title mr-4">第二轮</h3>
+                    <h3 class="card-title mr-4">第一轮</h3>
                     <div class="card-options">
-                      <a
-                        href="course-round-setting.html"
-                        class="card-options-delete"
-                        ><i class="fe fe-settings"></i
-                      ></a>
                       <a
                         href="#round1"
                         class="card-options-collapse"
@@ -290,139 +231,43 @@
                     </div>
                   </div>
                   <div class="card-body p-0" id="round1">
-                    <div class="card m-0">
-                      <div class="card-header">
-                        <div class="d-flex align-items-center">
-                          <span class="">
-                            <i class="icon fe fe-book-open mr-3"></i>
-                            业务流程分析
-                          </span>
-                        </div>
-                        <div class="card-options">
-                          <a
-                            class="card-options-collapse"
-                            data-toggle="card-collapse"
-                            href="#round1s1"
-                            ><i class="fe fe-chevron-up mr-1"></i
-                          ></a>
-                        </div>
-                      </div>
-                      <div class="card-body p-0" id="round1s1">
-                        <div class="table-responsive">
-                          <table
-                            class="table card-table table-vcenter text-nowrap"
-                          >
-                            <tbody>
-                              <tr>
-                                <td><span class="text-muted">2016</span></td>
-                                <td><span class="text-muted">(1)</span></td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="javascript:void(0)"
-                                  >
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td><span class="text-muted">2016</span></td>
-                                <td><span class="text-muted">(1)</span></td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="javascript:void(0)"
-                                  >
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td><span class="text-muted">2016</span></td>
-                                <td><span class="text-muted">(1)</span></td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="javascript:void(0)"
-                                  >
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card m-0">
-                      <div class="card-header">
-                        <div class="d-flex align-items-center">
-                          <span class="">
-                            <i class="icon fe fe-book-open mr-3"></i>
-                            业务流程分析
-                          </span>
-                        </div>
-                        <div class="card-options">
-                          <a
-                            class="card-options-collapse"
-                            data-toggle="card-collapse"
-                            href="#round1s2"
-                            ><i class="fe fe-chevron-up mr-1"></i
-                          ></a>
-                        </div>
-                      </div>
-                      <div class="card-body p-0" id="round1s2">
-                        <div class="table-responsive">
-                          <table
-                            class="table card-table table-vcenter text-nowrap"
-                          >
-                            <tbody>
-                              <tr>
-                                <td><span class="text-muted">2016</span></td>
-                                <td><span class="text-muted">(1)</span></td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="javascript:void(0)"
-                                  >
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td><span class="text-muted">2016</span></td>
-                                <td><span class="text-muted">(1)</span></td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="javascript:void(0)"
-                                  >
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td><span class="text-muted">2016</span></td>
-                                <td><span class="text-muted">(1)</span></td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="javascript:void(0)"
-                                  >
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
+                    <div class="table-responsive">
+                      <table class="table card-table table-vcenter text-nowrap">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <span class="text-muted">业务流程分析</span>
+                            </td>
+                            <td>
+                              <span class="badge badge-danger">未开始</span>
+                            </td>
+                            <td>
+                              <a
+                                class="icon float-right"
+                                href="seminar-detail.html"
+                              >
+                                <i class="fe fe-chevron-right"></i>
+                              </a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <span class="text-muted">领域模型设计</span>
+                            </td>
+                            <td>
+                              <span class="badge badge-danger">未开始</span>
+                            </td>
+                            <td>
+                              <a
+                                class="icon float-right"
+                                href="seminar-detail.html"
+                              >
+                                <i class="fe fe-chevron-right"></i>
+                              </a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -433,11 +278,6 @@
                     <h3 class="card-title mr-4">第二轮</h3>
                     <div class="card-options">
                       <a
-                        href="course-round-setting.html"
-                        class="card-options-delete"
-                        ><i class="fe fe-settings"></i
-                      ></a>
-                      <a
                         href="#round2"
                         class="card-options-collapse"
                         data-toggle="card-collapse"
@@ -446,166 +286,64 @@
                     </div>
                   </div>
                   <div class="card-body p-0" id="round2">
-                    <div class="card m-0">
-                      <div class="card-header">
-                        <div class="d-flex align-items-center">
-                          <span class="">
-                            <i class="icon fe fe-book-open mr-3"></i>
-                            业务流程分析
-                          </span>
-                        </div>
-                        <div class="card-options">
-                          <a
-                            class="card-options-collapse"
-                            data-toggle="card-collapse"
-                            href="#round1s1"
-                            ><i class="fe fe-chevron-up mr-1"></i
-                          ></a>
-                        </div>
-                      </div>
-                      <div class="card-body p-0" id="round2s1">
-                        <div class="table-responsive">
-                          <table
-                            class="table card-table table-vcenter text-nowrap"
-                          >
-                            <tbody>
-                              <tr>
-                                <td><span class="text-muted">2016</span></td>
-                                <td><span class="text-muted">(1)</span></td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="javascript:void(0)"
-                                  >
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td><span class="text-muted">2016</span></td>
-                                <td><span class="text-muted">(1)</span></td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="javascript:void(0)"
-                                  >
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td><span class="text-muted">2016</span></td>
-                                <td><span class="text-muted">(1)</span></td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="javascript:void(0)"
-                                  >
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card m-0">
-                      <div class="card-header">
-                        <div class="d-flex align-items-center">
-                          <span class="">
-                            <i class="icon fe fe-book-open mr-3"></i>
-                            业务流程分析
-                          </span>
-                        </div>
-                        <div class="card-options">
-                          <a
-                            class="card-options-collapse"
-                            data-toggle="card-collapse"
-                            href="#round1s2"
-                            ><i class="fe fe-chevron-up mr-1"></i
-                          ></a>
-                        </div>
-                      </div>
-                      <div class="card-body p-0" id="round2s2">
-                        <div class="table-responsive">
-                          <table
-                            class="table card-table table-vcenter text-nowrap"
-                          >
-                            <tbody>
-                              <tr>
-                                <td><span class="text-muted">2016</span></td>
-                                <td><span class="text-muted">(1)</span></td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="javascript:void(0)"
-                                  >
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td><span class="text-muted">2016</span></td>
-                                <td><span class="text-muted">(1)</span></td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="javascript:void(0)"
-                                  >
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td><span class="text-muted">2016</span></td>
-                                <td><span class="text-muted">(1)</span></td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="javascript:void(0)"
-                                  >
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
+                    <div class="table-responsive">
+                      <table class="table card-table table-vcenter text-nowrap">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <span class="text-muted">业务流程分析</span>
+                            </td>
+                            <td>
+                              <span class="badge badge-danger">未开始</span>
+                            </td>
+                            <td>
+                              <a
+                                class="icon float-right"
+                                href="seminar-detail.html"
+                              >
+                                <i class="fe fe-chevron-right"></i>
+                              </a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <span class="text-muted">领域模型设计</span>
+                            </td>
+                            <td>
+                              <span class="badge badge-danger">未开始</span>
+                            </td>
+                            <td>
+                              <a
+                                class="icon float-right"
+                                href="seminar-detail.html"
+                              >
+                                <i class="fe fe-chevron-right"></i>
+                              </a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="position-fixed">
-              <a
-                href="./course-round-create.html"
-                class="btn btn-green float-action-button shadow-lg"
-                ><i class="fe fe-plus"></i
-              ></a>
-            </div>
           </div>
         </div>
       </div>
-	    <footer class="footer">
-		    <div class="container">
-			    <div class="row align-items-center flex-row-reverse">
-				    <div class="col-12 col-lg-auto mt-0 mt-lg-0 text-center">
-					    Copyright © 2018 <a href="https://github.com/XMUOOADIntellij/CourseManageSystem">Cms</a>.
-				    </div>
-			    </div>
-		    </div>
-	    </footer>
+      <footer class="footer">
+        <div class="container">
+          <div class="row align-items-center flex-row-reverse">
+            <div class="col-12 mt-0 mt-lg-0 text-center">
+              Copyright © 2018
+              <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
+                >Cms</a
+              >.
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
-
-
   </body>
   <script></script>
 </html>
