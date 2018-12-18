@@ -11,6 +11,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -45,6 +46,13 @@ public class KlassSeminarDaoTest extends AbstractTransactionalJUnit4SpringContex
         Assert.assertEquals(2,klassSeminarDao.deleteKlassSeminarBySeminarId(new Long(4)).intValue());
     }
 
+    @Test
+    public void testUpdateKlassSeminar(){
+        KlassSeminar klassSeminar = new KlassSeminar();
+        klassSeminar.setId(new Long(1));
+        klassSeminar.setReportDdl(LocalDateTime.now());
+        klassSeminarDao.updateKlassSeminar(klassSeminar);
+    }
 
 
 }

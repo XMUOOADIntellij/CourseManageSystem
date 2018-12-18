@@ -34,8 +34,11 @@ public class KlassSeminarDao {
         return  klassSeminarMapper.deleteBySeminarId(seminarId);
     }
 
-    public Integer updateKlassSeminar(Long seminarId,Long classId,KlassSeminar klassSeminar){
-        return  klassSeminarMapper.updateKlassSeminar(klassSeminar,
-                klassSeminarMapper.selectKlassSeminarBySeminarIdAndKlassId(seminarId, classId).getId());
+    public Integer updateKlassSeminar(KlassSeminar klassSeminar){
+        if(klassSeminar.getId()!=null){
+        return  klassSeminarMapper.updateKlassSeminar(klassSeminar);}
+        else{
+            return null;
+        }
     }
 }

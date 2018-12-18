@@ -19,7 +19,8 @@ public class SeminarService {
     SeminarDao seminarDao;
     @Autowired
     KlassSeminarDao klassSeminarDao;
-
+    @Autowired
+    CourseDao courseDao;
 
     /**
      * 新建讨论课 Service层
@@ -27,8 +28,16 @@ public class SeminarService {
      * @param record 讨论课记录
      * @return 讨论课Id
      */
-    public Long createSeminar(Seminar record){
+    public Long createSeminar(Seminar record,Teacher teacher){
+        record.setCourse(courseDao.getCourse(record.getCourse().getId()));
+        if(record.getCourse().getTeacher().getId().equals(
+                teacher.getId())){
         return  seminarDao.createSeminar(record);
+        }
+        else{
+            return null;
+            //TODO 权限,不能在非自己课程
+        }
     }
 
 
@@ -37,8 +46,15 @@ public class SeminarService {
      * @param seminarId 讨论课id
      * @return 1成功 0失败
      */
-    public Integer deleteSeminar(Long seminarId){
-      return seminarDao.deleteSeminarById(seminarId);
+    public Integer deleteSeminar(Long seminarId,Teacher teacher){
+        //TODO 验证老师教的课中有这个seminar
+        if(seminarDao.selectSeminarById(seminarId).getCourse().getTeacher().getId().equals(
+                teacher.getId())){
+            return seminarDao.deleteSeminarById(seminarId);}
+      else{
+          //TODO 权限
+          return null;
+        }
     }
 
 
@@ -52,11 +68,13 @@ public class SeminarService {
         return klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId);
     }
 
-    public Integer updateSeminar(Seminar seminar,Long seminarId){
-       return seminarDao.updateSeminar(seminar,seminarId);
+    public Integer updateSeminar(Seminar seminar){
+       return seminarDao.updateSeminar(seminar);
     }
 
-    public Integer updateKlassSeminar(Long seminarId,Long classId,KlassSeminar klassSeminar){
-        return  klassSeminarDao.updateKlassSeminar(seminarId,classId,klassSeminar);
+    public Integer updateKlassSeminar(Long seminarId,Long classId,KlassSeminar record){
+        KlassSeminar klassSeminar = selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+        record.setId(klassSeminar.getId());
+        return  klassSeminarDao.updateKlassSeminar(record);
     }
 }

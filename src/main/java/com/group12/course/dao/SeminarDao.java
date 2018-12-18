@@ -27,6 +27,8 @@ public class SeminarDao {
     AttendanceDao attendanceDao;
     @Autowired
     SeminarScoreDao seminarScoreDao;
+    @Autowired
+    RoundDao roundDao;
 
     /**
      * 创建课程讨论课
@@ -54,7 +56,7 @@ public class SeminarDao {
             //插入班级讨论课记录
             klassSeminarDao.insertByList(klassSeminarsRecord);
             if(record.getRound()==null){
-                //TODO 若没有轮，默认新建
+                //TODO 新建轮
             }
             return record.getId();
         }
@@ -63,13 +65,17 @@ public class SeminarDao {
         }
     }
 
-
+    /**
+     * 通过id获得课程讨论课
+     * @param id id
+     * @return Seminar
+     */
     public Seminar selectSeminarById(Long id){
         return seminarMapper.selectSeminarById(id);
     }
 
-    public Integer updateSeminar(Seminar seminar,Long seminarId){
-        return seminarMapper.updateSeminar(seminar,seminarId);
+    public Integer updateSeminar(Seminar seminar){
+        return seminarMapper.updateSeminar(seminar);
     }
 
     /**
