@@ -22,7 +22,7 @@ public interface KlassSeminarMapper {
 
     List<KlassSeminar> selectKlassSeminarBySeminarId(Long seminarId);
 
-    Integer updateKlassSeminar(KlassSeminar record,Long id);
+    Integer updateKlassSeminar(KlassSeminar record);
 
     Integer insertByList(List<KlassSeminar> list);
 }

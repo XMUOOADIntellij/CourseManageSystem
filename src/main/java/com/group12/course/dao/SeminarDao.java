@@ -29,6 +29,7 @@ public class SeminarDao {
     SeminarScoreDao seminarScoreDao;
     @Autowired
     RoundDao roundDao;
+
     /**
      * 创建课程讨论课
      * @param record 讨论课记录
@@ -64,13 +65,17 @@ public class SeminarDao {
         }
     }
 
-
+    /**
+     * 通过id获得课程讨论课
+     * @param id id
+     * @return Seminar
+     */
     public Seminar selectSeminarById(Long id){
         return seminarMapper.selectSeminarById(id);
     }
 
-    public Integer updateSeminar(Seminar seminar,Long seminarId){
-        return seminarMapper.updateSeminar(seminar,seminarId);
+    public Integer updateSeminar(Seminar seminar){
+        return seminarMapper.updateSeminar(seminar);
     }
 
     /**

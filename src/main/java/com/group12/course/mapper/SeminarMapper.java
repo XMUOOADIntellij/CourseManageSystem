@@ -41,5 +41,5 @@ public interface SeminarMapper {
      * @param id  讨论课id
      * @return int
      */
-    int updateSeminar(Seminar record,Long id);
+    int updateSeminar(Seminar record);
 }

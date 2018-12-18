@@ -69,14 +69,14 @@
     </trim>
   </insert>
 
-  <update id="updateKlassSeminar"  >
+  <update id="updateKlassSeminar" parameterType="klassSeminar">
     update klass_seminar
     <set >
-      <if test="record.reportDdl != null" >
-        report_ddl = #{record.reportDdl,jdbcType=TIMESTAMP},
+      <if test="reportDdl != null" >
+        report_ddl = #{reportDdl,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.seminarStatus != null" >
-        seminar_status = #{record.seminarStatus,jdbcType=TINYINT},
+      <if test="seminarStatus != null" >
+        seminar_status = #{seminarStatus,jdbcType=TINYINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}

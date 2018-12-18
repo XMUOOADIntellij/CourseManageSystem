@@ -27,13 +27,13 @@ public class SeminarServiceTest extends AbstractTransactionalJUnit4SpringContext
         seminar.setSeminarName("test");
         seminar.setSeminarSerial(4);
         seminar.setVisible(false);
-
-        seminarService.createSeminar(seminar);
+        //seminarService.createSeminar(seminar);
     }
 
     @Test
     public void testDeleteSeminar(){
-        seminarService.deleteSeminar(new Long(4));
+
+        //seminarService.deleteSeminar(new Long(4));
     }
 
     @Test

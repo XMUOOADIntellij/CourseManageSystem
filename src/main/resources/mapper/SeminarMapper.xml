@@ -78,39 +78,32 @@
   <update id="updateSeminar">
     update seminar
     <set >
-
-      <if test="record.course!=null">
-      <if test="record.course.id != null" >
-        course_id = #{record.course.id,jdbcType=BIGINT},
+      <if test="round!=null">
+      <if test="round.id!= null" >
+        round_id = #{round.id,jdbcType=BIGINT},
       </if>
       </if>
 
-      <if test="record.round!=null">
-      <if test="record.round.id!= null" >
-        round_id = #{record.round.id,jdbcType=BIGINT},
+      <if test="seminarName != null" >
+        seminar_name = #{seminarName,jdbcType=VARCHAR},
       </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
       </if>
-
-      <if test="record.seminarName != null" >
-        seminar_name = #{record.seminarName,jdbcType=VARCHAR},
+      <if test="maxTeam != null" >
+        max_team = #{maxTeam,jdbcType=INTEGER},
       </if>
-      <if test="record.introduction != null" >
-        introduction = #{record.introduction,jdbcType=VARCHAR},
+      <if test="visible != null" >
+        is_visible = #{visible,jdbcType=TINYINT},
       </if>
-      <if test="record.maxTeam != null" >
-        max_team = #{record.maxTeam,jdbcType=INTEGER},
+      <if test="seminarSerial != null" >
+        seminar_serial = #{seminarSerial,jdbcType=INTEGER},
       </if>
-      <if test="record.visible != null" >
-        is_visible = #{record.visible,jdbcType=TINYINT},
+      <if test="enrollStartTime != null" >
+        enroll_start_time = #{enrollStartTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.seminarSerial != null" >
-        seminar_serial = #{record.seminarSerial,jdbcType=INTEGER},
-      </if>
-      <if test="record.enrollStartTime != null" >
-        enroll_start_time = #{record.enrollStartTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.enrollEndTime != null" >
-        enroll_end_time = #{record.enrollEndTime,jdbcType=TIMESTAMP},
+      <if test="enrollEndTime != null" >
+        enroll_end_time = #{enrollEndTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
