@@ -71,4 +71,14 @@
         </trim>
     </insert>
 
+    <update id="updateTeamValidApplicationStatusById" parameterType="com.group12.course.entity.application.TeamValidApplication" >
+        update team_valid_application
+        <set >
+            <if test="status != null" >
+               status = #{status}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
 </mapper>

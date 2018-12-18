@@ -22,6 +22,10 @@ public class TeamDao {
     @Autowired
     TeamMapper teamMapper;
 
+//    public Team checkStudentInTeam(){
+//
+//    }
+
     public Team getTeamById(Long account){
         return teamMapper.selectTeamById(account);
     }

@@ -4,6 +4,8 @@ import com.group12.course.entity.Round;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Round Mapper 层接口
  * @author Tan Xue
@@ -21,4 +23,6 @@ public interface RoundMapper {
     Round selectRoundById(Long id);
 
     int updateRound(Round record);
+
+    List<Round> selectRoundByCourseId(Long id);
 }

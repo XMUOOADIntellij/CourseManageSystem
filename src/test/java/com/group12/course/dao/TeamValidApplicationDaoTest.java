@@ -38,4 +38,13 @@ public class TeamValidApplicationDaoTest {
         int count=teamValidApplicationMapper.addTeamValidApplication(teamValidApplication);
         Assert.assertEquals(1,count);
     }
+
+    @Test
+    @Rollback
+    public void testChange(){
+        TeamValidApplication teamValidApplication = new TeamValidApplication();
+        teamValidApplication.setId(1L);
+        teamValidApplication.setStatus(1);
+        Assert.assertEquals(1,teamValidApplicationMapper.updateTeamValidApplicationStatus(teamValidApplication));
+    }
 }

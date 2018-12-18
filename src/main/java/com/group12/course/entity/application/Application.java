@@ -2,7 +2,7 @@ package com.group12.course.entity.application;
 
 public class Application {
 
-    private Integer id;
+    private Long id;
 
     /**
      * 队伍状态有三种
@@ -19,7 +19,7 @@ public class Application {
         this.status = status;
     }
 
-    public Application(Integer id, Integer status) {
+    public Application(Long id, Integer status) {
         this.id = id;
         this.status = status;
     }
@@ -32,11 +32,11 @@ public class Application {
                 '}';
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
