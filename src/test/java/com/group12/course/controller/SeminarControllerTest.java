@@ -107,4 +107,33 @@ public class SeminarControllerTest  extends AbstractTransactionalJUnit4SpringCon
                         //.andDo(print())
                         .andReturn();
     }
+
+    @Test
+    public void testAskQuestion() throws  Exception{
+        Map<String,String> request = new TreeMap<>();
+        request.put("attendanceId", "1");
+
+        MvcResult mvcResult =
+                mvc.perform(MockMvcRequestBuilders.post("/seminar/{seminarId}/class/{classId}/question",4,3)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .header("Authorization","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUxNTAyMDA2NDEsInBheWxvYWQiOiJ7XCJpZFwiOjEyMSxcImFjY291bnRcIjpcIjIyMjIyMjIyMjIyMjIzXCIsXCJwYXNzd29yZFwiOlwiMzIxXCIsXCJlbWFpbFwiOm51bGwsXCJhY3RpdmVcIjp0cnVlLFwic3R1ZGVudE5hbWVcIjpudWxsfSJ9.05Hk8pqgwoX03_nxkiPTGRc_DRB7wHSTdaM7XvaOM18")
+                        .content(JSONObject.toJSONString(request)))
+                        //验证执行的控制器类型
+                        .andExpect(handler().handlerType(SeminarController.class))
+                        //验证执行的控制器方法名
+                        .andExpect(handler().methodName("askQuestion"))
+                        //验证状态码
+                        .andExpect(status().isOk())
+                        //验证contentType
+                        .andExpect(content().contentType("application/json;charset=UTF-8"))
+                        // 可以打印结果
+                        //.andDo(print())
+                        .andReturn();
+
+    }
+
+    @Test
+    public void testScoreQuestion() throws Exception{
+        
+    }
 }

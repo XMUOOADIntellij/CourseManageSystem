@@ -4,6 +4,8 @@ import com.group12.course.entity.Question;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * 讨论课提问的Mapper
  * @author Y Jiang
@@ -15,12 +17,14 @@ public interface QuestionMapper {
 
     Integer delete(Long id);
 
-    Integer insert(Question record);
+    Integer insertQuestion(Question record);
 
-    Question select(Long id);
+    Question selectQuestionById(Long id);
 
-    Integer update(Question record);
+    Integer updateQuestion(Question record);
 
     Integer deleteQuestionByKlassSeminarId(Long klassSeminarId);
+
+    List<Question> selectQuestionByKlassSeminarId(Long klassSemiarId);
 
 }
