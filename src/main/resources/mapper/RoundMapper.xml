@@ -94,4 +94,12 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
+  <select id="selectRoundByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from round
+    where course_id = #{id,jdbcType=BIGINT}
+  </select>
+
+
 </mapper>
