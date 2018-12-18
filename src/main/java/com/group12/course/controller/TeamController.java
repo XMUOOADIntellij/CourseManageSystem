@@ -42,17 +42,14 @@ public class TeamController {
     @PostMapping(value = "",produces = "application/json; charset=utf-8")
     public void createTeam(@RequestBody TeamVO teamVO, HttpServletResponse response)throws IOException {
         Team team=new Team(teamVO);
-        int status=teamService.createTeam(team);
-        if (status==0){
+        team =teamService.createTeam(team);
+        if (team.getId()==null){
             response.setStatus(400);
         }
         else {
             response.setStatus(200);
-            response.getWriter().write(""+team.getId());
-            /**
-             * TODO
-             * 返回 id
-             * */
+            String json =JSONObject.toJSONString(team);
+            response.getWriter().write(json);
         }
     }
 
@@ -110,8 +107,8 @@ public class TeamController {
     public void addTeam(@RequestBody Student student, @PathVariable Long teamId, HttpServletResponse response)throws IOException {
         Team team=new Team();
         team.setId(teamId);
-        int count = teamService.addMember(team,student);
-        if (count==1){
+        Team count = teamService.addMember(team,student);
+        if (count.getId()!=null){
             response.setStatus(200);
         }
         else {
