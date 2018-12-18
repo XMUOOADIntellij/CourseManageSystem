@@ -134,6 +134,24 @@ public class SeminarControllerTest  extends AbstractTransactionalJUnit4SpringCon
 
     @Test
     public void testScoreQuestion() throws Exception{
-        
+        Map<String,String> request = new TreeMap<>();
+        request.put("score", "4.5");
+
+        MvcResult mvcResult =
+                mvc.perform(MockMvcRequestBuilders.put("/question/{questionId}",1)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .header("Authorization","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUxNTE4MDIwNjksInBheWxvYWQiOiJ7XCJpZFwiOjEsXCJhY2NvdW50XCI6XCIyMTNcIixcInBhc3N3b3JkXCI6XCIxMjM0NTZcIixcImVtYWlsXCI6XCIxNTEzQHFxLmNvbVwiLFwidGVhY2hlck5hbWVcIjpcInNzc1wiLFwiYWN0aXZlXCI6dHJ1ZX0ifQ.CN9dcsCV_O8iIYvl-XcWDo2BCvDZnGaQwusOqlEOtW4")
+                        .content(JSONObject.toJSONString(request)))
+                        //验证执行的控制器类型
+                        .andExpect(handler().handlerType(QuestionController.class))
+                        //验证执行的控制器方法名
+                        .andExpect(handler().methodName("scoreQuestion"))
+                        //验证状态码
+                        .andExpect(status().isOk())
+                        //验证contentType
+                        .andExpect(content().contentType("application/json;charset=UTF-8"))
+                        // 可以打印结果
+                        //.andDo(print())
+                        .andReturn();
     }
 }

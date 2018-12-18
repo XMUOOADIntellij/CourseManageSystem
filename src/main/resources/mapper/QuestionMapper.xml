@@ -92,8 +92,8 @@
   <update id="updateQuestion" parameterType="question" >
     update question
     <set >
-      <if test="isSelected != null" >
-        is_selected = #{isSelected,jdbcType=BIT},
+      <if test="selected != null" >
+        is_selected = #{selected,jdbcType=BIT},
       </if>
       <if test="score != null" >
         score = #{score,jdbcType=DECIMAL},
