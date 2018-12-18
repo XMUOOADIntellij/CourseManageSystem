@@ -22,7 +22,7 @@
   </sql>
 
   <!--查询某班级讨论课所有展示-->
-  <select id="selectAllAttendance" resultMap="BaseResultMap">
+  <select id="selectAttendanceByKlassSeminarId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from attendance
@@ -30,7 +30,7 @@
   </select>
 
   <!--查询某班级讨论课某小组报名的展示-->
-  <select id="selectAttendance" resultMap="BaseResultMap">
+  <select id="selectAttendanceByKlassSeminarIdAndTeamId" resultMap="BaseResultMap">
     select
      <include refid="Base_Column_List" />
     from attendance
@@ -56,21 +56,13 @@
     where klass_seminar_id = #{klassSeminarId,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" parameterType="com.group12.course.entity.Attendance" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+  <insert id="insertAttendance" parameterType="com.group12.course.entity.Attendance" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     insert into attendance
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="klassSeminarId != null" >
         klass_seminar_id,
-      </if>
-      <if test="teamId != null" >
         team_id,
-      </if>
-      <if test="teamOrder != null" >
         team_order,
-      </if>
-      <if test="presented != null" >
         is_present,
-      </if>
       <if test="reportName != null" >
         report_name,
       </if>
@@ -85,18 +77,10 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="klassSeminarId != null" >
-        #{klassSeminarId,jdbcType=BIGINT},
-      </if>
-      <if test="teamId != null" >
-        #{teamId,jdbcType=BIGINT},
-      </if>
-      <if test="teamOrder != null" >
+        #{klassSeminar.id,jdbcType=BIGINT},
+        #{team.id,jdbcType=BIGINT},
         #{teamOrder,jdbcType=TINYINT},
-      </if>
-      <if test="presented != null" >
         #{presented,jdbcType=TINYINT},
-      </if>
       <if test="reportName != null" >
         #{reportName,jdbcType=VARCHAR},
       </if>
@@ -112,15 +96,9 @@
     </trim>
   </insert>
 
-  <update id="update" parameterType="com.group12.course.entity.Attendance" >
+  <update id="updateAttendance" parameterType="com.group12.course.entity.Attendance" >
     update attendance
     <set >
-      <if test="klassSeminarId != null" >
-        klass_seminar_id = #{klassSeminarId,jdbcType=BIGINT},
-      </if>
-      <if test="teamId != null" >
-        team_id = #{teamId,jdbcType=BIGINT},
-      </if>
       <if test="teamOrder != null" >
         team_order = #{teamOrder,jdbcType=TINYINT},
       </if>
@@ -144,13 +122,4 @@
   </update>
 
 
-    <update id="updateOrder">
-        update attendance
-        <set>
-            <if test="teamOrder != null" >
-                team_order = #{teamOrder,jdbcType=TINYINT},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
 </mapper>

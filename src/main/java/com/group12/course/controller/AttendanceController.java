@@ -1,9 +1,12 @@
 package com.group12.course.controller;
 
 import com.group12.course.entity.Attendance;
+import com.group12.course.entity.Student;
 import com.group12.course.service.AttendanceService;
+import com.group12.course.tools.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +26,7 @@ public class AttendanceController {
      */
     @PutMapping(value="/{attendanceId}")
     public Integer changeOrder(@PathVariable Long attendanceId,@RequestBody Attendance record){
-        return attendanceService.changeAttendanceOrder(attendanceId,record.getTeamOrder());
+        return null;
     }
 
     /**
@@ -32,7 +35,7 @@ public class AttendanceController {
      */
     @DeleteMapping(value="/{attendanceId}")
     public Integer cancelAttendance(@PathVariable Long attendanceId){
-        return attendanceService.cancelAttendance(attendanceId);
+        return null;
     }
 
     /**
@@ -42,30 +45,34 @@ public class AttendanceController {
      */
     @GetMapping(value="/{attendanceId}/report")
     public void downloadReport(@PathVariable Long attendanceId, HttpServletResponse response){
-        //TODO 下载某个展示报告
-        return;
+        attendanceService.downloadReport(attendanceId,response);
     }
 
     /**
      * 上传某个展示报告
-     * @param attendanceId 某报名的展示
-     * @param request 请求
+     * @param file  报告文件
+     * @param attendanceId 展示的id
      */
-    @PostMapping(value="/{attendanceId}/report")
-    public void uploadReport(@PathVariable Long attendanceId,HttpServletRequest request){
-        //TODO 上传某个展示报告
-        return;
+    @PostMapping(value="/{attendanceId}/report",produces = "application/json; charset=utf-8")
+    public String uploadReport(@RequestParam("file") MultipartFile file, @PathVariable Long attendanceId,
+                               HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        return attendanceService.uploadReport(attendanceId,file,jwtStudent);
     }
 
     /**
      * 重传某个展示报告
-     * @param attendanceId 某报名的展示
-     * @param request 请求
+     * @param file 文件名
+     * @param attendanceId 展示的id
+     * @return 文件的url
      */
     @PutMapping(value="/{attendanceId}/report")
-    public void modifyReport(@PathVariable Long attendanceId,HttpServletRequest request){
-        //TODO 重传某个展示报告
-        return;
+    public String modifyReport(@RequestParam("file") MultipartFile file,@PathVariable Long attendanceId,
+                               HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        return attendanceService.uploadReport(attendanceId,file,jwtStudent);
     }
 
     /**
@@ -75,31 +82,35 @@ public class AttendanceController {
      */
     @GetMapping(value="/{attendanceId}/ppt")
     public void downloadPPT(@PathVariable Long attendanceId, HttpServletResponse response){
-        //TODO 下载某个展示ppt
-        return;
+        attendanceService.downloadPpt(attendanceId,response);
     }
 
     /**
      * 上传某个展示ppt
-     * @param attendanceId 某报名的展示
-     * @param request 请求
+     * @param file 文件
+     * @param attendanceId 展示的id
+     * @return 文件的url
      */
-    @PostMapping(value="/{attendanceId}/ppt")
-    public void uploadPPT(@PathVariable Long attendanceId,HttpServletRequest request){
-        //TODO 上传某个展示ppt
-        return;
+    @PostMapping(value="/{attendanceId}/ppt",produces = "application/json; charset=utf-8")
+    public String uploadPPT(@RequestParam("file") MultipartFile file,@PathVariable Long attendanceId,
+                            HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        return attendanceService.uploadPpt(attendanceId,file,jwtStudent);
     }
 
     /**
-     * 重传某个展示ppt
-     * @param attendanceId 某报名的展示
-     * @param request 请求
+     * 重传ppt
+     * @param file 文件
+     * @param attendanceId 展示id
+     * @return 文件的url
      */
     @PutMapping(value="/{attendanceId}/ppt")
-    public void modifyPPT(@PathVariable Long attendanceId,HttpServletRequest request){
-        //TODO 重传某个展示ppt
-        return;
+    public String modifyPPT(@RequestParam("file") MultipartFile file,@PathVariable Long attendanceId,
+                            HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        return attendanceService.uploadPpt(attendanceId,file,jwtStudent);
     }
-
 
 }
