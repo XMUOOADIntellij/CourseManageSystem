@@ -46,20 +46,18 @@ public class RoundService {
 
     /**
      * 根据轮次 id 修改轮次
-     * @param roundId
+     * @param round
      * @param round
      */
-    public void updateRound(Long roundId,Round round){
-        int status = roundDao.updateRound(round);
-
+    public int updateRound(Round round){
+        return  roundDao.updateRound(round);
     }
 
     /**
      * 创建轮次
      * @param round
      */
-    public void createRound(Round round){
-        int status = roundDao.addRound(round);
-
+    public int addRound(Round round){
+        return roundDao.addRound(round);
     }
 }
