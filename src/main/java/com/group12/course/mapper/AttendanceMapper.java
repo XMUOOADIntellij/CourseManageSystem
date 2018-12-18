@@ -20,15 +20,14 @@ public interface AttendanceMapper {
 
     Integer deleteAttendanceByKlassSeminarId(Long klassSeminarId);
 
-    int insert(Attendance record);
+    Integer insertAttendance(Attendance record);
 
-    int update(Attendance record);
+    Integer updateAttendance(Attendance record);
 
-    Attendance selectAttendenceById(Long id);
+    Attendance selectAttendanceById(Long id);
 
-    Attendance selectAttendance(Long klassSeminarId,Long teamId);
+    Attendance selectAttendanceByKlassSeminarIdAndTeamId(Long klassSeminarId,Long teamId);
 
-    List<Attendance> selectAllAttendance(Long klassSeminarId);
+    List<Attendance> selectAttendanceByKlassSeminarId(Long klassSeminarId);
 
-    Integer updateOrder(Long id,Integer teamOrder);
 }

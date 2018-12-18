@@ -136,6 +136,14 @@ public class Seminar  {
 
     public Seminar(){}
     public Seminar(SeminarVo seminarVo){
+        this.id =seminarVo.getSeminarId();
+
+        this.course = new Course();
+        this.course.setId(seminarVo.getCourseId());
+
+        this.round = new Round();
+        this.round.setId(seminarVo.getRoundId());
+
         this.seminarName = seminarVo.getSeminarName();
         this.introduction = seminarVo.getIntroduction();
         this.maxTeam = seminarVo.getMaxTeam();

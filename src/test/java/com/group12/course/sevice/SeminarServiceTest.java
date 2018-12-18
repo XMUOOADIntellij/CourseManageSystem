@@ -4,6 +4,7 @@ import com.group12.course.entity.Course;
 import com.group12.course.entity.Round;
 import com.group12.course.entity.Seminar;
 import com.group12.course.service.SeminarService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +36,8 @@ public class SeminarServiceTest extends AbstractTransactionalJUnit4SpringContext
         seminarService.deleteSeminar(new Long(4));
     }
 
+    @Test
+    public void testSelectKlassSeminarBySeminarIdAndKlassId(){
+        Assert.assertNotNull(seminarService.selectKlassSeminarBySeminarIdAndClassId(new Long(4),new Long(3)));
+    }
 }

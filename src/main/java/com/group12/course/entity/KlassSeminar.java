@@ -70,13 +70,15 @@ public class KlassSeminar  {
 
     public KlassSeminar() {}
 
-    public KlassSeminar(Long id, LocalDateTime reportDdl, Integer seminarStatus) {
-        this.id = id;
-        this.reportDdl = reportDdl;
-        this.seminarStatus = seminarStatus;
-    }
-
     public  KlassSeminar(SeminarVo seminarVo){
+        this.id = seminarVo.getKlassSeminarId();
+
+        this.klass = new Klass();
+        this.klass.setId(seminarVo.getKlassId());
+
+        this.seminar = new Seminar();
+        this.seminar.setId(seminarVo.getSeminarId());
+
         this.seminarStatus = seminarVo.getSeminarStatus();
         this.reportDdl=seminarVo.getReportDdl();
     }

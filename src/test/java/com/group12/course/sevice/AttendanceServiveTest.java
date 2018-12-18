@@ -1,10 +1,10 @@
 package com.group12.course.sevice;
 
-import com.group12.course.dao.AttendanceDao;
-import com.group12.course.dao.KlassSeminarDao;
 import com.group12.course.entity.Attendance;
 import com.group12.course.entity.KlassSeminar;
+import com.group12.course.entity.Student;
 import com.group12.course.service.AttendanceService;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,10 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class AttendanceServiveTest extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
     AttendanceService attendanceService;
-//    @Autowired
-//    KlassSeminarDao klassSeminarDao;
-//    @Autowired
-//    AttendanceDao attendanceDao;
+
 
     @Test
     public void testGetAttendance(){
@@ -31,7 +28,31 @@ public class AttendanceServiveTest extends AbstractTransactionalJUnit4SpringCont
     }
 
     @Test
-    public  void testCancelAttendance(){
-        //Assert.assertEquals(Long.valueOf(1),attendanceService.cancelAttendance(new Long(1)));
+    public void testChangeAttendanceOrder(){
+        Attendance attendance = new Attendance();
+        attendance.setId(new Long(2));
+        attendance.setTeamOrder(3);
+        attendanceService.changeAttendanceOrder(attendance);
+    }
+
+    @Test
+    public void testCancelAttendance(){
+        Student student = new Student();
+        student.setId(new Long(1));
+        Assert.assertNotNull(attendanceService.cancelAttendance(new Long(2),student));
+    }
+
+    @Test
+    public void testEnrollAttendance(){
+        Attendance attendance = new Attendance();
+        attendance.setTeamOrder(3);
+        attendance.setKlassSeminar(new KlassSeminar());
+        attendance.getKlassSeminar().setId(new Long(2));
+
+        Student student =new Student();
+        student.setId(new Long(1));
+
+        Assert.assertNotNull(
+                attendanceService.enrollAttendance(attendance,student));
     }
 }
