@@ -17,7 +17,7 @@ public class TeamService {
     @Autowired
     TeamDao teamDao;
 
-    public int createTeam(Team team){
+    public Team createTeam(Team team){
         return teamDao.addTeam(team);
     }
 
@@ -33,7 +33,7 @@ public class TeamService {
         return teamDao.deleteTeamById(teamId);
     }
 
-    public int addMember(Team team,Student student){
+    public Team addMember(Team team,Student student){
         return teamDao.addTeamMembers(team,student);
     }
 

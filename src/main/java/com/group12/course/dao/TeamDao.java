@@ -22,9 +22,47 @@ public class TeamDao {
     @Autowired
     TeamMapper teamMapper;
 
-//    public Team checkStudentInTeam(){
-//
-//    }
+    /*public Team checkStudentInTeam(Student student){
+        Team team=getTeamByStudentId(student.getId());
+    }*/
+
+    public Boolean checkTeamValid(Team team){
+        try {
+            Long courseId = team.getCourse().getId();
+            Long klassId = team.getKlass().getId();
+            Long leaderId = team.getLeader().getId();
+        }
+        catch (NullPointerException e){
+            //throw team invalid Exception
+            System.out.println("team message invalid");
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean checkLeaderInTeam(Team team){
+        Team leaderInTeam =getTeamByStudentId(team.getLeader().getId());
+        if (leaderInTeam!=null){
+            //throw leader already in team exception
+            System.out.println("leader is already in a team \n"+leaderInTeam);
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean checkMembersInTeam(Team team){
+        Iterator<Student> iterator = team.getMembers().iterator();
+        while (iterator.hasNext()){
+            Student member = iterator.next();
+            Long memberInTeam = teamMapper.selectTeamIdByMembersId(member.getId());
+            if (memberInTeam!=null){
+                // throw members already in team exception
+                System.out.println("member \n"+ member + "\n is already in a team \n"+memberInTeam);
+                return false;
+            }
+        }
+        return true;
+    }
 
     public Team getTeamById(Long account){
         return teamMapper.selectTeamById(account);
@@ -51,65 +89,54 @@ public class TeamDao {
         return teamMapper.deleteTeamMembers(member.getId());
     }
 
-    public int addTeam(Team team){
-        Long courseId,klassId,leaderId;
-        try {
-            courseId = team.getCourse().getId();
-            klassId = team.getKlass().getId();
-            leaderId = team.getLeader().getId();
-        }
-        catch (NullPointerException e){
-            System.out.println(e.getStackTrace());
-            System.out.println(e.getMessage());
-            return 0;
+    public Team addTeam(Team team){
+        if (!checkTeamValid(team)||!checkLeaderInTeam(team)||!checkMembersInTeam(team)){
+            return new Team();
         }
         team.setStatus(0);
-
-        int addTeamCount=teamMapper.addTeam(team,courseId,klassId,leaderId);
+        int addTeamCount=teamMapper.addTeam(team,team.getCourse().getId(),team.getKlass().getId(),team.getLeader().getId());
         if (addTeamCount==0){
-            return 0;
+            return new Team();
         }
         Iterator<Student> members = team.getMembers().iterator();
         while (members.hasNext()){
             addNewTeamMembers(team,members.next());
         }
-
-        return addTeamCount;
+        return team;
     }
 
-    public int addNewTeamMembers(Team team,Student member){
-        Long courseId,klassId,teamId;
-        try {
-            courseId = team.getCourse().getId();
-            klassId = team.getKlass().getId();
-            teamId = team.getId();
+    /**
+     * 这个方法用于给一个新的队伍添加组员
+     *
+     * @param team 新的队伍
+     * @param member 组员
+     * @return 返回新的队伍对象
+     * */
+    public Team addNewTeamMembers(Team team,Student member){
+        if (!checkTeamValid(team)){
+            return new Team();
         }
-        catch (NullPointerException e){
-            return 0;
-        }
-        int temp=teamMapper.addTeamMembers(teamId,courseId,klassId,member.getId());
+        int temp=teamMapper.addTeamMembers(team.getId(),team.getCourse().getId(),team.getKlass().getId(),member.getId());
         if (temp==0){
+            // throw insert error
             System.out.println("error insert team members:"+member.getId()+" at team:"+team.getId());
         }
-        return temp;
+        return team;
     }
 
-    public int addTeamMembers(Team team,Student member){
-        Long courseId,klassId,teamId;
+    public Team addTeamMembers(Team team,Student member){
         team=teamMapper.selectTeamById(team.getId());
-        try {
-            courseId = team.getCourse().getId();
-            klassId = team.getKlass().getId();
-            teamId = team.getId();
+        if (!checkTeamValid(team)){
+            // throw team not exist exception
+            return new Team();
         }
-        catch (NullPointerException e){
-            return 0;
-        }
-        int temp=teamMapper.addTeamMembers(teamId,courseId,klassId,member.getId());
+        int temp=teamMapper.addTeamMembers(team.getId(),team.getCourse().getId(),team.getKlass().getId(),member.getId());
         if (temp==0){
+            // throw insert error
             System.out.println("error insert team members:"+member.getId()+" at team:"+team.getId());
+            return new Team();
         }
-        return temp;
+        return team;
     }
 
     public int changeTeam(Team team){
@@ -135,6 +162,9 @@ public class TeamDao {
     }
 
     public Team getMembers(Team team){
+        if (!checkTeamValid(team)){
+            return new Team();
+        }
         List<Student> members = teamMapper.selectTeamMembersByTeamId(team.getId());
         team.setMembers(members);
         return team;

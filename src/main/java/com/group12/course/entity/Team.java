@@ -22,6 +22,13 @@ public class Team {
 
     private String teamName;
 
+    /**
+     * status 代表队伍状态，
+     * 0为审核中
+     * 1为已通过
+     * 2为已驳回
+     * 默认为 0 审核中
+     * */
     private Integer status;
 
     private Integer teamSerial;
@@ -29,6 +36,7 @@ public class Team {
     private List<Student> members;
 
     public Team() {
+        this.status=0;
     }
 
     public Team(TeamVO teamVO) {
