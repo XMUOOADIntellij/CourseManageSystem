@@ -19,7 +19,7 @@ public class TeamVO implements Serializable {
 
     private Long classId;
 
-    private StudentVO leader;
+    private Student leader;
 
     private List<Student> members;
 
@@ -32,7 +32,7 @@ public class TeamVO implements Serializable {
 
     public TeamVO(Team team) {
         this.name = team.getTeamName();
-        this.leader = new StudentVO(team.getLeader());
+        this.leader = team.getLeader();
         this.members = team.getMembers();
         this.status = team.getStatus();
         this.teamSerial = team.getTeamSerial();
@@ -75,11 +75,11 @@ public class TeamVO implements Serializable {
         this.classId = classId;
     }
 
-    public StudentVO getLeader() {
+    public Student getLeader() {
         return leader;
     }
 
-    public void setLeader(StudentVO leader) {
+    public void setLeader(Student leader) {
         this.leader = leader;
     }
 

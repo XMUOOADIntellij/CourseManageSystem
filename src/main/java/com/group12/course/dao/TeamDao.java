@@ -22,6 +22,10 @@ public class TeamDao {
     @Autowired
     TeamMapper teamMapper;
 
+//    public Team checkStudentInTeam(){
+//
+//    }
+
     public Team getTeamById(Long account){
         return teamMapper.selectTeamById(account);
     }
@@ -67,19 +71,36 @@ public class TeamDao {
         }
         Iterator<Student> members = team.getMembers().iterator();
         while (members.hasNext()){
-            addTeamMembers(team,members.next());
+            addNewTeamMembers(team,members.next());
         }
 
         return addTeamCount;
     }
 
+    public int addNewTeamMembers(Team team,Student member){
+        Long courseId,klassId,teamId;
+        try {
+            courseId = team.getCourse().getId();
+            klassId = team.getKlass().getId();
+            teamId = team.getId();
+        }
+        catch (NullPointerException e){
+            return 0;
+        }
+        int temp=teamMapper.addTeamMembers(teamId,courseId,klassId,member.getId());
+        if (temp==0){
+            System.out.println("error insert team members:"+member.getId()+" at team:"+team.getId());
+        }
+        return temp;
+    }
+
     public int addTeamMembers(Team team,Student member){
         Long courseId,klassId,teamId;
-        courseId = team.getCourse().getId();
-        klassId = team.getKlass().getId();
-        teamId = team.getId();
+        team=teamMapper.selectTeamById(team.getId());
         try {
-
+            courseId = team.getCourse().getId();
+            klassId = team.getKlass().getId();
+            teamId = team.getId();
         }
         catch (NullPointerException e){
             return 0;

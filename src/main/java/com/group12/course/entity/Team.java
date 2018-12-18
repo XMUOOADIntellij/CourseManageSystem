@@ -39,7 +39,7 @@ public class Team {
         this.course=tempCourse;
         this.teamName=teamVO.getName();
         this.klass=tempKlass;
-        this.leader=new Student(teamVO.getLeader());
+        this.leader=teamVO.getLeader();
         this.members=teamVO.getMembers();
     }
 
