@@ -20,4 +20,7 @@ public interface TeamValidApplicationMapper {
     List<TeamValidApplication> selectTeamValidApplicationByTeacherId(Long id);
 
     int addTeamValidApplication(TeamValidApplication record);
+
+    int updateTeamValidApplicationStatusById(TeamValidApplication record);
+
 }
