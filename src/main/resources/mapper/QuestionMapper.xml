@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.group12.course.mapper.QuestionMapper" >
 
-  <resultMap id="BaseResultMap" type="com.group12.course.entity.Question" >
+  <resultMap id="BaseResultMap" type="question" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="is_selected" property="isSelected" jdbcType="BIT" />
+    <result column="is_selected" property="selected" jdbcType="BIT" />
     <result column="score" property="score" jdbcType="DECIMAL" />
 
     <association property="klassSeminar" select="com.group12.course.mapper.KlassSeminarMapper.selectKlassSeminarById"
@@ -21,11 +21,18 @@
     id, klass_seminar_id, attendance_id, team_id, student_id, is_selected, score
   </sql>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectQuestionById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from question
     where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectQuestionByKlassSeminarId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List"/>
+    from question
+    where klass_seminar_id =#{klassSeminarId,jdbcType=BIGINT}
   </select>
 
   <delete id="deleteQuestionById" parameterType="java.lang.Long" >
@@ -38,22 +45,22 @@
     where klass_seminar_id = #{klassSeminarId,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" parameterType="com.group12.course.entity.Question" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+  <insert id="insertQuestion" parameterType="question" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
     insert into question
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="klassSeminarId != null" >
+      <if test="klassSeminar.id != null" >
         klass_seminar_id,
       </if>
-      <if test="attendanceId != null" >
+      <if test="attendance.id != null" >
         attendance_id,
       </if>
-      <if test="teamId != null" >
+      <if test="team.id != null" >
         team_id,
       </if>
-      <if test="studentId != null" >
+      <if test="student.id != null" >
         student_id,
       </if>
-      <if test="isSelected != null" >
+      <if test="selected != null" >
         is_selected,
       </if>
       <if test="score != null" >
@@ -61,20 +68,20 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="klassSeminarId != null" >
-        #{klassSeminarId,jdbcType=BIGINT},
+      <if test="klassSeminar.id != null" >
+        #{klassSeminar.id,jdbcType=BIGINT},
       </if>
-      <if test="attendanceId != null" >
-        #{attendanceId,jdbcType=BIGINT},
+      <if test="attendance.id != null" >
+        #{attendance.id,jdbcType=BIGINT},
       </if>
-      <if test="teamId != null" >
-        #{teamId,jdbcType=BIGINT},
+      <if test="team.id != null" >
+        #{team.id,jdbcType=BIGINT},
       </if>
-      <if test="studentId != null" >
-        #{studentId,jdbcType=BIGINT},
+      <if test="student.id != null" >
+        #{student.id,jdbcType=BIGINT},
       </if>
-      <if test="isSelected != null" >
-        #{isSelected,jdbcType=BIT},
+      <if test="selected != null" >
+        #{selected,jdbcType=BIT},
       </if>
       <if test="score != null" >
         #{score,jdbcType=DECIMAL},
@@ -82,23 +89,11 @@
     </trim>
   </insert>
 
-  <update id="update" parameterType="com.group12.course.entity.Question" >
+  <update id="updateQuestion" parameterType="question" >
     update question
     <set >
-      <if test="klassSeminarId != null" >
-        klass_seminar_id = #{klassSeminarId,jdbcType=BIGINT},
-      </if>
-      <if test="attendanceId != null" >
-        attendance_id = #{attendanceId,jdbcType=BIGINT},
-      </if>
-      <if test="teamId != null" >
-        team_id = #{teamId,jdbcType=BIGINT},
-      </if>
-      <if test="studentId != null" >
-        student_id = #{studentId,jdbcType=BIGINT},
-      </if>
-      <if test="isSelected != null" >
-        is_selected = #{isSelected,jdbcType=BIT},
+      <if test="selected != null" >
+        is_selected = #{selected,jdbcType=BIT},
       </if>
       <if test="score != null" >
         score = #{score,jdbcType=DECIMAL},

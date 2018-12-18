@@ -1,7 +1,11 @@
 package com.group12.course.entity;
 
+import com.group12.course.vo.QuestionVO;
+import org.apache.ibatis.type.Alias;
+
 import java.math.BigDecimal;
 
+@Alias("question")
 public class Question {
     private Long id;
 
@@ -95,5 +99,14 @@ public class Question {
         "student"+student.getId()+"\n"+
         "selected"+selected+"\n"+
         "score"+score+"\n";
+    }
+
+    public Question(){}
+
+    public Question(QuestionVO questionVO){
+        this.attendance =new Attendance();
+        this.attendance.setId(questionVO.getAttendanceId());
+
+        this.score = questionVO.getScore();
     }
 }
