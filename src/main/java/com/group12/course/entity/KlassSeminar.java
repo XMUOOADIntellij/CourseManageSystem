@@ -1,6 +1,6 @@
 package com.group12.course.entity;
 
-import com.group12.course.vo.SeminarVo;
+import com.group12.course.vo.SeminarVO;
 import org.apache.ibatis.type.Alias;
 
 import java.io.Serializable;
@@ -70,7 +70,7 @@ public class KlassSeminar  {
 
     public KlassSeminar() {}
 
-    public  KlassSeminar(SeminarVo seminarVo){
+    public  KlassSeminar(SeminarVO seminarVo){
         this.id = seminarVo.getKlassSeminarId();
 
         this.klass = new Klass();

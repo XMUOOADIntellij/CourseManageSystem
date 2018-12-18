@@ -118,6 +118,13 @@ public class AttendanceService {
             }
     }
 
+    /**
+     * 上传报告
+     * @param attendanceId 展示id
+     * @param file 文件
+     * @param student 学生jwt
+     * @return 文件的url
+     */
     public String uploadReport(Long attendanceId,MultipartFile file,Student student){
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
         Team team = teamDao.getTeamByStudentId(student.getId());
@@ -151,6 +158,13 @@ public class AttendanceService {
         }
     }
 
+    /**
+     * 上传ppt
+     * @param attendanceId 展示id
+     * @param file 文件
+     * @param student 学生jwt
+     * @return 文件的url
+     */
     public String uploadPpt(Long attendanceId,MultipartFile file,Student student){
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
         Team team = teamDao.getTeamByStudentId(student.getId());
@@ -184,6 +198,11 @@ public class AttendanceService {
         }
     }
 
+    /**
+     * 下载报告
+     * @param attendanceId 展示id
+     * @param response 回应
+     */
     public void downloadReport(Long attendanceId, HttpServletResponse response){
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
         String fileUrl = attendance.getReportUrl();

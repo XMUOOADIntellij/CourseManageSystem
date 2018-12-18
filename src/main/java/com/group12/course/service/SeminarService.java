@@ -19,7 +19,8 @@ public class SeminarService {
     SeminarDao seminarDao;
     @Autowired
     KlassSeminarDao klassSeminarDao;
-
+    @Autowired
+    CourseDao courseDao;
 
     /**
      * 新建讨论课 Service层
@@ -28,7 +29,7 @@ public class SeminarService {
      * @return 讨论课Id
      */
     public Long createSeminar(Seminar record){
-        return  seminarDao.createSeminar(record);
+            return  seminarDao.createSeminar(record);
     }
 
 

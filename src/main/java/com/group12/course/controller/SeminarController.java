@@ -7,7 +7,7 @@ import com.group12.course.entity.Seminar;
 import com.group12.course.service.AttendanceService;
 import com.group12.course.service.SeminarService;
 import com.group12.course.vo.AttendanceVo;
-import com.group12.course.vo.SeminarVo;
+import com.group12.course.vo.SeminarVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,8 +36,14 @@ public class SeminarController {
      * @return 讨论课id
      */
     @PostMapping(value= "" , produces = "application/json; charset=utf-8")
-    public Long createSeminar(@RequestBody SeminarVo seminarVo){
-        //TODO if(seminar name/maxteam/isvisible/serial/courseId 信息不完整
+    public Long createSeminar(@RequestBody SeminarVO seminarVo){
+        if(seminarVo.getMaxTeam()==null ||
+           seminarVo.getSeminarName()==null||
+           seminarVo.getCourseId()==null||
+           seminarVo.getVisible()==null||
+           seminarVo.getSeminarSerial()==null){
+            //TODO 信息不完全
+        }
         Seminar seminar = new Seminar(seminarVo);
         return  seminarService.createSeminar(seminar);
     }
@@ -55,12 +61,12 @@ public class SeminarController {
      * 获得某班级的讨论课
      * @param seminarId 课程讨论课的id
      * @param classId 班级id
-     * @return SeminarVo
+     * @return SeminarVO
      */
     @GetMapping(value="/{seminarId}/class/{classId}",produces = "application/json")
-    public SeminarVo selectKlassSeminarBySeminarIdAndClassId(@PathVariable Long seminarId, @PathVariable Long classId){
+    public SeminarVO selectKlassSeminarBySeminarIdAndClassId(@PathVariable Long seminarId, @PathVariable Long classId){
        KlassSeminar record =  seminarService.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
-       return new SeminarVo(record);
+       return new SeminarVO(record);
     }
 
     /**
@@ -69,7 +75,7 @@ public class SeminarController {
      * @param seminarId 讨论课id
      */
     @PutMapping(value="/{seminarId}",produces = "application/json")
-    public Integer modifySeminar(@RequestBody SeminarVo seminarVo,@PathVariable Long seminarId){
+    public Integer modifySeminar(@RequestBody SeminarVO seminarVo,@PathVariable Long seminarId){
         //TODO 判断合法
         Seminar seminar =new Seminar(seminarVo);
         return seminarService.updateSeminar(seminar,seminarId);
@@ -82,7 +88,7 @@ public class SeminarController {
      * @param
      */
     @PutMapping(value="/{seminarId}/class/{classId}",produces = "application/json")
-    public Integer modifyKlassSeminar(@PathVariable Long seminarId, @PathVariable Long classId,@RequestBody SeminarVo seminarVo){
+    public Integer modifyKlassSeminar(@PathVariable Long seminarId, @PathVariable Long classId,@RequestBody SeminarVO seminarVo){
         //TODO 判断合法
         KlassSeminar klassSeminar = new KlassSeminar(seminarVo);
         return seminarService.updateKlassSeminar(seminarId,classId,klassSeminar);

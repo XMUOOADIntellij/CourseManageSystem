@@ -27,7 +27,8 @@ public class SeminarDao {
     AttendanceDao attendanceDao;
     @Autowired
     SeminarScoreDao seminarScoreDao;
-
+    @Autowired
+    RoundDao roundDao;
     /**
      * 创建课程讨论课
      * @param record 讨论课记录
@@ -54,7 +55,7 @@ public class SeminarDao {
             //插入班级讨论课记录
             klassSeminarDao.insertByList(klassSeminarsRecord);
             if(record.getRound()==null){
-                //TODO 若没有轮，默认新建
+                //TODO 新建轮
             }
             return record.getId();
         }

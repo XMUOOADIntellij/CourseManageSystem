@@ -7,9 +7,9 @@
 
     <result column="seminar_name" property="seminarName" jdbcType="VARCHAR" />
     <result column="introduction" property="introduction" jdbcType="VARCHAR" />
-    <result column="max_team" property="maxTeam" jdbcType="INTEGER" />
+    <result column="max_team" property="maxTeam" jdbcType="TINYINT" />
     <result column="is_visible" property="visible" jdbcType="TINYINT" />
-    <result column="seminar_serial" property="seminarSerial" jdbcType="INTEGER" />
+    <result column="seminar_serial" property="seminarSerial" jdbcType="TINYINT" />
     <result column="enroll_start_time" property="enrollStartTime" jdbcType="TIMESTAMP" />
     <result column="enroll_end_time" property="enrollEndTime" jdbcType="TIMESTAMP" />
 
