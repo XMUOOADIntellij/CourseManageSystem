@@ -123,9 +123,9 @@ public class SeminarController {
      * @param classId 班级id
      */
     @GetMapping(value="/{seminarId}/class/{classId}/report")
-    public void downloadAllReport(@PathVariable Long seminarId, @PathVariable Long classId, HttpServletResponse response){
-        //TODO
-        return;
+    public void downloadAllReport(@PathVariable Long seminarId, @PathVariable Long classId,
+                                  HttpServletResponse response){
+        attendanceService.downloadAllReport(seminarId,classId,response);
     }
 
     /**
@@ -136,7 +136,7 @@ public class SeminarController {
     @GetMapping(value="/{seminarId}/class/{classId}/ppt")
     public void downloadAllPPT(@PathVariable Long seminarId, @PathVariable Long classId,
                                HttpServletResponse response) {
-       // attendanceService.downloadAllPpt(seminarId,classId,response);
+       attendanceService.downloadAllPpt(seminarId,classId,response);
     }
 
     /**

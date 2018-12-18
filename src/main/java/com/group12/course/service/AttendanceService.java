@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -193,6 +194,47 @@ public class AttendanceService {
             FileUtil.downloadFile(response,fileUrl);}
         catch (Exception e){
             return;
+        }
+    }
+
+    public void downloadAllPpt(Long seminarId,Long classId,HttpServletResponse response){
+        List<String> fileName = new ArrayList<>();
+        KlassSeminar klassSeminar = klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+        if(klassSeminar!=null){
+           List<Attendance> attendanceList = attendanceDao.selectAttendanceByKlassSeminarId(klassSeminar.getId());
+           for(Attendance item:attendanceList){
+               fileName.add(item.getPptName());
+           }
+           String filePath = "E:/ppt/"+klassSeminar.getId()+"/";
+           try{
+               FileUtil.downloadAllFiles(response,fileName,filePath);
+           }catch (Exception e){
+               //TODO
+           }
+        }
+        else{
+            //TODO KlassSeminarNotFound
+        }
+    }
+
+    public void downloadAllReport(Long seminarId,Long classId,HttpServletResponse response){
+
+        List<String> fileName = new ArrayList<>();
+        KlassSeminar klassSeminar = klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+        if(klassSeminar!=null){
+            List<Attendance> attendanceList = attendanceDao.selectAttendanceByKlassSeminarId(klassSeminar.getId());
+            for(Attendance item:attendanceList){
+                fileName.add(item.getReportName());
+            }
+            String filePath = "E:/ppt/"+klassSeminar.getId()+"/";
+            try{
+                FileUtil.downloadAllFiles(response,fileName,filePath);
+            }catch (Exception e){
+                //TODO
+            }
+        }
+        else{
+            //TODO KlassSeminarNotFound
         }
     }
 }

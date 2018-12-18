@@ -62,13 +62,13 @@ public class RoundController {
      */
     @PutMapping(value="/{roundId}",produces = "application/json;charset=utf-8")
     public void updateRound(@PathVariable Long roundId,@RequestBody Round round, HttpServletResponse response){
-        int status = roundService.updateRound(round);
-        if(status == 0){
-            response.setStatus(400);
-        }
-        else{
-            response.setStatus(204);
-        }
+//        int status = roundService.updateRound(round);
+//        if(status == 0){
+//            response.setStatus(400);
+//        }
+//        else{
+//            response.setStatus(204);
+//        }
     }
 
     /**
@@ -78,13 +78,13 @@ public class RoundController {
      */
     @PostMapping(value="",produces = "application/json;charset=utf-8")
     public void createRound(@RequestBody Round round,HttpServletResponse response){
-        int status = roundService.addRound(round);
-        if(status == 0){
-            response.setStatus(400);
-        }
-        else{
-            response.setStatus(204);
-        }
+//        int status = roundService.addRound(round);
+//        if(status == 0){
+//            response.setStatus(400);
+//        }
+//        else{
+//            response.setStatus(204);
+//        }
     }
 
 }
