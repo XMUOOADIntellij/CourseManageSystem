@@ -12,6 +12,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 /**
  *
  */
@@ -23,8 +25,15 @@ public class CourseDaoTest {
     CourseMapper courseMapper;
 
     @Test
-    public void testSelectCourse(){
+    public void testGetCourse(){
         Course record =  courseMapper.selectCourseById(new Long(1));
         Assert.assertNotNull(record.getCourseName());
+    }
+
+    @Test
+    public void testGetCourseByTeacherId(){
+        List<Course> records = courseMapper.selectCourseByTeacherId(new Long(1));
+        Assert.assertFalse(records.isEmpty());
+
     }
 }
