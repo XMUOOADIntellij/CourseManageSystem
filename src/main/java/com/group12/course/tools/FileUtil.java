@@ -12,13 +12,10 @@ import java.util.zip.ZipOutputStream;
 
 public class FileUtil {
 
-    static public String uploadFile(MultipartFile file,String filePath) throws Exception{
+    static public String uploadFile(MultipartFile file,String filePath,String fileName) throws Exception{
         if(file.isEmpty()){
             return "Empty file";
         }
-        String fileName = file.getOriginalFilename();
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));
-
         File dest =new File(filePath + fileName);
         if(!dest.getParentFile().exists()){
             dest.getParentFile().mkdirs();
@@ -29,18 +26,18 @@ public class FileUtil {
     }
 
 
-    static public void downloadFile(HttpServletResponse response, String fileUrl) throws Exception{
+    static public void downloadFile(HttpServletResponse response, String fileUrl,String fileName) throws Exception{
+        //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
+        response.setContentType("multipart/form-data");
+        //2.设置文件头：最后一个参数是设置下载文件名
+        response.setHeader("Content-Disposition", "attachment;fileName="+ fileName);
+
         if(fileUrl!=null){
             File file = new File(fileUrl);
             if(file.exists()){
-                response.setContentType("application/force-download");
-                response.addHeader("Content-Disposition","attachment;fileUrl="+fileUrl);
-
                 byte[] buffer = new byte[1024];
                 FileInputStream fileInputStream = null;
                 BufferedInputStream bufferedInputStream=null;
-
-
                 fileInputStream = new FileInputStream(file);
                 bufferedInputStream = new BufferedInputStream(fileInputStream);
                 OutputStream outputStream = response.getOutputStream();
@@ -72,11 +69,11 @@ public class FileUtil {
         return;
     }
 
-    static public void downloadAllFiles(HttpServletResponse response, List<String> names, String path) throws Exception{
+    static public void downloadAllFiles(HttpServletResponse response, List<String> url , List<String>fileName) throws Exception{
 
-        for(String item:names){
-            System.out.println(path+names);
-        }
+        //取出路径
+        String path = url.get(1).substring(0,url.get(1).lastIndexOf("/")+1);
+
         File directoryFile = new File(path);
         if (!directoryFile.isDirectory() && !directoryFile.exists()) {
             directoryFile.mkdirs();
@@ -95,11 +92,10 @@ public class FileUtil {
 
         try {
             zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFile));
-            for (int i = 0; i < names.size(); i++) {
+            for (int i = 0; i < url.size(); i++) {
                 //解码获取真实路径与文件名
-                String realFileName = java.net.URLDecoder.decode(names.get(i), "UTF-8");
-                String realFilePath = java.net.URLDecoder.decode(path, "UTF-8");
-                File file = new File(realFilePath,realFileName);
+                String realFileName = fileName.get(i);
+                File file = new File(url.get(i));
                 //未对文件不存在时进行操作，后期优化。
                 if (file.exists()) {
                     //将需要压缩的文件格式化为输入流
@@ -134,7 +130,7 @@ public class FileUtil {
 
         }
         if(zipFile.exists()){
-            downloadFile(response,stringZipPath+zipFileName);
+            downloadFile(response,stringZipPath+zipFileName,zipFileName);
             zipFile.delete();
         }
     }
