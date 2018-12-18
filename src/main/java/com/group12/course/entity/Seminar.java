@@ -1,6 +1,6 @@
 package com.group12.course.entity;
 
-import com.group12.course.vo.SeminarVo;
+import com.group12.course.vo.SeminarVO;
 import org.apache.ibatis.type.Alias;
 
 import java.io.Serializable;
@@ -135,14 +135,16 @@ public class Seminar  {
     }
 
     public Seminar(){}
-    public Seminar(SeminarVo seminarVo){
+    public Seminar(SeminarVO seminarVo){
         this.id =seminarVo.getSeminarId();
 
         this.course = new Course();
         this.course.setId(seminarVo.getCourseId());
 
-        this.round = new Round();
-        this.round.setId(seminarVo.getRoundId());
+        if(seminarVo.getRoundId()!=null){
+            this.round = new Round();
+            this.round.setId(seminarVo.getRoundId());
+        }
 
         this.seminarName = seminarVo.getSeminarName();
         this.introduction = seminarVo.getIntroduction();

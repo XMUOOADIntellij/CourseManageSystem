@@ -2,8 +2,10 @@
 //
 //
 //import com.group12.course.entity.*;
+//import com.group12.course.entity.strategy.MemberLimitStrategy;
 //import com.group12.course.service.CourseService;
 //import com.group12.course.service.KlassService;
+//import com.group12.course.service.MemberLimitStrategyService;
 //import com.group12.course.service.StudentService;
 //import com.group12.course.vo.CourseVO;
 //import com.group12.course.vo.ShareVO;
@@ -32,6 +34,25 @@
 //    KlassService klassService;
 //    @Autowired
 //    StudentService studentService;
+//    @Autowired
+//    MemberLimitStrategyService memberLimitStrategyService;
+//
+//    /**
+//     * 新建课程
+//     * @param courseVO
+//     * @return Course
+//     */
+//    @PostMapping(value="",produces = "application/json; charset=utf-8")
+//    public void createCourse(@RequestParam Long teacherId,@RequestBody CourseVO courseVO, HttpServletResponse response){
+//        Course course = new Course(courseVO);
+//        int status1 = courseService.addCourse(teacherId,course);
+//
+//        MemberLimitStrategy memberLimitStrategy = new MemberLimitStrategy(courseVO);
+//        int status2 = memberLimitStrategyService.addMemberLimitStrategy(memberLimitStrategy);
+//
+//
+//        /*TODO 冲突课程*/
+//    }
 //
 //    /**
 //     * 获得当前用户所有课程
@@ -53,17 +74,7 @@
 //        return courseService.getCourseById(courseId);
 //    }
 //
-//    /**
-//     * 新建课程
-//     * @param courseVO
-//     * @return Course
-//     */
-//    @PostMapping(value="",produces = "application/json; charset=utf-8")
-//    public void createCourse(@RequestParam Long teacherId,@RequestBody CourseVO courseVO, HttpServletResponse response){
 //
-//
-//        return;
-//    }
 //
 //    /**
 //     * 删除课程
@@ -88,7 +99,7 @@
 //     * @param course Course
 //     * @return Course
 //     */
-//    @PostMapping(value="",produces = "application/json; charset=utf-8")
+//    @PutMapping(value="",produces = "application/json; charset=utf-8")
 //    public void updateCourse(@RequestBody Course course,HttpServletResponse response){
 //        int status = courseService.updateCourse(course);
 //        if(status == 0){
@@ -141,14 +152,14 @@
 //     */
 //    @GetMapping(value="/{courseId}/class",produces = "application/json; charset=utf-8")
 //    public List<Klass> getAllKlassByCourseId(@PathVariable Long courseId,HttpServletResponse response){
-//        List<Klass> list = klassService.getAllKlassByCourseId(courseId);
-//        if (list.isEmpty()){
+//        List<Klass> klassList = klassService.getAllKlassByCourseId(courseId);
+//        if (klassList.isEmpty()){
 //            response.setStatus(404);
 //            return new ArrayList<>();
 //        }
 //        else {
 //            response.setStatus(200);
-//            return list;
+//            return klassList;
 //        }
 //    }
 //

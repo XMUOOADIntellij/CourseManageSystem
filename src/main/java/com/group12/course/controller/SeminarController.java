@@ -1,16 +1,16 @@
 package com.group12.course.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.group12.course.entity.Attendance;
-import com.group12.course.entity.KlassSeminar;
-import com.group12.course.entity.Seminar;
+import com.group12.course.entity.*;
 import com.group12.course.service.AttendanceService;
 import com.group12.course.service.SeminarService;
+import com.group12.course.tools.Jwt;
 import com.group12.course.vo.AttendanceVo;
-import com.group12.course.vo.SeminarVo;
+import com.group12.course.vo.SeminarVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,10 +36,21 @@ public class SeminarController {
      * @return 讨论课id
      */
     @PostMapping(value= "" , produces = "application/json; charset=utf-8")
-    public Long createSeminar(@RequestBody SeminarVo seminarVo){
-        //TODO if(seminar name/maxteam/isvisible/serial/courseId 信息不完整
+    public Long createSeminar(@RequestBody SeminarVO seminarVo, HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
+
+        if(seminarVo.getMaxTeam()==null ||
+           seminarVo.getSeminarName()==null||
+           seminarVo.getCourseId()==null||
+           seminarVo.getVisible()==null||
+           seminarVo.getSeminarSerial()==null){
+        }
+        else{
+            //TODO 信息不完全
+        }
         Seminar seminar = new Seminar(seminarVo);
-        return  seminarService.createSeminar(seminar);
+        return  seminarService.createSeminar(seminar,jwtTeacher);
     }
 
     /**
@@ -47,20 +58,10 @@ public class SeminarController {
      * @param seminarId 根据id
      */
     @DeleteMapping(value="/{seminarId}", produces = "application/json; charset=utf-8")
-    public Integer deleteSeminar(@PathVariable Long seminarId){
-        return seminarService.deleteSeminar(seminarId);
-    }
-
-    /**
-     * 获得某班级的讨论课
-     * @param seminarId 课程讨论课的id
-     * @param classId 班级id
-     * @return SeminarVo
-     */
-    @GetMapping(value="/{seminarId}/class/{classId}",produces = "application/json")
-    public SeminarVo selectKlassSeminarBySeminarIdAndClassId(@PathVariable Long seminarId, @PathVariable Long classId){
-       KlassSeminar record =  seminarService.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
-       return new SeminarVo(record);
+    public Integer deleteSeminar(@PathVariable Long seminarId,HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
+        return seminarService.deleteSeminar(seminarId,jwtTeacher);
     }
 
     /**
@@ -69,10 +70,11 @@ public class SeminarController {
      * @param seminarId 讨论课id
      */
     @PutMapping(value="/{seminarId}",produces = "application/json")
-    public Integer modifySeminar(@RequestBody SeminarVo seminarVo,@PathVariable Long seminarId){
+    public Integer modifySeminar(@RequestBody SeminarVO seminarVo,@PathVariable Long seminarId){
         //TODO 判断合法
         Seminar seminar =new Seminar(seminarVo);
-        return seminarService.updateSeminar(seminar,seminarId);
+        seminar.setId(seminarId);
+        return seminarService.updateSeminar(seminar);
     }
 
     /**
@@ -82,10 +84,23 @@ public class SeminarController {
      * @param
      */
     @PutMapping(value="/{seminarId}/class/{classId}",produces = "application/json")
-    public Integer modifyKlassSeminar(@PathVariable Long seminarId, @PathVariable Long classId,@RequestBody SeminarVo seminarVo){
+    public Integer modifyKlassSeminar(@PathVariable Long seminarId, @PathVariable Long classId,
+                                      @RequestBody SeminarVO seminarVo){
         //TODO 判断合法
         KlassSeminar klassSeminar = new KlassSeminar(seminarVo);
         return seminarService.updateKlassSeminar(seminarId,classId,klassSeminar);
+    }
+
+    /**
+     * 获得某班级的讨论课
+     * @param seminarId 课程讨论课的id
+     * @param classId 班级id
+     * @return SeminarVO
+     */
+    @GetMapping(value="/{seminarId}/class/{classId}",produces = "application/json")
+    public SeminarVO selectKlassSeminarBySeminarIdAndClassId(@PathVariable Long seminarId, @PathVariable Long classId){
+       KlassSeminar record =  seminarService.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+       return new SeminarVO(record);
     }
 
 
@@ -123,9 +138,9 @@ public class SeminarController {
      * @param classId 班级id
      */
     @GetMapping(value="/{seminarId}/class/{classId}/report")
-    public void downloadAllReport(@PathVariable Long seminarId, @PathVariable Long classId, HttpServletResponse response){
-        //TODO
-        return;
+    public void downloadAllReport(@PathVariable Long seminarId, @PathVariable Long classId,
+                                  HttpServletResponse response){
+        attendanceService.downloadAllReport(seminarId,classId,response);
     }
 
     /**
@@ -136,7 +151,7 @@ public class SeminarController {
     @GetMapping(value="/{seminarId}/class/{classId}/ppt")
     public void downloadAllPPT(@PathVariable Long seminarId, @PathVariable Long classId,
                                HttpServletResponse response) {
-       // attendanceService.downloadAllPpt(seminarId,classId,response);
+       attendanceService.downloadAllPpt(seminarId,classId,response);
     }
 
     /**
@@ -149,6 +164,11 @@ public class SeminarController {
         //TODO RequstBody有teamid和order解决
         //TODO
         return;
+    }
+
+    @GetMapping(value="/{seminarId}/class/{classId}/question")
+    public void getAllQuestion(@PathVariable Long seminarId,@PathVariable Long classId){
+
     }
 
 }

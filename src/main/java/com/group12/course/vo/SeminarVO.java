@@ -5,7 +5,7 @@ import com.group12.course.entity.Seminar;
 
 import java.time.LocalDateTime;
 
-public class SeminarVo {
+public class SeminarVO {
 
     /**
      * id属性
@@ -159,9 +159,9 @@ public class SeminarVo {
         this.klassId = klassId;
     }
 
-    public SeminarVo(){};
+    public SeminarVO(){};
 
-    public SeminarVo(KlassSeminar klassSeminar){
+    public SeminarVO(KlassSeminar klassSeminar){
         //班级讨论课属性
         this.klassSeminarId = klassSeminar.getId();
         this.reportDdl = klassSeminar.getReportDdl();
@@ -178,10 +178,9 @@ public class SeminarVo {
         this.seminarSerial=seminar.getSeminarSerial();
         this.enrollStartTime = seminar.getEnrollStartTime();
         this.enrollEndTime = seminar.getEnrollEndTime();
-
     }
 
-    public SeminarVo(Seminar seminar){
+    public SeminarVO(Seminar seminar){
         this.seminarId = seminar.getId();
         this.seminarName =seminar.getSeminarName();
         this.introduction = seminar.getIntroduction();

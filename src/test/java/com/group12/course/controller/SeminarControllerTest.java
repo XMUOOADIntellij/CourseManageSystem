@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -63,5 +64,47 @@ public class SeminarControllerTest  extends AbstractTransactionalJUnit4SpringCon
                         .andReturn();
     }
 
+    @Test
+    public void testModifyKlassSeminar() throws Exception{
+        Map<String,String> request = new TreeMap<>();
+        request.put("reportDdl", LocalDateTime.now().toString());
 
+        MvcResult mvcResult =
+                mvc.perform(MockMvcRequestBuilders.put("/seminar/{seminarId}/class/{classId}",4,3)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(JSONObject.toJSONString(request)))
+                        //验证执行的控制器类型
+                        .andExpect(handler().handlerType(SeminarController.class))
+                        //验证执行的控制器方法名
+                        .andExpect(handler().methodName("modifyKlassSeminar"))
+                        //验证状态码
+                        .andExpect(status().isOk())
+                        //验证contentType
+                        .andExpect(content().contentType("application/json;charset=UTF-8"))
+                        // 可以打印结果
+                        //.andDo(print())
+                        .andReturn();
+    }
+
+    @Test
+    public void testModifySeminar() throws Exception{
+        Map<String,String> request = new TreeMap<>();
+        request.put("seminarName", "testModify");
+
+        MvcResult mvcResult =
+                mvc.perform(MockMvcRequestBuilders.put("/seminar/{seminarId}",1)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(JSONObject.toJSONString(request)))
+                        //验证执行的控制器类型
+                        .andExpect(handler().handlerType(SeminarController.class))
+                        //验证执行的控制器方法名
+                        .andExpect(handler().methodName("modifySeminar"))
+                        //验证状态码
+                        .andExpect(status().isOk())
+                        //验证contentType
+                        .andExpect(content().contentType("application/json;charset=UTF-8"))
+                        // 可以打印结果
+                        //.andDo(print())
+                        .andReturn();
+    }
 }
