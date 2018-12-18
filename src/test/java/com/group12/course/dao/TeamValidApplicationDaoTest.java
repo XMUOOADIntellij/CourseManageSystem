@@ -45,6 +45,6 @@ public class TeamValidApplicationDaoTest {
         TeamValidApplication teamValidApplication = new TeamValidApplication();
         teamValidApplication.setId(1L);
         teamValidApplication.setStatus(1);
-        Assert.assertEquals(1,teamValidApplicationMapper.updateTeamValidApplicationStatusById(teamValidApplication));
+        Assert.assertEquals(1,teamValidApplicationMapper.updateTeamValidApplicationStatus(teamValidApplication));
     }
 }

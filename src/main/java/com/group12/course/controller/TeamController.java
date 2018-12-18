@@ -7,10 +7,12 @@ import com.group12.course.entity.Course;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
 import com.group12.course.entity.Team;
+import com.group12.course.entity.application.TeamValidApplication;
 import com.group12.course.service.TeamService;
 import com.group12.course.tools.Jwt;
 import com.group12.course.vo.StudentVO;
 import com.group12.course.vo.TeamVO;
+import com.group12.course.vo.TeamValidApplicationVO;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
@@ -46,6 +48,7 @@ public class TeamController {
         }
         else {
             response.setStatus(200);
+            response.getWriter().write(""+team.getId());
             /**
              * TODO
              * 返回 id
@@ -130,8 +133,10 @@ public class TeamController {
     }
 
     @PostMapping(value = "/{teamId}/teamvalidrequest",produces = "application/json; charset=utf-8")
-    public void sendRequest(@RequestBody Team team, @PathVariable String teamId, HttpServletResponse response)throws IOException {
-        /*TODO*/
+    public void sendRequest(@RequestBody TeamValidApplicationVO teamValidApplicationVO, @PathVariable Long teamId, HttpServletResponse response)throws IOException {
+        //TeamValidApplication teamValidApplication = new TeamValidApplication(teamValidApplicationVO);
+
+        // TODO 前端不能回传老师的id，所以需要根据课程去找老师的id
     }
 
     @PutMapping(value = "/{teamId}/approve",produces = "application/json; charset=utf-8")

@@ -21,6 +21,6 @@ public interface TeamValidApplicationMapper {
 
     int addTeamValidApplication(TeamValidApplication record);
 
-    int updateTeamValidApplicationStatusById(TeamValidApplication record);
+    int updateTeamValidApplicationStatus(TeamValidApplication record);
 
 }
