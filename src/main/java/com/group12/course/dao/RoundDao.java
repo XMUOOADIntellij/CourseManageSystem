@@ -5,6 +5,8 @@ import com.group12.course.mapper.RoundMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Round Dao 层
  * @author Tan Xue
@@ -32,5 +34,7 @@ public class RoundDao {
         return roundMapper.updateRound(round);
     }
 
-
+    public List<Round> getRoundByCourseId(Long id){
+        return roundMapper.selectRoundByCourseId(id);
+    }
 }

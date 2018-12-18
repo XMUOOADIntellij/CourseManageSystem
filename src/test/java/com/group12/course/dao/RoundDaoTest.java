@@ -12,6 +12,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -20,9 +22,15 @@ public class RoundDaoTest {
     RoundMapper roundMapper;
 
     @Test
-    public void testSelectRound(){
+    public void testGetRound(){
         Round record =  roundMapper.selectRoundById(new Long(1));
         Assert.assertNotNull(record.getCourse());
+    }
+
+    @Test
+    public void testGetRoundByCourseId(){
+        List<Round> records = roundMapper.selectRoundByCourseId(new Long(1));
+        Assert.assertFalse(records.isEmpty());
     }
 
 }
