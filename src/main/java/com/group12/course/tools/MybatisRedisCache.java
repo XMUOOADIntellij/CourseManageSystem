@@ -87,7 +87,8 @@ public class MybatisRedisCache implements Cache {
     }
 
     protected static Jedis createRedis() {
-        JedisPool pool = new JedisPool(new JedisPoolConfig(), "47.107.81.51",6379,2000,"123456");
+        //JedisPool pool = new JedisPool(new JedisPoolConfig(), "47.107.81.51",6379,2000,"123456");
+        JedisPool pool = new JedisPool(new JedisPoolConfig(),"localhost");
         return pool.getResource();
     }
 }

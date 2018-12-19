@@ -21,6 +21,8 @@
 
     </resultMap>
 
+    <cache type="com.group12.course.tools.MybatisRedisCache" />
+
     <sql id="Base_Column_List" >
         id,team_id,teacher_id,reason,status
     </sql>

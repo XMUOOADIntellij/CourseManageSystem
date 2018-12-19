@@ -13,7 +13,7 @@
     id, account, password, email, is_active, student_name
   </sql>
 
-  <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
+  <cache type="com.group12.course.tools.MybatisRedisCache" />
 
   <select id="getAllStudent" resultMap="BaseResultMap" >
     select

@@ -3,6 +3,7 @@ package com.group12.course.entity;
 import com.group12.course.vo.TeamVO;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @date 2018年12月10日
  */
 @Component
-public class Team {
+public class Team implements Serializable {
     private Long id;
 
     private Course course;
