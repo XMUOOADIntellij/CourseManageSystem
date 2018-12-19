@@ -41,4 +41,8 @@ public class KlassSeminarDao {
             return null;
         }
     }
+
+    public List<KlassSeminar> getKlassSeminarBySeminarIdList(List<Long> seminarId){
+        return klassSeminarMapper.selectKlassSeminarBySeminarIdList(seminarId);
+    }
 }

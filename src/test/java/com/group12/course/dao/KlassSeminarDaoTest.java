@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -54,5 +55,12 @@ public class KlassSeminarDaoTest extends AbstractTransactionalJUnit4SpringContex
         klassSeminarDao.updateKlassSeminar(klassSeminar);
     }
 
+    @Test
+    public void testSelectKlassSeminarBySeminarIdList(){
+        List<Long> seminarId = new ArrayList<>();
+        seminarId.add(new Long(1));
+        seminarId.add(new Long(2));
+        Assert.assertNotNull(klassSeminarDao.getKlassSeminarBySeminarIdList(seminarId));
+    }
 
 }

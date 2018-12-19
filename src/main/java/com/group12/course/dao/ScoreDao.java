@@ -1,9 +1,7 @@
 package com.group12.course.dao;
 
-import com.group12.course.entity.Course;
-import com.group12.course.entity.Round;
-import com.group12.course.entity.RoundScore;
-import com.group12.course.entity.SeminarScore;
+import com.group12.course.entity.*;
+import com.group12.course.mapper.RoundScoreMapper;
 import com.group12.course.mapper.SeminarScoreMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,14 +17,20 @@ import java.util.List;
  * @date 2018/12/19
  */
 @Component
-public class SeminarScoreDao {
+public class ScoreDao {
     @Autowired
     SeminarScoreMapper seminarScoreMapper;
+    @Autowired
+    RoundScoreMapper roundScoreMapper;
+
     @Autowired
     CourseDao courseDao;
     @Autowired
     RoundDao roundDao;
-
+    @Autowired
+    SeminarDao seminarDao;
+    @Autowired
+    KlassSeminarDao klassSeminarDao;
 
     /**
      * 计算平均分
@@ -38,6 +42,7 @@ public class SeminarScoreDao {
         for(BigDecimal item:score){
             result = result.add(item);
         }
+        //TODO 换成除以每轮的报名数
         return result.divide(new BigDecimal(score.size())).setScale(2, RoundingMode.HALF_DOWN);
     }
 
@@ -72,7 +77,10 @@ public class SeminarScoreDao {
                                 .add(questionScore.multiply(new BigDecimal(course.getQuestionPercentage())))
                                 .add(reportScore.multiply(new BigDecimal(course.getReportPercentage())))
                 )
-                        .divide(new BigDecimal(100));
+                        .divide(new BigDecimal(course.getQuestionPercentage()
+                                +course.getPresentationPercentage()
+                                +course.getReportPercentage()))
+                        .setScale(2);
     }
 
     /**
@@ -82,6 +90,7 @@ public class SeminarScoreDao {
      * Method 1->平均分 0->最高分
      */
     private RoundScore calculateRoundScore(List<SeminarScore> seminarScores,Round round){
+
         RoundScore roundScore = new RoundScore();
 
         List<BigDecimal> presentationScore = new ArrayList<>();
@@ -111,7 +120,6 @@ public class SeminarScoreDao {
         return roundScore;
     }
 
-
     public Integer deleteSeminarScoreByKlassSeminarId(Long klassSeminarId){
         // TODO 更新RoundDao的记录
         return seminarScoreMapper.deleteSeminarScoreByKlassSeminarId(klassSeminarId);
@@ -135,17 +143,45 @@ public class SeminarScoreDao {
 
         //按照比例更改总分
         seminarScore.setTotalScore(
-                seminarScore.getPresentationScore().multiply(new BigDecimal(course.getPresentationPercentage()))
-                .add(seminarScore.getQuestionScore().multiply(new BigDecimal(course.getQuestionPercentage())))
-                .add(seminarScore.getReportScore().multiply(new BigDecimal(course.getReportPercentage())))
-                .divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_DOWN));
+                calculateTotalScore(seminarScore.getPresentationScore(),seminarScore.getQuestionScore(),
+                        seminarScore.getReportScore(),course));
 
         seminarScoreMapper.updateSeminarScore(seminarScore);
 
         //更改RoundScore
         Round round = roundDao.getRound(seminarScore.getKlassSeminar().getSeminar().getRound().getId());
+        List<KlassSeminar> klassSeminarList = new ArrayList<>();
 
+        //获得班级
+        Klass klass = seminarScore.getKlassSeminar().getKlass();
+
+        //找到该轮的班级讨论课
+        for(Seminar seminar:seminarDao.listSeminarByRoundId(round.getId())){
+            klassSeminarList.add(
+                    klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminar.getId(),klass.getId())
+            );
+        }
+
+        //根据班级讨论课和小组找到该轮该小组分数
+        List<SeminarScore> seminarScoreList = new ArrayList<>();
+        for(KlassSeminar item : klassSeminarList){
+            seminarScoreList.add(
+                    selectSeminarScoreByKlassSeminarIdAndTeamId(item.getId(),seminarScore.getTeam().getId())
+            );
+        }
+
+        //计算RoundScore
+        RoundScore roundScore = calculateRoundScore(seminarScoreList,round);
+        roundScore.setTotalScore(
+                calculateTotalScore(roundScore.getPresentationScore(),roundScore.getQuestionScore(),
+                        roundScore.getReportScore(),course)
+        );
+        roundScore.setRound(round);
+        roundScore.setTeam(seminarScore.getTeam());
+        roundScoreMapper.updateRoundScore(roundScore);
         return null;
     }
+
+
 
 }

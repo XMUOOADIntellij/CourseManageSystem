@@ -1,7 +1,10 @@
 package com.group12.course.entity;
 
+import org.apache.ibatis.type.Alias;
+
 import java.math.BigDecimal;
 
+@Alias("roundScore")
 public class RoundScore {
 
     private  Round round;

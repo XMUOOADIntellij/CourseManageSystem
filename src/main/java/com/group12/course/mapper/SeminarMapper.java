@@ -4,6 +4,8 @@ import com.group12.course.entity.Seminar;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Seminar Mapper层
  * @author Y Jiang
@@ -38,8 +40,14 @@ public interface SeminarMapper {
     /**
      * 修改讨论课信息
      * @param record Seminar
-     * @param id  讨论课id
      * @return int
      */
     int updateSeminar(Seminar record);
+
+    /**
+     * 查找该轮的所有讨论课
+     * @param roundId 课程id
+     * @return List<Seminar>
+     */
+    List<Seminar> listSeminarByRoundId(Long roundId);
 }
