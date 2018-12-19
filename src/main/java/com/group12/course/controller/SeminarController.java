@@ -3,9 +3,11 @@ package com.group12.course.controller;
 import com.alibaba.fastjson.JSON;
 import com.group12.course.entity.*;
 import com.group12.course.service.AttendanceService;
+import com.group12.course.service.QuestionService;
 import com.group12.course.service.SeminarService;
 import com.group12.course.tools.Jwt;
 import com.group12.course.vo.AttendanceVo;
+import com.group12.course.vo.QuestionVO;
 import com.group12.course.vo.SeminarVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,8 @@ public class SeminarController {
     SeminarService seminarService;
     @Autowired
     AttendanceService attendanceService;
+    @Autowired
+    QuestionService questionService;
 
     /**
      * 创建讨论课
@@ -167,8 +171,22 @@ public class SeminarController {
     }
 
     @GetMapping(value="/{seminarId}/class/{classId}/question")
-    public void getAllQuestion(@PathVariable Long seminarId,@PathVariable Long classId){
-
+    public List<QuestionVO> getAllQuestion(@PathVariable Long seminarId, @PathVariable Long classId){
+        List<Question> questionlist = questionService.getAllQuestion(seminarId,classId);
+        List<QuestionVO> questionVOList = new ArrayList<>();
+        for(Question item:questionlist){
+            questionVOList.add(new QuestionVO(item));
+        }
+        return questionVOList;
     }
 
+    @PostMapping(value="/{seminarId}/class/{classId}/question")
+    public Long askQuestion(@PathVariable Long seminarId,@PathVariable Long classId,
+                               @RequestBody QuestionVO questionVO,
+                               HttpServletRequest request){
+
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        return questionService.askQuestion(seminarId,classId,new Question(questionVO),jwtStudent);
+    }
 }

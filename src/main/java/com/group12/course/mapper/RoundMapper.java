@@ -2,6 +2,7 @@ package com.group12.course.mapper;
 
 import com.group12.course.entity.Round;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface RoundMapper {
 
     int deleteRound(Long id);
 
-    int addRound(Round record);
+    int addRound(Round record,Long courseId);
 
     Round selectRoundById(Long id);
 

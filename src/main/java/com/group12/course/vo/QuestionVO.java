@@ -7,8 +7,6 @@ import java.math.BigDecimal;
 public class QuestionVO {
     private Long id;
 
-    private Long klassSeminarId;
-
     private Integer klassSerial;
 
     private Long attendanceId;
@@ -29,14 +27,6 @@ public class QuestionVO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getKlassSeminarId() {
-        return klassSeminarId;
-    }
-
-    public void setKlassSeminarId(Long klassSeminarId) {
-        this.klassSeminarId = klassSeminarId;
     }
 
     public Integer getKlassSerial() {
@@ -107,7 +97,6 @@ public class QuestionVO {
 
     public QuestionVO(Question question){
         this.id = question.getId();
-        this.klassSeminarId = question.getKlassSeminar().getId();
         this.klassSerial = question.getKlassSeminar().getKlass().getKlassSerial();
         this.account = question.getStudent().getAccount();
         this.studentName = question.getStudent().getStudentName();
@@ -115,6 +104,6 @@ public class QuestionVO {
         this.teamSerial = question.getTeam().getTeamSerial();
         this.attendanceId = question.getAttendance().getId();
         this.score = question.getScore();
-        this.selected =question.getSelected();
+        this.selected = question.getSelected();
     }
 }
