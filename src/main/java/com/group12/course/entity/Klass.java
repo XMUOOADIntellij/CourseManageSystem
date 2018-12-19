@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 
 @Component
-public class Klass  {
+public class Klass implements Serializable{
     private Long id;
 
     private Course course;

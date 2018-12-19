@@ -40,8 +40,7 @@ public class RoundService {
      * @return
      */
     public Round getRound(Long roundId){
-        Round round = roundDao.getRound(roundId);
-        return round;
+        return roundDao.getRound(roundId);
     }
 
     /**
@@ -59,5 +58,16 @@ public class RoundService {
      */
     public int addRound(Round round){
         return roundDao.addRound(round);
+    }
+
+    /**
+     * 计算某课程下的轮次个数
+     * @param courseId
+     * @return
+     */
+    public int countRoundByCourseId(Long courseId){
+        List<Round> roundList = roundDao.getRoundByCourseId(courseId);
+        Integer count = roundList.size();
+        return count;
     }
 }

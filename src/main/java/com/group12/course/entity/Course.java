@@ -2,6 +2,7 @@ package com.group12.course.entity;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
  */
 
 @Component
-public class Course {
+public class Course implements Serializable {
     private Long id;
 
     private Teacher teacher;

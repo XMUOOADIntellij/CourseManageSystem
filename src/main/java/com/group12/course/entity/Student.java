@@ -52,6 +52,18 @@ public class Student implements Serializable {
         this.email=studentVO.getEmail();
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", active=" + active +
+                ", studentName='" + studentName + '\'' +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
