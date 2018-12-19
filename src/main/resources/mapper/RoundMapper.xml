@@ -3,10 +3,10 @@
 <mapper namespace="com.group12.course.mapper.RoundMapper" >
   <resultMap id="BaseResultMap" type="com.group12.course.entity.Round" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="round_serial" property="roundSerial" jdbcType="BIT" />
-    <result column="presentation_score_method" property="presentationScoreMethod" jdbcType="BIT" />
-    <result column="report_score_method" property="reportScoreMethod" jdbcType="BIT" />
-    <result column="question_score_method" property="questionScoreMethod" jdbcType="BIT" />
+    <result column="round_serial" property="roundSerial" jdbcType="TINYINT" />
+    <result column="presentation_score_method" property="presentationScoreMethod" jdbcType="TINYINT" />
+    <result column="report_score_method" property="reportScoreMethod" jdbcType="TINYINT" />
+    <result column="question_score_method" property="questionScoreMethod" jdbcType="TINYINT" />
 
     <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
                  column="course_id" javaType="com.group12.course.entity.Course"/>
@@ -28,7 +28,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="addRound" parameterType="com.group12.course.entity.Round" >
+  <insert id="addRound" useGeneratedKeys="true" keyProperty="round.id"  >
     insert into round
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -58,16 +58,16 @@
         #{courseId,jdbcType=BIGINT},
       </if>
       <if test="roundSerial != null" >
-        #{roundSerial,jdbcType=BIT},
+        #{roundSerial,jdbcType=TINYINT},
       </if>
       <if test="presentationScoreMethod != null" >
-        #{presentationScoreMethod,jdbcType=BIT},
+        #{presentationScoreMethod,jdbcType=TINYINT},
       </if>
       <if test="reportScoreMethod != null" >
-        #{reportScoreMethod,jdbcType=BIT},
+        #{reportScoreMethod,jdbcType=TINYINT},
       </if>
       <if test="questionScoreMethod != null" >
-        #{questionScoreMethod,jdbcType=BIT},
+        #{questionScoreMethod,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -75,20 +75,20 @@
   <update id="updateRound" parameterType="com.group12.course.entity.Round" >
     update round
     <set >
-      <if test="courseId != null" >
-        course_id = #{courseId,jdbcType=BIGINT},
+      <if test="course != null" >
+        course_id = #{course.id,jdbcType=BIGINT},
       </if>
       <if test="roundSerial != null" >
-        round_serial = #{roundSerial,jdbcType=BIT},
+        round_serial = #{roundSerial,jdbcType=TYNYINT},
       </if>
       <if test="presentationScoreMethod != null" >
-        presentation_score_method = #{presentationScoreMethod,jdbcType=BIT},
+        presentation_score_method = #{presentationScoreMethod,jdbcType=TINYINT},
       </if>
       <if test="reportScoreMethod != null" >
-        report_score_method = #{reportScoreMethod,jdbcType=BIT},
+        report_score_method = #{reportScoreMethod,jdbcType=TINYINT},
       </if>
       <if test="questionScoreMethod != null" >
-        question_score_method = #{questionScoreMethod,jdbcType=BIT},
+        question_score_method = #{questionScoreMethod,jdbcType=TINYINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
