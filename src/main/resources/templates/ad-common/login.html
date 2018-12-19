@@ -21,7 +21,7 @@
     <link href="../favicon.ico" rel="icon" type="image/x-icon" />
     <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Generated: 2018-04-16 09:29:05 +0200 -->
-    <title>修改邮箱</title>
+    <title>登录</title>
     <!-- Font -->
     <link href="../../static/css/fontawesome.min.css" rel="stylesheet" />
 
@@ -45,7 +45,6 @@
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/common.js"></script>
-    <script src="../../static/js/teacher.js"></script>
   </head>
   <body class="">
     <div class="page">
@@ -57,50 +56,50 @@
                 <img alt="" class="h-9" src="../../static/images/brand.png" />
               </div>
               <form
-                action="account-setting.html"
+                action="../teacher/active.html"
                 class="card"
                 method="post"
-                onsubmit="return editEmail();"
+                onsubmit="return bindUser();"
               >
                 <div class="card-body p-6">
-                  <div class="card-title">修改邮箱</div>
+                  <div class="card-title">登录您的账户</div>
                   <div class="form-group">
-                    <label class="form-label" for="exampleInputEmail1"
-                      >设置新邮箱</label
-                    >
+                    <label class="form-label">账户名/学工号</label>
                     <input
                       aria-describedby="emailHelp"
                       class="form-control"
                       id="exampleInputEmail1"
-                      placeholder="handsome@xmu.edu.cn"
+                      placeholder="account"
                       type="email"
                     />
                   </div>
                   <div class="form-group">
-                    <label class="form-label">验证身份</label>
-                    <div class="input-group">
+                    <label class="form-label">账户密码 </label>
+                    <div class="input-icon mb-3">
                       <input
                         class="form-control"
-                        placeholder="发送验证码至邮箱"
-                        type="text"
+                        id="exampleInputPassword1"
+                        placeholder="password"
+                        type="password"
                       />
-                      <span class="input-group-append">
-                        <button class="btn btn-secondary" type="button">
-                          获取验证码
-                        </button>
-                      </span>
+                      <span class="input-icon-addon"
+                        ><i class="fe fe-eye-off"></i
+                      ></span>
                     </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="custom-control custom-checkbox">
+                      <input class="custom-control-input" type="checkbox" />
+                      <span class="custom-control-label">记住我的密码</span>
+                    </label>
                   </div>
                   <div class="form-footer">
                     <button class="btn btn-primary btn-block" type="submit">
-                      确认提交
+                      登录
                     </button>
                   </div>
                 </div>
               </form>
-              <div class="text-center text-muted">
-                取消修改, <a href="account-setting.html">返回</a> 账户设置界面
-              </div>
             </div>
           </div>
         </div>
@@ -119,4 +118,5 @@
       </footer>
     </div>
   </body>
+  <script></script>
 </html>

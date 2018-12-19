@@ -21,7 +21,7 @@
     <link href="../favicon.ico" rel="icon" type="image/x-icon" />
     <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Generated: 2018-04-16 09:29:05 +0200 -->
-    <title>学生组队</title>
+    <title>我的课程</title>
     <!-- Font -->
     <link href="../../static/css/fontawesome.min.css" rel="stylesheet" />
 
@@ -53,7 +53,7 @@
         <div class="header py-4">
           <div class="container">
             <div class="d-flex">
-              <a class="header-brand ml-1" href="./home.html">
+              <a class="header-brand ml-1" href=".">
                 <img
                   alt="logo"
                   class="header-brand-img"
@@ -101,12 +101,31 @@
                         <div class="small text-muted">2 hours ago</div>
                       </div>
                     </a>
-                    <div class="dropdown-divider"></div>
+
                     <a
                       class="dropdown-item text-center text-muted-dark"
                       href="#"
                       >Mark all as read</a
                     >
+                  </div>
+                </div>
+                <div class="dropdown d-flex">
+                  <a class="nav-link icon" data-toggle="dropdown">
+                    <span class="btn btn-outline-secondary py-0">切换课程</span>
+                  </a>
+
+                  <div
+                    class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                  >
+                    <a class="dropdown-item" href="round-home.html">
+                      <i class="dropdown-icon fe fe-book"></i> OOAD
+                    </a>
+                    <a class="dropdown-item" href="import-home.html">
+                      <i class="dropdown-icon fe fe-book"></i> J2ee
+                    </a>
+                    <a class="dropdown-item" href="export-home.html">
+                      <i class="dropdown-icon fe fe-book"></i> .Net
+                    </a>
                   </div>
                 </div>
                 <div class="dropdown">
@@ -129,16 +148,6 @@
                   <div
                     class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
                   >
-                    <a class="dropdown-item" href="account-setting.html">
-                      <i class="dropdown-icon fe fe-settings"></i> 个人设置
-                    </a>
-                    <a class="dropdown-item" href="todo-list.html">
-                      <span class="float-right"
-                        ><span class="badge badge-primary">6</span></span
-                      >
-                      <i class="dropdown-icon fe fe-mail"></i> 待办事项
-                    </a>
-                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="../common/help.html">
                       <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
                     </a>
@@ -178,23 +187,18 @@
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="./home.html"
-                      ><i class="fe fe-home"></i> 我的主页</a
+                    <a class="nav-link" href="./round-home.html"
+                      ><i class="fe fe-home"></i> 我的讨论课</a
                     >
                   </li>
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="./course-home.html"
-                      ><i class="fe fe-book"></i> 我的课程</a
+                    <a class="nav-link" href="./import-home.html"
+                      ><i class="fe fe-book"></i> 导入名单</a
                     >
                   </li>
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="./seminar-home.html"
-                      ><i class="fe fe-book-open"></i> 我的讨论课</a
-                    >
-                  </li>
-                  <li class="nav-item pl-5">
-                    <a class="nav-link" href="going.html"
-                      ><i class="fe fe-play-circle"></i> 正在进行中</a
+                    <a class="nav-link" href="./export-home.html"
+                      ><i class="fe fe-book-open"></i> 导出成绩</a
                     >
                   </li>
                 </ul>
@@ -206,25 +210,17 @@
           <div class="container">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="./course-home.html">我的课程</a>
-                </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  学生组队
+                  我的讨论课
                 </li>
               </ol>
             </nav>
             <div class="row">
-              <div class="col-lg-4">
+              <div class="col-md-6 col-xl-4">
                 <div class="card">
                   <div class="card-header">
-                    <div class="d-flex align-items-center">
-                      <span class="stamp stamp-md bg-blue ml-1 mr-4">1-1</span>
-                      <div>
-                        <h4 class="m-0"><small>Intellij</small></h4>
-                        <small class="text-danger">Invalid</small>
-                      </div>
-                    </div>
+                    <h3 class="card-title mr-4">第一轮</h3>
+                    <span class="btn btn-outline-secondary py-0">已结束</span>
                     <div class="card-options">
                       <a
                         class="card-options-collapse"
@@ -235,59 +231,39 @@
                     </div>
                   </div>
                   <div class="card-body p-0">
-                    <div class="table-responsive">
-                      <table
-                        class="table card-table table-striped table-vcenter"
+                    <div class="list-group">
+                      <a
+                        href="./round-seminar.html"
+                        class="list-group-item list-group-item-action"
                       >
-                        <tbody>
-                          <tr>
-                            <td class="w-1"><span class="avatar">L</span></td>
-                            <td class="text-nowrap">林晓明</td>
-                            <td>24320162202xxx</td>
-                            <td>组长</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">N</span></td>
-                            <td class="text-nowrap">牛晓彤</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">J</span></td>
-
-                            <td class="text-nowrap">蒋耀</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">X</span></td>
-
-                            <td class="text-nowrap">徐刚</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">T</span></td>
-                            <td class="text-nowrap">谈雪</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-book-open mr-3"></i>
+                          需求分析说明书
+                        </span>
+                      </a>
+                      <a
+                        href="./round-seminar.html"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-book mr-3"></i> 界面原型说明书
+                        </span>
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4">
-                <div class="card card-collapsed">
+              <div class="col-md-6 col-xl-4">
+                <div class="card">
                   <div class="card-header">
-                    <div class="d-flex align-items-center">
-                      <span class="stamp stamp-md bg-blue ml-1 mr-4">1-1</span>
-                      <div>
-                        <h4 class="m-0"><small>Intellij</small></h4>
-                        <small class="text-danger"></small>
-                      </div>
-                    </div>
+                    <h3 class="card-title mr-4">第一轮</h3>
+                    <span class="btn btn-outline-secondary py-0">已结束</span>
                     <div class="card-options">
                       <a
                         class="card-options-collapse"
@@ -298,108 +274,30 @@
                     </div>
                   </div>
                   <div class="card-body p-0">
-                    <div class="table-responsive">
-                      <table
-                        class="table card-table table-striped table-vcenter"
-                      >
-                        <tbody>
-                          <tr>
-                            <td class="w-1"><span class="avatar">L</span></td>
-                            <td class="text-nowrap">林晓明</td>
-                            <td>24320162202xxx</td>
-                            <td>组长</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">N</span></td>
-                            <td class="text-nowrap">牛晓彤</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">J</span></td>
-
-                            <td class="text-nowrap">蒋耀</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">X</span></td>
-
-                            <td class="text-nowrap">徐刚</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">T</span></td>
-                            <td class="text-nowrap">谈雪</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="card card-collapsed">
-                  <div class="card-header">
-                    <div class="d-flex align-items-center">
-                      <span class="stamp stamp-md bg-blue ml-1 mr-4">1-1</span>
-                      <div>
-                        <h4 class="m-0"><small>Intellij</small></h4>
-                        <small class="text-danger"></small>
-                      </div>
-                    </div>
-                    <div class="card-options">
+                    <div class="list-group">
                       <a
-                        class="card-options-collapse"
-                        data-toggle="card-collapse"
-                        href="#"
-                        ><i class="fe fe-chevron-up mr-1"></i
-                      ></a>
-                    </div>
-                  </div>
-                  <div class="card-body p-0">
-                    <div class="table-responsive">
-                      <table
-                        class="table card-table table-striped table-vcenter"
+                        href="./round-seminar.html"
+                        class="list-group-item list-group-item-action"
                       >
-                        <tbody>
-                          <tr>
-                            <td class="w-1"><span class="avatar">L</span></td>
-                            <td class="text-nowrap">林晓明</td>
-                            <td>24320162202xxx</td>
-                            <td>组长</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">N</span></td>
-                            <td class="text-nowrap">牛晓彤</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">J</span></td>
-
-                            <td class="text-nowrap">蒋耀</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">X</span></td>
-
-                            <td class="text-nowrap">徐刚</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">T</span></td>
-                            <td class="text-nowrap">谈雪</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-book-open mr-3"></i>
+                          需求分析说明书
+                        </span>
+                      </a>
+                      <a
+                        href="./round-seminar.html"
+                        class="list-group-item list-group-item-action"
+                      >
+                        <span class="float-right">
+                          <i class="icon fe fe-chevron-right"></i>
+                        </span>
+                        <span class="float-left">
+                          <i class="icon fe fe-book mr-3"></i> 界面原型说明书
+                        </span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -408,18 +306,18 @@
           </div>
         </div>
       </div>
-    </div>
-    <footer class="footer">
-      <div class="container">
-        <div class="row align-items-center flex-row-reverse">
-          <div class="col-12 mt-0 mt-lg-0 text-center">
-            Copyright © 2018
-            <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
-              >Cms</a
-            >.
+      <footer class="footer">
+        <div class="container">
+          <div class="row align-items-center flex-row-reverse">
+            <div class="col-12 mt-0 mt-lg-0 text-center">
+              Copyright © 2018
+              <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
+                >Cms</a
+              >.
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
   </body>
 </html>

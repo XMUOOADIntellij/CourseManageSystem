@@ -21,7 +21,7 @@
     <link href="../favicon.ico" rel="icon" type="image/x-icon" />
     <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Generated: 2018-04-16 09:29:05 +0200 -->
-    <title>我的讨论课</title>
+    <title>讨论课报告</title>
     <!-- Font -->
     <link href="../../static/css/fontawesome.min.css" rel="stylesheet" />
 
@@ -53,7 +53,7 @@
         <div class="header py-4">
           <div class="container">
             <div class="d-flex">
-              <a class="header-brand ml-1" href="./home.html">
+              <a class="header-brand ml-1" href=".">
                 <img
                   alt="logo"
                   class="header-brand-img"
@@ -101,7 +101,7 @@
                         <div class="small text-muted">2 hours ago</div>
                       </div>
                     </a>
-                    <div class="dropdown-divider"></div>
+
                     <a
                       class="dropdown-item text-center text-muted-dark"
                       href="#"
@@ -129,21 +129,14 @@
                   <div
                     class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
                   >
-                    <a class="dropdown-item" href="account-setting.html">
-                      <i class="dropdown-icon fe fe-settings"></i> 个人设置
-                    </a>
                     <a class="dropdown-item" href="todo-list.html">
                       <span class="float-right"
                         ><span class="badge badge-primary">6</span></span
                       >
                       <i class="dropdown-icon fe fe-mail"></i> 待办事项
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../common/help.html">
-                      <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
-                    </a>
                     <a class="dropdown-item" href="../common/login.html">
-                      <i class="dropdown-icon fe fe-log-out"></i> 切换账户
+                      <i class="dropdown-icon fe fe-log-out"></i> 退出登录
                     </a>
                   </div>
                 </div>
@@ -165,10 +158,10 @@
               <div class="col-lg-3 ml-auto">
                 <form class="input-icon my-3 my-lg-0">
                   <input
+                    type="search"
                     class="form-control header-search"
                     placeholder="Search&hellip;"
                     tabindex="1"
-                    type="search"
                   />
                   <div class="input-icon-addon">
                     <i class="fe fe-search"></i>
@@ -177,24 +170,14 @@
               </div>
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
-                  <li class="nav-item pl-5">
-                    <a class="nav-link" href="./home.html"
-                      ><i class="fe fe-home"></i> 我的主页</a
-                    >
+                  <li class="nav-item">
+                    <a href="./teacher-home.html" class="nav-link active"
+                      ><i class="fe fe-home"></i> 教师信息管理
+                    </a>
                   </li>
-                  <li class="nav-item pl-5">
-                    <a class="nav-link" href="./course-home.html"
-                      ><i class="fe fe-book"></i> 我的课程</a
-                    >
-                  </li>
-                  <li class="nav-item pl-5">
-                    <a class="nav-link" href="./seminar-home.html"
-                      ><i class="fe fe-book-open"></i> 我的讨论课</a
-                    >
-                  </li>
-                  <li class="nav-item pl-5">
-                    <a class="nav-link" href="going.html"
-                      ><i class="fe fe-play-circle"></i> 正在进行中</a
+                  <li class="nav-item">
+                    <a href="./student-home.html" class="nav-link"
+                      ><i class="fe fe-image"></i> 学生信息管理</a
                     >
                   </li>
                 </ul>
@@ -202,96 +185,77 @@
             </div>
           </div>
         </div>
-        <div class="my-3 my-md-5 mt-5">
+        <div class="my-3 my-md-5">
           <div class="container">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="./teacher-home.html">学生信息管理</a>
+                </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  我的讨论课
+                  新建学生账户
                 </li>
               </ol>
             </nav>
             <div class="row">
-              <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <div class="card-category">OOAD</div>
-                    <ul class="list-unstyled leading-loose">
-                      <li><strong>主课程</strong></li>
-                      <li>
-                        <i
-                          aria-hidden="true"
-                          class="fe fe-check-circle text-gray mr-2"
-                        ></i>
-                        已完成
-                      </li>
-                    </ul>
-                    <div class="text-center mt-6">
-                      <a
-                        class="btn btn-secondary btn-block"
-                        href="./course-round.html"
-                        >查看详情</a
-                      >
+              <div class="col-12">
+                <form
+                  action="student-home.html"
+                  method="post"
+                  onsubmit="return createStudent();"
+                  class="card"
+                >
+                  <div class="card-header">
+                    <h3 class="card-title">创建学生用户</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-12">
+                        <fieldset class="form-fieldset">
+                          <div class="form-group">
+                            <label class="form-label"
+                              >输入姓名<span class="form-required"
+                                >*</span
+                              ></label
+                            >
+                            <input type="text" class="form-control" />
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label"
+                              >输入学号<span class="form-required"
+                                >*</span
+                              ></label
+                            >
+                            <input type="text" class="form-control" />
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label"
+                              >输入邮箱<span class="form-required"
+                                >*</span
+                              ></label
+                            >
+                            <input type="email" class="form-control" />
+                          </div>
+                          <div class="form-group mb-0">
+                            <label class="form-label">设置初始密码</label>
+                            <input type="tel" class="form-control" />
+                          </div>
+                        </fieldset>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                  <div class="card-status bg-green"></div>
-                  <div class="card-body text-center">
-                    <div class="card-category">J2ee</div>
-                    <ul class="list-unstyled leading-loose">
-                      <li><strong>次课程</strong></li>
-                      <li>
-                        <i
-                          aria-hidden="true"
-                          class="fe fe-play-circle text-success mr-2"
-                        ></i>
-                        正在进行
-                      </li>
-                    </ul>
-                    <div class="text-center mt-6">
-                      <a
-                        class="btn btn-green btn-block"
-                        href="./course-round.html"
-                        >查看详情</a
+                  <div class="card-footer text-right">
+                    <div class="d-flex">
+                      <a href="./student-home.html" class="btn btn-link"
+                        >取消</a
                       >
+                      <button type="submit" class="btn btn-primary ml-auto">
+                        确认创建
+                      </button>
                     </div>
                   </div>
-                </div>
+                </form>
               </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <div class="card-category">.Net</div>
-                    <ul class="list-unstyled leading-loose">
-                      <li><strong>主课程</strong></li>
-                      <li>
-                        <i
-                          aria-hidden="true"
-                          class="fe fe-clock text-danger mr-2"
-                        ></i>
-                        未开始
-                      </li>
-                    </ul>
-                    <div class="text-center mt-6">
-                      <a
-                        class="btn btn-secondary btn-block"
-                        href="./course-round.html"
-                        >查看详情</a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="position-fixed">
-              <a
-                href="./seminar-create.html"
-                class="btn btn-green float-action-button shadow-lg"
-                ><i class="fe fe-plus"></i
-              ></a>
             </div>
           </div>
         </div>
