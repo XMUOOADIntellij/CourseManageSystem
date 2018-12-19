@@ -1,5 +1,7 @@
 package com.group12.course.entity;
 
+import com.group12.course.vo.RoundVO;
+
 /**
  * Round 实体对象
  * @author Tan Xue
@@ -71,5 +73,23 @@ public class Round {
     }
     public Round(Long id) {
         this.id = id;
+    }
+
+    public Round(RoundVO roundVO){
+        this.presentationScoreMethod = roundVO.getPresentationScoreMethod();
+        this.reportScoreMethod = roundVO.getReportScoreMethod();
+        this.questionScoreMethod = roundVO.getQuestionScoreMethod();
+    }
+
+    @Override
+    public String toString() {
+        return "Round{" +
+                "id=" + id +
+                ", roundSerial=" + roundSerial +
+                ", presentationScoreMethod=" + presentationScoreMethod +
+                ", reportScoreMethod=" + reportScoreMethod +
+                ", questionScoreMethod=" + questionScoreMethod +
+                ", course=" + course +
+                '}';
     }
 }
