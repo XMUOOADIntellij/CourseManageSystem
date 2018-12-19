@@ -38,6 +38,6 @@ public class SeminarServiceTest extends AbstractTransactionalJUnit4SpringContext
 
     @Test
     public void testSelectKlassSeminarBySeminarIdAndKlassId(){
-        Assert.assertNotNull(seminarService.selectKlassSeminarBySeminarIdAndClassId(new Long(4),new Long(3)));
+        Assert.assertNotNull(seminarService.selectKlassSeminar(new Long(4),new Long(3)));
     }
 }

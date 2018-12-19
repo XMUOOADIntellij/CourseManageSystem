@@ -64,7 +64,7 @@ public class SeminarService {
      * @param classId 班级id
      * @return
      */
-    public KlassSeminar selectKlassSeminarBySeminarIdAndClassId(Long seminarId,Long classId){
+    public KlassSeminar selectKlassSeminar(Long seminarId,Long classId){
         return klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId);
     }
 
@@ -73,7 +73,7 @@ public class SeminarService {
     }
 
     public Integer updateKlassSeminar(Long seminarId,Long classId,KlassSeminar record){
-        KlassSeminar klassSeminar = selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+        KlassSeminar klassSeminar = klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId);
         record.setId(klassSeminar.getId());
         return  klassSeminarDao.updateKlassSeminar(record);
     }

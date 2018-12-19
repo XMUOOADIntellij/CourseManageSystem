@@ -5,6 +5,7 @@ import com.group12.course.entity.Course;
 import com.group12.course.entity.Round;
 import com.group12.course.entity.Seminar;
 import com.group12.course.mapper.SeminarMapper;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,4 +35,8 @@ public class SeminarDaoTest {
         System.out.println(seminar.getId());
     }
 
+    @Test
+    public void testListSeminarByRoundId(){
+        Assert.assertNotNull(seminarMapper.listSeminarByRoundId(new Long(1)));
+    }
 }
