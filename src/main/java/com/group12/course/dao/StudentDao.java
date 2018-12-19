@@ -93,6 +93,15 @@ public class StudentDao {
     }
 
     /**
+     * 通过 id 获取学生信息
+     * @param id 可以是学生姓名或者账号
+     * @return 返回符合的学生的
+     * */
+    public Student getStudentById(Long id){
+        return studentMapper.selectStudentById(id);
+    }
+
+    /**
      * 删除数据库中学生的记录
      *
      * @param id 代表用户id
