@@ -58,4 +58,10 @@ public class TeamDaoTest {
         testTeam.setName("asa");
         Assert.assertEquals("add Error",1,teamMapper.addTeam(testTeam));*/
     }
+
+    @Test
+    @Rollback
+    public void testRemoveTeammate(){
+
+    }
 }
