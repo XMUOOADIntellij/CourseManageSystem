@@ -14,7 +14,7 @@ public class KlassSeminarDao {
     KlassSeminarMapper klassSeminarMapper;
 
 
-    public KlassSeminar getKlassSeminarBySeminarIdAndClassId(@Param("seminarId") Long seminarId,@Param("classId") Long classId){
+    public KlassSeminar getKlassSeminarBySeminarIdAndClassId(Long seminarId,Long classId){
          return klassSeminarMapper.selectKlassSeminarBySeminarIdAndKlassId(seminarId,classId);
     }
 

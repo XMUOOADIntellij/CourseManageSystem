@@ -4,8 +4,6 @@
 
 
     <resultMap id="BaseResultMap" type="com.group12.course.entity.SeminarScore" >
-        <id column="id" property="id" jdbcType="BIGINT" />
-
         <result column="presentation_score" property="presentationScore" jdbcType="DECIMAL" />
         <result column="question_score" property="questionScore" jdbcType="DECIMAL" />
         <result column="report_score" property="reportScore" jdbcType="DECIMAL" />
@@ -22,14 +20,15 @@
     </resultMap>
 
     <sql id="Base_Column_List" >
-        id, klass_seminar_id, team_id,presentation_score,report_score,question_score,total_score
+        klass_seminar_id, team_id,presentation_score,report_score,question_score,total_score
     </sql>
     
-    <select id="selectSeminarScoreById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="selectSeminarScoreByKlassSeminarIdAndTeamId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from seminar_score
-        where id=#{id,jdbcType=BIGINT}
+        where klass_seminar_id =#{klassSeminarId,jdbcType=BIGINT}
+        and   team_id =#{teamId,jdbcType=BIGINT}
     </select>
 
     <delete id="deleteSeminarScoreByKlassSeminarId" parameterType="java.lang.Long" >
@@ -37,4 +36,23 @@
         where klass_seminar_id = #{klassSeminarId,jdbcType=BIGINT}
     </delete>
 
+    <update id="updateSeminarScore" parameterType="seminarScore">
+        update seminar_score
+        <set>
+            <if test="presentationScore!=null">
+                presentation_score = #{presentationScore,jdbcType=DECIMAL},
+            </if>
+            <if test="questionScore!=null">
+                question_score = #{questionScore,jdbcType=DECIMAL},
+            </if>
+            <if test="reportScore!=null">
+                report_score = #{reportScore,jdbcType=DECIMAL},
+            </if>
+            <if test="totalScore!=null">
+                total_score = #{totalScore,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where klass_seminar_id =#{klassSeminar.id,jdbcType=BIGINT}
+        and   team_id =#{team.id,jdbcType=BIGINT}
+    </update>
 </mapper>

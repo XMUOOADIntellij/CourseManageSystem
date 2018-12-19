@@ -140,7 +140,7 @@ public class SeminarControllerTest  extends AbstractTransactionalJUnit4SpringCon
         MvcResult mvcResult =
                 mvc.perform(MockMvcRequestBuilders.put("/question/{questionId}",1)
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .header("Authorization","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUxNTE4MDIwNjksInBheWxvYWQiOiJ7XCJpZFwiOjEsXCJhY2NvdW50XCI6XCIyMTNcIixcInBhc3N3b3JkXCI6XCIxMjM0NTZcIixcImVtYWlsXCI6XCIxNTEzQHFxLmNvbVwiLFwidGVhY2hlck5hbWVcIjpcInNzc1wiLFwiYWN0aXZlXCI6dHJ1ZX0ifQ.CN9dcsCV_O8iIYvl-XcWDo2BCvDZnGaQwusOqlEOtW4")
+                        .header("Authorization","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDUxOTI5OTI5NTcsInBheWxvYWQiOiJ7XCJpZFwiOjEsXCJhY2NvdW50XCI6XCIyMTNcIixcInBhc3N3b3JkXCI6XCIxMjM0NTZcIixcImVtYWlsXCI6XCIxNTEzQHFxLmNvbVwiLFwidGVhY2hlck5hbWVcIjpcInNzc1wiLFwiYWN0aXZlXCI6dHJ1ZX0ifQ.maq9zMvxZ5CCXTxvdt1hRjR0ArCzckvODryGDSq17c0")
                         .content(JSONObject.toJSONString(request)))
                         //验证执行的控制器类型
                         .andExpect(handler().handlerType(QuestionController.class))
