@@ -56,7 +56,7 @@ public class CourseService {
         course.setTeamStartTime(courseVO.getTeamStartTime());
         course.setTeamEndTime(courseVO.getTeamEndTime());
 
-        int status = courseDao.addCourse(teacherId,course);
+        //int status = courseDao.addCourse(teacherId,course);
         Long courseId = course.getId();
 
         /*TODO：组队人数+冲突课程*/

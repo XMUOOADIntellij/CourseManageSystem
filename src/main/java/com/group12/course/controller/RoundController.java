@@ -101,7 +101,7 @@ public class RoundController {
             Long courseId = jwtCourse.getId();
 
             Round round = new Round();
-            round.setCourse(courseService.getCourseById(courseId));
+//            round.setCourse(courseService.getCourseById(courseId));
             Integer serial = roundService.countRoundByCourseId(courseId)+1;
             round.setRoundSerial(serial);
 
