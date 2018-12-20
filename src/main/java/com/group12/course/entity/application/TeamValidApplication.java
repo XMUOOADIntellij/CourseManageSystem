@@ -2,7 +2,7 @@ package com.group12.course.entity.application;
 
 import com.group12.course.entity.Teacher;
 import com.group12.course.entity.Team;
-import com.group12.course.vo.TeamValidApplicationVO;
+import com.group12.course.controller.vo.TeamValidApplicationVO;
 import org.springframework.stereotype.Component;
 
 /**

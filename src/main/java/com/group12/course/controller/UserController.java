@@ -63,10 +63,10 @@ public class UserController {
         else {
             Teacher returnTeacher = teacherService.login(user);
             if (returnTeacher.getAccount() != null) {
-                token = Jwt.sign(returnTeacher, tokenLifeCycle);
                 temp.setId(returnTeacher.getId());
                 temp.setAccount(returnTeacher.getAccount());
                 temp.setTeacherName(returnTeacher.getTeacherName());
+                temp.setActive(returnTeacher.getActive());
                 isTeacher = true;
                 token = Jwt.sign(returnTeacher, tokenLifeCycle);
             }
@@ -83,7 +83,7 @@ public class UserController {
             map.put("account",temp.getAccount());
             map.put("role",isTeacher?"teacher":"student");
             map.put("name",temp.getTeacherName());
-            map.put("isActive",temp.getActive()==null?false:temp.getActive());
+            map.put("isActive",temp.getActive());
             map.put("jwt",token);
             String json = JSON.toJSONString(map);
             response.getWriter().write(json);

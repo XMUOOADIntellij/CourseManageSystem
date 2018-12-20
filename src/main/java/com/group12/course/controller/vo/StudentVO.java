@@ -1,7 +1,6 @@
-package com.group12.course.vo;
+package com.group12.course.controller.vo;
 
 import com.group12.course.entity.Student;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STUnderline;
 
 public class StudentVO {
 

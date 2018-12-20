@@ -1,11 +1,10 @@
 package com.group12.course.controller;
 
 
-import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
 import com.group12.course.service.ScoreService;
 import com.group12.course.tools.Jwt;
-import com.group12.course.vo.ScoreVO;
+import com.group12.course.controller.vo.ScoreVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;

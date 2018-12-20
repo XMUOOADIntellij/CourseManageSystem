@@ -1,6 +1,4 @@
-package com.group12.course.vo;
-
-import com.group12.course.entity.Teacher;
+package com.group12.course.controller.vo;
 
 public class ShareVO {
 

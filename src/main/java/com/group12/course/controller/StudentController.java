@@ -1,12 +1,9 @@
 package com.group12.course.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.group12.course.entity.Student;
-import com.group12.course.entity.Teacher;
 import com.group12.course.service.StudentService;
 import com.group12.course.tools.Jwt;
-import com.group12.course.vo.StudentVO;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STUnderline;
+import com.group12.course.controller.vo.StudentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Student Controller 层

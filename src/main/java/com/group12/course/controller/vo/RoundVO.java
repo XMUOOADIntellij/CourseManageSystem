@@ -1,11 +1,6 @@
-package com.group12.course.vo;
+package com.group12.course.controller.vo;
 
-import com.group12.course.entity.Course;
-import com.group12.course.entity.KlassRound;
 import com.group12.course.entity.Round;
-import com.group12.course.entity.Seminar;
-
-import java.util.List;
 
 public class RoundVO {
 
