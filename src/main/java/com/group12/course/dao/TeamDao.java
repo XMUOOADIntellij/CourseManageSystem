@@ -135,6 +135,53 @@ public class TeamDao {
     }
 
     /**
+     * 根据传入的学生 id
+     * 获取其所在的队伍（以队长身份或队员身份的都算）
+     *
+     * @param id 查询的学生id
+     * @return 查询到的队伍对象*/
+    public Team getTeamByStudentId(Long id){
+        Team teamByLeader = getTeamByLeaderId(id);
+        if (teamByLeader==null){
+            Long teamIdByMembers = getTeamByMembersId(id);
+            if (teamIdByMembers==null){
+                return new Team();
+            }
+            else {
+                Team teamByMember = teamMapper.selectTeamById(teamIdByMembers);
+                return getMembers(teamByMember);
+            }
+        }
+        else {
+            return getMembers(teamByLeader);
+        }
+    }
+
+    /**
+     * 给传入的队伍对象添加组员
+     *
+     * @param team 传入的队伍对象
+     * @return 队伍对象*/
+    public Team getMembers(Team team){
+        if (!checkTeamValid(team)){
+            return new Team();
+        }
+        List<Student> members = teamMapper.selectTeamMembersByTeamId(team.getId());
+        List<Student> realMembers = new ArrayList<>();
+        Iterator<Student> iterator =members.iterator();
+        while (iterator.hasNext()){
+            Student member = iterator.next();
+            Student temp = studentDao.getStudentById(member.getId());
+            if (temp.getAccount()!=null){
+                member=temp;
+            }
+            realMembers.add(member);
+        }
+        team.setMembers(realMembers);
+        return team;
+    }
+
+    /**
      * 根据队伍id 删除小组
      *
      * @param teamId 队伍的id
@@ -232,52 +279,5 @@ public class TeamDao {
      * */
     public int changeTeam(Team team){
         return teamMapper.updateTeam(team);
-    }
-
-    /**
-     * 根据传入的学生 id
-     * 获取其所在的队伍（以队长身份或队员身份的都算）
-     *
-     * @param id 查询的学生id
-     * @return 查询到的队伍对象*/
-    public Team getTeamByStudentId(Long id){
-        Team teamByLeader = getTeamByLeaderId(id);
-        if (teamByLeader==null){
-            Long teamIdByMembers = getTeamByMembersId(id);
-            if (teamIdByMembers==null){
-                return new Team();
-            }
-            else {
-                Team teamByMember = teamMapper.selectTeamById(teamIdByMembers);
-                return getMembers(teamByMember);
-            }
-        }
-        else {
-            return getMembers(teamByLeader);
-        }
-    }
-
-    /**
-     * 给传入的队伍对象添加组员
-     *
-     * @param team 传入的队伍对象
-     * @return 队伍对象*/
-    public Team getMembers(Team team){
-        if (!checkTeamValid(team)){
-            return new Team();
-        }
-        List<Student> members = teamMapper.selectTeamMembersByTeamId(team.getId());
-        List<Student> realMembers = new ArrayList<>();
-        Iterator<Student> iterator =members.iterator();
-        while (iterator.hasNext()){
-            Student member = iterator.next();
-            Student temp = studentDao.getStudentById(member.getId());
-            if (temp.getAccount()!=null){
-                member=temp;
-            }
-            realMembers.add(member);
-        }
-        team.setMembers(realMembers);
-        return team;
     }
 }

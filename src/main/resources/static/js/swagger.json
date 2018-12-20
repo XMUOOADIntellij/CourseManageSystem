@@ -1,0 +1,5922 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0-oas3",
+    "title": "OOAD2018ControllerApi",
+    "description": "厦门大学 *2018~19上* **面向对象分析与设计** 课堂管理系统 `RESTful API` 标准\n"
+  },
+  "tags": [
+    {
+      "name": "admin",
+      "description": "管理员信息"
+    },
+    {
+      "name": "user",
+      "description": "用户信息"
+    },
+    {
+      "name": "student",
+      "description": "学生信息"
+    },
+    {
+      "name": "teacher",
+      "description": "教师信息"
+    },
+    {
+      "name": "course",
+      "description": "课程信息"
+    },
+    {
+      "name": "class",
+      "description": "班级信息"
+    },
+    {
+      "name": "round",
+      "description": "轮次信息"
+    },
+    {
+      "name": "seminar",
+      "description": "讨论课信息"
+    },
+    {
+      "name": "attendance",
+      "description": "展示信息"
+    },
+    {
+      "name": "question",
+      "description": "展示信息"
+    },
+    {
+      "name": "team",
+      "description": "分组信息"
+    },
+    {
+      "name": "request",
+      "description": "申请信息(共享申请、特殊组队申请)"
+    },
+    {
+      "name": "question",
+      "description": "讨论课提问信息"
+    },
+    {
+      "name": "seminarScore",
+      "description": "讨论课成绩"
+    },
+    {
+      "name": "roundScore",
+      "description": "轮次成绩"
+    }
+  ],
+  "paths": {
+    "/admin/login": {
+      "post": {
+        "tags": ["admin"],
+        "summary": "管理员使用账号密码登录",
+        "operationId": "adminLogin",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "account": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  }
+                },
+                "required": ["account", "password"],
+                "example": {
+                  "account": "24320162233998",
+                  "password": "qwer1234"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "required": ["id", "jwt"]
+                    },
+                    {
+                      "properties": {
+                        "jwt": {
+                          "type": "string",
+                          "format": "password",
+                          "description": "Json Web Token,用于维护用户登录状态"
+                        }
+                      },
+                      "example": {
+                        "id": 3486,
+                        "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjaWQiOiJPQTAwMDEiLCJpYXQiOjE0ODI2NTcyODQyMjF9.TeJpy936w610Vrrm+c3+RXouCA9k1AX0Bk8qURkYkdo="
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "账号/密码错误"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": ["user"],
+        "summary": "使用账号密码登录",
+        "operationId": "userLogin",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "account": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  }
+                },
+                "required": ["account", "password"],
+                "example": {
+                  "account": "24320162233998",
+                  "password": "qwer1234"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "required": [
+                        "id",
+                        "account",
+                        "role",
+                        "name",
+                        "isActived",
+                        "jwt"
+                      ]
+                    },
+                    {
+                      "properties": {
+                        "jwt": {
+                          "type": "string",
+                          "format": "password",
+                          "description": "Json Web Token,用于维护用户登录状态"
+                        }
+                      },
+                      "example": {
+                        "id": 3486,
+                        "account": "24322016231",
+                        "role": "student",
+                        "name": "张三",
+                        "isActived": 1,
+                        "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjaWQiOiJPQTAwMDEiLCJpYXQiOjE0ODI2NTcyODQyMjF9.TeJpy936w610Vrrm+c3+RXouCA9k1AX0Bk8qURkYkdo="
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "账号/密码错误"
+          }
+        }
+      }
+    },
+    "/user/password": {
+      "get": {
+        "tags": ["user"],
+        "summary": "忘记密码时发送密码到邮箱",
+        "operationId": "getPassword",
+        "parameters": [
+          {
+            "name": "account",
+            "in": "query",
+            "required": true,
+            "description": "学号/教工号",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功"
+          }
+        }
+      },
+      "put": {
+        "tags": ["user"],
+        "summary": "修改密码",
+        "operationId": "modifyPassword",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  }
+                },
+                "required": ["password"],
+                "example": {
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "信息不合法"
+          }
+        }
+      }
+    },
+    "/user/information": {
+      "get": {
+        "tags": ["user"],
+        "summary": "获取个人信息",
+        "operationId": "getUserInfo",
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "required": [
+                        "id",
+                        "account",
+                        "role",
+                        "name",
+                        "email",
+                        "messageInterval"
+                      ],
+                      "example": {
+                        "id": 3486,
+                        "account": "24322016231",
+                        "role": "student",
+                        "name": "张三",
+                        "email": "413142222@qq.com",
+                        "messageInterval": 1
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/email": {
+      "put": {
+        "tags": ["user"],
+        "summary": "修改邮箱",
+        "operationId": "modifyEmail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "required": ["email"],
+                "example": {
+                  "email": "2432016298@qq.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "信息不合法"
+          }
+        }
+      }
+    },
+    "/student": {
+      "get": {
+        "tags": ["student"],
+        "summary": "管理员获得所有学生信息",
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      {
+                        "required": ["id", "account", "name", "email"]
+                      }
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 3486,
+                      "account": "24322016231",
+                      "name": "张三",
+                      "email": "413142222@qq.com"
+                    },
+                    {
+                      "id": 3487,
+                      "account": "24322016232",
+                      "name": "李四",
+                      "email": "413142233@qq.com"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/student/searchstudent": {
+      "get": {
+        "tags": ["student"],
+        "summary": "管理员根据姓名或学生号查询学生",
+        "operationId": "searchStudent",
+        "parameters": [
+          {
+            "name": "identity",
+            "in": "query",
+            "required": true,
+            "description": "学生的姓名或学生号",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      {
+                        "required": ["id", "account", "name", "email"]
+                      }
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 3486,
+                      "account": "24322016231",
+                      "name": "张三",
+                      "email": "413142222@qq.com"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "找不到相应的学生"
+          }
+        }
+      }
+    },
+    "/student/{studentId}/information": {
+      "put": {
+        "tags": ["student"],
+        "summary": "管理员修改某一学生的信息",
+        "operationId": "modifyStudentInfo",
+        "parameters": [
+          {
+            "name": "studentId",
+            "in": "path",
+            "description": "需修改学生的studentID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/User"
+                  },
+                  {
+                    "required": ["account", "name", "email"],
+                    "example": {
+                      "account": "24322016231",
+                      "name": "张三",
+                      "email": "413142222@qq.com"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "required": ["id", "account", "name", "email"],
+                      "example": {
+                        "id": 3486,
+                        "account": "24322016231",
+                        "name": "张三",
+                        "email": "413142222@qq.com"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "未找到该学生"
+          }
+        }
+      }
+    },
+    "/student/{studentId}/password": {
+      "put": {
+        "tags": ["student"],
+        "summary": "管理员重置某一学生的密码",
+        "description": "重置的密码统一为123456",
+        "operationId": "resetStudentPassword",
+        "parameters": [
+          {
+            "name": "studentId",
+            "in": "path",
+            "description": "需重置账户的studentID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "required": ["id", "account", "name", "email"],
+                      "example": {
+                        "id": 3486,
+                        "account": "24322016231",
+                        "name": "张三",
+                        "email": "413142222@qq.com"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "未找到该用户"
+          }
+        }
+      }
+    },
+    "/student/{studentId}": {
+      "delete": {
+        "tags": ["student"],
+        "summary": "管理员按ID删除某一学生",
+        "operationId": "deleteStudent",
+        "parameters": [
+          {
+            "name": "studentId",
+            "in": "path",
+            "description": "需删除学生的studentID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "404": {
+            "description": "未找到该学生"
+          }
+        }
+      }
+    },
+    "/student/active": {
+      "put": {
+        "tags": ["student"],
+        "summary": "学生激活账号",
+        "operationId": "activateStudent",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "required": ["password", "email"],
+                "example": {
+                  "password": "123456",
+                  "email": "2432016298@qq.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "required": ["id", "account", "role", "name"],
+                      "example": {
+                        "id": 3486,
+                        "account": "24322016231",
+                        "name": "张三"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "信息不合法"
+          }
+        }
+      }
+    },
+    "/teacher": {
+      "post": {
+        "tags": ["teacher"],
+        "summary": "管理员创建一个教师",
+        "operationId": "createTeacher",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/User"
+                  },
+                  {
+                    "required": ["account", "password", "name", "email"],
+                    "example": {
+                      "account": "24322016231",
+                      "password": "123456",
+                      "name": "张三",
+                      "email": "413142222@qq.com"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "required": ["id", "account", "name", "email"],
+                      "example": {
+                        "id": 3486,
+                        "account": "24322016231",
+                        "name": "张三",
+                        "email": "413142222@qq.com"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的account/email参数"
+          }
+        }
+      },
+      "get": {
+        "tags": ["teacher"],
+        "summary": "管理员获得所有教师信息",
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      {
+                        "required": ["id", "account", "name", "email"]
+                      }
+                    ]
+                  }
+                },
+                "example": [
+                  {
+                    "id": 3486,
+                    "account": "24322016231",
+                    "name": "张三",
+                    "email": "413142222@qq.com"
+                  },
+                  {
+                    "id": 3487,
+                    "account": "24322016232",
+                    "name": "李四",
+                    "email": "413142233@qq.com"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teacher/searchteacher": {
+      "get": {
+        "tags": ["teacher"],
+        "summary": "管理员根据姓名或教工号查询教师",
+        "operationId": "searchTeacher",
+        "parameters": [
+          {
+            "name": "identity",
+            "in": "query",
+            "required": true,
+            "description": "教师的姓名或教工号",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      {
+                        "required": ["id", "account", "name", "email"]
+                      }
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 3486,
+                      "account": "24322016231",
+                      "name": "张三",
+                      "email": "413142222@qq.com"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "找不到相应的教师"
+          }
+        }
+      }
+    },
+    "/teacher/{teacherId}/information": {
+      "put": {
+        "tags": ["teacher"],
+        "summary": "管理员修改某一教师的信息",
+        "operationId": "modifyTeacherInfo",
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "path",
+            "description": "需修改教师的teacherID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/User"
+                  },
+                  {
+                    "required": ["account", "name", "email"],
+                    "example": {
+                      "account": "24322016231",
+                      "name": "张三",
+                      "email": "413142222@qq.com"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "required": ["id", "account", "name", "email"],
+                      "example": {
+                        "id": 3486,
+                        "account": "24322016231",
+                        "name": "张三",
+                        "email": "413142222@qq.com"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "未找到该教师"
+          }
+        }
+      }
+    },
+    "/teacher/{teacherId}/password": {
+      "put": {
+        "tags": ["teacher"],
+        "summary": "管理员重置某一教师的密码",
+        "operationId": "resetTeacherPassword",
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "path",
+            "description": "需重置账户的teacherID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "required": ["id", "account", "name", "email"],
+                      "example": {
+                        "id": 3486,
+                        "account": "24322016231",
+                        "name": "张三",
+                        "email": "413142222@qq.com"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "未找到该用户"
+          }
+        }
+      }
+    },
+    "/teacher/{teacherId}": {
+      "delete": {
+        "tags": ["teacher"],
+        "summary": "管理员按ID删除某一教师",
+        "operationId": "deleteTeacher",
+        "parameters": [
+          {
+            "name": "teacherId",
+            "in": "path",
+            "description": "需删除教师的teacherID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "404": {
+            "description": "未找到教师"
+          }
+        }
+      }
+    },
+    "/teacher/active": {
+      "put": {
+        "tags": ["teacher"],
+        "summary": "教师激活账号",
+        "operationId": "activateTeacher",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "required": ["password", "email"],
+                "example": {
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/User"
+                    },
+                    {
+                      "required": ["id"],
+                      "example": {
+                        "id": 3486
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "信息不合法"
+          }
+        }
+      }
+    },
+    "/course": {
+      "post": {
+        "tags": ["course"],
+        "summary": "创建课程",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Course"
+                  },
+                  {
+                    "required": [
+                      "name",
+                      "intro",
+                      "presentationWeight",
+                      "questionWeight",
+                      "reportWeight",
+                      "minMemberNumber",
+                      "maxMemberNumber",
+                      "startTeamTime",
+                      "endTeamTime",
+                      "conflictCourses"
+                    ]
+                  }
+                ],
+                "example": {
+                  "name": "OOAD",
+                  "intro": "课程要求",
+                  "presentationWeight": 0.5,
+                  "questionWeight": 0.1,
+                  "reportWeight": 0.3,
+                  "minMemberNumber": 4,
+                  "maxMemberNumber": 6,
+                  "startTeamTime": "2018-10-11 18:00",
+                  "endTeamTime": "2018-11-11 18:00",
+                  "conflictCourses": {
+                    "courseId": 45,
+                    "courseName": ".Net",
+                    "teacherId": 15,
+                    "teacherName": "杨老师"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "创建成功，返回课程的ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Course"
+                    },
+                    {
+                      "required": ["id"]
+                    }
+                  ],
+                  "example": {
+                    "id": 23
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "用户权限不足（学生无法创建课程）"
+          }
+        }
+      },
+      "get": {
+        "tags": ["course"],
+        "summary": "获取所有课程",
+        "responses": {
+          "200": {
+            "description": "成功，课程列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Course"
+                      },
+                      {
+                        "required": [
+                          "id",
+                          "name",
+                          "time",
+                          "isShareTeam",
+                          "isShareSeminar",
+                          "className",
+                          "classId",
+                          "teacherName"
+                        ]
+                      }
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 1,
+                      "isShareTeam": true,
+                      "isShareSeminar": false,
+                      "name": "OOAD",
+                      "className": "2016-2",
+                      "classId": 1,
+                      "teacherName": "邱明"
+                    },
+                    {
+                      "id": 2,
+                      "isShareTeam": true,
+                      "isShareSeminar": false,
+                      "name": "J2EE",
+                      "className": "2016-1",
+                      "classId": 2,
+                      "teacherName": "邱明"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "404": {
+            "description": "未找到课程"
+          }
+        }
+      }
+    },
+    "/course/{courseId}/round": {
+      "get": {
+        "tags": ["course"],
+        "summary": "获取课程下的所有轮次",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "需获取课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Round"
+                    },
+                    {
+                      "required": ["id", "order"]
+                    }
+                  ],
+                  "example": [
+                    {
+                      "id": 1,
+                      "order": 2
+                    },
+                    {
+                      "id": 2,
+                      "order": 3
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "404": {
+            "description": "未找到轮次"
+          }
+        }
+      }
+    },
+    "/course/{courseId}": {
+      "get": {
+        "tags": ["course"],
+        "summary": "按ID获取课程",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "需获取课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Course"
+                    },
+                    {
+                      "required": [
+                        "name",
+                        "intro",
+                        "presentationWeight",
+                        "questionWeight",
+                        "reportWeight",
+                        "minMemberNumber",
+                        "maxMemberNumber",
+                        "startTeamTime",
+                        "endTeamTime"
+                      ]
+                    }
+                  ],
+                  "example": {
+                    "name": "OOAD",
+                    "intro": "课程介绍",
+                    "presentationWeight": 0.5,
+                    "questionWeight": 0.1,
+                    "reportWeight": 0.3,
+                    "minMemberNumber": 4,
+                    "maxMemberNumber": 6,
+                    "startTeamTime": "2018.10.11 18:00",
+                    "endTeamTime": "2018.11.11 18:00"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "404": {
+            "description": "未找到课程"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["course"],
+        "summary": "按ID删除课程",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "需删除课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "用户权限不足（无法删除他人课程、学生无法删除课程）"
+          },
+          "404": {
+            "description": "未找到课程"
+          }
+        }
+      }
+    },
+    "/course/{courseId}/team": {
+      "get": {
+        "tags": ["course"],
+        "summary": "根据课程Id获取小组信息，会根据jwt中的id确定身份",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "需获取的课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功，返回具体组队信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Team"
+                    },
+                    {
+                      "required": ["name", "valid", "leader", "members"]
+                    }
+                  ],
+                  "example": [
+                    {
+                      "name": "1-32 早早鸟小组",
+                      "valid": true,
+                      "leader": {
+                        "id": "001",
+                        "account": 121,
+                        "name": "张三"
+                      },
+                      "members": [
+                        {
+                          "id": "002",
+                          "account": 123,
+                          "name": "李四"
+                        },
+                        {
+                          "id": "003",
+                          "account": 124,
+                          "name": "王五"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "1-33 早鸟小组",
+                      "valid": true,
+                      "leader": {
+                        "id": "004",
+                        "account": 112,
+                        "name": "三张"
+                      },
+                      "members": [
+                        {
+                          "id": "005",
+                          "account": 132,
+                          "name": "四李"
+                        },
+                        {
+                          "id": "006",
+                          "account": 142,
+                          "name": "五王"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "404": {
+            "description": "未找到课程"
+          }
+        }
+      }
+    },
+    "/course/{courseId}/myTeam": {
+      "get": {
+        "tags": ["course"],
+        "summary": "根据课程Id以及学生id获取我的小组信息，学生id通过jwt传入",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "需获取的课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功，返回具体组队信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Team"
+                    },
+                    {
+                      "required": ["id", "name", "valid", "leader", "members"]
+                    }
+                  ],
+                  "example": {
+                    "id": "001",
+                    "name": "1-32 早早鸟小组",
+                    "valid": true,
+                    "leader": {
+                      "id": "001",
+                      "account": 121,
+                      "name": "张三"
+                    },
+                    "members": [
+                      {
+                        "id": "002",
+                        "account": 123,
+                        "name": "李四"
+                      },
+                      {
+                        "id": "003",
+                        "account": 124,
+                        "name": "王五"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "404": {
+            "description": "未找到课程"
+          }
+        }
+      }
+    },
+    "/course/{courseId}/noTeam": {
+      "get": {
+        "tags": ["course"],
+        "summary": "根据课程Id获取未组队的学生",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "需获取的课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功，返回学生",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      {
+                        "required": ["account", "name"]
+                      }
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": "001",
+                      "account": "111111",
+                      "name": "张三"
+                    },
+                    {
+                      "id": "002",
+                      "account": "222222",
+                      "name": "张三"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "404": {
+            "description": "未找到课程"
+          }
+        }
+      }
+    },
+    "/course/{courseId}/class": {
+      "get": {
+        "tags": ["course"],
+        "summary": "按ID获取课程的班级列表,从jwt传入权限和id",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "需获取班级的课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功，返回班级的ID和具体信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Class"
+                      },
+                      {
+                        "required": ["id", "name", "time", "classroom"]
+                      }
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 45,
+                      "name": "2016-1",
+                      "time": "周三 7、8节",
+                      "classroom": "海韵教学楼"
+                    },
+                    {
+                      "id": 48,
+                      "name": "2016-2",
+                      "time": "周二7、8节",
+                      "classroom": "海韵教学楼"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "404": {
+            "description": "未找到课程"
+          }
+        }
+      },
+      "post": {
+        "tags": ["course"],
+        "summary": "在指定ID的课程创建班级并且可传入学生名单",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "待创建班级的课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Class"
+                  },
+                  {
+                    "required": ["name", "time", "classroom"]
+                  }
+                ],
+                "example": {
+                  "name": "2016-3",
+                  "time": "周三一二节",
+                  "classroom": "海韵教学楼"
+                }
+              }
+            },
+            "mutipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int64",
+                      "example": 45
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "用户权限不足（学生无法创建班级）"
+          },
+          "404": {
+            "description": "未找到课程"
+          }
+        }
+      }
+    },
+    "/class/{classId}": {
+      "put": {
+        "tags": ["class"],
+        "summary": "在指定ID的班级传入学生名单",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "待传入名单的课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "待传入名单的班级的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "mutipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int64",
+                      "example": 45
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "用户权限不足（学生无法传入名单）"
+          },
+          "404": {
+            "description": "未找到课程"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["class"],
+        "summary": "按ID删除课程",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "需要删除班级的课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "待删除的班级的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "用户权限不足（无法删除他人课程、学生无法删除课程）"
+          },
+          "404": {
+            "description": "未找到课程"
+          }
+        }
+      }
+    },
+    "/course/{courseId}/teamshare": {
+      "get": {
+        "tags": ["course"],
+        "summary": "获取所有共享信息",
+        "operationId": "listAllTeamShareByCourseId",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "当前课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "课程共享列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/TeamShare"
+                      },
+                      {
+                        "required": [
+                          "teamShareId",
+                          "masterCourse",
+                          "recieveCourse"
+                        ],
+                        "example": {
+                          "teamShareId": 1,
+                          "masterCourse": {
+                            "masterCourseId": 1,
+                            "masterCourseName": "OOAD",
+                            "teacherName": "王美红"
+                          },
+                          "recieveCourse": {
+                            "recieveCourseId": 2,
+                            "recieveCourseName": "软件工程",
+                            "teacherName": "林坤辉"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/course/{courseId}/seminarshare": {
+      "get": {
+        "tags": ["course"],
+        "summary": "获取所有共享信息",
+        "operationId": "listAllSeminarShareByCourseId",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "当前课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "课程共享列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SeminarShare"
+                      },
+                      {
+                        "required": [
+                          "seminarShareId",
+                          "masterCourse",
+                          "recieveCourse"
+                        ],
+                        "example": {
+                          "seminarShareId": 1,
+                          "masterCourse": {
+                            "masterCourseId": 1,
+                            "masterCourseName": "OOAD",
+                            "teacherName": "王美红"
+                          },
+                          "recieveCourse": {
+                            "recieveCourseId": 2,
+                            "recieveCourseName": "软件工程",
+                            "teacherName": "林坤辉"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/course/teamshare/{teamshareId}": {
+      "delete": {
+        "tags": ["course"],
+        "summary": "按ID删除共享",
+        "operationId": "deleteTeamShareById",
+        "parameters": [
+          {
+            "name": "teamshareId",
+            "in": "path",
+            "description": "课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "shareId",
+            "in": "path",
+            "description": "需删除共享的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "权限不足（无法删除他人课程下的共享、学生无法删除共享）"
+          },
+          "404": {
+            "description": "未找到共享记录"
+          }
+        }
+      }
+    },
+    "/course/seminarshare/{seminarshareId}": {
+      "delete": {
+        "tags": ["course"],
+        "summary": "按ID删除共享",
+        "operationId": "deleteSeminarShareById",
+        "parameters": [
+          {
+            "name": "seminarshareId",
+            "in": "path",
+            "description": "课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "shareId",
+            "in": "path",
+            "description": "需删除共享的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "权限不足（无法删除他人课程下的共享、学生无法删除共享）"
+          },
+          "404": {
+            "description": "未找到共享记录"
+          }
+        }
+      }
+    },
+    "/course/{courseId}/teamsharerequest": {
+      "post": {
+        "tags": ["course"],
+        "summary": "发起一个队伍共享请求",
+        "operationId": "createTeamShareRequestByCourseId",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TeamShareRequest"
+                  },
+                  {
+                    "required": ["subCourseId"],
+                    "example": {
+                      "subCourseId": 1
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/TeamShareRequest"
+                    },
+                    {
+                      "required": ["teamShareRequestId"]
+                    }
+                  ],
+                  "example": {
+                    "teamShareRequestId": 5
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "用户权限不足（学生无法创建）"
+          },
+          "404": {
+            "description": "未找到主课程"
+          }
+        }
+      }
+    },
+    "/course/{courseId}/seminarsharerequest": {
+      "post": {
+        "tags": ["course"],
+        "summary": "发起一个讨论课共享请求",
+        "operationId": "createSeminarShareRequestByCourseId",
+        "parameters": [
+          {
+            "name": "courseId",
+            "in": "path",
+            "description": "课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SeminarShareRequest"
+                  },
+                  {
+                    "required": ["subCourseId"],
+                    "example": {
+                      "subCourseId": 2
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SeminarShareRequest"
+                    },
+                    {
+                      "required": ["seminarShareRequestId"]
+                    }
+                  ],
+                  "example": {
+                    "seminarShareRequestId": 5
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "用户权限不足（学生无法创建）"
+          },
+          "404": {
+            "description": "未找到主课程"
+          }
+        }
+      }
+    },
+    "/request/teamshare": {
+      "get": {
+        "tags": ["request"],
+        "summary": "获得队伍共享申请信息列表",
+        "operationId": "listAllTeamShareRequest",
+        "parameters": [
+          {
+            "name": "handletype",
+            "in": "query",
+            "description": "处理类型",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["unhandle", "accept", "reject"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "共享申请的详情列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/TeamShareRequest"
+                      },
+                      {
+                        "required": [
+                          "mastercourseid",
+                          "mastercoursename",
+                          "teachername",
+                          "sharetype"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的handletype格式"
+          },
+          "404": {
+            "description": "未找到共享申请"
+          }
+        }
+      }
+    },
+    "/request/seminarshare": {
+      "get": {
+        "tags": ["request"],
+        "summary": "获得讨论课共享申请信息列表",
+        "operationId": "listAllSeminarShareRequest",
+        "parameters": [
+          {
+            "name": "handletype",
+            "in": "query",
+            "description": "处理类型",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["unhandle", "accept", "reject"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "共享申请的详情列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SeminarShareRequest"
+                      },
+                      {
+                        "required": [
+                          "mastercourseid",
+                          "mastercoursename",
+                          "teachername",
+                          "sharetype"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的handletype格式"
+          },
+          "404": {
+            "description": "未找到共享申请"
+          }
+        }
+      }
+    },
+    "/request/teamshare/{teamshareId}": {
+      "get": {
+        "tags": ["request"],
+        "summary": "获得某一个队伍共享申请信息",
+        "operationId": "getTeamShareRequestByShareId",
+        "parameters": [
+          {
+            "name": "teamshareId",
+            "in": "path",
+            "description": "共享的唯一标识ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "handletype",
+            "in": "query",
+            "description": "处理类型",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["unhandle", "accept", "reject"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "共享申请的信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/TeamShareRequest"
+                    },
+                    {
+                      "required": [
+                        "id",
+                        "mastercourseid",
+                        "mastercoursename",
+                        "teachername"
+                      ]
+                    }
+                  ],
+                  "example": {
+                    "id": 1,
+                    "mastercourseid": 1,
+                    "mastercoursename": "OOAD",
+                    "teachername": "邱明"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的handletype格式"
+          },
+          "404": {
+            "description": "未找到共享申请"
+          }
+        }
+      },
+      "put": {
+        "tags": ["request"],
+        "summary": "按id修改共享请求状态",
+        "description": "处理共享请求",
+        "operationId": "updateTeamShareRequestById",
+        "parameters": [
+          {
+            "name": "teamshareId",
+            "in": "path",
+            "description": "请求的唯一标识ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "处理类型handletype",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TeamShareRequest"
+                  },
+                  {
+                    "required": ["handletype"]
+                  }
+                ],
+                "example": {
+                  "handletype": "accept"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "权限不足（不是接收方老师）"
+          },
+          "404": {
+            "description": "未找到请求"
+          }
+        }
+      }
+    },
+    "/request/seminarshare/{seminarshareId}": {
+      "get": {
+        "tags": ["request"],
+        "summary": "获得某一个讨论课共享申请信息",
+        "operationId": "getSeminarShareRequestByShareId",
+        "parameters": [
+          {
+            "name": "seminarshareId",
+            "in": "path",
+            "description": "共享的唯一标识ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "handletype",
+            "in": "query",
+            "description": "处理类型",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["unhandle", "accept", "reject"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "共享申请的信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SeminarShareRequest"
+                    },
+                    {
+                      "required": [
+                        "id",
+                        "mastercourseid",
+                        "mastercoursename",
+                        "teachername"
+                      ]
+                    }
+                  ],
+                  "example": {
+                    "id": 1,
+                    "mastercourseid": 1,
+                    "mastercoursename": "OOAD",
+                    "teachername": "邱明"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的handletype格式"
+          },
+          "404": {
+            "description": "未找到共享申请"
+          }
+        }
+      },
+      "put": {
+        "tags": ["request"],
+        "summary": "按id修改共享请求状态",
+        "description": "处理共享请求",
+        "operationId": "updateSeminarShareRequestById",
+        "parameters": [
+          {
+            "name": "seminarshareId",
+            "in": "path",
+            "description": "请求的唯一标识ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "处理类型handletype",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SeminarShareRequest"
+                  },
+                  {
+                    "required": ["handletype"]
+                  }
+                ],
+                "example": {
+                  "handletype": "accept"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "权限不足（不是接收方老师）"
+          },
+          "404": {
+            "description": "未找到请求"
+          }
+        }
+      }
+    },
+    "/request/teamvalid": {
+      "get": {
+        "tags": ["request"],
+        "summary": "获得组队申请信息列表",
+        "operationId": "listAllTeamRequest",
+        "parameters": [
+          {
+            "name": "handletype",
+            "in": "query",
+            "description": "处理类型",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["unhandle", "accept", "reject"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "组队申请的详情列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/TeamValidRequest"
+                      },
+                      {
+                        "required": [
+                          "courseid",
+                          "coursename",
+                          "classid",
+                          "classname",
+                          "teamid",
+                          "leaderid",
+                          "leadername",
+                          "reason"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的handletype格式"
+          },
+          "404": {
+            "description": "未找到组队申请"
+          }
+        }
+      }
+    },
+    "/request/teamvalid/{teamvalidId}": {
+      "get": {
+        "tags": ["request"],
+        "summary": "获得某一个组队申请信息",
+        "operationId": "getTeamValidRequestById",
+        "parameters": [
+          {
+            "name": "teamvalidId",
+            "in": "path",
+            "description": "组队申请的唯一标识ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "handletype",
+            "in": "query",
+            "description": "处理类型",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["unhandle", "accept", "reject"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "组队申请的信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/TeamValidRequest"
+                    },
+                    {
+                      "required": [
+                        "id",
+                        "courseid",
+                        "coursename",
+                        "classid",
+                        "classname",
+                        "leaderid",
+                        "leadername",
+                        "reason"
+                      ]
+                    }
+                  ],
+                  "example": {
+                    "id": 3,
+                    "courseid": 1,
+                    "coursename": "OOAD",
+                    "classid": 2,
+                    "classname": "2016(1)",
+                    "leaderid": 1,
+                    "leadername": "小明",
+                    "reason": "组员生病"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的handletype格式"
+          },
+          "404": {
+            "description": "未找到组队申请"
+          }
+        }
+      },
+      "put": {
+        "tags": ["request"],
+        "summary": "按id修改组队请求状态",
+        "description": "处理组队请求",
+        "operationId": "updateTeamValidRequestById",
+        "parameters": [
+          {
+            "name": "teamvalidId",
+            "in": "path",
+            "description": "请求的唯一标识ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "处理类型handletype",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TeamValidRequest"
+                  },
+                  {
+                    "required": ["handletype"]
+                  }
+                ],
+                "example": {
+                  "handletype": "accept"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "权限不足（不是接收方老师）"
+          },
+          "404": {
+            "description": "未找到请求"
+          }
+        }
+      }
+    },
+    "/attendance/{attendanceId}": {
+      "put": {
+        "tags": ["presentation"],
+        "summary": "修改报名展示",
+        "operationId": "modifyEnrollAttendance",
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "展示的Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Attendance"
+                  },
+                  {
+                    "required": ["presentationOrder"]
+                  }
+                ],
+                "example": {
+                  "teamOrder": 1
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "成功修改",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Attendance"
+                    },
+                    {
+                      "required": ["id"]
+                    }
+                  ],
+                  "example": {
+                    "id": 124
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "只能修改自己的报名"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["presentation"],
+        "summary": "取消报名展示",
+        "operationId": "cancelAttendance",
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "展示的Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "成功删除"
+          },
+          "403": {
+            "description": "只能取消自己的报名"
+          },
+          "404": {
+            "description": "不存在该报名"
+          }
+        }
+      }
+    },
+    "/attendance/{attendanceId}/report": {
+      "post": {
+        "tags": ["presentation"],
+        "summary": "上传讨论课报告",
+        "operationId": "uploadReport",
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "展示的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "服务器上报告的URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "url",
+                      "example": "/seminar1/report/1-2.pdf"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "File Invalid"
+          }
+        }
+      },
+      "put": {
+        "tags": ["presentation"],
+        "summary": "重传讨论课报告",
+        "operationId": "updateReport",
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "展示的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "服务器上报告的URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "url",
+                      "example": "/seminar1/1-2.pdf"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "File Invalid"
+          }
+        }
+      },
+      "get": {
+        "tags": ["presentation"],
+        "summary": "下载讨论课报告",
+        "operationId": "downloadReport",
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "展示的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "报告文件",
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "没有该文件"
+          }
+        }
+      }
+    },
+    "/attendance/{attendanceId}/powerpoint": {
+      "post": {
+        "tags": ["presentation"],
+        "summary": "上传讨论课ppt",
+        "operationId": "uploadPowerpoint",
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "展示的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "服务器上ppt的URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "url",
+                      "example": "/seminar1/ppt/1-2.pdf"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "File Invalid"
+          }
+        }
+      },
+      "put": {
+        "tags": ["presentation"],
+        "summary": "重传讨论课ppt",
+        "operationId": "updatePowerpoint",
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "展示的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "服务器上报告的URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "url",
+                      "example": "/seminar1/1-2.pdf"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "File Invalid"
+          }
+        }
+      },
+      "get": {
+        "tags": ["presentation"],
+        "summary": "下载讨论课报告",
+        "operationId": "downloadPowerpoint",
+        "parameters": [
+          {
+            "name": "attendanceId",
+            "in": "path",
+            "description": "展示的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ppt文件",
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "服务器没有该文件"
+          }
+        }
+      }
+    },
+    "/seminar/{seminarId}/class/{classId}/ppt": {
+      "get": {
+        "tags": ["presentation"],
+        "summary": "下载此次讨论课的所有ppt",
+        "operationId": "uploadAllPowerpoint",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "展示的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "对应班级",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "服务器上报告文件打包的压缩包",
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/seminar/{seminarId}/class/{classId}/report": {
+      "get": {
+        "tags": ["presentation"],
+        "summary": "下载此次讨论课的所有报告",
+        "operationId": "downloadAllReport",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "展示的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "对应班级",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "服务器上报告文件打包的压缩包",
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/seminar/{seminarId}/class/{classId}/attendance": {
+      "get": {
+        "tags": ["presentation"],
+        "summary": "① 获得当前班级讨论课的展示报名 ② 获得当前班级讨论课正在展示的小组     presented ③ 某一小组获得当前班级讨论课报名的展示 teamId",
+        "operationId": "getSeminarAttendance",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "对应讨论课Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "对应班级的Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "presented",
+            "in": "query",
+            "description": "展示状态",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "teamId",
+            "in": "query",
+            "description": "小组的id",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功,返回Attendance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Attendance"
+                      },
+                      {
+                        "required": [
+                          "id",
+                          "team",
+                          "class",
+                          "pptName",
+                          "reportName",
+                          "teamOrder"
+                        ]
+                      }
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 123,
+                      "team": {
+                        "id": 123,
+                        "teamSerial": 1
+                      },
+                      "class": {
+                        "classSerial": 3,
+                        "id": 123
+                      },
+                      "pptName": "3-1.ppt",
+                      "reportName": "null",
+                      "teamOrder": 4
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["presentation"],
+        "summary": "报名展示",
+        "operationId": "enrollPresentation",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "对应班级ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "teamId": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "teamOrder": {
+                        "type": "integer",
+                        "format": "int64"
+                      }
+                    }
+                  }
+                ],
+                "example": {
+                  "teamOrder": 1,
+                  "teamId": 41
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "成功报名",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Attendance"
+                    },
+                    {
+                      "required": ["id"]
+                    }
+                  ],
+                  "example": {
+                    "id": 124
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/seminar/{seminarId}/class/{classId}/question": {
+      "get": {
+        "tags": ["question"],
+        "summary": "本节讨论课所有提问",
+        "operationId": "askQuestion",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "对应班级ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "QuestionId，小组，提问分",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Question"
+                      },
+                      {
+                        "required": ["id", "score", "team"]
+                      },
+                      {
+                        "properties": {
+                          "groupName": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 124,
+                      "score": 5,
+                      "team": [
+                        {
+                          "teamName": "1-2"
+                        },
+                        {
+                          "teamId": 12
+                        }
+                      ]
+                    },
+                    {
+                      "id": 134,
+                      "score": 5,
+                      "team": [
+                        {
+                          "teamName": "1-2"
+                        },
+                        {
+                          "teamId": 1
+                        }
+                      ]
+                    },
+                    {
+                      "id": 135,
+                      "score": 3,
+                      "team": [
+                        {
+                          "teamName": "1-2"
+                        },
+                        {
+                          "teamId": 12
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "学生无法查看提问信息"
+          }
+        }
+      },
+      "post": {
+        "tags": ["question"],
+        "summary": "提问",
+        "operationId": "askQuestion",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "对应班级ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "studentId",
+            "in": "query",
+            "description": "发起提问的学生Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "成功提问，新建了一个Question对象",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Question"
+                    },
+                    {
+                      "required": ["id"]
+                    }
+                  ],
+                  "example": {
+                    "id": 124
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/question/{questionId}": {
+      "post": {
+        "tags": ["question"],
+        "summary": "给提问打分，修改提问打分",
+        "operationId": "scorePresentation",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "问题的Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Question"
+                  },
+                  {
+                    "required": ["score"]
+                  }
+                ],
+                "example": {
+                  "score": "5"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "成功打分"
+          },
+          "405": {
+            "description": "Invalid input"
+          },
+          "403": {
+            "description": "学生无法给问题打分"
+          }
+        }
+      }
+    },
+    "/seminar": {
+      "post": {
+        "tags": ["seminar"],
+        "summary": "创建讨论课",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Seminar"
+                  },
+                  {
+                    "required": [
+                      "topic",
+                      "intro",
+                      "order",
+                      "roundOrder",
+                      "visible",
+                      "teamNumLimit",
+                      "signupStartTime",
+                      "signupEndTime",
+                      "courseId"
+                    ]
+                  }
+                ],
+                "example": {
+                  "topic": "业务流程分析",
+                  "intro": "界面导航图和所有界面原型设计",
+                  "order": 4,
+                  "roundOrder": 2,
+                  "visible": true,
+                  "teamNumLimit": 5,
+                  "signupStartTime": "2018/8/9",
+                  "signupEndTime": "2018/8/15",
+                  "courseId": 3
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "创建成功，返回讨论课的ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Seminar"
+                    },
+                    {
+                      "required": ["id"]
+                    }
+                  ],
+                  "example": {
+                    "id": 23
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "用户权限不足"
+          }
+        }
+      }
+    },
+    "/seminar/{seminarId}/class": {
+      "get": {
+        "tags": ["seminar"],
+        "summary": "获取讨论课所属的班级",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "讨论课",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Class"
+                    },
+                    {
+                      "required": ["id", "name"],
+                      "example": {
+                        "id": 23,
+                        "name": "2016-(1)"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/seminar/{seminarId}": {
+      "put": {
+        "tags": ["seminar"],
+        "summary": "按ID修改讨论课",
+        "description": "在不同界面设置讨论课不同属性用到该方法",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Seminar"
+                  },
+                  {
+                    "required": [
+                      "id",
+                      "topic",
+                      "intro",
+                      "order",
+                      "visible",
+                      "round",
+                      "signupStartTime",
+                      "signupEndTime",
+                      "teamNumLimit",
+                      "reportDDL"
+                    ]
+                  }
+                ],
+                "example": {
+                  "id": 2,
+                  "topic": "需求分析",
+                  "intro": "本节讨论课主要讨论课堂管理系统的 需求",
+                  "order": 2,
+                  "visible": true,
+                  "round": 2,
+                  "signupStartTime": "2018/8/3",
+                  "signupEndTime": "2018/8/9",
+                  "teamNumLimit": 6,
+                  "reportDDL": "2018/9/1"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["seminar"],
+        "summary": "按ID删除讨论课",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "需删除讨论课的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "用户权限不足"
+          },
+          "404": {
+            "description": "未找到"
+          }
+        }
+      },
+      "get": {
+        "tags": ["seminar"],
+        "summary": "根据ID获取讨论课",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "讨论课",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Seminar"
+                    },
+                    {
+                      "required": [
+                        "id",
+                        "topic",
+                        "intro",
+                        "status",
+                        "order",
+                        "teamNumLimit"
+                      ],
+                      "example": {
+                        "id": 23,
+                        "topic": "需求分析",
+                        "intro": "本节讨论课主要讨论课堂管理系统的 需求",
+                        "status": "未开始",
+                        "order": 2,
+                        "teamNumLimit": 6
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/seminar/{seminarId}/class/{classId}": {
+      "put": {
+        "tags": ["seminar"],
+        "summary": "按ID修改班级讨论课",
+        "description": "设置不同班级讨论课的报告提交时间",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "classId",
+            "in": "path",
+            "description": "班级ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ClassSeminar"
+                  },
+                  {
+                    "required": ["reportDDL"]
+                  }
+                ],
+                "example": {
+                  "reportDDL": "2018/9/1"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["seminar"],
+        "summary": "按ID删除讨论课",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "需删除讨论课的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "用户权限不足"
+          },
+          "404": {
+            "description": "未找到"
+          }
+        }
+      },
+      "get": {
+        "tags": ["seminar"],
+        "summary": "根据ID获取讨论课",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "讨论课",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Seminar"
+                    },
+                    {
+                      "required": [
+                        "id",
+                        "topic",
+                        "intro",
+                        "status",
+                        "order",
+                        "teamNumLimit"
+                      ],
+                      "example": {
+                        "id": 23,
+                        "topic": "需求分析",
+                        "intro": "本节讨论课主要讨论课堂管理系统的 需求",
+                        "status": "未开始",
+                        "order": 2,
+                        "teamNumLimit": 6
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/seminar/{seminarId}/round": {
+      "put": {
+        "tags": ["seminar"],
+        "summary": "设置讨论课轮次",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "某一轮次",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Seminar"
+                  },
+                  {
+                    "required": ["id", "order"]
+                  }
+                ],
+                "example": {
+                  "id": 24,
+                  "order": 2
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      }
+    },
+    "/seminar/{seminarId}/status": {
+      "put": {
+        "tags": ["seminar"],
+        "summary": "设置讨论课状态",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "讨论课状态",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Round"
+                  },
+                  {
+                    "required": ["id", "order"]
+                  }
+                ],
+                "example": {
+                  "id": 24,
+                  "status": "暂停"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      }
+    },
+    "/seminar/{seminarId}/reportddl": {
+      "put": {
+        "tags": ["seminar"],
+        "summary": "设置讨论课书面报告截止时间",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "书面报告截止时间",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Seminar"
+                  },
+                  {
+                    "required": ["id", "reportDDL"]
+                  }
+                ],
+                "example": {
+                  "id": 24,
+                  "reportDDL": "2018/9/6"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "权限不足"
+          }
+        }
+      }
+    },
+    "/seminar/{seminarId}/team/{teamId}/seminarscore": {
+      "get": {
+        "tags": ["seminar"],
+        "summary": "按讨论课ID查找队伍讨论课的成绩",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "队伍的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "本次讨论课的所有成绩",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SeminarScore"
+                      },
+                      {
+                        "required": [
+                          "id",
+                          "team",
+                          "preScore",
+                          "reportScore",
+                          "questionScore"
+                        ]
+                      }
+                    ]
+                  },
+                  "example": {
+                    "id": 233,
+                    "team": {
+                      "id": 123,
+                      "name": "4-3"
+                    },
+                    "preScpre": "5",
+                    "reportScore": "4",
+                    "questionScore": "5"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          }
+        }
+      },
+      "put": {
+        "tags": ["seminar"],
+        "summary": "按讨论课ID修改队伍讨论课的成绩",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "队伍的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "本次讨论课的所有成绩",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SeminarScore"
+                      },
+                      {
+                        "required": [
+                          "team",
+                          "preScore",
+                          "reportScore",
+                          "questionScore"
+                        ]
+                      }
+                    ]
+                  },
+                  "example": {
+                    "team": {
+                      "id": 123,
+                      "name": "4-3"
+                    },
+                    "preScpre": "5",
+                    "reportScore": "4",
+                    "questionScore": "5"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          }
+        }
+      }
+    },
+    "/seminar/{seminarId}/seminarscore": {
+      "get": {
+        "tags": ["seminar"],
+        "summary": "按讨论课ID查找讨论课的成绩",
+        "parameters": [
+          {
+            "name": "seminarId",
+            "in": "path",
+            "description": "讨论课的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "本次讨论课的所有成绩",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SeminarScore"
+                      },
+                      {
+                        "required": [
+                          "team",
+                          "preScore",
+                          "reportScore",
+                          "questionScore"
+                        ]
+                      }
+                    ]
+                  },
+                  "example": [
+                    {
+                      "team": {
+                        "id": 123,
+                        "name": "4-3"
+                      },
+                      "preScpre": "5",
+                      "reportScore": "4",
+                      "questionScore": "5"
+                    },
+                    {
+                      "team": {
+                        "id": 133,
+                        "name": "4-4"
+                      },
+                      "preScpre": "5",
+                      "reportScore": "4",
+                      "questionScore": "5"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          }
+        }
+      }
+    },
+    "/round/{roundId}/seminar": {
+      "get": {
+        "tags": ["round"],
+        "summary": "按ID获取某轮的所有讨论课",
+        "parameters": [
+          {
+            "name": "roundId",
+            "in": "path",
+            "description": "需获取讨论课的所属轮次的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功，返回讨论课的ID和具体信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Seminar"
+                      },
+                      {
+                        "required": ["id", "topic", "order"]
+                      }
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 45,
+                      "topic": "业务流程分析",
+                      "order": 2
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "404": {
+            "description": "未找到讨论课"
+          }
+        }
+      }
+    },
+    "/round/{roundId}": {
+      "get": {
+        "tags": ["round"],
+        "summary": "按ID获取轮次",
+        "parameters": [
+          {
+            "name": "roundId",
+            "in": "path",
+            "description": "需获取轮次的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功，返回轮次的ID和具体信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Round"
+                    },
+                    {
+                      "required": [
+                        "id",
+                        "order",
+                        "calculatePreType",
+                        "calculateQueType",
+                        "calculateRepType"
+                      ]
+                    }
+                  ],
+                  "example": {
+                    "id": 45,
+                    "order": 1,
+                    "calculatePreType": "最高分",
+                    "calculateQueType": "平均分",
+                    "calculateRepType": "最高分"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "404": {
+            "description": "未找到轮次"
+          }
+        }
+      },
+      "put": {
+        "tags": ["round"],
+        "summary": "按ID修改轮次",
+        "description": "修改该轮次成绩计算规则",
+        "parameters": [
+          {
+            "name": "roundId",
+            "in": "path",
+            "description": "需获取轮次的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Round"
+                  },
+                  {
+                    "required": [
+                      "calculatePreType",
+                      "calculateQueType",
+                      "calculateRepType"
+                    ],
+                    "example": {
+                      "calculatePreType": "最高分",
+                      "calculateQueType": "平均分",
+                      "calculateRepType": "最高分"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式、轮次不存在"
+          },
+          "403": {
+            "description": "用户权限不足"
+          }
+        }
+      }
+    },
+    "/round": {
+      "post": {
+        "tags": ["round"],
+        "summary": "创建轮次",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Round"
+                  },
+                  {
+                    "required": ["order"]
+                  }
+                ],
+                "example": {
+                  "order": 2
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "创建成功，返回轮次的ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Round"
+                    },
+                    {
+                      "required": ["id"]
+                    }
+                  ],
+                  "example": {
+                    "id": 12
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "用户权限不足"
+          }
+        }
+      }
+    },
+    "/round/{roundId}/roundscore": {
+      "get": {
+        "tags": ["round"],
+        "summary": "按轮次ID查找所有的成绩",
+        "parameters": [
+          {
+            "name": "roundId",
+            "in": "path",
+            "description": "轮次ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "本轮次的成绩",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/RoundScore"
+                      },
+                      {
+                        "required": [
+                          "team",
+                          "preScore",
+                          "reportScore",
+                          "questionScore"
+                        ]
+                      }
+                    ]
+                  },
+                  "example": [
+                    {
+                      "team": {
+                        "id": 122,
+                        "name": "4-1"
+                      },
+                      "preScpre": "5",
+                      "reportScore": "4",
+                      "questionScore": "5"
+                    },
+                    {
+                      "team": {
+                        "id": 133,
+                        "name": "4-2"
+                      },
+                      "preScpre": "5",
+                      "reportScore": "4",
+                      "questionScore": "5"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "错误的ID格式"
+          }
+        }
+      }
+    },
+    "/round/{roundId}/team/{teamId}/roundsocre": {
+      "get": {
+        "tags": ["round"],
+        "summary": "按ID获取轮次成绩信息",
+        "operationId": "getRoundScoreById",
+        "parameters": [
+          {
+            "name": "roundId",
+            "in": "path",
+            "description": "需要获取轮次成绩的轮次ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "需要获取轮次成绩的轮次ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/RoundScore"
+                    },
+                    {
+                      "required": [
+                        "preScore",
+                        "reportScore",
+                        "questionScore",
+                        "team",
+                        "round"
+                      ]
+                    }
+                  ],
+                  "example": {
+                    "preScore": 3,
+                    "reportScore": 4.5,
+                    "questionScore": 5,
+                    "team": {
+                      "id": 1,
+                      "name": "早早鸟小组"
+                    },
+                    "round": {
+                      "id": 1,
+                      "order": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "未找到成绩"
+          }
+        }
+      },
+      "put": {
+        "tags": ["round"],
+        "summary": "按ID修改轮次成绩信息",
+        "operationId": "updateRoundScore",
+        "parameters": [
+          {
+            "name": "roundId",
+            "in": "path",
+            "description": "需要修改的轮次成绩的轮次ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "需要获取轮次成绩的轮次ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/RoundScore"
+                  },
+                  {
+                    "required": ["preScore", "reportScore", "questionScore"]
+                  }
+                ],
+                "example": {
+                  "preScore": 3,
+                  "reportScore": 4.5,
+                  "questionScore": 5
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "403": {
+            "description": "用户权限不足（学生无法修改成绩）"
+          },
+          "404": {
+            "description": "未找到成绩"
+          }
+        }
+      }
+    },
+    "/team": {
+      "post": {
+        "tags": ["team"],
+        "summary": "新建队伍",
+        "operationId": "createTeam",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Team"
+                  },
+                  {
+                    "required": [
+                      "name",
+                      "courseId",
+                      "classId",
+                      "leader",
+                      "members"
+                    ]
+                  }
+                ],
+                "example": {
+                  "name": "早早鸟小组",
+                  "courseId": 1,
+                  "classId": 1,
+                  "leader": {
+                    "id": 121,
+                    "name": "张三"
+                  },
+                  "members": [
+                    {
+                      "id": 123,
+                      "name": "李四"
+                    },
+                    {
+                      "id": 124,
+                      "name": "王五"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "创建成功，返回队伍的ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Team"
+                    },
+                    {
+                      "required": ["id"]
+                    }
+                  ],
+                  "example": {
+                    "id": 23
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "用户权限不足（老师无法新建队伍）"
+          }
+        }
+      }
+    },
+    "/team/{teamId}": {
+      "get": {
+        "tags": ["team"],
+        "summary": "按ID获取队伍信息",
+        "operationId": "getTeamById",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "需要获取队伍的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Team"
+                    },
+                    {
+                      "required": [
+                        "id",
+                        "name",
+                        "course",
+                        "class",
+                        "leader",
+                        "members",
+                        "vaild"
+                      ]
+                    }
+                  ],
+                  "example": {
+                    "id": 1,
+                    "name": "4-2 早早鸟小组",
+                    "course": {
+                      "id": 1,
+                      "name": "OOAD"
+                    },
+                    "class": {
+                      "id": 1,
+                      "name": "2016(4)"
+                    },
+                    "leader": {
+                      "id": 121,
+                      "account": 24322016231,
+                      "name": "张三"
+                    },
+                    "members": [
+                      {
+                        "id": 123,
+                        "account": 24322016232,
+                        "name": "李四"
+                      },
+                      {
+                        "id": 124,
+                        "account": 24322016233,
+                        "name": "王五"
+                      }
+                    ],
+                    "vaild": true
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "未找到课程"
+          }
+        }
+      },
+      "put": {
+        "tags": ["team"],
+        "summary": "updateTeam",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "需要修改队伍的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Team"
+                  },
+                  {
+                    "required": [
+                      "name",
+                      "courseId",
+                      "classId",
+                      "leader",
+                      "members"
+                    ]
+                  }
+                ],
+                "example": {
+                  "id": 1,
+                  "name": "4-2 早早鸟小组",
+                  "course": {
+                    "id": 1,
+                    "name": "OOAD"
+                  },
+                  "class": {
+                    "id": 1,
+                    "name": "2016(4)"
+                  },
+                  "leader": {
+                    "id": 121,
+                    "account": 24322016231,
+                    "name": "张三"
+                  },
+                  "members": [
+                    {
+                      "id": 123,
+                      "account": 24322016232,
+                      "name": "李四"
+                    },
+                    {
+                      "id": 124,
+                      "account": 24322016233,
+                      "name": "王五"
+                    }
+                  ],
+                  "vaild": true
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "修改成功"
+          },
+          "403": {
+            "description": "用户权限不足（老师无法修改队伍，学生无法修改他人队伍）"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["team"],
+        "summary": "按ID删除队伍,及组长解散队伍",
+        "operationId": "deleteTeamById",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "需要删除队伍的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式"
+          },
+          "403": {
+            "description": "用户权限不足（老师无法删除学生队伍、学生无法删除他人的队伍）"
+          },
+          "404": {
+            "description": "未找到队伍"
+          }
+        }
+      }
+    },
+    "/team/{teamId}/add": {
+      "put": {
+        "tags": ["team"],
+        "summary": "添加成员",
+        "operationId": "addTeamMember",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "添加成员小组的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "学生的ID",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/User"
+                  },
+                  {
+                    "required": ["id"]
+                  }
+                ],
+                "example": {
+                  "id": 246
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式、待添加的学生不存在"
+          },
+          "403": {
+            "description": "权限不足（不是该小组的成员）"
+          },
+          "404": {
+            "description": "小组不存在"
+          },
+          "409": {
+            "description": "待添加学生已经在小组里了"
+          }
+        }
+      }
+    },
+    "/team/{teamId}/remove": {
+      "put": {
+        "tags": ["team"],
+        "summary": "移除成员和退出队伍",
+        "operationId": "removeTeamMember",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "移除成员小组的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "学生的ID",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/User"
+                  },
+                  {
+                    "required": ["id"]
+                  }
+                ],
+                "example": {
+                  "id": 246
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "错误的ID格式、待移除的学生不存在"
+          },
+          "403": {
+            "description": "权限不足（不是该小组的成员）"
+          },
+          "404": {
+            "description": "小组不存在"
+          },
+          "409": {
+            "description": "待移除学生不在小组里"
+          }
+        }
+      }
+    },
+    "/team/{teamId}/teamvalidrequest": {
+      "post": {
+        "tags": ["team"],
+        "summary": "发起队伍状态申请",
+        "operationId": "createTeamValidRequest",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "课程的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TeamValidRequest"
+                  },
+                  {
+                    "required": [
+                      "requestType",
+                      "courseId",
+                      "classId",
+                      "teamId",
+                      "leaderId",
+                      "reason"
+                    ],
+                    "example": {
+                      "requestType": "teamValid",
+                      "courseId": 1,
+                      "classId": 1,
+                      "teamId": 1,
+                      "learderId": 1,
+                      "reason": "组员生病"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/TeamValidRequest"
+                    },
+                    {
+                      "required": ["id"]
+                    }
+                  ],
+                  "example": {
+                    "id": 5
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "用户权限不足（老师无法创建）"
+          },
+          "404": {
+            "description": "未找到队伍"
+          }
+        }
+      }
+    },
+    "/team/{teamId}/approve": {
+      "put": {
+        "tags": ["team"],
+        "summary": "老师同意学生组队合法",
+        "operationId": "approveTeam",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "同意合法小组的ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功"
+          },
+          "403": {
+            "description": "权限不足（只有老师能同意小组合法）"
+          },
+          "404": {
+            "description": "小组不存在"
+          },
+          "409": {
+            "description": "小组已经合法"
+          }
+        }
+      }
+    },
+    "/seminarscore": {
+      "post": {
+        "tags": ["seminarScore"],
+        "summary": "新建讨论课成绩",
+        "operationId": "createSeminarScore",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SeminarScore"
+                  },
+                  {
+                    "required": [
+                      "preScore",
+                      "reportScore",
+                      "questionScore",
+                      "team",
+                      "seminar"
+                    ]
+                  }
+                ],
+                "example": {
+                  "preScore": 3,
+                  "reportScore": 4.5,
+                  "questionScore": 5,
+                  "team": {
+                    "id": 1,
+                    "name": "早早鸟小组"
+                  },
+                  "seminar": {
+                    "id": 1,
+                    "topic": "业务流程分析"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "创建成功，返回成绩的ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SeminarScore"
+                    },
+                    {
+                      "required": ["id"]
+                    }
+                  ],
+                  "example": {
+                    "id": 23
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "用户权限不足（学生无法新建成绩）"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "用户的唯一ID",
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "account": {
+            "type": "string",
+            "description": "用户的教工号/学生号"
+          },
+          "role": {
+            "description": "用户的角色",
+            "type": "string",
+            "readOnly": true,
+            "enum": ["student", "teacher"]
+          },
+          "password": {
+            "description": "用户的密码",
+            "type": "string"
+          },
+          "name": {
+            "description": "用户的姓名",
+            "type": "string"
+          },
+          "email": {
+            "description": "用户的Email",
+            "type": "string"
+          },
+          "isActived": {
+            "description": "用户是否被激活",
+            "type": "integer",
+            "format": "int64",
+            "enum": [0, 1]
+          }
+        }
+      },
+      "TeamShare": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "共享的唯一ID",
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "maincourse": {
+            "description": "主课程",
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "主课程唯一ID",
+                "type": "integer",
+                "format": "int64"
+              },
+              "name": {
+                "description": "主课程名称",
+                "type": "string"
+              },
+              "teacherid": {
+                "description": "主课程老师唯一ID",
+                "type": "integer",
+                "format": "int64"
+              },
+              "teachername": {
+                "description": "主课程老师名称",
+                "type": "string"
+              }
+            }
+          },
+          "subcourse": {
+            "description": "从课程",
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "从课程唯一ID",
+                "type": "integer",
+                "format": "int64"
+              },
+              "name": {
+                "description": "从课程名称",
+                "type": "string"
+              },
+              "teacherid": {
+                "description": "从课程老师唯一ID",
+                "type": "integer",
+                "format": "int64"
+              },
+              "teachername": {
+                "description": "从主课程老师名称",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "SeminarShare": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "共享的唯一ID",
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "maincourse": {
+            "description": "主课程",
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "主课程唯一ID",
+                "type": "integer",
+                "format": "int64"
+              },
+              "name": {
+                "description": "主课程名称",
+                "type": "string"
+              },
+              "teacherid": {
+                "description": "主课程老师唯一ID",
+                "type": "integer",
+                "format": "int64"
+              },
+              "teachername": {
+                "description": "主课程老师名称",
+                "type": "string"
+              }
+            }
+          },
+          "subcourse": {
+            "description": "从课程",
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "从课程唯一ID",
+                "type": "integer",
+                "format": "int64"
+              },
+              "name": {
+                "description": "从课程名称",
+                "type": "string"
+              },
+              "teacherid": {
+                "description": "从课程老师唯一ID",
+                "type": "integer",
+                "format": "int64"
+              },
+              "teachername": {
+                "description": "从主课程老师名称",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "课程的唯一ID",
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "name": {
+            "description": "课程名字",
+            "type": "string"
+          },
+          "intro": {
+            "description": "课程要求",
+            "type": "string"
+          },
+          "teacher": {
+            "description": "任课教师",
+            "type": "object"
+          },
+          "isShareTeam": {
+            "description": "是否作为主课程分享组队",
+            "type": "boolean"
+          },
+          "isShareSeminar": {
+            "description": "是否作为主课程分享讨论课",
+            "type": "boolean"
+          },
+          "masterCourseId": {
+            "description": "主课程Id",
+            "type": "integer"
+          },
+          "startTeamTime": {
+            "description": "开始组队时间",
+            "type": "string"
+          },
+          "endTeamTime": {
+            "description": "组队截止时间",
+            "type": "string"
+          },
+          "presentationWeight": {
+            "description": "展示得分比重",
+            "type": "number"
+          },
+          "questionWeight": {
+            "description": "提问得分比重",
+            "type": "number"
+          },
+          "reportWeight": {
+            "description": "报告得分比重",
+            "type": "number"
+          },
+          "roundNumber": {
+            "description": "讨论课轮数",
+            "type": "integer"
+          },
+          "minMemberNumber": {
+            "description": "最小组队人数描述",
+            "type": "integer"
+          },
+          "maxMemberNumber": {
+            "description": "最大组队人数",
+            "type": "integer"
+          }
+        }
+      },
+      "Class": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "用户的唯一ID",
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "course": {
+            "description": "所属课程",
+            "type": "object"
+          },
+          "name": {
+            "description": "班级描述（如\"2016-1\"）",
+            "type": "string"
+          },
+          "classroom": {
+            "description": "上课地点",
+            "type": "string"
+          },
+          "time": {
+            "description": "上课时间",
+            "type": "string"
+          },
+          "studentFile": {
+            "description": "学生名单",
+            "type": "object"
+          }
+        }
+      },
+      "TeamShareRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "共享请求的唯一ID",
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "teamShare": {
+            "description": "共享申请",
+            "type": "object"
+          },
+          "handletype": {
+            "description": "处理类型",
+            "type": "string",
+            "enum": ["unhandle", "accept", "reject"]
+          }
+        }
+      },
+      "SeminarShareRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "共享请求的唯一ID",
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "seminarShare": {
+            "description": "共享申请",
+            "type": "object"
+          },
+          "handletype": {
+            "description": "处理类型",
+            "type": "string",
+            "enum": ["unhandle", "accept", "reject"]
+          }
+        }
+      },
+      "TeamValidRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "组队请求的唯一ID",
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "course": {
+            "description": "所属课程",
+            "type": "object"
+          },
+          "class": {
+            "description": "所在主班级",
+            "type": "object"
+          },
+          "team": {
+            "description": "队伍",
+            "type": "object"
+          },
+          "leadername": {
+            "description": "学生姓名",
+            "type": "string"
+          },
+          "requesttype": {
+            "description": "申请类型",
+            "type": "string",
+            "enum": ["teamValid", "teamMember"]
+          },
+          "reason": {
+            "description": "申请理由",
+            "type": "string"
+          },
+          "handletype": {
+            "description": "处理类型",
+            "type": "string",
+            "enum": ["unhandle", "accept", "reject"]
+          }
+        }
+      },
+      "Attendance": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pptName": {
+            "type": "string"
+          },
+          "reportName": {
+            "type": "string"
+          },
+          "pptUrl": {
+            "type": "string"
+          },
+          "reportUrl": {
+            "type": "string"
+          },
+          "teamOrder": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "presented": {
+            "type": "boolean"
+          },
+          "team": {
+            "description": "报名展示的队伍",
+            "type": "object",
+            "format": "#/components/schemas/Team"
+          },
+          "Seminar": {
+            "description": "报名展示对应的课程讨论课",
+            "type": "object",
+            "format": "#/components/schemas/Seminar"
+          },
+          "class": {
+            "description": "讨论课对应的班级",
+            "type": "object",
+            "format": "#/components/schemas/Class"
+          }
+        },
+        "xml": {
+          "name": "Attendance"
+        }
+      },
+      "Question": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "score": {
+            "type": "integer",
+            "format": "int64",
+            "maximum": 5,
+            "minimum": 1
+          },
+          "studentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "asked": {
+            "type": "boolean"
+          },
+          "team": {
+            "description": "提问所属的队伍",
+            "type": "object",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Team"
+              },
+              {
+                "required": ["id"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["team"]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "xml": {
+          "name": "Question"
+        }
+      },
+      "Round": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "讨论课轮次的唯一ID",
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "order": {
+            "description": "轮次信息（如\"第一轮\"）",
+            "type": "integer"
+          },
+          "calculatePreType": {
+            "description": "本轮次展示成绩计算策略",
+            "type": "string"
+          },
+          "calculateQueType": {
+            "description": "本轮次提问成绩计算策略",
+            "type": "string"
+          },
+          "calculateRepType": {
+            "description": "本轮次报告成绩计算策略",
+            "type": "string"
+          },
+          "course": {
+            "description": "所属课程",
+            "type": "object"
+          }
+        }
+      },
+      "Seminar": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "讨论课的唯一ID",
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "topic": {
+            "description": "讨论课主题",
+            "type": "string"
+          },
+          "visible": {
+            "description": "讨论课是否可见",
+            "type": "boolean"
+          },
+          "isShare": {
+            "description": "是否共享",
+            "type": "boolean"
+          },
+          "round": {
+            "description": "讨论课所属的轮次",
+            "type": "object"
+          },
+          "order": {
+            "description": "讨论课次序号",
+            "type": "string"
+          },
+          "intro": {
+            "description": "讨论课详情",
+            "type": "string"
+          },
+          "status": {
+            "description": "讨论课状态",
+            "type": "string"
+          },
+          "teamNumLimit": {
+            "description": "讨论课报名组数限制",
+            "type": "integer"
+          },
+          "reportDDL": {
+            "description": "讨论课报告提交截止日期",
+            "type": "string"
+          },
+          "signupStartTime": {
+            "description": "讨论课报名开始时间",
+            "type": "string"
+          },
+          "signupEndTime": {
+            "description": "讨论课报名结束时间",
+            "type": "string"
+          },
+          "course": {
+            "description": "所属课程",
+            "type": "object"
+          },
+          "class": {
+            "description": "所属班级",
+            "type": "object"
+          },
+          "conflictCourse": {
+            "description": "冲突课程",
+            "type": "object"
+          }
+        }
+      },
+      "ClassSeminar": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "班级讨论课的唯一ID",
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "classId": {
+            "description": "班级ID",
+            "type": "integer",
+            "format": "int64"
+          },
+          "seminarId": {
+            "description": "讨论课ID",
+            "type": "integer",
+            "format": "int64"
+          },
+          "reportDDL": {
+            "description": "讨论课报告提交截止日期",
+            "type": "string"
+          },
+          "status": {
+            "description": "讨论课状态",
+            "type": "string"
+          }
+        }
+      },
+      "Team": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "队伍的唯一ID",
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "name": {
+            "description": "队伍名字",
+            "type": "string"
+          },
+          "course": {
+            "description": "所属课程",
+            "type": "object",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Course"
+              },
+              {
+                "required": ["id"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["class"]
+                  }
+                }
+              }
+            ]
+          },
+          "class": {
+            "description": "所属班级",
+            "type": "object",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Class"
+              },
+              {
+                "required": ["id"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["class"]
+                  }
+                }
+              }
+            ]
+          },
+          "leader": {
+            "description": "队长",
+            "type": "object",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              },
+              {
+                "required": ["id"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["student"]
+                  }
+                }
+              }
+            ]
+          },
+          "members": {
+            "description": "队员",
+            "type": "array",
+            "readOnly": true,
+            "uniqueItems": true,
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/User"
+                },
+                {
+                  "required": ["id"],
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": ["student"]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "valid": {
+            "description": "合法情况",
+            "type": "boolean"
+          }
+        }
+      },
+      "SeminarScore": {
+        "type": "object",
+        "properties": {
+          "presentationScore": {
+            "description": "展示成绩",
+            "type": "float"
+          },
+          "reportScore": {
+            "description": "报告成绩",
+            "type": "float"
+          },
+          "questionScore": {
+            "description": "提问成绩",
+            "type": "float"
+          },
+          "team": {
+            "description": "分数所属的队伍",
+            "type": "object",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Team"
+              },
+              {
+                "required": ["id"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["team"]
+                  }
+                }
+              }
+            ]
+          },
+          "seminar": {
+            "description": "分数所属的讨论课",
+            "type": "object",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Seminar"
+              },
+              {
+                "required": ["id"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["seminar"]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "RoundScore": {
+        "type": "object",
+        "properties": {
+          "presentationScore": {
+            "description": "展示成绩",
+            "type": "float"
+          },
+          "reportScore": {
+            "description": "报告成绩",
+            "type": "float"
+          },
+          "questionScore": {
+            "description": "提问成绩",
+            "type": "float"
+          },
+          "team": {
+            "description": "分数所属的队伍",
+            "type": "object",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Team"
+              },
+              {
+                "required": ["id"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["team"]
+                  }
+                }
+              }
+            ]
+          },
+          "round": {
+            "description": "分数所属的轮次",
+            "type": "object",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Round"
+              },
+              {
+                "required": ["id"],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": ["seminar"]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

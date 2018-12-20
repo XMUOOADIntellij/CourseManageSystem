@@ -1,74 +1,77 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible"
-          content="IE=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Page Title</title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1">
-    <link rel="stylesheet"
-          type="text/css"
-          media="screen"
-          href="../../static/css/common/style.css"/>
-</head>
-<body>
-<!-- 这个是顶部栏，直接复制这段代码就行，记得放在body结点后面第一个 -->
-<div class="topBar">
-   <div class="content-icon right"><img alt=""  class="icon"
-                                   src="../../static/img/Down_white.png"/></div>
-    <div class="content text text-light">学生成绩</div>
-   <div class="content-icon right"><img alt=""  class="icon"
-                                   src="../../static/img/Down_white.png"/></div>
-</div>
-<!-- 对于所有页面中的内容，都是以卡片形式存放，card 属性定义了最高层 -->
-<div class="card">
-    <!-- 每个卡片都存在一个卡片头，用于描述该卡片信息 -->
-    <div class="card-head">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../../static/css/common/style.css"
+    />
+  </head>
+  <body>
+    <!-- 这个是顶部栏，直接复制这段代码就行，记得放在body结点后面第一个 -->
+    <div class="topBar">
+      <div class="content-icon right">
+        <img alt="" class="icon" src="../../static/img/Down_white.png" />
+      </div>
+      <div class="content text text-light">学生成绩</div>
+      <div class="content-icon right">
+        <img alt="" class="icon" src="../../static/img/Down_white.png" />
+      </div>
+    </div>
+    <!-- 对于所有页面中的内容，都是以卡片形式存放，card 属性定义了最高层 -->
+    <div class="card">
+      <!-- 每个卡片都存在一个卡片头，用于描述该卡片信息 -->
+      <div class="card-head">
         <!-- 对于所有的文本信息，都放在 span 结点下，text 默认字体颜色为黑，text-light 则改为白
         对于卡片头的文本样式已预定好如浮动等属性，均在 card-head-content，直接用上就行 -->
         <span class="card-head-content text text-light">第一轮</span>
         <!-- 每个图标都必须用 icon 属性，这里已经为卡片头定义好了详细属性 content-icon 直接用 -->
-       <div class="content-icon right"><img alt=""  class="icon"
-                                       src="../../static/img/Down_white.png"/></div>
-    </div>
-    <!-- 对于卡片下的二级卡片，定义了 card-head-secondary -->
-    <div class="card-head card-head-secondary">
-        <span class="card-head-content text">用例分析</span>
-       <div class="content-icon right"><img alt=""  class="icon"
-                                       src="../../static/img/Down_black.png"/></div>
-    </div>
-    <div class="card-body">
-        <div>
-            <div class="card-row-details">
-                <!-- 对于详细信息的文本，用 text-small，这个字号相比较与 text 小一号 -->
-                <span class="text text-small">展示：</span> <span class="text score">5.0</span> <span class="text text-small">提问：</span>
-                <span class="text score">5.0</span> <span class="text text-small">书面报告：</span> <span class="text score">5.0</span>
-                <span class="text score">5.0</span>
-            </div>
-            <!-- 分割线，要添加的地方直接添加如下代码即可 -->
-            <div class="separator-dark"></div>
-            <div class="card-row-details">
-                <input class="btn-success btn"
-                       type="button"
-                       value="修改"> <span class="text text-small">本轮成绩：</span> <span class="text score">5.0</span>
-            </div>
+        <div class="content-icon right">
+          <img alt="" class="icon" src="../../static/img/Down_white.png" />
         </div>
+      </div>
+      <!-- 对于卡片下的二级卡片，定义了 card-head-secondary -->
+      <div class="card-head card-head-secondary">
+        <span class="card-head-content text">用例分析</span>
+        <div class="content-icon right">
+          <img alt="" class="icon" src="../../static/img/Down_black.png" />
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="card-row-details">
+            <!-- 对于详细信息的文本，用 text-small，这个字号相比较与 text 小一号 -->
+            <span class="text text-small">展示：</span>
+            <span class="text score">5.0</span>
+            <span class="text text-small">提问：</span>
+            <span class="text score">5.0</span>
+            <span class="text text-small">书面报告：</span>
+            <span class="text score">5.0</span>
+            <span class="text score">5.0</span>
+          </div>
+          <!-- 分割线，要添加的地方直接添加如下代码即可 -->
+          <div class="separator-dark"></div>
+          <div class="card-row-details">
+            <input class="btn-success btn" type="button" value="修改" />
+            <span class="text text-small">本轮成绩：</span>
+            <span class="text score">5.0</span>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-<div>
-    <!-- input 框 -->
-    <input class="input text text-small"
-           type="text"
-           placeholder="学号">
-</div>
-<div>
-    <!-- 占一行的按钮，用 btn-giant -->
-    <input class="btn btn-giant btn-success"
-           type="button"
-           value="登录">
-</div>
-<input type="date"
-       value="2018-09-01">
-</body>
+    <div>
+      <!-- input 框 -->
+      <input class="input text text-small" type="text" placeholder="学号" />
+    </div>
+    <div>
+      <!-- 占一行的按钮，用 btn-giant -->
+      <input class="btn btn-giant btn-success" type="button" value="登录" />
+    </div>
+    <input type="date" value="2018-09-01" />
+  </body>
 </html>

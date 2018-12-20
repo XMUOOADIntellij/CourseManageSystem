@@ -1,69 +1,67 @@
-.roll{
-    width: 98%;
-    float: left;
-    background-color: #dfdcdc;
-    border-radius: 10px;
-    margin-left: 1%;
+.roll {
+  width: 98%;
+  float: left;
+  background-color: #dfdcdc;
+  border-radius: 10px;
+  margin-left: 1%;
 }
 
-#roll{
-    float: right;
-    width: 40%;
-    font-size: large;
+#roll {
+  float: right;
+  width: 40%;
+  font-size: large;
 }
 
-.presentation_score{
-    width: 100%;
-    float: left;
-
-
+.presentation_score {
+  width: 100%;
+  float: left;
 }
 
-#presentation_score{
-    float: right;
-    width: 40%;
-    font-size: large;
-    color: #27AE60;
+#presentation_score {
+  float: right;
+  width: 40%;
+  font-size: large;
+  color: #27ae60;
 }
 
-.report_score{
-    width: 98%;
-    float: left;
-    background-color: #dfdcdc;
-    border-radius: 10px;
-    margin-left: 1%;
+.report_score {
+  width: 98%;
+  float: left;
+  background-color: #dfdcdc;
+  border-radius: 10px;
+  margin-left: 1%;
 }
 
-#report_score{
-    float: right;
-    width: 40%;
-    font-size: large;
-    color: #27AE60;
+#report_score {
+  float: right;
+  width: 40%;
+  font-size: large;
+  color: #27ae60;
 }
 
-.question_score{
-    width: 100%;
-    float: left;
+.question_score {
+  width: 100%;
+  float: left;
 }
 
-#question_score{
-    float: right;
-    width: 40%;
-    font-size: large;
-    color: #27AE60;
+#question_score {
+  float: right;
+  width: 40%;
+  font-size: large;
+  color: #27ae60;
 }
 
-.sum_score{
-    width: 98%;
-    float: left;
-    background-color: #dfdcdc;
-    border-radius: 10px;
-    margin-left: 1%;
+.sum_score {
+  width: 98%;
+  float: left;
+  background-color: #dfdcdc;
+  border-radius: 10px;
+  margin-left: 1%;
 }
 
-#sum_score{
-    float: right;
-    width: 40%;
-    font-size: large;
-    color: #27AE60;
+#sum_score {
+  float: right;
+  width: 40%;
+  font-size: large;
+  color: #27ae60;
 }

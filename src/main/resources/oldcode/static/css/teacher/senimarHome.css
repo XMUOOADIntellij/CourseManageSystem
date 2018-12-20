@@ -1,10 +1,8 @@
 @media screen and (max-width: 480px) {
-    .card-head-content {
-        width: 70%;
-    }
-    .card-head-warning {
-        background-color: #7B7C7D;
-    }
+  .card-head-content {
+    width: 70%;
+  }
+  .card-head-warning {
+    background-color: #7b7c7d;
+  }
 }
-
-

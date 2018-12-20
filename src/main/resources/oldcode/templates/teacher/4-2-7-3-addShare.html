@@ -1,117 +1,132 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/addShare.css" />
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../../static/css/common/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../../static/css/teacher/addShare.css"
+    />
+  </head>
+  <body>
+    <div class="topBar">
+      <div class="content-icon right">
+        <img
+          class="icon"
+          onclick="onClose()"
+          src="../../static/img/close_white.png"
+        />
+      </div>
+      <div class="content text text-light">新增共享</div>
+    </div>
 
-<div class="topBar">
-   <div class="content-icon right"><img class="icon" onclick="onClose()" src="../../static/img/close_white.png"/></div>
-    <div class="content text text-light">新增共享</div>
-</div>
-
-<div class="form">
-    <div class="separator-blank"></div>
-    <div>
+    <div class="form">
+      <div class="separator-blank"></div>
+      <div>
         <span class="text text-small text-bold myMarginLeft">设置共享</span>
         <div class="myMargin"></div>
-    </div>
+      </div>
 
-    <div class="dialog-row">
+      <div class="dialog-row">
         <span class="myMarginLeft text-smaller">共享类型</span>
         <select class="selector" id="shareType">
-            <option>共享讨论课</option>
-            <option>共享课程</option>
+          <option>共享讨论课</option>
+          <option>共享课程</option>
         </select>
-    </div>
+      </div>
 
-    <div class="dialog-row">
+      <div class="dialog-row">
         <span class="myMarginLeft text-smaller">课堂提问：</span>
         <select class="selector" id="shareAsk">
+          <option>J2EE(林老师)</option>
+          <option>J2EE(徐老师)</option>
+        </select>
+      </div>
+
+      <div class="separator-blank"></div>
+
+      <div>
+        <div>
+          <span class="text text-small text-bold myMarginLeft">冲突设置</span>
+          <div class="myMargin"></div>
+        </div>
+        <div class="dialog-row">
+          <span class="myMarginLeft text-smaller">冲突课程</span>
+          <select class="conflict">
             <option>J2EE(林老师)</option>
             <option>J2EE(徐老师)</option>
-        </select>
-    </div>
-
-    <div class="separator-blank"></div>
-
-
-    <div>
-        <div>
-            <span class="text text-small text-bold myMarginLeft">冲突设置</span>
-            <div class="myMargin"></div>
+          </select>
         </div>
         <div class="dialog-row">
-            <span class="myMarginLeft text-smaller">冲突课程</span>
-            <select class="conflict">
-                <option>J2EE(林老师)</option>
-                <option>J2EE(徐老师)</option>
-            </select>
-        </div>
-        <div class="dialog-row">
-            <select class="conflict">
-                <option>J2EE(徐老师)</option>
-                <option>J2EE(王老师)</option>
-            </select>
+          <select class="conflict">
+            <option>J2EE(徐老师)</option>
+            <option>J2EE(王老师)</option>
+          </select>
         </div>
         <div class="myMargin"></div>
 
         <div class="card-row-details">
-            <input class="btn btn-warning right" type="button" value="新增对象"/>
+          <input class="btn btn-warning right" type="button" value="新增对象" />
         </div>
+      </div>
     </div>
+    <div class="separator-blank"></div>
+    <div class="card-row-details">
+      <input
+        class="btn btn-success btn-giant"
+        type="button"
+        id="btnSubmit"
+        value="提交"
+      />
+    </div>
+  </body>
 
-</div>
-<div class="separator-blank"></div>
-<div class="card-row-details">
-    <input class="btn btn-success btn-giant"
-           type="button" id="btnSubmit"
-           value="提交">
-</div>
-</body>
-
-<script>
+  <script>
     function createShare() {
-
-        var ata = {
-            type: $("#shareType").val(),
-            ask: $("#shareAsk").val(),
-            conflict: document.getElementsByClassName("conflict"),
-        };
-        // alert("55");
-        $.ajax({
-            type: 'post',
-            url: '/course/' + getCookie("courseCurrent"),
-            dataType: "json",
-            contentType: "application/json;",
-            data: JSON.stringify(ata),
-            success: function (data, textStatus, xhr) {
-                if (xhr.status == 201) {
-                    alert("创建成功!");
-                    window.reload();
-                }
-            },
-            statusCode: {
-                403: function () {
-                    alert("用户权限不足");
-                },
-                404: function () {
-                    alert("未找到课程");
-                }
-            }
-        });
+      var ata = {
+        type: $("#shareType").val(),
+        ask: $("#shareAsk").val(),
+        conflict: document.getElementsByClassName("conflict")
+      };
+      // alert("55");
+      $.ajax({
+        type: "post",
+        url: "/course/" + getCookie("courseCurrent"),
+        dataType: "json",
+        contentType: "application/json;",
+        data: JSON.stringify(ata),
+        success: function(data, textStatus, xhr) {
+          if (xhr.status == 201) {
+            alert("创建成功!");
+            window.reload();
+          }
+        },
+        statusCode: {
+          403: function() {
+            alert("用户权限不足");
+          },
+          404: function() {
+            alert("未找到课程");
+          }
+        }
+      });
     }
-    $("#btnSubmit").click(function () {
-        window.reload();
-        // createShare();
+    $("#btnSubmit").click(function() {
+      window.reload();
+      // createShare();
     });
     function onClose() {
-        window.location.href = "4-2-0-courseManage.html"
+      window.location.href = "4-2-0-courseManage.html";
     }
-</script>
+  </script>
 </html>

@@ -1,58 +1,56 @@
-.show_list{
-    width: 100%;
-
+.show_list {
+  width: 100%;
 }
 
-.list{
-    width: 50%;
-    float: left;
+.list {
+  width: 50%;
+  float: left;
 }
-.left_list{
-    font-size: x-large;
-    font-weight: bold;
-    padding: 10%;
-    margin-left: 10%;
-}
-
-.seminar_name{
-    width: 100%;
-    background-color: grey;
-    height: 40px;
+.left_list {
+  font-size: x-large;
+  font-weight: bold;
+  padding: 10%;
+  margin-left: 10%;
 }
 
-.team_No{
-    float: right;
-    width: 50%;
-}
-.right_name{
-    font-size: x-large;
-    font-weight: bold;
-    padding: 10%;
-
-}
-.on{
-    font-size: x-large;
-    padding: 10%;
-
-    color: red;
-    font-weight: bolder;
+.seminar_name {
+  width: 100%;
+  background-color: grey;
+  height: 40px;
 }
 
-.name{
-    text-align: center;
-    font-size: large;
-    color: white;
-    font-weight: bold;
-    float: left;
-    margin-left: 35%;
-    margin-top: 5px;
+.team_No {
+  float: right;
+  width: 50%;
 }
-.btn_question{
-    width:30%;
-    color: #ffffff;
-    background-color: #27AE60;
-    font-size: large;
-    border-radius: 5px;
-    margin-left: 35%;
-    margin-top: 10%;
+.right_name {
+  font-size: x-large;
+  font-weight: bold;
+  padding: 10%;
+}
+.on {
+  font-size: x-large;
+  padding: 10%;
+
+  color: red;
+  font-weight: bolder;
+}
+
+.name {
+  text-align: center;
+  font-size: large;
+  color: white;
+  font-weight: bold;
+  float: left;
+  margin-left: 35%;
+  margin-top: 5px;
+}
+.btn_question {
+  width: 30%;
+  color: #ffffff;
+  background-color: #27ae60;
+  font-size: large;
+  border-radius: 5px;
+  margin-left: 35%;
+  margin-top: 10%;
 }
