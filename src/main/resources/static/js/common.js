@@ -37,8 +37,42 @@ function bindUser() {
     }
   });
 }
-
-function resetPassword() {
+function getUserInfo() {
+  // jquery 表单提交
+  $.ajax({
+    type: "get",
+    url: "http://xug98.cn/user/information",
+    dataType: "json",
+    contentType: "application/json",
+    beforeSend: function(xhr) {
+      if (localStorage.jwt) {
+        let token=localStorage.jwt;
+        xhr.setRequestHeader("Authorization",'Bearer '+token);
+      }
+    },
+    success: function(data, textStatus, xhr) {
+      console.log(data);
+      alert("success");
+      if (xhr.status === 200) {
+        Cookies.set("messageInterval",data.messageInterval);
+        $("#account").html(data.account);
+        $("#email").html(data.email);
+        $("#messageInterval").value=data.messageInterval;
+      }
+    },
+    statusCode: {
+      401: function () {
+        alert("未登录!");
+        window.location.href="./login";
+      },
+      403:function () {
+        alert("未登录!");
+        window.location.href="./login";
+      }
+      }
+  });
+}
+function sendPassword() {
   // jquery 表单提交
   let ata=$("#account").val();
   console.log(ata);
@@ -68,24 +102,64 @@ function resetPassword() {
   });
 }
 
+function editPassword() {
+  // jquery 表单提交
+  let ata = {
+    password:$("#password").val()
+  };
+  $.ajax({
+    type:'put',
+    url: 'http://xug98.cn/user/password',
+    dataType: "json",
+    data: JSON.stringify(ata),
+    contentType: "application/json",
+    beforeSend: function(xhr) {
+      if (localStorage.jwt) {
+        let token=localStorage.jwt;
+        xhr.setRequestHeader("Authorization",'Bearer '+token);
+      }
+    },
+    success: function (data,textStatus,xhr) {
+      if(xhr.status === 200){
+        alert("修改成功");
+        window.location.href = "./account-setting.html";
+      }
+    },
+    statusCode:{
+      400: function () {
+        alert("修改失败");
+      }
+    },
+  });
+}
 function editEmail() {
   // jquery 表单提交
-  getVerCode();
-  updateEmail();
-  return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+  let ata = {
+    password:$("#email").val()
+  };
+  $.ajax({
+    type:'put',
+    url: 'http://xug98.cn/user/email',
+    dataType: "json",
+    data: JSON.stringify(ata),
+    contentType: "application/json",
+    beforeSend: function(xhr) {
+      if (localStorage.jwt) {
+        let token=localStorage.jwt;
+        xhr.setRequestHeader("Authorization",'Bearer '+token);
+      }
+    },
+    success: function (data,textStatus,xhr) {
+      if(xhr.status === 200){
+        alert("修改成功");
+        window.location.href = "./account-setting.html";
+      }
+    },
+    statusCode:{
+      400: function () {
+        alert("修改失败");
+      }
+    },
+  });
 }
-function updatePassword() {
-  // jquery 表单提交
-  alert("success");
-  return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
-}
-function updateEmail() {
-  // jquery 表单提交
-  alert("success");
-  return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
-}
-function getVerCode() {
-  // jquery 表单提交
-  alert("success");
-  return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
-}
+
