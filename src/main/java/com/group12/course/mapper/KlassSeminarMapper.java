@@ -2,6 +2,7 @@ package com.group12.course.mapper;
 
 import com.group12.course.entity.KlassSeminar;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface KlassSeminarMapper {
     Integer updateKlassSeminar(KlassSeminar record);
 
     Integer insertByList(List<KlassSeminar> list);
+
+    List<KlassSeminar> selectKlassSeminarBySeminarIdList(@Param("seminarId") List<Long> seminarId);
 }

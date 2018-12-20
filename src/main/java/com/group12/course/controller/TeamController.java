@@ -39,6 +39,13 @@ public class TeamController {
     @Autowired
     TeamService teamService;
 
+    /**
+     * 添加某个队伍
+     *
+     * @param teamVO 前端传过来的新加的队伍对象
+     * 成功创建返回200以及返回的队伍对象中包含新添加的对象的id
+     * 失败返回400
+     * */
     @PostMapping(value = "",produces = "application/json; charset=utf-8")
     public void createTeam(@RequestBody TeamVO teamVO, HttpServletResponse response)throws IOException {
         Team team=new Team(teamVO);
@@ -53,6 +60,12 @@ public class TeamController {
         }
     }
 
+    /**
+     * 根据学生 id 获取队伍
+     *
+     * @param request 包含学生对象的 jwt token 的请求
+     * 返回一个包含该学生的队伍
+     * */
     @GetMapping(value = "",produces = "application/json; charset=utf-8")
     public void getTeam(HttpServletRequest request, HttpServletResponse response)throws IOException {
         String token = request.getHeader("Authorization");
@@ -73,6 +86,12 @@ public class TeamController {
         }
     }
 
+    /**
+     * 根据队伍 id 获取队伍
+     *
+     * @param teamId 队伍id
+     * 返回一个包含该学生的队伍
+     * */
     @GetMapping(value = "/{teamId}",produces = "application/json; charset=utf-8")
     public void getTeamByTeamId(@PathVariable Long teamId, HttpServletResponse response)throws IOException {
         Team returnTeam = teamService.getTeamByTeamId(teamId);
@@ -92,6 +111,13 @@ public class TeamController {
         return new Team();
     }
 
+    /**
+     * 根据队伍 id 删除队伍
+     *
+     * @param teamId 队伍id
+     * 成功返回200
+     * 失败返回404
+     * */
     @DeleteMapping(value = "/{teamId}",produces = "application/json; charset=utf-8")
     public void deleteTeam(@PathVariable Long teamId, HttpServletResponse response)throws IOException {
         int count = teamService.deleteTeamByTeamId(teamId);
@@ -103,6 +129,14 @@ public class TeamController {
         }
     }
 
+    /**
+     * 根据队伍 id 添加组员
+     *
+     * @param teamId 队伍id
+     * @param student 新加的学生
+     * 成功返回200
+     * 失败返回404
+     * */
     @PutMapping(value = "/{teamId}/add",produces = "application/json; charset=utf-8")
     public void addTeam(@RequestBody Student student, @PathVariable Long teamId, HttpServletResponse response)throws IOException {
         Team team=new Team();
@@ -116,6 +150,14 @@ public class TeamController {
         }
     }
 
+    /**
+     * 根据队伍 id 删除组员
+     *
+     * @param teamId 队伍id
+     * @param student 删除的学生
+     * 成功返回200
+     * 失败返回404
+     * */
     @PutMapping(value = "/{teamId}/remove",produces = "application/json; charset=utf-8")
     public void removeTeammate(@RequestBody Student student, @PathVariable Long teamId, HttpServletResponse response)throws IOException {
         Team team=new Team();

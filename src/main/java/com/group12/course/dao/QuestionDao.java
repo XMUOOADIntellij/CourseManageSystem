@@ -32,4 +32,5 @@ public class QuestionDao {
     public Question getQustionById(Long id){
         return questionMapper.selectQuestionById(id);
     }
+
 }

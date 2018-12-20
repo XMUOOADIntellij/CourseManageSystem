@@ -26,7 +26,7 @@ public class SeminarDao {
     @Autowired
     AttendanceDao attendanceDao;
     @Autowired
-    SeminarScoreDao seminarScoreDao;
+    ScoreDao scoreDao;
     @Autowired
     RoundDao roundDao;
 
@@ -98,7 +98,7 @@ public class SeminarDao {
                 Long klassSeminarId = item.getId();
                 questionDao.deleteQuestionByKlassSeminarId(klassSeminarId);
                 attendanceDao.deleteAttendanceByKlassSeminarId(klassSeminarId);
-                seminarScoreDao.deleteSeminarScoreByKlassSeminarId(klassSeminarId);
+                scoreDao.deleteSeminarScoreByKlassSeminarId(klassSeminarId);
             }
             //然后删除class_seminar
             klassSeminarDao.deleteKlassSeminarBySeminarId(seminarId);
@@ -106,5 +106,9 @@ public class SeminarDao {
             return seminarMapper.deleteSeminarById(seminarId);
         }
         return null;
+    }
+
+    public List<Seminar> listSeminarByRoundId(Long roundId){
+        return seminarMapper.listSeminarByRoundId(roundId);
     }
 }

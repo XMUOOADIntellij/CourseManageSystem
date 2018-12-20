@@ -103,7 +103,7 @@ public class SeminarController {
      */
     @GetMapping(value="/{seminarId}/class/{classId}",produces = "application/json")
     public SeminarVO selectKlassSeminarBySeminarIdAndClassId(@PathVariable Long seminarId, @PathVariable Long classId){
-       KlassSeminar record =  seminarService.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+       KlassSeminar record =  seminarService.selectKlassSeminar(seminarId,classId);
        return new SeminarVO(record);
     }
 

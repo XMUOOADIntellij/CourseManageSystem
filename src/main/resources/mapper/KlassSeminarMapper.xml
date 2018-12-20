@@ -17,6 +17,8 @@
                  javaType="com.group12.course.entity.Klass"/>
   </resultMap>
 
+  <cache type="com.group12.course.tools.MybatisRedisCache" />
+
   <sql id="Base_Column_List" >
     id, seminar_id, klass_id ,report_ddl, seminar_status
   </sql>
@@ -41,6 +43,16 @@
     <include refid="Base_Column_List" />
     from klass_seminar
     where seminar_id = #{seminarId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectKlassSeminarBySeminarIdList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from klass_seminar
+    where seminar_id in
+    <foreach collection="seminarId" item="id" open="(" close=")" separator=",">
+      #{id,jdbcType=BIGINT}
+    </foreach>
   </select>
 
   <delete id="deleteById" parameterType="java.lang.Long" >

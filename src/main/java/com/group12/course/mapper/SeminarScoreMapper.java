@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 @Mapper
 public interface SeminarScoreMapper {
 
-    SeminarScore selectSeminarScoreById(Long id);
+    SeminarScore selectSeminarScoreByKlassSeminarIdAndTeamId(Long klassSeminarId,Long teamId);
 
     Integer deleteSeminarScoreByKlassSeminarId(Long klassSeminarId);
+
+    Integer updateSeminarScore(SeminarScore seminarScore);
 }

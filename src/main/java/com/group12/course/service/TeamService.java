@@ -17,26 +17,65 @@ public class TeamService {
     @Autowired
     TeamDao teamDao;
 
+    /**
+     * 添加某个队伍
+     *
+     * @param team 新加的队伍对象
+     * @return 返回的队伍对象中包含新添加的对象的id
+     * */
     public Team createTeam(Team team){
         return teamDao.addTeam(team);
     }
 
+    /**
+     * 根据传入的学生 id
+     * 获取其所在的队伍（以队长身份或队员身份的都算）
+     *
+     * @param id 查询的学生id
+     * @return 查询到的队伍对象
+     * */
     public Team getTeamByStudentId(Long id){
         return teamDao.getTeamByStudentId(id);
     }
 
+    /**
+     * 根据 id 获取队伍
+     *
+     * @param id 队伍id
+     * @return 返回一个包含所有队员的队伍
+     * */
     public Team getTeamByTeamId(Long id){
         return teamDao.getTeamById(id);
     }
 
+    /**
+     * 根据队伍id 删除小组
+     *
+     * @param teamId 队伍的id
+     * @return 该 id 所在的队伍的id
+     * */
     public int deleteTeamByTeamId(Long teamId){
         return teamDao.deleteTeamById(teamId);
     }
 
+    /**
+     * 这个方法用于给现有的队伍添加组员
+     *
+     * @param team 新的队伍
+     * @param student 组员
+     * @return 返回新的队伍对象
+     * */
     public Team addMember(Team team,Student student){
         return teamDao.addTeamMembers(team,student);
     }
 
+    /**
+     * 将某个学生从队伍内移除
+     *
+     * @param student 将要移除的学生对象
+     * @param team  要移除出的队伍
+     * @return 删除数量
+     * */
     public int deleteTeamMember(Team team,Student student){
         return teamDao.deleteTeamMember(team,student);
     }

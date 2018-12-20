@@ -25,11 +25,20 @@
     seminar_serial, enroll_start_time, enroll_end_time
   </sql>
 
+  <cache type="com.group12.course.tools.MybatisRedisCache" />
+
   <select id="selectSeminarById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from seminar
     where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="listSeminarByRoundId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from seminar
+    where round_id = #{roundId,jdbcType=BIGINT}
   </select>
 
   <delete id="deleteSeminarById" parameterType="java.lang.Long" >
@@ -108,5 +117,6 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+
 
 </mapper>
