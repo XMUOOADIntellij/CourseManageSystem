@@ -24,7 +24,6 @@
     <title>登录</title>
     <!-- Font -->
     <link href="../../static/css/fontawesome.min.css" rel="stylesheet" />
-
     <!--Dashboard Core-->
     <link href="../../static/css/dashboard.css" rel="stylesheet" />
     <script src="../../static/js/vendors/jquery-3.2.1.min.js"></script>
@@ -36,6 +35,7 @@
     <script src="../../static/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="../../static/js/vendors/chart.bundle.min.js"></script>
     <script src="../../static/js/vendors/selectize.min.js"></script>
+    <script src="../../static/js/vendors/js.cookie-2.2.0.min.js"></script>
     <script src="../../static/js/core.js"></script>
     <link href="../../static/css/dashboard.css" rel="stylesheet" />
     <!-- c3.js Charts Plugin -->
@@ -55,12 +55,7 @@
               <div class="text-center mb-6">
                 <img alt="" class="h-9" src="../../static/images/brand.png" />
               </div>
-              <form
-                action="../teacher/active.html"
-                class="card"
-                method="post"
-                onsubmit="return bindUser();"
-              >
+              <form class="card" method="post" onsubmit="return bindUser();">
                 <div class="card-body p-6">
                   <div class="card-title">登录您的账户</div>
                   <div class="form-group">
@@ -68,7 +63,7 @@
                     <input
                       aria-describedby="emailHelp"
                       class="form-control"
-                      id="exampleInputEmail1"
+                      id="account"
                       placeholder="2432016220xxxx"
                       type="email"
                     />
@@ -83,7 +78,7 @@
                     <div class="input-icon mb-3">
                       <input
                         class="form-control"
-                        id="exampleInputPassword1"
+                        id="password"
                         placeholder="初始密码为123456"
                         type="password"
                       />
