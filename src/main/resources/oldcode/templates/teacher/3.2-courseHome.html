@@ -1,92 +1,100 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible"
-          content="IE=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Page Title</title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1">
-    <link rel="stylesheet"
-          type="text/css"
-          media="screen"
-          href="../../static/css/common/style.css"/>
-    <link rel="stylesheet"
-          type="text/css"
-          media="screen"
-          href="../../static/css/teacher/courseHome.css"/>
-<script src="../../static/js/jquery-1.10.2.js"></script>
-   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
-   <script src="../../static/js/common.js"></script>
-<!--<script src="../../static/js/teacher.js"></script>--></head>
-<body>
-<!-- 这个是顶部栏，直接复制这段代码就行，记得放在body结点后面第一个 -->
-<div class="topBar">
-   <div class="content-icon right">
-        <img alt=""  class="icon"
-             src="../../static/img/Left_white.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../../static/css/common/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../../static/css/teacher/courseHome.css"
+    />
+    <script src="../../static/js/jquery-1.10.2.js"></script>
+    <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+    <script src="../../static/js/common.js"></script>
+    <!--<script src="../../static/js/teacher.js"></script>-->
+  </head>
+  <body>
+    <!-- 这个是顶部栏，直接复制这段代码就行，记得放在body结点后面第一个 -->
+    <div class="topBar">
+      <div class="content-icon right">
+        <img alt="" class="icon" src="../../static/img/Left_white.png" />
+      </div>
+      <div class="content text text-light">OOAD</div>
+      <div class="content-icon right">
+        <img alt="" class="icon" src="../../static/img/Add_white.png" />
+      </div>
     </div>
-    <div class="content text text-light">OOAD</div>
-   <div class="content-icon right">
-        <img alt=""  class="icon"
-             src="../../static/img/Add_white.png"/>
-    </div>
-</div>
-<!-- 对于所有页面中的内容，都是以卡片形式存放，card 属性定义了最高层 -->
-<div class="card">
-    <!-- 每个卡片都存在一个卡片头，用于描述该卡片信息 -->
-    <div class="card-head">
+    <!-- 对于所有页面中的内容，都是以卡片形式存放，card 属性定义了最高层 -->
+    <div class="card">
+      <!-- 每个卡片都存在一个卡片头，用于描述该卡片信息 -->
+      <div class="card-head">
         <!-- 对于所有的文本信息，都放在 span 结点下，text 默认字体颜色为黑，text-light 则改为白
         对于卡片头的文本样式已预定好如浮动等属性，均在 card-head-content，直接用上就行 -->
         <span class="card-head-content text text-light">第一轮</span>
         <!-- 每个图标都必须用 icon 属性，这里已经为卡片头定义好了详细属性 content-icon 直接用 -->
-       <div class="content-icon right"><img alt=""  class="icon"
-                                       src="../../static/img/Up_white.png"/></div>
-    </div>
-    <!-- 对于卡片下的二级卡片，定义了 card-head-secondary -->
-    <div class="card-head card-head-secondary">
-        <span class="card-head-content text text-light">用例分析</span>
-       <div class="content-icon right"><img alt=""  class="icon"
-                                       src="../../static/img/Down_black.png"/></div>
-    </div>
-    <div class="card-body">
-        <div>
-            <div class="card-row-details">
-                <span class="text card-head-content">2016 (1)</span>
-                <div class="content-icon-right"><img alt=""  class="icon"
-                                                     src="../../static/img/Right_black.png"/></div>
-            </div>
-            <div class="separator-dark"></div>
-            <div class="card-row-details">
-                <span class="text card-head-content">2016 (2)</span>
-                <div class="content-icon-right"><img alt=""  class="icon"
-                                                     src="../../static/img/Right_black.png"/></div>
-            </div>
-            <div class="separator-dark"></div>
-            <div class="card-row-details">
-                <span class="text card-head-content">2016 (2)</span>
-                <div class="content-icon-right"><img alt=""  class="icon"
-                                                     src="../../static/img/Right_black.png"/></div>
-            </div>
+        <div class="content-icon right">
+          <img alt="" class="icon" src="../../static/img/Up_white.png" />
         </div>
-    </div>
-    <div class="card-head">
+      </div>
+      <!-- 对于卡片下的二级卡片，定义了 card-head-secondary -->
+      <div class="card-head card-head-secondary">
+        <span class="card-head-content text text-light">用例分析</span>
+        <div class="content-icon right">
+          <img alt="" class="icon" src="../../static/img/Down_black.png" />
+        </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="card-row-details">
+            <span class="text card-head-content">2016 (1)</span>
+            <div class="content-icon-right">
+              <img alt="" class="icon" src="../../static/img/Right_black.png" />
+            </div>
+          </div>
+          <div class="separator-dark"></div>
+          <div class="card-row-details">
+            <span class="text card-head-content">2016 (2)</span>
+            <div class="content-icon-right">
+              <img alt="" class="icon" src="../../static/img/Right_black.png" />
+            </div>
+          </div>
+          <div class="separator-dark"></div>
+          <div class="card-row-details">
+            <span class="text card-head-content">2016 (2)</span>
+            <div class="content-icon-right">
+              <img alt="" class="icon" src="../../static/img/Right_black.png" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-head">
         <!-- 对于所有的文本信息，都放在 span 结点下，text 默认字体颜色为黑，text-light 则改为白
         对于卡片头的文本样式已预定好如浮动等属性，均在 card-head-content，直接用上就行 -->
         <span class="card-head-content text text-light">第二轮</span>
         <!-- 每个图标都必须用 icon 属性，这里已经为卡片头定义好了详细属性 content-icon 直接用 -->
-       <div class="content-icon right"><img alt=""  class="icon"
-                                       src="../../static/img/Down_white.png"/></div>
-    </div>
-    <div class="separator-blank"></div>
-    <div class="card-head card-head-warning">
+        <div class="content-icon right">
+          <img alt="" class="icon" src="../../static/img/Down_white.png" />
+        </div>
+      </div>
+      <div class="separator-blank"></div>
+      <div class="card-head card-head-warning">
         <!-- 对于所有的文本信息，都放在 span 结点下，text 默认字体颜色为黑，text-light 则改为白
         对于卡片头的文本样式已预定好如浮动等属性，均在 card-head-content，直接用上就行 -->
         <span class="card-head-content text text-light">新建讨论课</span>
         <!-- 每个图标都必须用 icon 属性，这里已经为卡片头定义好了详细属性 content-icon 直接用 -->
-       <div class="content-icon right"><img alt=""  class="icon"
-                                       src="../../static/img/Add_white.png"/></div>
+        <div class="content-icon right">
+          <img alt="" class="icon" src="../../static/img/Add_white.png" />
+        </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

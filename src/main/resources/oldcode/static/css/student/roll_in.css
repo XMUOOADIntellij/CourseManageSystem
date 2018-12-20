@@ -1,30 +1,29 @@
-.even_row{
-    width: 100%;
-    float: left;
-    padding: 5%;
+.even_row {
+  width: 100%;
+  float: left;
+  padding: 5%;
 }
 
-.odd_row{
-    width: 100%;
-    float: left;
-    background-color: #f2f2f2;
-    padding: 5%;
+.odd_row {
+  width: 100%;
+  float: left;
+  background-color: #f2f2f2;
+  padding: 5%;
 }
 
-.vacant{
-    width: 60%;
-    float: right;
-    font-size: large;
-    font-weight: bold;
-    color: #96c864;
+.vacant {
+  width: 60%;
+  float: right;
+  font-size: large;
+  font-weight: bold;
+  color: #96c864;
 
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-.occupied{
-    width: 60%;
-    float: right;
-    font-size: large;
-    font-weight: bold;
-
+.occupied {
+  width: 60%;
+  float: right;
+  font-size: large;
+  font-weight: bold;
 }

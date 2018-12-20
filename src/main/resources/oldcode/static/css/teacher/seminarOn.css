@@ -1,129 +1,125 @@
-@media screen and (max-width:480px) {
-    .card-head-content {
-        width: 60%;
-        }
+@media screen and (max-width: 480px) {
+  .card-head-content {
+    width: 60%;
+  }
 
-    .tab {
-        width: 20%;
-        margin-top: 0%;
-        background-color: #dff1f9;
-        height: 600px;
-        color: #394B54;
+  .tab {
+    width: 20%;
+    margin-top: 0%;
+    background-color: #dff1f9;
+    height: 600px;
+    color: #394b54;
+  }
 
-        }
-
-.btn-giant{
+  .btn-giant {
     margin-top: 5%;
-}
-    .btn-success:disabled {
-        color: #ffffff;
-        background-color: #BDC3C7;
-    }
-    .btn-warning:disabled {
-        color: #ffffff;
-        background-color: #BDC3C7;
-    }
-    .btn-danger:disabled {
-        color: #ffffff;
-        background-color: #BDC3C7;
-    }
-    .tabRest {
+  }
+  .btn-success:disabled {
+    color: #ffffff;
+    background-color: #bdc3c7;
+  }
+  .btn-warning:disabled {
+    color: #ffffff;
+    background-color: #bdc3c7;
+  }
+  .btn-danger:disabled {
+    color: #ffffff;
+    background-color: #bdc3c7;
+  }
+  .tabRest {
+  }
 
-        }
+  .tabTitle {
+    padding-top: 15%;
+    height: 35px;
+    text-align: center;
+    background-color: #829ca9;
+    color: #ffffff;
+  }
 
-    .tabTitle {
-        padding-top: 15%;
-        height: 35px;
-        text-align: center;
-        background-color: #829CA9;
-        color: #ffffff;
-        }
+  /* Change background color of buttons on hover */
+  .tabLinks:hover {
+    background-color: #ffffff;
+    color: red;
+  }
 
-    /* Change background color of buttons on hover */
-    .tabLinks:hover {
-        background-color: #ffffff;
-        color:red;
-    }
+  /* Create an active/current "tab button" class */
+  .tabLinks.active {
+    background-color: #ffffff;
+    color: #232f34;
+  }
 
-    /* Create an active/current "tab button" class */
-    .tabLinks.active {
-        background-color: #ffffff;
-        color:#232F34;
-    }
+  .tabLinks {
+    padding-top: 20%;
+    width: 100%;
+    height: 35px;
+    text-align: center;
+  }
+  .tabLinksRight:hover {
+    background-color: #ffffff;
+    color: red;
+  }
 
-    .tabLinks {
-        padding-top: 20%;
-        width: 100%;
-        height: 35px;
-        text-align: center;
-        }
-    .tabLinksRight:hover {
-        background-color: #ffffff;
-        color:red;
-    }
+  /* Create an active/current "tab button" class */
+  .tabLinksRight.active {
+    background-color: #ffffff;
+    color: #232f34;
+  }
 
-    /* Create an active/current "tab button" class */
-    .tabLinksRight.active {
-        background-color: #ffffff;
-        color:#232F34;
-    }
+  .tabLinksRight {
+    padding-top: 20%;
+    width: 100%;
+    height: 35px;
+    text-align: center;
+  }
+  .card {
+    margin-left: 25%;
+    width: 50%;
+  }
 
-    .tabLinksRight {
-        padding-top: 20%;
-        width: 100%;
-        height: 35px;
-        text-align: center;
-    }
-    .card {
+  ul {
+    width: 30%;
+    height: 100%;
+  }
 
-        margin-left: 25%;
-        width: 50%;
-        }
+  li {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 0;
+    width: 35px;
+    height: 26px;
+    font-weight: bolder;
+    font-size: large;
+  }
 
-    ul {
-        width: 30%;
-        height: 100%;
-        }
+  .timeSquare {
+    width: 50%;
+    border-width: 0;
+    border-radius: 5px;
+    color: #000;
+    text-align: center;
+    font-size: x-large;
+    font-family: Microsoft YaHei, Microsoft YaHei UI, serif;
+  }
 
-    li {
-        margin-top: 10px;
-        margin-bottom: 15px;
-        margin-left: 0;
-        width: 35px;
-        height: 26px;
-        font-weight: bolder;
-        font-size: large;
-        }
+  .selector {
+    margin-left: 3%;
+  }
 
-    .timeSquare {
-        width: 50%;
-        border-width: 0;
-        border-radius: 5px;
-        color: #000;
-        text-align: center;
-        font-size: x-large;
-        font-family: Microsoft YaHei,Microsoft YaHei UI,serif;
-        }
+  .text-left-margin {
+    margin-left: 5%;
+  }
+  .text-right-margin {
+    margin-right: 5%;
+  }
 
-    .selector {
-margin-left: 3%;
-        }
-
-    .text-left-margin {
-        margin-left: 5%;
-        }
-    .text-right-margin {
-        margin-right: 5%;
-        }
-
-    .btn-big {
-        padding: 0% 4%;
-        width: auto;
-        height:30px;
-        margin-top: 3%;
-        }
-.myBigMargin{
+  .btn-big {
+    padding: 0% 4%;
+    width: auto;
+    height: 30px;
+    margin-top: 3%;
+  }
+  .myBigMargin {
     margin-top: 30px;
-    }
-
-    }
+  }
+}

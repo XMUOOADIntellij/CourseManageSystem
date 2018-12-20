@@ -1,71 +1,68 @@
 @media screen and (max-width: 480px) {
-    .card-head-secondary {
-        margin-top: 0px;
-        background-color: #FFFFFF;
-    }
-    .form {
-        margin-left: 5%;
-        margin-right: 5%;
-        margin-top: 5%;
-        width: 90%;
-        border-radius: 5px;
-        box-shadow: none;
-    }
-    .input {
-        width: 75%;
-        margin-left: 2%;
-        height: 30px;
-        background-color: #FFFFFF;
-        border: none;
-    }
-    .myMargin {
-        margin-bottom: 2%;
-    }
-    .myBigMargin {
-        margin-top: 10%;
-    }
-    .myMarginLeft {
-        margin-left: 2%;
-    }
-    .dateSelector {
-        width: 40%;
-        height: 30px;
-        border-radius: 5px;
-        border: none;
-        text-align: left;
-    }
-    .textCenter {
-        text-align: center;
-    }
-    .textRight {
-        text-align: right;
-    }
-    .text-left-margin {
-        margin-left: 3%;
-    }
-    .card-text-title {
-        width: 90%;
-        padding-top: 20px;
-        padding-left: 5%;
-        padding-bottom: 20px;
-    }
-    .inputfile {
-        box-shadow: none;
-    }
+  .card-head-secondary {
+    margin-top: 0px;
+    background-color: #ffffff;
+  }
+  .form {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    width: 90%;
+    border-radius: 5px;
+    box-shadow: none;
+  }
+  .input {
+    width: 75%;
+    margin-left: 2%;
+    height: 30px;
+    background-color: #ffffff;
+    border: none;
+  }
+  .myMargin {
+    margin-bottom: 2%;
+  }
+  .myBigMargin {
+    margin-top: 10%;
+  }
+  .myMarginLeft {
+    margin-left: 2%;
+  }
+  .dateSelector {
+    width: 40%;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    text-align: left;
+  }
+  .textCenter {
+    text-align: center;
+  }
+  .textRight {
+    text-align: right;
+  }
+  .text-left-margin {
+    margin-left: 3%;
+  }
+  .card-text-title {
+    width: 90%;
+    padding-top: 20px;
+    padding-left: 5%;
+    padding-bottom: 20px;
+  }
+  .inputfile {
+    box-shadow: none;
+  }
 
-    span{
-        margin-left: 2%;
-        margin-right: 2%;
-
-    }
-    .dateSelector
-    {
-        margin: 0px;
-        padding: 0px;
-    }
-    .dialog-row
-    {
-        height:30px;
-        margin-left: 10px;
-    }
+  span {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  .dateSelector {
+    margin: 0px;
+    padding: 0px;
+  }
+  .dialog-row {
+    height: 30px;
+    margin-left: 10px;
+  }
 }

@@ -1,62 +1,61 @@
 @media screen and (max-width: 480px) {
-    .card-head-secondary {
-        margin-top: 0px;
-        margin-bottom: 0px;
-        background-color: #FFFFFF;
-
-        }
-    .card-row-details{
-        height:35px;
-        vertical-align: center;
-        padding: 0px;
-        }
-    .form {
-        margin-left: 5%;
-        margin-right: 5%;
-        margin-top: 5%;
-        width: 90%;
-        border-radius: 5px;
-        }
-    .inputs {
-        width: 96%;
-        margin-left: 2%;
-        height: 90px;
-        background-color: #FFFFFF;
-        border: none;
-        border-radius: 5px;
-        }
-    .myMargin {
-        margin-bottom: 2%;
-        }
-    .myBigMargin {
-        margin-top: 10%;
-        }
-    .myMarginLeft {
-        margin-left: 2%;
-        }
-    .dateSelector {
-        float: right;
-        width: 40%;
-        height: 30px;
-        margin-top: 15px;
-        margin-bottom: 15px;
-        margin-right: 5%;
-        border-radius: 5px;
-        border: none;
-        }
-    .textCenter {
-        text-align: center;
-        }
-    .textRight {
-        text-align: right;
-        }
-    .text-left-margin {
-        margin-left: 5%;
-        }
-    .card-text-title {
-        width: 90%;
-        padding-top: 20px;
-        padding-left: 5%;
-        padding-bottom: 20px;
-        }
-    }
+  .card-head-secondary {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-color: #ffffff;
+  }
+  .card-row-details {
+    height: 35px;
+    vertical-align: center;
+    padding: 0px;
+  }
+  .form {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    width: 90%;
+    border-radius: 5px;
+  }
+  .inputs {
+    width: 96%;
+    margin-left: 2%;
+    height: 90px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+  }
+  .myMargin {
+    margin-bottom: 2%;
+  }
+  .myBigMargin {
+    margin-top: 10%;
+  }
+  .myMarginLeft {
+    margin-left: 2%;
+  }
+  .dateSelector {
+    float: right;
+    width: 40%;
+    height: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 5%;
+    border-radius: 5px;
+    border: none;
+  }
+  .textCenter {
+    text-align: center;
+  }
+  .textRight {
+    text-align: right;
+  }
+  .text-left-margin {
+    margin-left: 5%;
+  }
+  .card-text-title {
+    width: 90%;
+    padding-top: 20px;
+    padding-left: 5%;
+    padding-bottom: 20px;
+  }
+}

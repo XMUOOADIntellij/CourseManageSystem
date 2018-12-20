@@ -1,98 +1,116 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/accountSetting.css"/>
-<script src="../../static/js/jquery-1.10.2.js"></script>
-   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
-   <script src="../../static/js/common.js"></script>
-<!--<script src="../../static/js/teacher.js"></script>--></head>
-<!--<body onload="return getteainfo();">-->
-<body>
-<div class="topBar">
-    <div class="content-icon" id="myReturn"><img alt=""  class="icon" src="../../static/img/Left_white.png"/></div>
-    <div class="content text text-light">账户与设置</div>
-</div>
-<div class="card card-text-title">
-    <span class="text text-large text-bold">您的个人信息</span>
-</div>
-<div class="card">
-    <span class="card-head-content text-small text-bold">名称</span>
-    <div class="card-row-details">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../../static/css/common/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../../static/css/teacher/accountSetting.css"
+    />
+    <script src="../../static/js/jquery-1.10.2.js"></script>
+    <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+    <script src="../../static/js/common.js"></script>
+    <!--<script src="../../static/js/teacher.js"></script>-->
+  </head>
+  <!--<body onload="return getteainfo();">-->
+  <body>
+    <div class="topBar">
+      <div class="content-icon" id="myReturn">
+        <img alt="" class="icon" src="../../static/img/Left_white.png" />
+      </div>
+      <div class="content text text-light">账户与设置</div>
+    </div>
+    <div class="card card-text-title">
+      <span class="text text-large text-bold">您的个人信息</span>
+    </div>
+    <div class="card">
+      <span class="card-head-content text-small text-bold">名称</span>
+      <div class="card-row-details">
         <span class="text text-smaller" id="username">Ming Qiu</span>
+      </div>
+      <div class="separator-dark"></div>
     </div>
-    <div class="separator-dark"></div>
-</div>
-<div class="card">
-    <span class="card-head-content text text-small text-bold">教工号</span>
-    <div class="card-row-details">
+    <div class="card">
+      <span class="card-head-content text text-small text-bold">教工号</span>
+      <div class="card-row-details">
         <span class="text-smaller" id="usernumber">243201622</span>
+      </div>
+      <div class="separator-dark"></div>
     </div>
-    <div class="separator-dark"></div>
-</div>
-<div class="card">
-    <span class="card-head-content text text-small text-bold">联系方式</span>
-    <div class="card-row-details">
+    <div class="card">
+      <span class="card-head-content text text-small text-bold">联系方式</span>
+      <div class="card-row-details">
         <span class="text text-smaller" id="usermail">course@xmu.edu.cn</span>
+      </div>
+      <div class="separator-dark"></div>
     </div>
-    <div class="separator-dark"></div>
-</div>
-<div class="card card-text-title">
-    <span class="text text-large text-bold">管理你的账号</span>
-</div>
-<div class="card" id="editPassword">
-    <span class="card-head-content text-small text-bold">密码设置</span> <span class="card-row-details text text-smaller">修改你的密码</span>
-    <div class="content-icon right"><img alt=""  class="icon" src="../../static/img/Setting_black.png"/>
+    <div class="card card-text-title">
+      <span class="text text-large text-bold">管理你的账号</span>
     </div>
-    <div class="separator-dark"></div>
-</div>
-<div class="card" id="editMail">
-    <span class="card-head-content text-small text-bold">联系方式设置</span> <span class="card-row-details text text-smaller">修改你的邮箱</span>
-    <div class="content-icon right">
-        <img alt=""  class="icon" src="../../static/img/Setting_black.png"/>
+    <div class="card" id="editPassword">
+      <span class="card-head-content text-small text-bold">密码设置</span>
+      <span class="card-row-details text text-smaller">修改你的密码</span>
+      <div class="content-icon right">
+        <img alt="" class="icon" src="../../static/img/Setting_black.png" />
+      </div>
+      <div class="separator-dark"></div>
     </div>
-</div>
-<div class="card">
-    <span class="card-head-content text-small text-bold">通知间隔</span> <span class="card-row-details text text-smaller ">设置通知的时间间隔</span>
-    <div class="dialog-row">
+    <div class="card" id="editMail">
+      <span class="card-head-content text-small text-bold">联系方式设置</span>
+      <span class="card-row-details text text-smaller">修改你的邮箱</span>
+      <div class="content-icon right">
+        <img alt="" class="icon" src="../../static/img/Setting_black.png" />
+      </div>
+    </div>
+    <div class="card">
+      <span class="card-head-content text-small text-bold">通知间隔</span>
+      <span class="card-row-details text text-smaller "
+        >设置通知的时间间隔</span
+      >
+      <div class="dialog-row">
         <select class="selector">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
         </select>
         <span class="text text-smaller text-grey">小时</span>
+      </div>
     </div>
-</div>
 
-<div class="myMargin"></div>
-<div id="logout">
-    <!-- 占一行的按钮，用 btn-giant -->
-    <input class="btn btn-giant btn-success" type="button" value="退出登录">
-</div>
-</body>
-<script>
-
-    $("#editPassword").click(function () {
-        window.location.href = "4-1-2-accountPassword.html";//test
+    <div class="myMargin"></div>
+    <div id="logout">
+      <!-- 占一行的按钮，用 btn-giant -->
+      <input class="btn btn-giant btn-success" type="button" value="退出登录" />
+    </div>
+  </body>
+  <script>
+    $("#editPassword").click(function() {
+      window.location.href = "4-1-2-accountPassword.html"; //test
     });
-    $("#editMail").click(function () {
-        window.location.href = "4-1-1-accountMail.html";//test
+    $("#editMail").click(function() {
+      window.location.href = "4-1-1-accountMail.html"; //test
     });
-    $("#myReturn").click(function () {
-        window.location.href="4-studentHome.html";//test
+    $("#myReturn").click(function() {
+      window.location.href = "4-studentHome.html"; //test
     });
-    $("#logout").click(function () {
-          /*
+    $("#logout").click(function() {
+      /*
             if(localStorage.jwt){
                 localStorage.removeItem("jwt");
             }
             */
-        window.location.href="../common/1.0_log.html";//test
+      window.location.href = "../common/1.0_log.html"; //test
     });
 
     /*
@@ -123,5 +141,5 @@
     });
 };
      */
-</script>
+  </script>
 </html>
