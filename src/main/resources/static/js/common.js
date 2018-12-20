@@ -1,26 +1,25 @@
 function bindUser() {
   // jquery 表单提交
   // let ata = {account:$("#account").val(),password:$("#password").val()}
-  let ata = {account:"213",password:"123456"};
+  let ata = { account: "213", password: "123456" };
   $.ajax({
-    type:'post',
-    url: 'http://xug98.cn/user/login',
+    type: "post",
+    url: "http://xug98.cn/user/login",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
-    success: function (data,textStatus,xhr) {
+    success: function(data, textStatus, xhr) {
       console.log(data);
       alert("success");
-      if(xhr.status === 200){//状态码存疑
+      if (xhr.status === 200) {
+        //状态码存疑
         window.localStorage.setItem("jwt", data.jwt);
-        if(data.type === "student")
-          window.location.href="/student/profile";
-        else
-          window.location.href="/teacher/home";
+        if (data.type === "student") window.location.href = "/student/profile";
+        else window.location.href = "/teacher/home";
       }
     },
-    statusCode:{
-      400: function () {
+    statusCode: {
+      400: function() {
         $("#password").val("");
         alert("用户名或密码错误！");
       }

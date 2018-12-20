@@ -1,47 +1,45 @@
 @media screen and (max-width: 480px) {
-    body {
-        background-color: #f6f7f8;
-    }
-    .input {
-        width: 100%;
-        height: 45px;
-        background-color: #FFFFFF;
-        border: none;
-        border-radius: 5px;
-        padding-left: 2%;
-    }
-    .myMargin {
-        margin-bottom: 5%;
-    }
-    .myMarginLeft {
-        margin-left: 2%;
-    }
-    .myMarginRight {
-        margin-right: 2%;
-    }
-    .tips {
-        margin-top: 25%;
-        margin-left: 20%;
-        margin-right: 20%;
-        text-align: center;
-    }
-    .form {
-        margin-left: 10%;
-        margin-right: 10%;
-        margin-top: 5%;
-        width: 80%;
-        border-radius: 5px;
-    }
-    .btnContainer {
-        margin-top: 10%;
-        padding-left: 0%;
-        padding-right: 0%;
-        width: 100%;
-    }
-    .btn-big {
-
-        padding-left: 5%;
-        padding-right: 5%;
-        }
-
-    }
+  body {
+    background-color: #f6f7f8;
+  }
+  .input {
+    width: 100%;
+    height: 45px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding-left: 2%;
+  }
+  .myMargin {
+    margin-bottom: 5%;
+  }
+  .myMarginLeft {
+    margin-left: 2%;
+  }
+  .myMarginRight {
+    margin-right: 2%;
+  }
+  .tips {
+    margin-top: 25%;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+  }
+  .form {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    width: 80%;
+    border-radius: 5px;
+  }
+  .btnContainer {
+    margin-top: 10%;
+    padding-left: 0%;
+    padding-right: 0%;
+    width: 100%;
+  }
+  .btn-big {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}

@@ -1,73 +1,73 @@
-@media screen and (max-width : 480px) {
-    .card-row-details {
-        margin-left  : 10%;
-        margin-right : 10%;
-        }
-    .right {
-        margin-right : 2%;
-        float        : right;
-        }
-    .margin-horizon {
-        margin-right : 10%;
-        }
-    .text-underline {
-        text-decoration : underline;
-        }
-    .separator-dark {
-        margin-left  : 12%;
-        width        : 76%;
-        margin-right : 12%;
-        }
-    .btn-giant {
-        width : 90.5%;
-        }
-    .myMargin {
-        margin-bottom : 20%;
-        }
-    .card-head-secondary {
-        margin-top       : 0px;
-        margin-left      : 2%;
-        background-color : #FFFFFF;
-        }
-    .form {
-        margin-left   : 5%;
-        margin-right  : 5%;
-        margin-top    : 5%;
-        width         : 90%;
-        border-radius : 5px;
-        }
-    input {
-        margin-left : 2.5%;
-        }
-    .myBigMargin {
-        margin-top : 10%;
-        }
-    .myMarginLeft {
-        margin-left : 2%;
-        }
-    .dateSelector {
-        float         : right;
-        width         : 40%;
-        height        : 30px;
-        margin-top    : 15px;
-        margin-bottom : 15px;
-        margin-right  : 5%;
-        border-radius : 5px;
-        border        : none;
-        }
-    .textCenter {
-        text-align : center;
-        }
-    .textRight {
-        text-align : right;
-        }
-    .text-left-margin {
-        margin-left : 3%;
-        }
-    .card-text-title {
-        width          : 90%;
-        padding-top    : 20px;
-        padding-left   : 5%;
-        padding-bottom : 20px;
-        }
-    }
+@media screen and (max-width: 480px) {
+  .card-row-details {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  .right {
+    margin-right: 2%;
+    float: right;
+  }
+  .margin-horizon {
+    margin-right: 10%;
+  }
+  .text-underline {
+    text-decoration: underline;
+  }
+  .separator-dark {
+    margin-left: 12%;
+    width: 76%;
+    margin-right: 12%;
+  }
+  .btn-giant {
+    width: 90.5%;
+  }
+  .myMargin {
+    margin-bottom: 20%;
+  }
+  .card-head-secondary {
+    margin-top: 0px;
+    margin-left: 2%;
+    background-color: #ffffff;
+  }
+  .form {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    width: 90%;
+    border-radius: 5px;
+  }
+  input {
+    margin-left: 2.5%;
+  }
+  .myBigMargin {
+    margin-top: 10%;
+  }
+  .myMarginLeft {
+    margin-left: 2%;
+  }
+  .dateSelector {
+    float: right;
+    width: 40%;
+    height: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 5%;
+    border-radius: 5px;
+    border: none;
+  }
+  .textCenter {
+    text-align: center;
+  }
+  .textRight {
+    text-align: right;
+  }
+  .text-left-margin {
+    margin-left: 3%;
+  }
+  .card-text-title {
+    width: 90%;
+    padding-top: 20px;
+    padding-left: 5%;
+    padding-bottom: 20px;
+  }
+}

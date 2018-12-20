@@ -1,244 +1,237 @@
-@CHARSET "UTF-8";
+@charset "UTF-8";
 /*
     *Author:         XuGang
     *Version:        1.0.3
     *Email:          277030573@qq.com
     *Last modified:  2018年11月18日  */
 * {
-    font-family: "Microsoft YaHei", "Microsoft YaHei UI", serif !important;
+  font-family: "Microsoft YaHei", "Microsoft YaHei UI", serif !important;
 }
 body {
-    width: 100%;
-    margin: 0;
-    padding:0;
-    height: 100%;
-    background-color: #ffffff;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #ffffff;
 }
 
 .topBar {
-    background-color: #263238;
-    width: 100%;
-    height: 45px;
-
+  background-color: #263238;
+  width: 100%;
+  height: 45px;
 }
 .secondBar {
-    background-color: #263238;
-    width: 100%;
-    height: 45px;
-    }
+  background-color: #263238;
+  width: 100%;
+  height: 45px;
+}
 
 .content-icon {
-    width: 9%;
-    text-align: center;
-    float: left;
-    margin-top: 2.5%;
-    margin-left: 2%;
-    margin-right: 2%;
+  width: 9%;
+  text-align: center;
+  float: left;
+  margin-top: 2.5%;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 .content {
-    height: 45px;
-    width: 74%;
-    float: left;
-    line-height: 45px;
-    text-align: center;
+  height: 45px;
+  width: 74%;
+  float: left;
+  line-height: 45px;
+  text-align: center;
 }
 
 .text {
-    font-size: 18px;
-    color: #232F34;
+  font-size: 18px;
+  color: #232f34;
 }
 
 .text-light {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .text-small {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .text-smaller {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .text-smallest {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .text-bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .test-gery {
-    color: #757575;
+  color: #757575;
 }
 
 .icon {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
 }
 
 .btnContainer {
-    width: 70%;
-    padding: 5% 15% 5% 15%;
+  width: 70%;
+  padding: 5% 15% 5% 15%;
 }
 
 .card {
-    margin-left: 2%;
-    margin-right: 2%;
-    margin-top: 15px;
-    background-color: #ffffff;
-    width: 96%;
-    border-radius: 5px;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 15px;
+  background-color: #ffffff;
+  width: 96%;
+  border-radius: 5px;
 }
 
 .card-head {
-    width: 100%;
-    height: 45px;
-    background-color: #455A64;
-    border-radius: 5px;
+  width: 100%;
+  height: 45px;
+  background-color: #455a64;
+  border-radius: 5px;
 }
 
 .card-orange {
-    width: 100%;
-    height: 45px;
-    background-color: #FF9800;
-    border-radius: 5px;
+  width: 100%;
+  height: 45px;
+  background-color: #ff9800;
+  border-radius: 5px;
 }
 
 .card-head-content {
-    height: 45px;
-    width: 65%;
-    padding-left: 5%;
-    float: left;
-    text-align: left;
-    line-height: 45px;
+  height: 45px;
+  width: 65%;
+  padding-left: 5%;
+  float: left;
+  text-align: left;
+  line-height: 45px;
 }
-.card-orange{
-
+.card-orange {
 }
 .card-head-secondary {
-    background-color: #829CA9;
-    margin-top: 10px;
+  background-color: #829ca9;
+  margin-top: 10px;
 }
-.card-head-tertiary
-{
-    background-color: #BAC9D0;
-    margin-top: 10px;
-    }
+.card-head-tertiary {
+  background-color: #bac9d0;
+  margin-top: 10px;
+}
 .card-body {
-    /* background-color: #C6F1E7; */
+  /* background-color: #C6F1E7; */
 }
 
 .card-row-details {
-    height: 45px;
-    line-height: 45px;
+  height: 45px;
+  line-height: 45px;
 }
 
 .separator-blank {
-    margin-bottom: 5%;
+  margin-bottom: 5%;
 }
 
 .score {
-    color: #D24646;
+  color: #d24646;
 }
 
 .btn {
-    height: 45px;
-    font-size: 16px;
-    width: 25%;
-    border: none;
-    border-radius: 5px;
+  height: 45px;
+  font-size: 16px;
+  width: 25%;
+  border: none;
+  border-radius: 5px;
 }
 
-
 .btn-big {
-    width:auto;
-    padding-left: 8%;
-    padding-right : 8%;
-    font-size: 16px;
+  width: auto;
+  padding-left: 8%;
+  padding-right: 8%;
+  font-size: 16px;
 }
 
 .btn-success {
-    color: #ffffff;
-    background-color: #27ae60;
+  color: #ffffff;
+  background-color: #27ae60;
 }
 .btn-success:disabled {
-    color: #ffffff;
-    background-color: #BDC3C7;
-    }
+  color: #ffffff;
+  background-color: #bdc3c7;
+}
 .btn-warning:disabled {
-    color: #ffffff;
-    background-color: #BDC3C7;
+  color: #ffffff;
+  background-color: #bdc3c7;
 }
 .btn-danger:disabled {
-    color: #ffffff;
-    background-color: #BDC3C7;
+  color: #ffffff;
+  background-color: #bdc3c7;
 }
 .btn-warning {
-    color: #ffffff;
-    background-color: #f39c12;
+  color: #ffffff;
+  background-color: #f39c12;
 }
 .btn-danger {
-    color: #ffffff;
-    background-color: #c0392b;
-    }
+  color: #ffffff;
+  background-color: #c0392b;
+}
 .btn-info {
-    color: #ffffff;
-    background-color: #CFD8DC;
-    }
+  color: #ffffff;
+  background-color: #cfd8dc;
+}
 
 .btn-white {
-    color: #777775;
-    background-color: #ffffff;
-    border-width: 1px;
+  color: #777775;
+  background-color: #ffffff;
+  border-width: 1px;
 }
 
 .btn-giant {
-    width: 96%;
-    margin-left: 2%;
+  width: 96%;
+  margin-left: 2%;
 }
 
 .right {
-    float: right;
+  float: right;
 }
 
 .left {
-    float: left;
+  float: left;
 }
 
 .panel {
-    font-size: 16px;
-    margin-top: 5px;
-    display: none;
-    background-color: #ffffff;
-    overflow: hidden;
+  font-size: 16px;
+  margin-top: 5px;
+  display: none;
+  background-color: #ffffff;
+  overflow: hidden;
 }
 .valid-input {
-    margin-top: 5%;
-    width:55%;
-    height: 45px;
-    background-color: #FFFFFF;
-    border: none;
-    border-radius: 5px;
-    padding-left: 2%;
-    padding-right: 2%;
-    }
+  margin-top: 5%;
+  width: 55%;
+  height: 45px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding-left: 2%;
+  padding-right: 2%;
+}
 .btn-valid {
-    margin-top: 5%;
-    float: right;
-    width: auto;
-    height:45px;
-    padding-left: 5%;
-    padding-right : 5%;
-    }
+  margin-top: 5%;
+  float: right;
+  width: auto;
+  height: 45px;
+  padding-left: 5%;
+  padding-right: 5%;
+}
 .myMargin {
-    margin-bottom: 5%;
+  margin-bottom: 5%;
 }
-a{
-    color:#FF9800;
+a {
+  color: #ff9800;
 }
-
-
-

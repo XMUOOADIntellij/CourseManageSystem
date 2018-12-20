@@ -1,50 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/common/style.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../static/css/teacher/account.css"/>
-<script src="../../static/js/jquery-1.10.2.js"></script>
-   <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
-   <script src="../../static/js/common.js"></script>
-<!--<script src="../../static/js/teacher.js"></script>--></head>
-<body>
-<div class="topBar">
-    <div class="content-icon" onclick="goBack()">
-        <img alt="" class="icon" src="../../static/img/Left_white.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../../static/css/common/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../../static/css/teacher/account.css"
+    />
+    <script src="../../static/js/jquery-1.10.2.js"></script>
+    <script src="../../static/js/js.cookie-2.2.0.min.js"></script>
+    <script src="../../static/js/common.js"></script>
+    <!--<script src="../../static/js/teacher.js"></script>-->
+  </head>
+  <body>
+    <div class="topBar">
+      <div class="content-icon" onclick="goBack()">
+        <img alt="" class="icon" src="../../static/img/Left_white.png" />
+      </div>
+      <div class="content text text-light">修改邮箱</div>
     </div>
-    <div class="content text text-light">修改邮箱</div>
-</div>
-<div class="tips">
-    <span class="text text-large  text-bold">修改当前邮箱</span>
-</div>
-<div class="form">
-    <div>
-        <input class="input text text-small" type="text" placeholder="输入新的邮箱"> <span class="text text-smallest  text-red myMarginLeft">邮箱格式如：user@host.domainnames</span>
+    <div class="tips">
+      <span class="text text-large  text-bold">修改当前邮箱</span>
     </div>
-    <div class="myMargin"></div>
-    <div>
-        <input class="input text text-small" type="text" placeholder="输入验证码">
+    <div class="form">
+      <div>
+        <input
+          class="input text text-small"
+          type="text"
+          placeholder="输入新的邮箱"
+        />
+        <span class="text text-smallest  text-red myMarginLeft"
+          >邮箱格式如：user@host.domainnames</span
+        >
+      </div>
+      <div class="myMargin"></div>
+      <div>
+        <input
+          class="input text text-small"
+          type="text"
+          placeholder="输入验证码"
+        />
+      </div>
     </div>
-</div>
-<div class="btnContainer">
-    <input class="btn btn-big btn-success" id="btnSend" type="button" value="发送验证码"/>
-    <input class="btn btn-big btn-success right" id="btnSubmit" type="button" disabled="disabled" value="确认提交"/>
-</div>
-</body>
-<script>
+    <div class="btnContainer">
+      <input
+        class="btn btn-big btn-success"
+        id="btnSend"
+        type="button"
+        value="发送验证码"
+      />
+      <input
+        class="btn btn-big btn-success right"
+        id="btnSubmit"
+        type="button"
+        disabled="disabled"
+        value="确认提交"
+      />
+    </div>
+  </body>
+  <script>
     function goBack() {
-        window.location.href = "4-0-1-accountSetting.html"
+      window.location.href = "4-0-1-accountSetting.html";
     }
-    $("#btnSubmit").click(function () {
-        window.location.href = "4-0-1-accountSetting.html";
-        // createClass();
+    $("#btnSubmit").click(function() {
+      window.location.href = "4-0-1-accountSetting.html";
+      // createClass();
     });
-    $("#btnSend").click(function () {
-        $("#btnSubmit").removeAttr("disabled");
+    $("#btnSend").click(function() {
+      $("#btnSubmit").removeAttr("disabled");
     });
-</script>
+  </script>
 </html>
