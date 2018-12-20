@@ -2,7 +2,7 @@ package com.group12.course.service;
 
 import com.group12.course.dao.CourseDao;
 import com.group12.course.entity.Course;
-import com.group12.course.vo.CourseVO;
+import com.group12.course.controller.vo.CourseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

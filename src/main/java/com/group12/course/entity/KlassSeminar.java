@@ -1,6 +1,6 @@
 package com.group12.course.entity;
 
-import com.group12.course.vo.SeminarVO;
+import com.group12.course.controller.vo.SeminarVO;
 import org.apache.ibatis.type.Alias;
 
 import java.io.Serializable;

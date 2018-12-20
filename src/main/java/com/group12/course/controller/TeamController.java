@@ -1,30 +1,18 @@
 package com.group12.course.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.group12.course.entity.Course;
 import com.group12.course.entity.Student;
-import com.group12.course.entity.Teacher;
 import com.group12.course.entity.Team;
-import com.group12.course.entity.application.TeamValidApplication;
 import com.group12.course.service.TeamService;
 import com.group12.course.tools.Jwt;
-import com.group12.course.vo.StudentVO;
-import com.group12.course.vo.TeamVO;
-import com.group12.course.vo.TeamValidApplicationVO;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STUnderline;
+import com.group12.course.controller.vo.TeamVO;
+import com.group12.course.controller.vo.TeamValidApplicationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**

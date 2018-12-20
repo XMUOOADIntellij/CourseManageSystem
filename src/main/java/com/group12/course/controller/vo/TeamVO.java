@@ -1,15 +1,10 @@
-package com.group12.course.vo;
+package com.group12.course.controller.vo;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.group12.course.entity.Course;
-import com.group12.course.entity.Klass;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Team;
-import com.group12.course.vo.StudentVO;
 
 public class TeamVO implements Serializable {
 

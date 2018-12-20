@@ -1,6 +1,6 @@
 package com.group12.course.entity;
 
-import com.group12.course.vo.TeamVO;
+import com.group12.course.controller.vo.TeamVO;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;

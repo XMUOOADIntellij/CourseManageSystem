@@ -1,10 +1,9 @@
 package com.group12.course.entity;
 
-import com.group12.course.vo.StudentVO;
+import com.group12.course.controller.vo.StudentVO;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Student 实体对象

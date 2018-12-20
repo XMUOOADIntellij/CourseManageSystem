@@ -1,11 +1,10 @@
 package com.group12.course.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
 import com.group12.course.service.TeacherService;
 import com.group12.course.tools.Jwt;
-import com.group12.course.vo.TeacherVO;
+import com.group12.course.controller.vo.TeacherVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

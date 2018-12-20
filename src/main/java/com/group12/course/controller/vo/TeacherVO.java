@@ -1,4 +1,4 @@
-package com.group12.course.vo;
+package com.group12.course.controller.vo;
 
 public class TeacherVO {
     private Long id;
