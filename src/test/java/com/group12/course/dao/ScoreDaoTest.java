@@ -32,19 +32,6 @@ public class ScoreDaoTest {
     }
 
     @Test
-    public void testUpdateRoundSeminar(){
-        RoundScore roundScore = new RoundScore();
-        roundScore.setTeam(new Team());
-        roundScore.getTeam().setId(new Long(1));
-        roundScore.setRound(new Round());
-        roundScore.getRound().setId(new Long(1));
-        roundScore.setQuestionScore(new BigDecimal(4));
-        roundScore.setReportScore(new BigDecimal(4.5));
-
-        roundScoreMapper.updateRoundScore(roundScore);
-    }
-
-    @Test
     public void testSelectSeminarScoreById(){
         Assert.assertNotNull(scoreDao.selectSeminarScoreByKlassSeminarIdAndTeamId(new Long(1),new Long(1)));
     }
@@ -72,5 +59,12 @@ public class ScoreDaoTest {
 
         //seminarScoreMapper.updateSeminarScore(seminarScore);
         Assert.assertNull(scoreDao.updateSeminarScore(seminarScore));
+    }
+
+    @Test
+    public void testSelectRoundScore(){
+        Assert.assertNotNull(roundScoreMapper.listRoundScoreByRoundId(new Long(1)));
+        Assert.assertNotNull(roundScoreMapper.listRoundScoreByTeamId(new Long(1)));
+        Assert.assertNotNull(roundScoreMapper.selectRoundScoreByRoundIdAndTeamId(new Long(1),new Long(1)));
     }
 }

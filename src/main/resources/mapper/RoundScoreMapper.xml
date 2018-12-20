@@ -42,4 +42,27 @@
         where round_id =#{round.id,jdbcType=BIGINT}
         and   team_id =#{team.id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectRoundScoreByRoundIdAndTeamId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from round_score
+        where round_id =#{roundId,jdbcType=BIGINT}
+        and   team_id =#{teamId,jdbcType=BIGINT}
+    </select>
+
+    <select id="listRoundScoreByRoundId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from round_score
+        where round_id =#{roundId,jdbcType=BIGINT}
+    </select>
+
+    <select id="listRoundScoreByTeamId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from round_score
+        where team_id =#{teamId,jdbcType=BIGINT}
+    </select>
+
 </mapper>

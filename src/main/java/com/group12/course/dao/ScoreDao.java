@@ -182,6 +182,11 @@ public class ScoreDao {
         return null;
     }
 
+    public RoundScore selectRoundScoreByRoundIdAndTeamId(Long roundId,Long temaId){
+        return roundScoreMapper.selectRoundScoreByRoundIdAndTeamId(roundId,temaId);
+    }
+
+
 
 
 }
