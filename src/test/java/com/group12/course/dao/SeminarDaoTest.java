@@ -24,9 +24,7 @@ public class SeminarDaoTest {
     @Test
     public void testInsertSeminar(){
         Seminar seminar =new Seminar();
-        seminar.setCourse(new Course(new Long(99)));
         System.out.println(seminar.getCourse().getId());
-        seminar.setRound(new Round(new Long(88)));
         seminar.setMaxTeam(5);
         seminar.setSeminarName("test");
         seminar.setSeminarSerial(4);

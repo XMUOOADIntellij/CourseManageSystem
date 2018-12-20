@@ -15,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -65,6 +67,13 @@ public class ScoreDaoTest {
     public void testSelectRoundScore(){
         Assert.assertNotNull(roundScoreMapper.listRoundScoreByRoundId(new Long(1)));
         Assert.assertNotNull(roundScoreMapper.listRoundScoreByTeamId(new Long(1)));
-        Assert.assertNotNull(roundScoreMapper.selectRoundScoreByRoundIdAndTeamId(new Long(1),new Long(1)));
+        RoundScore roundScore = roundScoreMapper.selectRoundScoreByRoundIdAndTeamId(new Long(1),new Long(1));
+        Assert.assertNotNull(roundScore.getRound());
+        List<Long> roundId = new ArrayList<>();
+        roundId.add(new Long(1));
+        roundId.add(new Long(2));
+
+        Assert.assertNotNull(roundScoreMapper.listRoundScoreByRoundIdList(roundId));
+        Assert.assertNotNull(roundScoreMapper.listRoundScoreByRoundIdListAndTeamId(roundId,new Long(1)));
     }
 }

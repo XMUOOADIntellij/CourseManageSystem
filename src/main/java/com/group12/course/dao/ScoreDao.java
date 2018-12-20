@@ -182,8 +182,8 @@ public class ScoreDao {
         return null;
     }
 
-    public RoundScore selectRoundScoreByRoundIdAndTeamId(Long roundId,Long temaId){
-        return roundScoreMapper.selectRoundScoreByRoundIdAndTeamId(roundId,temaId);
+    public List<RoundScore> listRoundScoreByRoundIdList(List<Long>roundId){
+        return roundScoreMapper.listRoundScoreByRoundIdList(roundId);
     }
 
 

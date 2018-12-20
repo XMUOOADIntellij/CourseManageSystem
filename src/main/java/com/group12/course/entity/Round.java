@@ -73,9 +73,6 @@ public class Round implements Serializable {
     public Round(){
 
     }
-    public Round(Long id) {
-        this.id = id;
-    }
 
     public Round(RoundVO roundVO){
         this.presentationScoreMethod = roundVO.getPresentationScoreMethod();

@@ -1,12 +1,14 @@
 package com.group12.course.service;
 
 import com.group12.course.dao.CourseDao;
+import com.group12.course.dao.RoundDao;
 import com.group12.course.dao.ScoreDao;
-import com.group12.course.entity.SeminarScore;
-import com.group12.course.entity.Student;
-import com.group12.course.entity.Teacher;
+import com.group12.course.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ScoreService {
@@ -14,6 +16,8 @@ public class ScoreService {
     ScoreDao scoreDao;
     @Autowired
     CourseDao courseDao;
+    @Autowired
+    RoundDao roundDao;
 
     public Integer modifyScore(Teacher teacher, SeminarScore seminarScore){
         if(teacher.getId().equals(
@@ -32,7 +36,23 @@ public class ScoreService {
         
     }
 
-    public void getCourseScore(Student student){
-      
+    /**
+     * 老师获得学生课程下的成绩
+     * @param teacher 老师对象
+     * @param courseId 课程Id
+     */
+    public List<RoundScore> getStudentRoundScore(Teacher teacher,Long courseId){
+        Course course = courseDao.getCourse(courseId);
+        List<Long> roundIdList = new ArrayList<>();
+        if(course!=null){
+            for(Round item : roundDao.getRoundByCourseId(course.getId())){
+                roundIdList.add(item.getId());
+            }
+            return scoreDao.listRoundScoreByRoundIdList(roundIdList);
+        }
+        else{
+            //TODO COURSENOTFOUND
+            return null;
+        }
     }
 }

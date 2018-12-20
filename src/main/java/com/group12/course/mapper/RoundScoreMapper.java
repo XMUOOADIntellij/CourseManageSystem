@@ -1,8 +1,8 @@
 package com.group12.course.mapper;
 
-import com.group12.course.entity.Round;
 import com.group12.course.entity.RoundScore;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,4 +18,8 @@ public interface RoundScoreMapper {
     List<RoundScore> listRoundScoreByRoundId(Long rounId);
 
     List<RoundScore> listRoundScoreByTeamId(Long teamId);
+
+    List<RoundScore> listRoundScoreByRoundIdListAndTeamId(@Param("roundIdList") List<Long> roundIdList, @Param("teamId") Long teamId);
+
+    List<RoundScore> listRoundScoreByRoundIdList(@Param("roundIdList") List<Long> roundIdList);
 }

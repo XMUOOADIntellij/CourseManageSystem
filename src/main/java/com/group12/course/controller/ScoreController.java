@@ -1,18 +1,16 @@
 package com.group12.course.controller;
 
 
-import com.group12.course.entity.Student;
+import com.group12.course.entity.RoundScore;
 import com.group12.course.entity.Teacher;
 import com.group12.course.service.ScoreService;
 import com.group12.course.tools.Jwt;
 import com.group12.course.vo.ScoreVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,11 +26,11 @@ public class ScoreController {
      * @return ScoreVo
      */
     @GetMapping("")
-    public List<ScoreVO> getSeminarScore(HttpServletRequest request){
-        return null;
+    public void getSeminarScore(HttpServletRequest request){
+        return;
     }
 
-    @PutMapping("/{scoreId}")
+    @PutMapping(value = "/{scoreId}")
     public Integer modifyScore(HttpServletRequest request){
         String token = request.getHeader("Authorization");
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
@@ -40,4 +38,14 @@ public class ScoreController {
         //return scoreService.modifyScore(jwtTeacher,seminarScore);
         return null;
     }
+
+    @GetMapping(value = "/course/{courseId}")
+    public List<ScoreVO> getCourseScore(@PathVariable Long courseId){
+        List<ScoreVO> scoreVOList = new ArrayList<>();
+        for(RoundScore item : scoreService.getStudentRoundScore(new Teacher(),courseId)){
+            scoreVOList.add(new ScoreVO(item));
+        }
+        return  scoreVOList;
+    }
+
 }
