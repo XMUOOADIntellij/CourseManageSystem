@@ -162,12 +162,13 @@ public class TeacherController {
         int modifyCount=0;
         String token = request.getHeader("Authorization");
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
-        // 区分传入的是学生还是教师，调用不同的 Service
         if (jwtTeacher!=null){
             Teacher tempTeacher=new Teacher(jwtTeacher.getAccount());
             tempTeacher.setId(jwtTeacher.getId());
             tempTeacher.setPassword(user.getPassword());
+            tempTeacher.setEmail(user.getEmail());
             tempTeacher.setActive(true);
+            System.out.println(tempTeacher);
             modifyCount = teacherService.updateTeacher(tempTeacher);
         }
         else {

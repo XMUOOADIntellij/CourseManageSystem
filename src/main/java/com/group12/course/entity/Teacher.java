@@ -49,6 +49,18 @@ public class Teacher implements Serializable {
         this.teacherName=teacherVO.getName();
     }
 
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", teacherName='" + teacherName + '\'' +
+                ", active=" + active +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
