@@ -1,23 +1,20 @@
 package com.group12.course.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.group12.course.entity.*;
 import com.group12.course.service.AttendanceService;
 import com.group12.course.service.QuestionService;
 import com.group12.course.service.SeminarService;
 import com.group12.course.tools.Jwt;
-import com.group12.course.vo.AttendanceVo;
-import com.group12.course.vo.QuestionVO;
-import com.group12.course.vo.SeminarVO;
+import com.group12.course.controller.vo.AttendanceVo;
+import com.group12.course.controller.vo.QuestionVO;
+import com.group12.course.controller.vo.SeminarVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 讨论课部分的 Controller

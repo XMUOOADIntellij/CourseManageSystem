@@ -1,6 +1,6 @@
 package com.group12.course.entity;
 
-import com.group12.course.vo.QuestionVO;
+import com.group12.course.controller.vo.QuestionVO;
 import org.apache.ibatis.type.Alias;
 
 import java.math.BigDecimal;

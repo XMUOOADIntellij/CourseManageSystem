@@ -4,7 +4,7 @@ import com.group12.course.entity.Question;
 import com.group12.course.entity.Teacher;
 import com.group12.course.service.QuestionService;
 import com.group12.course.tools.Jwt;
-import com.group12.course.vo.QuestionVO;
+import com.group12.course.controller.vo.QuestionVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,13 +1,10 @@
 package com.group12.course.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
-import com.group12.course.entity.Team;
 import com.group12.course.entity.application.TeamValidApplication;
 import com.group12.course.service.TeamValidApplicationService;
 import com.group12.course.tools.Jwt;
-import com.group12.course.vo.TeamValidApplicationVO;
+import com.group12.course.controller.vo.TeamValidApplicationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

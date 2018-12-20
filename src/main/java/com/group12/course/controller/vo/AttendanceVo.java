@@ -1,4 +1,4 @@
-package com.group12.course.vo;
+package com.group12.course.controller.vo;
 
 import com.group12.course.entity.Attendance;
 

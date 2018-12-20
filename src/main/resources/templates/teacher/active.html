@@ -49,7 +49,7 @@
     <script src="../../static/js/common.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body class="">
+  <body>
     <div class="page">
       <div class="page-single">
         <div class="container">
@@ -59,7 +59,7 @@
                 action="home.html"
                 class="card"
                 method="post"
-                onsubmit="return createUser();"
+                onsubmit="return activeUser();"
               >
                 <div class="card-body p-6">
                   <div class="card-title">激活账户</div>
@@ -69,48 +69,16 @@
                     >
                     <input
                       class="form-control"
+                      id="password"
                       placeholder="不少于6位"
-                      type="email"
+                      type="text"
                     />
                   </div>
                   <div class="form-group">
                     <label class="form-label"
                       >确认密码<span class="form-required">*</span></label
                     >
-                    <input
-                      class="form-control"
-                      placeholder="重新输入密码"
-                      type="password"
-                    />
-                  </div>
-                  <!--<p class="text-muted">Enter your email address and your password will be reset and emailed to you
-                            .</p>-->
-                  <div class="form-group">
-                    <label class="form-label"
-                      >验证邮箱<span class="form-required">*</span></label
-                    >
-                    <input
-                      class="form-control"
-                      placeholder="可用的邮箱地址"
-                      type="text"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label"
-                      >验证身份<span class="form-required">*</span></label
-                    >
-                    <div class="input-group">
-                      <input
-                        class="form-control"
-                        placeholder="发送验证码至邮箱"
-                        type="text"
-                      />
-                      <span class="input-group-append">
-                        <button class="btn btn-secondary" type="button">
-                          获取验证码
-                        </button>
-                      </span>
-                    </div>
+                    <input type="password" id="check" class="form-control mt-3"  placeholder="重新输入密码">
                   </div>
                   <div class="form-footer">
                     <button

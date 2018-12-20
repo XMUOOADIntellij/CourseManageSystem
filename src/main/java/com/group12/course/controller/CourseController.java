@@ -7,8 +7,8 @@
 //import com.group12.course.service.KlassService;
 //import com.group12.course.service.MemberLimitStrategyService;
 //import com.group12.course.service.StudentService;
-//import com.group12.course.vo.CourseVO;
-//import com.group12.course.vo.ShareVO;
+//import com.group12.course.controller.vo.CourseVO;
+//import com.group12.course.controller.vo.ShareVO;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.multipart.MultipartFile;

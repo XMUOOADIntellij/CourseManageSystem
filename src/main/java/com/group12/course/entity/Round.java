@@ -1,6 +1,6 @@
 package com.group12.course.entity;
 
-import com.group12.course.vo.RoundVO;
+import com.group12.course.controller.vo.RoundVO;
 
 import java.io.Serializable;
 

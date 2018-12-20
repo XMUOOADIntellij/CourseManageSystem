@@ -6,9 +6,8 @@ import com.group12.course.entity.Seminar;
 import com.group12.course.service.CourseService;
 import com.group12.course.service.RoundService;
 import com.group12.course.tools.Jwt;
-import com.group12.course.vo.RoundVO;
+import com.group12.course.controller.vo.RoundVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
