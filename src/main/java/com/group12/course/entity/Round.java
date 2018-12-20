@@ -2,12 +2,14 @@ package com.group12.course.entity;
 
 import com.group12.course.vo.RoundVO;
 
+import java.io.Serializable;
+
 /**
  * Round 实体对象
  * @author Tan Xue
  * @date 2018/12/12
  */
-public class Round {
+public class Round implements Serializable {
     private Long id;
 
     private Integer roundSerial;

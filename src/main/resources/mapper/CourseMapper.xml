@@ -16,6 +16,8 @@
 
   </resultMap>
 
+  <cache type="com.group12.course.tools.MybatisRedisCache" />
+
   <sql id="Base_Column_List" >
     id, teacher_id, course_name, introduction, presentation_percentage, question_percentage,
     report_percentage, team_start_time, team_end_time
