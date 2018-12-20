@@ -182,6 +182,11 @@ public class ScoreDao {
         return null;
     }
 
+    public List<RoundScore> listRoundScoreByRoundIdList(List<Long>roundId){
+        return roundScoreMapper.listRoundScoreByRoundIdList(roundId);
+    }
+
+
 
 
 }

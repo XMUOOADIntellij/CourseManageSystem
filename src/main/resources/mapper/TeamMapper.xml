@@ -20,7 +20,7 @@
         <id column="student_id" property="id" jdbcType="BIGINT" />
     </resultMap>
 
-    <cache type="com.group12.course.tools.MybatisRedisCache" />
+    <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
     <sql id="Base_Column_List" >
         id, course_id,klass_id, leader_id, team_name, team_serial,status

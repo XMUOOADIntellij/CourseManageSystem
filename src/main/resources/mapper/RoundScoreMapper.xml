@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.group12.course.mapper.RoundScoreMapper" >
-
+<mapper namespace="com.group12.course.mapper.RoundScoreMapper">
 
     <resultMap id="BaseResultMap" type="roundScore" >
         <result column="presentation_score" property="presentationScore" jdbcType="DECIMAL" />
@@ -10,7 +9,7 @@
         <result column="total_score" property="totalScore" jdbcType="DECIMAL" />
 
 
-        <association property="Round" column="round_id"
+        <association property="round" column="round_id"
                      select="com.group12.course.mapper.RoundMapper.selectRoundById"
                      javaType="com.group12.course.entity.Round"/>
 
@@ -42,4 +41,48 @@
         where round_id =#{round.id,jdbcType=BIGINT}
         and   team_id =#{team.id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectRoundScoreByRoundIdAndTeamId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from round_score
+        where round_id =#{roundId,jdbcType=BIGINT}
+        and   team_id =#{teamId,jdbcType=BIGINT}
+    </select>
+
+    <select id="listRoundScoreByRoundId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from round_score
+        where round_id =#{roundId,jdbcType=BIGINT}
+    </select>
+
+    <select id="listRoundScoreByTeamId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from round_score
+        where team_id =#{teamId,jdbcType=BIGINT}
+    </select>
+
+    <select id="listRoundScoreByRoundIdListAndTeamId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from round_score
+        where round_id in
+        <foreach collection="roundIdList" item="id" open="(" close=")" separator=",">
+            #{id,jdbcType=BIGINT}
+        </foreach>
+        and team_id = #{teamId,jdbcType=BIGINT}
+    </select>
+
+    <select id="listRoundScoreByRoundIdList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from round_score
+        where round_id in
+        <foreach collection="roundIdList" item="id" open="(" close=")" separator=",">
+            #{id,jdbcType=BIGINT}
+        </foreach>
+    </select>
+
 </mapper>

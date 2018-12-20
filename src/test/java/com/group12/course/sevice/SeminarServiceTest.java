@@ -21,8 +21,6 @@ public class SeminarServiceTest extends AbstractTransactionalJUnit4SpringContext
     @Test
     public void testCreateSeminar(){
         Seminar seminar =new Seminar();
-        seminar.setCourse(new Course(new Long(1)));
-        seminar.setRound(new Round(new Long(88)));
         seminar.setMaxTeam(5);
         seminar.setSeminarName("test");
         seminar.setSeminarSerial(4);
