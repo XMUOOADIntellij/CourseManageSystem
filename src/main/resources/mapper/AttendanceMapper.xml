@@ -30,7 +30,7 @@
   </select>
 
   <!--查询某班级讨论课某小组报名的展示-->
-  <select id="listAttendanceByKlassSeminarIdAndTeamId" resultMap="BaseResultMap">
+  <select id="selectAttendanceByKlassSeminarIdAndTeamId" resultMap="BaseResultMap">
     select
      <include refid="Base_Column_List" />
     from attendance

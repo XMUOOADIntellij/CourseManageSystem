@@ -34,7 +34,7 @@ public class QuestionService {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
         if(klassSeminar!=null){
             question.setKlassSeminar(klassSeminar);
-            question.setTeam(teamDao.getTeamByStudentId(student.getId()));
+            question.setTeam(teamDao.getTeamByStudentIdAndCourseId(student.getId(),null));
             question.setStudent(student);
             question.setScore(null);
             question.setSelected(false);

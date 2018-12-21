@@ -105,7 +105,6 @@ public class SeminarController {
     /**
      ① 获得当前班级讨论课的展示报名
      ② 获得当前班级讨论课正在展示的小组      presented
-     ③ 某一小组获得当前班级讨论课报名的展示   teamId
      * @param seminarId 课程讨论课
      * @param classId   班级id
      * @param presented 当前是否正在展示
@@ -131,7 +130,7 @@ public class SeminarController {
     }
 
     /**
-     * 获得自己队伍的展示
+     * 某小组获得自己队伍的展示
      * @param seminarId 讨论课Id
      * @return 展示信息
      */
@@ -139,7 +138,9 @@ public class SeminarController {
     public AttendanceVo getTeamAttendance(@PathVariable Long seminarId){
         Student student = new Student();
         student.setId(999L);
-        return null;
+        return new AttendanceVo(
+                attendanceService.getTeamAttendance(seminarId,student)
+        );
     }
 
     /**

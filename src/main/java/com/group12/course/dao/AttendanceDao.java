@@ -27,8 +27,8 @@ public class AttendanceDao {
         return false;
     }
 
-    public Attendance listAttendanceByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {
-        return attendanceMapper.listAttendanceByKlassSeminarIdAndTeamId(klassSeminarId, teamId);
+    public Attendance selectAttendanceByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {
+        return attendanceMapper.selectAttendanceByKlassSeminarIdAndTeamId(klassSeminarId, teamId);
     }
 
     public List<Attendance> listAttendanceByKlassSeminarId(Long klassSeminarId) {
