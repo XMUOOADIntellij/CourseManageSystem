@@ -2,6 +2,7 @@ package com.group12.course.controller.vo;
 
 import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Seminar;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +11,6 @@ public class SeminarVO {
     /**
      * id属性
      */
-    private Long klassSeminarId;
     private Long seminarId;
 
     /**
@@ -39,21 +39,11 @@ public class SeminarVO {
      *     班级下讨论课属性
      *     status 班级论课所处状态，未开始0，正在进行1，已结束2，暂停3
      */
-
     private LocalDateTime reportDdl;
 
     private Integer seminarStatus;
 
     private Long klassId;
-
-
-    public Long getKlassSeminarId() {
-        return klassSeminarId;
-    }
-
-    public void setKlassSeminarId(Long klassSeminarId) {
-        this.klassSeminarId = klassSeminarId;
-    }
 
     public Long getSeminarId() {
         return seminarId;
@@ -162,8 +152,8 @@ public class SeminarVO {
     public SeminarVO(){};
 
     public SeminarVO(KlassSeminar klassSeminar){
+
         //班级讨论课属性
-        this.klassSeminarId = klassSeminar.getId();
         this.reportDdl = klassSeminar.getReportDdl();
         this.seminarStatus = klassSeminar.getSeminarStatus();
         this.klassId = klassSeminar.getKlass().getId();

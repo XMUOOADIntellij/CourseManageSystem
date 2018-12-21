@@ -28,6 +28,7 @@ public interface SeminarMapper {
      * @param record Seminar
      * @return int
      */
+
     int insertSeminar(Seminar record);
 
     /**

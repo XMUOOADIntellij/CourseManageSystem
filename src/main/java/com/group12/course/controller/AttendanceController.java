@@ -1,5 +1,6 @@
 package com.group12.course.controller;
 
+import com.group12.course.controller.vo.AttendanceVo;
 import com.group12.course.entity.Attendance;
 import com.group12.course.entity.Student;
 import com.group12.course.service.AttendanceService;
@@ -25,9 +26,12 @@ public class AttendanceController {
      * @return
      */
     @PutMapping(value="/{attendanceId}")
-    public Integer changeOrder(@PathVariable Long attendanceId,@RequestBody Attendance record){
-
-        return null;
+    public Integer changeOrder(@PathVariable Long attendanceId,@RequestBody AttendanceVo record){
+        Attendance attendance = new Attendance(record);
+        Student student = new Student();
+        student.setId(999L);
+        attendance.setId(attendanceId);
+        return attendanceService.changeAttendanceOrder(attendance,student);
     }
 
     /**
@@ -38,6 +42,7 @@ public class AttendanceController {
     public Integer cancelAttendance(@PathVariable Long attendanceId){
         return null;
     }
+
 
     /**
      * 下载某个展示报告

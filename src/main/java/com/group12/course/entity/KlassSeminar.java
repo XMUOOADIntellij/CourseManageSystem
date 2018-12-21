@@ -71,14 +71,6 @@ public class KlassSeminar  implements Serializable{
     public KlassSeminar() {}
 
     public  KlassSeminar(SeminarVO seminarVo){
-        this.id = seminarVo.getKlassSeminarId();
-
-        this.klass = new Klass();
-        this.klass.setId(seminarVo.getKlassId());
-
-        this.seminar = new Seminar();
-        this.seminar.setId(seminarVo.getSeminarId());
-
         this.seminarStatus = seminarVo.getSeminarStatus();
         this.reportDdl=seminarVo.getReportDdl();
     }

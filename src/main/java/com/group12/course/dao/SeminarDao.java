@@ -3,6 +3,7 @@ package com.group12.course.dao;
 import com.group12.course.entity.Klass;
 import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Seminar;
+import com.group12.course.entity.Teacher;
 import com.group12.course.mapper.SeminarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,35 +36,44 @@ public class SeminarDao {
      * @param record 讨论课记录
      * @return  id
      */
-    public Long createSeminar(Seminar record){
+    public Long insertSeminar(Seminar record) {
         List<Klass> classRecord;
         List<KlassSeminar> klassSeminarsRecord = new ArrayList<>();
         // 判断当前课程存在
-        if(courseDao.getCourse(record.getCourse().getId())!=null){
-            //Seminar表插入记录
-            seminarMapper.insertSeminar(record);
-            //寻找该课程下的班级
-            classRecord = klassDao.getAllKlassByCourseId(record.getCourse().getId());
-            //生成班级讨论课的记录
-            for(Klass klass : classRecord){
-                KlassSeminar tempKlassSeminar = new KlassSeminar();
-                tempKlassSeminar.setKlass(klass);
-                tempKlassSeminar.setSeminar(record);
-                tempKlassSeminar.setSeminarStatus(0);
-                tempKlassSeminar.setReportDdl(null);
-                klassSeminarsRecord.add(tempKlassSeminar);
+        if (record.getCourse().getId() != null) {
+            if (record.getMaxTeam() != null ||
+                    record.getSeminarName() != null ||
+                    record.getVisible() != null ||
+                    record.getSeminarSerial() != null) {
+                //Seminar表插入记录
+                seminarMapper.insertSeminar(record);
+                //寻找该课程下的班级
+                classRecord = klassDao.getAllKlassByCourseId(record.getCourse().getId());
+                //生成班级讨论课的记录
+                for (Klass klass : classRecord) {
+                    KlassSeminar tempKlassSeminar = new KlassSeminar();
+                    tempKlassSeminar.setKlass(klass);
+                    tempKlassSeminar.setSeminar(record);
+                    tempKlassSeminar.setSeminarStatus(0);
+                    tempKlassSeminar.setReportDdl(null);
+                    klassSeminarsRecord.add(tempKlassSeminar);
+                }
+                //插入班级讨论课记录
+                klassSeminarDao.insertByList(klassSeminarsRecord);
+                if (record.getRound() == null) {
+                    //TODO 新建轮
+                }
+                return record.getId();
+            } else {
+                //TODO 讨论课信息不完全
+                return null;
             }
-            //插入班级讨论课记录
-            klassSeminarDao.insertByList(klassSeminarsRecord);
-            if(record.getRound()==null){
-                //TODO 新建轮
-            }
-            return record.getId();
-        }
-        else{
+        } else {
+            //TODO CourseNotFound
             return null;
         }
     }
+
 
     /**
      * 通过id获得课程讨论课
@@ -86,7 +96,7 @@ public class SeminarDao {
     public Integer deleteSeminarById(Long seminarId){
         if(seminarMapper.selectSeminarById(seminarId)!=null) {
             List<KlassSeminar> klassSeminarList;
-            klassSeminarList = klassSeminarDao.getKlassSeminarBySeminarId(seminarId);
+            klassSeminarList = klassSeminarDao.selectKlassSeminarBySeminarId(seminarId);
 
             /**
              *  根据找到的classseminar
@@ -102,11 +112,13 @@ public class SeminarDao {
             }
             //然后删除class_seminar
             klassSeminarDao.deleteKlassSeminarBySeminarId(seminarId);
+
             //删除讨论课
             return seminarMapper.deleteSeminarById(seminarId);
         }
         return null;
     }
+
 
     public List<Seminar> listSeminarByRoundId(Long roundId){
         return seminarMapper.listSeminarByRoundId(roundId);

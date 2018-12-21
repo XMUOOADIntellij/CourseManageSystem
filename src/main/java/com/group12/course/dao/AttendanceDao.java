@@ -18,51 +18,67 @@ public class AttendanceDao {
     @Autowired
     KlassSeminarDao klassSeminarDao;
 
-    public Attendance selectAttendanceByKlassSeminarIdAndTeamId(Long klassSeminarId,Long teamId){
-        return attendanceMapper.selectAttendanceByKlassSeminarIdAndTeamId(klassSeminarId,teamId);
+    private Boolean OrderExist(List<Attendance> attendanceList, Integer order) {
+        for (Attendance item : attendanceList) {
+            if (order.equals(item.getTeamOrder())) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public List<Attendance> selectAttendanceByKlassSeminarId(Long klassSeminarId){
-        return attendanceMapper.selectAttendanceByKlassSeminarId(klassSeminarId);
+    public Attendance selectAttendanceByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {
+        return attendanceMapper.selectAttendanceByKlassSeminarIdAndTeamId(klassSeminarId, teamId);
     }
 
-    public Attendance selectAttendanceById(Long attendanceId){
+    public List<Attendance> listAttendanceByKlassSeminarId(Long klassSeminarId) {
+        return attendanceMapper.listAttendanceByKlassSeminarId(klassSeminarId);
+    }
+
+    public Attendance selectAttendanceById(Long attendanceId) {
         return attendanceMapper.selectAttendanceById(attendanceId);
     }
 
-    public Integer updateAttendance(Attendance attendance){
-        return attendanceMapper.updateAttendance(attendance);
+    public Integer updateAttendance(Attendance attendance) {
+        if (!OrderExist
+                (listAttendanceByKlassSeminarId(
+                        selectAttendanceById(attendance.getId()).getKlassSeminar().getId()),
+                        attendance.getTeamOrder())) {
+            return attendanceMapper.updateAttendance(attendance);
+        } else {
+            //TODO 非法更新
+            return null;
+        }
+
     }
 
-    public Integer deleteAttendanceById(Long attendanceId){
-        return  attendanceMapper.deleteAttendanceById(attendanceId);
+    public Integer deleteAttendanceById(Long attendanceId) {
+        return attendanceMapper.deleteAttendanceById(attendanceId);
     }
 
-    public Integer deleteAttendanceByKlassSeminarId(Long klassSeminarId){
+    public Integer deleteAttendanceByKlassSeminarId(Long klassSeminarId) {
         return attendanceMapper.deleteAttendanceByKlassSeminarId(klassSeminarId);
     }
 
-    public Long insertAttendance(Attendance attendance){
-        if(teamDao.getTeamById(attendance.getTeam().getId())!=null){
-        //TODO teamnotfound
+    public Long insertAttendance(Attendance attendance) {
+        if (teamDao.getTeamById(attendance.getTeam().getId()) != null) {
+            //TODO teamnotfound
             Long klassSeminarId = attendance.getKlassSeminar().getId();
-            if(klassSeminarDao.getKlassSeminarById(klassSeminarId)!=null){
-                List<Attendance> attendanceList = attendanceMapper.selectAttendanceByKlassSeminarId(klassSeminarId);
+            if (klassSeminarDao.selectKlassSeminarById(klassSeminarId) != null) {
+                List<Attendance> attendanceList = attendanceMapper.listAttendanceByKlassSeminarId(klassSeminarId);
                 Integer teamOrder = attendance.getTeamOrder();
-                for(Attendance item:attendanceList){
-                    if(teamOrder.equals(item.getTeamOrder())){
+                for (Attendance item : attendanceList) {
+                    if (teamOrder.equals(item.getTeamOrder())) {
                         //TODO order已经存在Exception
                     }
                 }
                 attendanceMapper.insertAttendance(attendance);
-            }
-            else{
+            } else {
                 //TODO klassSeminar not found
             }
-        return  attendance.getId();
-        }
-        else{
-            return  null;
+            return attendance.getId();
+        } else {
+            return null;
         }
     }
 }

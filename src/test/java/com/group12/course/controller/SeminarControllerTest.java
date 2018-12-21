@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.mail.internet.ContentType;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.TreeMap;
@@ -45,7 +46,7 @@ public class SeminarControllerTest  extends AbstractTransactionalJUnit4SpringCon
         request.put("visible","false");
         request.put("seminarSerial","2");
         request.put("roundId","1");
-
+        //request.put("enrollStartTime",LocalDateTime.now().toString());
 
         MvcResult mvcResult =
                 mvc.perform(MockMvcRequestBuilders.post("/seminar")
@@ -64,6 +65,22 @@ public class SeminarControllerTest  extends AbstractTransactionalJUnit4SpringCon
                         .andReturn();
     }
 
+    @Test
+    public void testDeleteSeminar() throws Exception{
+        MvcResult mvcResult =
+                mvc.perform(MockMvcRequestBuilders.delete("/seminar/{seminarId}",31))
+                        //验证执行的控制器类型
+                        .andExpect(handler().handlerType(SeminarController.class))
+                        //验证执行的控制器方法名
+                        .andExpect(handler().methodName("deleteSeminar"))
+                        //验证状态码
+                        .andExpect(status().isOk())
+                        //验证contentType
+                        .andExpect(content().contentType("application/json;charset=UTF-8"))
+                        // 可以打印结果
+                        //.andDo(print())
+                        .andReturn();
+    }
     @Test
     public void testModifyKlassSeminar() throws Exception{
         Map<String,String> request = new TreeMap<>();
@@ -154,4 +171,6 @@ public class SeminarControllerTest  extends AbstractTransactionalJUnit4SpringCon
                         //.andDo(print())
                         .andReturn();
     }
+
+
 }
