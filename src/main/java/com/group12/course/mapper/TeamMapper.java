@@ -68,7 +68,7 @@ public interface TeamMapper {
      * @param id 主键代表队长id
      * @return 代表获取到的队伍对象
      * */
-    Team selectTeamByLeaderId(Long id);
+    List<Team> selectTeamByLeaderId(Long id);
 
     /**
      * 根据队伍 id 获取数据库中队伍的记录
@@ -84,7 +84,7 @@ public interface TeamMapper {
      * @param id 主键代表队员id
      * @return 代表获取到的队伍 id
      * */
-    Long selectTeamIdByMembersId(Long id);
+    List<Long> selectTeamIdByMembersId(Long id);
 
     /**
      * 更新数据库中学生的记录
