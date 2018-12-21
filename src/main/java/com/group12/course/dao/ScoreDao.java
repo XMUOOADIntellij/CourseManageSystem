@@ -158,7 +158,7 @@ public class ScoreDao {
         //找到该轮的班级讨论课
         for(Seminar seminar:seminarDao.listSeminarByRoundId(round.getId())){
             klassSeminarList.add(
-                    klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminar.getId(),klass.getId())
+                    klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminar.getId(),klass.getId())
             );
         }
 
@@ -185,8 +185,6 @@ public class ScoreDao {
     public List<RoundScore> listRoundScoreByRoundIdList(List<Long>roundId){
         return roundScoreMapper.listRoundScoreByRoundIdList(roundId);
     }
-
-
 
 
 }

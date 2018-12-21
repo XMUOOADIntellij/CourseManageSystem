@@ -37,21 +37,11 @@ public class SeminarController {
      * @return 讨论课id
      */
     @PostMapping(value= "" , produces = "application/json; charset=utf-8")
-    public Long createSeminar(@RequestBody SeminarVO seminarVo, HttpServletRequest request){
-        String token = request.getHeader("Authorization");
-        Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
-
-        if(seminarVo.getMaxTeam()==null ||
-           seminarVo.getSeminarName()==null||
-           seminarVo.getCourseId()==null||
-           seminarVo.getVisible()==null||
-           seminarVo.getSeminarSerial()==null){
-        }
-        else{
-            //TODO 信息不完全
-        }
+    public Long createSeminar(@RequestBody SeminarVO seminarVo){
         Seminar seminar = new Seminar(seminarVo);
-        return  seminarService.createSeminar(seminar,jwtTeacher);
+        Teacher teacher = new Teacher();
+        teacher.setId(new Long(1));
+        return  seminarService.createSeminar(seminar,teacher);
     }
 
     /**
@@ -59,10 +49,10 @@ public class SeminarController {
      * @param seminarId 根据id
      */
     @DeleteMapping(value="/{seminarId}", produces = "application/json; charset=utf-8")
-    public Integer deleteSeminar(@PathVariable Long seminarId,HttpServletRequest request){
-        String token = request.getHeader("Authorization");
-        Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
-        return seminarService.deleteSeminar(seminarId,jwtTeacher);
+    public Integer deleteSeminar(@PathVariable Long seminarId){
+        Teacher teacher = new Teacher();
+        teacher.setId(new Long(1));
+        return seminarService.deleteSeminar(seminarId,teacher);
     }
 
     /**
@@ -72,10 +62,11 @@ public class SeminarController {
      */
     @PutMapping(value="/{seminarId}",produces = "application/json")
     public Integer modifySeminar(@RequestBody SeminarVO seminarVo,@PathVariable Long seminarId){
-        //TODO 判断合法
         Seminar seminar =new Seminar(seminarVo);
         seminar.setId(seminarId);
-        return seminarService.updateSeminar(seminar);
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
+        return seminarService.updateSeminar(seminar,teacher);
     }
 
     /**
@@ -87,9 +78,15 @@ public class SeminarController {
     @PutMapping(value="/{seminarId}/class/{classId}",produces = "application/json")
     public Integer modifyKlassSeminar(@PathVariable Long seminarId, @PathVariable Long classId,
                                       @RequestBody SeminarVO seminarVo){
-        //TODO 判断合法
+
         KlassSeminar klassSeminar = new KlassSeminar(seminarVo);
-        return seminarService.updateKlassSeminar(seminarId,classId,klassSeminar);
+        klassSeminar.setKlass(new Klass());
+        klassSeminar.getKlass().setId(classId);
+        klassSeminar.setSeminar(new Seminar());
+        klassSeminar.getSeminar().setId(seminarId);
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
+        return seminarService.updateKlassSeminar(klassSeminar,teacher);
     }
 
     /**

@@ -41,7 +41,7 @@ public class AttendanceService {
      */
     public List<Attendance> getKlassSeminarAttendance(Long classId, Long seminarId){
         return attendanceDao.selectAttendanceByKlassSeminarId(
-                klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId).getId());
+                klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId).getId());
     }
 
     /**
@@ -65,7 +65,7 @@ public class AttendanceService {
      */
     public Attendance getAttendance(Long classId, Long seminarId,Long teamId){
 
-      KlassSeminar klassSeminar = klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+      KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
       if(klassSeminar!=null){
        return attendanceDao.selectAttendanceByKlassSeminarIdAndTeamId(klassSeminar.getId(),teamId);
        }
@@ -227,7 +227,7 @@ public class AttendanceService {
     public void downloadAllPpt(Long seminarId,Long classId,HttpServletResponse response){
         List<String> fileName = new ArrayList<>();
         List<String> url = new ArrayList<>();
-        KlassSeminar klassSeminar = klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
         if(klassSeminar!=null){
            List<Attendance> attendanceList = attendanceDao.selectAttendanceByKlassSeminarId(klassSeminar.getId());
            for(Attendance item:attendanceList) {
@@ -248,7 +248,7 @@ public class AttendanceService {
     public void downloadAllReport(Long seminarId,Long classId,HttpServletResponse response){
         List<String> fileName = new ArrayList<>();
         List<String> url = new ArrayList<>();
-        KlassSeminar klassSeminar = klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
         if(klassSeminar!=null){
             List<Attendance> attendanceList = attendanceDao.selectAttendanceByKlassSeminarId(klassSeminar.getId());
             for(Attendance item:attendanceList){

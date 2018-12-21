@@ -26,12 +26,12 @@ public class QuestionService {
 
     public List<Question> getAllQuestion(Long seminarId,Long klassId){
         return  questionDao.getQuestionByKlassSeminarId(
-                klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,klassId).getId()
+                klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,klassId).getId()
         );
     }
 
     public Long askQuestion(Long seminarId, Long classId, Question question, Student student){
-        KlassSeminar klassSeminar = klassSeminarDao.getKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
         if(klassSeminar!=null){
             question.setKlassSeminar(klassSeminar);
             question.setTeam(teamDao.getTeamByStudentId(student.getId()));

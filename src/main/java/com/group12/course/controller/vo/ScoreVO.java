@@ -1,8 +1,6 @@
 package com.group12.course.controller.vo;
 
 import com.group12.course.entity.RoundScore;
-
-
 import java.math.BigDecimal;
 
 
@@ -14,7 +12,7 @@ public class ScoreVO {
     private Integer roundSerial;
     private RoundPart roundPart;
 
-    class RoundPart{
+    public class RoundPart{
     private Long teamId;
     private Integer teamSerial;
     private Integer classSerial;

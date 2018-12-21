@@ -46,7 +46,7 @@ public class AttendanceDao {
         if(teamDao.getTeamById(attendance.getTeam().getId())!=null){
         //TODO teamnotfound
             Long klassSeminarId = attendance.getKlassSeminar().getId();
-            if(klassSeminarDao.getKlassSeminarById(klassSeminarId)!=null){
+            if(klassSeminarDao.selectKlassSeminarById(klassSeminarId)!=null){
                 List<Attendance> attendanceList = attendanceMapper.selectAttendanceByKlassSeminarId(klassSeminarId);
                 Integer teamOrder = attendance.getTeamOrder();
                 for(Attendance item:attendanceList){
