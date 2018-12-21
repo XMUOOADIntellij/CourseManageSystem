@@ -57,51 +57,30 @@
               <div class="text-center mb-6">
                 <img alt="" class="h-9" src="../../static/images/brand.png" />
               </div>
-              <form
-                action="forgot-reset.html"
-                class="card"
-                method="post"
-                onsubmit="return getVerCode();"
-              >
+              <div class="card">
                 <div class="card-body p-6">
                   <div class="card-title">忘记密码</div>
                   <p class="text-muted">
-                    输入账户信息,验证码会通过绑定的邮箱发送给用户
+                    请输入您的账户,新密码会通过绑定的邮箱发送给您
                   </p>
                   <div class="form-group">
-                    <label class="form-label" for="exampleInputEmail1"
+                    <label class="form-label" for="account"
                       >学号/教工号</label
                     >
                     <input
-                      aria-describedby="emailHelp"
                       class="form-control"
-                      id="exampleInputEmail1"
+                      id="account"
                       placeholder="24320162202xxx"
-                      type="email"
+                      type="text"
                     />
                   </div>
-                  <div class="form-group">
-                    <label class="form-label">验证身份</label>
-                    <div class="input-group">
-                      <input
-                        class="form-control"
-                        placeholder="发送验证码至邮箱"
-                        type="text"
-                      />
-                      <span class="input-group-append">
-                        <button class="btn btn-secondary" type="button">
-                          获取验证码
-                        </button>
-                      </span>
-                    </div>
-                  </div>
                   <div class="form-footer">
-                    <button class="btn btn-primary btn-block" type="submit">
-                      进入下一步
+                    <button class="btn btn-primary btn-block" onclick="sendPassword()">
+                      确认发送
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
               <div class="text-center text-muted">
                 想起密码, <a href="login.html">返回</a> 登录界面
               </div>

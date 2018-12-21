@@ -15,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,19 +31,6 @@ public class ScoreDaoTest {
     @Test
     public void testSelectSeminarScore(){
         //SeminarScore record = seminarScoreMapper.selectSeminarScoreById(new Long(1));
-    }
-
-    @Test
-    public void testUpdateRoundSeminar(){
-        RoundScore roundScore = new RoundScore();
-        roundScore.setTeam(new Team());
-        roundScore.getTeam().setId(new Long(1));
-        roundScore.setRound(new Round());
-        roundScore.getRound().setId(new Long(1));
-        roundScore.setQuestionScore(new BigDecimal(4));
-        roundScore.setReportScore(new BigDecimal(4.5));
-
-        roundScoreMapper.updateRoundScore(roundScore);
     }
 
     @Test
@@ -72,5 +61,19 @@ public class ScoreDaoTest {
 
         //seminarScoreMapper.updateSeminarScore(seminarScore);
         Assert.assertNull(scoreDao.updateSeminarScore(seminarScore));
+    }
+
+    @Test
+    public void testSelectRoundScore(){
+        Assert.assertNotNull(roundScoreMapper.listRoundScoreByRoundId(new Long(1)));
+        Assert.assertNotNull(roundScoreMapper.listRoundScoreByTeamId(new Long(1)));
+        RoundScore roundScore = roundScoreMapper.selectRoundScoreByRoundIdAndTeamId(new Long(1),new Long(1));
+        Assert.assertNotNull(roundScore.getRound());
+        List<Long> roundId = new ArrayList<>();
+        roundId.add(new Long(1));
+        roundId.add(new Long(2));
+
+        Assert.assertNotNull(roundScoreMapper.listRoundScoreByRoundIdList(roundId));
+        Assert.assertNotNull(roundScoreMapper.listRoundScoreByRoundIdListAndTeamId(roundId,new Long(1)));
     }
 }
