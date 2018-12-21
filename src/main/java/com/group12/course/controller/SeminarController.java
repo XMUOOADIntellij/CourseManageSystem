@@ -102,24 +102,25 @@ public class SeminarController {
     }
 
 
+
+    //----------------------------------------------------------------------------------//
+
     /**
      ① 获得当前班级讨论课的展示报名
      ② 获得当前班级讨论课正在展示的小组      presented
      * @param seminarId 课程讨论课
      * @param classId   班级id
      * @param presented 当前是否正在展示
-     * @param teamId    找到某一小组报名的展示
      * @return Attendance
      */
     @GetMapping(value="/{seminarId}/class/{classId}/attendance")
     public List<AttendanceVo> getSeminarAttendance(@PathVariable Long seminarId, @PathVariable Long classId,
-                                                   @RequestParam(value ="presented",required = false) Boolean presented,
-                                                   @RequestParam(value="teamId",required = false) Long teamId) throws Exception{
+                                                   @RequestParam(value ="presented",required = false) Boolean presented) throws Exception{
 
         //TODO Present Socket解决？ Exception
         List<AttendanceVo> result = new ArrayList<>();
-        if(teamId!=null){
-            result.add(new AttendanceVo(attendanceService.getAttendance(classId,seminarId,teamId)));
+        if(presented!=null){
+            result.add(new AttendanceVo(attendanceService.getCurrentAttendance(classId,seminarId)));
         }
         else{
             for(Attendance item:attendanceService.getKlassSeminarAttendance(classId, seminarId)){
@@ -144,6 +145,19 @@ public class SeminarController {
     }
 
     /**
+     * 报名某班级讨论课
+     * @param seminarId  课程讨论课id
+     */
+    @PostMapping(value="/{seminarId}/attendance")
+    public Long enrollAttendance(@PathVariable Long seminarId,@RequestBody AttendanceVo attendanceVo){
+
+        Student student = new Student();
+        student.setId(999L);
+        Attendance attendance = new Attendance(attendanceVo);
+        return attendanceService.enrollAttendance(seminarId,attendance,student);
+    }
+
+    /**
      * 批量下载当前班级讨论课报告
      * @param seminarId 课程讨论课
      * @param classId 班级id
@@ -165,17 +179,6 @@ public class SeminarController {
        attendanceService.downloadAllPpt(seminarId,classId,response);
     }
 
-    /**
-     * 报名某班级讨论课
-     * @param seminarId  课程讨论课id
-     * @param classId    班级id
-     */
-    @PostMapping(value="/{seminarId}/class/{classId}/attendance")
-    public void enrollAttendance(@PathVariable Long seminarId, @PathVariable Long classId){
-        //TODO RequstBody有teamid和order解决
-        //TODO
-        return;
-    }
 
     @GetMapping(value="/{seminarId}/class/{classId}/question")
     public List<QuestionVO> getAllQuestion(@PathVariable Long seminarId, @PathVariable Long classId){

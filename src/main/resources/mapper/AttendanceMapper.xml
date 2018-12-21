@@ -38,6 +38,15 @@
     and   team_id = #{teamId,jdbcType=BIGINT}
   </select>
 
+  <!--查询正在展示的小组-->
+  <select id="selectPresentedAttendanceByKlassSeminarId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from attendance
+    where klass_seminar_id = #{klassSeminarId,jdbcType=BIGINT}
+    and   is_present = 1
+  </select>
+
   <select id="selectAttendanceById" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

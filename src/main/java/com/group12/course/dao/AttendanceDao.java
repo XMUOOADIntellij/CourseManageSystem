@@ -2,6 +2,7 @@ package com.group12.course.dao;
 
 import com.group12.course.entity.Attendance;
 import com.group12.course.entity.KlassSeminar;
+import com.group12.course.entity.Seminar;
 import com.group12.course.mapper.AttendanceMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,22 @@ public class AttendanceDao {
     @Autowired
     KlassSeminarDao klassSeminarDao;
 
-    private Boolean OrderExist(List<Attendance> attendanceList, Integer order) {
+    private Boolean orderExist(List<Attendance> attendanceList, Integer order) {
         for (Attendance item : attendanceList) {
             if (order.equals(item.getTeamOrder())) {
                 return true;
             }
         }
         return false;
+    }
+
+    private Boolean orderLegal(Seminar seminar, Integer order) {
+        if (order > seminar.getMaxTeam()) {
+            return false;
+        } else if (order < 0) {
+            return false;
+        }
+        return true;
     }
 
     public Attendance selectAttendanceByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {
@@ -39,12 +49,20 @@ public class AttendanceDao {
         return attendanceMapper.selectAttendanceById(attendanceId);
     }
 
-    public Integer updateAttendance(Attendance attendance) {
-        if (!OrderExist
-                (listAttendanceByKlassSeminarId(
-                        selectAttendanceById(attendance.getId()).getKlassSeminar().getId()),
-                        attendance.getTeamOrder())) {
-            return attendanceMapper.updateAttendance(attendance);
+    public Integer updateAttendance(Attendance record) {
+        Attendance attendance = selectAttendanceById(record.getId());
+        KlassSeminar klassSeminar;
+        if (attendance != null) {
+            klassSeminar = attendance.getKlassSeminar();
+        } else {
+            // TODO AttendanceNotFound
+            return null;
+        }
+
+        if ((!orderExist(listAttendanceByKlassSeminarId(klassSeminar.getId()), record.getTeamOrder()))
+                && orderLegal(klassSeminar.getSeminar(), record.getTeamOrder())) {
+
+            return attendanceMapper.updateAttendance(record);
         } else {
             //TODO 非法更新
             return null;
@@ -60,25 +78,27 @@ public class AttendanceDao {
         return attendanceMapper.deleteAttendanceByKlassSeminarId(klassSeminarId);
     }
 
-    public Long insertAttendance(Attendance attendance) {
-        if (teamDao.getTeamById(attendance.getTeam().getId()) != null) {
-            //TODO teamnotfound
-            Long klassSeminarId = attendance.getKlassSeminar().getId();
-            if (klassSeminarDao.selectKlassSeminarById(klassSeminarId) != null) {
-                List<Attendance> attendanceList = attendanceMapper.listAttendanceByKlassSeminarId(klassSeminarId);
-                Integer teamOrder = attendance.getTeamOrder();
-                for (Attendance item : attendanceList) {
-                    if (teamOrder.equals(item.getTeamOrder())) {
-                        //TODO order已经存在Exception
-                    }
-                }
-                attendanceMapper.insertAttendance(attendance);
+    public Long insertAttendance(Attendance record) {
+        if (record.getTeam() != null &&
+                record.getKlassSeminar() != null &&
+                record.getTeamOrder() != null &&
+                record.getPresented() != null) {
+            KlassSeminar klassSeminar = record.getKlassSeminar();
+            if ((!orderExist(listAttendanceByKlassSeminarId(klassSeminar.getId()), record.getTeamOrder()))
+                    && orderLegal(klassSeminar.getSeminar(), record.getTeamOrder())) {
+                attendanceMapper.insertAttendance(record);
+                return record.getId();
             } else {
-                //TODO klassSeminar not found
+                //TODO 信息不合法
+                return null;
             }
-            return attendance.getId();
         } else {
+            //TODO 信息不完整
             return null;
         }
+    }
+
+    public Attendance selectPresentedAttendanceByKlassSeminarId(Long klassSeminarId) {
+        return attendanceMapper.selectPresentedAttendanceByKlassSeminarId(klassSeminarId);
     }
 }
