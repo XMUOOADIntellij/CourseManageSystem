@@ -1,5 +1,6 @@
 package com.group12.course.dao;
 
+import com.group12.course.entity.Course;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
 import com.group12.course.entity.Team;
@@ -56,8 +57,8 @@ public class TeamDao {
      * @return 若不在，返回 true
      * 否则为 false
      * */
-    public Boolean checkLeaderInTeam(Team team){
-        if (checkStudentIsInTeam(team.getLeader())){
+    public Boolean checkLeaderInTeam(Team team, Course course){
+        if (checkStudentIsInTeam(team.getLeader(),course)){
             //throw leader already in team exception
             System.out.println("leader is already in a team \n");
             return false;
@@ -73,8 +74,8 @@ public class TeamDao {
      * @return 若不在，返回 true
      * 否则为 false
      * */
-    public Boolean checkStudentIsInTeam(Student student){
-        Team team = getTeamByStudentId(student.getId());
+    public Boolean checkStudentIsInTeam(Student student,Course course){
+        Team team = getTeamByStudentIdAndCourseId(student.getId(),course.getId());
         if (team.getId()==null){
             return true;
         }
@@ -95,7 +96,7 @@ public class TeamDao {
         Iterator<Student> iterator = team.getMembers().iterator();
         while (iterator.hasNext()){
             Student member = iterator.next();
-            if (checkStudentIsInTeam(team.getLeader())){
+            if (checkStudentIsInTeam(team.getLeader(),team.getCourse())){
                 // throw members already in team exception
                 System.out.println("member \n"+ member + "\n is already in a team \n");
                 return false;
@@ -120,7 +121,7 @@ public class TeamDao {
      * @param id 队长的 id
      * @return 以该 id 为队长的队伍
      * */
-    public Team getTeamByLeaderId(Long id){
+    public List<Team> getTeamByLeaderId(Long id){
         return teamMapper.selectTeamByLeaderId(id);
     }
 
@@ -130,38 +131,54 @@ public class TeamDao {
      * @param id 队员的id
      * @return 该 id 所在的队伍的id
      * */
-    public Long getTeamByMembersId(Long id){
+    public List<Long> getTeamByMembersId(Long id){
         return teamMapper.selectTeamIdByMembersId(id);
     }
 
     /**
-     * 根据传入的学生 id
-     * 获取其所在的队伍（以队长身份或队员身份的都算）
+     * 根据传入的学生 id 和课程 id
+     * 获取其所在该课程下的队伍（以队长身份或队员身份的都算）
      *
      * @param id 查询的学生id
-     * @return 查询到的队伍对象*/
-    public Team getTeamByStudentId(Long id){
-        Team teamByLeader = getTeamByLeaderId(id);
-        if (teamByLeader==null){
-            Long teamIdByMembers = getTeamByMembersId(id);
-            if (teamIdByMembers==null){
-                return new Team();
-            }
-            else {
-                Team teamByMember = teamMapper.selectTeamById(teamIdByMembers);
-                return getMembers(teamByMember);
+     * @return 查询到的队伍对象
+     * */
+    public Team getTeamByStudentIdAndCourseId(Long id,Long courseId){
+        List<Team> teams = getTeamByLeaderId(id);
+        Team finalTeam = null;
+        if (teams==null||teams.isEmpty()){
+            // 此时以该学生作为队长的小队不存在
+            List<Long> teamIdByMembers = getTeamByMembersId(id);
+            // 此时以该学生作为队员的队伍不存在
+            if (teamIdByMembers!=null&&teamIdByMembers.isEmpty()){
+                Iterator<Long> iterator = teamIdByMembers.iterator();
+                for (Long currentId: teamIdByMembers) {
+                    Team teamByMember = teamMapper.selectTeamById(currentId);
+                    if (teamByMember.getCourse().getId().equals(courseId)){
+                        // 此时该学生所在的队伍就是期望的队伍
+                        finalTeam=teamByMember;
+                    }
+                }
             }
         }
         else {
-            return getMembers(teamByLeader);
+            Iterator<Team> iterator = teams.iterator();
+            while (iterator.hasNext()){
+                Team team = iterator.next();
+                if (team.getCourse().getId().equals(courseId)){
+                    // 此时该学生所在的队伍就是期望的队伍
+                    finalTeam=team;
+                }
+            }
         }
+        return finalTeam==null? new Team():getMembers(finalTeam);
     }
 
     /**
      * 给传入的队伍对象添加组员
      *
      * @param team 传入的队伍对象
-     * @return 队伍对象*/
+     * @return 队伍对象
+     * */
     public Team getMembers(Team team){
         if (!checkTeamValid(team)){
             return new Team();
@@ -214,7 +231,7 @@ public class TeamDao {
      * @return 返回的队伍对象中包含新添加的对象的id
      * */
     public Team addTeam(Team team){
-        if (!checkTeamValid(team)||!checkLeaderInTeam(team)||!checkMembersInTeam(team)){
+        if (!checkTeamValid(team)||!checkLeaderInTeam(team,team.getCourse())||!checkMembersInTeam(team)){
             return new Team();
         }
         team.setStatus(0);
@@ -257,9 +274,16 @@ public class TeamDao {
      * */
     public Team addTeamMembers(Team team,Student member){
         team=teamMapper.selectTeamById(team.getId());
-        Long memberInTeam = teamMapper.selectTeamIdByMembersId(member.getId());
-        if (!checkTeamValid(team)||memberInTeam!=null){
-            // throw team not exist exception
+        List<Long> memberInTeams = teamMapper.selectTeamIdByMembersId(member.getId());
+        for (Long id:memberInTeams) {
+            Team tempTeam = getTeamById(id);
+            if (tempTeam.getCourse().getId().equals(team.getCourse().getId())){
+                // 学生已在该课程下组队
+                return new Team();
+            }
+        }
+        if (!checkTeamValid(team)){
+            // 传入的队伍信息不足
             return new Team();
         }
         int temp=teamMapper.addTeamMembers(team.getId(),team.getCourse().getId(),team.getKlass().getId(),member.getId());

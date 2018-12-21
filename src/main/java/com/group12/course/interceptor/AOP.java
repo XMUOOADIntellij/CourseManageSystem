@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class AOP {
 
     /**
-     * 拦截com.toly1994.toly_mybatis.controller包下所以方法
+     * 拦截 controller 包下所以方法
      */
     @Pointcut("execution(public * com.group12.course.controller.*.*(..))")
     public void log() {

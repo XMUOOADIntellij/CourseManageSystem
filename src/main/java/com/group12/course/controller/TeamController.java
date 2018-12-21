@@ -53,6 +53,8 @@ public class TeamController {
      *
      * @param request 包含学生对象的 jwt token 的请求
      * 返回一个包含该学生的队伍
+     *
+     * 此 api 暂时不实现了
      * */
     @GetMapping(value = "",produces = "application/json; charset=utf-8")
     public void getTeam(HttpServletRequest request, HttpServletResponse response)throws IOException {

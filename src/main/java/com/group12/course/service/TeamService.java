@@ -33,9 +33,12 @@ public class TeamService {
      *
      * @param id 查询的学生id
      * @return 查询到的队伍对象
+     *
+     * 此 api 暂时不实现了
      * */
     public Team getTeamByStudentId(Long id){
-        return teamDao.getTeamByStudentId(id);
+        return new Team();
+        //teamDao.getTeamByStudentId(id);
     }
 
     /**
