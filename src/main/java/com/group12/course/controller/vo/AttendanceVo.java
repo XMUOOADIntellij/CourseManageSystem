@@ -31,6 +31,7 @@ public class AttendanceVo {
     private Long teamId;
     private Integer teamSerial;
 
+    private Long seminarId;
 
     public Long getId() {
         return id;
@@ -120,6 +121,15 @@ public class AttendanceVo {
         this.teamSerial = teamSerial;
     }
 
+    public Long getSeminarId() {
+        return seminarId;
+    }
+
+    public void setSeminarId(Long seminarId) {
+        this.seminarId = seminarId;
+    }
+
+
     public AttendanceVo(){}
     public AttendanceVo(Attendance attendance) {
         this.id = attendance.getId();
@@ -129,7 +139,6 @@ public class AttendanceVo {
         this.reportUrl=attendance.getReportUrl();
         this.presented=attendance.getPresented();
         this.teamOrder=attendance.getTeamOrder();
-
 
         this.classSerial=attendance.getKlassSeminar().getKlass().getKlassSerial();
         this.teamSerial = attendance.getTeam().getTeamSerial();

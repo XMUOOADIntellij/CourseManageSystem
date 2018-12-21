@@ -31,6 +31,7 @@ public class AttendanceController {
         Student student = new Student();
         student.setId(999L);
         attendance.setId(attendanceId);
+
         return attendanceService.changeAttendanceOrder(attendance,student);
     }
 
@@ -40,7 +41,11 @@ public class AttendanceController {
      */
     @DeleteMapping(value="/{attendanceId}")
     public Integer cancelAttendance(@PathVariable Long attendanceId){
-        return null;
+
+        Student student = new Student();
+        student.setId(999L);
+
+        return attendanceService.cancelAttendance(attendanceId,student);
     }
 
 
@@ -62,9 +67,10 @@ public class AttendanceController {
     @PostMapping(value="/{attendanceId}/report",produces = "application/json; charset=utf-8")
     public String uploadReport(@RequestParam("file") MultipartFile file, @PathVariable Long attendanceId,
                                HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        Student jwtStudent = Jwt.unSign(token,Student.class);
-        return attendanceService.uploadReport(attendanceId,file,jwtStudent);
+
+        Student student = new Student();
+        student.setId(999L);
+        return attendanceService.uploadReport(attendanceId,file,student);
     }
 
     /**
