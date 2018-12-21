@@ -27,7 +27,7 @@ public class AttendanceDaoTest {
 
     @Test
     public void testGetAttendance(){
-        Assert.assertNotNull(attendanceDao.selectAttendanceByKlassSeminarIdAndTeamId(new Long(1),new Long(3)));
+        Assert.assertNotNull(attendanceDao.listAttendanceByKlassSeminarIdAndTeamId(new Long(1),new Long(3)));
     }
 
     @Test

@@ -22,7 +22,7 @@
   </sql>
 
   <!--查询某班级讨论课所有展示-->
-  <select id="selectAttendanceByKlassSeminarId" resultMap="BaseResultMap">
+  <select id="listAttendanceByKlassSeminarId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from attendance
@@ -30,7 +30,7 @@
   </select>
 
   <!--查询某班级讨论课某小组报名的展示-->
-  <select id="selectAttendanceByKlassSeminarIdAndTeamId" resultMap="BaseResultMap">
+  <select id="listAttendanceByKlassSeminarIdAndTeamId" resultMap="BaseResultMap">
     select
      <include refid="Base_Column_List" />
     from attendance

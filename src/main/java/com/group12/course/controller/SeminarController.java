@@ -131,6 +131,18 @@ public class SeminarController {
     }
 
     /**
+     * 获得自己队伍的展示
+     * @param seminarId 讨论课Id
+     * @return 展示信息
+     */
+    @GetMapping(value = "/{seminarId}/attendance")
+    public AttendanceVo getTeamAttendance(@PathVariable Long seminarId){
+        Student student = new Student();
+        student.setId(999L);
+        return null;
+    }
+
+    /**
      * 批量下载当前班级讨论课报告
      * @param seminarId 课程讨论课
      * @param classId 班级id

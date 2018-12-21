@@ -3,10 +3,7 @@ package com.group12.course.service;
 import com.group12.course.dao.AttendanceDao;
 import com.group12.course.dao.KlassSeminarDao;
 import com.group12.course.dao.TeamDao;
-import com.group12.course.entity.Attendance;
-import com.group12.course.entity.KlassSeminar;
-import com.group12.course.entity.Student;
-import com.group12.course.entity.Team;
+import com.group12.course.entity.*;
 import com.group12.course.tools.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,6 +30,7 @@ public class AttendanceService {
     @Autowired
     TeamDao teamDao;
 
+
     /**
      * 获得当前班级讨论课的展示报名
      * @param classId   班级
@@ -40,7 +38,7 @@ public class AttendanceService {
      * @return List
      */
     public List<Attendance> getKlassSeminarAttendance(Long classId, Long seminarId){
-        return attendanceDao.selectAttendanceByKlassSeminarId(
+        return attendanceDao.listAttendanceByKlassSeminarId(
                 klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId).getId());
     }
 
@@ -67,15 +65,31 @@ public class AttendanceService {
 
       KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
       if(klassSeminar!=null){
-       return attendanceDao.selectAttendanceByKlassSeminarIdAndTeamId(klassSeminar.getId(),teamId);
+       return attendanceDao.listAttendanceByKlassSeminarIdAndTeamId(klassSeminar.getId(),teamId);
        }
         else {
             return null;
         }
     }
 
-    public Integer changeAttendanceOrder(Attendance attendance){
-        //TODO 顺序没有被报
+    public Attendance getTeamAttendance(Long seminarId,Student student){
+        Team team = teamDao.getTeamByStudentId(student.getId());
+        //TODO selectTeamByStudentIdAndCourseId
+
+        KlassSeminar klassSeminar = klassSeminarDao.
+                selectKlassSeminarBySeminarIdAndClassId(seminarId,team.getKlass().getId());
+        if(klassSeminar!=null){
+            return attendanceDao.
+                    listAttendanceByKlassSeminarIdAndTeamId(klassSeminar.getId(),team.getId());
+        }else{
+            return null;
+            //TODO seminarNotFound
+        }
+    }
+
+
+    public Integer changeAttendanceOrder(Attendance attendance,Student student){
+
         return attendanceDao.updateAttendance(attendance);
     }
 
@@ -229,7 +243,7 @@ public class AttendanceService {
         List<String> url = new ArrayList<>();
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
         if(klassSeminar!=null){
-           List<Attendance> attendanceList = attendanceDao.selectAttendanceByKlassSeminarId(klassSeminar.getId());
+           List<Attendance> attendanceList = attendanceDao.listAttendanceByKlassSeminarId(klassSeminar.getId());
            for(Attendance item:attendanceList) {
                fileName.add(item.getPptName());
                url.add(item.getPptUrl());
@@ -250,7 +264,7 @@ public class AttendanceService {
         List<String> url = new ArrayList<>();
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
         if(klassSeminar!=null){
-            List<Attendance> attendanceList = attendanceDao.selectAttendanceByKlassSeminarId(klassSeminar.getId());
+            List<Attendance> attendanceList = attendanceDao.listAttendanceByKlassSeminarId(klassSeminar.getId());
             for(Attendance item:attendanceList){
                 fileName.add(item.getReportName());
                 url.add(item.getReportUrl());

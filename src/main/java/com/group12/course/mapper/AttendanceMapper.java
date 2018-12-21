@@ -26,8 +26,8 @@ public interface AttendanceMapper {
 
     Attendance selectAttendanceById(Long id);
 
-    Attendance selectAttendanceByKlassSeminarIdAndTeamId(Long klassSeminarId,Long teamId);
+    Attendance listAttendanceByKlassSeminarIdAndTeamId(Long klassSeminarId,Long teamId);
 
-    List<Attendance> selectAttendanceByKlassSeminarId(Long klassSeminarId);
+    List<Attendance> listAttendanceByKlassSeminarId(Long klassSeminarId);
 
 }
