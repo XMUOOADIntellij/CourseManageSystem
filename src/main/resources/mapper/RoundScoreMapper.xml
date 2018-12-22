@@ -22,6 +22,27 @@
         round_id, team_id,presentation_score,report_score,question_score,total_score
     </sql>
 
+    <insert id="insertRoundScore" parameterType="roundScore">
+        insert into round_score
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            round_id,
+            team_id,
+            total_score,
+            presentation_score,
+            question_score,
+            report_score,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{round.id},
+            #{team.id},
+            #{totalScore},
+            #{presentationScore},
+            #{questionScore},
+            #{reportScore},
+        </trim>
+    </insert>
+
     <update id="updateRoundScore" parameterType="roundScore">
         update round_score
         <set>

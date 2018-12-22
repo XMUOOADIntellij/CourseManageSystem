@@ -13,6 +13,8 @@ public interface RoundScoreMapper {
 
     Integer updateRoundScore(RoundScore roundScore);
 
+    Integer insertRoundScore(RoundScore record);
+
     RoundScore selectRoundScoreByRoundIdAndTeamId(Long roundId,Long teamId);
 
     List<RoundScore> listRoundScoreByRoundId(Long rounId);

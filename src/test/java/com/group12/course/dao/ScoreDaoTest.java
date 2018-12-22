@@ -76,4 +76,11 @@ public class ScoreDaoTest {
         Assert.assertNotNull(roundScoreMapper.listRoundScoreByRoundIdList(roundId));
         Assert.assertNotNull(roundScoreMapper.listRoundScoreByRoundIdListAndTeamId(roundId,new Long(1)));
     }
+
+    @Test
+    public void testInitialScoreBeforeKlassSeminar(){
+        //scoreDao.initialScoreBeforeKlassSeminar(999L);
+        scoreDao.updateScoreAfterKlassSeminar(999L);
+    }
+
 }

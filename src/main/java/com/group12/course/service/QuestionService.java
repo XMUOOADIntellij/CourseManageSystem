@@ -25,7 +25,7 @@ public class QuestionService {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, klassId);
         if (klassSeminar != null) {
             if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
-                return questionDao.getQuestionByKlassSeminarId(klassSeminar.getId());
+                return questionDao.listQuestionByKlassSeminarId(klassSeminar.getId());
             } else {
                 //todo 权限
                 return null;
@@ -40,7 +40,7 @@ public class QuestionService {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, klassId);
         if (klassSeminar != null) {
             if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
-                return questionDao.getQuestionByKlassSeminarIdAndAttendanceId(klassSeminar.getId(),attendanceId);
+                return questionDao.listQuestionByKlassSeminarIdAndAttendanceId(klassSeminar.getId(),attendanceId);
             } else {
                 //todo 权限
                 return null;

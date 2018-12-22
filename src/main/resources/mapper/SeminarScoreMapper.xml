@@ -69,13 +69,14 @@
         values
         <foreach collection="list" item="item" index="index" separator=",">
             <trim prefix="(" suffix=")" suffixOverrides=",">
-                #{item.klassSeminar.id}
-                #{item.team.id}
-                #{item.totalScore}
-                #{item.presentationScore}
-                #{item.questionScore}
-                #{item.reportScore}
+                #{item.klassSeminar.id},
+                #{item.team.id},
+                #{item.totalScore},
+                #{item.presentationScore},
+                #{item.questionScore},
+                #{item.reportScore},
             </trim>
         </foreach>
     </insert>
+
 </mapper>

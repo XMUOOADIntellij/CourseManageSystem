@@ -43,6 +43,14 @@
     and attendance_id = #{attendanceId,jdbcType=BIGINT}
   </select>
 
+  <select id="listQuestionByKlassSeminarIdAndTeamId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List"/>
+    from question
+    where klass_seminar_id =#{klassSeminarId,jdbcType=BIGINT}
+    and team_id = #{teamId,jdbcType=BIGINT}
+  </select>
+
   <delete id="deleteQuestionById" parameterType="java.lang.Long" >
     delete from question
     where id = #{id,jdbcType=BIGINT}
