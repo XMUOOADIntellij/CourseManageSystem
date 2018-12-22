@@ -82,9 +82,10 @@ public class AttendanceController {
     @PutMapping(value="/{attendanceId}/report")
     public String modifyReport(@RequestParam("file") MultipartFile file,@PathVariable Long attendanceId,
                                HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        Student jwtStudent = Jwt.unSign(token,Student.class);
-        return attendanceService.uploadReport(attendanceId,file,jwtStudent);
+
+        Student student = new Student();
+        student.setId(999L);
+        return attendanceService.uploadReport(attendanceId,file,student);
     }
 
     /**
@@ -120,9 +121,9 @@ public class AttendanceController {
     @PutMapping(value="/{attendanceId}/ppt")
     public String modifyPPT(@RequestParam("file") MultipartFile file,@PathVariable Long attendanceId,
                             HttpServletRequest request){
-        String token = request.getHeader("Authorization");
-        Student jwtStudent = Jwt.unSign(token,Student.class);
-        return attendanceService.uploadPpt(attendanceId,file,jwtStudent);
+        Student student = new Student();
+        student.setId(999L);
+        return attendanceService.uploadPpt(attendanceId,file,student);
     }
 
 }

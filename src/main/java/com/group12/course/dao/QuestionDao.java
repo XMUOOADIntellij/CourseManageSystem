@@ -17,7 +17,7 @@ public class QuestionDao {
     }
 
     public List<Question> getQuestionByKlassSeminarId(Long klassSeminarId){
-        return questionMapper.selectQuestionByKlassSeminarId(klassSeminarId);
+        return questionMapper.listQuestionByKlassSeminarId(klassSeminarId);
     }
 
     public Long insertQuetion(Question record){
@@ -31,6 +31,10 @@ public class QuestionDao {
 
     public Question getQustionById(Long id){
         return questionMapper.selectQuestionById(id);
+    }
+
+    public List<Question> getQuestionByKlassSeminarIdAndAttendanceId(Long klassSeminarId,Long attendanceId){
+        return questionMapper.listQuestionByKlassSeminarIdAndAttendanceId(klassSeminarId,attendanceId);
     }
 
 }

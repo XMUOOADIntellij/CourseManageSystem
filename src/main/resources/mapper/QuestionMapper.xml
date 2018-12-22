@@ -28,11 +28,19 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="selectQuestionByKlassSeminarId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  <select id="listQuestionByKlassSeminarId" resultMap="BaseResultMap" parameterType="java.lang.Long">
     select
     <include refid="Base_Column_List"/>
     from question
     where klass_seminar_id =#{klassSeminarId,jdbcType=BIGINT}
+  </select>
+
+  <select id="listQuestionByKlassSeminarIdAndAttendanceId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List"/>
+    from question
+    where klass_seminar_id =#{klassSeminarId,jdbcType=BIGINT}
+    and attendance_id = #{attendanceId,jdbcType=BIGINT}
   </select>
 
   <delete id="deleteQuestionById" parameterType="java.lang.Long" >

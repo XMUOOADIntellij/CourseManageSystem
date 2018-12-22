@@ -182,7 +182,24 @@ public class SeminarController {
 
     @GetMapping(value="/{seminarId}/class/{classId}/question")
     public List<QuestionVO> getAllQuestion(@PathVariable Long seminarId, @PathVariable Long classId){
-        List<Question> questionlist = questionService.getAllQuestion(seminarId,classId);
+
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
+        List<Question> questionlist = questionService.getAllQuestion(teacher,seminarId,classId);
+        List<QuestionVO> questionVOList = new ArrayList<>();
+        for(Question item:questionlist){
+            questionVOList.add(new QuestionVO(item));
+        }
+        return questionVOList;
+    }
+
+
+    @GetMapping(value="/{seminarId}/class/{classId}/attendance/{attendanceId}/question")
+    public List<QuestionVO> getAttendanceQuestion(@PathVariable Long seminarId, @PathVariable Long classId
+            ,@PathVariable Long attendanceId){
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
+        List<Question> questionlist = questionService.getAttendanceQuestion(teacher,seminarId,classId,attendanceId);
         List<QuestionVO> questionVOList = new ArrayList<>();
         for(Question item:questionlist){
             questionVOList.add(new QuestionVO(item));
@@ -195,8 +212,10 @@ public class SeminarController {
                                @RequestBody QuestionVO questionVO,
                                HttpServletRequest request){
 
-        String token = request.getHeader("Authorization");
-        Student jwtStudent = Jwt.unSign(token,Student.class);
-        return questionService.askQuestion(seminarId,classId,new Question(questionVO),jwtStudent);
+        Student student = new Student();
+        student.setId(999L);
+
+        return questionService.askQuestion(seminarId,classId,new Question(questionVO),student);
     }
+
 }

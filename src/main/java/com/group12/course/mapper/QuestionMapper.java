@@ -25,6 +25,8 @@ public interface QuestionMapper {
 
     Integer deleteQuestionByKlassSeminarId(Long klassSeminarId);
 
-    List<Question> selectQuestionByKlassSeminarId(Long klassSemiarId);
+    List<Question> listQuestionByKlassSeminarId(Long klassSemiarId);
+
+    List<Question> listQuestionByKlassSeminarIdAndAttendanceId(Long klassSeminarId,Long attendanceId);
 
 }
