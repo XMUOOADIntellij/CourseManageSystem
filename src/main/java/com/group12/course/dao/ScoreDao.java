@@ -38,7 +38,6 @@ public class ScoreDao {
     QuestionDao questionDao;
 
 
-
     /**
      * 计算平均分
      *
@@ -56,6 +55,7 @@ public class ScoreDao {
 
     /**
      * 计算最高分
+     *
      * @param score 分数
      * @return BigDecimal均分
      */
@@ -132,6 +132,7 @@ public class ScoreDao {
 
     /**
      * 在班级讨论课开始的时候为每个参与的小组初始化分数
+     *
      * @param klassSeminarId 班级讨论课Id
      */
     public void initialScoreBeforeKlassSeminar(Long klassSeminarId) {
@@ -170,6 +171,7 @@ public class ScoreDao {
 
     /**
      * 在班级讨论课结束的时候为每个参与的小组更新提问分
+     *
      * @param klassSeminarId 班级讨论课id
      */
     public void updateScoreAfterKlassSeminar(Long klassSeminarId) {
@@ -181,32 +183,30 @@ public class ScoreDao {
         //获得轮规则
         Round round = klassSeminar.getSeminar().getRound();
 
-        if(klassSeminar!=null) {
+        if (klassSeminar != null) {
             for (Team item : teamDao.listTeamByKlassId(klassSeminar.getKlass().getId())) {
                 //存放提问分
                 List<BigDecimal> questionScoreList = new ArrayList<>();
-                for (Question question : questionDao.listQuestionByKlassSeminarIdAndTeamId(klassSeminarId,item.getId())){
-                    if(question.getScore()!=null){
+                for (Question question : questionDao.listQuestionByKlassSeminarIdAndTeamId(klassSeminarId, item.getId())) {
+                    if (question.getScore() != null) {
                         questionScoreList.add(question.getScore());
                     }
                 }
                 SeminarScore seminarScore = seminarScoreMapper.selectSeminarScoreByKlassSeminarIdAndTeamId(
-                        klassSeminarId,item.getId()
+                        klassSeminarId, item.getId()
                 );
                 //计算提问分
                 seminarScore.setQuestionScore(
-                        round.getQuestionScoreMethod().equals(1)?
-                                averageScore(questionScoreList):maxScore(questionScoreList)
+                        round.getQuestionScoreMethod().equals(1) ?
+                                averageScore(questionScoreList) : maxScore(questionScoreList)
                 );
                 //更新并计算
                 updateSeminarScore(seminarScore);
             }
-        }
-        else{
+        } else {
             //TODO SEMINARNOTFOUND
         }
     }
-
 
 
     public Integer deleteSeminarScoreByKlassSeminarId(Long klassSeminarId) {
@@ -214,58 +214,68 @@ public class ScoreDao {
         return seminarScoreMapper.deleteSeminarScoreByKlassSeminarId(klassSeminarId);
     }
 
-
     /**
      * 修改分数
+     *
      * @param seminarScore
      * @return
      */
+
     public Integer updateSeminarScore(SeminarScore seminarScore) {
-        Course course = courseDao.getCourse(seminarScore.getKlassSeminar().getKlass().getCourse().getId());
-        seminarScoreMapper.updateSeminarScore(seminarScore);
-        seminarScore = seminarScoreMapper.selectSeminarScoreByKlassSeminarIdAndTeamId(
-                seminarScore.getKlassSeminar().getId(), seminarScore.getTeam().getId()
-        );
 
-        //按照比例更改总分
-        seminarScore.setTotalScore(
-                calculateTotalScore(seminarScore.getPresentationScore(), seminarScore.getQuestionScore(),
-                        seminarScore.getReportScore(), course));
-
-        seminarScoreMapper.updateSeminarScore(seminarScore);
-
-        //更改RoundScore
-        Round round = roundDao.getRound(seminarScore.getKlassSeminar().getSeminar().getRound().getId());
-        List<KlassSeminar> klassSeminarList = new ArrayList<>();
-
-        //获得班级
-        Klass klass = seminarScore.getKlassSeminar().getKlass();
-
-        //找到该轮的班级讨论课
-        for (Seminar seminar : seminarDao.listSeminarByRoundId(round.getId())) {
-            klassSeminarList.add(
-                    klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminar.getId(), klass.getId())
+        //未开始0，正在进行1，已结束2，暂停3
+        if (seminarScore.getKlassSeminar().getSeminarStatus().equals(1)) {
+            //更新
+            return seminarScoreMapper.updateSeminarScore(seminarScore);
+        } else {
+            //更新并重新计算成绩
+            Course course = courseDao.getCourse(seminarScore.getKlassSeminar().getKlass().getCourse().getId());
+            seminarScoreMapper.updateSeminarScore(seminarScore);
+            seminarScore = seminarScoreMapper.selectSeminarScoreByKlassSeminarIdAndTeamId(
+                    seminarScore.getKlassSeminar().getId(), seminarScore.getTeam().getId()
             );
+
+            //按照比例更改总分
+            seminarScore.setTotalScore(
+                    calculateTotalScore(seminarScore.getPresentationScore(), seminarScore.getQuestionScore(),
+                            seminarScore.getReportScore(), course));
+
+            seminarScoreMapper.updateSeminarScore(seminarScore);
+
+            //更改RoundScore
+            Round round = roundDao.getRound(seminarScore.getKlassSeminar().getSeminar().getRound().getId());
+            List<KlassSeminar> klassSeminarList = new ArrayList<>();
+
+            //获得班级
+            Klass klass = seminarScore.getKlassSeminar().getKlass();
+
+            //找到该轮的班级讨论课
+            for (Seminar seminar : seminarDao.listSeminarByRoundId(round.getId())) {
+                klassSeminarList.add(
+                        klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminar.getId(), klass.getId())
+                );
+            }
+
+            //根据班级讨论课和小组找到该轮该小组分数
+            List<SeminarScore> seminarScoreList = new ArrayList<>();
+            for (KlassSeminar item : klassSeminarList) {
+                seminarScoreList.add(
+                        selectSeminarScoreByKlassSeminarIdAndTeamId(item.getId(), seminarScore.getTeam().getId())
+                );
+            }
+
+            //计算RoundScore
+            RoundScore roundScore = calculateRoundScore(seminarScoreList, round);
+            roundScore.setTotalScore(
+                    calculateTotalScore(roundScore.getPresentationScore(), roundScore.getQuestionScore(),
+                            roundScore.getReportScore(), course)
+            );
+            roundScore.setRound(round);
+            roundScore.setTeam(seminarScore.getTeam());
+            roundScoreMapper.updateRoundScore(roundScore);
+            return 1;
         }
 
-        //根据班级讨论课和小组找到该轮该小组分数
-        List<SeminarScore> seminarScoreList = new ArrayList<>();
-        for (KlassSeminar item : klassSeminarList) {
-            seminarScoreList.add(
-                    selectSeminarScoreByKlassSeminarIdAndTeamId(item.getId(), seminarScore.getTeam().getId())
-            );
-        }
-
-        //计算RoundScore
-        RoundScore roundScore = calculateRoundScore(seminarScoreList, round);
-        roundScore.setTotalScore(
-                calculateTotalScore(roundScore.getPresentationScore(), roundScore.getQuestionScore(),
-                        roundScore.getReportScore(), course)
-        );
-        roundScore.setRound(round);
-        roundScore.setTeam(seminarScore.getTeam());
-        roundScoreMapper.updateRoundScore(roundScore);
-        return null;
     }
 
     public List<RoundScore> listRoundScoreByRoundIdList(List<Long> roundId) {
@@ -280,8 +290,8 @@ public class ScoreDao {
         return roundScoreMapper.insertRoundScore(roundScore);
     }
 
-    public List<SeminarScore> listSeminarScoreByKlassSeminarIdListAndTeamId(List<Long> klassSeminarIdList,Long teamId){
-        return seminarScoreMapper.listSeminarScoreByKlassSeminarIdListAndTeamId(klassSeminarIdList,teamId);
+    public List<SeminarScore> listSeminarScoreByKlassSeminarIdListAndTeamId(List<Long> klassSeminarIdList, Long teamId) {
+        return seminarScoreMapper.listSeminarScoreByKlassSeminarIdListAndTeamId(klassSeminarIdList, teamId);
     }
 
     public SeminarScore selectSeminarScoreByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {

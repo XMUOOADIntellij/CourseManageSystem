@@ -25,14 +25,50 @@ public class ScoreService {
     @Autowired
     AttendanceDao attendanceDao;
 
-    public Integer modifyScore(Teacher teacher, SeminarScore seminarScore) {
-        if (teacher.getId().equals(
-                scoreDao.selectSeminarScoreByKlassSeminarIdAndTeamId(
-                        seminarScore.getKlassSeminar().getId(), seminarScore.getTeam().getId())
-                        .getKlassSeminar().getKlass().getCourse().getTeacher().getId())) {
+    public Integer modifyScoreByAttendance(Teacher teacher, SeminarScore record, Long attendanceId) {
+        Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+
+        SeminarScore seminarScore;
+        if (attendance != null) {
+            seminarScore = scoreDao.selectSeminarScoreByKlassSeminarIdAndTeamId(
+                    attendance.getKlassSeminar().getId(), attendance.getTeam().getId());
+        } else {
+            return null;
+            //TODO AttendanceNOTFOUND
+        }
+        if (teacher.getId().equals(seminarScore.getKlassSeminar().
+                getSeminar().getCourse().getTeacher().getId())) {
+
+            record.setKlassSeminar(attendance.getKlassSeminar());
+            record.setTeam(attendance.getTeam());
             return scoreDao.updateSeminarScore(seminarScore);
+
         } else {
             //TODO 权限
+            return null;
+        }
+    }
+
+    public Integer modiftScoreBySeminar(Teacher teacher, SeminarScore seminarScore, Long seminarId) {
+        Team team = teamDao.getTeamById(seminarScore.getTeam().getId());
+        KlassSeminar klassSeminar;
+        if (team != null) {
+            klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, team.getKlass().getId());
+            if (klassSeminar != null) {
+                if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
+                    seminarScore.setTeam(team);
+                    seminarScore.setKlassSeminar(klassSeminar);
+                    return scoreDao.updateSeminarScore(seminarScore);
+                } else {
+                    return null;
+                    //todo 权限
+                }
+            } else {
+                //TODO SEMINARNOTFOUND
+                return null;
+            }
+        } else {
+            //TODO teamNotFound
             return null;
         }
     }
@@ -91,13 +127,13 @@ public class ScoreService {
         }
     }
 
-    public SeminarScore getAttendanceScore(Long attendanceId){
+    public SeminarScore getAttendanceScore(Long attendanceId) {
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
-        if(attendance!=null){
-            return  scoreDao.selectSeminarScoreByKlassSeminarIdAndTeamId(
-                    attendance.getKlassSeminar().getId(),attendance.getTeam().getId()
+        if (attendance != null) {
+            return scoreDao.selectSeminarScoreByKlassSeminarIdAndTeamId(
+                    attendance.getKlassSeminar().getId(), attendance.getTeam().getId()
             );
-        }else{
+        } else {
             //TODO ATTENDANCENOTFOUND
             return null;
         }

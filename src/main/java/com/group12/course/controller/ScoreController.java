@@ -34,13 +34,22 @@ public class ScoreController {
     }
 
     @PutMapping(value = "/attendance/{attendanceId}/score")
-    public Integer modifyScore(@PathVariable Long attendanceId,@RequestBody SeminarScoreVO seminarScoreVO) {
-        Teacher teacher = new Teacher();
+    public Integer modifyScoreByAttendance(@PathVariable Long attendanceId,@RequestBody SeminarScoreVO seminarScoreVO) {
 
-        //return scoreService.modifyScore(jwtTeacher,seminarScore);
-        return null;
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
+
+        return scoreService.modifyScoreByAttendance(teacher,new SeminarScore(seminarScoreVO),attendanceId);
     }
 
+    @PutMapping(value="/seminar/{seminarId}/score")
+    public Integer modifyScoreBySeminar(@PathVariable Long seminarId,@RequestBody SeminarScoreVO seminarScoreVO){
+        Teacher teacher =new Teacher();
+        teacher.setId(1L);
+
+        SeminarScore seminarScore = new SeminarScore(seminarScoreVO);
+        return scoreService.modiftScoreBySeminar(teacher,seminarScore,seminarId);
+    }
 
     /**
      * 查看课程下的轮成绩
@@ -75,4 +84,5 @@ public class ScoreController {
     public SeminarScoreVO getAttendanceScore(@PathVariable Long attendanceId){
         return new SeminarScoreVO(scoreService.getAttendanceScore(attendanceId));
     }
+
 }
