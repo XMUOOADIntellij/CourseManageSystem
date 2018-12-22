@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -17,6 +18,7 @@ public class FileUtil {
             return "Empty file";
         }
         File dest =new File(filePath + fileName);
+        System.out.println(dest.getPath());
         if(!dest.getParentFile().exists()){
             dest.getParentFile().mkdirs();
         }
@@ -30,7 +32,7 @@ public class FileUtil {
         //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
         response.setContentType("multipart/form-data");
         //2.设置文件头：最后一个参数是设置下载文件名
-        response.setHeader("Content-Disposition", "attachment;fileName="+ fileName);
+        response.setHeader("Content-Disposition", "attachment;fileName="+ URLEncoder.encode(fileName));
 
         if(fileUrl!=null){
             File file = new File(fileUrl);
@@ -72,7 +74,7 @@ public class FileUtil {
     static public void downloadAllFiles(HttpServletResponse response, List<String> url , List<String>fileName) throws Exception{
 
         //取出路径
-        String path = url.get(1).substring(0,url.get(1).lastIndexOf("/")+1);
+        String path = url.get(0).substring(0,url.get(0).lastIndexOf("/")+1);
 
         File directoryFile = new File(path);
         if (!directoryFile.isDirectory() && !directoryFile.exists()) {
@@ -96,7 +98,6 @@ public class FileUtil {
                 //解码获取真实路径与文件名
                 String realFileName = fileName.get(i);
                 File file = new File(url.get(i));
-                //未对文件不存在时进行操作，后期优化。
                 if (file.exists()) {
                     //将需要压缩的文件格式化为输入流
                     fileInputStream = new FileInputStream(file);
