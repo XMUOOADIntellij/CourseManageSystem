@@ -1,12 +1,12 @@
 package com.group12.course.controller;
 
 
-import com.group12.course.controller.vo.ScoreVO;
+import com.group12.course.controller.vo.RoundScoreVO;
+import com.group12.course.controller.vo.SeminarScoreVO;
 import com.group12.course.entity.RoundScore;
 import com.group12.course.entity.SeminarScore;
 import com.group12.course.entity.Teacher;
 import com.group12.course.service.ScoreService;
-import com.group12.course.tools.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,39 +15,61 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/score")
+@RequestMapping("")
 public class ScoreController {
 
     @Autowired
     ScoreService scoreService;
+
     /**
      * 查看课程成绩
      * 在Service 老师和学生返回不同
+     *
      * @param request 请求
      * @return ScoreVo
      */
     @GetMapping("")
-    public void getSeminarScore(HttpServletRequest request){
+    public void getSeminarScore(HttpServletRequest request) {
         return;
     }
 
-    @PutMapping(value = "/{scoreId}")
-    public Integer modifyScore(HttpServletRequest request){
-        String token = request.getHeader("Authorization");
-        Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
+    @PutMapping(value = "/attendance/{attendanceId}/score")
+    public Integer modifyScore(@PathVariable Long attendanceId) {
+
+        Teacher teacher = new Teacher();
 
         //return scoreService.modifyScore(jwtTeacher,seminarScore);
         return null;
     }
 
-    @GetMapping(value = "/course/{courseId}")
-    public List<ScoreVO> getCourseScore(@PathVariable Long courseId){
-        List<ScoreVO> scoreVOList = new ArrayList<>();
-        for(RoundScore item : scoreService.getStudentRoundScore(new Teacher(),courseId)){
-            scoreVOList.add(new ScoreVO(item));
+
+    /**
+     * 查看课程下的轮成绩
+     * @param courseId 课程id
+     * @return 成绩列表
+     */
+    @GetMapping(value = "/course/{courseId}/score")
+    public List<RoundScoreVO> getCourseScore(@PathVariable Long courseId) {
+
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
+
+        List<RoundScoreVO> scoreVOList = new ArrayList<>();
+        for (RoundScore item : scoreService.getCourseRoundScoreByTeacher(teacher, courseId)) {
+            scoreVOList.add(new RoundScoreVO(item));
         }
-        return  scoreVOList;
+        return scoreVOList;
     }
 
+    @GetMapping(value = "/round/{roundId}/score")
+    public List<SeminarScoreVO> getRoundSeminarScore(@PathVariable Long roundId,
+                                                     @RequestBody SeminarScoreVO seminarScoreVO){
+
+        List<SeminarScoreVO> seminarScoreVOList = new ArrayList<>();
+        for(SeminarScore seminarScore:scoreService.getRoundSeminarScore(roundId,seminarScoreVO.getTeamId())){
+            seminarScoreVOList.add(new SeminarScoreVO(seminarScore));
+        }
+        return  seminarScoreVOList;
+    }
 
 }

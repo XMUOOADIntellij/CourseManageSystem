@@ -79,7 +79,7 @@ public class ScoreDaoTest {
 
     @Test
     public void testInitialScoreBeforeKlassSeminar(){
-        //scoreDao.initialScoreBeforeKlassSeminar(999L);
+        scoreDao.initialScoreBeforeKlassSeminar(999L);
         scoreDao.updateScoreAfterKlassSeminar(999L);
     }
 

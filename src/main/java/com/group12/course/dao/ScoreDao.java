@@ -173,14 +173,14 @@ public class ScoreDao {
      * @param klassSeminarId 班级讨论课id
      */
     public void updateScoreAfterKlassSeminar(Long klassSeminarId) {
+
         //获得班级讨论课
         KlassSeminar klassSeminar =
                 klassSeminarDao.selectKlassSeminarById(klassSeminarId);
 
+        //获得轮规则
         Round round = klassSeminar.getSeminar().getRound();
-        System.out.println(round.getId());
 
-        //获得计分规则
         if(klassSeminar!=null) {
             for (Team item : teamDao.listTeamByKlassId(klassSeminar.getKlass().getId())) {
                 //存放提问分
@@ -207,14 +207,13 @@ public class ScoreDao {
         }
     }
 
+
+
     public Integer deleteSeminarScoreByKlassSeminarId(Long klassSeminarId) {
         // TODO 更新RoundDao的记录
         return seminarScoreMapper.deleteSeminarScoreByKlassSeminarId(klassSeminarId);
     }
 
-    public SeminarScore selectSeminarScoreByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {
-        return seminarScoreMapper.selectSeminarScoreByKlassSeminarIdAndTeamId(klassSeminarId, teamId);
-    }
 
     /**
      * 修改分数
@@ -281,4 +280,11 @@ public class ScoreDao {
         return roundScoreMapper.insertRoundScore(roundScore);
     }
 
+    public List<SeminarScore> listSeminarScoreByKlassSeminarIdListAndTeamId(List<Long> klassSeminarIdList,Long teamId){
+        return seminarScoreMapper.listSeminarScoreByKlassSeminarIdListAndTeamId(klassSeminarIdList,teamId);
+    }
+
+    public SeminarScore selectSeminarScoreByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {
+        return seminarScoreMapper.selectSeminarScoreByKlassSeminarIdAndTeamId(klassSeminarId, teamId);
+    }
 }

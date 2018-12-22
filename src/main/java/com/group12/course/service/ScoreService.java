@@ -1,8 +1,6 @@
 package com.group12.course.service;
 
-import com.group12.course.dao.CourseDao;
-import com.group12.course.dao.RoundDao;
-import com.group12.course.dao.ScoreDao;
+import com.group12.course.dao.*;
 import com.group12.course.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,46 +16,77 @@ public class ScoreService {
     CourseDao courseDao;
     @Autowired
     RoundDao roundDao;
+    @Autowired
+    TeamDao teamDao;
+    @Autowired
+    SeminarDao seminarDao;
+    @Autowired
+    KlassSeminarDao klassSeminarDao;
 
-
-
-    public Integer modifyScore(Teacher teacher, SeminarScore seminarScore){
-        if(teacher.getId().equals(
+    public Integer modifyScore(Teacher teacher, SeminarScore seminarScore) {
+        if (teacher.getId().equals(
                 scoreDao.selectSeminarScoreByKlassSeminarIdAndTeamId(
-                seminarScore.getKlassSeminar().getId(),seminarScore.getTeam().getId())
-                .getKlassSeminar().getKlass().getCourse().getTeacher().getId())) {
+                        seminarScore.getKlassSeminar().getId(), seminarScore.getTeam().getId())
+                        .getKlassSeminar().getKlass().getCourse().getTeacher().getId())) {
             return scoreDao.updateSeminarScore(seminarScore);
-        }
-        else{
+        } else {
             //TODO 权限
             return null;
         }
     }
 
-    public void getStudentScore(Teacher teacher,SeminarScore seminarScore){
-        
+    public void getStudentScore(Teacher teacher, SeminarScore seminarScore) {
+
     }
 
     /**
-     * 老师获得学生课程下的成绩
-     * @param teacher 老师对象
+     * 老师获得学生课程下的每轮成绩
+     *
+     * @param teacher  老师对象
      * @param courseId 课程Id
      */
-    public List<RoundScore> getStudentRoundScore(Teacher teacher,Long courseId){
+    public List<RoundScore> getCourseRoundScoreByTeacher(Teacher teacher, Long courseId) {
         Course course = courseDao.getCourse(courseId);
+
         List<Long> roundIdList = new ArrayList<>();
-        if(course!=null){
-            for(Round item : roundDao.getRoundByCourseId(course.getId())){
-                roundIdList.add(item.getId());
+        if (course != null) {
+            if (course.getTeacher().getId().equals(teacher.getId())) {
+                for (Round item : roundDao.getRoundByCourseId(course.getId())) {
+                    roundIdList.add(item.getId());
+                }
+                return scoreDao.listRoundScoreByRoundIdList(roundIdList);
+            } else {
+                return null;
+                //todo 权限
             }
-            return scoreDao.listRoundScoreByRoundIdList(roundIdList);
-        }
-        else{
+        } else {
             //TODO COURSENOTFOUND
             return null;
         }
     }
 
-
+    public List<SeminarScore> getRoundSeminarScore(Long roundId, Long teamId) {
+        Round round = roundDao.getRound(roundId);
+        Klass klass;
+        if (teamDao.getTeamById(teamId) != null) {
+            klass = teamDao.getTeamById(teamId).getKlass();
+        } else {
+            //TODO TEAMNOTFOUND
+            return null;
+        }
+        List<Long> klassSeminarId = new ArrayList<>();
+        if (round != null && klass != null) {
+            for (Seminar seminar : seminarDao.listSeminarByRoundId(roundId)) {
+                klassSeminarId.add(
+                        klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminar.getId(), klass.getId()).getId()
+                );
+            }
+            return scoreDao.listSeminarScoreByKlassSeminarIdListAndTeamId(klassSeminarId, teamId);
+        } else {
+            //todo RoundNotFound
+            //klassNOTFOUND
+            return null;
+        }
+    }
 
 }

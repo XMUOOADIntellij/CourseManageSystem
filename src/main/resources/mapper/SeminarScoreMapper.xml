@@ -22,7 +22,8 @@
     <sql id="Base_Column_List" >
         klass_seminar_id, team_id,presentation_score,report_score,question_score,total_score
     </sql>
-    
+
+
     <select id="selectSeminarScoreByKlassSeminarIdAndTeamId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
@@ -79,4 +80,14 @@
         </foreach>
     </insert>
 
+    <select id="listSeminarScoreByKlassSeminarIdListAndTeamId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from seminar_score
+        where klass_seminar_id in
+        <foreach collection="klassSeminarIdList" item="id" open="(" close=")" separator=",">
+            #{id,jdbcType=BIGINT}
+        </foreach>
+        and team_id = #{teamId,jdbcType=BIGINT}
+    </select>
 </mapper>
