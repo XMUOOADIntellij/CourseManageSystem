@@ -174,6 +174,17 @@ public class TeamDao {
     }
 
     /**
+     * 根据传入的班级 id
+     * 获取其所在该班级下的队伍
+     *
+     * @param klassId 查询的班级的id
+     * @return 查询到的队伍对象
+     * */
+    public List<Team> listTeamByKlassId(Long klassId){
+        return teamMapper.selectTeamByKlassId(klassId);
+    }
+
+    /**
      * 给传入的队伍对象添加组员
      *
      * @param team 传入的队伍对象

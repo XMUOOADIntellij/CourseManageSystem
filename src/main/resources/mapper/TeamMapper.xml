@@ -40,6 +40,13 @@
     where leader_id = #{id,jdbcType=BIGINT}
   </select>
 
+  <select id="selectTeamByKlassId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from team
+    where klass_id = #{id,jdbcType=BIGINT}
+  </select>
+
   <select id="selectTeamIdByMembersId" resultType="java.lang.Long" parameterType="java.lang.Long" >
     select
     team_id
