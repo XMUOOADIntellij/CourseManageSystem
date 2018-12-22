@@ -15,6 +15,7 @@ import java.util.List;
 @Component
 public interface QuestionMapper {
 
+
     Integer delete(Long id);
 
     Integer insertQuestion(Question record);
@@ -25,6 +26,15 @@ public interface QuestionMapper {
 
     Integer deleteQuestionByKlassSeminarId(Long klassSeminarId);
 
-    List<Question> selectQuestionByKlassSeminarId(Long klassSemiarId);
+    List<Question> listQuestionByKlassSeminarId(Long klassSemiarId);
 
+    List<Question> listQuestionByKlassSeminarIdAndAttendanceId(Long klassSeminarId,Long attendanceId);
+
+    /**
+     * 获得某小组在一次班级讨论课的提问
+     * @param klassSeminarId 班级讨论课id
+     * @param teamId 队伍id
+     * @return 问题list
+     */
+    List<Question> listQuestionByKlassSeminarIdAndTeamId(Long klassSeminarId,Long teamId);
 }

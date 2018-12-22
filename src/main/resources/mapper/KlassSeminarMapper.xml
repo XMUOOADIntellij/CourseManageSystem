@@ -94,7 +94,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <insert id="insertByList" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+  <insert id="insertKlassSeminarList" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     insert into klass_seminar
     <trim prefix="(" suffix=")" suffixOverrides="," >
       klass_id,

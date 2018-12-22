@@ -37,4 +37,17 @@ public class SeminarDaoTest {
     public void testListSeminarByRoundId(){
         Assert.assertNotNull(seminarMapper.listSeminarByRoundId(new Long(1)));
     }
+
+    @Test
+    public void testSelectSeminarById(){
+        Seminar seminar = seminarMapper.selectSeminarById(1L);
+        System.out.println(seminar);
+        Assert.assertEquals("用户故事x11",
+                seminarMapper.selectSeminarById(1L).getIntroduction());
+        Assert.assertEquals(new Long(3),
+                seminarMapper.selectSeminarById(1L).getRound().getId()
+        );
+
+    }
+
 }

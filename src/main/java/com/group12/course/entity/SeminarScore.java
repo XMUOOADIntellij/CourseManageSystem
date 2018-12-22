@@ -1,6 +1,8 @@
 package com.group12.course.entity;
 
 
+import com.group12.course.controller.vo.SeminarScoreVO;
+
 import java.math.BigDecimal;
 
 /**
@@ -72,5 +74,18 @@ public class SeminarScore {
         this.totalScore = totalScore;
     }
 
+    public SeminarScore(){};
+
+    public SeminarScore(SeminarScoreVO seminarScoreVO){
+
+        this.presentationScore = seminarScoreVO.getPresentationScore();
+        this.questionScore = seminarScoreVO.getQuestionScore();
+        this.reportScore = seminarScoreVO.getReportScore();
+        this.totalScore =seminarScoreVO.getTotalScore();
+
+        this.setTeam(new Team());
+        this.getTeam().setId(seminarScoreVO.getTeamId());
+
+    }
 
 }

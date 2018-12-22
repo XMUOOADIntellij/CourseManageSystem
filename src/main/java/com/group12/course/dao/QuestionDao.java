@@ -16,9 +16,7 @@ public class QuestionDao {
         return questionMapper.deleteQuestionByKlassSeminarId(klassSeminarId);
     }
 
-    public List<Question> getQuestionByKlassSeminarId(Long klassSeminarId){
-        return questionMapper.selectQuestionByKlassSeminarId(klassSeminarId);
-    }
+
 
     public Long insertQuetion(Question record){
         questionMapper.insertQuestion(record);
@@ -33,4 +31,14 @@ public class QuestionDao {
         return questionMapper.selectQuestionById(id);
     }
 
+    public List<Question> listQuestionByKlassSeminarIdAndAttendanceId(Long klassSeminarId,Long attendanceId){
+        return questionMapper.listQuestionByKlassSeminarIdAndAttendanceId(klassSeminarId,attendanceId);
+    }
+
+    public List<Question> listQuestionByKlassSeminarIdAndTeamId(Long klassSeminarId,Long teamId){
+        return questionMapper.listQuestionByKlassSeminarIdAndTeamId(klassSeminarId,teamId);
+    }
+    public List<Question> listQuestionByKlassSeminarId(Long klassSeminarId){
+        return questionMapper.listQuestionByKlassSeminarId(klassSeminarId);
+    }
 }

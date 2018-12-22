@@ -17,6 +17,6 @@ public class QuestionDaoTest {
 
     @Test
     public void testGetAllQuestions(){
-        Assert.assertNotNull(questionDao.getQuestionByKlassSeminarId(new Long(1)));
+        Assert.assertNotNull(questionDao.listQuestionByKlassSeminarId(new Long(1)));
     }
 }

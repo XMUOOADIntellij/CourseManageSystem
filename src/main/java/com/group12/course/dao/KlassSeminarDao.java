@@ -26,8 +26,8 @@ public class KlassSeminarDao {
         return  klassSeminarMapper.selectKlassSeminarBySeminarId(seminarId);
     }
 
-    public Integer insertByList(List<KlassSeminar> record){
-        return  klassSeminarMapper.insertByList(record);
+    public Integer insertKlassSeminarList(List<KlassSeminar> record){
+        return  klassSeminarMapper.insertKlassSeminarList(record);
     }
 
     public Integer deleteKlassSeminarBySeminarId(Long seminarId){
