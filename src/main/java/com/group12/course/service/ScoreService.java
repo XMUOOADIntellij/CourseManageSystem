@@ -19,6 +19,8 @@ public class ScoreService {
     @Autowired
     RoundDao roundDao;
 
+
+
     public Integer modifyScore(Teacher teacher, SeminarScore seminarScore){
         if(teacher.getId().equals(
                 scoreDao.selectSeminarScoreByKlassSeminarIdAndTeamId(
@@ -55,4 +57,7 @@ public class ScoreService {
             return null;
         }
     }
+
+
+
 }

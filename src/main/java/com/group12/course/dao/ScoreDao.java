@@ -31,6 +31,8 @@ public class ScoreDao {
     SeminarDao seminarDao;
     @Autowired
     KlassSeminarDao klassSeminarDao;
+    @Autowired
+    TeamDao teamDao;
 
     /**
      * 计算平均分
@@ -120,6 +122,37 @@ public class ScoreDao {
         return roundScore;
     }
 
+    private void initialScoreBeforeClass(Long klassSeminarId){
+
+        //获得班级讨论课
+        KlassSeminar klassSeminar =
+                klassSeminarDao.selectKlassSeminarById(klassSeminarId);
+
+        //为该班级的每个队伍插入seminarScore记录
+        List<SeminarScore> seminarScoreList = new ArrayList<>();
+        for(Team item:teamDao.listTeamByKlassId(klassSeminar.getKlass().getId()){
+            SeminarScore seminarScore = new SeminarScore();
+            seminarScore.setTeam(item);
+            seminarScore.setReportScore(new BigDecimal(0));
+            seminarScore.setPresentationScore(new BigDecimal(0));
+            seminarScore.setQuestionScore(new BigDecimal(0));
+            seminarScore.setTotalScore(new BigDecimal(0));
+            seminarScore.setKlassSeminar(klassSeminar);
+            seminarScoreList.add(seminarScore);
+
+            //如果这个队伍还没有RoundScore，新建一个
+            roundScoreMapper.selectRoundScoreByRoundIdAndTeamId(
+                    klassSeminar.getSeminar().getRound().getId(),item.;
+            )
+        }
+
+
+    }
+    private void updateScoreAfterClass(Long klassSeminarId){
+
+    }
+
+
     public Integer deleteSeminarScoreByKlassSeminarId(Long klassSeminarId){
         // TODO 更新RoundDao的记录
         return seminarScoreMapper.deleteSeminarScoreByKlassSeminarId(klassSeminarId);
@@ -184,6 +217,10 @@ public class ScoreDao {
 
     public List<RoundScore> listRoundScoreByRoundIdList(List<Long>roundId){
         return roundScoreMapper.listRoundScoreByRoundIdList(roundId);
+    }
+
+    public Integer insertSeminarScoreList(List<SeminarScore> seminarScoreList){
+        return seminarScoreMapper.insertSeminarScoreList(seminarScoreList);
     }
 
 

@@ -55,4 +55,27 @@
         where klass_seminar_id =#{klassSeminar.id,jdbcType=BIGINT}
         and   team_id =#{team.id,jdbcType=BIGINT}
     </update>
+
+    <insert id="insertSeminarScoreList">
+        insert into seminar_score
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            klass_seminar_id,
+            team_id,
+            total_score,
+            presentation_score,
+            question_score,
+            report_score,
+        </trim>
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.klassSeminar.id}
+                #{item.team.id}
+                #{item.totalScore}
+                #{item.presentationScore}
+                #{item.questionScore}
+                #{item.reportScore}
+            </trim>
+        </foreach>
+    </insert>
 </mapper>
