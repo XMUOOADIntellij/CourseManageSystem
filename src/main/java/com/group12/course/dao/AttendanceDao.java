@@ -59,9 +59,11 @@ public class AttendanceDao {
             return null;
         }
 
-        if ((!orderExist(listAttendanceByKlassSeminarId(klassSeminar.getId()), record.getTeamOrder()))
-                && orderLegal(klassSeminar.getSeminar(), record.getTeamOrder())) {
-
+        //若更改报名次序则验证，不更改则跳过
+        Boolean order =((!orderExist(listAttendanceByKlassSeminarId(klassSeminar.getId()), record.getTeamOrder()))
+                && orderLegal(klassSeminar.getSeminar(), record.getTeamOrder()));
+        if (order||record.getTeamOrder()==null||record.getTeamOrder().equals(attendance.getTeamOrder()))
+        {
             return attendanceMapper.updateAttendance(record);
         } else {
             //TODO 非法更新

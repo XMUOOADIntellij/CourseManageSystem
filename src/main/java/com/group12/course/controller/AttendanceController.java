@@ -64,7 +64,7 @@ public class AttendanceController {
      * @param file  报告文件
      * @param attendanceId 展示的id
      */
-    @PostMapping(value="/{attendanceId}/report",produces = "application/json; charset=utf-8")
+    @PostMapping(value="/{attendanceId}/report",produces = "multipart/form-data; charset=utf-8")
     public String uploadReport(@RequestParam("file") MultipartFile file, @PathVariable Long attendanceId,
                                HttpServletRequest request) {
 
@@ -106,9 +106,9 @@ public class AttendanceController {
     @PostMapping(value="/{attendanceId}/ppt",produces = "application/json; charset=utf-8")
     public String uploadPPT(@RequestParam("file") MultipartFile file,@PathVariable Long attendanceId,
                             HttpServletRequest request){
-        String token = request.getHeader("Authorization");
-        Student jwtStudent = Jwt.unSign(token,Student.class);
-        return attendanceService.uploadPpt(attendanceId,file,jwtStudent);
+        Student student = new Student();
+        student.setId(999L);
+        return attendanceService.uploadPpt(attendanceId,file,student);
     }
 
     /**
