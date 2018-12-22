@@ -34,8 +34,7 @@ public class ScoreController {
     }
 
     @PutMapping(value = "/attendance/{attendanceId}/score")
-    public Integer modifyScore(@PathVariable Long attendanceId) {
-
+    public Integer modifyScore(@PathVariable Long attendanceId,@RequestBody SeminarScoreVO seminarScoreVO) {
         Teacher teacher = new Teacher();
 
         //return scoreService.modifyScore(jwtTeacher,seminarScore);
@@ -72,4 +71,8 @@ public class ScoreController {
         return  seminarScoreVOList;
     }
 
+    @GetMapping(value = "/attendance/{attendanceId}/score")
+    public SeminarScoreVO getAttendanceScore(@PathVariable Long attendanceId){
+        return new SeminarScoreVO(scoreService.getAttendanceScore(attendanceId));
+    }
 }

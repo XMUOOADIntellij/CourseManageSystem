@@ -22,6 +22,8 @@ public class ScoreService {
     SeminarDao seminarDao;
     @Autowired
     KlassSeminarDao klassSeminarDao;
+    @Autowired
+    AttendanceDao attendanceDao;
 
     public Integer modifyScore(Teacher teacher, SeminarScore seminarScore) {
         if (teacher.getId().equals(
@@ -89,4 +91,16 @@ public class ScoreService {
         }
     }
 
+    public SeminarScore getAttendanceScore(Long attendanceId){
+        Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+        if(attendance!=null){
+            return  scoreDao.selectSeminarScoreByKlassSeminarIdAndTeamId(
+                    attendance.getKlassSeminar().getId(),attendance.getTeam().getId()
+            );
+        }else{
+            //TODO ATTENDANCENOTFOUND
+            return null;
+        }
+
+    }
 }
