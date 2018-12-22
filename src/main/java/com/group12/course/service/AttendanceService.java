@@ -181,11 +181,10 @@ public class AttendanceService {
             if (attendance.getId().equals(
                     getTeamAttendance(attendance.getKlassSeminar().getSeminar().getId(), student).getId())){
                 //TODO path 服务器
-                String filePath = "E:/report/" + attendance.getKlassSeminar().getId() + "/";
+                String filePath = System.getProperty("java.io.tmpdir")+"report/" + attendance.getKlassSeminar().getId() + "\\";
                 String fileName = attendance.getKlassSeminar().getKlass().getKlassSerial()
                         + "_" + attendance.getTeam().getTeamSerial()
                         + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-
                 try {
                     FileUtil.uploadFile(file, filePath, fileName);
                 } catch (Exception e) {
@@ -215,12 +214,12 @@ public class AttendanceService {
      */
     public String uploadPpt(Long attendanceId, MultipartFile file, Student student) {
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
-        Team team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), null);
         if (attendance != null) {
             //自己组的报名才能传
-            if (team.getId().equals(attendance.getTeam().getId())) {
+            if (attendance.getId().equals(
+                    getTeamAttendance(attendance.getKlassSeminar().getSeminar().getId(), student).getId())){
                 //TODO path 服务器
-                String filePath = "E:/ppt/" + attendance.getKlassSeminar().getId() + "/";
+                String filePath =System.getProperty("user.home")+"/ppt/" + attendance.getKlassSeminar().getId() + "/";
                 String fileName = attendance.getKlassSeminar().getKlass().getKlassSerial()
                         + "_" + attendance.getTeam().getTeamSerial()
                         + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
