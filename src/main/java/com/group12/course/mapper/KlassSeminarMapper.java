@@ -25,7 +25,7 @@ public interface KlassSeminarMapper {
 
     Integer updateKlassSeminar(KlassSeminar record);
 
-    Integer insertByList(List<KlassSeminar> list);
+    Integer insertKlassSeminarList(List<KlassSeminar> list);
 
     List<KlassSeminar> selectKlassSeminarBySeminarIdList(@Param("seminarId") List<Long> seminarId);
 }

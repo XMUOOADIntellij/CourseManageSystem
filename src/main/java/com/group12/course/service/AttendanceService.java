@@ -6,6 +6,8 @@ import com.group12.course.dao.SeminarDao;
 import com.group12.course.dao.TeamDao;
 import com.group12.course.entity.*;
 import com.group12.course.tools.FileUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * 讨论课展示 Service层
@@ -33,6 +36,9 @@ public class AttendanceService {
     TeamDao teamDao;
     @Autowired
     SeminarDao seminarDao;
+
+    private final String ServerFilePath = System.getProperty("user.dir") + System.getProperty("file.separator") + "file" + System.getProperty("file.separator");
+    private final Logger logger = LoggerFactory.getLogger(AttendanceService.class);
 
     /**
      * 获得当前班级讨论课的展示报名
@@ -151,10 +157,10 @@ public class AttendanceService {
             KlassSeminar klassSeminar = klassSeminarDao.
                     selectKlassSeminarBySeminarIdAndClassId(seminarId, team.getKlass().getId());
             if (klassSeminar != null) {
-               attendance.setTeam(team);
-               attendance.setKlassSeminar(klassSeminar);
-               attendance.setPresented(false);
-               return attendanceDao.insertAttendance(attendance);
+                attendance.setTeam(team);
+                attendance.setKlassSeminar(klassSeminar);
+                attendance.setPresented(false);
+                return attendanceDao.insertAttendance(attendance);
             } else {
                 return null;
                 //TODO seminarNotFound
@@ -179,16 +185,21 @@ public class AttendanceService {
         if (attendance != null) {
             //自己组的报名才能传
             if (attendance.getId().equals(
-                    getTeamAttendance(attendance.getKlassSeminar().getSeminar().getId(), student).getId())){
+                    getTeamAttendance(attendance.getKlassSeminar().getSeminar().getId(), student).getId())) {
                 //TODO path 服务器
-                String filePath = System.getProperty("java.io.tmpdir")+"report/" + attendance.getKlassSeminar().getId() + "\\";
+                String filePath = ServerFilePath + System.getProperty("file.separator") + "report" + System.getProperty("file.separator")
+                        + attendance.getKlassSeminar().getId() + System.getProperty("file.separator");
                 String fileName = attendance.getKlassSeminar().getKlass().getKlassSerial()
                         + "_" + attendance.getTeam().getTeamSerial()
                         + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+
+                logger.trace("fileName:" + fileName);
+                logger.trace("filePath:" + filePath);
+
                 try {
                     FileUtil.uploadFile(file, filePath, fileName);
                 } catch (Exception e) {
-                    return null;
+                    e.printStackTrace();
                 }
                 attendance.setReportName(file.getOriginalFilename());
                 attendance.setReportUrl(filePath + fileName);
@@ -217,22 +228,28 @@ public class AttendanceService {
         if (attendance != null) {
             //自己组的报名才能传
             if (attendance.getId().equals(
-                    getTeamAttendance(attendance.getKlassSeminar().getSeminar().getId(), student).getId())){
+                    getTeamAttendance(attendance.getKlassSeminar().getSeminar().getId(), student).getId())) {
                 //TODO path 服务器
-                String filePath =System.getProperty("user.home")+"/ppt/" + attendance.getKlassSeminar().getId() + "/";
+                String filePath = ServerFilePath + System.getProperty("file.separator") + "ppt" + System.getProperty("file.separator")
+                        + attendance.getKlassSeminar().getId() + System.getProperty("file.separator");
                 String fileName = attendance.getKlassSeminar().getKlass().getKlassSerial()
                         + "_" + attendance.getTeam().getTeamSerial()
                         + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 
+                logger.debug("fileName:" + fileName);
+                logger.debug("filePath:" + filePath);
+
                 try {
+                    logger.debug("tryUpload");
                     FileUtil.uploadFile(file, filePath, fileName);
                 } catch (Exception e) {
-                    return null;
+                    e.printStackTrace();
+                } finally {
+                    attendance.setPptName(file.getOriginalFilename());
+                    attendance.setPptUrl(filePath + fileName);
+                    attendanceDao.updateAttendance(attendance);
+                    return filePath + fileName;
                 }
-                attendance.setPptName(file.getOriginalFilename());
-                attendance.setPptUrl(filePath + fileName);
-                attendanceDao.updateAttendance(attendance);
-                return filePath + fileName;
             } else {
                 //TODO 权限
                 return null;

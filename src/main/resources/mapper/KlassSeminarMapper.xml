@@ -17,7 +17,7 @@
                  javaType="com.group12.course.entity.Klass"/>
   </resultMap>
 
-  <cache type="com.group12.course.tools.MybatisRedisCache" />
+  <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
   <sql id="Base_Column_List" >
     id, seminar_id, klass_id ,report_ddl, seminar_status
@@ -94,7 +94,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <insert id="insertByList" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+  <insert id="insertKlassSeminarList" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
     insert into klass_seminar
     <trim prefix="(" suffix=")" suffixOverrides="," >
       klass_id,
