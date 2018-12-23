@@ -105,6 +105,11 @@ public class CourseService {
         return shareTeamApplicationDao.deleteShareTeamApplication(id);
     }
 
+    /**
+     * 取消讨论课共享
+     * @param id
+     * @return
+     */
     public int deleteShareSeminarApplication(Long id){
         return shareSeminarApplicationDao.deleteShareSeminarApplication(id);
     }
