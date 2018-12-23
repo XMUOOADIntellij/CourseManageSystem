@@ -46,7 +46,6 @@ public class SeminarService {
         }
     }
 
-
     /**
      * 删除讨论课
      *
@@ -76,7 +75,6 @@ public class SeminarService {
             //TODO SeminarNotFound
         }
     }
-
 
     /**
      * 寻找班级讨论课
@@ -134,5 +132,9 @@ public class SeminarService {
             return null;
             //TODO SeminarNotFound
         }
+    }
+
+    public KlassSeminar pauseSeminar(Teacher teacher){
+        return null;
     }
 }

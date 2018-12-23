@@ -26,8 +26,8 @@ public class QuestionController {
     public Integer scoreQuestion(@PathVariable Long questionId, @RequestBody QuestionVO questionVO,
                                  HttpServletRequest request){
 
-        Teacher teacher = new Teacher();
-        teacher.setId(1L);
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
         
         Question question = new Question(questionVO);
         question.setId(questionId);
