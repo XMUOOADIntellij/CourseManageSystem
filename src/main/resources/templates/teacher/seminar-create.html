@@ -50,7 +50,8 @@
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/control.js"></script>
-    <script src="../../static/js/common.js"></script>
+    <script src="../../static/js/convert.js"></script>
+    <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
     <script src="../../static/js/jwt.js"></script>
   </head>
@@ -241,18 +242,19 @@
                             type="text"
                           />
                         </div>
-                       <!-- <div class="form-group">
+                       <div class="form-group">
                           <label class="form-label"
                             >要求
-                            <span class="form-label-small">56/100</span></label
+                           <!-- <span class="form-label-small">0/500</span>--></label
                           >
                           <textarea
                             class="form-control"
                             name="example-textarea-input"
-                            placeholder="Content.."
+                            id="introduction"
+                            placeholder="不多于500"
                             rows="6"
                           ></textarea>
-                        </div>-->
+                        </div>
                         <div class="form-group">
                           <label class="form-label">讨论课序号</label>
                           <div class="row gutters-xs">
@@ -297,7 +299,7 @@
                               <div class="col-12">
                                 <div class="row">
                                   <div class="col-lg-12">
-                                   <!-- <div class="form-group">
+                                    <div class="form-group">
                                       <div class="row gutters-xs">
                                         <div class="col-lg-6">
                                           <label class="form-label"
@@ -316,7 +318,7 @@
                                           </div>
                                         </div>
                                       </div>
-                                    </div>-->
+                                    </div>
                                     <div class="form-group">
                                       <label class="form-label"
                                         >最多报名组数</label
@@ -340,7 +342,7 @@
                                         </div>
                                       </div>
                                     </div>
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                       <div class="row gutters-xs">
                                         <div class="col-auto">
                                           <label class="form-label mb-0 mr-3"
@@ -358,7 +360,7 @@
                                           ></span>
                                         </label>
                                       </div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group">
                                       <label class="form-label">所属轮次</label>
                                       <div class="row gutters-xs">
@@ -384,39 +386,6 @@
                                       </div>
                                     </div>
                                   </div>
-                                 <!-- <div class="col-lg-6">
-                                    <label class="form-label"
-                                      >报告提交截至时间</label
-                                    >
-                                    <div class="row gutters-xs">
-                                      <div class="col-md-4">
-                                        <span class="btn btn-primary btn-block py-1 mb-3"
-                                          >2016 - (1)</span
-                                        >
-                                      </div>
-                                      <div class="col-md-8">
-                                        <div class="form-group ml-1">
-                                              <div class="row gutters-xs px-1">
-                                                <input id="input-deadline-1" />
-                                              </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="row gutters-xs">
-                                      <div class="col-md-4">
-                                        <span class="btn btn-primary btn-block py-1 mb-3"
-                                        >2016 - (1)</span
-                                        >
-                                      </div>
-                                      <div class="col-md-8">
-                                        <div class="form-group ml-1">
-                                          <div class="row gutters-xs px-1">
-                                            <input id="input-deadline-2" />
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>-->
                                 </div>
                               </div>
                             </div>
@@ -456,12 +425,12 @@
     </div>
   </body>
   <script>
-    $('#input-start').datepicker({
+    $('#input-start').datetimepicker({
       uiLibrary: 'bootstrap4',
       modal: true,
       footer: true
     });
-    $('#input-end').datepicker({
+    $('#input-end').datetimepicker({
       uiLibrary: 'bootstrap4',
       modal: true,
       footer: true

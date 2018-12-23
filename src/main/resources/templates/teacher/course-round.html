@@ -50,7 +50,8 @@
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/control.js"></script>
-    <script src="../../static/js/common.js"></script>
+    <script src="../../static/js/convert.js"></script>
+    <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
     <script src="../../static/js/jwt.js"></script>
   </head>
@@ -221,11 +222,11 @@
                 </li>
               </ol>
             </nav>
-            <div class="row">
+            <div class="row" id="content">
               <div class="col-md-6 col-lg-4">
-                <div class="card">
+                <div class="card" >
                   <div class="card-header">
-                    <h3 class="card-title mr-4">第二轮</h3>
+                    <h3 class="card-title mr-4">第一轮</h3>
                     <div class="card-options">
                       <a
                         href="course-round-setting.html"
@@ -233,15 +234,15 @@
                         ><i class="fe fe-settings"></i
                       ></a>
                       <a
-                        href="#round1"
+                        href="#data[i].id"
                         class="card-options-collapse"
                         data-toggle="card-collapse"
                         ><i class="fe fe-chevron-up"></i
                       ></a>
                     </div>
                   </div>
-                  <div class="card-body p-0" id="round1">
-                    <div class="card m-0">
+                  <div class="card-body p-0" id="data[i].id">
+                   <!-- <div class="card m-0">
                       <div class="card-header">
                         <div class="d-flex align-items-center">
                           <span class="">
@@ -250,6 +251,11 @@
                           </span>
                         </div>
                         <div class="card-options">
+                          <a
+                                  onclick="deleteSeminar()"
+                                  class="card-options-delete"
+                          ><i class="fe fe-trash"></i
+                          ></a>
                           <a
                             class="card-options-collapse"
                             data-toggle="card-collapse"
@@ -410,188 +416,7 @@
                           </table>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title mr-4">第二轮</h3>
-                    <div class="card-options">
-                      <a
-                        href="course-round-setting.html"
-                        class="card-options-delete"
-                        ><i class="fe fe-settings"></i
-                      ></a>
-                      <a
-                        href="#round2"
-                        class="card-options-collapse"
-                        data-toggle="card-collapse"
-                        ><i class="fe fe-chevron-up"></i
-                      ></a>
-                    </div>
-                  </div>
-                  <div class="card-body p-0" id="round2">
-                    <div class="card m-0">
-                      <div class="card-header">
-                        <div class="d-flex align-items-center">
-                          <span class="">
-                            <i class="icon fe fe-book-open mr-3"></i>
-                            业务流程分析
-                          </span>
-                        </div>
-                        <div class="card-options">
-                          <a
-                            class="card-options-collapse"
-                            data-toggle="card-collapse"
-                            href="#round1s1"
-                            ><i class="fe fe-chevron-up mr-1"></i
-                          ></a>
-                        </div>
-                      </div>
-                      <div class="card-body p-0" id="round2s1">
-                        <div class="table-responsive">
-                          <table
-                            class="table card-table table-vcenter text-nowrap"
-                          >
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <span class="text-muted">2016-(1)</span>
-                                </td>
-                                <td>
-                                  <span class="badge badge-success"
-                                    >正在进行</span
-                                  >
-                                </td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="seminar-detail.html"
-                                  >
-                                    <i class="fe fe-chevron-right"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <span class="text-muted">2016-(1)</span>
-                                </td>
-                                <td>
-                                  <span class="badge badge-success"
-                                    >正在进行</span
-                                  >
-                                </td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="seminar-detail.html"
-                                  >
-                                    <i class="fe fe-chevron-right"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <span class="text-muted">2016-(1)</span>
-                                </td>
-                                <td>
-                                  <span class="badge badge-success"
-                                    >正在进行</span
-                                  >
-                                </td>
-
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="seminar-detail.html"
-                                  >
-                                    <i class="fe fe-chevron-right"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card m-0">
-                      <div class="card-header">
-                        <div class="d-flex align-items-center">
-                          <span class="">
-                            <i class="icon fe fe-book-open mr-3"></i>
-                            业务流程分析
-                          </span>
-                        </div>
-                        <div class="card-options">
-                          <a
-                            class="card-options-collapse"
-                            data-toggle="card-collapse"
-                            href="#round1s2"
-                            ><i class="fe fe-chevron-up mr-1"></i
-                          ></a>
-                        </div>
-                      </div>
-                      <div class="card-body p-0" id="round2s2">
-                        <div class="table-responsive">
-                          <table
-                            class="table card-table table-vcenter text-nowrap"
-                          >
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <span class="text-muted">2016-(1)</span>
-                                </td>
-                                <td>
-                                  <span class="badge badge-danger">未开始</span>
-                                </td>
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="seminar-detail.html"
-                                  >
-                                    <i class="fe fe-chevron-right"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <span class="text-muted">2016-(1)</span>
-                                </td>
-                                <td>
-                                  <span class="badge badge-danger">未开始</span>
-                                </td>
-                                <td>
-                                  <a
-                                    class="icon float-right"
-                                    href="seminar-detail.html"
-                                  >
-                                    <i class="fe fe-chevron-right"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <span class="text-muted">2016-(1)</span>
-                                </td>
-                                <td>
-                                  <span class="badge badge-danger">未开始</span>
-                                </td>
-
-                                <td>
-                                  <a class="icon float-right" href="">
-                                    <i class="fe fe-chevron-right"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
+                    </div>-->
                   </div>
                 </div>
               </div>
