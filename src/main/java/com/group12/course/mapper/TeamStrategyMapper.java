@@ -2,6 +2,7 @@ package com.group12.course.mapper;
 
 import com.group12.course.entity.strategy.TeamStrategy;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 @Mapper
@@ -15,5 +16,5 @@ public interface TeamStrategyMapper {
 
     int updateTeamStrategy(TeamStrategy teamStrategy);
 
-    TeamStrategy selectTeamStrategyByCourseIdAndStrategyName(Long courseId,String strategyName);
+    TeamStrategy selectTeamStrategyByCourseIdAndStrategyName(@Param("courseId") Long courseId,@Param("strategyName") String strategyName);
 }
