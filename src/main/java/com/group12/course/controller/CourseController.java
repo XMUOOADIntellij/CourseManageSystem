@@ -337,6 +337,8 @@ public class CourseController {
 
     }
 
+    /*TODO 是否要加个处理共享信息的api*/
+
     /**
      * 取消分组共享
      * @param teamshareId
@@ -424,6 +426,14 @@ public class CourseController {
         }
     }
 
+
+    /**
+     * 新建队伍
+     * @param teamInfoVO
+     * @param courseId
+     * @param classId
+     * @param response
+     */
     @PostMapping(value="/{courseId}/class/{classId}/team",produces = "application/json; charset=utf-8")
     public void createTeam(@RequestBody TeamInfoVO teamInfoVO, @PathVariable Long courseId, @PathVariable Long classId, HttpServletResponse response){
         /* 这里界面返回的内容与api标准的有所差别*/
