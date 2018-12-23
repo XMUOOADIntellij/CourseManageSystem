@@ -30,7 +30,7 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="selectKlassSeminarBySeminarIdAndKlassId" resultMap="BaseResultMap" >
+  <select id="listKlassSeminarBySeminarIdAndKlassId" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from klass_seminar
@@ -38,14 +38,14 @@
     and   seminar_id = #{seminarId,jdbcType=BIGINT}
   </select>
 
-  <select id="selectKlassSeminarBySeminarId" resultMap="BaseResultMap">
+  <select id="listKlassSeminarBySeminarId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from klass_seminar
     where seminar_id = #{seminarId,jdbcType=BIGINT}
   </select>
 
-  <select id="selectKlassSeminarBySeminarIdList" resultMap="BaseResultMap">
+  <select id="listKlassSeminarBySeminarIdList" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from klass_seminar

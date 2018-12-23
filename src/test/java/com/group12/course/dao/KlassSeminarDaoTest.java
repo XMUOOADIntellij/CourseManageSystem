@@ -30,7 +30,7 @@ public class KlassSeminarDaoTest extends AbstractTransactionalJUnit4SpringContex
 
     @Test
     public void testSelectKlassSeminarBySeminarId(){
-        List<KlassSeminar> record = klassSeminarDao.selectKlassSeminarBySeminarId(new Long(4));
+        List<KlassSeminar> record = klassSeminarDao.listKlassSeminarBySeminarId(new Long(4));
         Assert.assertEquals(2,record.size());
 
     }
@@ -60,7 +60,7 @@ public class KlassSeminarDaoTest extends AbstractTransactionalJUnit4SpringContex
         List<Long> seminarId = new ArrayList<>();
         seminarId.add(new Long(1));
         seminarId.add(new Long(2));
-        Assert.assertNotNull(klassSeminarDao.selectKlassSeminarBySeminarIdList(seminarId));
+        Assert.assertNotNull(klassSeminarDao.listKlassSeminarBySeminarIdList(seminarId));
     }
 
 }

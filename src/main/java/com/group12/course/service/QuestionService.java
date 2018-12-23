@@ -8,7 +8,7 @@ import com.group12.course.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class QuestionService {
@@ -36,11 +36,11 @@ public class QuestionService {
         }
     }
 
-    public List<Question> getAttendanceQuestion(Teacher teacher,Long seminarId,Long klassId,Long attendanceId){
+    public List<Question> getAttendanceQuestion(Teacher teacher, Long seminarId, Long klassId, Long attendanceId) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, klassId);
         if (klassSeminar != null) {
             if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
-                return questionDao.listQuestionByKlassSeminarIdAndAttendanceId(klassSeminar.getId(),attendanceId);
+                return questionDao.listQuestionByKlassSeminarIdAndAttendanceId(klassSeminar.getId(), attendanceId);
             } else {
                 //todo 权限
                 return null;
@@ -51,7 +51,7 @@ public class QuestionService {
         }
     }
 
-    public Long askQuestion(Long seminarId, Long classId, Question question, Student student) {
+    public Question askQuestion(Long seminarId, Long classId, Question question, Student student) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         if (klassSeminar != null) {
             question.setKlassSeminar(klassSeminar);
@@ -59,7 +59,12 @@ public class QuestionService {
             question.setStudent(student);
             question.setScore(null);
             question.setSelected(false);
-            return questionDao.insertQuetion(question);
+
+            if (questionDao.insertQuetion(question) != 0) {
+                return question;
+            } else {
+                return null;
+            }
         } else {
             //TODO SeminarNotFound
             return null;
@@ -81,5 +86,59 @@ public class QuestionService {
             return null;
         }
     }
+
+    public Question answerQuestion(Teacher teacher, Long seminarId, Long classId, Long attendanceId) {
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
+
+        if (klassSeminar != null) {
+            if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
+
+                List<Question> questionList = questionDao.listQuestionByKlassSeminarId(klassSeminar.getId());
+                // 小组，此次讨论课被提问次数
+                Map<Long, Integer> questionCount = new TreeMap<>();
+
+                // 计算提问数，提问被抽加一，提问没被抽减一
+                for (Question item : questionList) {
+                    int count = item.getSelected() ? 1 : -1;
+                    questionCount.merge(item.getTeam().getId(), count,
+                            (valueOrigin, valueNew) -> (valueOrigin + valueNew));
+                }
+
+                //当前展示的提问
+                List<Question> attendanceQuestion = questionDao.listQuestionByKlassSeminarIdAndAttendanceId(
+                        klassSeminar.getId(), attendanceId);
+
+                //按照id小的排序，小的代表先创建先提问
+                attendanceQuestion.sort(new Comparator<Question>() {
+                    @Override
+                    public int compare(Question o1, Question o2) {
+                        return o1.getId().intValue()-o2.getId().intValue();
+                    }
+                });
+
+                //按照未提问优先为主，先到先得选择顺序
+                Question result = null;
+                int minCount=Integer.MAX_VALUE;
+                for(Question item:attendanceQuestion){
+                    Integer count = questionCount.get(item.getTeam().getId());
+                    if(count==null){
+                        return item;
+                    }
+                    else if(count<minCount){
+                        result = item;
+                        minCount = questionCount.get(item.getTeam().getId());
+                    }
+                }
+                return  result;
+            } else {
+                return null;
+                //todo 权限
+            }
+        } else {
+            return null;
+            //todo seminarnotfound
+        }
+    }
+
 
 }

@@ -15,15 +15,15 @@ public class KlassSeminarDao {
 
 
     public KlassSeminar selectKlassSeminarBySeminarIdAndClassId(Long seminarId,Long classId){
-         return klassSeminarMapper.selectKlassSeminarBySeminarIdAndKlassId(seminarId,classId);
+         return klassSeminarMapper.listKlassSeminarBySeminarIdAndKlassId(seminarId,classId);
     }
 
     public KlassSeminar selectKlassSeminarById(Long id){
         return klassSeminarMapper.selectKlassSeminarById(id);
     }
 
-    public List<KlassSeminar> selectKlassSeminarBySeminarId(Long seminarId){
-        return  klassSeminarMapper.selectKlassSeminarBySeminarId(seminarId);
+    public List<KlassSeminar> listKlassSeminarBySeminarId(Long seminarId){
+        return  klassSeminarMapper.listKlassSeminarBySeminarId(seminarId);
     }
 
     public Integer insertKlassSeminarList(List<KlassSeminar> record){
@@ -42,7 +42,7 @@ public class KlassSeminarDao {
         }
     }
 
-    public List<KlassSeminar> selectKlassSeminarBySeminarIdList(List<Long> seminarId){
-        return klassSeminarMapper.selectKlassSeminarBySeminarIdList(seminarId);
+    public List<KlassSeminar> listKlassSeminarBySeminarIdList(List<Long> seminarId){
+        return klassSeminarMapper.listKlassSeminarBySeminarIdList(seminarId);
     }
 }

@@ -24,7 +24,7 @@ public class KlassSeminar  implements Serializable{
     private LocalDateTime reportDdl;
 
     /**
-     * 论课所处状态，未开始0，正在进行1，已结束2，暂停3
+     * 讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
      */
     private Integer seminarStatus;
 

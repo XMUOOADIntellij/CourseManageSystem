@@ -37,10 +37,11 @@ public class SeminarController {
      * @return 讨论课id
      */
     @PostMapping(value= "" , produces = "application/json; charset=utf-8")
-    public Long createSeminar(@RequestBody SeminarVO seminarVo){
+    public Long createSeminar(@RequestBody SeminarVO seminarVo,HttpServletRequest request){
         Seminar seminar = new Seminar(seminarVo);
-        Teacher teacher = new Teacher();
-        teacher.setId(new Long(1));
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
+
         return  seminarService.createSeminar(seminar,teacher);
     }
 
@@ -49,9 +50,10 @@ public class SeminarController {
      * @param seminarId 根据id
      */
     @DeleteMapping(value="/{seminarId}", produces = "application/json; charset=utf-8")
-    public Integer deleteSeminar(@PathVariable Long seminarId){
-        Teacher teacher = new Teacher();
-        teacher.setId(new Long(1));
+    public Integer deleteSeminar(@PathVariable Long seminarId,HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
+
         return seminarService.deleteSeminar(seminarId,teacher);
     }
 
@@ -61,11 +63,13 @@ public class SeminarController {
      * @param seminarId 讨论课id
      */
     @PutMapping(value="/{seminarId}",produces = "application/json")
-    public Integer modifySeminar(@RequestBody SeminarVO seminarVo,@PathVariable Long seminarId){
+    public Integer modifySeminar(@RequestBody SeminarVO seminarVo,@PathVariable Long seminarId,
+                                 HttpServletRequest request){
         Seminar seminar =new Seminar(seminarVo);
         seminar.setId(seminarId);
-        Teacher teacher = new Teacher();
-        teacher.setId(1L);
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
+
         return seminarService.updateSeminar(seminar,teacher);
     }
 
@@ -77,15 +81,16 @@ public class SeminarController {
      */
     @PutMapping(value="/{seminarId}/class/{classId}",produces = "application/json")
     public Integer modifyKlassSeminar(@PathVariable Long seminarId, @PathVariable Long classId,
-                                      @RequestBody SeminarVO seminarVo){
+                                      @RequestBody SeminarVO seminarVo,HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
 
         KlassSeminar klassSeminar = new KlassSeminar(seminarVo);
         klassSeminar.setKlass(new Klass());
         klassSeminar.getKlass().setId(classId);
         klassSeminar.setSeminar(new Seminar());
         klassSeminar.getSeminar().setId(seminarId);
-        Teacher teacher = new Teacher();
-        teacher.setId(1L);
+
         return seminarService.updateKlassSeminar(klassSeminar,teacher);
     }
 
@@ -107,7 +112,7 @@ public class SeminarController {
 
     /**
      ① 获得当前班级讨论课的展示报名
-     ② 获得当前班级讨论课正在展示的小组      presented
+     ② 获得当前班级讨论课正在展示的小组presented
      * @param seminarId 课程讨论课
      * @param classId   班级id
      * @param presented 当前是否正在展示
@@ -117,7 +122,6 @@ public class SeminarController {
     public List<AttendanceVo> getSeminarAttendance(@PathVariable Long seminarId, @PathVariable Long classId,
                                                    @RequestParam(value ="presented",required = false) Boolean presented) throws Exception{
 
-        //TODO Present Socket解决？ Exception
         List<AttendanceVo> result = new ArrayList<>();
         if(presented!=null){
             result.add(new AttendanceVo(attendanceService.getCurrentAttendance(classId,seminarId)));
@@ -136,9 +140,9 @@ public class SeminarController {
      * @return 展示信息
      */
     @GetMapping(value = "/{seminarId}/attendance")
-    public AttendanceVo getTeamAttendance(@PathVariable Long seminarId){
-        Student student = new Student();
-        student.setId(999L);
+    public AttendanceVo getTeamAttendance(@PathVariable Long seminarId,HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        Student student = Jwt.unSign(token,Student.class);
         return new AttendanceVo(
                 attendanceService.getTeamAttendance(seminarId,student)
         );
@@ -149,10 +153,11 @@ public class SeminarController {
      * @param seminarId  课程讨论课id
      */
     @PostMapping(value="/{seminarId}/attendance")
-    public Long enrollAttendance(@PathVariable Long seminarId,@RequestBody AttendanceVo attendanceVo){
+    public Long enrollAttendance(@PathVariable Long seminarId,@RequestBody AttendanceVo attendanceVo,
+                                 HttpServletRequest request){
 
-        Student student = new Student();
-        student.setId(999L);
+        String token = request.getHeader("Authorization");
+        Student student = Jwt.unSign(token,Student.class);
         Attendance attendance = new Attendance(attendanceVo);
         return attendanceService.enrollAttendance(seminarId,attendance,student);
     }
@@ -181,10 +186,12 @@ public class SeminarController {
 
 
     @GetMapping(value="/{seminarId}/class/{classId}/question")
-    public List<QuestionVO> getAllQuestion(@PathVariable Long seminarId, @PathVariable Long classId){
+    public List<QuestionVO> getAllQuestion(@PathVariable Long seminarId, @PathVariable Long classId,
+                                           HttpServletRequest request){
 
-        Teacher teacher = new Teacher();
-        teacher.setId(1L);
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
+
         List<Question> questionlist = questionService.getAllQuestion(teacher,seminarId,classId);
         List<QuestionVO> questionVOList = new ArrayList<>();
         for(Question item:questionlist){
@@ -195,10 +202,11 @@ public class SeminarController {
 
 
     @GetMapping(value="/{seminarId}/class/{classId}/attendance/{attendanceId}/question")
-    public List<QuestionVO> getAttendanceQuestion(@PathVariable Long seminarId, @PathVariable Long classId
-            ,@PathVariable Long attendanceId){
-        Teacher teacher = new Teacher();
-        teacher.setId(1L);
+    public List<QuestionVO> getAttendanceQuestion(@PathVariable Long seminarId, @PathVariable Long classId,
+                                                  @PathVariable Long attendanceId,HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
+
         List<Question> questionlist = questionService.getAttendanceQuestion(teacher,seminarId,classId,attendanceId);
         List<QuestionVO> questionVOList = new ArrayList<>();
         for(Question item:questionlist){
@@ -207,15 +215,21 @@ public class SeminarController {
         return questionVOList;
     }
 
-    @PostMapping(value="/{seminarId}/class/{classId}/question")
-    public Long askQuestion(@PathVariable Long seminarId,@PathVariable Long classId,
-                               @RequestBody QuestionVO questionVO,
-                               HttpServletRequest request){
 
-        Student student = new Student();
-        student.setId(999L);
+    /**
+     * 开始班级讨论课
+     * @param seminarId 讨论课id
+     * @param classId 班级id
+     * @param request 请求获得老师
+     * @return seminar
+     */
+    @PutMapping(value = "/{seminarId}/class/{classId}/start")
+    public SeminarVO startSeminar(@PathVariable Long seminarId,@PathVariable Long classId,
+                                  HttpServletRequest request){
 
-        return questionService.askQuestion(seminarId,classId,new Question(questionVO),student);
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token, Teacher.class);
+
+        return new SeminarVO(seminarService.startSeminar(teacher,seminarId,classId));
     }
-
 }
