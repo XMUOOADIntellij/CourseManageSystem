@@ -26,10 +26,13 @@ public class AttendanceController {
      * @return
      */
     @PutMapping(value="/{attendanceId}")
-    public Integer changeOrder(@PathVariable Long attendanceId,@RequestBody AttendanceVo record){
+    public Integer changeOrder(@PathVariable Long attendanceId,@RequestBody AttendanceVo record,
+                               HttpServletRequest request){
+
+        String token = request.getHeader("Authorization");
+        Student student = Jwt.unSign(token,Student.class);
+
         Attendance attendance = new Attendance(record);
-        Student student = new Student();
-        student.setId(999L);
         attendance.setId(attendanceId);
 
         return attendanceService.changeAttendanceOrder(attendance,student);
@@ -40,10 +43,10 @@ public class AttendanceController {
      * @param attendanceId
      */
     @DeleteMapping(value="/{attendanceId}")
-    public Integer cancelAttendance(@PathVariable Long attendanceId){
+    public Integer cancelAttendance(@PathVariable Long attendanceId, HttpServletRequest request){
 
-        Student student = new Student();
-        student.setId(999L);
+        String token = request.getHeader("Authorization");
+        Student student = Jwt.unSign(token,Student.class);
 
         return attendanceService.cancelAttendance(attendanceId,student);
     }
@@ -68,8 +71,9 @@ public class AttendanceController {
     public String uploadReport(@RequestParam("file") MultipartFile file, @PathVariable Long attendanceId,
                                HttpServletRequest request) {
 
-        Student student = new Student();
-        student.setId(999L);
+        String token = request.getHeader("Authorization");
+        Student student = Jwt.unSign(token,Student.class);
+
         return attendanceService.uploadReport(attendanceId,file,student);
     }
 
@@ -83,8 +87,9 @@ public class AttendanceController {
     public String modifyReport(@RequestParam("file") MultipartFile file,@PathVariable Long attendanceId,
                                HttpServletRequest request) {
 
-        Student student = new Student();
-        student.setId(999L);
+        String token = request.getHeader("Authorization");
+        Student student = Jwt.unSign(token,Student.class);
+
         return attendanceService.uploadReport(attendanceId,file,student);
     }
 
@@ -107,8 +112,9 @@ public class AttendanceController {
     @PostMapping(value="/{attendanceId}/ppt",produces = "application/json; charset=utf-8")
     public String uploadPPT(@RequestParam("file") MultipartFile file,@PathVariable Long attendanceId,
                             HttpServletRequest request){
-        Student student = new Student();
-        student.setId(999L);
+        String token = request.getHeader("Authorization");
+        Student student = Jwt.unSign(token,Student.class);
+
         return attendanceService.uploadPpt(attendanceId,file,student);
     }
 
@@ -121,8 +127,10 @@ public class AttendanceController {
     @PutMapping(value="/{attendanceId}/ppt")
     public String modifyPPT(@RequestParam("file") MultipartFile file,@PathVariable Long attendanceId,
                             HttpServletRequest request){
-        Student student = new Student();
-        student.setId(999L);
+
+        String token = request.getHeader("Authorization");
+        Student student = Jwt.unSign(token,Student.class);
+
         return attendanceService.uploadPpt(attendanceId,file,student);
     }
 
