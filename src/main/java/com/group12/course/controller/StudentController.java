@@ -90,10 +90,12 @@ public class StudentController {
         }
         else {
             response.setStatus(200);
-            // 这里 API 标准组还返回了修改后的对象，没实现
-            // 因为如果还要返回修改后的对象的话，
-            // 得 UPDATE 之后再 SELECT
-            // 但是这里返回的实际意义不大
+            /**
+             * 这里 API 标准组还返回了修改后的对象，没实现
+             * 因为如果还要返回修改后的对象的话，
+             * 得 UPDATE 之后再 SELECT
+             * 但是这里返回的实际意义不大
+             */
         }
     }
 

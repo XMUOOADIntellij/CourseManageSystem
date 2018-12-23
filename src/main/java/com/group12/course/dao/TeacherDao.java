@@ -104,8 +104,14 @@ public class TeacherDao {
      * @return 处理数量
      * 成功添加为1，否则为0
      * */
-    public int addTeacher(Teacher teacher){
-        return teacherMapper.addTeacher(teacher);
+    public Teacher addTeacher(Teacher teacher){
+        int count = teacherMapper.addTeacher(teacher);
+        if (count==0){
+            return new Teacher();
+        }
+        else {
+            return teacher;
+        }
     }
 
     /**

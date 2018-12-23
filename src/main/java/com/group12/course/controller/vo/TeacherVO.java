@@ -9,6 +9,16 @@ public class TeacherVO {
 
     private String name;
 
+    public TeacherVO() {
+    }
+
+    public TeacherVO(Long id, String account, String email, String name) {
+        this.id = id;
+        this.account = account;
+        this.email = email;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

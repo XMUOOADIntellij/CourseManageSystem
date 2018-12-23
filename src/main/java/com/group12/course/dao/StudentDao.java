@@ -111,8 +111,14 @@ public class StudentDao {
         return studentMapper.deleteStudentByID(id);
     }
 
-    public int addStudent(Student student){
-        return studentMapper.addStudent(student);
+    public Student addStudent(Student student){
+        int count = studentMapper.addStudent(student);
+        if (count==0){
+            return new Student();
+        }
+        else {
+            return student;
+        }
     }
 
     /**
