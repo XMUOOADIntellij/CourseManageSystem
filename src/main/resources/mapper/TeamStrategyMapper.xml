@@ -2,32 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.group12.course.mapper.TeamStrategyMapper">
 
-    <resultMap id="ConflictCourseStrategyResultMap" type="com.group12.course.entity.strategy.ConflictCourseStrategy">
+    <resultMap id="ConflictCourseStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
         <association property="strategy" column="strategy_id"
                      select="com.group12.course.mapper.ConflictCourseStrategyMapper.selectConflictCourseStrategyById"
                      javaType="com.group12.course.entity.strategy.ConflictCourseStrategy"/>
     </resultMap>
 
-    <resultMap id="MemberLimitStrategyResultMap" type="com.group12.course.entity.strategy.MemberLimitStrategy">
+    <resultMap id="MemberLimitStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
         <association property="strategy" column="strategy_id"
                      select="com.group12.course.mapper.MemberLimitStrategyMapper.selectMemberLimitStrategyById"
                      javaType="com.group12.course.entity.strategy.MemberLimitStrategy"/>
     </resultMap>
 
-    <resultMap id="CourseMemberLimitStrategyResultMap" type="com.group12.course.entity.strategy.CourseMemberLimitStrategy">
+    <resultMap id="CourseMemberLimitStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
         <association property="strategy" column="strategy_id"
                      select="com.group12.course.mapper.ConflictCourseStrategyMapper.selectConflictCourseStrategyById"
                      javaType="com.group12.course.entity.strategy.ConflictCourseStrategy"/>
     </resultMap>
 
 
-    <resultMap id="TeamAndStrategyResultMap" type="com.group12.course.entity.strategy.TeamAndStrategy">
+    <resultMap id="TeamAndStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
         <association property="strategy" column="strategy_id"
                      select="com.group12.course.mapper.TeamAndStrategyMapper.selectTeamAndStrategyById"
                      javaType="com.group12.course.entity.strategy.TeamAndStrategy"/>
     </resultMap>
 
-    <resultMap id="TeamOrStrategyResultMap" type="com.group12.course.entity.strategy.TeamOrStrategy">
+    <resultMap id="TeamOrStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
         <association property="strategy" column="strategy_id"
                      select="com.group12.course.mapper.TeamOrStrategyMapper.selectTeamOrStrategyById"
                      javaType="com.group12.course.entity.strategy.TeamOrStrategy"/>
@@ -62,7 +83,7 @@
         where course_id = #{courseId,jdbcType=BIGINT}
     </select>
 
-    <select id="selectTeamStrategyByCourseIdAndStrategyName" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <select id="selectTeamStrategyByCourseIdAndStrategyName" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from team_strategy
