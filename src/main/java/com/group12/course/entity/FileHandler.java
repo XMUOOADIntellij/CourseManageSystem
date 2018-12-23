@@ -16,19 +16,19 @@ import java.util.ArrayList;
  * */
 public class FileHandler {
 
-    public ArrayList<User> handlerStudentList(MultipartFile file){
+    public ArrayList<Student> handlerStudentList(MultipartFile file){
         try {
             Workbook workbook = WorkbookFactory.create(file.getInputStream());
             Sheet sheet = workbook.getSheetAt(0);
             int rowCount=sheet.getLastRowNum();
-            ArrayList<User> userlist = new ArrayList<>(rowCount-2);
+            ArrayList<Student> studentList = new ArrayList<>(rowCount-2);
             for (int i = 0; i <= rowCount ; i++) {
                 if (i<2){
                     continue;
                 }
-                User tempUser= new User();
+                Student tempStudent= new Student();
                 DataFormatter dataFormatter = new DataFormatter();
-                tempUser.setAccount(dataFormatter.formatCellValue(
+                tempStudent.setAccount(dataFormatter.formatCellValue(
                         sheet.getRow(i).getCell(0))
                         .trim().replaceAll("\\u00a0",""));
                 /**
@@ -37,20 +37,20 @@ public class FileHandler {
                  * 只能人工去掉
                  * I love excel :)
                  * */
-                tempUser.setPassword("123456");
-                tempUser.setName(sheet.getRow(i).getCell(1).getStringCellValue());
-                userlist.add(tempUser);
+                tempStudent.setPassword("123456");
+                tempStudent.setStudentName(sheet.getRow(i).getCell(1).getStringCellValue());
+                studentList.add(tempStudent);
             }
-            return userlist;
+            return studentList;
         }
         catch (Exception e){
             /**
              * 异常记录
              * */
+            ArrayList<Student> users= new ArrayList<Student>();
+            return users;
         }
-        ArrayList<User> users= new ArrayList<User>();
-        return users;
-    }
 
+    }
 
 }

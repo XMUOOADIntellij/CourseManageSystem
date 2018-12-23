@@ -1,10 +1,10 @@
 package com.group12.course.entity;
 
+import com.group12.course.controller.vo.CourseVO;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * Course 实体对象
@@ -31,6 +31,10 @@ public class Course implements Serializable {
     private LocalDateTime teamStartTime;
 
     private LocalDateTime teamEndTime;
+
+    private Long teamMainCourseId;
+
+    private Long seminarMainCourseId;
 
     public Long getId() {
         return id;
@@ -104,6 +108,22 @@ public class Course implements Serializable {
         this.teamEndTime = teamEndTime;
     }
 
+    public Long getTeamMainCourseId() {
+        return teamMainCourseId;
+    }
+
+    public void setTeamMainCourseId(Long teamMainCourseId) {
+        this.teamMainCourseId = teamMainCourseId;
+    }
+
+    public Long getSeminarMainCourseId() {
+        return seminarMainCourseId;
+    }
+
+    public void setSeminarMainCourseId(Long seminarMainCourseId) {
+        this.seminarMainCourseId = seminarMainCourseId;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -124,5 +144,17 @@ public class Course implements Serializable {
     }
     public Course(Long id) {
         this.id = id;
+    }
+
+
+    public Course(CourseVO courseVO) {
+
+        this.courseName = courseVO.getCourseName();
+        this.introduction = courseVO.getIntroduction();
+        this.presentationPercentage = courseVO.getPresentationPercentage();
+        this.questionPercentage = courseVO.getQuestionPercentage();
+        this.reportPercentage = courseVO.getReportPercentage();
+        this.teamStartTime = courseVO.getTeamStartTime();
+        this.teamEndTime = courseVO.getTeamEndTime();
     }
 }

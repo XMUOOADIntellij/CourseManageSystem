@@ -1,5 +1,6 @@
 package com.group12.course.entity;
 
+import com.group12.course.controller.vo.KlassVO;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -9,7 +10,6 @@ import java.io.Serializable;
  * @author Tan Xue
  * @date 2018/12/12
  */
-
 @Component
 public class Klass implements Serializable{
     private Long id;
@@ -34,6 +34,15 @@ public class Klass implements Serializable{
                 ", klassTime='" + klassTime + '\'' +
                 ", klassLocation='" + klassLocation + '\'' +
                 '}';
+    }
+
+    public Klass(){}
+
+    public Klass(KlassVO klassVO){
+        this.setGrade(klassVO.getGrade());
+        this.setKlassSerial(klassVO.getKlassSerial());
+        this.setKlassTime(klassVO.getKlassTime());
+        this.setKlassLocation(klassVO.getKlassLocation());
     }
 
     public Long getId() {
