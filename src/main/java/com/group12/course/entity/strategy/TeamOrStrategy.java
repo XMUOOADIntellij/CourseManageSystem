@@ -2,23 +2,43 @@ package com.group12.course.entity.strategy;
 
 public class TeamOrStrategy extends Strategy{
 
-    private String strategyName;
+    private String strategyFirstName;
 
-    private Strategy strategy;
+    private Strategy strategyFirst;
 
-    public String getStrategyName() {
-        return strategyName;
+    private String getStrategySecondName;
+
+    private Strategy strategySecond;
+
+    public String getStrategyFirstName() {
+        return strategyFirstName;
     }
 
-    public void setStrategyName(String strategyName) {
-        this.strategyName = strategyName;
+    public void setStrategyFirstName(String strategyFirstName) {
+        this.strategyFirstName = strategyFirstName;
     }
 
-    public Strategy getStrategy() {
-        return strategy;
+    public Strategy getStrategyFirst() {
+        return strategyFirst;
     }
 
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
+    public void setStrategyFirst(Strategy strategyFirst) {
+        this.strategyFirst = strategyFirst;
+    }
+
+    public String getGetStrategySecondName() {
+        return getStrategySecondName;
+    }
+
+    public void setGetStrategySecondName(String getStrategySecondName) {
+        this.getStrategySecondName = getStrategySecondName;
+    }
+
+    public Strategy getStrategySecond() {
+        return strategySecond;
+    }
+
+    public void setStrategySecond(Strategy strategySecond) {
+        this.strategySecond = strategySecond;
     }
 }

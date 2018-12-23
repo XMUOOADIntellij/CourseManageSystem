@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.group12.course.mapper.CourseMapper" >
+
   <resultMap id="BaseResultMap" type="com.group12.course.entity.Course" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="course_name" property="courseName" jdbcType="VARCHAR" />
@@ -10,6 +11,8 @@
     <result column="report_percentage" property="reportPercentage" jdbcType="BIT" />
     <result column="team_start_time" property="teamStartTime" jdbcType="TIMESTAMP" />
     <result column="team_end_time" property="teamEndTime" jdbcType="TIMESTAMP" />
+    <result column="teamMainCourseId" property="team_main_course_id" jdbcType="BIGINT"/>
+    <result column="seminarMainCourseId" property="seminar_main_course_id" jdbcType="BIGINT"/>
 
     <association property="teacher" select="com.group12.course.mapper.TeacherMapper.selectTeacherById"
                  column="teacher_id" javaType="com.group12.course.entity.Teacher"/>
@@ -18,9 +21,15 @@
 
   <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
+  <cache type="com.group12.course.tools.MybatisRedisCache" />
+
   <sql id="Base_Column_List" >
     id, teacher_id, course_name, introduction, presentation_percentage, question_percentage,
-    report_percentage, team_start_time, team_end_time
+    report_percentage, team_start_time, team_end_time,team_main_course_id,seminar_main_course_id
+  </sql>
+
+  <sql id="Klass_Student_Column_List">
+    klass_id,student_id,course_id,team_id
   </sql>
 
 
@@ -66,6 +75,12 @@
       <if test="teamEndTime != null" >
         team_end_time,
       </if>
+      <if test="teamMainCourseId!=null">
+        team_main_course_id,
+      </if>
+      <if test="seminarMainCourseId!=null">
+        seminar_main_course_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -94,6 +109,12 @@
       </if>
       <if test="teamEndTime != null" >
         #{teamEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teamMainCourseId!=null">
+        #{teamMainCourseId,jdbcType=BIGINT}
+      </if>
+      <if test="seminarMainCourseId!=null">
+        #{seminarMainCourseId,jdbcType=BIGINT}
       </if>
     </trim>
   </insert>
@@ -124,6 +145,12 @@
       </if>
       <if test="teamEndTime != null" >
         team_end_time = #{teamEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teamMainCourseId != null">
+        team_main_course_id = #{teamMainCourseId,jdbcType=BIGINT}
+      </if>
+      <if test="seminarMainCourseId != null">
+        seminar_main_course_id = #{seminarMainCourseId,jdbcType=BIGINT}
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}

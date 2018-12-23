@@ -51,4 +51,11 @@ public interface KlassMapper {
      */
     List<Klass> getAllKlassByCourseId(Long courseId);
 
+    /**
+     * 删除某一班级与班级下所有学生的关联
+     * @param klassId
+     * @return
+     */
+    int deleteStudentByKlassId(Long klassId);
+
 }

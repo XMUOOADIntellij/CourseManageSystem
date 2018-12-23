@@ -71,7 +71,10 @@ public class Round implements Serializable {
     }
 
     public Round(){
-
+        //默认初值
+        this.presentationScoreMethod = new Integer(0);
+        this.questionScoreMethod = new Integer(0);
+        this.reportScoreMethod = new Integer(0);
     }
 
     public Round(RoundVO roundVO){

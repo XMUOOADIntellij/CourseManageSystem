@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.TeamStrategyMapper">
+
+    <resultMap id="ConflictCourseStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
+        <association property="strategy" column="strategy_id"
+                     select="com.group12.course.mapper.ConflictCourseStrategyMapper.selectConflictCourseStrategyById"
+                     javaType="com.group12.course.entity.strategy.ConflictCourseStrategy"/>
+    </resultMap>
+
+    <resultMap id="MemberLimitStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
+        <association property="strategy" column="strategy_id"
+                     select="com.group12.course.mapper.MemberLimitStrategyMapper.selectMemberLimitStrategyById"
+                     javaType="com.group12.course.entity.strategy.MemberLimitStrategy"/>
+    </resultMap>
+
+    <resultMap id="CourseMemberLimitStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
+        <association property="strategy" column="strategy_id"
+                     select="com.group12.course.mapper.ConflictCourseStrategyMapper.selectConflictCourseStrategyById"
+                     javaType="com.group12.course.entity.strategy.ConflictCourseStrategy"/>
+    </resultMap>
+
+
+    <resultMap id="TeamAndStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
+        <association property="strategy" column="strategy_id"
+                     select="com.group12.course.mapper.TeamAndStrategyMapper.selectTeamAndStrategyById"
+                     javaType="com.group12.course.entity.strategy.TeamAndStrategy"/>
+    </resultMap>
+
+    <resultMap id="TeamOrStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
+        <association property="strategy" column="strategy_id"
+                     select="com.group12.course.mapper.TeamOrStrategyMapper.selectTeamOrStrategyById"
+                     javaType="com.group12.course.entity.strategy.TeamOrStrategy"/>
+    </resultMap>
+
+
+
+    <resultMap id="BaseResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
+        <discriminator javaType="java.lang.String" column="strategy_name">
+            <case value="conflict_course_strategy" resultMap="ConflictCourseStrategyResultMap"/>
+            <case value="member_limit_strategy" resultMap="MemberLimitStrategyResultMap"/>
+            <case value="course_member_limit_strategy" resultMap="CourseMemberLimitStrategyResultMap"/>
+            <case value="team_and_strategy" resultMap="TeamAndStrategyResultMap"/>
+            <case value="team_or_strategy" resultMap="TeamOrStrategyResultMap"/>
+        </discriminator>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    course_id,strategy_id,strategy_name
+    </sql>
+
+
+
+    <select id="selectTeamStrategyByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from team_strategy
+        where course_id = #{courseId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectTeamStrategyByCourseIdAndStrategyName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from team_strategy
+        where course_id = #{courseId,jdbcType=BIGINT} and strategy_name = #{strategyName,jdbcType=VARCHAR}
+    </select>
+    
+    <delete id="deleteTeamStrategyByCourseId" parameterType="java.lang.Long">
+        delete from team_strategy
+        where course_id = #{courseId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="addTeamStrategy" >
+        insert into conflict_course_strategy
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="courseId != null" >
+                course_id,
+            </if>
+            <if test="strategyId != null" >
+                strategy_id,
+            </if>
+            <if test="strategyName != null" >
+                strategy_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="courseId != null" >
+                #{courseId,jdbcType=BIGINT},
+            </if>
+            <if test="strategyId != null" >
+                #{strategyId,jdbcType=BIGINT},
+            </if>
+            <if test="strategyName != null" >
+                #{strategyName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateTeamStrategy" parameterType="com.group12.course.entity.strategy.Strategy">
+        update team_strategy
+        <set>
+            <if test="course != null">
+                course_id = #{course.id,jdbcType = BIGINT},
+            </if>
+            <if test="strategy != null">
+                strategy_id = #{strategy.id,jdbcType = BIGINT},
+            </if>
+            <if test="strategyNamme != null">
+                strategy_name = #{strategyName,jdbcType = BIGINT},
+            </if>
+        </set>
+    </update>
+    
+
+</mapper>
