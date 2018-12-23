@@ -7,11 +7,11 @@ $.ajaxSetup({
   statusCode: {
     401: function() {
       alert("未授权访问");
-      window.location.href = "/login";
+      window.location.href = "../common/login.html";
     },
     403: function() {
       alert("未授权访问");
-      window.location.href = "/login";
+      window.location.href = "../common/login.html";
     }
   }
 });

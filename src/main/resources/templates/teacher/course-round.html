@@ -40,14 +40,19 @@
 
     <script src="../../static/js/core.js"></script>
     <link href="../../static/css/dashboard.css" rel="stylesheet" />
-    <!-- c3.js Charts Plugin -->
+       <!-- c3.js Charts Plugin -->
     <link href="../../static/plugins/charts-c3/plugin.css" rel="stylesheet" />
     <!-- gijgo datepicker Plugin -->
-    <link href="../../static/plugins/charts-c3/plugin.css" rel="stylesheet" />
+    <link href="../../static/plugins/gijgo/css/gijgo.min.css" rel="stylesheet" />
+    <script src="../../static/plugins/gijgo/js/gijgo.min.js"></script>
+     <!-- fab Plugin -->
+    <link href="../../static/plugins/fab/fab.css" rel="stylesheet" />
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
+    <script src="../../static/js/control.js"></script>
     <script src="../../static/js/common.js"></script>
     <script src="../../static/js/teacher.js"></script>
+    <script src="../../static/js/jwt.js"></script>
   </head>
   <body>
     <div class="page">
@@ -591,13 +596,12 @@
                 </div>
               </div>
             </div>
-            <div class="position-fixed">
-              <a
-                href="./course-round-create.html"
-                class="btn btn-green float-action-button shadow-lg"
-                ><i class="fe fe-plus"></i
-              ></a>
-            </div>
+            <nav class="fab"  >
+              <a href="./seminar-create.html" class="buttons" style="background-image:url(../../static/images/book-open.svg)" tooltip="新建讨论课"></a>
+              <a href="./course-round-create.html" class="buttons" style="background-image:url(../../static/images/box.svg)" tooltip="新建轮次"></a>
+              <a class="buttons" tooltip="新建" href="#"></a>
+            </nav>
+
           </div>
         </div>
       </div>

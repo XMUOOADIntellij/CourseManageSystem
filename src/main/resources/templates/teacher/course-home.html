@@ -40,14 +40,19 @@
 
     <script src="../../static/js/core.js"></script>
     <link href="../../static/css/dashboard.css" rel="stylesheet" />
-    <!-- c3.js Charts Plugin -->
+       <!-- c3.js Charts Plugin -->
     <link href="../../static/plugins/charts-c3/plugin.css" rel="stylesheet" />
     <!-- gijgo datepicker Plugin -->
-    <link href="../../static/plugins/charts-c3/plugin.css" rel="stylesheet" />
+    <link href="../../static/plugins/gijgo/css/gijgo.min.css" rel="stylesheet" />
+    <script src="../../static/plugins/gijgo/js/gijgo.min.js"></script>
+     <!-- fab Plugin -->
+    <link href="../../static/plugins/fab/fab.css" rel="stylesheet" />
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
+    <script src="../../static/js/control.js"></script>
     <script src="../../static/js/common.js"></script>
     <script src="../../static/js/teacher.js"></script>
+    <script src="../../static/js/jwt.js"></script>
   </head>
   <body>
     <div class="page">
@@ -215,7 +220,7 @@
             </nav>
             <div class="row">
               <div class="col-md-6 col-xl-4">
-                <div class="card">
+                <div class="card" id="courseId">
                   <div class="card-header">
                     <h3 class="card-title mr-4">OOAD</h3>
                     <span class="btn btn-outline-secondary py-0">主</span>
@@ -232,6 +237,7 @@
                     <div class="list-group">
                       <a
                         href="./course-info.html"
+                        onclick="return jumpCourseInfo()"
                         class="list-group-item list-group-item-action"
                       >
                         <span class="float-right">
