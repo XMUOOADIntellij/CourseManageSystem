@@ -101,7 +101,7 @@ public class SeminarDao {
     public Integer deleteSeminarById(Long seminarId){
         if(seminarMapper.selectSeminarById(seminarId)!=null) {
             List<KlassSeminar> klassSeminarList;
-            klassSeminarList = klassSeminarDao.selectKlassSeminarBySeminarId(seminarId);
+            klassSeminarList = klassSeminarDao.listKlassSeminarBySeminarId(seminarId);
 
             /**
              *  根据找到的classseminar

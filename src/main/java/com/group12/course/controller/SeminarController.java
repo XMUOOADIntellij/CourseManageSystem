@@ -215,14 +215,21 @@ public class SeminarController {
         return questionVOList;
     }
 
-    @PostMapping(value="/{seminarId}/class/{classId}/question")
-    public Long askQuestion(@PathVariable Long seminarId,@PathVariable Long classId,
-                            @RequestBody QuestionVO questionVO, HttpServletRequest request){
+
+    /**
+     * 开始班级讨论课
+     * @param seminarId 讨论课id
+     * @param classId 班级id
+     * @param request 请求获得老师
+     * @return seminar
+     */
+    @PutMapping(value = "/{seminarId}/class/{classId}/start")
+    public SeminarVO startSeminar(@PathVariable Long seminarId,@PathVariable Long classId,
+                                  HttpServletRequest request){
 
         String token = request.getHeader("Authorization");
-        Student student = Jwt.unSign(token,Student.class);
+        Teacher teacher = Jwt.unSign(token, Teacher.class);
 
-        return questionService.askQuestion(seminarId,classId,new Question(questionVO),student);
+        return new SeminarVO(seminarService.startSeminar(teacher,seminarId,classId));
     }
-
 }

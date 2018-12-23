@@ -19,13 +19,13 @@ public interface KlassSeminarMapper {
 
     KlassSeminar selectKlassSeminarById(Long id);
 
-    KlassSeminar selectKlassSeminarBySeminarIdAndKlassId(Long seminarId, Long classId);
+    KlassSeminar listKlassSeminarBySeminarIdAndKlassId(Long seminarId, Long classId);
 
-    List<KlassSeminar> selectKlassSeminarBySeminarId(Long seminarId);
+    List<KlassSeminar> listKlassSeminarBySeminarId(Long seminarId);
 
     Integer updateKlassSeminar(KlassSeminar record);
 
     Integer insertKlassSeminarList(List<KlassSeminar> list);
 
-    List<KlassSeminar> selectKlassSeminarBySeminarIdList(@Param("seminarId") List<Long> seminarId);
+    List<KlassSeminar> listKlassSeminarBySeminarIdList(@Param("seminarId") List<Long> seminarId);
 }

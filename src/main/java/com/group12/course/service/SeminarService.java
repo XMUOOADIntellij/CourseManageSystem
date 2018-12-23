@@ -134,7 +134,50 @@ public class SeminarService {
         }
     }
 
-    public KlassSeminar pauseSeminar(Teacher teacher){
-        return null;
+
+    public KlassSeminar pauseSeminar(Teacher teacher,Long seminarId,Long classId){
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+        if(klassSeminar!=null){
+            if(teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())){
+                //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
+                klassSeminar.setSeminarStatus(3);
+                if(klassSeminarDao.updateKlassSeminar(klassSeminar)==1){
+                    return klassSeminar;
+                }
+                else{
+                    return null;
+                }
+            }
+            else{
+                //todo 权限
+                return null;
+            }
+        }else{
+            //todo classSeminarnotFound
+            return null;
+        }
+    }
+
+    public KlassSeminar startSeminar(Teacher teacher,Long seminarId,Long classId){
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+        if(klassSeminar!=null){
+            if(teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())){
+                //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
+                klassSeminar.setSeminarStatus(1);
+                if(klassSeminarDao.updateKlassSeminar(klassSeminar)==1){
+                    return klassSeminar;
+                }
+                else{
+                    return null;
+                }
+            }
+            else{
+                //todo 权限
+                return null;
+            }
+        }else{
+            //todo classSeminarnotFound
+            return null;
+        }
     }
 }
