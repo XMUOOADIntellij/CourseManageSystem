@@ -1,11 +1,9 @@
 function createClass() {
-  // jquery 表单提交
-  alert("success");
+alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
 function activeUser() {
-  // jquery 表单提交
-  // let ata = {account:$("#account").val(),password:$("#password").val()}
+// let ata = {account:$("#account").val(),password:$("#password").val()}
   let ata = {
     password:$("#password").val()
   };
@@ -15,12 +13,6 @@ function activeUser() {
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
-    beforeSend: function(xhr) {
-      if (localStorage.jwt) {
-        let token=localStorage.jwt;
-        xhr.setRequestHeader("Authorization",token);
-      }
-    },
     success: function (data,textStatus,xhr) {
       if(xhr.status === 200){
         alert("注册成功");
@@ -36,42 +28,92 @@ function activeUser() {
   return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
 function createCourse() {
-  // jquery 表单提交
-  alert("success");
+alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
 function createSeminar() {
-  // jquery 表单提交
-  alert("success");
-  return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+  let ata = {
+    courseId:Cookies.get("courseId"),
+    seminarName:$("#name").val(),
+    maxTeam:$("#select-max-team").val(),
+    visible:$("#switch-visible").is(":checked"),
+    seminarSerial: $("#select-seminar-serial").val(),
+    roundId:$("#select-round-id").val()
+  };
+  console.log(ata);
+  $.ajax({
+    type: "post",
+    url: "http://xug98.cn/seminar",
+    dataType: "json",
+    data: JSON.stringify(ata),
+    contentType: "application/json",
+    success: function(data, textStatus, xhr) {
+      console.log(data);
+      alert("success");
+      backCourseRound();
+    },
+/*    statusCode: {
+      400: function() {
+        $("#password").val("");
+        alert("用户名或密码错误！");
+      }
+    }*/
+  });
+}
+function deleteSeminar() {
+  let ata = { id: cid };
+  $.ajax({
+    type: "delete",
+    url: "/course/" + cid,
+    data: JSON.stringify(ata),
+    dataType: "json",
+    contentType: "application/json;",
+    error: function(data, textStatus, xhr) {
+      console.log(cid);
+      alert("wrong");
+    },
+    success: function(data, textStatus, xhr) {
+      if (xhr.status === 204) {
+        alert("成功");
+        document.fe;
+      }
+    },
+    statusCode: {
+      400: function() {
+        alert("错误的ID格式");
+      },
+      403: function() {
+        alert("用户权限不足");
+      },
+      404: function() {
+        alert("未找到课程");
+      }
+    }
+  });
+  window.location.reload();
+
 }
 function createRound() {
-  // jquery 表单提交
-  alert("success");
+alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
 function createShare() {
-  // jquery 表单提交
-  alert("success");
+alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
 function updateSeminar() {
-  // jquery 表单提交
-  alert("success");
+alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
 function updateRound() {
-  // jquery 表单提交
-  alert("success");
+alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
 function updateClass() {
-  // jquery 表单提交
-  alert("success");
+alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
 function deleteCourse() {
-  // jquery 表单提交
-  alert("success");
+alert("success");
   return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }

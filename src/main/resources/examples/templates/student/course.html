@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学生课程首页</title>
+   <link href="/css/student/StudentCourseInformation.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload="return courseinfo();">
+    	<div class="top">
+        	<div class="font">
+        		课堂管理系统
+        	</div>
+        	<div class="icon">
+                <img src="/img/home.png"><a href="/student/profile">首页</a>
+                <img src="/img/help.png"><a>帮助</a>
+                <img src="/img/exit.png"><a href="#" onclick="logout();">退出</a>
+        	</div>
+        	<div class="clear"></div>
+    	</div>
+        <div class="body">
+            <div class="navigation">
+                <div class="courseName" id="coursename"></div>
+                <div class="line"></div>
+                <div class="courseIntroduction" id="description"></div>
+            </div>
+            <div class="content">
+                <div class="classInfo" id = "seminarinfo">
+                    <div class="title">讨论课</div>
+                    <div class="returnButton" onclick="window.location.href='/student/courses'">返回上一页</div>
+                    <div class="line"></div>
+                    <div class="blockBody">
+                        <div class="block" onclick="window.location.href='student/random_seminar'"><div class="blockFont">讨论课1</div></div>
+                        <div class="block" onclick="window.location.href='student/random_seminar'"><div class="blockFont">讨论课2</div></div>
+                    </div>
+                </div>
+                <div class="seminarInfo">
+                    <div class="title" >课程分组</div>
+                    <div class="line"></div>
+                    <div class="blockBody">
+                        <div class="block" onclick="window.location.href='group';"><div class="blockFont">固定分组</div></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        </div>
+    <!-- jquery.js-->
+    <script src ="/js/jquery-1.10.2.js"></script>
+    <!-- student-innercourse.js -->
+    <script src ="/js/student-innercourse.js"></script>
+        <!--jwt.js-->
+        <script src="/js/jwt.js"></script>
+</body>
+</html>
