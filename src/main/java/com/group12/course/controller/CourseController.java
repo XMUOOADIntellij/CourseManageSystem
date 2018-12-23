@@ -67,11 +67,13 @@ public class CourseController {
             int status2 = memberLimitStrategyService.addMemberLimitStrategy(course.getId(),memberLimitStrategy);
 
             List<Course> conflictCourseList = courseVO.getConflictCourseList();
-            for (Course conflictCourse:conflictCourseList) {
-                ConflictCourseStrategy conflictCourseStrategy = new ConflictCourseStrategy();
-                conflictCourseStrategy.setCourseFirst(course);
-                conflictCourseStrategy.setCourseSecond(conflictCourse);
-                conflictCourseStrategyService.addConflicCourseStrategy(conflictCourseStrategy);
+            if(conflictCourseList!=null){
+                for (Course conflictCourse:conflictCourseList) {
+                    ConflictCourseStrategy conflictCourseStrategy = new ConflictCourseStrategy();
+                    conflictCourseStrategy.setCourseFirst(course);
+                    conflictCourseStrategy.setCourseSecond(conflictCourse);
+                    conflictCourseStrategyService.addConflicCourseStrategy(conflictCourseStrategy);
+                }
             }
 
             if(status1 == 0 || status2 ==0 ){
@@ -275,12 +277,12 @@ public class CourseController {
     }
 
     /**
-     * 在课程下创建班级并且可导入学生名单
+     * 在课程下创建班级并且可导入学生名
      * @param courseId
      * @param response
      */
     @PostMapping(value="/{courseId}/class",produces = "application/json; charset=utf-8")
-    public void createKlass(@PathVariable Long courseId, @RequestBody KlassVO klassVO, @RequestParam("file") MultipartFile file, HttpServletResponse response){
+    public void createKlass(@PathVariable Long courseId, @RequestBody KlassVO klassVO, @RequestParam(required = false,value = "file") MultipartFile file, HttpServletResponse response){
         //创建班级
         Klass klass = new Klass(klassVO);
         klass.setCourse(courseService.getCourseById(courseId));

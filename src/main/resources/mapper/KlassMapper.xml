@@ -28,13 +28,10 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="addKlass" useGeneratedKeys="true" keyProperty="klass.id" parameterType="com.group12.course.entity.Klass" >
+  <insert id="addKlass" useGeneratedKeys="true" keyProperty="id" parameterType="com.group12.course.entity.Klass" >
     insert into klass
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="courseId != null" >
+      <if test="course.id != null" >
         course_id,
       </if>
       <if test="grade != null" >
@@ -51,11 +48,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="courseId != null" >
-        #{courseId,jdbcType=BIGINT},
+      <if test="course.id != null" >
+        #{course.id,jdbcType=BIGINT},
       </if>
       <if test="grade != null" >
         #{grade,jdbcType=TINYINT},
@@ -64,10 +58,10 @@
         #{klassSerial,jdbcType=TINYINT},
       </if>
       <if test="klassTime != null" >
-        #{klass_time,jdbcType=VARCHAR},
+        #{klassTime,jdbcType=VARCHAR},
       </if>
       <if test="klassLocation != null" >
-        #{klass_Location,jdbcType=VARCHAR},
+        #{klassLocation,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

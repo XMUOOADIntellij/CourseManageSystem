@@ -21,7 +21,7 @@
 
   <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
-  <cache type="com.group12.course.tools.MybatisRedisCache" />
+  <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
   <sql id="Base_Column_List" >
     id, teacher_id, course_name, introduction, presentation_percentage, question_percentage,
@@ -45,76 +45,70 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="addCourse" useGeneratedKeys="true" keyProperty="course.id" >
+  <insert id="addCourse" useGeneratedKeys="true" keyProperty="record.id" >
     insert into course
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="teacherId != null" >
         teacher_id,
       </if>
-      <if test="courseName != null" >
+      <if test="record.courseName != null" >
         course_name,
       </if>
-      <if test="introduction != null" >
+      <if test="record.introduction != null" >
         introduction,
       </if>
-      <if test="presentationPercentage != null" >
+      <if test="record.presentationPercentage != null" >
         presentation_percentage,
       </if>
-      <if test="questionPercentage != null" >
+      <if test="record.questionPercentage != null" >
         question_percentage,
       </if>
-      <if test="reportPercentage != null" >
+      <if test="record.reportPercentage != null" >
         report_percentage,
       </if>
-      <if test="teamStartTime != null" >
+      <if test="record.teamStartTime != null" >
         team_start_time,
       </if>
-      <if test="teamEndTime != null" >
+      <if test="record.teamEndTime != null" >
         team_end_time,
       </if>
-      <if test="teamMainCourseId!=null">
+      <if test="record.teamMainCourseId!=null">
         team_main_course_id,
       </if>
-      <if test="seminarMainCourseId!=null">
+      <if test="record.seminarMainCourseId!=null">
         seminar_main_course_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="teacherId != null" >
         #{teacherId,jdbcType=BIGINT},
       </if>
-      <if test="courseName != null" >
-        #{courseName,jdbcType=VARCHAR},
+      <if test="record.courseName != null" >
+        #{record.courseName,jdbcType=VARCHAR},
       </if>
-      <if test="introduction != null" >
-        #{introduction,jdbcType=VARCHAR},
+      <if test="record.introduction != null" >
+        #{record.introduction,jdbcType=VARCHAR},
       </if>
-      <if test="presentationPercentage != null" >
-        #{presentationPercentage,jdbcType=BIT},
+      <if test="record.presentationPercentage != null" >
+        #{record.presentationPercentage,jdbcType=BIT},
       </if>
-      <if test="questionPercentage != null" >
-        #{questionPercentage,jdbcType=BIT},
+      <if test="record.questionPercentage != null" >
+        #{record.questionPercentage,jdbcType=BIT},
       </if>
-      <if test="reportPercentage != null" >
-        #{reportPercentage,jdbcType=BIT},
+      <if test="record.reportPercentage != null" >
+        #{record.reportPercentage,jdbcType=BIT},
       </if>
-      <if test="teamStartTime != null" >
-        #{teamStartTime,jdbcType=TIMESTAMP},
+      <if test="record.teamStartTime != null" >
+        #{record.teamStartTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="teamEndTime != null" >
-        #{teamEndTime,jdbcType=TIMESTAMP},
+      <if test="record.teamEndTime != null" >
+        #{record.teamEndTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="teamMainCourseId!=null">
-        #{teamMainCourseId,jdbcType=BIGINT}
+      <if test="record.teamMainCourseId!=null">
+        #{record.teamMainCourseId,jdbcType=BIGINT}
       </if>
-      <if test="seminarMainCourseId!=null">
-        #{seminarMainCourseId,jdbcType=BIGINT}
+      <if test="record.seminarMainCourseId!=null">
+        #{record.seminarMainCourseId,jdbcType=BIGINT}
       </if>
     </trim>
   </insert>

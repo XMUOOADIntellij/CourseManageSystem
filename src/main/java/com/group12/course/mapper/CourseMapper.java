@@ -19,7 +19,7 @@ public interface CourseMapper {
 
     int deleteCourse(Long id);
 
-    int addCourse(@Param("teacherId") Long teacherId,@Param("course") Course record);
+    int addCourse(@Param("teacherId") Long teacherId,@Param("record") Course record);
 
     Course selectCourseById(Long id);
 

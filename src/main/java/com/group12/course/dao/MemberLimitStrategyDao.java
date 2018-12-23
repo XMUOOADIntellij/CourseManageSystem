@@ -17,6 +17,8 @@ public class MemberLimitStrategyDao {
     @Autowired
     TeamStrategyDao teamStrategyDao;
 
+    private final  String startegyName="member_limit_strategy";
+
     public MemberLimitStrategy selectMemberLimitStrategyById(Long id){
         return memberLimitStrategyMapper.selectMemberLimitStrategyById(id);
     }
@@ -32,7 +34,7 @@ public class MemberLimitStrategyDao {
         TeamStrategy teamStrategy = new TeamStrategy();
         teamStrategy.setCourse(course);
         teamStrategy.setStrategy(record);
-        teamStrategy.setStrategyName(new String("member_limit_strategy"));
+        teamStrategy.setStrategyName(startegyName);
         int status2 = teamStrategyDao.addTeamStrategy(teamStrategy);
 
         if(status1 !=0 && status2 != 0){

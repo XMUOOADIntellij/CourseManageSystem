@@ -32,9 +32,6 @@
     <insert id="addConflictCourseStrategy" useGeneratedKeys="true" keyProperty="conflictCourseStrategy.id" >
         insert into conflict_course_strategy
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                id,
-            </if>
             <if test="courseFirst != null" >
                 course_1_id,
             </if>
@@ -43,9 +40,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                #{id,jdbcType=BIGINT},
-            </if>
             <if test="courseFirst != null" >
                 #{courseFirst.id,jdbcType=BIGINT},
             </if>

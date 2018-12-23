@@ -96,7 +96,7 @@
     </delete>
 
     <insert id="addTeamStrategy" >
-        insert into conflict_course_strategy
+        insert into team_strategy
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="courseId != null" >
                 course_id,

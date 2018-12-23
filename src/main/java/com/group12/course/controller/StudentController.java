@@ -42,7 +42,7 @@ public class StudentController {
      * @return 返回符合的学生的列表
      * 当是通过账号查询时，列表只会包含一个
      * */
-    @GetMapping(value = "/searchstudent",produces = "application/json; charset=utf-8")
+    @GetMapping(value = "/searchStudent",produces = "application/json; charset=utf-8")
     public List<Student> searchStudent(@RequestParam(value = "identity") String param, HttpServletResponse response){
         List<Student> list = studentService.getStudentByParam(param.trim());
         if (list.isEmpty()){
