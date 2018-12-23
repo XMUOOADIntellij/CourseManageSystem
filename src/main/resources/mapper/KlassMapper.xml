@@ -100,4 +100,10 @@
     from klass
     where course_id = #{coureId,jdbcType=BIGINT}
   </select>
+
+  <delete id="deleteStudentByKlassId" parameterType="java.lang.Long" >
+    delete from klass_student
+    where klass_id = #{klassId,jdbcType=BIGINT}
+  </delete>
+
 </mapper>

@@ -6,27 +6,31 @@ import com.group12.course.mapper.ConflictCourseStrategyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ConflictCourseStrategyDao {
 
     @Autowired
     ConflictCourseStrategyMapper conflictCourseStrategyMapper;
 
-    ConflictCourseStrategy selectConflictCourseStrategyById(Long id){
+    public ConflictCourseStrategy selectConflictCourseStrategyById(Long id){
         return conflictCourseStrategyMapper.selectConflictCourseStrategyById(id);
     }
 
-    int deleteConflictCourseStrategy(Long id){
+    public int deleteConflictCourseStrategy(Long id){
         return conflictCourseStrategyMapper.deleteConflictCourseStrategy(id);
     }
 
-    int addConflictCourseStrategy(ConflictCourseStrategy record){
+    public int addConflictCourseStrategy(ConflictCourseStrategy record){
         return conflictCourseStrategyMapper.addConflictCourseStrategy(record);
     }
 
-    int updateConflictCourseStrategy(ConflictCourseStrategy record){
+    public int updateConflictCourseStrategy(ConflictCourseStrategy record){
         return conflictCourseStrategyMapper.updateConflictCourseStrategy(record);
     }
 
-
+    public List<ConflictCourseStrategy> selectConflictCourseStrategyByCourseId(Long courseId){
+        return conflictCourseStrategyMapper.selectConflictCourseStrategyByCourseId(courseId);
+    }
 }

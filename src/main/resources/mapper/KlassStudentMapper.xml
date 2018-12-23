@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.KlassStudentMapper" >
+
+    <resultMap id="BaseResultMap" type="com.group12.course.entity.KlassStudent" >
+        <association property="klass" select="com.group12.course.mapper.KlassMapper.selectKlassById"
+                     column="klass_id" javaType="com.group12.course.entity.Klass"/>
+        <association property="student" select="com.group12.course.mapper.StudentMapper.selectStudentById"
+                     column="student_id" javaType="com.group12.course.entity.Student"/>
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
+        <association property="team" select="com.group12.course.mapper.TeamMapper.selectTeamById"
+                     column="team_id" javaType="com.group12.course.entity.Team"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    klass_id, student_id,course_id,team_id
+  </sql>
+
+    <select id="selectKlassStudentByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from klass_student
+        where course_id = #{courseId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectKlassStudentByStudentId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from klass_student
+        where student_id=#{studentId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteKlassStudentByKlassId" parameterType="java.lang.Long">
+        delete from klass_student
+        where klass_id=#{klassId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="addKlassStudent" parameterType="com.group12.course.entity.KlassStudent">
+        insert into klass_student
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="klass != null" >
+                klass_id,
+            </if>
+            <if test="student != null" >
+                student_id,
+            </if>
+            <if test="course != null">
+                course_id,
+            </if>
+            <if test="team != null">
+                team_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="klass != null" >
+                #{klass.id,jdbcType=BIGINT},
+            </if>
+            <if test="course != null" >
+                #{course.id,jdbcType=BIGINT},
+            </if>
+            <if test="student != null">
+                #{student.id,jdbcType=BIGINT},
+            </if>
+            <if test="team != null">
+                #{team.id.jdbcType=BIGINT}
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

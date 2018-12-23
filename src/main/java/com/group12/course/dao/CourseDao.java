@@ -37,29 +37,34 @@ public class CourseDao {
      * @return
      */
     public int deleteCourse(Long id){
-//        if(courseMapper.selectCourseById(id)!=null)
-//        {
-//            List<Klass> klassList = klassDao.getAllKlassByCourseId(id);
-//            //根据找到的班级，删除班级以及班级与学生的关联
-//            for (Klass klass:klassList) {
-//                Long klassId = klass.getId();
-//                klassDao.deleteStudentByKlassId(klassId);
-//                klassDao.deleteKlass(klassId);
-//            }
-//
-//            List<ConflictCourseStrategy> conflictCourseStrategyList = conflictCourseStrategyDao.selectConflictCourseStrategyByCourseId(id);
-//            //删除该课程的冲突记录
-//            for (ConflictCourseStrategy conflictCourseStrategy:conflictCourseStrategyList) {
-//                Long conflictCourseStrategyId = conflictCourseStrategy.getId();
-//                conflictCourseStrategyDao.deleteConflictCourseStrategy(conflictCourseStrategyId);
-//            }
-//
-//            /*TODO 删除组队策略*/
-//
-//            return courseMapper.deleteCourse(id);
-//
-//        }
-        return courseMapper.deleteCourse(id);
+        if(courseMapper.selectCourseById(id)!=null)
+        {
+            List<Klass> klassList = klassDao.getAllKlassByCourseId(id);
+            //根据找到的班级，删除班级以及班级与学生的关联
+            int status1 = 1;
+            for (Klass klass:klassList) {
+                Long klassId = klass.getId();
+                status1 = klassDao.deleteKlass(klassId)==0?0:status1;
+            }
+
+            List<ConflictCourseStrategy> conflictCourseStrategyList = conflictCourseStrategyDao.selectConflictCourseStrategyByCourseId(id);
+            //删除该课程的冲突记录
+            int status2 = 1;
+            for (ConflictCourseStrategy conflictCourseStrategy:conflictCourseStrategyList) {
+                Long conflictCourseStrategyId = conflictCourseStrategy.getId();
+                status2 = conflictCourseStrategyDao.deleteConflictCourseStrategy(conflictCourseStrategyId)==0?0:status2;
+            }
+
+            int status3 = courseMapper.deleteCourse(id);
+            if(status1 == 0 || status2 ==0 || status3 ==0){
+                return 0;
+            }
+            else{
+                return 1;
+            }
+        }
+        return 0;
+        /*是否要查找team_strategy表删除相应策略记录，或者直接查询每一个策略表进行删除*/
     }
 
     public int addCourse(Course course){
@@ -73,4 +78,5 @@ public class CourseDao {
     public List<Course> getCourseByTeacherId(Long teacherId){
         return courseMapper.selectCourseByTeacherId(teacherId);
     }
+
 }

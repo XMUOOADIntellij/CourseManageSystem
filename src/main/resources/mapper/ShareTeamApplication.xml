@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.group12.course.mapper.ShareTeamApplicationMapper">
+
+    <resultMap id="BaseResultMap" type="com.group12.course.entity.application.ShareTeamApplication">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="status" property="status" jdbcType="TINYINT" />
+
+        <association property="mainCourse" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="main_course_id" javaType="com.group12.course.entity.Course"/>
+        <association property="subCourse" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="sub_course_id" javaType="com.group12.course.entity.Course"/>
+        <association property="subCourseTeacher" select="com.group12.course.mapper.TeacherMapper.selectTeacherById"
+                     column="sub_course_teacher_id" javaType="com.group12.course.entity.Teacher"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,main_course_id,sub_course_id,sub_course_teacher_id,status
+    </sql>
+
+    <select id="selectShareTeamApplicationById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from share_team_application
+        where id=#{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectShareTeamApplicationByMainCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from share_team_application
+        where main_course_id=#{id,jdbcType=BIGINT}
+    </select>
+
+    <insert id="addShareTeamApplication" useGeneratedKeys="true" keyProperty="id" parameterType="com.group12.course.entity.application.ShareTeamApplication">
+        insert into share_team_application
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="mainCourse != null" >
+                main_course_id,
+            </if>
+            <if test="subCourse != null" >
+                sub_course_id,
+            </if>
+            <if test="subCourseTeacher != null" >
+                sub_course_teacher_id,
+            </if>
+            <if test="status !=null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id},
+            </if>
+            <if test="mainCourse != null" >
+                #{mainCourse.id},
+            </if>
+            <if test="subCourse != null" >
+                #{subCourse.id},
+            </if>
+            <if test="subCourseTeacher != null" >
+                #{subCourseTeacher.id},
+            </if>
+            <if test="status != null" >
+                #{status},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateShareTeamApplication" parameterType="com.group12.course.entity.application.ShareTeamApplication" >
+        update share_team_application
+        <set >
+            <if test="id != null" >
+                id=#{id,jdbcType=BIGINT},
+            </if>
+            <if test="mainCourse != null" >
+                main_course_id=#{mainCourse.id,jdbcType=BIGINT},
+            </if>
+            <if test="subCourse != null" >
+                sub_course_id=#{subCourse.id,jdbcType=BIGINT},
+            </if>
+            <if test="subCourseTeacher != null" >
+                sub_course_teacher_id=#{subCourseTeacher.id,jdbcType=BIGINT},
+            </if>
+            <if test="status != null" >
+                status=#{status,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <delete id="deleteShareTeamApplication" parameterType="java.lang.Long">
+        delete from share_team_application
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteShareTeamApplicationByMainCourseId" parameterType="java.lang.Long">
+        delete from share_team_application
+        where main_course_id = #{mainCourseId,jdbcType=BIGINT}
+    </delete>
+
+
+</mapper>

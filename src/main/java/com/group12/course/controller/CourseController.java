@@ -1,253 +1,452 @@
-//package com.group12.course.controller;
-//
-//
-//import com.group12.course.entity.*;
-//import com.group12.course.entity.strategy.MemberLimitStrategy;
-//import com.group12.course.service.CourseService;
-//import com.group12.course.service.KlassService;
-//import com.group12.course.service.MemberLimitStrategyService;
-//import com.group12.course.service.StudentService;
-//import com.group12.course.controller.vo.CourseVO;
-//import com.group12.course.controller.vo.ShareVO;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.multipart.MultipartFile;
-//
-//import javax.servlet.http.HttpServletResponse;
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//
-///**
-// * Course Controller 层
-// * @author Tan Xue
-// * @date 2018/12/12
-// */
-//
-//@RestController
-//@RequestMapping("/course")
-//public class CourseController {
-//
-//    @Autowired
-//    CourseService courseService;
-//    @Autowired
-//    KlassService klassService;
-//    @Autowired
-//    StudentService studentService;
-//    @Autowired
-//    MemberLimitStrategyService memberLimitStrategyService;
-//
-//    /**
-//     * 新建课程
-//     * @param courseVO
-//     * @return Course
-//     */
-//    @PostMapping(value="",produces = "application/json; charset=utf-8")
-//    public void createCourse(@RequestParam Long teacherId,@RequestBody CourseVO courseVO, HttpServletResponse response){
-//        Course course = new Course(courseVO);
-//        int status1 = courseService.addCourse(teacherId,course);
-//
-//        MemberLimitStrategy memberLimitStrategy = new MemberLimitStrategy(courseVO);
-//        int status2 = memberLimitStrategyService.addMemberLimitStrategy(memberLimitStrategy);
-//
-//
-//        /*TODO 冲突课程*/
-//    }
-//
-//    /**
-//     * 获得当前用户所有课程
-//     * @return List<Course>
-//     * @param  teacherId 老师ID
-//     */
-//    @GetMapping(value="",produces = "application/json; charset=utf-8")
-//    public List<CourseVO> listCourses(Long teacherId,HttpServletResponse response){
-//        return courseService.listCourses(teacherId);
-//    }
-//
-//    /**
-//     * 根据课程id获得课程
-//     * @param courseId int
-//     * @return Course
-//     */
-//    @GetMapping(value="/{courseId}",produces = "application/json; charset=utf-8")
-//    public CourseVO getCourseById(@PathVariable Long courseId,HttpServletResponse response){
-//        return courseService.getCourseById(courseId);
-//    }
-//
-//
-//
-//    /**
-//     * 删除课程
-//     *
-//     * @param courseId int
-//     * @return Course
-//     */
-//    @DeleteMapping(value="/{courseId}",produces = "application/json; charset=utf-8")
-//    public void deleteCourse(@PathVariable Long courseId,HttpServletResponse response){
-//
-//        int status = courseService.deleteCourse(courseId);
-//        if(status == 0){
-//            response.setStatus(400);
-//        }
-//        else{
-//            response.setStatus(204);
-//        }
-//    }
-//
-//    /**
-//     * 修改课程信息
-//     * @param course Course
-//     * @return Course
-//     */
-//    @PutMapping(value="",produces = "application/json; charset=utf-8")
-//    public void updateCourse(@RequestBody Course course,HttpServletResponse response){
-//        int status = courseService.updateCourse(course);
-//        if(status == 0){
-//            response.setStatus(400);
-//        }
-//        else{
-//            response.setStatus(204);
-//        }
-//    }
-//
-//    /**
-//     * 根据课程id获取成绩
-//     */
-//    @GetMapping(value="/{courseId}/score",produces = "application/json; charset=utf-8")
-//    public List<SeminarScore> getSeminarScore(@PathVariable Long courseId,HttpServletResponse response){
-//        return new ArrayList<>();
-//    }
-//
-//    /**
-//     * 修改成绩
-//     * @param courseId
-//     * @param response
-//     */
-//    @PutMapping(value="/{courseId}",produces = "application/json; charset=utf-8")
-//    public void modifyScore(@PathVariable Long courseId,@RequestBody SeminarScore seminarScore,HttpServletResponse response){
-//
-//    }
-//
-//    /**
-//     * 根据课程id获取小组信息
-//     */
-//    @GetMapping(value="/{courseId}/team",produces = "application/json; charset=utf-8")
-//    public List<Team> getTeamByCourseId(@PathVariable Long courseId,HttpServletResponse response){
-//
-//        return new ArrayList<>();
-//    }
-//
-//    /**
-//     * 根据课程id获取未组队学生
-//     */
-//    @GetMapping(value="/{courseId}/noTeam",produces = "application/json; charset=utf-8")
-//    public List<Student> getStudentNoTeam(@PathVariable Long courseId,HttpServletResponse response){
-//        return new ArrayList<>();
-//    }
-//
-//    /**
-//     * 根据id获取课程的班级列表
-//     * @param courseId 课程id
-//     * @return 班级列表
-//     */
-//    @GetMapping(value="/{courseId}/class",produces = "application/json; charset=utf-8")
-//    public List<Klass> getAllKlassByCourseId(@PathVariable Long courseId,HttpServletResponse response){
-//        List<Klass> klassList = klassService.getAllKlassByCourseId(courseId);
-//        if (klassList.isEmpty()){
-//            response.setStatus(404);
-//            return new ArrayList<>();
-//        }
-//        else {
-//            response.setStatus(200);
-//            return klassList;
-//        }
-//    }
-//
-//    /**
-//     * 在课程下创建班级
-//     * @param courseId
-//     * @param klass
-//     * @param response
-//     */
-//    @PostMapping(value="/{courseId}/class",produces = "application/json; charset=utf-8")
-//    public void createKlass(@PathVariable Long courseId,@RequestBody Klass klass,HttpServletResponse response){
-//        int status = klassService.addKlass(klass);
-//        if(status == 0){
-//            response.setStatus(404);
-//        }
-//        else{
-//            response.setStatus(201);
-//        }
-//    }
-//
-//    /**
-//     * 在指定班级导入学生名单
-//     * @param
-//     * @return
-//     */
-//    @PutMapping(value="/{courseId}/class/{classId}",produces = "application/json; charset=utf-8")
-//    public void uploadStudentList(@PathVariable Long courseId, @PathVariable Long classId, @RequestParam("file") MultipartFile file, HttpServletResponse response){
-////        int status = studentService.uploadStudentList(courseId,classId,file);
-////        if(status == 0){
-////            response.setStatus(404);
-////        }
-////        else{
-////            response.setStatus(201);
-////        }
-//    }
-//
-//    /**
-//     * 删除某一课程下的某一班级
-//     * @param courseId
-//     * @param classId
-//     */
-//    @DeleteMapping(value="/{courseId}/class/{classId}",produces = "application/json; charset=utf-8")
-//    public void deleteKlassByKlassId(@PathVariable Long courseId,@PathVariable Long classId,HttpServletResponse response){
-//        int status = klassService.deleteKlass(classId);
-//        if(status == 0){
-//            response.setStatus(404);
-//        }
-//        else{
-//            response.setStatus(204);
-//        }
-//    }
-//
-//    /**
-//     * 获取共享信息
-//     * @param courseId
-//     * @param response
-//     * @return
-//     */
-//    @GetMapping(value="/{courseId}/share",produces = "application/json; charset=utf-8")
-//    public List<ShareVO> getShareMessage(@PathVariable Long courseId, HttpServletResponse response){
-//        /*TODO*/
-//        return new ArrayList<>();
-//    }
-//
-//    /**
-//     * 取消共享
-//     * @param courseId
-//     * @param shareId
-//     * @param response
-//     */
-//    @DeleteMapping(value="/{courseId}/share/{shareId}",produces = "application/json; charset=utf-8")
-//    public void deleteShareById(@PathVariable Long courseId,@PathVariable Long shareId,@RequestParam String type,HttpServletResponse response){
-//        /*TODO*/
-//    }
-//
-//    /**
-//     * 新增共享
-//     * @param courseId
-//     * @param subCourseId
-//     * @param response
-//     */
-//    @PostMapping(value="/{courseId}/sharerequest",produces = "application/json; charset=utf-8")
-//    public void createShareRequest(@PathVariable Long courseId,@RequestParam String type,@RequestParam Long subCourseId,HttpServletResponse response){
-//        /*TODO*/
-//
-//    }
-//
-//}
-//
-//
-//
+package com.group12.course.controller;
+
+import com.alibaba.fastjson.JSONObject;
+import com.group12.course.controller.vo.*;
+import com.group12.course.entity.*;
+import com.group12.course.entity.application.ShareSeminarApplication;
+import com.group12.course.entity.application.ShareTeamApplication;
+import com.group12.course.entity.strategy.ConflictCourseStrategy;
+import com.group12.course.entity.strategy.MemberLimitStrategy;
+import com.group12.course.service.*;
+import com.group12.course.tools.Jwt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+/**
+ * Course Controller 层
+ * @author Tan Xue
+ * @date 2018/12/12
+ */
+
+@RestController
+@RequestMapping("/course")
+public class CourseController {
+
+    @Autowired
+    CourseService courseService;
+    @Autowired
+    KlassService klassService;
+    @Autowired
+    StudentService studentService;
+    @Autowired
+    MemberLimitStrategyService memberLimitStrategyService;
+    @Autowired
+    ConflictCourseStrategyService conflictCourseStrategyService;
+    @Autowired
+    RoundService roundService;
+    @Autowired
+    TeamService teamService;
+    @Autowired
+    SeminarService  seminarService;
+
+    /**
+     * 新建课程
+     * @param courseVO
+     * @return Course
+     */
+    @PostMapping(value="",produces = "application/json; charset=utf-8")
+    public void createCourse(@RequestBody CourseVO courseVO, HttpServletRequest request, HttpServletResponse response){
+        String token = request.getHeader("Authorization");
+        Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
+        if(jwtTeacher!=null){
+            Course course = new Course(courseVO);
+            course.setTeacher(jwtTeacher);
+            int status1 = courseService.addCourse(course);
+
+            MemberLimitStrategy memberLimitStrategy = new MemberLimitStrategy();
+            memberLimitStrategy.setMinMember(courseVO.getMinMember());
+            memberLimitStrategy.setMaxMember(courseVO.getMaxMember());
+            int status2 = memberLimitStrategyService.addMemberLimitStrategy(course.getId(),memberLimitStrategy);
+
+            List<Course> conflictCourseList = courseVO.getConflictCourseList();
+            for (Course conflictCourse:conflictCourseList) {
+                ConflictCourseStrategy conflictCourseStrategy = new ConflictCourseStrategy();
+                conflictCourseStrategy.setCourseFirst(course);
+                conflictCourseStrategy.setCourseSecond(conflictCourse);
+                conflictCourseStrategyService.addConflicCourseStrategy(conflictCourseStrategy);
+            }
+
+            if(status1 == 0 || status2 ==0 ){
+                response.setStatus(403);
+            }
+            else{
+                response.setStatus(201);
+            }
+        }
+        else{
+            response.setStatus(403);
+        }
+    }
+
+    /**
+     * 获得当前用户所有课程
+     * @return List<Course>
+     */
+    @GetMapping(value="",produces = "application/json; charset=utf-8")
+    public List<CourseKlassVO> getCourseByTeacherId(HttpServletRequest request, HttpServletResponse response){
+        String token = request.getHeader("Authorization");
+        Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
+        if (jwtTeacher!=null){
+            List<CourseKlassVO> courseKlassVOList = new ArrayList<>();
+
+            List<Course> courseList = courseService.getCourseByTeacherId(jwtTeacher.getId());
+            for (Course course:courseList) {
+                List<Klass> klassList = klassService.getAllKlassByCourseId(course.getId());
+                for (Klass klass:klassList) {
+                    CourseKlassVO courseKlassVO = new CourseKlassVO(course);
+                    courseKlassVO.setGrade(klass.getGrade());
+                    courseKlassVO.setKlassSerial(klass.getKlassSerial());
+                    courseKlassVO.setKlassId(klass.getId());
+                    courseKlassVOList.add(courseKlassVO);
+                }
+            }
+            if (courseKlassVOList.isEmpty()){
+                response.setStatus(404);
+                return null;
+            }
+            else {
+                response.setStatus(200);
+                return courseKlassVOList;
+            }
+        }
+        else {
+            response.setStatus(403);
+            return null;
+        }
+    }
+
+    /**
+     * 根据课程id 获得课程下的所有轮次
+     * @param courseId
+     * @param response
+     * @return
+     */
+    @GetMapping(value="/{courseId}/round",produces = "application/json; charset=utf-8")
+    public void getRoundByCourseId(@PathVariable Long courseId,HttpServletResponse response) throws IOException {
+        List<Round> roundList = roundService.getRoundByCourseId(courseId);
+        if(roundList.isEmpty()){
+            response.setStatus(404);
+        }
+        else{
+            response.setStatus(200);
+            String json = JSONObject.toJSONString(roundList);
+            response.getWriter().write(json);
+        }
+    }
+
+
+    /**
+     * 根据课程id 获得课程
+     * @param courseId int
+     * @return Course
+     */
+    @GetMapping(value="/{courseId}",produces = "application/json; charset=utf-8")
+    public void getCourseById(@PathVariable Long courseId,HttpServletResponse response) throws IOException {
+        Course course = courseService.getCourseById(courseId);
+        CourseVO courseVO = new CourseVO(course);
+
+        MemberLimitStrategy memberLimitStrategy = memberLimitStrategyService.selectMemberLimitStrategyByCourseId(courseId);
+        courseVO.setMinMember(memberLimitStrategy.getMinMember());
+        courseVO.setMaxMember(memberLimitStrategy.getMaxMember());
+
+        if(courseVO !=null){
+            response.setStatus(200);
+            String json = JSONObject.toJSONString(courseVO);
+            response.getWriter().write(json);
+        }
+        else{
+            response.setStatus(404);
+        }
+    }
+
+
+    /**
+     * 根据课程id 删除课程
+     * @param courseId int
+     * @return Course
+     */
+    @DeleteMapping(value="/{courseId}",produces = "application/json; charset=utf-8")
+    public void deleteCourse(@PathVariable Long courseId,HttpServletResponse response){
+
+        int status1 = courseService.deleteCourse(courseId);
+        int status2 = memberLimitStrategyService.deleteMemberLimitStrategy(courseId);
+
+        if(status1 == 0 || status2 == 0){
+            response.setStatus(400);
+        }
+        else{
+            response.setStatus(204);
+        }
+    }
+
+    /**
+     * 根据课程id获取所有小组信息
+     * @param courseId
+     * @param response
+     * @return
+     */
+    @GetMapping(value="/{courseId}/team",produces = "application/json; charset=utf-8")
+    public void getTeamByCourseId(@PathVariable Long courseId,HttpServletRequest request,HttpServletResponse response) throws IOException {
+
+//        List<Team> teamVOList = teamService.getTeamByCourseId(courseId);
+//        String json = JSONObject.toJSONString(teamVOList);
+//        response.getWriter().write(json);
+        /*TODO team的根据课程id 查询所有小组信息*/
+
+
+    }
+
+
+    /**
+     * 根据课程id 以及学生id 获取小组信息
+     * @param courseId
+     * @param request
+     * @param response
+     * @return
+     */
+    @GetMapping(value="/{courseId}/myTeam",produces = "application/json; charset=utf-8")
+    public void getMyTeam(@PathVariable Long courseId,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        if (jwtStudent!=null){
+            Team team = teamService.getTeamByStudentId(jwtStudent.getId());
+            /*TODO 这里的teamService方法有问题*/
+
+            if(team != null){
+                response.setStatus(200);
+                String json = JSONObject.toJSONString(team);
+                response.getWriter().write(json);
+            }
+            else{
+                response.setStatus(404);
+            }
+        }
+        else{
+            response.setStatus(404);
+        }
+    }
+
+    /**
+     * 根据课程id获取未组队学生
+     */
+    @GetMapping(value="/{courseId}/noTeam",produces = "application/json; charset=utf-8")
+    public void getStudentNoTeam(@PathVariable Long courseId, HttpServletResponse response) throws IOException {
+
+        List<StudentVO> studentVOList = new ArrayList<>();
+        List<Student> studentList = courseService.getStudentNoTeam(courseId);
+        if(studentList.isEmpty()){
+            response.setStatus(404);
+        }
+        else{
+            for (Student student:studentList) {
+                StudentVO studentVO = new StudentVO(student);
+                studentVOList.add(studentVO);
+            }
+            response.setStatus(200);
+            String json = JSONObject.toJSONString(studentVOList);
+            response.getWriter().write(json);
+        }
+    }
+
+    /**
+     * 根据id 获取课程的班级列表
+     * @param courseId 课程id
+     * @return 班级列表
+     */
+    @GetMapping(value="/{courseId}/class",produces = "application/json; charset=utf-8")
+    public void getKlassByCourseId(@PathVariable Long courseId,HttpServletResponse response) throws IOException {
+        List<Klass> klassList = klassService.getAllKlassByCourseId(courseId);
+        if (klassList.isEmpty()){
+            response.setStatus(404);
+        }
+        else {
+            response.setStatus(200);
+            String json = JSONObject.toJSONString(klassList);
+            response.getWriter().write(json);
+        }
+    }
+
+    /**
+     * 在课程下创建班级并且可导入学生名单
+     * @param courseId
+     * @param response
+     */
+    @PostMapping(value="/{courseId}/class",produces = "application/json; charset=utf-8")
+    public void createKlass(@PathVariable Long courseId, @RequestBody KlassVO klassVO, @RequestParam("file") MultipartFile file, HttpServletResponse response){
+        //创建班级
+        Klass klass = new Klass(klassVO);
+        klass.setCourse(courseService.getCourseById(courseId));
+        int status = klassService.addKlass(klass);
+//        //导入学生名单
+//        int status2 = klassService.uploadStudentList(klass.getId(),file);
+
+        if(status == 0){
+            response.setStatus(404);
+        }
+        else{
+            response.setStatus(201);
+        }
+
+
+    }
+
+    /**
+     * 获取分组共享信息
+     * @param courseId
+     * @param response
+     * @return
+     */
+    @GetMapping(value="/{courseId}/teamshare",produces = "application/json; charset=utf-8")
+    public void getTeamShareMessage(@PathVariable Long courseId, HttpServletResponse response) throws IOException {
+        List<ShareTeamApplication> shareTeamApplicationList = courseService.getShareTeamApplicationByMainCourseId(courseId);
+        if(shareTeamApplicationList.isEmpty()){
+            response.setStatus(404);
+        }
+        else{
+            response.setStatus(200);
+            String json = JSONObject.toJSONString(shareTeamApplicationList);
+            response.getWriter().write(json);
+        }
+    }
+
+    /**
+     * 获取讨论课共享信息
+     * @param courseId
+     * @param response
+     * @return
+     */
+    @GetMapping(value="/{courseId}/seminarshare",produces = "application/json; charset=utf-8")
+    public void getSeminarShareMessage(@PathVariable Long courseId, HttpServletResponse response) throws IOException {
+        List<ShareSeminarApplication> shareSeminarApplicationList = courseService.getShareSeminarApplicationByMainCourseId(courseId);
+        if(shareSeminarApplicationList.isEmpty()){
+            response.setStatus(404);
+        }
+        else{
+            response.setStatus(200);
+            String json = JSONObject.toJSONString(shareSeminarApplicationList);
+            response.getWriter().write(json);
+        }
+
+    }
+
+    /**
+     * 取消分组共享
+     * @param teamshareId
+     * @param response
+     */
+    @DeleteMapping(value="/teamshare/{teamshareId}",produces = "application/json; charset=utf-8")
+    public void deleteTeamShareById(@PathVariable Long teamshareId,HttpServletResponse response){
+        int status = courseService.deleteShareTeamApplication(teamshareId);
+        if(status == 0){
+            response.setStatus(404);
+        }
+        else{
+            response.setStatus(200);
+        }
+    }
+
+    /**
+     * 取消讨论课共享
+     * @param seminarshareId
+     * @param response
+     */
+    @DeleteMapping(value="/seminarshare/{seminarshareId}",produces = "application/json; charset=utf-8")
+    public void deleteSeminarShareById(@PathVariable Long seminarshareId,HttpServletResponse response){
+        int status = courseService.deleteShareSeminarApplication(seminarshareId);
+        if(status == 0){
+            response.setStatus(404);
+        }
+        else{
+            response.setStatus(200);
+        }
+    }
+
+    /**
+     * 发起一个分组共享请求
+     * @param courseId
+     * @param response
+     */
+    @PostMapping(value="/{courseId}/teamsharerequest",produces = "application/json; charset=utf-8")
+    public void requestTeamShare(@PathVariable Long courseId,@RequestBody List<Long> subCourseIdList, HttpServletResponse response){
+        /*注意：查看讨论课和分组时需要先判断是主课程还是从课程*/
+        int status = 1;
+        for (Long subCourseId:subCourseIdList) {
+            ShareTeamApplication shareTeamApplication = new ShareTeamApplication();
+
+            shareTeamApplication.setMainCourse(courseService.getCourseById(courseId));
+            Course subCourse = courseService.getCourseById(subCourseId);
+            shareTeamApplication.setSubCourse(subCourse);
+            shareTeamApplication.setSubCourseTeacher(subCourse.getTeacher());
+
+            status = courseService.addShareTeamApplication(shareTeamApplication)==0?0:status;
+        }
+
+        if(status == 0){
+            response.setStatus(404);
+        }
+        else{
+            response.setStatus(201);
+        }
+    }
+
+    /**
+     * 发起一个讨论课共享请求
+     * @param courseId
+     * @param response
+     */
+    @PostMapping(value="/{courseId}/seminarsharerequest",produces = "application/json; charset=utf-8")
+    public void requestSeminarShare(@PathVariable Long courseId,@RequestBody List<Long> subCourseIdList,HttpServletResponse response){
+        /*接受共享后才做一下操作*/
+        int status= 1;
+        for (Long subCourseId:subCourseIdList) {
+            ShareSeminarApplication shareSeminarApplication = new ShareSeminarApplication();
+
+            shareSeminarApplication.setMainCourse(courseService.getCourseById(courseId));
+            Course subCourse = courseService.getCourseById(subCourseId);
+            shareSeminarApplication.setSubCourse(subCourse);
+            shareSeminarApplication.setSubCourseTeacher(subCourse.getTeacher());
+
+            status = courseService.addShareSeminarApplication(shareSeminarApplication)==0?0:status;
+        }
+        if(status == 0){
+            response.setStatus(404);
+        }
+        else{
+            response.setStatus(201);
+        }
+    }
+
+    @PostMapping(value="/{courseId}/class/{classId}/team",produces = "application/json; charset=utf-8")
+    public void createTeam(@RequestBody TeamInfoVO teamInfoVO, @PathVariable Long courseId, @PathVariable Long classId, HttpServletResponse response){
+        /* 这里界面返回的内容与api标准的有所差别*/
+        Team team = new Team();
+        team.setTeamName(teamInfoVO.getName());
+        team.setLeader(teamInfoVO.getLeader());
+        team.setMembers(teamInfoVO.getMembers());
+
+        Course course = courseService.getCourseById(courseId);
+        team.setCourse(course);
+        Klass klass = klassService.getKlass(classId);
+        team.setKlass(klass);
+
+        Team returnTeam = teamService.createTeam(team);
+        if(returnTeam==null){
+            response.setStatus(403);
+        }
+        else{
+            response.setStatus(201);
+        }
+    }
+
+}
+
+
+
