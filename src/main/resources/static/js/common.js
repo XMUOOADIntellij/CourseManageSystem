@@ -1,7 +1,5 @@
 function bindUser() {
-  // jquery 表单提交
-  // let ata = {account:$("#account").val(),password:$("#password").val()}
-  let ata = { account: "2888", password: "123456" };//for test
+let ata = {account:$("#account").val(),password:$("#password").val()}
   $.ajax({
     type: "post",
     url: "http://xug98.cn/user/login",
@@ -17,7 +15,7 @@ function bindUser() {
         Cookies.set("account",data.account);
         Cookies.set("role",data.role);
         Cookies.set("name",data.name);
-       /* if(data.isActive===true){
+        if(data.isActive===true){
             if (data.role === "student") window.location.href = "../student/home.html";
             else window.location.href = "/teacher/home.html";
         }
@@ -25,8 +23,6 @@ function bindUser() {
             if (data.role === "student") window.location.href = "../student/active.html";
             else window.location.href = "../teacher/active.html";
         }
-        */
-        window.location.href = "../teacher/home.html"; //for test
       }
     },
     statusCode: {
@@ -38,18 +34,11 @@ function bindUser() {
   });
 }
 function getUserInfo() {
-  // jquery 表单提交
-  $.ajax({
+$.ajax({
     type: "get",
     url: "http://xug98.cn/user/information",
     dataType: "json",
     contentType: "application/json",
-    beforeSend: function(xhr) {
-      if (localStorage.jwt) {
-        let token=localStorage.jwt;
-        xhr.setRequestHeader("Authorization",'Bearer '+token);
-      }
-    },
     success: function(data, textStatus, xhr) {
       console.log(data);
       alert("success");
@@ -73,8 +62,7 @@ function getUserInfo() {
   });
 }
 function sendPassword() {
-  // jquery 表单提交
-  let ata=$("#account").val();
+let ata=$("#account").val();
   console.log(ata);
   $.ajax({
     type: "get",
@@ -101,10 +89,8 @@ function sendPassword() {
     }
   });
 }
-
 function editPassword() {
-  // jquery 表单提交
-  let ata = {
+let ata = {
     password:$("#password").val()
   };
   $.ajax({
@@ -113,12 +99,6 @@ function editPassword() {
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
-    beforeSend: function(xhr) {
-      if (localStorage.jwt) {
-        let token=localStorage.jwt;
-        xhr.setRequestHeader("Authorization",'Bearer '+token);
-      }
-    },
     success: function (data,textStatus,xhr) {
       if(xhr.status === 200){
         alert("修改成功");
@@ -133,8 +113,7 @@ function editPassword() {
   });
 }
 function editEmail() {
-  // jquery 表单提交
-  let ata = {
+let ata = {
     password:$("#email").val()
   };
   $.ajax({
@@ -143,12 +122,6 @@ function editEmail() {
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
-    beforeSend: function(xhr) {
-      if (localStorage.jwt) {
-        let token=localStorage.jwt;
-        xhr.setRequestHeader("Authorization",'Bearer '+token);
-      }
-    },
     success: function (data,textStatus,xhr) {
       if(xhr.status === 200){
         alert("修改成功");

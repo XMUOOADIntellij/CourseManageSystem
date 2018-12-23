@@ -27,7 +27,7 @@ public class RoundDao {
     }
 
     public int addRound(Round round){
-        return roundMapper.addRound(round,round.getCourse().getId());
+        return roundMapper.addRound(round);
     }
 
     public int updateRound(Round round){

@@ -19,7 +19,7 @@ public interface RoundMapper {
 
     int deleteRound(Long id);
 
-    int addRound(Round record,Long courseId);
+    int addRound(Round record);
 
     Round selectRoundById(Long id);
 

@@ -1,6 +1,9 @@
 package com.group12.course.controller.vo;
 
 import com.group12.course.entity.Course;
+import com.group12.course.entity.Teacher;
+import com.group12.course.entity.strategy.ConflictCourseStrategy;
+import com.group12.course.entity.strategy.CourseMemberLimitStrategy;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,8 +12,6 @@ import java.util.List;
  *
  */
 public class CourseVO {
-
-    private Long id;
 
     private String courseName;
 
@@ -30,15 +31,7 @@ public class CourseVO {
 
     private Integer minMember;
 
-    private List<Course> conflictCourse;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    List<Course> conflictCourseList;
 
     public String getCourseName() {
         return courseName;
@@ -112,11 +105,43 @@ public class CourseVO {
         this.minMember = minMember;
     }
 
-    public List<Course> getConflictCourse() {
-        return conflictCourse;
+    public List<Course> getConflictCourseList() {
+        return conflictCourseList;
     }
 
-    public void setConflictCourse(List<Course> conflictCourse) {
-        this.conflictCourse = conflictCourse;
+    public void setConflictCourseList(List<Course> conflictCourseList) {
+        this.conflictCourseList = conflictCourseList;
     }
+
+    public CourseVO(){}
+
+    public CourseVO(Course course){
+
+        this.courseName = course.getCourseName();
+        this.introduction = course.getIntroduction();
+        this.presentationPercentage = course.getPresentationPercentage();
+        this.questionPercentage = course.getQuestionPercentage();
+        this.reportPercentage = course.getReportPercentage();
+        this.teamStartTime = course.getTeamStartTime();
+        this.teamEndTime = course.getTeamEndTime();
+    }
+
+//    public CourseVO(CourseMemberLimitStrategy courseMemberLimitStrategy){
+//        //组队规则属性
+//        this.minMember = courseMemberLimitStrategy.getMinMember();
+//        this.maxMember = courseMemberLimitStrategy.getMaxMember();
+//
+//        //课程属性
+//        Course course = courseMemberLimitStrategy.getCourse();
+//        this.id = course.getId();
+//        this.teacherId = course.getTeacher().getId();
+//        this.courseName = course.getCourseName();
+//        this.introduction = course.getIntroduction();
+//        this.presentationPercentage = course.getPresentationPercentage();
+//        this.questionPercentage = course.getQuestionPercentage();
+//        this.reportPercentage = course.getReportPercentage();
+//        this.teamStartTime = course.getTeamStartTime();
+//        this.teamEndTime = course.getTeamEndTime();
+//    }
+
 }

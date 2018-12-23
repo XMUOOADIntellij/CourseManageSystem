@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>查看话题</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/teacher/content.css">
+</head>
+<body  onload="courseintroduce();return topicinfo();">
+        <div class="top">
+          <div class="font">
+            课堂管理系统
+          </div>
+          <div class="icon">
+              <img src="/img/home.png"><a href="/teacher/home">首页</a>
+             <img src="/img/help.png"><a>帮助</a>
+              <img src="/img/exit.png"><a href="#" onclick="logout();">退出</a>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="body">
+            <div class="navigation">
+                <div class="courseName" id="courseName"></div>
+                <div class="line"></div>
+                <div class="courseIntroduction" id="courseIntroduction"></div>
+            </div>
+            <div class="content">
+                <div class="block">
+                    <div class="title">查看话题</div>
+                    <div class="returnButton" onclick="backtoseminar();">返回上一页</div>
+                    <div class="line"></div>
+                    <div class="itemBody">
+                        <div class="item">
+                          <label class="itemName">编   号*:</label>
+                           <label class="itemName" id="topicserial"></label>
+                        </div>
+                        <div class="item">
+                          <label class="itemName">题   目 :</label>
+                           <label class="itemName" id="topicname"></label>
+                        </div>
+                        <div class="item" style="height:40%;">
+                          <label class="itemName">说   明 :</label>
+                           <label class="itemName" id="description"></label>
+                        </div>
+                        <div class="item">
+                          <label class="itemName">组数限制: </label>
+                          <label class="itemName" id="groupLimit"></label>
+                        </div>
+                        <div class="item">
+                          <label class="itemName">组内人数上限: </label>
+                          <label class="itemName" id="groupMemberLimit"></label>
+                        </div>
+                        <div class="item">
+                          <label class="itemName">已选小组: </label>
+                          <label class="itemName" id="groupLeft"></label>
+                        </div>
+                        <div class="item">
+                          <button class="submit" onclick="return turntopicupdate();">修 改</button>
+                          <button class="reset" onclick="return deletetopic();">删除话题</button>
+                          <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    <!-- jquery.js-->
+    <script src ="/js/jquery-1.10.2.js"></script>
+    <script src ="/js/teacher_page.js"></script>
+     <script src ="/js/jwt.js"></script>
+</body>
+</html>

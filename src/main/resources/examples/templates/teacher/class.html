@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>班级信息</title>
+   <link rel="stylesheet" href="/css/teacher/content.css">
+</head>
+<body onload="courseintroduce();return classinfo();">
+        <div class="top">
+          <div class="font">
+            课堂管理系统
+          </div>
+          <div class="icon">
+              <img src="/img/home.png"><a href="/teacher/home">首页</a>
+             <img src="/img/help.png"><a>帮助</a>
+              <img src="/img/exit.png"><a href="#" onclick="logout();">退出</a>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="body">
+            <div class="navigation">
+                <div class="courseName" id="courseName"></div>
+                <div class="line"></div>
+                <div class="courseIntroduction" id="courseIntroduction"></div>
+            </div>
+            <div class="content">
+                <div class="block">
+                    <div class="title" id="upclassname"></div><br/>
+                    <div class="returnButton" onclick="return backtocourse();">返回上一页</div>
+                    <div class="line"></div>
+                    <div class="itemBody" id="classdetailcontent">
+                        <div class="item">
+                          <label class="itemName">班级名称:</label>
+                          <label class="itemName"  id="classname"></label>
+                        </div>
+                        <div class="item">
+                          <label class="itemName">上课地点:</label>
+                          <label class="itemName"  id="site"></label>
+                        </div>
+                        <div class="item">
+                          <label class="itemName" >上课时间:</label>
+                          <label class="itemName" id="time"></label>
+                          <!-- <label class="itemName"> 周三12节</label> -->
+                        </div>
+                        <div class="item">
+                          <label class="itemName">评分规则:</label>
+                          <label class="itemName" >讨论课分数占比</label>
+                          <label class="itemName" id="presentation"></label>
+                          <label class="itemName"> 报告分数占比</label>
+                          <label class="itemName" id="report"></label>
+                        </div>
+                        <div class="item" style="margin-left: 25%">
+                          <label class="smallItemName">5分占比</label>
+                           <label class="itemName" id="five"></label>
+                          <label class="smallItemName">4分占比</label>
+                          <label class="itemName" id="four"></label>
+                          <label class="smallItemName">3分占比</label>
+                          <label class="itemName" id="three"></label>
+                        </div>
+                     <!--    <div class="item">
+                          <label class="itemName">开始时间:</label>
+                          <label class="itemName">2017/11/11</label>
+                          <label class="itemName">结束时间 </label>
+                          <label class="itemName">2017/11/17</label>
+                        </div> -->
+                        <div class="item">
+                          <label class="itemName">学生人数:</label>
+                          <label class="itemName"  id="numStudent"></label>
+                        </div>
+                        <div class="item">
+                          <label class="itemName">导入学生名单:</label>
+                          <!--<button class="selectFile" id="selectFile">选择文件</button>-->
+                            <input type="file" id="file">
+                        </div>
+                        <div class="item">
+                          <button class="submit" onclick="return updateclass();">修改</button>
+                          <button class="reset" onclick="deleteclass();">删除班级</button>
+                          <div class="clear"></div>
+                        </div>
+                        <div class="item">
+                          <div class="clear"></div>
+                        </div>
+                       <!--  <div class="topicBlockBody">
+                          <div class="topicBlock"><div class="topicBlockFont">TopicA</div></div>
+                          <div class="topicBlock"><div class="topicBlockFont">TopicB</div></div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    <!-- jquery.js-->
+    <script src ="/js/jquery-1.10.2.js"></script>
+    <!-- student.js -->
+    <script src ="/js/teacher_page.js"></script>
+     <script src ="/js/jwt.js"></script>
+<!--<script type="text/javascript">-->
+    <!--$("#selectFile").click(function () {-->
+        <!--$('#file').click();-->
+    <!--})-->
+<!--</script>-->
+</body>
+</html>

@@ -23,12 +23,9 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-    <insert id="addMemberLimitStrategy" useGeneratedKeys="true" keyProperty="memberLimitStrategy.id" >
+    <insert id="addMemberLimitStrategy" useGeneratedKeys="true" keyProperty="id" >
         insert into member_limit_strategy
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                id,
-            </if>
             <if test="minMember != null" >
                 min_member,
             </if>
@@ -37,9 +34,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                #{id,jdbcType=BIGINT},
-            </if>
             <if test="minMember != null" >
                 #{minMember,jdbcType=TINYINT},
             </if>

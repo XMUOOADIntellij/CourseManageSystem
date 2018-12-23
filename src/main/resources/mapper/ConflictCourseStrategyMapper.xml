@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.group12.course.mapper.ConflictCourseStrategyMapper" >
+
     <resultMap id="BaseResultMap" type="com.group12.course.entity.strategy.ConflictCourseStrategy" >
         <id column="id" property="id" jdbcType="BIGINT" />
 
@@ -11,6 +12,7 @@
                      column="course_2_id" javaType="com.group12.course.entity.Course"/>
 
     </resultMap>
+
     <sql id="Base_Column_List" >
     id, course_1_id,course_2_id
   </sql>
@@ -30,9 +32,6 @@
     <insert id="addConflictCourseStrategy" useGeneratedKeys="true" keyProperty="conflictCourseStrategy.id" >
         insert into conflict_course_strategy
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                id,
-            </if>
             <if test="courseFirst != null" >
                 course_1_id,
             </if>
@@ -41,9 +40,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                #{id,jdbcType=BIGINT},
-            </if>
             <if test="courseFirst != null" >
                 #{courseFirst.id,jdbcType=BIGINT},
             </if>
@@ -65,5 +61,13 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectConflictCourseStrategyByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from conflict_course_strategy
+        where course_1_id = #{courseId,jdbcType=BIGINT}
+    </select>
+
 
 </mapper>

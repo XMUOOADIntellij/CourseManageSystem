@@ -10,19 +10,19 @@ public class CourseMemberLimitStrategyDao {
     @Autowired
     CourseMemberLimitStrategyMapper courseMemberLimitStrategyMapper;
 
-    CourseMemberLimitStrategy selectCourseMemberLimitStrategyById(Long id){
+    public CourseMemberLimitStrategy selectCourseMemberLimitStrategyById(Long id){
         return courseMemberLimitStrategyMapper.selectCourseMemberLimitStrategyById(id);
     }
 
-    int deleteCourseMemberLimitStrategy(Long id){
+    public int deleteCourseMemberLimitStrategy(Long id){
         return courseMemberLimitStrategyMapper.deleteCourseMemberLimitStrategy(id);
     }
 
-    int addCourseMemberLimitStrategy(CourseMemberLimitStrategy record){
+    public int addCourseMemberLimitStrategy(CourseMemberLimitStrategy record){
         return courseMemberLimitStrategyMapper.addCourseMemberLimitStrategy(record);
     }
 
-    int updateCourseMemberLimitStrategy(CourseMemberLimitStrategy record){
+    public int updateCourseMemberLimitStrategy(CourseMemberLimitStrategy record){
         return courseMemberLimitStrategyMapper.updateCourseMemberLimitStrategy(record);
     }
 }
