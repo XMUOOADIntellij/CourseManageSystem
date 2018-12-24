@@ -18,7 +18,6 @@ public class KlassSeminarDao {
     @Autowired
     KlassSeminarMapper klassSeminarMapper;
 
-
     public KlassSeminar selectKlassSeminarBySeminarIdAndClassId(Long seminarId,Long classId){
          return klassSeminarMapper.listKlassSeminarBySeminarIdAndKlassId(seminarId,classId);
     }

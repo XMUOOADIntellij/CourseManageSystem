@@ -4,6 +4,8 @@ import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Seminar;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class SeminarVO {
@@ -16,14 +18,18 @@ public class SeminarVO {
     /**
      * Seminar 属性
      */
+    @NotEmpty(message="seminar need a name")
     private String seminarName;
 
     private String introduction;
 
+    @NotNull(message="seminar need maxTeam")
     private Integer maxTeam;
 
+    @NotNull(message="need seminar's visibility")
     private Boolean visible;
 
+    @NotNull(message="seminar need serial")
     private Integer seminarSerial;
 
     private LocalDateTime enrollStartTime;
@@ -179,7 +185,7 @@ public class SeminarVO {
         this.seminarSerial=seminar.getSeminarSerial();
         this.enrollStartTime = seminar.getEnrollStartTime();
         this.enrollEndTime = seminar.getEnrollEndTime();
-        
+
         this.setCourseId(seminar.getCourse().getId());
         this.setRoundId(seminar.getRound().getId());
     }

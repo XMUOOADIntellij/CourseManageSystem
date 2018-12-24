@@ -1,5 +1,6 @@
 package com.group12.course.service;
 
+import com.group12.course.Exceptions.UnauthorizedOperationException;
 import com.group12.course.dao.*;
 import com.group12.course.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,7 @@ public class SeminarService {
                 teacher.getId())) {
             return seminarDao.insertSeminar(record);
         } else {
-            System.out.println(record.getCourse().getTeacher().getId());
-            System.out.println(teacher.getId());
-            return null;
-            //TODO 权限,不能在非自己课程
+            throw new UnauthorizedOperationException("can not create seminar under a course belongs others");
         }
     }
 
@@ -179,8 +177,7 @@ public class SeminarService {
                 }
             }
             else{
-                //todo 权限
-                return null;
+                throw new UnauthorizedOperationException("only teacher in this course can operate");
             }
         }else{
             //todo classSeminarnotFound
