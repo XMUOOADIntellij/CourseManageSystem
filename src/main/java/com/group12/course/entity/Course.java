@@ -52,11 +52,11 @@ public class Course implements Serializable {
         this.teacher = teacher;
     }
 
-    public String getCourseName() {
+    public String getcourseName() {
         return courseName;
     }
 
-    public void setCourseName(String courseName) {
+    public void setcourseName(String courseName) {
         this.courseName = courseName == null ? null : courseName.trim();
     }
 
@@ -149,7 +149,7 @@ public class Course implements Serializable {
 
     public Course(CourseVO courseVO) {
 
-        this.courseName = courseVO.getCourseName();
+        this.courseName = courseVO.getcourseName();
         this.introduction = courseVO.getIntroduction();
         this.presentationPercentage = courseVO.getPresentationPercentage();
         this.questionPercentage = courseVO.getQuestionPercentage();

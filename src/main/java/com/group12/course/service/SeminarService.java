@@ -25,6 +25,8 @@ public class SeminarService {
     KlassSeminarDao klassSeminarDao;
     @Autowired
     CourseDao courseDao;
+    @Autowired
+    ScoreDao scoreDao;
 
     /**
      * 新建讨论课 Service层
@@ -165,6 +167,8 @@ public class SeminarService {
                 //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
                 klassSeminar.setSeminarStatus(1);
                 if(klassSeminarDao.updateKlassSeminar(klassSeminar)==1){
+                    //开始成功后，为该班级小组添加成绩记录
+                    scoreDao.initialScoreBeforeKlassSeminar(klassSeminar.getId());
                     return klassSeminar;
                 }
                 else{

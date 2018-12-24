@@ -2,17 +2,17 @@ package com.group12.course.controller.vo;
 
 public class ShareVO {
 
-    private String CourseName;
+    private String courseName;
     private String teacherName;
     private String type;
     private String situation;
 
-    public String getCourseName() {
-        return CourseName;
+    public String getcourseName() {
+        return courseName;
     }
 
-    public void setCourseName(String courseName) {
-        CourseName = courseName;
+    public void setcourseName(String courseName) {
+        courseName = courseName;
     }
 
     public String getTeacherName() {
@@ -42,7 +42,7 @@ public class ShareVO {
     @Override
     public String toString() {
         return "shareMessageVo{" +
-                "CourseName='" + CourseName + '\'' +
+                "courseName='" + courseName + '\'' +
                 ", teacherName='" + teacherName + '\'' +
                 ", type='" + type + '\'' +
                 ", situation='" + situation + '\'' +

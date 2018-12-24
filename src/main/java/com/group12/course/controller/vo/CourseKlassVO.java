@@ -52,7 +52,7 @@ public class CourseKlassVO {
         return name;
     }
 
-    public void setCourseName(String name) {
+    public void setcourseName(String name) {
         this.name = name;
     }
 
@@ -91,7 +91,7 @@ public class CourseKlassVO {
 
     public CourseKlassVO(Course course){
         this.id = course.getId();
-        this.name = course.getCourseName();
+        this.name = course.getcourseName();
         this.teacherName = course.getTeacher().getTeacherName();
         if (course.getTeamMainCourseId()!=null){
             this.setSharedTeam(true);

@@ -1755,12 +1755,12 @@
                           "teamShareId": 1,
                           "masterCourse": {
                             "masterCourseId": 1,
-                            "masterCourseName": "OOAD",
+                            "mastercourseName": "OOAD",
                             "teacherName": "王美红"
                           },
                           "recieveCourse": {
                             "recieveCourseId": 2,
-                            "recieveCourseName": "软件工程",
+                            "recievecourseName": "软件工程",
                             "teacherName": "林坤辉"
                           }
                         }
@@ -1813,12 +1813,12 @@
                           "seminarShareId": 1,
                           "masterCourse": {
                             "masterCourseId": 1,
-                            "masterCourseName": "OOAD",
+                            "mastercourseName": "OOAD",
                             "teacherName": "王美红"
                           },
                           "recieveCourse": {
                             "recieveCourseId": 2,
-                            "recieveCourseName": "软件工程",
+                            "recievecourseName": "软件工程",
                             "teacherName": "林坤辉"
                           }
                         }

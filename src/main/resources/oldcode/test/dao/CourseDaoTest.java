@@ -36,7 +36,7 @@ public class CourseDaoTest {
         course = new Course();
         //course.setId(new Long(1));
         course.setTeacherNum(new Long(1));
-        course.setCourseName(new String("OOAD"));
+        course.setcourseName(new String("OOAD"));
         course.setIntroduction(new String("OOAD的简介"));
         course.setPrePercentage(new Integer(40));
         course.setReportPercentage(new Integer(30));
@@ -55,10 +55,10 @@ public class CourseDaoTest {
     @Test
     @Rollback
     public void testInsertSelective(){
-        course.setCourseName(null);
+        course.setcourseName(null);
 
         Assert.assertEquals(1,courseMapper.insertSelective(course));
-        Assert.assertEquals(null,courseMapper.selectByPrimaryKey(course.getId()).getCourseName());
+        Assert.assertEquals(null,courseMapper.selectByPrimaryKey(course.getId()).getcourseName());
 
     }
 
@@ -75,10 +75,10 @@ public class CourseDaoTest {
     @Rollback
     public  void testUpdateByPrimaryKey(){
         courseMapper.insert(course);
-        course.setCourseName(null);
+        course.setcourseName(null);
         course.setTeamStartDate(null);
         Assert.assertEquals(1,courseMapper.updateByPrimaryKey(course));
-        Assert.assertEquals(null,courseMapper.selectByPrimaryKey(course.getId()).getCourseName());
+        Assert.assertEquals(null,courseMapper.selectByPrimaryKey(course.getId()).getcourseName());
 
     }
 
@@ -87,10 +87,10 @@ public class CourseDaoTest {
     public  void testUpdateByPrimaryKeySelective(){
 
         courseMapper.insert(course);
-        course.setCourseName(null);
+        course.setcourseName(null);
         course.setTeamStartDate(null);
         Assert.assertEquals(1,courseMapper.updateByPrimaryKeySelective(course));
-        Assert.assertEquals("OOAD",courseMapper.selectByPrimaryKey(course.getId()).getCourseName());
+        Assert.assertEquals("OOAD",courseMapper.selectByPrimaryKey(course.getId()).getcourseName());
     }
 
     @Test

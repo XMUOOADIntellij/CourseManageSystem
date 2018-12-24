@@ -20,5 +20,7 @@ public interface SeminarScoreMapper {
 
     Integer insertSeminarScoreList(List<SeminarScore> seminarScoreList);
 
+    List<SeminarScore> listSeminarScoreByKlassSeminarId(Long klassSeminarId);
+
     List<SeminarScore> listSeminarScoreByKlassSeminarIdListAndTeamId(@Param("klassSeminarIdList") List<Long> klassSeminarIdList, @Param("teamId") Long teamId);
 }
