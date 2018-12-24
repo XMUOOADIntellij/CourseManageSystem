@@ -11,7 +11,7 @@ function activeUser() {
   alert("input");
   $.ajax({
     type:'put',
-    url: 'http://xug98.cn/teacher/active',
+    url: 'http://xug98.cn:8080/teacher/active',
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -32,7 +32,7 @@ function activeUser() {
 /*function getCourseList() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course",
+    url: "http://xug98.cn:8080/course",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -68,7 +68,7 @@ function activeUser() {
 function getRoundList() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course/"+Cookies.get("course")+"/round",
+    url: "http://xug98.cn:8080/course/"+Cookies.get("course")+"/round",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -97,7 +97,7 @@ function getRoundList() {
 function getSeminarList(roundid) {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course",
+    url: "http://xug98.cn:8080/course",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -124,6 +124,7 @@ function getSeminarList(roundid) {
     }
   });
 }*/
+//success
 function getCourseList() {
   $.ajax({
     type: "get",
@@ -152,6 +153,7 @@ function getCourseList() {
     }
   });
 }
+//400 未部署
 function getAllCourse() {
   $.ajax({
     type: "get",
@@ -180,17 +182,18 @@ function getAllCourse() {
     }
   });
 }
+//success conflict未加
 function getCourseInfo() {
   Cookies.set("course","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course"+Cookies.get("course"),
+    url: "http://xug98.cn:8080/course/"+Cookies.get("course"),
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
         // alert("获取成功");
-          console.log(data[i]);
+          console.log(data);
 
       }
     },
@@ -204,12 +207,13 @@ function getCourseInfo() {
     }
   });
 }
+//success
 function getClassList() {
   Cookies.set("course","1");
   Cookies.set("class","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course"+Cookies.get("course")+"/class",
+    url: "http://xug98.cn:8080/course/"+Cookies.get("course")+"/class",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -232,13 +236,13 @@ function getClassList() {
   });
 }
 function updateClass() {
-  Cookies.set("seminar","1");
   Cookies.set("class","1");
-  let ata ={file: "string"};
+  var fileToUpload = $("#file").prop("files")[0];
+  let ata ={file: fileToUpload};
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn/class/"+Cookies.get("class"),
+    url: "http://xug98.cn:8080/class/"+Cookies.get("class"),
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -255,12 +259,13 @@ function updateClass() {
     }
   });
 }
+//状态码存疑
 function deleteClass(){
   let cid="1";
   let ata = { id: cid };
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn/class/" + cid,
+    url: "http://xug98.cn:8080/class/" + cid,
     data: JSON.stringify(ata),
     dataType: "json",
     contentType: "application/json;",
@@ -269,6 +274,8 @@ function deleteClass(){
       alert("wrong");
     },
     success: function(data, textStatus, xhr) {
+      alert("成功");
+
       if (xhr.status === 204) {
         alert("成功");
         console.log(data);
@@ -288,11 +295,12 @@ function deleteClass(){
   });
   window.location.reload();
 }
+//success
 function getRoundList() {
   Cookies.set("course","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course/"+Cookies.get("course")+"/round",
+    url: "http://xug98.cn:8080/course/"+Cookies.get("course")+"/round",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -319,10 +327,11 @@ function getRoundList() {
     }
   });
 }
+//success
 function getSeminarList(roundId) {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/round/"+roundId+"/seminar",
+    url: "http://xug98.cn:8080/round/"+roundId+"/seminar",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -349,11 +358,12 @@ function getSeminarList(roundId) {
     }
   });
 }
+//405
 function getSeminar() {
   Cookies.set("seminar","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar"),
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar"),
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -372,18 +382,19 @@ function getSeminar() {
     }
   });
 }
+//success
 function getSeminarByClass() {
   Cookies.set("seminar","1");
   Cookies.set("class","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class"),
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class"),
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
         // alert("获取成功");
-        console.log(data[i]);
+        console.log(data);
       }
     },
     statusCode: {
@@ -401,7 +412,7 @@ function getSeminarScoreByClass(){
   Cookies.set("class","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/seminarscore",
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/seminarscore",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -433,7 +444,7 @@ function updateSeminarScoreByClass(){
   Cookies.set("class","1");
   $.ajax({
     type: "put",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/seminarscore",
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/seminarscore",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -481,7 +492,16 @@ function createCourse() {
       alert("success");
       window.location.href="./course-round.html";
     },
+    error: function(data){
+      console.log(data);
+      alert("fail");
+    },
     statusCode: {
+      201: function(){
+        console.log(data);
+        alert("success");
+        window.location.href="./course-round.html";
+      },
       400: function() {
         $("#password").val("");
         alert("用户名或密码错误！");
@@ -489,6 +509,7 @@ function createCourse() {
     }
   });
 }
+//success
 function createSeminar() {
   Cookies.set("course","1");
   let ata = {
@@ -507,7 +528,7 @@ function createSeminar() {
   alert("input");
   $.ajax({
     type: "post",
-    url: "http://xug98.cn/seminar",
+    url: "http://xug98.cn:8080/seminar",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -524,9 +545,10 @@ function createSeminar() {
     }
   });
 }
+//success
 function deleteSeminar() {
-  let cid="1";
-  let ata = { id: cid };
+  let cid="2";
+  let ata = { seminarId: cid };
   $.ajax({
     type: "delete",
     url: "http://xug98.cn:8080/seminar/" + cid,
@@ -538,11 +560,11 @@ function deleteSeminar() {
       alert("wrong");
     },
     success: function(data, textStatus, xhr) {
-      if (xhr.status === 204) {
         alert("成功");
         console.log(data);
-      }
+
     },
+
     statusCode: {
       400: function() {
         alert("错误的ID格式");
@@ -555,13 +577,12 @@ function deleteSeminar() {
       }
     }
   });
+/*
   window.location.reload();
+*/
 
 }
-function createShare() {
-alert("success");
-  return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
-}
+//success
 function updateSeminar() {
   Cookies.set("seminar","1");
   let ata = {
@@ -578,7 +599,7 @@ function updateSeminar() {
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar"),
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar"),
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -595,6 +616,7 @@ function updateSeminar() {
     }
   });
 }
+//success
 function updateSeminarByClass() {
   Cookies.set("seminar","1");
   Cookies.set("class","1");
@@ -604,7 +626,7 @@ function updateSeminarByClass() {
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class"),
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class"),
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -626,7 +648,7 @@ function getAttendanceByClass(){
   Cookies.set("class","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance",
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -650,7 +672,7 @@ function getPptByClass(){
   Cookies.set("class","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/ppt",
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/ppt",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -674,7 +696,7 @@ function getReportByClass(){
   Cookies.set("class","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/report",
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/report",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -697,7 +719,7 @@ function getPptByAttendance(){
   Cookies.set("attendance","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/attendance/"+Cookies.get("attendance")+"/ppt",
+    url: "http://xug98.cn:8080/attendance/"+Cookies.get("attendance")+"/ppt",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -720,7 +742,7 @@ function getReportByAttendance(){
   Cookies.set("attendance","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/attendance/"+Cookies.get("attendance")+"/report",
+    url: "http://xug98.cn:8080/attendance/"+Cookies.get("attendance")+"/report",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {

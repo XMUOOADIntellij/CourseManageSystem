@@ -16,7 +16,7 @@ function activeUser() {
   alert("input");
   $.ajax({
     type:'put',
-    url: 'http://xug98.cn/student/active',
+    url: 'http://xug98.cn:8080/student/active',
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
