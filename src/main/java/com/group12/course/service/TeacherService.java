@@ -53,7 +53,7 @@ public class TeacherService {
      * @param teacher 新教师对象
      * @return 处理数量，成功添加为1，否则为0
      * */
-    public int addTeacher(Teacher teacher){
+    public Teacher addTeacher(Teacher teacher){
         return teacherDao.addTeacher(teacher);
     }
 

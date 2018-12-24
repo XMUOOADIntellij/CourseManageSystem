@@ -33,7 +33,7 @@
         where main_course_id=#{id,jdbcType=BIGINT}
     </select>
 
-    <insert id="addShareSeminarApplication" useGeneratedKeys="true" keyProperty="id" parameterType="com.group12.course.entity.application.ShareSeminarApplication">
+    <insert id="addShareSeminarApplication" useGeneratedKeys="true" keyProperty="id">
         insert into share_seminar_application
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >

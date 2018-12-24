@@ -36,34 +36,40 @@
         where klass_id=#{klassId,jdbcType=BIGINT}
     </delete>
 
+    <delete id="deleteKlassStudentByKlassIdAndStudentId" parameterType="java.lang.Long">
+        delete from klass_student
+        where klass_id=#{klassId,jdbcType=BIGINT} and student_id=#{studentId,jdbcType=BIGINT}
+    </delete>
+
+
     <insert id="addKlassStudent" parameterType="com.group12.course.entity.KlassStudent">
         insert into klass_student
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="klass != null" >
+            <if test="klassStudent.klass != null" >
                 klass_id,
             </if>
-            <if test="student != null" >
-                student_id,
-            </if>
-            <if test="course != null">
+            <if test="klassStudent.course != null">
                 course_id,
             </if>
-            <if test="team != null">
+            <if test="klassStudent.student!= null" >
+                student_id,
+            </if>
+            <if test="klassStudent.team != null">
                 team_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="klass != null" >
-                #{klass.id,jdbcType=BIGINT},
+            <if test="klassStudent.klass != null" >
+                #{klassStudent.klass.id,jdbcType=BIGINT},
             </if>
-            <if test="course != null" >
-                #{course.id,jdbcType=BIGINT},
+            <if test="klassStudent.course != null" >
+                #{klassStudent.course.id,jdbcType=BIGINT},
             </if>
-            <if test="student != null">
-                #{student.id,jdbcType=BIGINT},
+            <if test="klassStudent.student != null">
+                #{klassStudent.student.id,jdbcType=BIGINT},
             </if>
-            <if test="team != null">
-                #{team.id.jdbcType=BIGINT}
+            <if test="klassStudent.team != null">
+                #{klassStudent.team.id,jdbcType=BIGINT}
             </if>
         </trim>
     </insert>

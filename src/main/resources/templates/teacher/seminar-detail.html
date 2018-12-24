@@ -50,11 +50,12 @@
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/control.js"></script>
-    <script src="../../static/js/common.js"></script>
+    <script src="../../static/js/convert.js"></script>
+    <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
     <script src="../../static/js/jwt.js"></script>
   </head>
-  <body class="">
+  <body onload="getSeminarByClass()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -257,13 +258,12 @@
                     </span>
                     <div>
                       <h4 class="m-0">
-                        <a href="./seminar-detail-report.html">书面报告 </a>
+                        <a href="./seminar-detail-report.html">展示报名</a>
                       </h4>
                       <small class="text-muted">12 个新的提交</small>
                     </div>
                   </div>
                 </div>
-
                 <div class="card p-3">
                   <div class="d-flex align-items-center">
                     <span class="stamp stamp-md bg-blue mr-3">
@@ -350,7 +350,7 @@ Oh! Come and see the violence inherent in the system! Help, help, I'm being repr
                       <div class="card-footer text-right">
                         <a
                           class="btn btn-primary btn-lg my-0"
-                          href="./seminar-setting.html"
+                          href="./seminar-detail-setting.html"
                           >修改讨论课设置</a
                         >
                       </div>

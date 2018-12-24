@@ -28,6 +28,7 @@ public class Student implements Serializable {
     private String studentName;
 
     public Student() {
+        active = false;
     }
 
     public Student(String account) {
@@ -49,6 +50,16 @@ public class Student implements Serializable {
         this.account=studentVO.getAccount();
         this.studentName=studentVO.getName();
         this.email=studentVO.getEmail();
+        this.active=true;
+    }
+
+    public Student(Long id, String account, String password, String email, Boolean active, String studentName) {
+        this.id = id;
+        this.account = account;
+        this.password = password;
+        this.email = email;
+        this.active = active;
+        this.studentName = studentName;
     }
 
     @Override
