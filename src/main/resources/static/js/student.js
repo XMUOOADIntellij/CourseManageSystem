@@ -13,6 +13,7 @@ function activeUser() {
     email:$("#email").val()
   };
   console.log(ata);
+  alert("input");
   $.ajax({
     type:'put',
     url: 'http://xug98.cn/student/active',
