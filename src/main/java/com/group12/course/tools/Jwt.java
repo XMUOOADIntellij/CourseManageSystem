@@ -3,6 +3,7 @@ package com.group12.course.tools;
 import com.auth0.jwt.JWTSigner;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.internal.com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,6 +62,23 @@ public class Jwt {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public static Boolean checkExpire(String jwt){
+        final JWTVerifier verifier = new JWTVerifier(SECRET);
+        try {
+            final Map<String,Object> claims= verifier.verify(jwt);
+            if (claims.containsKey(EXP) && claims.containsKey(PAYLOAD)) {
+                long exp = (Long) claims.get(EXP);
+                long currentTimeMillis = System.currentTimeMillis();
+                return exp > currentTimeMillis;
+            }
+            return false;
+        }
+        catch (Exception e){
+            return false;
+        }
+
     }
 
 }
