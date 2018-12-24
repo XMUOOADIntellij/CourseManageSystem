@@ -468,7 +468,6 @@ function createCourse() {
     maxMember: "6",
     teamStartTime: convertTime($("#input-start").val()),
     teamEndTime: convertTime($("#input-start").val()),
-    conflictCourseList: conflict
   };
   console.log(ata);
   $.ajax({
@@ -530,7 +529,7 @@ function deleteSeminar() {
   let ata = { id: cid };
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn/seminar/" + cid,
+    url: "http://xug98.cn:8080/seminar/" + cid,
     data: JSON.stringify(ata),
     dataType: "json",
     contentType: "application/json;",
