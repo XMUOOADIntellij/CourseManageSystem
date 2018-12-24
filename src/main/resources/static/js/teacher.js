@@ -146,6 +146,118 @@ function getCourseList() {
     }
   });
 }
+
+function getCourseInfo() {
+  Cookies.set("course","1");
+  $.ajax({
+    type: "get",
+    url: "http://xug98.cn/course"+Cookies.get("course"),
+    dataType: "json",
+    contentType: "application/json;",
+    success: function(data, textStatus, xhr) {
+      if (xhr.status === 200) {
+        // alert("获取成功");
+          console.log(data[i]);
+
+      }
+    },
+    statusCode: {
+      400: function() {
+        alert("错误的ID格式");
+      },
+      404: function() {
+        alert("未找到课程");
+      }
+    }
+  });
+}
+
+function getClasslist() {
+  Cookies.set("course","1");
+  Cookies.set("class","1");
+  $.ajax({
+    type: "get",
+    url: "http://xug98.cn/course"+Cookies.get("course")+"/class",
+    dataType: "json",
+    contentType: "application/json;",
+    success: function(data, textStatus, xhr) {
+      if (xhr.status === 200) {
+        // alert("获取成功");
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i]);
+        }
+
+      }
+    },
+    statusCode: {
+      400: function() {
+        alert("错误的ID格式");
+      },
+      404: function() {
+        alert("未找到课程");
+      }
+    }
+  });
+}
+function updateClass() {
+  Cookies.set("seminar","1");
+  Cookies.set("class","1");
+  let ata ={file: "string"
+  };
+  console.log(ata);
+  $.ajax({
+    type: "put",
+    url: "http://xug98.cn/class/"+Cookies.get("class"),
+    dataType: "json",
+    data: JSON.stringify(ata),
+    contentType: "application/json",
+    success: function(data, textStatus, xhr) {
+      console.log(data);
+      alert("success");
+      window.location.href="./seminar-detail.html";
+    },
+    statusCode: {
+      400: function() {
+        $("#password").val("");
+        alert("用户名或密码错误！");
+      }
+    }
+  });
+}
+
+function deleteClass(){
+  let cid="1";
+  let ata = { id: cid };
+  $.ajax({
+    type: "delete",
+    url: "/class/" + cid,
+    data: JSON.stringify(ata),
+    dataType: "json",
+    contentType: "application/json;",
+    error: function(data, textStatus, xhr) {
+      console.log(cid);
+      alert("wrong");
+    },
+    success: function(data, textStatus, xhr) {
+      if (xhr.status === 204) {
+        alert("成功");
+        console.log(data);
+      }
+    },
+    statusCode: {
+      400: function() {
+        alert("错误的ID格式");
+      },
+      403: function() {
+        alert("用户权限不足");
+      },
+      404: function() {
+        alert("未找到课程");
+      }
+    }
+  });
+  window.location.reload();
+}
 function getRoundList() {
   Cookies.set("course","1");
   $.ajax({
