@@ -1,7 +1,7 @@
 package com.group12.course.entity;
 
 
-import com.group12.course.controller.vo.AttendanceVo;
+import com.group12.course.controller.vo.AttendanceVO;
 import org.apache.ibatis.type.Alias;
 
 /**
@@ -110,7 +110,7 @@ public class Attendance {
 
 
     public Attendance(){}
-    public Attendance(AttendanceVo attendanceVo){
+    public Attendance(AttendanceVO attendanceVo){
         this.id =attendanceVo.getId();
         this.pptName = attendanceVo.getPptName();
         this.reportName =attendanceVo.getReportName();

@@ -28,7 +28,7 @@ public class RoundDao {
         return roundMapper.deleteRound(id);
     }
 
-    public int addRound(Long courseId){
+    public Long addRound(Long courseId){
 
         Round round = new Round();
         round.setCourse(courseDao.getCourse(courseId));
@@ -37,7 +37,9 @@ public class RoundDao {
         Integer count = roundList.size();
         Integer serial = count+1;
         round.setRoundSerial(serial);
-        return roundMapper.addRound(round);
+        roundMapper.addRound(round);
+
+        return round.getId();
     }
 
     public int updateRound(Round round){

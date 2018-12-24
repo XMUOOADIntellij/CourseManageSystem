@@ -5,7 +5,7 @@ import com.group12.course.service.AttendanceService;
 import com.group12.course.service.QuestionService;
 import com.group12.course.service.SeminarService;
 import com.group12.course.tools.Jwt;
-import com.group12.course.controller.vo.AttendanceVo;
+import com.group12.course.controller.vo.AttendanceVO;
 import com.group12.course.controller.vo.QuestionVO;
 import com.group12.course.controller.vo.SeminarVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,16 +119,16 @@ public class SeminarController {
      * @return Attendance
      */
     @GetMapping(value="/{seminarId}/class/{classId}/attendance")
-    public List<AttendanceVo> getSeminarAttendance(@PathVariable Long seminarId, @PathVariable Long classId,
+    public List<AttendanceVO> getSeminarAttendance(@PathVariable Long seminarId, @PathVariable Long classId,
                                                    @RequestParam(value ="presented",required = false) Boolean presented) throws Exception{
 
-        List<AttendanceVo> result = new ArrayList<>();
+        List<AttendanceVO> result = new ArrayList<>();
         if(presented!=null){
-            result.add(new AttendanceVo(attendanceService.getCurrentAttendance(classId,seminarId)));
+            result.add(new AttendanceVO(attendanceService.getCurrentAttendance(classId,seminarId)));
         }
         else{
             for(Attendance item:attendanceService.getKlassSeminarAttendance(classId, seminarId)){
-                result.add(new AttendanceVo(item));
+                result.add(new AttendanceVO(item));
             }
         }
         return result;
@@ -140,10 +140,10 @@ public class SeminarController {
      * @return 展示信息
      */
     @GetMapping(value = "/{seminarId}/attendance")
-    public AttendanceVo getTeamAttendance(@PathVariable Long seminarId,HttpServletRequest request){
+    public AttendanceVO getTeamAttendance(@PathVariable Long seminarId,HttpServletRequest request){
         String token = request.getHeader("Authorization");
         Student student = Jwt.unSign(token,Student.class);
-        return new AttendanceVo(
+        return new AttendanceVO(
                 attendanceService.getTeamAttendance(seminarId,student)
         );
     }
@@ -153,7 +153,7 @@ public class SeminarController {
      * @param seminarId  课程讨论课id
      */
     @PostMapping(value="/{seminarId}/attendance")
-    public Long enrollAttendance(@PathVariable Long seminarId,@RequestBody AttendanceVo attendanceVo,
+    public Long enrollAttendance(@PathVariable Long seminarId,@RequestBody AttendanceVO attendanceVo,
                                  HttpServletRequest request){
 
         String token = request.getHeader("Authorization");
@@ -216,20 +216,4 @@ public class SeminarController {
     }
 
 
-    /**
-     * 开始班级讨论课
-     * @param seminarId 讨论课id
-     * @param classId 班级id
-     * @param request 请求获得老师
-     * @return seminar
-     */
-    @PutMapping(value = "/{seminarId}/class/{classId}/start")
-    public SeminarVO startSeminar(@PathVariable Long seminarId,@PathVariable Long classId,
-                                  HttpServletRequest request){
-
-        String token = request.getHeader("Authorization");
-        Teacher teacher = Jwt.unSign(token, Teacher.class);
-
-        return new SeminarVO(seminarService.startSeminar(teacher,seminarId,classId));
-    }
 }

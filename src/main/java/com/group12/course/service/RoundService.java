@@ -78,7 +78,7 @@ public class RoundService {
      * 创建轮次
      * @param courseId
      */
-    public int addRound(Long courseId){
+    public Long addRound(Long courseId){
         return roundDao.addRound(courseId);
     }
 
