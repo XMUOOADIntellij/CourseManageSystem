@@ -46,6 +46,23 @@ public class SeminarProgressController {
     @Autowired
     AttendanceService attendanceService;
 
+
+    /**
+     * 开始班级讨论课
+     * @param seminarId 讨论课id
+     * @param classId 班级id
+     * @param message 消息获得老师
+     * @return seminar
+     */
+    @MessageMapping(value = "/Socket/seminar/{seminarId}/class/{classId}/start")
+    public SeminarVO startSeminar(@DestinationVariable Long seminarId,@DestinationVariable Long classId,
+                                  Message message){
+
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
+        return new SeminarVO(seminarService.startSeminar(teacher,seminarId,classId));
+    }
+
     /**
      * 处理发往 /app/seminar/pause的消息
      * 暂停讨论课

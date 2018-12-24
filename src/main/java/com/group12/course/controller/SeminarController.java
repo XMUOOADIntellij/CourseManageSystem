@@ -216,20 +216,4 @@ public class SeminarController {
     }
 
 
-    /**
-     * 开始班级讨论课
-     * @param seminarId 讨论课id
-     * @param classId 班级id
-     * @param request 请求获得老师
-     * @return seminar
-     */
-    @PutMapping(value = "/{seminarId}/class/{classId}/start")
-    public SeminarVO startSeminar(@PathVariable Long seminarId,@PathVariable Long classId,
-                                  HttpServletRequest request){
-
-        String token = request.getHeader("Authorization");
-        Teacher teacher = Jwt.unSign(token, Teacher.class);
-
-        return new SeminarVO(seminarService.startSeminar(teacher,seminarId,classId));
-    }
 }

@@ -1,4 +1,4 @@
-package com.group12.course.controller;
+package com.group12.course.interceptor;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -18,7 +18,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/seminarSocket");
+        config.enableSimpleBroker("/seminarProgress");
         config.setApplicationDestinationPrefixes("/app");
     }
 
