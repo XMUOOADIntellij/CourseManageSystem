@@ -18,7 +18,7 @@ function activeUser() {
     success: function (data,textStatus,xhr) {
       if(xhr.status === 200){
         alert("注册成功");
-        window.location.href="/login";
+        window.location.href="../common/login.html";
       }
     },
     statusCode:{
