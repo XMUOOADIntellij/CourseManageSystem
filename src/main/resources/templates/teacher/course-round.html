@@ -55,7 +55,7 @@
     <script src="../../static/js/teacher.js"></script>
     <script src="../../static/js/jwt.js"></script>
   </head>
-  <body>
+  <body onload="getRoundList();">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -231,18 +231,18 @@
                       <a
                         href="course-round-setting.html"
                         class="card-options-delete"
-                        ><i class="fe fe-settings"></i
+                      ><i class="fe fe-settings"></i
                       ></a>
                       <a
-                        href="#data[i].id"
+                        href="#roundid"
                         class="card-options-collapse"
                         data-toggle="card-collapse"
                         ><i class="fe fe-chevron-up"></i
                       ></a>
                     </div>
                   </div>
-                  <div class="card-body p-0" id="data[i].id">
-                   <!-- <div class="card m-0">
+                  <div class="card-body p-0" id="roundid">
+                    <div class="card m-0">
                       <div class="card-header">
                         <div class="d-flex align-items-center">
                           <span class="">
@@ -251,6 +251,11 @@
                           </span>
                         </div>
                         <div class="card-options">
+                            <a
+                                    href="seminar-setting.html"
+                                    class="card-options-delete"
+                            ><i class="fe fe-settings"></i
+                            ></a>
                           <a
                                   onclick="deleteSeminar()"
                                   class="card-options-delete"
@@ -416,7 +421,7 @@
                           </table>
                         </div>
                       </div>
-                    </div>-->
+                    </div>
                   </div>
                 </div>
               </div>
