@@ -248,8 +248,8 @@ public class AttendanceService {
                     attendance.setPptName(file.getOriginalFilename());
                     attendance.setPptUrl(filePath + fileName);
                     attendanceDao.updateAttendance(attendance);
-                    return filePath + fileName;
                 }
+                return filePath + fileName;
             } else {
                 //TODO 权限
                 return null;

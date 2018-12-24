@@ -41,11 +41,11 @@ public class Mail {
     public boolean sendMail (String to,String text) {
         try{
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-            final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+            final String sslFactory = "javax.net.ssl.SSLSocketFactory";
             // Get a Properties object
             Properties props = new Properties();
             props.setProperty("mail.smtp.host", "smtp.qq.com");
-            props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+            props.setProperty("mail.smtp.socketFactory.class", sslFactory);
             props.setProperty("mail.smtp.socketFactory.fallback", "false");
             props.setProperty("mail.smtp.port", "465");
             props.setProperty("mail.smtp.socketFactory.port", "465");

@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.util.unit.DataSize;
 
 import javax.servlet.MultipartConfigElement;
 
@@ -23,9 +24,9 @@ public class Application {
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
         //  单个数据大小
-        factory.setMaxFileSize(150*1024L*1024L);
+        factory.setMaxFileSize(DataSize.ofMegabytes(15L));
         /// 总上传数据大小
-        factory.setMaxRequestSize(200*1024L*1024L);
+        factory.setMaxRequestSize(DataSize.ofKilobytes(20L));
         return factory.createMultipartConfig();
     }
 

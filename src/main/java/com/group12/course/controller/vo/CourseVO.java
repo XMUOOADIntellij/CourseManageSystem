@@ -33,11 +33,11 @@ public class CourseVO {
 
     List<Course> conflictCourseList;
 
-    public String getCourseName() {
+    public String getcourseName() {
         return courseName;
     }
 
-    public void setCourseName(String courseName) {
+    public void setcourseName(String courseName) {
         this.courseName = courseName;
     }
 
@@ -117,7 +117,7 @@ public class CourseVO {
 
     public CourseVO(Course course){
 
-        this.courseName = course.getCourseName();
+        this.courseName = course.getcourseName();
         this.introduction = course.getIntroduction();
         this.presentationPercentage = course.getPresentationPercentage();
         this.questionPercentage = course.getQuestionPercentage();
@@ -135,7 +135,7 @@ public class CourseVO {
 //        Course course = courseMemberLimitStrategy.getCourse();
 //        this.id = course.getId();
 //        this.teacherId = course.getTeacher().getId();
-//        this.courseName = course.getCourseName();
+//        this.courseName = course.getcourseName();
 //        this.introduction = course.getIntroduction();
 //        this.presentationPercentage = course.getPresentationPercentage();
 //        this.questionPercentage = course.getQuestionPercentage();

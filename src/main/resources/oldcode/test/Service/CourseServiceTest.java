@@ -32,7 +32,7 @@ public class CourseServiceTest extends AbstractTransactionalJUnit4SpringContextT
     public void initialTestCourse(){
         testCourse = new Course();
         testCourse.setTeacherNum(new Long(1));
-        testCourse.setCourseName("OOAD");
+        testCourse.setcourseName("OOAD");
         testCourse.setIntroduction("OOAD的简介");
         testCourse.setPrePercentage(40);
         testCourse.setReportPercentage(30);
@@ -53,7 +53,7 @@ public class CourseServiceTest extends AbstractTransactionalJUnit4SpringContextT
     @Test
     public void testAddCourse(){
         Assert.assertEquals(1,courseService.addCourse(testCourse));
-        Assert.assertEquals("OOAD",courseService.getCourseById(testCourse.getId()).getCourseName());
+        Assert.assertEquals("OOAD",courseService.getCourseById(testCourse.getId()).getcourseName());
     }
 
     @Test
@@ -70,10 +70,10 @@ public class CourseServiceTest extends AbstractTransactionalJUnit4SpringContextT
         courseService.addCourse(testCourse);
 
        testCourse.setQuesPercentage(20);
-       testCourse.setCourseName(null);
+       testCourse.setcourseName(null);
 
        Assert.assertEquals(1,courseService.updateCourse(testCourse));
-       Assert.assertEquals("OOAD",courseService.getCourseById(testCourse.getId()).getCourseName());
+       Assert.assertEquals("OOAD",courseService.getCourseById(testCourse.getId()).getcourseName());
        Assert.assertEquals(20,courseService.getCourseById(testCourse.getId()).getQuesPercentage().intValue());
     }
 
