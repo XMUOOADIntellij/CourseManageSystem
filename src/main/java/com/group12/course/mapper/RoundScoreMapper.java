@@ -15,7 +15,7 @@ public interface RoundScoreMapper {
 
     Integer insertRoundScore(RoundScore record);
 
-    RoundScore selectRoundScoreByRoundIdAndTeamId(Long roundId,Long teamId);
+    RoundScore selectRoundScoreByRoundIdAndTeamId(@Param("roundId") Long roundId,@Param("teamId") Long teamId);
 
     List<RoundScore> listRoundScoreByRoundId(Long rounId);
 

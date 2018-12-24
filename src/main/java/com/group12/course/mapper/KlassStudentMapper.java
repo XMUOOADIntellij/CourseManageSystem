@@ -2,6 +2,7 @@ package com.group12.course.mapper;
 
 import com.group12.course.entity.KlassStudent;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Null;
@@ -17,6 +18,8 @@ public interface KlassStudentMapper {
 
     int deleteKlassStudentByKlassId(Long klassId);
 
-    int addKlassStudent(KlassStudent klassStudent);
+    int deleteKlassStudentByKlassIdAndStudentId(@Param("klassId") Long klassId,@Param("studentId") Long studentId);
+
+    int addKlassStudent(@Param("klassStudent") KlassStudent klassStudent);
 
 }
