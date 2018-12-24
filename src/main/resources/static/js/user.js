@@ -97,7 +97,7 @@ let ata = {
 console.log(ata);
   $.ajax({
     type:'put',
-    url: 'http://xug98.cn/user/password',
+    url: 'http://xug98.cn:8080/user/password',
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -121,7 +121,7 @@ let ata = {
   console.log(ata);
   $.ajax({
     type:'put',
-    url: 'http://xug98.cn/user/email',
+    url: 'http://xug98.cn:8080/user/email',
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",

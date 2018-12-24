@@ -127,12 +127,14 @@ function getSeminarList(roundid) {
 function getCourseList() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course",
+    url: "http://xug98.cn:8080/course",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
         // alert("获取成功");
+        console.log("courselist");
+
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
         }
@@ -140,9 +142,39 @@ function getCourseList() {
     },
     statusCode: {
       400: function() {
+        alert("courselist");
         alert("错误的ID格式");
       },
       404: function() {
+        alert("courselist");
+        alert("未找到课程");
+      }
+    }
+  });
+}
+function getAllCourse() {
+  $.ajax({
+    type: "get",
+    url: "http://xug98.cn:8080/course/allcourse",
+    dataType: "json",
+    contentType: "application/json;",
+    success: function(data, textStatus, xhr) {
+      if (xhr.status === 200) {
+        // alert("获取成功");
+        console.log("courselist");
+
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i]);
+        }
+      }
+    },
+    statusCode: {
+      400: function() {
+        alert("courselist");
+        alert("错误的ID格式");
+      },
+      404: function() {
+        alert("courselist");
         alert("未找到课程");
       }
     }
@@ -202,8 +234,7 @@ function getClassList() {
 function updateClass() {
   Cookies.set("seminar","1");
   Cookies.set("class","1");
-  let ata ={file: "string"
-  };
+  let ata ={file: "string"};
   console.log(ata);
   $.ajax({
     type: "put",
@@ -229,7 +260,7 @@ function deleteClass(){
   let ata = { id: cid };
   $.ajax({
     type: "delete",
-    url: "/class/" + cid,
+    url: "http://xug98.cn/class/" + cid,
     data: JSON.stringify(ata),
     dataType: "json",
     contentType: "application/json;",
@@ -267,6 +298,7 @@ function getRoundList() {
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
         // alert("获取成功");
+        console.log("roundlist");
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
           getSeminarList(data[i].id);
@@ -275,9 +307,13 @@ function getRoundList() {
     },
     statusCode: {
       400: function() {
+        alert("roundlist");
+
         alert("错误的ID格式");
       },
       404: function() {
+        alert("roundlist");
+
         alert("未找到课程");
       }
     }
@@ -292,6 +328,8 @@ function getSeminarList(roundId) {
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
         // alert("获取成功");
+        console.log("seminarList");
+
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
         }
@@ -299,9 +337,13 @@ function getSeminarList(roundId) {
     },
     statusCode: {
       400: function() {
+        alert("seminarList");
+
         alert("错误的ID格式");
       },
       404: function() {
+        alert("seminarList");
+
         alert("未找到课程");
       }
     }
@@ -414,27 +456,23 @@ function updateSeminarScoreByClass(){
 }
 function createCourse() {
   let conflict={
-    courseId: 45,
-    courseName: ".Net",
-    teacherId: 15,
-    teacherName: "杨老师"};
+    courseId: "2",
+    };
   let ata = {
-    name: "OOAD",
-    intro: "课程要求",
-    presentationWeight: 0.5,
-    questionWeight: 0.1,
-    reportWeight: 0.3,
-    minMemberNumber: 4,
-    maxMemberNumber: 6,
-    startTeamTime: "2018-10-11 18:00",
-    endTeamTime: "2018-11-11 18:00",
-    conflictCourses: conflict
-
+    courseName: "OOAD",
+    introduction: "课程要求",
+    presentationPercentage: "50",
+    questionPercentage: "10",
+    reportPercentage: "30",
+    minMember: "4",
+    maxMember: "6",
+    teamStartTime: convertTime($("#input-start").val()),
+    teamEndTime: convertTime($("#input-start").val()),
   };
   console.log(ata);
   $.ajax({
     type: "post",
-    url: "http://xug98.cn/course",
+    url: "http://xug98.cn:8080/course",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -454,6 +492,8 @@ function createCourse() {
 function createSeminar() {
   Cookies.set("course","1");
   let ata = {
+    roundId:$("#select-round-id").val(),
+
     seminarName:$("#name").val(),
     introduction:$("#introduction").val(),
     maxTeam:$("#select-max-team").val(),
@@ -461,10 +501,10 @@ function createSeminar() {
     seminarSerial: $("#select-seminar-serial").val(),
     enrollStartTime:convertTime($("#input-start").val()),
     enrollEndTime:convertTime($("#input-end").val()),
-    roundId:$("#select-round-id").val(),
     courseId:Cookies.get("course")
   };
   console.log(ata);
+  alert("input");
   $.ajax({
     type: "post",
     url: "http://xug98.cn/seminar",
@@ -489,7 +529,7 @@ function deleteSeminar() {
   let ata = { id: cid };
   $.ajax({
     type: "delete",
-    url: "/seminar/" + cid,
+    url: "http://xug98.cn:8080/seminar/" + cid,
     data: JSON.stringify(ata),
     dataType: "json",
     contentType: "application/json;",
@@ -526,7 +566,7 @@ function updateSeminar() {
   Cookies.set("seminar","1");
   let ata = {
     seminarName:$("#name").val(),
-    introduction:$("#name").val(),
+    introduction:$("#introduction").val(),
     maxTeam:$("#select-max-team").val(),
     visible:$("#switch-visible").is(":checked"),
     seminarSerial: $("#select-seminar-serial").val(),
