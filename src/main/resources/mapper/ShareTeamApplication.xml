@@ -33,7 +33,7 @@
         where main_course_id=#{id,jdbcType=BIGINT}
     </select>
 
-    <insert id="addShareTeamApplication" useGeneratedKeys="true" keyProperty="id" parameterType="com.group12.course.entity.application.ShareTeamApplication">
+    <insert id="addShareTeamApplication" useGeneratedKeys="true" keyProperty="id">
         insert into share_team_application
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >

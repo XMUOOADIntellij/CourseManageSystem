@@ -43,6 +43,15 @@ public class KlassStudentDao {
     }
 
     /**
+     * 根据学生id和班级id删除学生与班级的关联
+     * @param klassId
+     * @param studentId
+     * @return
+     */
+    public int deleteKlassStudentByKlassIdAndStudentId(Long klassId,Long studentId){
+        return klassStudentMapper.deleteKlassStudentByKlassIdAndStudentId(klassId,studentId);
+    }
+    /**
      * 添加班级学生记录
      * @param klassStudent
      * @return
