@@ -124,11 +124,11 @@ function getSeminarList(roundid) {
     }
   });
 }*/
-//success
+//success 有8080 404 不带8080 就对
 function getCourseList() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/course",
+    url: "http://xug98.cn/course",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -235,6 +235,7 @@ function getClassList() {
     }
   });
 }
+//405 谈雪
 function updateClass() {
   Cookies.set("class","1");
   var fileToUpload = $("#file").prop("files")[0];
@@ -250,6 +251,12 @@ function updateClass() {
       console.log(data);
       alert("success");
       window.location.href="./seminar-detail.html";
+    },
+    error: function(data){
+      console.log(data);
+
+      alert("fail");
+
     },
     statusCode: {
       400: function() {
@@ -358,7 +365,7 @@ function getSeminarList(roundId) {
     }
   });
 }
-//405
+//未部署
 function getSeminar() {
   Cookies.set("seminar","1");
   $.ajax({
@@ -371,6 +378,10 @@ function getSeminar() {
         // alert("获取成功");
           console.log(data[i]);
       }
+    },
+    error :function(data){
+      console.log(data);
+      alert("fail");
     },
     statusCode: {
       400: function() {
@@ -407,6 +418,34 @@ function getSeminarByClass() {
     }
   });
 }
+//success
+function updateSeminarByClass() {
+  Cookies.set("seminar","1");
+  Cookies.set("class","1");
+  let ata ={
+    reportDdl:convertTime($("#input-deadline").val()),
+  };
+  console.log(ata);
+  $.ajax({
+    type: "put",
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class"),
+    dataType: "json",
+    data: JSON.stringify(ata),
+    contentType: "application/json",
+    success: function(data, textStatus, xhr) {
+      console.log(data);
+      alert("success");
+      window.location.href="./seminar-detail.html";
+    },
+    statusCode: {
+      400: function() {
+        $("#password").val("");
+        alert("用户名或密码错误！");
+      }
+    }
+  });
+}
+//未部署
 function getSeminarScoreByClass(){
   Cookies.set("seminar","1");
   Cookies.set("class","1");
@@ -431,6 +470,7 @@ function getSeminarScoreByClass(){
     }
   });
 }
+//未部署
 function updateSeminarScoreByClass(){
   let teamData={id: 1,name:"1-1"};
   let ata ={
@@ -465,6 +505,7 @@ function updateSeminarScoreByClass(){
   window.location.reload();
 
 }
+//success
 function createCourse() {
   let conflict={
     courseId: "2",
@@ -478,7 +519,7 @@ function createCourse() {
     minMember: "4",
     maxMember: "6",
     teamStartTime: convertTime($("#input-start").val()),
-    teamEndTime: convertTime($("#input-start").val()),
+    teamEndTime: convertTime($("#input-end").val()),
   };
   console.log(ata);
   $.ajax({
@@ -497,7 +538,7 @@ function createCourse() {
       alert("fail");
     },
     statusCode: {
-      201: function(){
+      201: function(data){
         console.log(data);
         alert("success");
         window.location.href="./course-round.html";
@@ -617,32 +658,6 @@ function updateSeminar() {
   });
 }
 //success
-function updateSeminarByClass() {
-  Cookies.set("seminar","1");
-  Cookies.set("class","1");
-  let ata ={
-    reportDdl:convertTime($("#input-deadline").val()),
-  };
-  console.log(ata);
-  $.ajax({
-    type: "put",
-    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class"),
-    dataType: "json",
-    data: JSON.stringify(ata),
-    contentType: "application/json",
-    success: function(data, textStatus, xhr) {
-      console.log(data);
-      alert("success");
-      window.location.href="./seminar-detail.html";
-    },
-    statusCode: {
-      400: function() {
-        $("#password").val("");
-        alert("用户名或密码错误！");
-      }
-    }
-  });
-}
 function getAttendanceByClass(){
   Cookies.set("seminar","1");
   Cookies.set("class","1");
@@ -653,9 +668,16 @@ function getAttendanceByClass(){
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
-        console.log(data[i]);
+         alert("获取成功");
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i]);
+        }
       }
+    },
+    error: function(data){
+      console.log(data);
+      alert("fail");
+
     },
     statusCode: {
       400: function() {
@@ -667,6 +689,7 @@ function getAttendanceByClass(){
     }
   });
 }
+//无文件
 function getPptByClass(){
   Cookies.set("seminar","1");
   Cookies.set("class","1");
@@ -677,9 +700,14 @@ function getPptByClass(){
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
-        console.log(data[i]);
+         alert("获取成功");
+        console.log(data);
       }
+    },
+    error: function(data){
+      console.log(data);
+      alert("fail");
+
     },
     statusCode: {
       400: function() {
@@ -691,6 +719,7 @@ function getPptByClass(){
     }
   });
 }
+//无文件
 function getReportByClass(){
   Cookies.set("seminar","1");
   Cookies.set("class","1");
@@ -701,9 +730,14 @@ function getReportByClass(){
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
-        console.log(data[i]);
+         alert("获取成功");
+        console.log(data);
       }
+    },
+    error: function(data){
+      console.log(data);
+      alert("fail");
+
     },
     statusCode: {
       400: function() {
@@ -715,6 +749,7 @@ function getReportByClass(){
     }
   });
 }
+//无文件
 function getPptByAttendance(){
   Cookies.set("attendance","1");
   $.ajax({
@@ -724,9 +759,14 @@ function getPptByAttendance(){
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
-        console.log(data[i]);
+         alert("获取成功");
+        console.log(data);
       }
+    },
+    error: function(data){
+      console.log(data);
+      alert("fail");
+
     },
     statusCode: {
       400: function() {
@@ -738,6 +778,7 @@ function getPptByAttendance(){
     }
   });
 }
+//无文件
 function getReportByAttendance(){
   Cookies.set("attendance","1");
   $.ajax({
@@ -747,9 +788,14 @@ function getReportByAttendance(){
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
-        console.log(data[i]);
+         alert("获取成功");
+        console.log(data);
       }
+    },
+    error: function(data){
+      console.log(data);
+      alert("fail");
+
     },
     statusCode: {
       400: function() {
