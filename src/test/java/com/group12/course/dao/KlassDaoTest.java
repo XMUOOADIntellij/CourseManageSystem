@@ -27,8 +27,9 @@ public class KlassDaoTest {
     KlassMapper klassMapper;
 
     @Test
-    public void testSelectKlass(){
+    public void testGetKlass(){
         Klass record =  klassMapper.selectKlassById(new Long(1));
+        System.out.print(record);
         Assert.assertNotNull(record.getCourse());
     }
 

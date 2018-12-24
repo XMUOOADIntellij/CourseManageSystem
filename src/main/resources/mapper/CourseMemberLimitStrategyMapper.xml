@@ -26,12 +26,9 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-    <insert id="addCourseMemberLimitStrategy" useGeneratedKeys="true" keyProperty="courseMemberLimitStrategy.id" >
+    <insert id="addCourseMemberLimitStrategy" useGeneratedKeys="true" keyProperty="id" >
         insert into course_member_limit_strategy
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                id,
-            </if>
             <if test="course != null" >
                 course_id,
             </if>
@@ -43,9 +40,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                #{id,jdbcType=BIGINT},
-            </if>
             <if test="course != null" >
                 #{course.id,jdbcType=BIGINT},
             </if>

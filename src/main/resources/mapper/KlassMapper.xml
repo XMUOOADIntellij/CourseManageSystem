@@ -28,7 +28,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="addKlass" useGeneratedKeys="true" keyProperty="id" parameterType="com.group12.course.entity.Klass" >
+  <insert id="addKlass" useGeneratedKeys="true" keyProperty="id">
     insert into klass
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="course.id != null" >

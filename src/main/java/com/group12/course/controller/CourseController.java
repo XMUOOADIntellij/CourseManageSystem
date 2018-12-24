@@ -93,35 +93,22 @@ public class CourseController {
      * @return List<Course>
      */
     @GetMapping(value="",produces = "application/json; charset=utf-8")
-    public List<CourseKlassVO> getCourseByTeacherId(HttpServletRequest request, HttpServletResponse response){
+    public void getCourseByTeacherId(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String token = request.getHeader("Authorization");
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
         if (jwtTeacher!=null){
-            List<CourseKlassVO> courseKlassVOList = new ArrayList<>();
-
             List<Course> courseList = courseService.getCourseByTeacherId(jwtTeacher.getId());
-            for (Course course:courseList) {
-                List<Klass> klassList = klassService.getAllKlassByCourseId(course.getId());
-                for (Klass klass:klassList) {
-                    CourseKlassVO courseKlassVO = new CourseKlassVO(course);
-                    courseKlassVO.setGrade(klass.getGrade());
-                    courseKlassVO.setKlassSerial(klass.getKlassSerial());
-                    courseKlassVO.setKlassId(klass.getId());
-                    courseKlassVOList.add(courseKlassVO);
-                }
-            }
-            if (courseKlassVOList.isEmpty()){
+            if (courseList.isEmpty()){
                 response.setStatus(404);
-                return null;
             }
             else {
                 response.setStatus(200);
-                return courseKlassVOList;
+                String json = JSONObject.toJSONString(courseList);
+                response.getWriter().write(json);
             }
         }
         else {
             response.setStatus(403);
-            return null;
         }
     }
 
