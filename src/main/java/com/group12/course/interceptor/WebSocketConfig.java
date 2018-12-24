@@ -18,7 +18,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/seminarProgress");
+        config.enableSimpleBroker("/seminarSocket");
         config.setApplicationDestinationPrefixes("/app");
     }
 
@@ -33,6 +33,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         //注册STOMP端点 ，订阅或发布消息到目的地路径前，要连接该端点
-        registry.addEndpoint("/seminarSocket").withSockJS();
+        registry.addEndpoint("/Socket").withSockJS();
     }
 }

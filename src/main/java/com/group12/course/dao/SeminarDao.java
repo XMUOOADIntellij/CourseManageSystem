@@ -61,7 +61,7 @@ public class SeminarDao {
                 //插入班级讨论课记录
                 klassSeminarDao.insertKlassSeminarList(klassSeminarsRecord);
                 if (record.getRound() == null) {
-                    //TODO 新建轮
+
                 }
                 return record.getId();
             } else {

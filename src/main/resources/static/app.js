@@ -13,15 +13,15 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/seminarSocket');
+    var socket = new SockJS('/Socket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/seminarProgress/progress', function (greeting) {
-            showGreeting(JSON.parse(greeting.body).content);
+        stompClient.subscribe('/seminarSocket/progress', function (greeting) {
+            showGreeting(JSON.parse(greeting.body).seminarName);
         });
-        stompClient.subscribe('/seminarProgress/question', function (greeting) {
+        stompClient.subscribe('/seminarSocket/question', function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
         });
     });
