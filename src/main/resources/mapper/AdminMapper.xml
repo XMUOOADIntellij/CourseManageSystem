@@ -14,11 +14,14 @@
     id, account, password
   </sql>
 
+
+
   <select id="getAdminByAccount" resultMap="BaseResultMap"  >
     select 
     <include refid="Base_Column_List" />
     from admin
     where account = #{account}
   </select>
+
 
 </mapper>
