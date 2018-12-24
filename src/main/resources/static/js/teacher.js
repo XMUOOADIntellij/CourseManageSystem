@@ -172,7 +172,7 @@ function getCourseInfo() {
   });
 }
 
-function getClasslist() {
+function getClassList() {
   Cookies.set("course","1");
   Cookies.set("class","1");
   $.ajax({
