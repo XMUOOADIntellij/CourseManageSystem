@@ -17,6 +17,8 @@ import java.util.List;
 public class RoundDao {
     @Autowired
     RoundMapper roundMapper;
+    @Autowired
+    CourseDao courseDao;
 
     public Round getRound(Long id){
         return roundMapper.selectRoundById(id);
@@ -26,7 +28,15 @@ public class RoundDao {
         return roundMapper.deleteRound(id);
     }
 
-    public int addRound(Round round){
+    public int addRound(Long courseId){
+
+        Round round = new Round();
+        round.setCourse(courseDao.getCourse(courseId));
+
+        List<Round> roundList = getRoundByCourseId(courseId);
+        Integer count = roundList.size();
+        Integer serial = count+1;
+        round.setRoundSerial(serial);
         return roundMapper.addRound(round);
     }
 
