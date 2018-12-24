@@ -55,7 +55,7 @@
     <script src="../../static/js/teacher.js"></script>
     <script src="../../static/js/jwt.js"></script>
   </head>
-  <body>
+  <body onload="getSeminarScoreByClass()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -255,7 +255,7 @@
                             <span class="status-icon bg-success"></span> 5.0
                           </td>
                           <td>
-                            <a class="icon" href="javascript:void(0)">
+                            <a class="icon" href="javascript:void(0)" onclick="updateSeminarScoreByClass()">
                               <i class="fe fe-edit"></i>
                             </a>
                           </td>
