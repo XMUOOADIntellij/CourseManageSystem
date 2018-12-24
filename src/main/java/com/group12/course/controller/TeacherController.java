@@ -31,17 +31,19 @@ public class TeacherController {
     /**
      * 创建教师
      *
-     * @param teacher 前端传入的用户对象
+     * @param teacherVO 前端传入的用户对象
      * 若激活成功，返回 200
      * 若激活失败，返回 400
      * */
     @PostMapping(value = "",produces = "application/json; charset=utf-8")
-    public void createTeacher(@RequestBody Teacher teacher, HttpServletResponse response){
-        int count=teacherService.addTeacher(teacher);
-        if (count==0){
+    public void createTeacher(@RequestBody TeacherVO teacherVO, HttpServletResponse response)throws IOException{
+        Teacher teacher=teacherService.addTeacher(new Teacher(teacherVO));
+        if (teacher.getId()==null){
             response.setStatus(400);
         }
         else {
+            String json = JSON.toJSONString(teacher);
+            response.getWriter().write(json);
             response.setStatus(200);
         }
     }
@@ -74,7 +76,7 @@ public class TeacherController {
      * 若没有教师，返回 400
      * */
     @GetMapping(value = "/searchTeacher",produces = "application/json; charset=utf-8")
-    public List<Teacher> searchTeacher(@RequestParam(value = "identity") String param, HttpServletResponse response)throws IOException {
+    public List<Teacher> searchTeacher(@RequestParam(value = "identity") String param, HttpServletResponse response) {
         List<Teacher> list=teacherService.getTeacherByParam(param);
         if (list.isEmpty()){
             response.setStatus(404);
@@ -103,12 +105,9 @@ public class TeacherController {
         }
         else {
             response.setStatus(200);
-            Map map = new HashMap(6);
-            map.put("id",teacher.getId());
-            map.put("account",teacher.getAccount());
-            map.put("name",teacher.getTeacherName()==null?"":teacher.getTeacherName());
-            map.put("email",teacher.getEmail()==null?"":teacher.getEmail());
-            String json = JSON.toJSONString(map);
+            TeacherVO returnVO = new TeacherVO(teacher.getId(),
+                    teacher.getAccount(),teacher.getTeacherName(),teacher.getEmail());
+            String json = JSON.toJSONString(returnVO);
             response.getWriter().write(json);
         }
     }
@@ -162,16 +161,9 @@ public class TeacherController {
         String token = request.getHeader("Authorization");
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
         if (jwtTeacher!=null){
-            Teacher tempTeacher=new Teacher(jwtTeacher.getAccount());
-            tempTeacher.setId(jwtTeacher.getId());
-            tempTeacher.setPassword(user.getPassword());
-            tempTeacher.setEmail(user.getEmail());
-            tempTeacher.setActive(true);
-            System.out.println(tempTeacher);
+            Teacher tempTeacher=new Teacher(jwtTeacher.getId(),
+                    jwtTeacher.getAccount(),user.getPassword(),user.getEmail(),true);
             modifyCount = teacherService.updateTeacher(tempTeacher);
-        }
-        else {
-            System.out.println("null");
         }
         if (modifyCount==0){
             response.setStatus(400);

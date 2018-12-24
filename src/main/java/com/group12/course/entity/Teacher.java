@@ -48,6 +48,14 @@ public class Teacher implements Serializable {
         this.teacherName=teacherVO.getName();
     }
 
+    public Teacher(Long id, String account, String password, String email, Boolean active) {
+        this.id = id;
+        this.account = account;
+        this.password = password;
+        this.email = email;
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +

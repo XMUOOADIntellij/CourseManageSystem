@@ -73,6 +73,17 @@ public class TeamService {
     }
 
     /**
+     * 根据传入的学生 id 和课程 id
+     * 获取其所在该课程下的队伍（以队长身份或队员身份的都算）
+     *
+     * @param id 查询的学生id
+     * @return 查询到的队伍对象
+     * */
+    public Team getTeamByStudentIdAndCourseId(Long id,Long courseId){
+        return teamDao.getTeamByStudentIdAndCourseId(id, courseId);
+    }
+
+    /**
      * 将某个学生从队伍内移除
      *
      * @param student 将要移除的学生对象

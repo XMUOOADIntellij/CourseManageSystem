@@ -30,7 +30,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="addRound" useGeneratedKeys="true" keyProperty="round.id"  >
+  <insert id="addRound" useGeneratedKeys="true" keyProperty="id"  >
     insert into round
     <trim prefix="(" suffix=")" suffixOverrides="," >
 

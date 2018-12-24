@@ -47,12 +47,9 @@
     where id = #{id}
   </delete>
 
-  <insert id="addStudent" parameterType="com.group12.course.entity.Student" >
+  <insert id="addStudent" parameterType="com.group12.course.entity.Student" useGeneratedKeys="true" keyProperty="id">
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="account != null" >
         account,
       </if>
@@ -70,9 +67,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="account != null" >
         #{account,jdbcType=VARCHAR},
       </if>
@@ -113,7 +107,7 @@
     where account = #{account,jdbcType=VARCHAR}
   </update>
 
-  <update id="updateStudentByID" parameterType="com.group12.course.entity.Student" >
+  <update id="updateStudentById" parameterType="com.group12.course.entity.Student" >
     update student
     <set >
       <if test="account != null" >

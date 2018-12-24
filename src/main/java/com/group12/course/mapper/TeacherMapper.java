@@ -61,7 +61,7 @@ public interface TeacherMapper {
      * @param record 主键代表新的教师对象
      * @return 代表处理数量
      * */
-    int updateTeacher(Teacher record);
+    int updateTeacherById(Teacher record);
 
     /**
      * 获取数据库中所有教师的记录

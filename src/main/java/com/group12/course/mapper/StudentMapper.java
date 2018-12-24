@@ -61,7 +61,7 @@ public interface StudentMapper {
      * @param record 代表新的学生对象
      * @return 代表处理数量
      * */
-    int updateStudentByID(Student record);
+    int updateStudentById(Student record);
 
     /**
      * 获取所有学生的记录
