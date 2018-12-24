@@ -2,7 +2,7 @@ package com.group12.course.controller.vo;
 
 import com.group12.course.entity.Attendance;
 
-public class AttendanceVo {
+public class AttendanceVO {
 
     /**
      * Attendance 的属性
@@ -130,8 +130,8 @@ public class AttendanceVo {
     }
 
 
-    public AttendanceVo(){}
-    public AttendanceVo(Attendance attendance) {
+    public AttendanceVO(){}
+    public AttendanceVO(Attendance attendance) {
         this.id = attendance.getId();
         this.pptName = attendance.getPptName();
         this.pptUrl = attendance.getPptUrl();

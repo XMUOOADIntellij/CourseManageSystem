@@ -1,10 +1,13 @@
 package com.group12.course.controller;
 
+import com.group12.course.controller.vo.AttendanceVO;
 import com.group12.course.controller.vo.QuestionVO;
 import com.group12.course.controller.vo.SeminarVO;
+import com.group12.course.entity.Attendance;
 import com.group12.course.entity.Question;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
+import com.group12.course.service.AttendanceService;
 import com.group12.course.service.QuestionService;
 import com.group12.course.service.SeminarService;
 import com.group12.course.tools.Jwt;
@@ -40,6 +43,8 @@ public class SeminarProgressController {
     SeminarService seminarService;
     @Autowired
     QuestionService questionService;
+    @Autowired
+    AttendanceService attendanceService;
 
     /**
      * 处理发往 /app/seminar/pause的消息
@@ -48,12 +53,24 @@ public class SeminarProgressController {
      */
     @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/pause")
     @SendTo("/seminarSocket/progress")
-    public SeminarVO pauseSeminar(Message message, @DestinationVariable Long seminarId, @DestinationVariable Long classId) {
+    public SeminarVO pauseSeminar(Message message, @DestinationVariable Long seminarId,
+                                  @DestinationVariable Long classId) {
 
         String token = message.getHeaders().get("Authorization").toString();
         Teacher teacher = Jwt.unSign(token, Teacher.class);
 
         return new SeminarVO(seminarService.pauseSeminar(teacher,seminarId,classId));
+    }
+
+    @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/continue")
+    @SendTo("/seminarSocket/progress")
+    public SeminarVO endSeminar(Message message, @DestinationVariable Long seminarId,
+                                  @DestinationVariable Long classId) {
+
+        String token = message.getHeaders().get("Authorization").toString();
+        Teacher teacher = Jwt.unSign(token, Teacher.class);
+
+        return new SeminarVO(seminarService.endSeminar(teacher,seminarId,classId));
     }
 
     /**
@@ -94,6 +111,27 @@ public class SeminarProgressController {
         return new QuestionVO(questionService.answerQuestion(
                 teacher,seminarId,classId,attendanceId));
     }
+
+
+    /**
+     * 选取下一组
+     * @param seminarId 讨论课id
+     * @param classId 班级id
+     * @param attendanceId 当前的展示id
+     * @param message 消息体，jwt
+     * @return 下一组展示
+     */
+    @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/attendance/{attendanceId}/next")
+    @SendTo("/seminarSocket/attendance")
+    public AttendanceVO nextAttendance(@DestinationVariable Long seminarId, @DestinationVariable Long classId,
+                                       @DestinationVariable Long attendanceId, Message message){
+
+        String token = message.getHeaders().get("Authorization").toString();
+        Teacher teacher = Jwt.unSign(token, Teacher.class);
+
+        return new AttendanceVO(attendanceService.nextAttendance(seminarId,classId,attendanceId,teacher));
+    }
+
 
 
 }
