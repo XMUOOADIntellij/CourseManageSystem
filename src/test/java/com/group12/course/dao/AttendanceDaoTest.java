@@ -48,4 +48,8 @@ public class AttendanceDaoTest {
         Assert.assertNotNull(attendance.getId());
     }
 
+    @Test
+    public void selectAttendanceByKlassSeminarIdAndTeamOrder(){
+        Assert.assertNotNull(attendanceDao.selectAttendanceByKlassSeminarIdAndTeamOrder(1L,3));
+    }
 }

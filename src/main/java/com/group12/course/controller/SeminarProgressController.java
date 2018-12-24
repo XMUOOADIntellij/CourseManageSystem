@@ -1,10 +1,10 @@
 package com.group12.course.controller;
 
+import com.group12.course.controller.vo.AttendanceVO;
 import com.group12.course.controller.vo.QuestionVO;
 import com.group12.course.controller.vo.SeminarVO;
-import com.group12.course.entity.Question;
-import com.group12.course.entity.Student;
-import com.group12.course.entity.Teacher;
+import com.group12.course.entity.*;
+import com.group12.course.service.AttendanceService;
 import com.group12.course.service.QuestionService;
 import com.group12.course.service.SeminarService;
 import com.group12.course.tools.Jwt;
@@ -16,12 +16,6 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 讨论课进程 controller
@@ -40,6 +34,26 @@ public class SeminarProgressController {
     SeminarService seminarService;
     @Autowired
     QuestionService questionService;
+    @Autowired
+    AttendanceService attendanceService;
+
+
+    /**
+     * 开始班级讨论课
+     * @param seminarId 讨论课id
+     * @param classId 班级id
+     * @param message 消息获得老师
+     * @return seminar
+     */
+    @MessageMapping(value = "/Socket/seminar/{seminarId}/class/{classId}/start")
+    @SendTo("/seminarSocket/progress")
+    public SeminarVO startSeminar(@DestinationVariable Long seminarId, @DestinationVariable Long classId,
+                                 Message message){
+
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
+        return new SeminarVO(seminarService.startSeminar(teacher,seminarId,classId));
+    }
 
     /**
      * 处理发往 /app/seminar/pause的消息
@@ -48,12 +62,24 @@ public class SeminarProgressController {
      */
     @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/pause")
     @SendTo("/seminarSocket/progress")
-    public SeminarVO pauseSeminar(Message message, @DestinationVariable Long seminarId, @DestinationVariable Long classId) {
+    public SeminarVO pauseSeminar(Message message, @DestinationVariable Long seminarId,
+                                  @DestinationVariable Long classId) {
 
-        String token = message.getHeaders().get("Authorization").toString();
-        Teacher teacher = Jwt.unSign(token, Teacher.class);
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
 
         return new SeminarVO(seminarService.pauseSeminar(teacher,seminarId,classId));
+    }
+
+    @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/end")
+    @SendTo("/seminarSocket/progress")
+    public SeminarVO endSeminar(Message message, @DestinationVariable Long seminarId,
+                                  @DestinationVariable Long classId) {
+
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
+
+        return new SeminarVO(seminarService.endSeminar(teacher,seminarId,classId));
     }
 
     /**
@@ -69,8 +95,8 @@ public class SeminarProgressController {
     public QuestionVO askQuestion(@DestinationVariable Long seminarId, @DestinationVariable Long classId,
                                   Message message,QuestionVO questionVO){
 
-        String token = message.getHeaders().get("Authorization").toString();
-        Student student = Jwt.unSign(token, Student.class);
+        Student student = new Student();
+        student.setId(1L);
 
         return new QuestionVO(questionService.askQuestion(seminarId,classId,new Question(questionVO),student));
     }
@@ -88,12 +114,33 @@ public class SeminarProgressController {
     @SendTo("/seminarSocket/question")
     public QuestionVO answerQuestion(@DestinationVariable Long seminarId,@DestinationVariable Long classId,
                                      @DestinationVariable Long attendanceId,Message message){
-        String token = message.getHeaders().get("Authorization").toString();
-        Teacher teacher = Jwt.unSign(token, Teacher.class);
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
 
         return new QuestionVO(questionService.answerQuestion(
                 teacher,seminarId,classId,attendanceId));
     }
+
+
+    /**
+     * 选取下一组
+     * @param seminarId 讨论课id
+     * @param classId 班级id
+     * @param attendanceId 当前的展示id
+     * @param message 消息体，jwt
+     * @return 下一组展示
+     */
+    @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/attendance/{attendanceId}/next")
+    @SendTo("/seminarSocket/attendance")
+    public AttendanceVO nextAttendance(@DestinationVariable Long seminarId, @DestinationVariable Long classId,
+                                       @DestinationVariable Long attendanceId, Message message){
+
+        Teacher teacher = new Teacher();
+        teacher.setId(1L);
+
+        return new AttendanceVO(attendanceService.nextAttendance(seminarId,classId,attendanceId,teacher));
+    }
+
 
 
 }

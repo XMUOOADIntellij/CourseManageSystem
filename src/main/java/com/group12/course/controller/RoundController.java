@@ -102,7 +102,7 @@ public class RoundController {
     public void createRound(@RequestParam Long courseId, HttpServletResponse response) {
         /* 需要前端传回courseId*/
 
-        int status = roundService.addRound(courseId);
+        Long status = roundService.addRound(courseId);
         if (status == 0) {
             response.setStatus(403);
         } else {

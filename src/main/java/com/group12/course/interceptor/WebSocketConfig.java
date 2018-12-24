@@ -1,4 +1,4 @@
-package com.group12.course.controller;
+package com.group12.course.interceptor;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -33,6 +33,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         //注册STOMP端点 ，订阅或发布消息到目的地路径前，要连接该端点
-        registry.addEndpoint("/seminarSocket").withSockJS();
+        registry.addEndpoint("/Socket").withSockJS();
     }
 }
