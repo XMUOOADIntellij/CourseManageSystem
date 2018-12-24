@@ -9,10 +9,13 @@ import com.group12.course.controller.vo.AttendanceVO;
 import com.group12.course.controller.vo.QuestionVO;
 import com.group12.course.controller.vo.SeminarVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +40,15 @@ public class SeminarController {
      * @return 讨论课id
      */
     @PostMapping(value= "" , produces = "application/json; charset=utf-8")
-    public Long createSeminar(@RequestBody SeminarVO seminarVo,HttpServletRequest request){
-        Seminar seminar = new Seminar(seminarVo);
+    public ResponseEntity<SeminarVO> createSeminar(@Valid @RequestBody SeminarVO seminarVo, HttpServletRequest request){
+
         String token = request.getHeader("Authorization");
         Teacher teacher = Jwt.unSign(token,Teacher.class);
 
-        return  seminarService.createSeminar(seminar,teacher);
+        Seminar seminar = new Seminar(seminarVo);
+        seminarService.createSeminar(seminar,teacher);
+
+        return new ResponseEntity<>(new SeminarVO(seminar), HttpStatus.OK);
     }
 
     /**
@@ -106,6 +112,11 @@ public class SeminarController {
        return new SeminarVO(record);
     }
 
+
+    @GetMapping(value = "/{seminarId}")
+    public SeminarVO selectSeminarBySeminarId(@PathVariable Long seminarId){
+        return new SeminarVO(seminarService.selectSeminarById(seminarId));
+    }
 
 
     //----------------------------------------------------------------------------------//

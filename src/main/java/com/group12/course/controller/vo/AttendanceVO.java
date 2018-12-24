@@ -2,6 +2,11 @@ package com.group12.course.controller.vo;
 
 import com.group12.course.entity.Attendance;
 
+/**
+ * 讨论课报名VO
+ * @author Y Jiang
+ * @date 2018/12/12
+ */
 public class AttendanceVO {
 
     /**
