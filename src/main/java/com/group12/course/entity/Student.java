@@ -28,6 +28,7 @@ public class Student implements Serializable {
     private String studentName;
 
     public Student() {
+        active = false;
     }
 
     public Student(String account) {

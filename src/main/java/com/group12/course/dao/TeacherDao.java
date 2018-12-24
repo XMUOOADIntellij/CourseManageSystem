@@ -121,7 +121,7 @@ public class TeacherDao {
      * 成功修改为1，否则为0
      * */
     public int changeTeacher(Teacher teacher){
-        return teacherMapper.updateTeacher(teacher);
+        return teacherMapper.updateTeacherById(teacher);
     }
 
     /**
@@ -130,7 +130,7 @@ public class TeacherDao {
      * @return 处理数量
      * */
     public int resetPassword(Long id){
-        return teacherMapper.updateTeacher(new Teacher(id,defaultPassword));
+        return teacherMapper.updateTeacherById(new Teacher(id,defaultPassword));
     }
 
     /**

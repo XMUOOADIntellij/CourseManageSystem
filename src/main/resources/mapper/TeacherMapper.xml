@@ -91,7 +91,7 @@
     </trim>
   </insert>
 
-  <update id="updateTeacher" parameterType="com.group12.course.entity.Teacher" >
+  <update id="updateTeacherById" parameterType="com.group12.course.entity.Teacher" >
     update teacher
     <set >
       <if test="account != null" >

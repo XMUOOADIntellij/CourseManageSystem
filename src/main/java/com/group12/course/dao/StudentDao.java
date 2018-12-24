@@ -128,7 +128,7 @@ public class StudentDao {
      * @return 代表处理数量
      * */
     public int changeStudentByID(Student student){
-        return studentMapper.updateStudentByID(student);
+        return studentMapper.updateStudentById(student);
     }
 
     /**

@@ -131,6 +131,7 @@ public class StudentController {
         // 区分传入的是学生还是教师，调用不同的 Service
         if (jwtStudent!=null){
             Student tempStudent=new Student(jwtStudent.getAccount());
+            tempStudent.setId(jwtStudent.getId());
             tempStudent.setPassword(user.getPassword());
             tempStudent.setEmail(user.getEmail());
             tempStudent.setActive(true);

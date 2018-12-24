@@ -160,11 +160,13 @@ public class UserController {
         // 区分传入的是学生还是教师，调用不同的 Service
         if (jwtStudent!=null){
             Student tempStudent=new Student(jwtStudent.getAccount());
+            tempStudent.setId(jwtStudent.getId());
             tempStudent.setPassword(user.getPassword());
             modifyCount = studentService.updateStudent(tempStudent);
         }
         else {
             Teacher tempTeacher=new Teacher(jwtTeacher.getAccount());
+            tempTeacher.setId(jwtTeacher.getId());
             tempTeacher.setPassword(user.getPassword());
             modifyCount = teacherService.updateTeacher(tempTeacher);
         }
@@ -218,11 +220,13 @@ public class UserController {
         // 区分传入的是学生还是教师，调用不同的 Service
         if (jwtStudent!=null){
             Student tempStudent=new Student(jwtStudent.getAccount());
+            tempStudent.setId(jwtStudent.getId());
             tempStudent.setEmail(user.getEmail());
             modifyCount = studentService.updateStudent(tempStudent);
         }
         else if (jwtTeacher!=null){
             Teacher tempTeacher=new Teacher(jwtTeacher.getAccount());
+            tempTeacher.setId(jwtTeacher.getId());
             tempTeacher.setEmail(user.getEmail());
             modifyCount = teacherService.updateTeacher(tempTeacher);
         }

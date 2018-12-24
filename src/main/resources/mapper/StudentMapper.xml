@@ -107,7 +107,7 @@
     where account = #{account,jdbcType=VARCHAR}
   </update>
 
-  <update id="updateStudentByID" parameterType="com.group12.course.entity.Student" >
+  <update id="updateStudentById" parameterType="com.group12.course.entity.Student" >
     update student
     <set >
       <if test="account != null" >
