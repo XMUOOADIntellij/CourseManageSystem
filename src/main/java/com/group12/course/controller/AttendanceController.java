@@ -12,6 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 讨论课展示相关 controller层
+ * @author Y Jiang
+ * @date 2018/12/12
+ */
 @RestController
 @RequestMapping("/attendance")
 public class AttendanceController {

@@ -146,12 +146,14 @@ public class ScoreDao {
         for (Team item : teamDao.listTeamByKlassId(klassSeminar.getKlass().getId())) {
             SeminarScore seminarScore = new SeminarScore();
             seminarScore.setTeam(item);
-            seminarScore.setReportScore(new BigDecimal(0));
-            seminarScore.setPresentationScore(new BigDecimal(0));
-            seminarScore.setQuestionScore(new BigDecimal(0));
-            seminarScore.setTotalScore(new BigDecimal(0));
             seminarScore.setKlassSeminar(klassSeminar);
-            seminarScoreList.add(seminarScore);
+            if (seminarScoreMapper.selectSeminarScoreByKlassSeminarIdAndTeamId(klassSeminarId, item.getId()) == null) {
+                seminarScore.setReportScore(new BigDecimal(0));
+                seminarScore.setPresentationScore(new BigDecimal(0));
+                seminarScore.setQuestionScore(new BigDecimal(0));
+                seminarScore.setTotalScore(new BigDecimal(0));
+                seminarScoreList.add(seminarScore);
+            }
 
             //如果这个队伍还没有RoundScore，新建一个
             if (roundScoreMapper.selectRoundScoreByRoundIdAndTeamId(
@@ -166,7 +168,9 @@ public class ScoreDao {
                 insertRoundScore(roundScore);
             }
         }
-        insertSeminarScoreList(seminarScoreList);
+        if(!seminarScoreList.isEmpty()){
+            insertSeminarScoreList(seminarScoreList);
+        }
     }
 
     /**
@@ -295,9 +299,10 @@ public class ScoreDao {
         return roundScoreMapper.listRoundScoreByRoundIdList(roundId);
     }
 
-    public  List<SeminarScore> listSeminarScoreByKlassSeminarId(Long klassSeminarId){
+    public List<SeminarScore> listSeminarScoreByKlassSeminarId(Long klassSeminarId) {
         return seminarScoreMapper.listSeminarScoreByKlassSeminarId(klassSeminarId);
     }
+
     public SeminarScore selectSeminarScoreByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {
         return seminarScoreMapper.selectSeminarScoreByKlassSeminarIdAndTeamId(klassSeminarId, teamId);
     }

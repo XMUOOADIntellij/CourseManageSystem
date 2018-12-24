@@ -8,11 +8,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * 班级讨论课相关 Dao层
+ * @author Y Jiang
+ * @date 2018/12/12
+ */
 @Component
 public class KlassSeminarDao {
     @Autowired
     KlassSeminarMapper klassSeminarMapper;
-
 
     public KlassSeminar selectKlassSeminarBySeminarIdAndClassId(Long seminarId,Long classId){
          return klassSeminarMapper.listKlassSeminarBySeminarIdAndKlassId(seminarId,classId);
