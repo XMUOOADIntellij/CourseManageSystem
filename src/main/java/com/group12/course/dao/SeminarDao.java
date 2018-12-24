@@ -45,6 +45,14 @@ public class SeminarDao {
                     record.getSeminarName() != null ||
                     record.getVisible() != null ||
                     record.getSeminarSerial() != null) {
+
+                //如果是需要新建轮，则新建轮
+                if (record.getRound() == null) {
+                    record.setRound(
+                            roundDao.getRound(
+                                    roundDao.addRound(record.getCourse().getId())));
+                }
+
                 //Seminar表插入记录
                 seminarMapper.insertSeminar(record);
                 //寻找该课程下的班级
@@ -60,9 +68,7 @@ public class SeminarDao {
                 }
                 //插入班级讨论课记录
                 klassSeminarDao.insertKlassSeminarList(klassSeminarsRecord);
-                if (record.getRound() == null) {
-                    //TODO 新建轮
-                }
+
                 return record.getId();
             } else {
                 //TODO 讨论课信息不完全
@@ -73,7 +79,6 @@ public class SeminarDao {
             return null;
         }
     }
-
 
     /**
      * 通过id获得课程讨论课
@@ -123,7 +128,6 @@ public class SeminarDao {
         }
         return null;
     }
-
 
     public List<Seminar> listSeminarByRoundId(Long roundId){
         return seminarMapper.listSeminarByRoundId(roundId);

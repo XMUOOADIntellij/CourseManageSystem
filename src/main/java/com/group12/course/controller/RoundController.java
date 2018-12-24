@@ -101,10 +101,8 @@ public class RoundController {
     @PostMapping(value = "", produces = "application/json;charset=utf-8")
     public void createRound(@RequestParam Long courseId, HttpServletResponse response) {
         /* 需要前端传回courseId*/
-        Round round = new Round();
-        round.setCourse(courseService.getCourseById(courseId));
 
-        int status = roundService.addRound(round);
+        Long status = roundService.addRound(courseId);
         if (status == 0) {
             response.setStatus(403);
         } else {

@@ -27,7 +27,7 @@ public class CourseDaoTest {
     @Test
     public void testGetCourse(){
         Course record =  courseMapper.selectCourseById(new Long(1));
-        Assert.assertNotNull(record.getCourseName());
+        Assert.assertNotNull(record.getcourseName());
     }
 
     @Test

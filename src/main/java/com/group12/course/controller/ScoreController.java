@@ -71,6 +71,18 @@ public class ScoreController {
         return  seminarScoreVOList;
     }
 
+    @GetMapping(value = "/seminar/{seminarId}/class/{classId}/score")
+    public List<SeminarScoreVO> getKlassSeminarScore(@PathVariable Long seminarId,@PathVariable Long classId,
+                                                     HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
+
+        List<SeminarScoreVO> seminarScoreVOList = new ArrayList<>();
+        for(SeminarScore seminarScore:scoreService.getKlassSeminarScore(teacher,seminarId,classId)){
+            seminarScoreVOList.add(new SeminarScoreVO(seminarScore));
+        }
+        return  seminarScoreVOList;
+    }
     @GetMapping(value = "/attendance/{attendanceId}/score")
     public SeminarScoreVO getAttendanceScore(@PathVariable Long attendanceId){
         return new SeminarScoreVO(scoreService.getAttendanceScore(attendanceId));

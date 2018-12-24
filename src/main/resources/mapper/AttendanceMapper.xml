@@ -54,6 +54,13 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
+  <select id="selectAttendanceByKlassSeminarIdAndTeamOrder" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from attendance
+    where klass_seminar_id = #{klassSeminarId,jdbcType=BIGINT}
+    and   team_order = #{teamOrder,jdbcType=TINYINT}
+  </select>
 
   <delete id="deleteAttendanceById" parameterType="java.lang.Long" >
     delete from attendance

@@ -278,9 +278,6 @@ public class ScoreDao {
 
     }
 
-    public List<RoundScore> listRoundScoreByRoundIdList(List<Long> roundId) {
-        return roundScoreMapper.listRoundScoreByRoundIdList(roundId);
-    }
 
     public Integer insertSeminarScoreList(List<SeminarScore> seminarScoreList) {
         return seminarScoreMapper.insertSeminarScoreList(seminarScoreList);
@@ -294,6 +291,13 @@ public class ScoreDao {
         return seminarScoreMapper.listSeminarScoreByKlassSeminarIdListAndTeamId(klassSeminarIdList, teamId);
     }
 
+    public List<RoundScore> listRoundScoreByRoundIdList(List<Long> roundId) {
+        return roundScoreMapper.listRoundScoreByRoundIdList(roundId);
+    }
+
+    public  List<SeminarScore> listSeminarScoreByKlassSeminarId(Long klassSeminarId){
+        return seminarScoreMapper.listSeminarScoreByKlassSeminarId(klassSeminarId);
+    }
     public SeminarScore selectSeminarScoreByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {
         return seminarScoreMapper.selectSeminarScoreByKlassSeminarIdAndTeamId(klassSeminarId, teamId);
     }

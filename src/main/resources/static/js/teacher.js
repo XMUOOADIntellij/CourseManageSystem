@@ -11,7 +11,7 @@ function activeUser() {
   alert("input");
   $.ajax({
     type:'put',
-    url: 'http://xug98.cn/teacher/active',
+    url: 'http://xug98.cn:8080/teacher/active',
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -32,7 +32,7 @@ function activeUser() {
 /*function getCourseList() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course",
+    url: "http://xug98.cn:8080/course",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -68,7 +68,7 @@ function activeUser() {
 function getRoundList() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course/"+Cookies.get("course")+"/round",
+    url: "http://xug98.cn:8080/course/"+Cookies.get("course")+"/round",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -97,7 +97,7 @@ function getRoundList() {
 function getSeminarList(roundid) {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course",
+    url: "http://xug98.cn:8080/course",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -124,6 +124,7 @@ function getSeminarList(roundid) {
     }
   });
 }*/
+//success 有8080 404 不带8080 就对
 function getCourseList() {
   $.ajax({
     type: "get",
@@ -133,6 +134,8 @@ function getCourseList() {
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
         // alert("获取成功");
+        console.log("courselist");
+
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
         }
@@ -140,25 +143,57 @@ function getCourseList() {
     },
     statusCode: {
       400: function() {
+        alert("courselist");
         alert("错误的ID格式");
       },
       404: function() {
+        alert("courselist");
         alert("未找到课程");
       }
     }
   });
 }
-function getCourseInfo() {
-  Cookies.set("course","1");
+//400 未部署
+function getAllCourse() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course"+Cookies.get("course"),
+    url: "http://xug98.cn:8080/course/allcourse",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
         // alert("获取成功");
+        console.log("courselist");
+
+        for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
+        }
+      }
+    },
+    statusCode: {
+      400: function() {
+        alert("courselist");
+        alert("错误的ID格式");
+      },
+      404: function() {
+        alert("courselist");
+        alert("未找到课程");
+      }
+    }
+  });
+}
+//success conflict未加
+function getCourseInfo() {
+  Cookies.set("course","1");
+  $.ajax({
+    type: "get",
+    url: "http://xug98.cn:8080/course/"+Cookies.get("course"),
+    dataType: "json",
+    contentType: "application/json;",
+    success: function(data, textStatus, xhr) {
+      if (xhr.status === 200) {
+        // alert("获取成功");
+          console.log(data);
 
       }
     },
@@ -172,12 +207,13 @@ function getCourseInfo() {
     }
   });
 }
+//success
 function getClassList() {
   Cookies.set("course","1");
   Cookies.set("class","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course"+Cookies.get("course")+"/class",
+    url: "http://xug98.cn:8080/course/"+Cookies.get("course")+"/class",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -199,15 +235,15 @@ function getClassList() {
     }
   });
 }
+//405 谈雪
 function updateClass() {
-  Cookies.set("seminar","1");
   Cookies.set("class","1");
-  let ata ={file: "string"
-  };
+  var fileToUpload = $("#file").prop("files")[0];
+  let ata ={file: fileToUpload};
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn/class/"+Cookies.get("class"),
+    url: "http://xug98.cn:8080/class/"+Cookies.get("class"),
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -215,6 +251,12 @@ function updateClass() {
       console.log(data);
       alert("success");
       window.location.href="./seminar-detail.html";
+    },
+    error: function(data){
+      console.log(data);
+
+      alert("fail");
+
     },
     statusCode: {
       400: function() {
@@ -224,12 +266,13 @@ function updateClass() {
     }
   });
 }
+//状态码存疑
 function deleteClass(){
   let cid="1";
   let ata = { id: cid };
   $.ajax({
     type: "delete",
-    url: "/class/" + cid,
+    url: "http://xug98.cn:8080/class/" + cid,
     data: JSON.stringify(ata),
     dataType: "json",
     contentType: "application/json;",
@@ -238,6 +281,8 @@ function deleteClass(){
       alert("wrong");
     },
     success: function(data, textStatus, xhr) {
+      alert("成功");
+
       if (xhr.status === 204) {
         alert("成功");
         console.log(data);
@@ -257,16 +302,18 @@ function deleteClass(){
   });
   window.location.reload();
 }
+//success
 function getRoundList() {
   Cookies.set("course","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/course/"+Cookies.get("course")+"/round",
+    url: "http://xug98.cn:8080/course/"+Cookies.get("course")+"/round",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
         // alert("获取成功");
+        console.log("roundlist");
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
           getSeminarList(data[i].id);
@@ -275,23 +322,30 @@ function getRoundList() {
     },
     statusCode: {
       400: function() {
+        alert("roundlist");
+
         alert("错误的ID格式");
       },
       404: function() {
+        alert("roundlist");
+
         alert("未找到课程");
       }
     }
   });
 }
+//success
 function getSeminarList(roundId) {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/round/"+roundId+"/seminar",
+    url: "http://xug98.cn:8080/round/"+roundId+"/seminar",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
         // alert("获取成功");
+        console.log("seminarList");
+
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
         }
@@ -299,19 +353,24 @@ function getSeminarList(roundId) {
     },
     statusCode: {
       400: function() {
+        alert("seminarList");
+
         alert("错误的ID格式");
       },
       404: function() {
+        alert("seminarList");
+
         alert("未找到课程");
       }
     }
   });
 }
+//未部署
 function getSeminar() {
   Cookies.set("seminar","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar"),
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar"),
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -320,6 +379,10 @@ function getSeminar() {
           console.log(data[i]);
       }
     },
+    error :function(data){
+      console.log(data);
+      alert("fail");
+    },
     statusCode: {
       400: function() {
         alert("错误的ID格式");
@@ -330,18 +393,19 @@ function getSeminar() {
     }
   });
 }
+//success
 function getSeminarByClass() {
   Cookies.set("seminar","1");
   Cookies.set("class","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class"),
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class"),
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
         // alert("获取成功");
-        console.log(data[i]);
+        console.log(data);
       }
     },
     statusCode: {
@@ -354,12 +418,40 @@ function getSeminarByClass() {
     }
   });
 }
+//success
+function updateSeminarByClass() {
+  Cookies.set("seminar","1");
+  Cookies.set("class","1");
+  let ata ={
+    reportDdl:convertTime($("#input-deadline").val()),
+  };
+  console.log(ata);
+  $.ajax({
+    type: "put",
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class"),
+    dataType: "json",
+    data: JSON.stringify(ata),
+    contentType: "application/json",
+    success: function(data, textStatus, xhr) {
+      console.log(data);
+      alert("success");
+      window.location.href="./seminar-detail.html";
+    },
+    statusCode: {
+      400: function() {
+        $("#password").val("");
+        alert("用户名或密码错误！");
+      }
+    }
+  });
+}
+//未部署
 function getSeminarScoreByClass(){
   Cookies.set("seminar","1");
   Cookies.set("class","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/seminarscore",
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/seminarscore",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -378,6 +470,7 @@ function getSeminarScoreByClass(){
     }
   });
 }
+//未部署
 function updateSeminarScoreByClass(){
   let teamData={id: 1,name:"1-1"};
   let ata ={
@@ -391,7 +484,7 @@ function updateSeminarScoreByClass(){
   Cookies.set("class","1");
   $.ajax({
     type: "put",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/seminarscore",
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/seminarscore",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -412,29 +505,26 @@ function updateSeminarScoreByClass(){
   window.location.reload();
 
 }
+//success
 function createCourse() {
   let conflict={
-    courseId: 45,
-    courseName: ".Net",
-    teacherId: 15,
-    teacherName: "杨老师"};
+    courseId: "2",
+    };
   let ata = {
-    name: "OOAD",
-    intro: "课程要求",
-    presentationWeight: 0.5,
-    questionWeight: 0.1,
-    reportWeight: 0.3,
-    minMemberNumber: 4,
-    maxMemberNumber: 6,
-    startTeamTime: "2018-10-11 18:00",
-    endTeamTime: "2018-11-11 18:00",
-    conflictCourses: conflict
-
+    courseName: "OOAD",
+    introduction: "课程要求",
+    presentationPercentage: "50",
+    questionPercentage: "10",
+    reportPercentage: "30",
+    minMember: "4",
+    maxMember: "6",
+    teamStartTime: convertTime($("#input-start").val()),
+    teamEndTime: convertTime($("#input-end").val()),
   };
   console.log(ata);
   $.ajax({
     type: "post",
-    url: "http://xug98.cn/course",
+    url: "http://xug98.cn:8080/course",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -443,7 +533,16 @@ function createCourse() {
       alert("success");
       window.location.href="./course-round.html";
     },
+    error: function(data){
+      console.log(data);
+      alert("fail");
+    },
     statusCode: {
+      201: function(data){
+        console.log(data);
+        alert("success");
+        window.location.href="./course-round.html";
+      },
       400: function() {
         $("#password").val("");
         alert("用户名或密码错误！");
@@ -451,9 +550,12 @@ function createCourse() {
     }
   });
 }
+//success
 function createSeminar() {
   Cookies.set("course","1");
   let ata = {
+    roundId:$("#select-round-id").val(),
+
     seminarName:$("#name").val(),
     introduction:$("#introduction").val(),
     maxTeam:$("#select-max-team").val(),
@@ -461,13 +563,13 @@ function createSeminar() {
     seminarSerial: $("#select-seminar-serial").val(),
     enrollStartTime:convertTime($("#input-start").val()),
     enrollEndTime:convertTime($("#input-end").val()),
-    roundId:$("#select-round-id").val(),
     courseId:Cookies.get("course")
   };
   console.log(ata);
+  alert("input");
   $.ajax({
     type: "post",
-    url: "http://xug98.cn/seminar",
+    url: "http://xug98.cn:8080/seminar",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -484,12 +586,13 @@ function createSeminar() {
     }
   });
 }
+//success
 function deleteSeminar() {
-  let cid="1";
-  let ata = { id: cid };
+  let cid="2";
+  let ata = { seminarId: cid };
   $.ajax({
     type: "delete",
-    url: "/seminar/" + cid,
+    url: "http://xug98.cn:8080/seminar/" + cid,
     data: JSON.stringify(ata),
     dataType: "json",
     contentType: "application/json;",
@@ -498,11 +601,11 @@ function deleteSeminar() {
       alert("wrong");
     },
     success: function(data, textStatus, xhr) {
-      if (xhr.status === 204) {
         alert("成功");
         console.log(data);
-      }
+
     },
+
     statusCode: {
       400: function() {
         alert("错误的ID格式");
@@ -515,18 +618,17 @@ function deleteSeminar() {
       }
     }
   });
+/*
   window.location.reload();
+*/
 
 }
-function createShare() {
-alert("success");
-  return true; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
-}
+//success
 function updateSeminar() {
   Cookies.set("seminar","1");
   let ata = {
     seminarName:$("#name").val(),
-    introduction:$("#name").val(),
+    introduction:$("#introduction").val(),
     maxTeam:$("#select-max-team").val(),
     visible:$("#switch-visible").is(":checked"),
     seminarSerial: $("#select-seminar-serial").val(),
@@ -538,7 +640,7 @@ function updateSeminar() {
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar"),
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar"),
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -555,45 +657,27 @@ function updateSeminar() {
     }
   });
 }
-function updateSeminarByClass() {
-  Cookies.set("seminar","1");
-  Cookies.set("class","1");
-  let ata ={
-    reportDdl:convertTime($("#input-deadline").val()),
-  };
-  console.log(ata);
-  $.ajax({
-    type: "put",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class"),
-    dataType: "json",
-    data: JSON.stringify(ata),
-    contentType: "application/json",
-    success: function(data, textStatus, xhr) {
-      console.log(data);
-      alert("success");
-      window.location.href="./seminar-detail.html";
-    },
-    statusCode: {
-      400: function() {
-        $("#password").val("");
-        alert("用户名或密码错误！");
-      }
-    }
-  });
-}
+//success
 function getAttendanceByClass(){
   Cookies.set("seminar","1");
   Cookies.set("class","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance",
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
-        console.log(data[i]);
+         alert("获取成功");
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i]);
+        }
       }
+    },
+    error: function(data){
+      console.log(data);
+      alert("fail");
+
     },
     statusCode: {
       400: function() {
@@ -605,19 +689,25 @@ function getAttendanceByClass(){
     }
   });
 }
+//无文件
 function getPptByClass(){
   Cookies.set("seminar","1");
   Cookies.set("class","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/ppt",
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/ppt",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
-        console.log(data[i]);
+         alert("获取成功");
+        console.log(data);
       }
+    },
+    error: function(data){
+      console.log(data);
+      alert("fail");
+
     },
     statusCode: {
       400: function() {
@@ -629,19 +719,25 @@ function getPptByClass(){
     }
   });
 }
+//无文件
 function getReportByClass(){
   Cookies.set("seminar","1");
   Cookies.set("class","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/report",
+    url: "http://xug98.cn:8080/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/report",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
-        console.log(data[i]);
+         alert("获取成功");
+        console.log(data);
       }
+    },
+    error: function(data){
+      console.log(data);
+      alert("fail");
+
     },
     statusCode: {
       400: function() {
@@ -653,18 +749,24 @@ function getReportByClass(){
     }
   });
 }
+//无文件
 function getPptByAttendance(){
   Cookies.set("attendance","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/attendance/"+Cookies.get("attendance")+"/ppt",
+    url: "http://xug98.cn:8080/attendance/"+Cookies.get("attendance")+"/ppt",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
-        console.log(data[i]);
+         alert("获取成功");
+        console.log(data);
       }
+    },
+    error: function(data){
+      console.log(data);
+      alert("fail");
+
     },
     statusCode: {
       400: function() {
@@ -676,18 +778,24 @@ function getPptByAttendance(){
     }
   });
 }
+//无文件
 function getReportByAttendance(){
   Cookies.set("attendance","1");
   $.ajax({
     type: "get",
-    url: "http://xug98.cn/attendance/"+Cookies.get("attendance")+"/report",
+    url: "http://xug98.cn:8080/attendance/"+Cookies.get("attendance")+"/report",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
-        console.log(data[i]);
+         alert("获取成功");
+        console.log(data);
       }
+    },
+    error: function(data){
+      console.log(data);
+      alert("fail");
+
     },
     statusCode: {
       400: function() {

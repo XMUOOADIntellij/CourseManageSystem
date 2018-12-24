@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Mapper
 @Component
 public interface TeamStrategyMapper {
-    int deleteTeamStrategyByCourseId(Long CourseId);
+    int deleteTeamStrategyByCourseId(Long courseId);
 
     int addTeamStrategy(Long courseId,Long strategyId,String strategyName);
 

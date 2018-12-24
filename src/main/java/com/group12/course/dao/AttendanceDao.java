@@ -103,4 +103,8 @@ public class AttendanceDao {
     public Attendance selectPresentedAttendanceByKlassSeminarId(Long klassSeminarId) {
         return attendanceMapper.selectPresentedAttendanceByKlassSeminarId(klassSeminarId);
     }
+
+    public Attendance selectAttendanceByKlassSeminarIdAndTeamOrder(Long klassSeminar,Integer teamOrder){
+        return  attendanceMapper.selectAttendanceByKlassSeminarIdAndTeamOrder(klassSeminar,teamOrder);
+    }
 }

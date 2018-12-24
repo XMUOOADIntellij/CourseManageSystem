@@ -103,6 +103,12 @@ public class ScoreService {
         }
     }
 
+    /**
+     * 老师获得轮下的讨论课成绩
+     * @param roundId 轮次id
+     * @param teamId 队伍id
+     * @return 讨论课成绩list
+     */
     public List<SeminarScore> getRoundSeminarScore(Long roundId, Long teamId) {
         Round round = roundDao.getRound(roundId);
         Klass klass;
@@ -124,6 +130,21 @@ public class ScoreService {
             //todo RoundNotFound
             //klassNOTFOUND
             return null;
+        }
+    }
+
+    public List<SeminarScore> getKlassSeminarScore(Teacher teacher,Long seminarId,Long classId){
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+        if(klassSeminar!=null){
+            if(teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())){
+                return scoreDao.listSeminarScoreByKlassSeminarId(klassSeminar.getId());
+            }else{
+                //todo 权限
+                return null;
+            }
+        }else{
+            return null;
+            //todo seminarnotFound
         }
     }
 

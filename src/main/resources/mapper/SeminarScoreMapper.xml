@@ -32,6 +32,13 @@
         and   team_id =#{teamId,jdbcType=BIGINT}
     </select>
 
+    <select id="listSeminarScoreByKlassSeminarId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from seminar_score
+        where klass_seminar_id =#{klassSeminarId,jdbcType=BIGINT}
+    </select>
+
     <delete id="deleteSeminarScoreByKlassSeminarId" parameterType="java.lang.Long" >
         delete from seminar_score
         where klass_seminar_id = #{klassSeminarId,jdbcType=BIGINT}

@@ -248,8 +248,8 @@ public class AttendanceService {
                     attendance.setPptName(file.getOriginalFilename());
                     attendance.setPptUrl(filePath + fileName);
                     attendanceDao.updateAttendance(attendance);
-                    return filePath + fileName;
                 }
+                return filePath + fileName;
             } else {
                 //TODO 权限
                 return null;
@@ -324,6 +324,36 @@ public class AttendanceService {
             }
         } else {
             //TODO KlassSeminarNotFound
+        }
+    }
+
+    public Attendance nextAttendance(Long seminarId,Long classId,Long attendanceId,Teacher teacher){
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
+        if(klassSeminar!=null){
+            if(teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())){
+                Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+                if(attendance!=null){
+                    //当前小组状态更新
+                    attendance.setPresented(false);
+                    attendanceDao.updateAttendance(attendance);
+
+                    //找到下一组，当前讨论课的展示小组序号+1
+                    Attendance nextAttendance = attendanceDao.selectAttendanceByKlassSeminarIdAndTeamOrder(
+                            klassSeminar.getId(),attendance.getTeamOrder()+1
+                    );
+                    nextAttendance.setPresented(true);
+                    return  nextAttendance;
+                }else{
+                    //TODO AttendanceNotfound
+                    return null;
+                }
+            }else {
+                //TODO 权限
+                return null;
+            }
+        }else{
+            //TODO SEMINARNOTFOUND
+            return null;
         }
     }
 }

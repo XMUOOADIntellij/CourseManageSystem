@@ -1,6 +1,6 @@
 package com.group12.course.controller;
 
-import com.group12.course.controller.vo.AttendanceVo;
+import com.group12.course.controller.vo.AttendanceVO;
 import com.group12.course.entity.Attendance;
 import com.group12.course.entity.Student;
 import com.group12.course.service.AttendanceService;
@@ -26,7 +26,7 @@ public class AttendanceController {
      * @return
      */
     @PutMapping(value="/{attendanceId}")
-    public Integer changeOrder(@PathVariable Long attendanceId,@RequestBody AttendanceVo record,
+    public Integer changeOrder(@PathVariable Long attendanceId,@RequestBody AttendanceVO record,
                                HttpServletRequest request){
 
         String token = request.getHeader("Authorization");

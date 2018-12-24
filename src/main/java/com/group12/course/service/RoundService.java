@@ -76,12 +76,10 @@ public class RoundService {
 
     /**
      * 创建轮次
-     * @param round
+     * @param courseId
      */
-    public int addRound(Round round){
-        Integer serial = countRoundByCourseId(round.getCourse().getId())+1;
-        round.setRoundSerial(serial);
-        return roundDao.addRound(round);
+    public Long addRound(Long courseId){
+        return roundDao.addRound(courseId);
     }
 
     /**
