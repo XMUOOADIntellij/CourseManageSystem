@@ -221,7 +221,7 @@ public class UserController {
             tempStudent.setEmail(user.getEmail());
             modifyCount = studentService.updateStudent(tempStudent);
         }
-        else {
+        else if (jwtTeacher!=null){
             Teacher tempTeacher=new Teacher(jwtTeacher.getAccount());
             tempTeacher.setEmail(user.getEmail());
             modifyCount = teacherService.updateTeacher(tempTeacher);
