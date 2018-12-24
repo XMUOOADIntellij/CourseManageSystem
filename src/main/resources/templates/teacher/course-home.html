@@ -50,11 +50,12 @@
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/control.js"></script>
-    <script src="../../static/js/common.js"></script>
+    <script src="../../static/js/convert.js"></script>
+    <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
     <script src="../../static/js/jwt.js"></script>
   </head>
-  <body>
+  <body onload="getCourseList()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -218,9 +219,11 @@
                 </li>
               </ol>
             </nav>
-            <div class="row">
+            <div class="row" id="content">
+<!--
               <div class="col-md-6 col-xl-4">
-                <div class="card" id="courseId">
+                &lt;!&ndash;id="courseId"&ndash;&gt;
+                <div class="card" >
                   <div class="card-header">
                     <h3 class="card-title mr-4">OOAD</h3>
                     <span class="btn btn-outline-secondary py-0">主</span>
@@ -237,8 +240,8 @@
                     <div class="list-group">
                       <a
                         href="./course-info.html"
-                        onclick="return jumpCourseInfo()"
                         class="list-group-item list-group-item-action"
+                        onclick=""
                       >
                         <span class="float-right">
                           <i class="icon fe fe-chevron-right"></i>
@@ -259,7 +262,7 @@
                         </span>
                       </a>
                       <a
-                        href="course-round.html"
+                        href="./course-round.html"
                         class="list-group-item list-group-item-action"
                       >
                         <span class="float-right">
@@ -308,101 +311,12 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-xl-4">
-                <div class="card card-collapsed">
-                  <div class="card-header">
-                    <h3 class="card-title">J2ee</h3>
-                    <div class="card-options">
-                      <a
-                        class="card-options-collapse"
-                        data-toggle="card-collapse"
-                        href="#"
-                        ><i class="fe fe-chevron-up mr-1"></i
-                      ></a>
-                    </div>
-                  </div>
-                  <div class="card-body p-0">
-                    <div class="list-group">
-                      <a
-                        href="./"
-                        class="list-group-item list-group-item-action"
-                      >
-                        <span class="float-right">
-                          <i class="icon fe fe-chevron-right"></i>
-                        </span>
-                        <span class="float-left">
-                          <i class="icon fe fe-book mr-3"></i> 课程信息
-                        </span>
-                      </a>
-                      <a
-                        href="./"
-                        class="list-group-item list-group-item-action"
-                      >
-                        <span class="float-right">
-                          <i class="icon fe fe-chevron-right"></i>
-                        </span>
-                        <span class="float-left">
-                          <i class="icon fe fe-briefcase mr-3"></i> 班级信息
-                        </span>
-                      </a>
-                      <a
-                        href="./"
-                        class="list-group-item list-group-item-action"
-                      >
-                        <span class="float-right">
-                          <i class="icon fe fe-chevron-right"></i>
-                        </span>
-                        <span class="float-left">
-                          <i class="icon fe fe-book-open mr-3"></i> 讨论课设置
-                        </span>
-                      </a>
-                      <a
-                        href="./"
-                        class="list-group-item list-group-item-action"
-                      >
-                        <span class="float-right">
-                          <i class="icon fe fe-chevron-right"></i>
-                        </span>
-                        <span class="float-left">
-                          <i class="icon fe fe-slack mr-3"></i> 学生组队
-                        </span>
-                      </a>
+-->
 
-                      <a
-                        href="./"
-                        class="list-group-item list-group-item-action"
-                      >
-                        <span class="float-right">
-                          <i class="icon fe fe-chevron-right"></i>
-                        </span>
-                        <span class="float-left">
-                          <i class="icon fe fe-clipboard mr-3"></i> 学生成绩
-                        </span>
-                      </a>
-
-                      <a
-                        href="./"
-                        class="list-group-item list-group-item-action"
-                      >
-                        <span class="float-right">
-                          <i class="icon fe fe-chevron-right"></i>
-                        </span>
-                        <span class="float-left">
-                          <i class="icon fe fe-send mr-3"></i> 共享设置
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-            <div class="position-fixed">
-              <a
-                href="./course-create.html"
-                class="btn btn-green float-action-button shadow-lg"
-                ><i class="fe fe-plus"></i
-              ></a>
-            </div>
+            <nav class="fab"  >
+              <a class="buttons" tooltip="新建课程" href="./course-create.html"></a>
+            </nav>
           </div>
         </div>
       </div>
@@ -420,4 +334,10 @@
       </footer>
     </div>
   </body>
+<script>
+  $('.list-group').on('click', '*', function() {
+    let cid=$(this).closest(".card").attr("id");
+    setCookie("course",cid);
+  });
+</script>
 </html>

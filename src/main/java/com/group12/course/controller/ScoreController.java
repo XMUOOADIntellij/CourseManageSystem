@@ -7,6 +7,7 @@ import com.group12.course.entity.RoundScore;
 import com.group12.course.entity.SeminarScore;
 import com.group12.course.entity.Teacher;
 import com.group12.course.service.ScoreService;
+import com.group12.course.tools.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,31 +22,21 @@ public class ScoreController {
     @Autowired
     ScoreService scoreService;
 
-    /**
-     * 查看课程成绩
-     * 在Service 老师和学生返回不同
-     *
-     * @param request 请求
-     * @return ScoreVo
-     */
-    @GetMapping("")
-    public void getSeminarScore(HttpServletRequest request) {
-        return;
-    }
-
     @PutMapping(value = "/attendance/{attendanceId}/score")
-    public Integer modifyScoreByAttendance(@PathVariable Long attendanceId,@RequestBody SeminarScoreVO seminarScoreVO) {
+    public Integer modifyScoreByAttendance(@PathVariable Long attendanceId,@RequestBody SeminarScoreVO seminarScoreVO,
+                                           HttpServletRequest request) {
 
-        Teacher teacher = new Teacher();
-        teacher.setId(1L);
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
 
         return scoreService.modifyScoreByAttendance(teacher,new SeminarScore(seminarScoreVO),attendanceId);
     }
 
     @PutMapping(value="/seminar/{seminarId}/score")
-    public Integer modifyScoreBySeminar(@PathVariable Long seminarId,@RequestBody SeminarScoreVO seminarScoreVO){
-        Teacher teacher =new Teacher();
-        teacher.setId(1L);
+    public Integer modifyScoreBySeminar(@PathVariable Long seminarId,@RequestBody SeminarScoreVO seminarScoreVO,
+                                        HttpServletRequest request){
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
 
         SeminarScore seminarScore = new SeminarScore(seminarScoreVO);
         return scoreService.modiftScoreBySeminar(teacher,seminarScore,seminarId);
@@ -57,10 +48,10 @@ public class ScoreController {
      * @return 成绩列表
      */
     @GetMapping(value = "/course/{courseId}/score")
-    public List<RoundScoreVO> getCourseScore(@PathVariable Long courseId) {
+    public List<RoundScoreVO> getCourseScore(@PathVariable Long courseId,HttpServletRequest request) {
 
-        Teacher teacher = new Teacher();
-        teacher.setId(1L);
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
 
         List<RoundScoreVO> scoreVOList = new ArrayList<>();
         for (RoundScore item : scoreService.getCourseRoundScoreByTeacher(teacher, courseId)) {

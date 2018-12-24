@@ -84,6 +84,11 @@ public class SeminarDao {
         return seminarMapper.selectSeminarById(id);
     }
 
+    /**
+     * 更新讨论课信息
+     * @param seminar 记录
+     * @return 1成功 0失败
+     */
     public Integer updateSeminar(Seminar seminar){
         return seminarMapper.updateSeminar(seminar);
     }
@@ -96,7 +101,7 @@ public class SeminarDao {
     public Integer deleteSeminarById(Long seminarId){
         if(seminarMapper.selectSeminarById(seminarId)!=null) {
             List<KlassSeminar> klassSeminarList;
-            klassSeminarList = klassSeminarDao.selectKlassSeminarBySeminarId(seminarId);
+            klassSeminarList = klassSeminarDao.listKlassSeminarBySeminarId(seminarId);
 
             /**
              *  根据找到的classseminar

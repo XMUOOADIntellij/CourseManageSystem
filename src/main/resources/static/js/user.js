@@ -1,3 +1,4 @@
+//测试通过
 function bindUser() {
 let ata = {account:$("#account").val(),password:$("#password").val()}
   $.ajax({
@@ -17,7 +18,7 @@ let ata = {account:$("#account").val(),password:$("#password").val()}
         Cookies.set("name",data.name);
         if(data.isActive===true){
             if (data.role === "student") window.location.href = "../student/home.html";
-            else window.location.href = "/teacher/home.html";
+            else window.location.href = "../teacher/home.html";
         }
         else{
             if (data.role === "student") window.location.href = "../student/active.html";
@@ -33,6 +34,7 @@ let ata = {account:$("#account").val(),password:$("#password").val()}
     }
   });
 }
+//测试通过
 function getUserInfo() {
 $.ajax({
     type: "get",
@@ -43,10 +45,9 @@ $.ajax({
       console.log(data);
       alert("success");
       if (xhr.status === 200) {
-        Cookies.set("messageInterval",data.messageInterval);
         $("#account").html(data.account);
-        $("#email").html(data.email);
-        $("#messageInterval").value=data.messageInterval;
+        $("#email").val(data.email);
+        $("#name").html(data.name);
       }
     },
     statusCode: {
@@ -93,6 +94,7 @@ function editPassword() {
 let ata = {
     password:$("#password").val()
   };
+console.log(ata);
   $.ajax({
     type:'put',
     url: 'http://xug98.cn/user/password',
@@ -114,8 +116,9 @@ let ata = {
 }
 function editEmail() {
 let ata = {
-    password:$("#email").val()
+    email:$("#email").val()
   };
+  console.log(ata);
   $.ajax({
     type:'put',
     url: 'http://xug98.cn/user/email',

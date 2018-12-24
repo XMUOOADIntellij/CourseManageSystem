@@ -50,7 +50,8 @@
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/control.js"></script>
-    <script src="../../static/js/common.js"></script>
+    <script src="../../static/js/convert.js"></script>
+    <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
     <script src="../../static/js/jwt.js"></script>
   </head>
@@ -61,7 +62,7 @@
           <div class="row">
             <div class="col col-login mx-auto">
               <form
-                action="../teacher/home.html"
+                action="home.html"
                 class="card"
                 method="post"
                 onsubmit="return activeUser();"
@@ -97,7 +98,7 @@
                 </div>
               </form>
               <div class="text-center text-muted">
-                已有账户? <a href="login.html">返回登录界面</a>
+                已有账户? <a href="../common/login.html">返回登录界面</a>
               </div>
             </div>
           </div>
