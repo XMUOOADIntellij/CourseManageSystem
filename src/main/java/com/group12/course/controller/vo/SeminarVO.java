@@ -179,6 +179,9 @@ public class SeminarVO {
         this.seminarSerial=seminar.getSeminarSerial();
         this.enrollStartTime = seminar.getEnrollStartTime();
         this.enrollEndTime = seminar.getEnrollEndTime();
+        
+        this.setCourseId(seminar.getCourse().getId());
+        this.setRoundId(seminar.getRound().getId());
     }
 
 }

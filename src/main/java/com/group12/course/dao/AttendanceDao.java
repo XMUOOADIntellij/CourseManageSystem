@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * 讨论课报名相关Dao层
+ * @author Y Jiang
+ * @date 2018/12/12
+ */
 @Component
 public class AttendanceDao {
     @Autowired

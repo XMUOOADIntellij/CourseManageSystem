@@ -89,6 +89,9 @@ public class SeminarService {
         return klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
     }
 
+    public Seminar selectSeminarById(Long seminarId){
+        return  seminarDao.selectSeminarById(seminarId);
+    }
     public Integer updateSeminar(Seminar record, Teacher teacher) {
         Seminar seminar;
         try {

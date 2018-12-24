@@ -107,6 +107,11 @@ public class SeminarController {
     }
 
 
+    @GetMapping(value = "/{seminarId}")
+    public SeminarVO selectSeminarBySeminarId(@PathVariable Long seminarId){
+        return new SeminarVO(seminarService.selectSeminarById(seminarId));
+    }
+
 
     //----------------------------------------------------------------------------------//
 
