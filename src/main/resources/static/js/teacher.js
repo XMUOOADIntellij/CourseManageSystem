@@ -148,7 +148,6 @@ function getCourseList() {
     }
   });
 }
-
 function getCourseInfo() {
   Cookies.set("course","1");
   $.ajax({
@@ -173,7 +172,6 @@ function getCourseInfo() {
     }
   });
 }
-
 function getClassList() {
   Cookies.set("course","1");
   Cookies.set("class","1");
@@ -226,7 +224,6 @@ function updateClass() {
     }
   });
 }
-
 function deleteClass(){
   let cid="1";
   let ata = { id: cid };
@@ -417,21 +414,21 @@ function updateSeminarScoreByClass(){
 }
 function createCourse() {
   let conflict={
-    "courseId": 45,
-    "courseName": ".Net",
-    "teacherId": 15,
-    "teacherName": "杨老师"};
+    courseId: 45,
+    courseName: ".Net",
+    teacherId: 15,
+    teacherName: "杨老师"};
   let ata = {
-    "name": "OOAD",
-    "intro": "课程要求",
-    "presentationWeight": 0.5,
-    "questionWeight": 0.1,
-    "reportWeight": 0.3,
-    "minMemberNumber": 4,
-    "maxMemberNumber": 6,
-    "startTeamTime": "2018-10-11 18:00",
-    "endTeamTime": "2018-11-11 18:00",
-    "conflictCourses": conflict
+    name: "OOAD",
+    intro: "课程要求",
+    presentationWeight: 0.5,
+    questionWeight: 0.1,
+    reportWeight: 0.3,
+    minMemberNumber: 4,
+    maxMemberNumber: 6,
+    startTeamTime: "2018-10-11 18:00",
+    endTeamTime: "2018-11-11 18:00",
+    conflictCourses: conflict
 
   };
   console.log(ata);
@@ -458,7 +455,7 @@ function createSeminar() {
   Cookies.set("course","1");
   let ata = {
     seminarName:$("#name").val(),
-    introduction:$("#name").val(),
+    introduction:$("#introduction").val(),
     maxTeam:$("#select-max-team").val(),
     visible:$("#switch-visible").is(":checked"),
     seminarSerial: $("#select-seminar-serial").val(),
