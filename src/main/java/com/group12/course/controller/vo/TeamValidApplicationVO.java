@@ -14,6 +14,8 @@ public class TeamValidApplicationVO {
 
     private String reason;
 
+    private String handletype;
+
     public TeamValidApplicationVO() {
     }
 
@@ -72,5 +74,13 @@ public class TeamValidApplicationVO {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getHandletype() {
+        return handletype;
+    }
+
+    public void setHandletype(String handletype) {
+        this.handletype = handletype;
     }
 }

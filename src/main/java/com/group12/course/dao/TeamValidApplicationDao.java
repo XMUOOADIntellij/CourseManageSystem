@@ -25,4 +25,8 @@ public class TeamValidApplicationDao {
     public int changeApplicationStatus(TeamValidApplication teamValidApplication){
         return teamValidApplicationMapper.updateTeamValidApplicationStatus(teamValidApplication);
     }
+
+    public int addApplication(TeamValidApplication teamValidApplication){
+        return teamValidApplicationMapper.addTeamValidApplication(teamValidApplication);
+    }
 }
