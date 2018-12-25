@@ -21,7 +21,7 @@ public interface SeminarMapper {
      * @param id Long
      * @return int
      */
-    int deleteSeminarById(Long id);
+    Integer deleteSeminarById(Long id);
 
     /**
      * 新建讨论课
@@ -29,7 +29,7 @@ public interface SeminarMapper {
      * @return int
      */
 
-    int insertSeminar(Seminar record);
+    Integer insertSeminar(Seminar record);
 
     /**
      * 根据id获取单个讨论课对象
@@ -43,12 +43,20 @@ public interface SeminarMapper {
      * @param record Seminar
      * @return int
      */
-    int updateSeminar(Seminar record);
+    Integer updateSeminar(Seminar record);
 
     /**
      * 查找该轮的所有讨论课
-     * @param roundId 课程id
+     * @param roundId 轮次id
      * @return List<Seminar>
      */
     List<Seminar> listSeminarByRoundId(Long roundId);
+
+    /**
+     * 查找该课程下所有讨论课
+     * @param courseId 课程id
+     * @return 讨论课列表
+     */
+    List<Seminar> listSeminarByCourseId(Long courseId);
+
 }

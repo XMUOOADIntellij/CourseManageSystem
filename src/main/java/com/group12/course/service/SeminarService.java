@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ConcurrentModificationException;
+import java.util.List;
 
 /**
  * 讨论课相关Service
+ *
  * @author Y Jiang
  * @date 2018/12/14
  */
@@ -28,17 +30,35 @@ public class SeminarService {
     /**
      * 新建讨论课 Service层
      * 新建的是课程讨论课在seminar，需要课程下找到班级在klassSeminar增加记录
+     * 从课程不能创建，主课程创建同步到从课程
+     * 从课程Seminar无备份，klassSeminar根据从课程班级插入
      *
      * @param record 讨论课记录
      * @return 讨论课Id
      */
     public Long createSeminar(Seminar record, Teacher teacher) {
+
+        Course course = courseDao.getCourse(record.getCourse().getId());
         record.setCourse(courseDao.getCourse(record.getCourse().getId()));
-        if (record.getCourse().getTeacher().getId().equals(
-                teacher.getId())) {
-            return seminarDao.insertSeminar(record);
+
+        if (course != null) {
+            if (course.getTeacher().getId().equals(
+                    teacher.getId())) {
+
+                //为record增加serial
+                List<Seminar> seminarList = seminarDao.listSeminarByCourseId(course.getId());
+                if(seminarList==null){
+                    record.setSeminarSerial(1);
+                }else{
+                    record.setSeminarSerial(seminarList.size()+1);
+                }
+                return seminarDao.insertSeminar(record);
+
+            } else {
+                throw new UnauthorizedOperationException("不属于自己的课程不能创建讨论课");
+            }
         } else {
-            throw new UnauthorizedOperationException("can not create seminar under a course belongs others");
+            throw new RecordNotFoundException("没有找到课程记录");
         }
     }
 

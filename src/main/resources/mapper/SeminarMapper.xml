@@ -41,6 +41,13 @@
     where round_id = #{roundId,jdbcType=BIGINT}
   </select>
 
+  <select id="listSeminarByCourseId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from seminar
+    where course_id = #{roundId,jdbcType=BIGINT}
+  </select>
+
   <delete id="deleteSeminarById" parameterType="java.lang.Long" >
     delete from seminar
     where id = #{id,jdbcType=BIGINT}
@@ -117,6 +124,8 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
 
 
 </mapper>
