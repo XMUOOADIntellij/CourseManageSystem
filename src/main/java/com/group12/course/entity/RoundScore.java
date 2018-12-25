@@ -4,6 +4,11 @@ import org.apache.ibatis.type.Alias;
 
 import java.math.BigDecimal;
 
+/**
+ * 轮次分数实体
+ * @author Y Jiang
+ * @date 2018/12/8
+ */
 @Alias("roundScore")
 public class RoundScore {
 

@@ -1,5 +1,7 @@
 package com.group12.course.service;
 
+import com.group12.course.exception.RecordNotFoundException;
+import com.group12.course.exception.UnauthorizedOperationException;
 import com.group12.course.dao.AttendanceDao;
 import com.group12.course.dao.KlassSeminarDao;
 import com.group12.course.dao.SeminarDao;
@@ -54,8 +56,7 @@ public class AttendanceService {
         if (klassSeminar != null) {
             return attendanceDao.listAttendanceByKlassSeminarId(klassSeminar.getId());
         } else {
-            return null;
-            //TODO seminarnotfound
+            throw new RecordNotFoundException("找不到该班级讨论课");
         }
     }
 
@@ -72,8 +73,7 @@ public class AttendanceService {
         if (klassSeminar != null) {
             return attendanceDao.selectPresentedAttendanceByKlassSeminarId(klassSeminar.getId());
         } else {
-            return null;
-            //TODO seminarnotfound
+            throw new RecordNotFoundException("找不到该班级讨论课");
         }
 
     }
@@ -101,12 +101,10 @@ public class AttendanceService {
                 return attendanceDao.
                         selectAttendanceByKlassSeminarIdAndTeamId(klassSeminar.getId(), team.getId());
             } else {
-                return null;
-                //TODO seminarNotFound
+                throw new RecordNotFoundException("找不到该班级讨论课");
             }
         } else {
-            return null;
-            //TODO SeminarNotFound
+            throw new RecordNotFoundException("讨论课不存在");
         }
     }
 
@@ -118,8 +116,7 @@ public class AttendanceService {
             )) {
                 return attendanceDao.updateAttendance(record);
             } else {
-                //TODO 权限不足
-                return null;
+                throw new UnauthorizedOperationException("只能更改自己组的展示顺序");
             }
         } else {
             return null;
@@ -136,8 +133,7 @@ public class AttendanceService {
             )) {
                 return attendanceDao.deleteAttendanceById(attendanceId);
             } else {
-                //TODO 权限不足
-                return null;
+                throw new UnauthorizedOperationException("只能取消自己组的报名");
             }
         } else {
             return null;
@@ -162,12 +158,10 @@ public class AttendanceService {
                 attendance.setPresented(false);
                 return attendanceDao.insertAttendance(attendance);
             } else {
-                return null;
-                //TODO seminarNotFound
+                throw new RecordNotFoundException("找不到该班级讨论课");
             }
         } else {
-            return null;
-            //TODO SeminarNotFound
+            throw new RecordNotFoundException("找不到该讨论课");
         }
     }
 
@@ -186,7 +180,6 @@ public class AttendanceService {
             //自己组的报名才能传
             if (attendance.getId().equals(
                     getTeamAttendance(attendance.getKlassSeminar().getSeminar().getId(), student).getId())) {
-                //TODO path 服务器
                 String filePath = ServerFilePath + System.getProperty("file.separator") + "report" + System.getProperty("file.separator")
                         + attendance.getKlassSeminar().getId() + System.getProperty("file.separator");
                 String fileName = attendance.getKlassSeminar().getKlass().getKlassSerial()
@@ -206,12 +199,10 @@ public class AttendanceService {
                 attendanceDao.updateAttendance(attendance);
                 return filePath + fileName;
             } else {
-                //TODO 权限
-                return null;
+                throw new UnauthorizedOperationException("只能给自己组上传报告");
             }
         } else {
-            //TODO AttendanceNotFound
-            return null;
+            throw new RecordNotFoundException("Attendance不存在");
         }
     }
 
@@ -229,7 +220,6 @@ public class AttendanceService {
             //自己组的报名才能传
             if (attendance.getId().equals(
                     getTeamAttendance(attendance.getKlassSeminar().getSeminar().getId(), student).getId())) {
-                //TODO path 服务器
                 String filePath = ServerFilePath + System.getProperty("file.separator") + "ppt" + System.getProperty("file.separator")
                         + attendance.getKlassSeminar().getId() + System.getProperty("file.separator");
                 String fileName = attendance.getKlassSeminar().getKlass().getKlassSerial()
@@ -251,12 +241,10 @@ public class AttendanceService {
                 }
                 return filePath + fileName;
             } else {
-                //TODO 权限
-                return null;
+                throw new UnauthorizedOperationException("只能给自己组上传ppt");
             }
         } else {
-            //TODO AttendanceNotFound
-            return null;
+            throw  new RecordNotFoundException("上传ppt对应的展示报名不存在");
         }
     }
 
@@ -300,10 +288,10 @@ public class AttendanceService {
             try {
                 FileUtil.downloadAllFiles(response, url, fileName);
             } catch (Exception e) {
-                //TODO
+                logger.trace("下载所有ppt出错: "+e.getMessage());
             }
         } else {
-            //TODO KlassSeminarNotFound
+            throw new RecordNotFoundException("下载ppt的班级讨论课不存在");
         }
     }
 
@@ -320,10 +308,10 @@ public class AttendanceService {
             try {
                 FileUtil.downloadAllFiles(response, url, fileName);
             } catch (Exception e) {
-                //TODO
+                logger.trace("下载所有ppt出错: "+e.getMessage());
             }
         } else {
-            //TODO KlassSeminarNotFound
+            throw new RecordNotFoundException("下载报告的班级讨论课不存在");
         }
     }
 
@@ -344,16 +332,13 @@ public class AttendanceService {
                     nextAttendance.setPresented(true);
                     return  nextAttendance;
                 }else{
-                    //TODO AttendanceNotfound
-                    return null;
+                    throw new RecordNotFoundException("Attendance不存在");
                 }
             }else {
-                //TODO 权限
-                return null;
+                throw new UnauthorizedOperationException("此节讨论课的老师才能操作");
             }
         }else{
-            //TODO SEMINARNOTFOUND
-            return null;
+            throw new RecordNotFoundException("该班级讨论课不存在");
         }
     }
 }

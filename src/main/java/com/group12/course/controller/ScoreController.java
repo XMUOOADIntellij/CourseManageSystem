@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 与分数相关controller
+ * @author Y Jiang
+ * @date 2018/12/22
+ */
 @RestController
 @RequestMapping("")
 public class ScoreController {

@@ -1,9 +1,9 @@
 package com.group12.course.dao;
 
+import com.group12.course.exception.InformationException;
 import com.group12.course.entity.Klass;
 import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Seminar;
-import com.group12.course.entity.Teacher;
 import com.group12.course.mapper.SeminarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,6 +11,12 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 与分数 相关Dao层
+ * @author Y Jiang
+ * @date 2018/12/22
+ */
 @Component
 public class SeminarDao {
 
@@ -40,7 +46,7 @@ public class SeminarDao {
         List<Klass> classRecord;
         List<KlassSeminar> klassSeminarsRecord = new ArrayList<>();
         // 判断当前课程存在
-        if (record.getCourse().getId() != null) {
+        if (courseDao.getCourse(record.getCourse().getId())!= null) {
             if (record.getMaxTeam() != null ||
                     record.getSeminarName() != null ||
                     record.getVisible() != null ||
@@ -71,12 +77,10 @@ public class SeminarDao {
 
                 return record.getId();
             } else {
-                //TODO 讨论课信息不完全
-                return null;
+                throw  new InformationException("Seminar 必要字段不存在");
             }
         } else {
-            //TODO CourseNotFound
-            return null;
+            throw new InformationException("讨论课不属于任何课程");
         }
     }
 

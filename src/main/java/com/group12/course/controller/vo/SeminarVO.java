@@ -8,6 +8,12 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+
+/**
+ * 讨论课实体
+ * @author Y Jiang
+ * @date 2018/12/22
+ */
 public class SeminarVO {
 
     /**
@@ -155,7 +161,7 @@ public class SeminarVO {
         this.klassId = klassId;
     }
 
-    public SeminarVO(){};
+    public SeminarVO(){}
 
     public SeminarVO(KlassSeminar klassSeminar){
 
@@ -190,4 +196,8 @@ public class SeminarVO {
         this.setRoundId(seminar.getRound().getId());
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

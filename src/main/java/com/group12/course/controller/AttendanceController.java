@@ -23,7 +23,6 @@ public class AttendanceController {
 
     @Autowired
     AttendanceService attendanceService;
-    //TODO 规范返回
 
     /**
      * 更改报名的次序
