@@ -1,5 +1,7 @@
 package com.group12.course.dao;
 
+import com.group12.course.Exceptions.RecordNotFoundException;
+import com.group12.course.Exceptions.UnauthorizedOperationException;
 import com.group12.course.entity.Attendance;
 import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Seminar;
@@ -60,8 +62,7 @@ public class AttendanceDao {
         if (attendance != null) {
             klassSeminar = attendance.getKlassSeminar();
         } else {
-            // TODO AttendanceNotFound
-            return null;
+            throw new RecordNotFoundException("Attendance Not Found");
         }
 
         //若更改报名次序则验证，不更改则跳过
@@ -71,8 +72,7 @@ public class AttendanceDao {
         {
             return attendanceMapper.updateAttendance(record);
         } else {
-            //TODO 非法更新
-            return null;
+           throw new UnauthorizedOperationException("Only this Seminar's teacher can operate");
         }
 
     }

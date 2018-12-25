@@ -1,5 +1,6 @@
 package com.group12.course.dao;
 
+import com.group12.course.Exceptions.RecordNotFoundException;
 import com.group12.course.entity.Klass;
 import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Seminar;
@@ -40,7 +41,7 @@ public class SeminarDao {
         List<Klass> classRecord;
         List<KlassSeminar> klassSeminarsRecord = new ArrayList<>();
         // 判断当前课程存在
-        if (record.getCourse().getId() != null) {
+        if (courseDao.getCourse(record.getCourse().getId())!= null) {
             if (record.getMaxTeam() != null ||
                     record.getSeminarName() != null ||
                     record.getVisible() != null ||
@@ -75,8 +76,7 @@ public class SeminarDao {
                 return null;
             }
         } else {
-            //TODO CourseNotFound
-            return null;
+            throw new RecordNotFoundException("Seminar isnot belong to any course");
         }
     }
 
