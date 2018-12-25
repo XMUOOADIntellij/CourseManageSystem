@@ -5,6 +5,12 @@ import com.group12.course.entity.RoundScore;
 
 import java.math.BigDecimal;
 
+
+/**
+ * 轮次分数VO
+ * @author Y Jiang
+ * @date 2018/12/22
+ */
 public class RoundScoreVO {
 
     private Long roundId;
@@ -92,7 +98,7 @@ public class RoundScoreVO {
         this.totalScore = totalScore;
     }
 
-    public RoundScoreVO(){};
+    public RoundScoreVO(){}
 
     public RoundScoreVO(RoundScore roundScore){
         this.roundSerial = roundScore.getRound().getRoundSerial();

@@ -1,10 +1,12 @@
 package com.group12.course.dao;
 
+import com.group12.course.exception.InformationException;
+import com.group12.course.exception.RecordNotFoundException;
+import com.group12.course.exception.UnauthorizedOperationException;
 import com.group12.course.entity.Attendance;
 import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Seminar;
 import com.group12.course.mapper.AttendanceMapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -60,8 +62,7 @@ public class AttendanceDao {
         if (attendance != null) {
             klassSeminar = attendance.getKlassSeminar();
         } else {
-            // TODO AttendanceNotFound
-            return null;
+            throw new RecordNotFoundException("Attendance Not Found");
         }
 
         //若更改报名次序则验证，不更改则跳过
@@ -71,8 +72,7 @@ public class AttendanceDao {
         {
             return attendanceMapper.updateAttendance(record);
         } else {
-            //TODO 非法更新
-            return null;
+           throw new UnauthorizedOperationException("Only this Seminar's teacher can operate");
         }
 
     }
@@ -96,12 +96,10 @@ public class AttendanceDao {
                 attendanceMapper.insertAttendance(record);
                 return record.getId();
             } else {
-                //TODO 信息不合法
-                return null;
+                throw new InformationException("Team Order 已存在或不合法");
             }
         } else {
-            //TODO 信息不完整
-            return null;
+            throw new InformationException("Attendance 必要字段不存在");
         }
     }
 

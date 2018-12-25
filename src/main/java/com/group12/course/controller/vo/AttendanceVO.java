@@ -148,4 +148,9 @@ public class AttendanceVO {
         this.classSerial=attendance.getKlassSeminar().getKlass().getKlassSerial();
         this.teamSerial = attendance.getTeam().getTeamSerial();
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

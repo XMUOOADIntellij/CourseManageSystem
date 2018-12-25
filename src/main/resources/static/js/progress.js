@@ -6,7 +6,7 @@ function setConnected(connected) {
     document.getElementById('response').innerHTML = '';
 }
 function connect() {
-    var socket = new SockJS('http://xug98.cn/Socket');
+    var socket = new SockJS('http://localhost:8080/Socket');
     console.log("${createLink(uri: '/stomp')}");
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
