@@ -42,11 +42,17 @@
 
   <select id="selectTeamByKlassId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
-    <include refid="Base_Column_List" />
+    klass_id,team_id
     from klass_team
     where klass_id = #{id,jdbcType=BIGINT}
   </select>
 
+  <select id="selectTeamByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from team
+    where course_id = #{id,jdbcType=BIGINT}
+  </select>
 
   <select id="selectTeamIdByMembersId" resultType="java.lang.Long" parameterType="java.lang.Long" >
     select

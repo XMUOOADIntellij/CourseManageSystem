@@ -1,9 +1,7 @@
 package com.group12.course.dao;
 
-import com.group12.course.entity.Course;
-import com.group12.course.entity.Student;
-import com.group12.course.entity.Teacher;
-import com.group12.course.entity.Team;
+import com.group12.course.entity.*;
+import com.group12.course.exception.InformationException;
 import com.group12.course.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,7 +32,7 @@ public class TeamDao {
      */
     public Integer getKlassLastTeamSerial(Long klassId){
         List<Team> teams = teamMapper.selectTeamByKlassId(klassId);
-        if (teams==null){
+        if (teams==null||teams.isEmpty()){
             return 1;
         }
         else {
@@ -106,6 +104,24 @@ public class TeamDao {
     }
 
     /**
+     * 检查传入的学生是否在传入的队伍内
+     * 若在队内的话会抛出异常
+     *
+     * @param studentId 传入待检查的队伍对象
+     * @return 若不在，返回 true
+     * 否则为 false
+     * */
+    public Boolean checkStudentIsInSpecialTeam(Long studentId,Long team){
+        List<Student> studentList = teamMapper.selectTeamMembersByTeamId(team);
+        for (Student student:studentList) {
+            if (student.getId().equals(studentId)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 检查传入的队伍的队员是否在队伍内
      * 若在队内的话会抛出异常
      *
@@ -122,8 +138,8 @@ public class TeamDao {
             Student member = iterator.next();
             if (checkStudentIsInTeam(team.getLeader(),team.getCourse())){
                 // throw members already in team exception
-                System.out.println("member \n"+ member + "\n is already in a team \n");
-                return false;
+                System.out.println();
+                throw new InformationException("成员："+ member + "已经在一个小组内了");
             }
         }
         return true;
@@ -137,6 +153,15 @@ public class TeamDao {
     public Team getTeamById(Long account){
         Team team = teamMapper.selectTeamById(account);
         return getMembers(team);
+    }
+
+    /**
+     * 根据课程 id 获取队伍
+     *
+     * @param id 课程id
+     * @return 返回一个包含所有队员的队伍*/
+    public List<Team> getTeamByCourseId(Long id){
+        return teamMapper.selectTeamByCourseId(id);
     }
 
     /**
@@ -180,34 +205,6 @@ public class TeamDao {
             }
         }
         return new Team();
-//        List<Team> teams = getTeamByLeaderId(id);
-//        Team finalTeam = null;
-//        if (teams==null||teams.isEmpty()){
-//            // 此时以该学生作为队长的小队不存在
-//            List<Long> teamIdByMembers = getTeamByMembersId(id);
-//            // 此时以该学生作为队员的队伍不存在
-//            if (teamIdByMembers!=null&&teamIdByMembers.isEmpty()){
-//                Iterator<Long> iterator = teamIdByMembers.iterator();
-//                for (Long currentId: teamIdByMembers) {
-//                    Team teamByMember = teamMapper.selectTeamById(currentId);
-//                    if (teamByMember.getCourse().getId().equals(courseId)){
-//                        // 此时该学生所在的队伍就是期望的队伍
-//                        finalTeam=teamByMember;
-//                    }
-//                }
-//            }
-//        }
-//        else {
-//            Iterator<Team> iterator = teams.iterator();
-//            while (iterator.hasNext()){
-//                Team team = iterator.next();
-//                if (team.getCourse().getId().equals(courseId)){
-//                    // 此时该学生所在的队伍就是期望的队伍
-//                    finalTeam=team;
-//                }
-//            }
-//        }
-//        return finalTeam==null? new Team():getMembers(finalTeam);
     }
 
     /**
@@ -283,9 +280,9 @@ public class TeamDao {
      * @return 返回的队伍对象中包含新添加的对象的id
      * */
     public Team addTeam(Team team){
-//        if (!checkTeamValid(team)||!checkLeaderInTeam(team,team.getCourse())||!checkMembersInTeam(team)){
-//            return new Team();
-//        }
+        if (!checkTeamValid(team)||!checkMembersInTeam(team)){
+            return new Team();
+        }
         team.setStatus(2);
         team.setTeamSerial(getKlassLastTeamSerial(team.getKlass().getId()));
         int addTeamCount=teamMapper.addTeam(team, team.getCourse().getId(),
@@ -352,6 +349,10 @@ public class TeamDao {
             return new Team();
         }
         return team;
+    }
+
+    public int addTeamIntoKlass(Team team, Klass klass){
+        return teamMapper.addTeamIntoKlass(team.getId(),klass.getId());
     }
 
     /**

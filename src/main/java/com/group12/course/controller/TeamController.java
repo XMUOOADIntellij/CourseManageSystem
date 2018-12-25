@@ -2,6 +2,7 @@ package com.group12.course.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.group12.course.entity.Student;
+import com.group12.course.entity.Teacher;
 import com.group12.course.entity.Team;
 import com.group12.course.service.TeamService;
 import com.group12.course.tools.Jwt;
@@ -109,7 +110,10 @@ public class TeamController {
      * 失败返回404
      * */
     @DeleteMapping(value = "/{teamId}",produces = "application/json; charset=utf-8")
-    public void deleteTeam(@PathVariable Long teamId, HttpServletResponse response)throws IOException {
+    public void deleteTeam(@PathVariable Long teamId, HttpServletRequest request,HttpServletResponse response)throws IOException {
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        teamService.authCheck(jwtStudent,teamId);
         int count = teamService.deleteTeamByTeamId(teamId);
         if (count==-1){
             response.setStatus(404);
@@ -128,7 +132,10 @@ public class TeamController {
      * 失败返回404
      * */
     @PutMapping(value = "/{teamId}/add",produces = "application/json; charset=utf-8")
-    public void addTeam(@RequestBody Student student, @PathVariable Long teamId, HttpServletResponse response)throws IOException {
+    public void addTeam(@RequestBody Student student, HttpServletRequest request,@PathVariable Long teamId, HttpServletResponse response)throws IOException {
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        teamService.authCheck(jwtStudent,teamId);
         Team team=new Team();
         team.setId(teamId);
         Team count = teamService.addMember(team,student);
@@ -149,7 +156,10 @@ public class TeamController {
      * 失败返回404
      * */
     @PutMapping(value = "/{teamId}/remove",produces = "application/json; charset=utf-8")
-    public void removeTeammate(@RequestBody Student student, @PathVariable Long teamId, HttpServletResponse response)throws IOException {
+    public void removeTeammate(@RequestBody Student student, @PathVariable Long teamId, HttpServletRequest request,HttpServletResponse response)throws IOException {
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        teamService.authCheck(jwtStudent,teamId);
         Team team=new Team();
         team.setId(teamId);
         int count = teamService.deleteTeamMember(team,student);

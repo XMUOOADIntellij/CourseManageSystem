@@ -54,7 +54,6 @@ public class TeamDaoTest {
         testTeam.setTeamName("hahaha");
         testTeam.setStatus(0);
         System.out.println(teamDao.checkTeamValid(testTeam));
-        System.out.println(teamDao.checkLeaderInTeam(testTeam,course));
         System.out.println(teamDao.checkMembersInTeam(testTeam));
         testTeam=teamDao.addTeam(testTeam);
         int i = teamDao.getKlassLastTeamSerial(klass.getId());

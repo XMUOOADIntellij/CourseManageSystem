@@ -100,4 +100,14 @@
     where klass_id = #{klassId,jdbcType=BIGINT}
   </delete>
 
+  <select id="getAllKlassByCourseIdList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from klass
+    where course_id in
+    <foreach collection="courseIdList" item="id" open="(" close=")" separator=",">
+      #{id,jdbcType=BIGINT}
+    </foreach>
+  </select>
+
 </mapper>

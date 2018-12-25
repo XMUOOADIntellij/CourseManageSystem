@@ -34,6 +34,8 @@ public class Team implements Serializable {
 
     private Integer teamSerial;
 
+    private Integer klassSerial;
+
     private List<Student> members;
 
     public Team() {
@@ -130,4 +132,11 @@ public class Team implements Serializable {
         this.teamSerial = teamSerial;
     }
 
+    public Integer getKlassSerial() {
+        return klassSerial;
+    }
+
+    public void setKlassSerial(Integer klassSerial) {
+        this.klassSerial = klassSerial;
+    }
 }
