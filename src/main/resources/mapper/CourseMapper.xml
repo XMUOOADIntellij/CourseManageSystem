@@ -81,10 +81,10 @@
       <if test="record.teamEndTime != null" >
         team_end_time,
       </if>
-      <if test="record.teamMainCourseId!=null">
+      <if test="record.teamMainCourse!=null">
         team_main_course_id,
       </if>
-      <if test="record.seminarMainCourseId!=null">
+      <if test="record.seminarMainCourse!=null">
         seminar_main_course_id,
       </if>
     </trim>
@@ -113,11 +113,11 @@
       <if test="record.teamEndTime != null" >
         #{record.teamEndTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.teamMainCourseId!=null">
-        #{record.teamMainCourseId,jdbcType=BIGINT}
+      <if test="record.teamMainCourse!=null">
+        #{record.teamMainCourse.id,jdbcType=BIGINT}
       </if>
-      <if test="record.seminarMainCourseId!=null">
-        #{record.seminarMainCourseId,jdbcType=BIGINT}
+      <if test="record.seminarMainCourse!=null">
+        #{record.seminarMainCourse.id,jdbcType=BIGINT}
       </if>
     </trim>
   </insert>
@@ -125,8 +125,8 @@
   <update id="updateCourse" parameterType="com.group12.course.entity.Course" >
     update course
     <set >
-      <if test="teacherId != null" >
-        teacher_id = #{teacherId,jdbcType=BIGINT},
+      <if test="teacher != null" >
+        teacher_id = #{teacher.id,jdbcType=BIGINT},
       </if>
       <if test="courseName != null" >
         course_name = #{courseName,jdbcType=VARCHAR},
@@ -149,11 +149,11 @@
       <if test="teamEndTime != null" >
         team_end_time = #{teamEndTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="teamMainCourseId != null">
-        team_main_course_id = #{teamMainCourseId,jdbcType=BIGINT}
+      <if test="teamMainCourse != null">
+        team_main_course_id = #{teamMainCourse.id,jdbcType=BIGINT}
       </if>
-      <if test="seminarMainCourseId != null">
-        seminar_main_course_id = #{seminarMainCourseId,jdbcType=BIGINT}
+      <if test="seminarMainCourse != null">
+        seminar_main_course_id = #{seminarMainCourse.id,jdbcType=BIGINT}
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
