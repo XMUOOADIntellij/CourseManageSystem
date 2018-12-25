@@ -5,10 +5,10 @@ public class Application {
     private Long id;
 
     /**
-     * 队伍状态有三种
-     * 0为审核中
+     * 申请的状态有三种
+     * 0为不合法
      * 1为合法
-     * 2为不合法
+     * 2为审核中
      * */
     private Integer status;
 

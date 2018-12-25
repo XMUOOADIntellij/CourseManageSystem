@@ -47,12 +47,19 @@ public interface TeamMapper {
      * 在数据库中添加队员的记录
      *
      * @param teamId 待添加的队员
-     * @param courseId 所在课程的 id
-     * @param klassId 所在的班级的 id
      * @param studentId  队员 id
      * @return 代表处理数量
      * */
-    int addTeamMembers(Long teamId,Long courseId,Long klassId,Long studentId);
+    int addTeamMembers(Long teamId,Long studentId);
+
+    /**
+     * 在数据库中添加队员的记录
+     *
+     * @param teamId 待添加的队员
+     * @param klassId  队员 id
+     * @return 代表处理数量
+     * */
+    int addTeamIntoKlass(Long teamId,Long klassId);
 
     /**
      * 获取数据库中队伍的记录
