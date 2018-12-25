@@ -1,5 +1,7 @@
 package com.group12.course.service;
 
+import com.group12.course.exception.RecordNotFoundException;
+import com.group12.course.exception.UnauthorizedOperationException;
 import com.group12.course.dao.CourseDao;
 import com.group12.course.dao.KlassSeminarDao;
 import com.group12.course.dao.QuestionDao;
@@ -27,12 +29,10 @@ public class QuestionService {
             if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
                 return questionDao.listQuestionByKlassSeminarId(klassSeminar.getId());
             } else {
-                //todo 权限
-                return null;
+                throw new UnauthorizedOperationException("只有当前课的老师可查看");
             }
         } else {
-            return null;
-            //TODO SeminarNotFound
+            throw new RecordNotFoundException("找不到班级讨论课");
         }
     }
 
@@ -42,12 +42,10 @@ public class QuestionService {
             if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
                 return questionDao.listQuestionByKlassSeminarIdAndAttendanceId(klassSeminar.getId(), attendanceId);
             } else {
-                //todo 权限
-                return null;
+                throw new UnauthorizedOperationException("只有当前课的老师可查看");
             }
         } else {
-            return null;
-            //TODO SeminarNotFound
+            throw new RecordNotFoundException("找不到班级讨论课");
         }
     }
 
@@ -66,8 +64,7 @@ public class QuestionService {
                 return null;
             }
         } else {
-            //TODO SeminarNotFound
-            return null;
+            throw new RecordNotFoundException("找不到班级讨论课");
         }
     }
 
@@ -131,12 +128,10 @@ public class QuestionService {
                 }
                 return  result;
             } else {
-                return null;
-                //todo 权限
+                throw new UnauthorizedOperationException("只有当前课的老师可抽取提问");
             }
         } else {
-            return null;
-            //todo seminarnotfound
+            throw new RecordNotFoundException("找不到班级讨论课");
         }
     }
 

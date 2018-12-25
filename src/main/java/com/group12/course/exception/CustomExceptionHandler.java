@@ -1,4 +1,4 @@
-package com.group12.course.Exceptions;
+package com.group12.course.exception;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +41,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity(error, HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(InformationExeption.class)
-    public  final ResponseEntity<Object> handleInformationExeption(InformationExeption ex,WebRequest request){
+    @ExceptionHandler(InformationException.class)
+    public  final ResponseEntity<Object> handleInformationExeption(InformationException ex,WebRequest request){
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
-        ErrorResponse error = new ErrorResponse("Lack the necessary information", details);
+        ErrorResponse error = new ErrorResponse("Illegal Information", details);
         return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
     }
 

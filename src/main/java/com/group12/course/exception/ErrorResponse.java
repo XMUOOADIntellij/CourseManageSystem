@@ -1,4 +1,4 @@
-package com.group12.course.Exceptions;
+package com.group12.course.exception;
 
 
 import java.util.List;

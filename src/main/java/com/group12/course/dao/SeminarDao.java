@@ -1,10 +1,9 @@
 package com.group12.course.dao;
 
-import com.group12.course.Exceptions.RecordNotFoundException;
+import com.group12.course.exception.InformationException;
 import com.group12.course.entity.Klass;
 import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Seminar;
-import com.group12.course.entity.Teacher;
 import com.group12.course.mapper.SeminarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -72,11 +71,10 @@ public class SeminarDao {
 
                 return record.getId();
             } else {
-                //TODO 讨论课信息不完全
-                return null;
+                throw  new InformationException("Seminar 必要字段不存在");
             }
         } else {
-            throw new RecordNotFoundException("Seminar isnot belong to any course");
+            throw new InformationException("讨论课不属于任何课程");
         }
     }
 

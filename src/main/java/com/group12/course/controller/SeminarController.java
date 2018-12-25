@@ -1,6 +1,6 @@
 package com.group12.course.controller;
 
-import com.group12.course.Exceptions.RecordNotFoundException;
+import com.group12.course.exception.RecordNotFoundException;
 import com.group12.course.entity.*;
 import com.group12.course.service.AttendanceService;
 import com.group12.course.service.QuestionService;

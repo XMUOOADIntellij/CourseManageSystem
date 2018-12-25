@@ -1,6 +1,7 @@
 package com.group12.course.service;
 
-import com.group12.course.Exceptions.RecordNotFoundException;
+import com.group12.course.exception.RecordNotFoundException;
+import com.group12.course.exception.UnauthorizedOperationException;
 import com.group12.course.dao.*;
 import com.group12.course.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,7 @@ public class ScoreService {
             seminarScore = scoreDao.selectSeminarScoreByKlassSeminarIdAndTeamId(
                     attendance.getKlassSeminar().getId(), attendance.getTeam().getId());
         } else {
-            return null;
-            //TODO AttendanceNOTFOUND
+            throw new RecordNotFoundException("找不到班级讨论课");
         }
         if (teacher.getId().equals(seminarScore.getKlassSeminar().
                 getSeminar().getCourse().getTeacher().getId())) {
@@ -45,8 +45,7 @@ public class ScoreService {
             return scoreDao.updateSeminarScore(seminarScore);
 
         } else {
-            //TODO 权限
-            return null;
+            throw new UnauthorizedOperationException("只有当前课的老师可更改分数");
         }
     }
 
@@ -61,16 +60,13 @@ public class ScoreService {
                     seminarScore.setKlassSeminar(klassSeminar);
                     return scoreDao.updateSeminarScore(seminarScore);
                 } else {
-                    return null;
-                    //todo 权限
+                    throw new UnauthorizedOperationException("只有当前课的老师可更改分数");
                 }
             } else {
-                //TODO SEMINARNOTFOUND
-                return null;
+                throw new RecordNotFoundException("找不到班级讨论课");
             }
         } else {
-            //TODO teamNotFound
-            return null;
+            throw new RecordNotFoundException("找不到小组记录");
         }
     }
 
@@ -91,19 +87,18 @@ public class ScoreService {
                 }
                 return scoreDao.listRoundScoreByRoundIdList(roundIdList);
             } else {
-                return null;
-                //todo 权限
+                throw new UnauthorizedOperationException("只有当前课的老师可查看该课程所有成绩");
             }
         } else {
-            //TODO COURSENOTFOUND
-            return null;
+            throw new RecordNotFoundException("找不到该课程记录");
         }
     }
 
     /**
      * 老师获得轮下的讨论课成绩
+     *
      * @param roundId 轮次id
-     * @param teamId 队伍id
+     * @param teamId  队伍id
      * @return 讨论课成绩list
      */
     public List<SeminarScore> getRoundSeminarScore(Long roundId, Long teamId) {
@@ -112,8 +107,7 @@ public class ScoreService {
         if (teamDao.getTeamById(teamId) != null) {
             klass = teamDao.getTeamById(teamId).getKlass();
         } else {
-            //TODO TEAMNOTFOUND
-            return null;
+            throw new RecordNotFoundException("找不到该小组信息");
         }
         List<Long> klassSeminarId = new ArrayList<>();
         if (round != null && klass != null) {
@@ -124,24 +118,20 @@ public class ScoreService {
             }
             return scoreDao.listSeminarScoreByKlassSeminarIdListAndTeamId(klassSeminarId, teamId);
         } else {
-            //todo RoundNotFound
-            //klassNOTFOUND
-            return null;
+            throw new RecordNotFoundException("找不到该轮次信息");
         }
     }
 
-    public List<SeminarScore> getKlassSeminarScore(Teacher teacher,Long seminarId,Long classId){
-        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
-        if(klassSeminar!=null){
-            if(teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())){
+    public List<SeminarScore> getKlassSeminarScore(Teacher teacher, Long seminarId, Long classId) {
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
+        if (klassSeminar != null) {
+            if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
                 return scoreDao.listSeminarScoreByKlassSeminarId(klassSeminar.getId());
-            }else{
-                //todo 权限
-                return null;
+            } else {
+                throw new UnauthorizedOperationException("只有当前课的老师可查看该班级讨论课分数");
             }
-        }else{
-            return null;
-            //todo seminarnotFound
+        } else {
+            throw new RecordNotFoundException("找不到班级讨论课");
         }
     }
 
