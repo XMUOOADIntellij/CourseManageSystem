@@ -1,10 +1,7 @@
 package com.group12.course.dao;
 
 
-import com.group12.course.entity.Admin;
-import com.group12.course.entity.Klass;
-import com.group12.course.entity.Teacher;
-import com.group12.course.entity.Team;
+import com.group12.course.entity.*;
 import com.group12.course.mapper.AdminMapper;
 import com.group12.course.mapper.KlassMapper;
 import com.group12.course.mapper.TeacherMapper;
@@ -17,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import redis.clients.jedis.Jedis;
@@ -27,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(SpringRunner.class)
-@MybatisTest
+@SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class TeamDaoTest {
 
@@ -35,35 +33,33 @@ public class TeamDaoTest {
     private TeamMapper teamMapper;
 
     @Autowired
+    private TeamDao teamDao;
+
+    @Autowired
     private KlassMapper klassMapper;
 
     @Test
     @Rollback
     public void testAddTeam(){
-        /*Team testTeam = new Team();
-        //testTeam.setCourseId(new Long(111));
-        Jedis jedis = new Jedis("47.107.81.51");
-        jedis.auth("123456");
-        System.out.println("success");
-        System.out.println("at "+jedis.ping());
-        Set<String> keys = jedis.keys("*");
-        Iterator<String> it=keys.iterator() ;
-        while(it.hasNext()){
-            String key = it.next();
-            System.out.println(key);
-        }*/
-        Klass klass = klassMapper.selectKlassById(1L);
-        System.out.println(klass);
-        /*Team testTeam = new Team();
-        *//*testTeam.setCourseId(new Long(111));
-        testTeam.setGmtCreate(new Date());
-        testTeam.setGmtModified(new Date());
-        //testTeam.setLeaderId(new Long(122));
-        testTeam.setLeaderId(new Long(122));*//*
-        testTeam.setValid(true);
-        testTeam.setLabel("aaa");
-        testTeam.setName("asa");
-        Assert.assertEquals("add Error",1,teamMapper.addTeam(testTeam));*/
+        Team testTeam = new Team();
+        Student leader = new Student();
+        leader.setId(14868L);
+        testTeam.setLeader(leader);
+        Course course = new Course();
+        course.setId(1L);
+        testTeam.setCourse(course);
+        Klass klass = new Klass();
+        klass.setId(1L);
+        testTeam.setKlass(klass);
+        testTeam.setTeamName("hahaha");
+        testTeam.setStatus(0);
+        System.out.println(teamDao.checkTeamValid(testTeam));
+        System.out.println(teamDao.checkLeaderInTeam(testTeam,course));
+        System.out.println(teamDao.checkMembersInTeam(testTeam));
+        testTeam=teamDao.addTeam(testTeam);
+        int i = teamDao.getKlassLastTeamSerial(klass.getId());
+        System.out.println(i);
+        System.out.println(testTeam);
     }
 
     @Test

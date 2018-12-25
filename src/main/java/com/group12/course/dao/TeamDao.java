@@ -8,9 +8,7 @@ import com.group12.course.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -26,6 +24,22 @@ public class TeamDao {
 
     @Autowired
     StudentDao studentDao;
+
+    public Integer getKlassLastTeamSerial(Long klassId){
+        List<Team> teams = teamMapper.selectTeamByKlassId(klassId);
+        if (teams==null){
+            return 1;
+        }
+        else {
+            teams.sort(new Comparator<Team>() {
+                @Override
+                public int compare(Team o1, Team o2) {
+                    return o1.getTeamSerial().compareTo(o2.getTeamSerial());
+                }
+            });
+            return teams.get(teams.size()-1).getTeamSerial()+1;
+        }
+    }
 
     /**
      * 检查队伍信息是否合法
@@ -58,7 +72,7 @@ public class TeamDao {
      * 否则为 false
      * */
     public Boolean checkLeaderInTeam(Team team, Course course){
-        if (checkStudentIsInTeam(team.getLeader(),course)){
+        if (!checkStudentIsInTeam(team.getLeader(),course)){
             //throw leader already in team exception
             System.out.println("leader is already in a team \n");
             return false;
@@ -93,6 +107,9 @@ public class TeamDao {
      * 否则为 false
      * */
     public Boolean checkMembersInTeam(Team team){
+        if (team.getMembers()==null){
+            return true;
+        }
         Iterator<Student> iterator = team.getMembers().iterator();
         while (iterator.hasNext()){
             Student member = iterator.next();
@@ -246,9 +263,14 @@ public class TeamDao {
             return new Team();
         }
         team.setStatus(0);
-        int addTeamCount=teamMapper.addTeam(team,team.getCourse().getId(),team.getKlass().getId(),team.getLeader().getId());
+        team.setTeamSerial(getKlassLastTeamSerial(team.getKlass().getId()));
+        int addTeamCount=teamMapper.addTeam(team, team.getCourse().getId(),
+                team.getKlass().getId(),team.getLeader().getId());
         if (addTeamCount==0){
             return new Team();
+        }
+        if (team.getMembers()==null){
+            return team;
         }
         Iterator<Student> members = team.getMembers().iterator();
         while (members.hasNext()){
