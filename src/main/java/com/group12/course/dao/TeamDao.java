@@ -7,6 +7,7 @@ import com.group12.course.entity.Team;
 import com.group12.course.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -25,6 +26,12 @@ public class TeamDao {
     @Autowired
     StudentDao studentDao;
 
+    /**
+     * 获取当前班级下最新的队伍序号(最新的+1)
+     *
+     * @param klassId 班级 id
+     * @return
+     */
     public Integer getKlassLastTeamSerial(Long klassId){
         List<Team> teams = teamMapper.selectTeamByKlassId(klassId);
         if (teams==null){
@@ -160,34 +167,47 @@ public class TeamDao {
      * @return 查询到的队伍对象
      * */
     public Team getTeamByStudentIdAndCourseId(Long id,Long courseId){
-        List<Team> teams = getTeamByLeaderId(id);
-        Team finalTeam = null;
-        if (teams==null||teams.isEmpty()){
-            // 此时以该学生作为队长的小队不存在
-            List<Long> teamIdByMembers = getTeamByMembersId(id);
-            // 此时以该学生作为队员的队伍不存在
-            if (teamIdByMembers!=null&&teamIdByMembers.isEmpty()){
-                Iterator<Long> iterator = teamIdByMembers.iterator();
-                for (Long currentId: teamIdByMembers) {
-                    Team teamByMember = teamMapper.selectTeamById(currentId);
-                    if (teamByMember.getCourse().getId().equals(courseId)){
-                        // 此时该学生所在的队伍就是期望的队伍
-                        finalTeam=teamByMember;
-                    }
-                }
-            }
+        List<Long> teamsId = teamMapper.selectTeamIdByMembersId(id);
+        if (teamsId==null||teamsId.isEmpty()){
+            return new Team();
         }
         else {
-            Iterator<Team> iterator = teams.iterator();
-            while (iterator.hasNext()){
-                Team team = iterator.next();
+            for (Long teamId: teamsId) {
+                Team team = teamMapper.selectTeamById(teamId);
                 if (team.getCourse().getId().equals(courseId)){
-                    // 此时该学生所在的队伍就是期望的队伍
-                    finalTeam=team;
+                    return getMembers(team);
                 }
             }
         }
-        return finalTeam==null? new Team():getMembers(finalTeam);
+        return new Team();
+//        List<Team> teams = getTeamByLeaderId(id);
+//        Team finalTeam = null;
+//        if (teams==null||teams.isEmpty()){
+//            // 此时以该学生作为队长的小队不存在
+//            List<Long> teamIdByMembers = getTeamByMembersId(id);
+//            // 此时以该学生作为队员的队伍不存在
+//            if (teamIdByMembers!=null&&teamIdByMembers.isEmpty()){
+//                Iterator<Long> iterator = teamIdByMembers.iterator();
+//                for (Long currentId: teamIdByMembers) {
+//                    Team teamByMember = teamMapper.selectTeamById(currentId);
+//                    if (teamByMember.getCourse().getId().equals(courseId)){
+//                        // 此时该学生所在的队伍就是期望的队伍
+//                        finalTeam=teamByMember;
+//                    }
+//                }
+//            }
+//        }
+//        else {
+//            Iterator<Team> iterator = teams.iterator();
+//            while (iterator.hasNext()){
+//                Team team = iterator.next();
+//                if (team.getCourse().getId().equals(courseId)){
+//                    // 此时该学生所在的队伍就是期望的队伍
+//                    finalTeam=team;
+//                }
+//            }
+//        }
+//        return finalTeam==null? new Team():getMembers(finalTeam);
     }
 
     /**
@@ -216,6 +236,10 @@ public class TeamDao {
         Iterator<Student> iterator =members.iterator();
         while (iterator.hasNext()){
             Student member = iterator.next();
+            // 组长也会被取出，要被剔除
+            if (member.getId().equals(team.getLeader().getId())){
+                continue;
+            }
             Student temp = studentDao.getStudentById(member.getId());
             if (temp.getAccount()!=null){
                 member=temp;
@@ -233,10 +257,10 @@ public class TeamDao {
      * @return 该 id 所在的队伍的id
      * */
     public int deleteTeamById(Long teamId){
-        int deleteTeamCount=teamMapper.deleteTeam(teamId);
+        int deleteTeamCount=teamMapper.deleteTeamByTeamId(teamId);
         if (deleteTeamCount==1){
-            int deleteTeamMembersCount = teamMapper.deleteTeamMembers(teamId);
-            return deleteTeamMembersCount;
+            teamMapper.deleteTeamFromKlass(teamId);
+            return teamMapper.deleteTeamMembersByTeamId(teamId);
         }
         return -1;
     }
@@ -249,7 +273,7 @@ public class TeamDao {
      * @return 删除数量
      * */
     public int deleteTeamMember(Team team,Student member){
-        return teamMapper.deleteTeamMembers(member.getId());
+        return teamMapper.deleteTeamMembersByMemberId(member.getId(),member.getId());
     }
 
     /**
@@ -277,7 +301,7 @@ public class TeamDao {
         while (members.hasNext()){
             addNewTeamMembers(team,members.next());
         }
-        teamMapper.addTeamIntoKlass(team.getId(),team.getKlass().getId());
+        int i = teamMapper.addTeamIntoKlass(team.getId(),team.getKlass().getId());
         return team;
     }
 
