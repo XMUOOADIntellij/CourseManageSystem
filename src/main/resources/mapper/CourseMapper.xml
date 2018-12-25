@@ -11,8 +11,12 @@
     <result column="report_percentage" property="reportPercentage" jdbcType="BIT" />
     <result column="team_start_time" property="teamStartTime" jdbcType="TIMESTAMP" />
     <result column="team_end_time" property="teamEndTime" jdbcType="TIMESTAMP" />
-    <result column="teamMainCourseId" property="team_main_course_id" jdbcType="BIGINT"/>
-    <result column="seminarMainCourseId" property="seminar_main_course_id" jdbcType="BIGINT"/>
+
+    <association property="teamMainCourse" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                 column="team_main_course_id" javaType="com.group12.course.entity.Course"/>
+
+    <association property="seminarMainCourse" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                 column="seminar_main_course_id" javaType="com.group12.course.entity.Course"/>
 
     <association property="teacher" select="com.group12.course.mapper.TeacherMapper.selectTeacherById"
                  column="teacher_id" javaType="com.group12.course.entity.Teacher"/>
@@ -21,7 +25,6 @@
 
   <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
-  <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
   <sql id="Base_Column_List" >
     id, teacher_id, course_name, introduction, presentation_percentage, question_percentage,
@@ -38,6 +41,12 @@
     <include refid="Base_Column_List" />
     from course
     where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAllCourse" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from course
   </select>
 
   <delete id="deleteCourse" parameterType="java.lang.Long" >
@@ -150,11 +159,25 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectCourseByTeacherId" parameterType="java.lang.Long" resultType="com.group12.course.entity.Course">
+  <select id="selectCourseByTeacherId" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from course
     where teacher_id = #{teacherId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectSubCourseByTeamMainCourseId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from course
+    where team_main_course_id = #{teamMainCourseId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectSubCourseBySeminarMainCourseId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from course
+    where seminar_main_course_id = #{seminarMainCourseId,jdbcType=BIGINT}
   </select>
 
 </mapper>

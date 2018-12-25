@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public interface ConflictCourseStrategyMapper {
 
-    ConflictCourseStrategy selectConflictCourseStrategyById(Long id);
+    List<ConflictCourseStrategy> selectConflictCourseStrategyById(Long id);
 
     int deleteConflictCourseStrategy(Long id);
 
@@ -25,6 +25,6 @@ public interface ConflictCourseStrategyMapper {
      * @param courseId
      * @return
      */
-    List<ConflictCourseStrategy> selectConflictCourseStrategyByCourseId(Long courseId);
+    ConflictCourseStrategy selectConflictCourseStrategyByCourseId(Long courseId);
 
 }

@@ -32,9 +32,9 @@ public class Course implements Serializable {
 
     private LocalDateTime teamEndTime;
 
-    private Long teamMainCourseId;
+    private Course teamMainCourse;
 
-    private Long seminarMainCourseId;
+    private Course seminarMainCourse;
 
     private Course course;
 
@@ -54,12 +54,12 @@ public class Course implements Serializable {
         this.teacher = teacher;
     }
 
-    public String getcourseName() {
+    public String getCourseName() {
         return courseName;
     }
 
-    public void setcourseName(String courseName) {
-        this.courseName = courseName == null ? null : courseName.trim();
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     public String getIntroduction() {
@@ -67,7 +67,7 @@ public class Course implements Serializable {
     }
 
     public void setIntroduction(String introduction) {
-        this.introduction = introduction == null ? null : introduction.trim();
+        this.introduction = introduction;
     }
 
     public Integer getPresentationPercentage() {
@@ -110,20 +110,20 @@ public class Course implements Serializable {
         this.teamEndTime = teamEndTime;
     }
 
-    public Long getTeamMainCourseId() {
-        return teamMainCourseId;
+    public Course getTeamMainCourse() {
+        return teamMainCourse;
     }
 
-    public void setTeamMainCourseId(Long teamMainCourseId) {
-        this.teamMainCourseId = teamMainCourseId;
+    public void setTeamMainCourse(Course teamMainCourse) {
+        this.teamMainCourse = teamMainCourse;
     }
 
-    public Long getSeminarMainCourseId() {
-        return seminarMainCourseId;
+    public Course getSeminarMainCourse() {
+        return seminarMainCourse;
     }
 
-    public void setSeminarMainCourseId(Long seminarMainCourseId) {
-        this.seminarMainCourseId = seminarMainCourseId;
+    public void setSeminarMainCourse(Course seminarMainCourse) {
+        this.seminarMainCourse = seminarMainCourse;
     }
 
     @Override
@@ -138,6 +138,8 @@ public class Course implements Serializable {
                 ", reportPercentage=" + reportPercentage +
                 ", teamStartTime=" + teamStartTime +
                 ", teamEndTime=" + teamEndTime +
+                ", teamMainCourse=" + teamMainCourse +
+                ", seminarMainCourse=" + seminarMainCourse +
                 '}';
     }
 

@@ -117,7 +117,7 @@ public class CourseVO {
 
     public CourseVO(Course course){
 
-        this.courseName = course.getcourseName();
+        this.courseName = course.getCourseName();
         this.introduction = course.getIntroduction();
         this.presentationPercentage = course.getPresentationPercentage();
         this.questionPercentage = course.getQuestionPercentage();
