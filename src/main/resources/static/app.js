@@ -36,7 +36,7 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/app/Socket/seminar/1/class/3/start", {}, null);
+    stompClient.send("/app/Socket/seminar/4/class/1/start", {}, null);
 }
 
 function showGreeting(message) {

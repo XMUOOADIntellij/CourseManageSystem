@@ -7,6 +7,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * 班级讨论课相关 Mapper层
+ * @author Y Jiang
+ * @date 2018/12/12
+ */
 @Mapper
 @Component
 public interface KlassSeminarMapper {

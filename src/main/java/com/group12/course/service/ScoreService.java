@@ -1,5 +1,6 @@
 package com.group12.course.service;
 
+import com.group12.course.Exceptions.RecordNotFoundException;
 import com.group12.course.dao.*;
 import com.group12.course.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,10 +72,6 @@ public class ScoreService {
             //TODO teamNotFound
             return null;
         }
-    }
-
-    public void getStudentScore(Teacher teacher, SeminarScore seminarScore) {
-
     }
 
     /**
@@ -155,8 +152,7 @@ public class ScoreService {
                     attendance.getKlassSeminar().getId(), attendance.getTeam().getId()
             );
         } else {
-            //TODO ATTENDANCENOTFOUND
-            return null;
+            throw new RecordNotFoundException("Attendance Not Found");
         }
 
     }
