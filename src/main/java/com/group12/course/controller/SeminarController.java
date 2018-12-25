@@ -60,7 +60,7 @@ public class SeminarController {
             throw  new RecordNotFoundException("Invalid seminar Id: "+seminarId);
         }
         else{
-            return new ResponseEntity<SeminarVO>(new SeminarVO(seminar), HttpStatus.OK);
+            return new ResponseEntity<>(new SeminarVO(seminar), HttpStatus.OK);
         }
     }
 

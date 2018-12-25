@@ -11,7 +11,6 @@ import java.util.ConcurrentModificationException;
 
 /**
  * 讨论课相关Service
- *
  * @author Y Jiang
  * @date 2018/12/14
  */
@@ -124,7 +123,6 @@ public class SeminarService {
             throw new RecordNotFoundException("找不到班级讨论课");
         }
     }
-
 
     public KlassSeminar pauseSeminar(Teacher teacher, Long seminarId, Long classId) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
