@@ -25,14 +25,14 @@ public class TeamStrategyDaoTest {
     @Autowired
     CourseMapper courseMapper;
 
-    @Test
-    @Rollback
-    public void testAddTeamStrategy(){
-        TeamStrategy teamStrategy = new TeamStrategy();
-        Course course = courseMapper.selectCourseById(new Long(1));
-        ConflictCourseStrategy conflictCourseStrategy = new ConflictCourseStrategy();
-
-    }
+//    @Test
+//    @Rollback
+//    public void testAddTeamStrategy(){
+//        TeamStrategy teamStrategy = new TeamStrategy();
+//        Course course = courseMapper.selectCourseById(new Long(1));
+//        ConflictCourseStrategy conflictCourseStrategy = new ConflictCourseStrategy();
+//
+//    }
 
 
     @Test

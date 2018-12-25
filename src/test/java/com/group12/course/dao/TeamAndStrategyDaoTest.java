@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -20,7 +22,7 @@ public class TeamAndStrategyDaoTest {
 
     @Test
     public void testSelectTeamAndStrategyById(){
-        TeamAndStrategy record =  teamAndStrategyMapper.selectTeamAndStrategyById(new Long(1));
-        Assert.assertNotNull(record.getStrategyFirst());
+        List<TeamAndStrategy> record =  teamAndStrategyMapper.selectTeamAndStrategyById(new Long(1));
+        Assert.assertFalse(record.isEmpty());
     }
 }

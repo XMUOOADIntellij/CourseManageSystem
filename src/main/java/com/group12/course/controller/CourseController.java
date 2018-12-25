@@ -66,12 +66,12 @@ public class CourseController {
             memberLimitStrategy.setMaxMember(courseVO.getMaxMember());
             int status2 = memberLimitStrategyService.addMemberLimitStrategy(course.getId(),memberLimitStrategy);
 
+
             List<Course> conflictCourseList = courseVO.getConflictCourseList();
             if(conflictCourseList!=null){
                 for (Course conflictCourse:conflictCourseList) {
                     ConflictCourseStrategy conflictCourseStrategy = new ConflictCourseStrategy();
-                    conflictCourseStrategy.setCourseFirst(course);
-                    conflictCourseStrategy.setCourseSecond(conflictCourse);
+                    conflictCourseStrategy.setCourse(conflictCourse);
                     conflictCourseStrategyService.addConflicCourseStrategy(conflictCourseStrategy);
                 }
             }
@@ -165,7 +165,7 @@ public class CourseController {
         courseVO.setMinMember(memberLimitStrategy.getMinMember());
         courseVO.setMaxMember(memberLimitStrategy.getMaxMember());
 
-        List<Course> courseList = conflictCourseStrategyService.getConflictCoure(courseId);
+        List<Course> courseList = conflictCourseStrategyService.getConflictCourse(courseId);
         courseVO.setConflictCourseList(courseList);
 
         if(courseVO !=null){

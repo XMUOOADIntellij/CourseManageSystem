@@ -18,12 +18,14 @@ public class ConflictCourseStrategyService {
         return conflictCourseStrategyDao.addConflictCourseStrategy(conflictCourseStrategy);
     }
 
-    public List<Course> getConflictCoure(Long courseId){
+    public List<Course> getConflictCourse(Long courseId){
         List<Course> courseList = new ArrayList<>();
 
-        List<ConflictCourseStrategy> conflictCourseStrategyList = conflictCourseStrategyDao.selectConflictCourseStrategyByCourseId(courseId);
+        ConflictCourseStrategy record = conflictCourseStrategyDao.selectConflictCourseStrategyByCourseId(courseId);
+        List<ConflictCourseStrategy> conflictCourseStrategyList = conflictCourseStrategyDao.selectConflictCourseStrategyById(record.getId());
+
         for (ConflictCourseStrategy conflictCourseStrategy:conflictCourseStrategyList) {
-            courseList.add(conflictCourseStrategy.getCourseSecond());
+            courseList.add(conflictCourseStrategy.getCourse());
         }
 
         return courseList;

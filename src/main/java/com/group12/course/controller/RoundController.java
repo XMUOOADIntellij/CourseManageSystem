@@ -147,27 +147,27 @@ public class RoundController {
         }
     }
 
-    /**
-     * 按id 修改轮次成绩信息
-     * @param roundScoreInfoVO
-     * @param roundId
-     * @param teamId
-     * @param response
-     */
-    @PutMapping(value = "/{roundId/team/{teamId}/roundscore", produces = "application/json;charset=utf-8")
-    public void updateRoundScore(@RequestBody RoundScoreInfoVO roundScoreInfoVO, @PathVariable Long roundId, @PathVariable Long teamId, HttpServletResponse response) {
-        RoundScore roundScore = new RoundScore();
-        roundScore.setRound(roundService.getRound(roundId));
-        roundScore.setTeam(teamService.getTeamByTeamId(teamId));
-        roundScore.setPresentationScore(roundScoreInfoVO.getPresentationScore());
-        roundScoreInfoVO.setQuestionScore(roundScoreInfoVO.getQuestionScore());
-        roundScore.setReportScore(roundScoreInfoVO.getReportScore());
-        int status = roundService.updateRoundScore(roundScore);
-        if (status == 0) {
-            response.setStatus(403);
-        } else {
-            response.setStatus(201);
-        }
-
-   }
+//    /**
+//     * 按id 修改轮次成绩信息
+//     * @param roundScoreInfoVO
+//     * @param roundId
+//     * @param teamId
+//     * @param response
+//     */
+//    @PutMapping(value = "/{roundId/team/{teamId}/roundscore", produces = "application/json;charset=utf-8")
+//    public void updateRoundScore(@RequestBody RoundScoreInfoVO roundScoreInfoVO, @PathVariable Long roundId, @PathVariable Long teamId, HttpServletResponse response) {
+//        RoundScore roundScore = new RoundScore();
+//        roundScore.setRound(roundService.getRound(roundId));
+//        roundScore.setTeam(teamService.getTeamByTeamId(teamId));
+//        roundScore.setPresentationScore(roundScoreInfoVO.getPresentationScore());
+//        roundScoreInfoVO.setQuestionScore(roundScoreInfoVO.getQuestionScore());
+//        roundScore.setReportScore(roundScoreInfoVO.getReportScore());
+//        int status = roundService.updateRoundScore(roundScore);
+//        if (status == 0) {
+//            response.setStatus(403);
+//        } else {
+//            response.setStatus(201);
+//        }
+//
+//   }
 }
