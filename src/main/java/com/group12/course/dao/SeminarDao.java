@@ -1,5 +1,6 @@
 package com.group12.course.dao;
 
+import com.group12.course.entity.Course;
 import com.group12.course.exception.InformationException;
 import com.group12.course.entity.Klass;
 import com.group12.course.entity.KlassSeminar;
@@ -45,10 +46,15 @@ public class SeminarDao {
      * @return id
      */
     public Long insertSeminar(Seminar record) {
+
         List<Klass> classRecord;
+        List<Course> courseList;
+        List<Long> courseIdList = new ArrayList<>();
         List<KlassSeminar> klassSeminarsRecord = new ArrayList<>();
+        Course course = courseDao.getCourse(record.getCourse().getId());
+
         // 判断当前课程存在
-        if (courseDao.getCourse(record.getCourse().getId()) != null) {
+        if (course != null) {
 
             //如果是需要新建轮，则新建轮 插入->获取->设置
             if (record.getRound() == null) {
@@ -57,10 +63,19 @@ public class SeminarDao {
                                 roundDao.addRound(record.getCourse().getId())));
             }
 
+            //查找所有从课程
+            courseList = courseDao.getSubCourseBySeminarMainCourseId(course.getId());
+            courseList.add(course);
+            for(Course item:courseList){
+                courseIdList.add(item.getId());
+            }
+
             //Seminar表插入记录
             seminarMapper.insertSeminar(record);
-            //寻找该课程下的班级
-            classRecord = klassDao.getAllKlassByCourseId(record.getCourse().getId());
+
+            //寻找主课程以及从课程下的班级
+            classRecord = klassDao.getAllKlassByCourseId(course.getId());
+
             //生成班级讨论课的记录
             for (Klass klass : classRecord) {
                 KlassSeminar tempKlassSeminar = new KlassSeminar();
@@ -72,7 +87,6 @@ public class SeminarDao {
             }
             //插入班级讨论课记录
             klassSeminarDao.insertKlassSeminarList(klassSeminarsRecord);
-
             return record.getId();
         } else {
             throw new InformationException("讨论课不属于任何课程");

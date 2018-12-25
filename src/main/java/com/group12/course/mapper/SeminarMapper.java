@@ -59,4 +59,6 @@ public interface SeminarMapper {
      */
     List<Seminar> listSeminarByCourseId(Long courseId);
 
+
+
 }
