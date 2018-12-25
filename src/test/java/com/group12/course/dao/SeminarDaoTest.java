@@ -15,18 +15,22 @@ import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@MybatisTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class SeminarDaoTest {
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
+public class SeminarDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
     SeminarMapper seminarMapper;
     @Autowired
     CourseMapper courseMapper;
     @Autowired
     KlassSeminarMapper klassSeminarMapper;
+    @Autowired
+    SeminarDao seminarDao;
 
     @Test
     public void testInsertSeminar(){
@@ -38,7 +42,7 @@ public class SeminarDaoTest {
         seminar.setMaxTeam(5);
         seminar.setSeminarName("test");
         seminar.setVisible(false);
-
+        seminar.setSeminarSerial(5);
 
         Course course = new Course();
         Course subCourse = new Course();
@@ -47,7 +51,7 @@ public class SeminarDaoTest {
         subCourse.setSeminarMainCourse(course);
         courseMapper.updateCourse(subCourse);
 
-        seminarMapper.insertSeminar(seminar);
+        seminarDao.insertSeminar(seminar);
 
         Assert.assertNotNull(klassSeminarMapper.selectKlassSeminarBySeminarIdAndKlassId(seminar.getId(),24L));
 

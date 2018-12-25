@@ -3,6 +3,7 @@ package com.group12.course.mapper;
 import com.group12.course.entity.Course;
 import com.group12.course.entity.Klass;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -64,6 +65,6 @@ public interface KlassMapper {
      * @param courseIdList
      * @return
      */
-    List<Klass> getAllKlassByCourseIdList(List<Long> courseIdList);
+    List<Klass> getAllKlassByCourseIdList(@Param("courseIdList") List<Long> courseIdList);
 
 }
