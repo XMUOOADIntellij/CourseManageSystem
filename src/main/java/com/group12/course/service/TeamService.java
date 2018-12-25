@@ -3,6 +3,7 @@ package com.group12.course.service;
 import com.group12.course.dao.TeamDao;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Team;
+import com.group12.course.exception.UnauthorizedOperationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,6 +82,12 @@ public class TeamService {
      * */
     public Team getTeamByStudentIdAndCourseId(Long id,Long courseId){
         return teamDao.getTeamByStudentIdAndCourseId(id, courseId);
+    }
+
+    public void authCheck(Student student,Long teamId){
+        if (student==null||!teamDao.checkStudentIsInSpecialTeam(student.getId(),teamId)){
+            throw new UnauthorizedOperationException("只有该小组成员才可进行该操作");
+        }
     }
 
     /**
