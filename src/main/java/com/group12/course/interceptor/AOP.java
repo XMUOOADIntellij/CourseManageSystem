@@ -1,5 +1,6 @@
 package com.group12.course.interceptor;
 
+import com.alibaba.fastjson.JSON;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
 import com.group12.course.tools.Jwt;
@@ -17,6 +18,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Aspect
@@ -30,7 +33,7 @@ public class AOP {
     @Pointcut("!execution(public * com.group12.course.controller.UserController.login(..))" +
             "&& !execution(public * com.group12.course.controller.UserController.forgetPassword(..))" +
             "&& !execution(public * com.group12.course.controller.SeminarProgressController.*(..))" +
-            "&& execution(public * com.group12.course.controller.UserController.*(..))")
+            "&& execution(public * com.group12.course.controller.*.*(..))")
     public void log() {}
 
     /**
@@ -64,11 +67,14 @@ public class AOP {
                 return result;
             }
             else {
-                System.out.println("jwt is bad");
                 logger.error("jwt token is valid");
                 HttpServletResponse response = sra.getResponse();
                 if (response!=null){
-                    response.sendError(403,"jwt token is valid");
+                    Map<String,String> errorMessage = new HashMap<>(16);
+                    errorMessage.put("message","jwt token is invalid");
+                    String json = JSON.toJSONString(errorMessage);
+                    response.setStatus(403);
+                    response.getWriter().write(json);
                 }
             }
 
