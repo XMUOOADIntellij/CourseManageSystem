@@ -16,21 +16,60 @@ import java.util.List;
 @Component
 public interface KlassSeminarMapper {
 
+    /**
+     * 按照id删除班级讨论课
+     * @param id 班级讨论课id
+     * @return 成功1，失败0
+     */
     Integer deleteById(Long id);
 
+    /**
+     * 通过讨论课id删除班级讨论课
+     * @param seminarId 讨论课id
+     * @return 成功数目
+     */
     Integer deleteBySeminarId(Long seminarId);
 
-    Integer insert(KlassSeminar record);
-
+    /**
+     * 通过id查找班级讨论课
+     * @param id 班级讨论课id
+     * @return 班级讨论课记录
+     */
     KlassSeminar selectKlassSeminarById(Long id);
 
-    KlassSeminar listKlassSeminarBySeminarIdAndKlassId(Long seminarId, Long classId);
+    /**
+     * 通过讨论课id和班级id找到班级讨论课
+     * @param seminarId 讨论课id
+     * @param classId 班级id
+     * @return 班级讨论课记录
+     */
+    KlassSeminar selectKlassSeminarBySeminarIdAndKlassId(Long seminarId, Long classId);
 
+    /**
+     * 列出讨论课下的所有班级讨论课
+     * @param seminarId 讨论课id
+     * @return 班级讨论课列表
+     */
     List<KlassSeminar> listKlassSeminarBySeminarId(Long seminarId);
 
+    /**
+     * 更新班级讨论课信息
+     * @param record 班级讨论课记录
+     * @return 1成功 0失败
+     */
     Integer updateKlassSeminar(KlassSeminar record);
 
+    /**
+     * 批量插入班级讨论课
+     * @param list 班级讨论课列表
+     * @return 成功数目
+     */
     Integer insertKlassSeminarList(List<KlassSeminar> list);
 
+    /**
+     * 列出多个讨论课下的班级讨论课
+     * @param seminarId 讨论课id列表
+     * @return 班级讨论课列表
+     */
     List<KlassSeminar> listKlassSeminarBySeminarIdList(@Param("seminarId") List<Long> seminarId);
 }

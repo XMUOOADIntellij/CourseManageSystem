@@ -7,6 +7,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+
+/**
+ * 提问Dao层
+ * @author Y Jiang
+ * @date 2018/12/12
+ */
 @Component
 public class QuestionDao {
     @Autowired
@@ -15,8 +21,6 @@ public class QuestionDao {
     public Integer deleteQuestionByKlassSeminarId(Long klassSeminarId){
         return questionMapper.deleteQuestionByKlassSeminarId(klassSeminarId);
     }
-
-
 
     public Long insertQuetion(Question record){
         questionMapper.insertQuestion(record);

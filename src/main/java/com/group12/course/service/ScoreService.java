@@ -10,6 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 与分数相关 service
+ * @author Y Jiang
+ * @date 2018/12/22
+ */
 @Service
 public class ScoreService {
     @Autowired

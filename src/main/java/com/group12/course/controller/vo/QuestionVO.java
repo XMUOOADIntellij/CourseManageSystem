@@ -4,6 +4,12 @@ import com.group12.course.entity.*;
 
 import java.math.BigDecimal;
 
+
+/**
+ * 提问 VO
+ * @author Y Jiang
+ * @date 2018/12/12
+ */
 public class QuestionVO {
     private Long id;
 
@@ -105,5 +111,10 @@ public class QuestionVO {
         this.attendanceId = question.getAttendance().getId();
         this.score = question.getScore();
         this.selected = question.getSelected();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

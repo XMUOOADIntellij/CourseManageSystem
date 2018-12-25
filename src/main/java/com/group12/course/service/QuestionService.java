@@ -12,6 +12,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+
+/**
+ * 提问Service层
+ * @author Y Jiang
+ * @date 2018/12/12
+ */
 @Service
 public class QuestionService {
     @Autowired

@@ -4,6 +4,12 @@ import com.group12.course.entity.SeminarScore;
 
 import java.math.BigDecimal;
 
+
+/**
+ * 讨论课分数VO
+ * @author Y Jiang
+ * @date 2018/12/22
+ */
 public class SeminarScoreVO {
 
     private  String seminarName;
@@ -84,5 +90,8 @@ public class SeminarScoreVO {
         this.totalScore =seminarScore.getTotalScore();
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

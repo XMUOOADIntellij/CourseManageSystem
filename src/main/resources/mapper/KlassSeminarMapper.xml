@@ -30,7 +30,7 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="listKlassSeminarBySeminarIdAndKlassId" resultMap="BaseResultMap" >
+  <select id="selectKlassSeminarBySeminarIdAndKlassId" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from klass_seminar
@@ -64,22 +64,6 @@
     delete from klass_seminar
     where seminar_id = #{seminarId,jdbcType=BIGINT}
   </delete>
-
-  <insert id="insert" parameterType="com.group12.course.entity.KlassSeminar" >
-    insert into klass_seminar
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-        klass_id,
-        seminar_id,
-        report_ddl,
-        seminar_status,
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-        #{klassId,jdbcType=BIGINT},
-        #{seminarId,jdbcType=BIGINT},
-        #{reportDdl,jdbcType=TIMESTAMP},
-        #{seminarStatus,jdbcType=TINYINT},
-    </trim>
-  </insert>
 
   <update id="updateKlassSeminar" parameterType="klassSeminar">
     update klass_seminar

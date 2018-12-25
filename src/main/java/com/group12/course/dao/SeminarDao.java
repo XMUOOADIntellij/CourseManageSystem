@@ -11,6 +11,12 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 与分数 相关Dao层
+ * @author Y Jiang
+ * @date 2018/12/22
+ */
 @Component
 public class SeminarDao {
 

@@ -3,6 +3,9 @@ package com.group12.course.exception;
 
 import java.util.List;
 
+/**
+ * 错误返回的实体
+ */
 public class ErrorResponse {
 
     /**
