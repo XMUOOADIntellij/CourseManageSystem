@@ -3,6 +3,7 @@
 <mapper namespace="com.group12.course.mapper.TeamStrategyMapper">
 
     <resultMap id="ConflictCourseStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_serial" property="strategySerial" jdbcType="VARCHAR"/>
         <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
 
         <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
@@ -13,6 +14,7 @@
     </resultMap>
 
     <resultMap id="MemberLimitStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_serial" property="strategySerial" jdbcType="VARCHAR"/>
         <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
 
         <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
@@ -23,7 +25,7 @@
     </resultMap>
 
     <resultMap id="CourseMemberLimitStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
-
+        <result column="strategy_serial" property="strategySerial" jdbcType="VARCHAR"/>
         <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
 
         <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
@@ -35,6 +37,7 @@
 
 
     <resultMap id="TeamAndStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_serial" property="strategySerial" jdbcType="VARCHAR"/>
         <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
 
         <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
@@ -45,6 +48,7 @@
     </resultMap>
 
     <resultMap id="TeamOrStrategyResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_serial" property="strategySerial" jdbcType="VARCHAR"/>
         <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
 
         <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
@@ -57,6 +61,7 @@
 
 
     <resultMap id="BaseResultMap" type="com.group12.course.entity.strategy.TeamStrategy">
+        <result column="strategy_serial" property="strategySerial" jdbcType="VARCHAR"/>
         <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
 
         <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
@@ -71,7 +76,7 @@
     </resultMap>
 
     <sql id="Base_Column_List" >
-    course_id,strategy_id,strategy_name
+    course_id,strategy_serial,strategy_name,strategy_id
     </sql>
 
 
@@ -95,28 +100,34 @@
         where course_id = #{courseId,jdbcType=BIGINT}
     </delete>
 
-    <insert id="addTeamStrategy" >
+    <insert id="addTeamStrategy" parameterType="com.group12.course.entity.strategy.TeamStrategy">
         insert into team_strategy
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="courseId != null" >
+            <if test="teamStrategy.course != null" >
                 course_id,
             </if>
-            <if test="strategyId != null" >
-                strategy_id,
+            <if test="teamStrategy.strategySerial!=null">
+                strategy_serial,
             </if>
-            <if test="strategyName != null" >
+            <if test="teamStrategy.strategyName != null" >
                 strategy_name,
+            </if>
+            <if test="teamStrategy.strategy != null" >
+                strategy_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="courseId != null" >
-                #{courseId,jdbcType=BIGINT},
+            <if test="teamStrategy.course != null" >
+                #{teamStrategy.course.id,jdbcType=BIGINT},
             </if>
-            <if test="strategyId != null" >
-                #{strategyId,jdbcType=BIGINT},
+            <if test="teamStrategy.strategySerial != null" >
+                #{teamStrategy.strategySerial,jdbcType=VARCHAR},
             </if>
-            <if test="strategyName != null" >
-                #{strategyName,jdbcType=VARCHAR},
+            <if test="teamStrategy.strategyName != null" >
+                #{teamStrategy.strategyName,jdbcType=VARCHAR},
+            </if>
+            <if test="teamStrategy.strategy != null">
+                #{teamStrategy.strategy.id,jdbcType=BIGINT}
             </if>
         </trim>
     </insert>
@@ -124,14 +135,17 @@
     <update id="updateTeamStrategy" parameterType="com.group12.course.entity.strategy.Strategy">
         update team_strategy
         <set>
-            <if test="course != null">
-                course_id = #{course.id,jdbcType = BIGINT},
+            <if test="teamStrategy.course != null" >
+                course_id = #{teamStrategy.course.id,jdbcType=BIGINT},
             </if>
-            <if test="strategy != null">
-                strategy_id = #{strategy.id,jdbcType = BIGINT},
+            <if test="teamStrategy.strategySerial != null" >
+                strategy_serial = #{teamStrategy.strategySerial,jdbcType=VARCHAR},
             </if>
-            <if test="strategyNamme != null">
-                strategy_name = #{strategyName,jdbcType = BIGINT},
+            <if test="teamStrategy.strategyName != null" >
+                strategy_name = #{teamStrategy.strategyName,jdbcType=VARCHAR},
+            </if>
+            <if test="teamStrategy.strategy != null">
+                strategy_id = #{teamStrategy.strategy.id,jdbcType=BIGINT}
             </if>
         </set>
     </update>

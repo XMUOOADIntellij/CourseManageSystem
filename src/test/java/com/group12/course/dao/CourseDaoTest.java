@@ -26,14 +26,20 @@ public class CourseDaoTest {
 
     @Test
     public void testGetCourse(){
-        Course record =  courseMapper.selectCourseById(new Long(1));
-        Assert.assertNotNull(record.getcourseName());
+        Course record =  courseMapper.selectCourseById(new Long(2));
+        Assert.assertNotNull(record.getTeamMainCourse());
     }
 
     @Test
     public void testGetCourseByTeacherId(){
-        List<Course> records = courseMapper.selectCourseByTeacherId(new Long(1));
+        List<Course> records = courseMapper.selectCourseByTeacherId(new Long(3));
         Assert.assertFalse(records.isEmpty());
+    }
 
+
+    @Test
+    public void testGetSubCourseByTeamMainCourseId(){
+        List<Course> courseList = courseMapper.selectSubCourseByTeamMainCourseId(new Long(1));
+        Assert.assertFalse(courseList.isEmpty());
     }
 }

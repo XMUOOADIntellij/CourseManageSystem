@@ -4,10 +4,14 @@ import com.group12.course.entity.strategy.TeamAndStrategy;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Mapper
 @Component
 public interface TeamAndStrategyMapper {
 
-    TeamAndStrategy selectTeamAndStrategyById(Long id);
+    List<TeamAndStrategy> selectTeamAndStrategyById(Long id);
+
+    int addTeamAndStrategy(TeamAndStrategy teamAndStrategy);
 
 }

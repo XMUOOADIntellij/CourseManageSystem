@@ -14,7 +14,7 @@ public class ConflictCourseStrategyDao {
     @Autowired
     ConflictCourseStrategyMapper conflictCourseStrategyMapper;
 
-    public ConflictCourseStrategy selectConflictCourseStrategyById(Long id){
+    public List<ConflictCourseStrategy> selectConflictCourseStrategyById(Long id){
         return conflictCourseStrategyMapper.selectConflictCourseStrategyById(id);
     }
 
@@ -30,7 +30,7 @@ public class ConflictCourseStrategyDao {
         return conflictCourseStrategyMapper.updateConflictCourseStrategy(record);
     }
 
-    public List<ConflictCourseStrategy> selectConflictCourseStrategyByCourseId(Long courseId){
+    public ConflictCourseStrategy selectConflictCourseStrategyByCourseId(Long courseId){
         return conflictCourseStrategyMapper.selectConflictCourseStrategyByCourseId(courseId);
     }
 }
