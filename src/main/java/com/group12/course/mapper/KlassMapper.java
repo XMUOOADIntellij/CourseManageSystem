@@ -1,5 +1,6 @@
 package com.group12.course.mapper;
 
+import com.group12.course.entity.Course;
 import com.group12.course.entity.Klass;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -57,5 +58,12 @@ public interface KlassMapper {
      * @return
      */
     int deleteStudentByKlassId(Long klassId);
+
+    /**
+     * 获取课程列表下的所有班级
+     * @param courseIdList
+     * @return
+     */
+    List<Klass> getAllKlassByCourseIdList(List<Long> courseIdList);
 
 }
