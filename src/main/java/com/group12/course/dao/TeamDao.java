@@ -258,11 +258,27 @@ public class TeamDao {
      * @param teamId 队伍的id
      * @return 该 id 所在的队伍的id
      * */
+    @Transactional(rollbackFor = Exception.class)
     public int deleteTeamById(Long teamId){
+        Team team = teamMapper.selectTeamById(teamId);
         int deleteTeamCount=teamMapper.deleteTeamByTeamId(teamId);
         if (deleteTeamCount==1){
             teamMapper.deleteTeamFromKlass(teamId);
-            return teamMapper.deleteTeamMembersByTeamId(teamId);
+            deleteTeamCount = teamMapper.deleteTeamMembersByTeamId(teamId);
+            List<Team> teamList = teamMapper.selectTeamByKlassId(team.getKlass().getId());
+            System.out.println(teamList);
+            int teamSerial = team.getTeamSerial();
+            for (Team teams:teamList) {
+                System.out.println(teams);
+                teams = teamMapper.selectTeamById(teams.getId());
+                System.out.println(teams);
+                int tempSerial = teams.getTeamSerial();
+                if (tempSerial>teamSerial){
+                    teams.setTeamSerial(teams.getTeamSerial()-1);
+                    changeTeam(teams);
+                }
+            }
+            return deleteTeamCount;
         }
         return -1;
     }

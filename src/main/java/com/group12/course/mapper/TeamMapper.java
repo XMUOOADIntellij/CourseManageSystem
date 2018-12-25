@@ -99,6 +99,7 @@ public interface TeamMapper {
      *
      * @param id 主键代表队长id
      * @return 代表获取到的队伍对象
+     * 内部只有 klass Id 和 team Id
      * */
     List<Team> selectTeamByKlassId(Long id);
 

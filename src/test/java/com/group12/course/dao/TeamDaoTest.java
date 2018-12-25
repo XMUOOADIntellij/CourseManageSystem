@@ -63,8 +63,8 @@ public class TeamDaoTest {
 
     @Test
     @Rollback
-    public void testRemoveTeammate(){
-
+    public void testRemoveTeam(){
+        teamDao.deleteTeamById(16L);
     }
 
     @Test
