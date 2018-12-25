@@ -75,4 +75,13 @@ public class CourseDao {
     public List<Course> getAllCourse(){
         return courseMapper.selectAllCourse();
     }
+
+    public List<Course> getSubCourseByTeamMainCourseId(Long teamMainCourseId){
+        return courseMapper.selectSubCourseByTeamMainCourseId(teamMainCourseId);
+    }
+
+    public List<Course> getSubCourseBySeminarMainCourseId(Long seminarMainCourseId){
+        return courseMapper.selectSubCourseBySeminarMainCourseId(seminarMainCourseId);
+    }
+
 }

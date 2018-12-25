@@ -157,4 +157,26 @@ public class CourseService {
         return shareSeminarApplicationDao.addShareSeminarApplication(shareSeminarApplication);
     }
 
+
+    /**
+     * 处理共享分组请求
+     * @param teamShareId
+     * @param handler
+     * @return
+     */
+    public int handleTeamShare(Long teamShareId,Integer handler){
+        return 0;
+    }
+
+
+    /**
+     * 处理共享讨论课请求
+     * @param seminarShareId
+     * @param handler
+     * @return
+     */
+    public int handleSeminarShare(Long seminarShareId,Integer handler){
+        return 0;
+    }
+
 }

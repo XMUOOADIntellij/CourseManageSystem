@@ -29,4 +29,8 @@ public interface CourseMapper {
 
     List<Course> selectCourseByTeacherId(Long teacherId);
 
+    List<Course> selectSubCourseByTeamMainCourseId(Long teamMainCourseId);
+
+    List<Course> selectSubCourseBySeminarMainCourseId(Long seminarMainCourseId);
+
 }

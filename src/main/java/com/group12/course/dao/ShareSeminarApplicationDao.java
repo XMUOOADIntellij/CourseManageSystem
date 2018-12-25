@@ -39,7 +39,7 @@ public class ShareSeminarApplicationDao {
      */
     public int deleteShareSeminarApplication(Long id){
         Course subCourse = selectShareSeminarApplicationById(id).getSubCourse();
-        subCourse.setSeminarMainCourseId(null);
+        subCourse.setSeminarMainCourse(null);
         courseDao.updateCourse(subCourse);
         return shareSeminarApplicationMapper.deleteShareSeminarApplication(id);
     }

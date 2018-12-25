@@ -9,6 +9,7 @@ import com.group12.course.entity.strategy.ConflictCourseStrategy;
 import com.group12.course.entity.strategy.MemberLimitStrategy;
 import com.group12.course.service.*;
 import com.group12.course.tools.Jwt;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -344,7 +345,39 @@ public class CourseController {
 
     }
 
-    /*TODO 是否要加个处理共享信息的api*/
+    /**
+     * 处理分组共享
+     * @param teamshareId
+     * @param response
+     */
+    @PostMapping(value="/teamshare/{teamshareId}",produces = "application/json; charset=utf-8")
+    public void handleTeamShare(@PathVariable Long teamshareId, @Param("handler") Integer handler, HttpServletResponse response){
+        int status = courseService.handleTeamShare(teamshareId,handler);
+        if(status == 0){
+            response.setStatus(404);
+        }
+        else{
+            response.setStatus(201);
+        }
+    }
+
+
+    /**
+     * 处理讨论课共享
+     * @param seminarshareId
+     * @param response
+     */
+    @PostMapping(value="/seminarshare/{seminarshareId}",produces = "application/json; charset=utf-8")
+    public void handleSeminarShare(@PathVariable Long seminarshareId,@Param("handler") Integer handler,HttpServletResponse response){
+        int status = courseService.handleSeminarShare(seminarshareId,handler);
+        if(status == 0){
+            response.setStatus(404);
+        }
+        else{
+            response.setStatus(201);
+        }
+    }
+
 
     /**
      * 取消分组共享
@@ -385,7 +418,6 @@ public class CourseController {
      */
     @PostMapping(value="/{courseId}/teamsharerequest",produces = "application/json; charset=utf-8")
     public void requestTeamShare(@PathVariable Long courseId,@RequestBody List<Long> subCourseIdList, HttpServletResponse response){
-        /*注意：查看讨论课和分组时需要先判断是主课程还是从课程*/
         int status = 1;
         for (Long subCourseId:subCourseIdList) {
             ShareTeamApplication shareTeamApplication = new ShareTeamApplication();
@@ -413,7 +445,6 @@ public class CourseController {
      */
     @PostMapping(value="/{courseId}/seminarsharerequest",produces = "application/json; charset=utf-8")
     public void requestSeminarShare(@PathVariable Long courseId,@RequestBody List<Long> subCourseIdList,HttpServletResponse response){
-        /*接受共享后才做一下操作*/
         int status= 1;
         for (Long subCourseId:subCourseIdList) {
             ShareSeminarApplication shareSeminarApplication = new ShareSeminarApplication();
