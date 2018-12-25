@@ -47,17 +47,18 @@
     where klass_id = #{id,jdbcType=BIGINT}
   </select>
 
+
   <select id="selectTeamIdByMembersId" resultType="java.lang.Long" parameterType="java.lang.Long" >
     select
     team_id
-    from klass_student
+    from team_student
     where student_id = #{id,jdbcType=BIGINT}
   </select>
 
   <select id="selectTeamMembersByTeamId" resultMap="StudentResultMap" parameterType="java.lang.Long" >
     select
     student_id
-    from klass_student
+    from team_student
     where team_id = #{id,jdbcType=BIGINT}
   </select>
 
@@ -65,9 +66,9 @@
     delete from team
     where id = #{id,jdbcType=BIGINT}
   </delete>
-
+  
   <delete id="deleteTeamMembers" parameterType="java.lang.Long" >
-    delete from klass_student
+    delete from team_student
     where student_id = #{id,jdbcType=BIGINT}
   </delete>
 
@@ -90,7 +91,7 @@
         status,
       </if>
       <if test="record.teamSerial != null" >
-        is_valid,
+        team_serial,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -116,14 +117,28 @@
   </insert>
 
   <insert id="addTeamMembers">
-    insert into klass_student
+    insert into team_student
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="courseId != null" >
-        course_id,
-      </if>
       <if test="studentId != null" >
         student_id,
       </if>
+      <if test="teamId != null" >
+        team_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        #{studentId},
+      </if>
+      <if test="teamId != null" >
+        #{teamId},
+      </if>
+    </trim>
+  </insert>
+
+  <insert id="addTeamIntoKlass">
+    insert into klass_team
+    <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="klassId != null" >
         klass_id,
       </if>
@@ -132,12 +147,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="courseId != null" >
-        #{courseId},
-      </if>
-      <if test="studentId != null" >
-        #{studentId},
-      </if>
       <if test="klassId != null" >
         #{klassId},
       </if>

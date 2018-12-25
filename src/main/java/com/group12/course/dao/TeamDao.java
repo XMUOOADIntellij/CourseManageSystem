@@ -8,9 +8,7 @@ import com.group12.course.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -26,6 +24,22 @@ public class TeamDao {
 
     @Autowired
     StudentDao studentDao;
+
+    public Integer getKlassLastTeamSerial(Long klassId){
+        List<Team> teams = teamMapper.selectTeamByKlassId(klassId);
+        if (teams==null){
+            return 1;
+        }
+        else {
+            teams.sort(new Comparator<Team>() {
+                @Override
+                public int compare(Team o1, Team o2) {
+                    return o1.getTeamSerial().compareTo(o2.getTeamSerial());
+                }
+            });
+            return teams.get(teams.size()-1).getTeamSerial()+1;
+        }
+    }
 
     /**
      * 检查队伍信息是否合法
@@ -93,6 +107,9 @@ public class TeamDao {
      * 否则为 false
      * */
     public Boolean checkMembersInTeam(Team team){
+        if (team.getMembers()==null){
+            return true;
+        }
         Iterator<Student> iterator = team.getMembers().iterator();
         while (iterator.hasNext()){
             Student member = iterator.next();
@@ -242,18 +259,25 @@ public class TeamDao {
      * @return 返回的队伍对象中包含新添加的对象的id
      * */
     public Team addTeam(Team team){
-        if (!checkTeamValid(team)||!checkLeaderInTeam(team,team.getCourse())||!checkMembersInTeam(team)){
-            return new Team();
-        }
-        team.setStatus(0);
-        int addTeamCount=teamMapper.addTeam(team,team.getCourse().getId(),team.getKlass().getId(),team.getLeader().getId());
+//        if (!checkTeamValid(team)||!checkLeaderInTeam(team,team.getCourse())||!checkMembersInTeam(team)){
+//            return new Team();
+//        }
+        team.setStatus(2);
+        team.setTeamSerial(getKlassLastTeamSerial(team.getKlass().getId()));
+        int addTeamCount=teamMapper.addTeam(team, team.getCourse().getId(),
+                team.getKlass().getId(),team.getLeader().getId());
         if (addTeamCount==0){
             return new Team();
         }
+        if (team.getMembers()==null){
+            return team;
+        }
+        addNewTeamMembers(team,team.getLeader());
         Iterator<Student> members = team.getMembers().iterator();
         while (members.hasNext()){
             addNewTeamMembers(team,members.next());
         }
+        teamMapper.addTeamIntoKlass(team.getId(),team.getKlass().getId());
         return team;
     }
 
@@ -268,7 +292,7 @@ public class TeamDao {
         if (!checkTeamValid(team)){
             return new Team();
         }
-        int temp=teamMapper.addTeamMembers(team.getId(),team.getCourse().getId(),team.getKlass().getId(),member.getId());
+        int temp=teamMapper.addTeamMembers(team.getId(),member.getId());
         if (temp==0){
             // throw insert error
             System.out.println("error insert team members:"+member.getId()+" at team:"+team.getId());
@@ -293,11 +317,11 @@ public class TeamDao {
                 return new Team();
             }
         }
-        if (!checkTeamValid(team)){
+        if (team.getId()==null){
             // 传入的队伍信息不足
             return new Team();
         }
-        int temp=teamMapper.addTeamMembers(team.getId(),team.getCourse().getId(),team.getKlass().getId(),member.getId());
+        int temp=teamMapper.addTeamMembers(team.getId(),member.getId());
         if (temp==0){
             // throw insert error
             System.out.println("error insert team members:"+member.getId()+" at team:"+team.getId());

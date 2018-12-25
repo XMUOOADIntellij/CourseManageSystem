@@ -30,6 +30,7 @@
     where id = #{id}
   </select>
 
+
   <select id="getAllTeacher" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
@@ -114,3 +115,4 @@
   </update>
 
 </mapper>
+
