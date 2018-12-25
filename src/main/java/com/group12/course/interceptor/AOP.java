@@ -15,6 +15,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
 
 
@@ -47,36 +48,33 @@ public class AOP {
             Boolean validJwt = Jwt.checkExpire(token);
             if (validJwt){
                 System.out.println("jwt is ok");
+                StopWatch stopWatch = new StopWatch();
+                stopWatch.start();
+                Object result = proceedingJoinPoint.proceed();
+                stopWatch.stop();
+                double elapsedTime = stopWatch.getTime() / 1000.0;
+                Signature signature = proceedingJoinPoint.getSignature();
+                String infoString = "[" + signature.toShortString() + "][Elapsed time: " + elapsedTime + " s]";
+            if (elapsedTime > 1) {
+                logger.error(infoString + "[Note that it's time consuming!]");
+            } else {
+                logger.info(infoString);
+            }
+
+                return result;
             }
             else {
                 System.out.println("jwt is bad");
+                logger.error("jwt token is valid");
+                HttpServletResponse response = sra.getResponse();
+                if (response!=null){
+                    response.sendError(403,"jwt token is valid");
+                }
             }
 
-            //记录日志
-            System.out.println("url" + request.getRequestURI().toString());
-            System.out.println("method" + request.getMethod());
-            System.out.println("ip" + request.getRemoteAddr());
-
-            Enumeration<String> names = request.getParameterNames();
-            while (names.hasMoreElements()) {
-                String name = names.nextElement();
-                System.out.println("name:" + name + ",value:{" + request.getParameter(name) + "}");
-
-            }
         }
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
-        Object result = proceedingJoinPoint.proceed();
-        stopWatch.stop();
-        double elapsedTime = stopWatch.getTime() / 1000.0;
-        Signature signature = proceedingJoinPoint.getSignature();
-        String infoString = "[" + signature.toShortString() + "][Elapsed time: " + elapsedTime + " s]";
-//            if (elapsedTime > 1) {
-//                log.error(infoString + "[Note that it's time consuming!]");
-//            } else {
-//                log.info(infoString);
-//            }
-        return result;
+        return null;
+
     }
 
     /**
