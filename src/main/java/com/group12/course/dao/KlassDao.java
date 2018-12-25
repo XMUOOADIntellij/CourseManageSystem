@@ -1,5 +1,6 @@
 package com.group12.course.dao;
 
+import com.group12.course.entity.Course;
 import com.group12.course.entity.Klass;
 import com.group12.course.entity.KlassStudent;
 import com.group12.course.mapper.KlassMapper;
@@ -59,4 +60,15 @@ public class KlassDao {
     public List<Klass> getAllKlassByCourseId(Long courseId){
         return klassMapper.getAllKlassByCourseId(courseId);
     }
+
+
+    /**
+     * 获取课程列表的下的所有班级
+     * @param courseIdList
+     * @return
+     */
+    public List<Klass> getAllKlassByCourseIdList(List<Long> courseIdList){
+        return klassMapper.getAllKlassByCourseIdList(courseIdList);
+    }
+
 }

@@ -25,7 +25,7 @@ public interface CourseMapper {
 
     List<Course> selectAllCourse();
 
-    int updateCourse(Course record);
+    int updateCourse(Course course);
 
     List<Course> selectCourseByTeacherId(Long teacherId);
 
