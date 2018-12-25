@@ -161,7 +161,12 @@ public class TeamDao {
      * @param id 课程id
      * @return 返回一个包含所有队员的队伍*/
     public List<Team> getTeamByCourseId(Long id){
-        return teamMapper.selectTeamByCourseId(id);
+        List<Team> teams = teamMapper.selectTeamByCourseId(id);
+        List<Team> returnTeams = new ArrayList<>(0);
+        for (Team team:teams) {
+            returnTeams.add(getMembers(team));
+        }
+        return returnTeams;
     }
 
     /**
