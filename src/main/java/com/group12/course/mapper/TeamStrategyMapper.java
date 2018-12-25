@@ -5,14 +5,16 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Mapper
 @Component
 public interface TeamStrategyMapper {
     int deleteTeamStrategyByCourseId(Long courseId);
 
-    int addTeamStrategy(Long courseId,Long strategyId,String strategyName);
+    int addTeamStrategy(TeamStrategy teamStrategy);
 
-    TeamStrategy selectTeamStrategyByCourseId(Long id);
+    List<TeamStrategy> selectTeamStrategyByCourseId(Long id);
 
     int updateTeamStrategy(TeamStrategy teamStrategy);
 

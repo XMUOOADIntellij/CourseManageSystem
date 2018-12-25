@@ -11,32 +11,21 @@ import com.group12.course.entity.Course;
  */
 public class ConflictCourseStrategy extends Strategy {
 
-    private Course courseFirst;
-
-    private Course courseSecond;
+    private Course course;
 
     public ConflictCourseStrategy() {
     }
 
-    public ConflictCourseStrategy(Long id, Course courseFirst, Course courseSecond) {
+    public ConflictCourseStrategy(Long id, Course course) {
         super(id);
-        this.courseFirst = courseFirst;
-        this.courseSecond = courseSecond;
+        this.course = course;
     }
 
-    public Course getCourseFirst() {
-        return courseFirst;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseFirst(Course courseFirst) {
-        this.courseFirst = courseFirst;
-    }
-
-    public Course getCourseSecond() {
-        return courseSecond;
-    }
-
-    public void setCourseSecond(Course courseSecond) {
-        this.courseSecond = courseSecond;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

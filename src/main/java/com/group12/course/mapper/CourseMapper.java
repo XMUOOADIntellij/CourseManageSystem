@@ -23,8 +23,14 @@ public interface CourseMapper {
 
     Course selectCourseById(Long id);
 
+    List<Course> selectAllCourse();
+
     int updateCourse(Course record);
 
     List<Course> selectCourseByTeacherId(Long teacherId);
+
+    List<Course> selectSubCourseByTeamMainCourseId(Long teamMainCourseId);
+
+    List<Course> selectSubCourseBySeminarMainCourseId(Long seminarMainCourseId);
 
 }

@@ -6,6 +6,7 @@ import com.group12.course.entity.strategy.ConflictCourseStrategy;
 import com.group12.course.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,9 +24,7 @@ public class CourseDao {
     @Autowired
     KlassDao klassDao;
     @Autowired
-    MemberLimitStrategyDao memberLimitStrategyDao;
-    @Autowired
-    ConflictCourseStrategyDao conflictCourseStrategyDao;
+    TeamStrategyDao teamStrategyDao;
 
     public Course getCourse(Long id){
         return courseMapper.selectCourseById(id);
@@ -36,6 +35,7 @@ public class CourseDao {
      * @param id
      * @return
      */
+    @Transactional(rollbackFor = {Exception.class})
     public int deleteCourse(Long id){
         if(courseMapper.selectCourseById(id)!=null)
         {
@@ -46,17 +46,11 @@ public class CourseDao {
                 Long klassId = klass.getId();
                 status1 = klassDao.deleteKlass(klassId)==0?0:status1;
             }
-
-            List<ConflictCourseStrategy> conflictCourseStrategyList = conflictCourseStrategyDao.selectConflictCourseStrategyByCourseId(id);
-            //删除该课程的冲突记录
-            int status2 = 1;
-            for (ConflictCourseStrategy conflictCourseStrategy:conflictCourseStrategyList) {
-                Long conflictCourseStrategyId = conflictCourseStrategy.getId();
-                status2 = conflictCourseStrategyDao.deleteConflictCourseStrategy(conflictCourseStrategyId)==0?0:status2;
-            }
-
+            //删除team_strategy策略表中的记录
+            int status2 = teamStrategyDao.deleteTeamStrategyByCourseId(id);
+            //删除课程
             int status3 = courseMapper.deleteCourse(id);
-            if(status1 == 0 || status2 ==0 || status3 ==0){
+            if(status1 == 0 || status2==0 || status3 ==0){
                 return 0;
             }
             else{
@@ -64,7 +58,6 @@ public class CourseDao {
             }
         }
         return 0;
-        /*是否要查找team_strategy表删除相应策略记录，或者直接查询每一个策略表进行删除*/
     }
 
     public int addCourse(Course course){
@@ -77,6 +70,18 @@ public class CourseDao {
 
     public List<Course> getCourseByTeacherId(Long teacherId){
         return courseMapper.selectCourseByTeacherId(teacherId);
+    }
+
+    public List<Course> getAllCourse(){
+        return courseMapper.selectAllCourse();
+    }
+
+    public List<Course> getSubCourseByTeamMainCourseId(Long teamMainCourseId){
+        return courseMapper.selectSubCourseByTeamMainCourseId(teamMainCourseId);
+    }
+
+    public List<Course> getSubCourseBySeminarMainCourseId(Long seminarMainCourseId){
+        return courseMapper.selectSubCourseBySeminarMainCourseId(seminarMainCourseId);
     }
 
 }

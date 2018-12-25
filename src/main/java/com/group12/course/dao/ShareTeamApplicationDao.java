@@ -39,7 +39,7 @@ public class ShareTeamApplicationDao {
      */
     public int deleteShareTeamApplication(Long id){
         Course subCourse = selectShareTeamApplicationById(id).getSubCourse();
-        subCourse.setTeamMainCourseId(null);
+        subCourse.setTeamMainCourse(null);
         courseDao.updateCourse(subCourse);
         return shareTeamApplicationMapper.deleteShareTeamApplication(id);
     }
