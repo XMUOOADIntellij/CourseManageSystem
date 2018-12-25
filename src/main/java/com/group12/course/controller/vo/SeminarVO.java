@@ -4,6 +4,7 @@ import com.group12.course.entity.KlassSeminar;
 import com.group12.course.entity.Seminar;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -24,18 +25,17 @@ public class SeminarVO {
     /**
      * Seminar 属性
      */
-    @NotEmpty(message="seminar need a name")
+    @NotEmpty(message="讨论课名称不能为空")
     private String seminarName;
+
+    @NotNull(message="需要最大报名组数")
+    private Integer maxTeam;
+
+    @NotNull(message="需要设置讨论课是否可见")
+    private Boolean visible;
 
     private String introduction;
 
-    @NotNull(message="seminar need maxTeam")
-    private Integer maxTeam;
-
-    @NotNull(message="need seminar's visibility")
-    private Boolean visible;
-
-    @NotNull(message="seminar need serial")
     private Integer seminarSerial;
 
     private LocalDateTime enrollStartTime;

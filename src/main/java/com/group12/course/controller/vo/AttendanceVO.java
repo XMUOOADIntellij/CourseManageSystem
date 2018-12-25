@@ -1,6 +1,9 @@
 package com.group12.course.controller.vo;
 
 import com.group12.course.entity.Attendance;
+import org.apache.ibatis.annotations.Param;
+
+import javax.validation.constraints.NotEmpty;
 
 /**
  * 讨论课报名VO
@@ -14,6 +17,7 @@ public class AttendanceVO {
      */
     private Long id;
 
+    @NotEmpty(message = "展示顺序不能为空")
     private Integer teamOrder;
 
     private Boolean presented;

@@ -36,6 +36,8 @@ public class Course implements Serializable {
 
     private Course seminarMainCourse;
 
+    private Course course;
+
     public Long getId() {
         return id;
     }

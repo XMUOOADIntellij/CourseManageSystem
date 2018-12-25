@@ -3,6 +3,7 @@ package com.group12.course.entity;
 import com.group12.course.controller.vo.SeminarVO;
 import org.apache.ibatis.type.Alias;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
