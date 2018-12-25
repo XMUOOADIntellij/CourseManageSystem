@@ -1,12 +1,9 @@
 package com.group12.course.tools;
 
-import com.group12.course.entity.Attendance;
-import com.group12.course.service.AttendanceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
@@ -14,9 +11,18 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+/**
+ * 文件处理工具类
+ * ① 上传文件
+ * ② 下载文件
+ * ③ 批量下载，打包成压缩文件
+ * @author Y Jiang
+ * @date 2018/12/19
+ */
 public class FileUtil {
 
-    static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
+
     static public String uploadFile(MultipartFile file, String filePath, String fileName) throws Exception {
         if (file.isEmpty()) {
             return "Empty file";
@@ -37,7 +43,6 @@ public class FileUtil {
         }
         return fileName;
     }
-
 
     static public void downloadFile(HttpServletResponse response, String fileUrl, String fileName) throws Exception {
         //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型

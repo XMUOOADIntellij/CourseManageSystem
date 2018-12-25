@@ -7,6 +7,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * 轮次分数Dao层
+ * @author Y Jiang
+ * @date 2018/12/22
+ */
 @Component
 public class RoundScoreDao {
 

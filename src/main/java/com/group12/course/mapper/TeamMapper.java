@@ -19,18 +19,35 @@ public interface TeamMapper {
     /**
      * 删除数据库中队伍的记录
      *
-     * @param id 主键代表用户账号
+     * @param id 主键代表队伍id
      * @return 代表处理数量
      * */
-    int deleteTeam(Long id);
+    int deleteTeamByTeamId(Long id);
 
     /**
      * 删除数据库中队伍的记录
      *
-     * @param id 主键代表用户账号
+     * @param id 主键代表队伍id
      * @return 代表处理数量
      * */
-    int deleteTeamMembers(Long id);
+    int deleteTeamMembersByTeamId(Long id);
+
+    /**
+     * 删除数据库中队伍中某条组员的记录
+     *
+     * @param teamId 队伍id
+     * @param id 主键代表组员id
+     * @return 代表处理数量
+     * */
+    int deleteTeamMembersByMemberId(Long teamId,Long id);
+
+    /**
+     * 删除数据库中队伍与班级的记录
+     *
+     * @param id 主键代表队伍id
+     * @return 代表处理数量
+     * */
+    int deleteTeamFromKlass(Long id);
 
     /**
      * 在数据库中添加队伍的记录

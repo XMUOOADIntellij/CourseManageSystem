@@ -1,16 +1,13 @@
 package com.group12.course.service;
 
-import com.group12.course.Exceptions.UnauthorizedOperationException;
+import com.group12.course.exception.RecordNotFoundException;
+import com.group12.course.exception.UnauthorizedOperationException;
 import com.group12.course.dao.*;
 import com.group12.course.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
-import java.util.List;
 
 /**
  * 讨论课相关Service
@@ -65,14 +62,10 @@ public class SeminarService {
                     teacher.getId())) {
                 return seminarDao.deleteSeminarById(seminarId);
             } else {
-                //TODO 权限
-                System.out.println("quanxian");
-                return null;
+                throw new UnauthorizedOperationException("只有当前课的老师可删除此讨论课");
             }
         } else {
-            System.out.println("notfound");
-            return null;
-            //TODO SeminarNotFound
+            throw new RecordNotFoundException("找不到讨论课");
         }
     }
 
@@ -87,9 +80,10 @@ public class SeminarService {
         return klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
     }
 
-    public Seminar selectSeminarById(Long seminarId){
-        return  seminarDao.selectSeminarById(seminarId);
+    public Seminar selectSeminarById(Long seminarId) {
+        return seminarDao.selectSeminarById(seminarId);
     }
+
     public Integer updateSeminar(Seminar record, Teacher teacher) {
         Seminar seminar;
         try {
@@ -101,110 +95,93 @@ public class SeminarService {
             if (seminar.getCourse().getTeacher().getId().equals(teacher.getId())) {
                 return seminarDao.updateSeminar(record);
             } else {
-                //TODO 权限
-                return null;
+                throw new UnauthorizedOperationException("只有当前课的老师可更新此讨论课");
             }
         } else {
-            //SeminarNotFound
-            return null;
+            throw new RecordNotFoundException("未找到该讨论课记录");
         }
     }
 
-    public Integer updateKlassSeminar(KlassSeminar record,Teacher teacher) {
+    public Integer updateKlassSeminar(KlassSeminar record, Teacher teacher) {
         KlassSeminar klassSeminar;
         try {
-            klassSeminar =klassSeminarDao.
-                    selectKlassSeminarBySeminarIdAndClassId(record.getSeminar().getId(), record.getKlass().getId());;
+            klassSeminar = klassSeminarDao.
+                    selectKlassSeminarBySeminarIdAndClassId(record.getSeminar().getId(), record.getKlass().getId());
         } catch (ConcurrentModificationException e) {
-            klassSeminar =klassSeminarDao.
-                    selectKlassSeminarBySeminarIdAndClassId(record.getSeminar().getId(), record.getKlass().getId());;
+            klassSeminar = klassSeminarDao.
+                    selectKlassSeminarBySeminarIdAndClassId(record.getSeminar().getId(), record.getKlass().getId());
         }
 
-        if(klassSeminar!=null){
-            if(klassSeminar.getSeminar().getCourse().getTeacher().getId()
-                    .equals(teacher.getId())){
+        if (klassSeminar != null) {
+            if (klassSeminar.getSeminar().getCourse().getTeacher().getId()
+                    .equals(teacher.getId())) {
                 record.setId(klassSeminar.getId());
                 return klassSeminarDao.updateKlassSeminar(record);
+            } else {
+                throw new UnauthorizedOperationException("只有当前课的老师可更新此班级讨论课");
             }
-            else{
-                //TODO 权限
-                return null;
-            }
-        }
-        else{
-            return null;
-            //TODO SeminarNotFound
+        } else {
+            throw new RecordNotFoundException("找不到班级讨论课");
         }
     }
 
 
-    public KlassSeminar pauseSeminar(Teacher teacher,Long seminarId,Long classId){
-        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
-        if(klassSeminar!=null){
-            if(teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())){
+    public KlassSeminar pauseSeminar(Teacher teacher, Long seminarId, Long classId) {
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
+        if (klassSeminar != null) {
+            if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
                 //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
                 klassSeminar.setSeminarStatus(3);
-                if(klassSeminarDao.updateKlassSeminar(klassSeminar)==1){
+                if (klassSeminarDao.updateKlassSeminar(klassSeminar) == 1) {
                     return klassSeminar;
-                }
-                else{
+                } else {
                     return null;
                 }
+            } else {
+                throw new UnauthorizedOperationException("只有当前课的老师可暂停该讨论课");
             }
-            else{
-                //todo 权限
-                return null;
-            }
-        }else{
-            //todo classSeminarnotFound
-            return null;
+        } else {
+            throw new RecordNotFoundException("找不到班级讨论课");
         }
     }
 
-    public KlassSeminar startSeminar(Teacher teacher,Long seminarId,Long classId){
-        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
-        if(klassSeminar!=null){
-            if(teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())){
+    public KlassSeminar startSeminar(Teacher teacher, Long seminarId, Long classId) {
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
+        if (klassSeminar != null) {
+            if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
                 //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
                 klassSeminar.setSeminarStatus(1);
-                if(klassSeminarDao.updateKlassSeminar(klassSeminar)==1){
+                if (klassSeminarDao.updateKlassSeminar(klassSeminar) == 1) {
                     //开始成功后，为该班级小组添加成绩记录
                     scoreDao.initialScoreBeforeKlassSeminar(klassSeminar.getId());
                     return klassSeminar;
-                }
-                else{
+                } else {
                     return null;
                 }
-            }
-            else{
+            } else {
                 throw new UnauthorizedOperationException("only teacher in this course can operate");
             }
-        }else{
-            //todo classSeminarnotFound
-            return null;
+        } else {
+            throw new RecordNotFoundException("找不到班级讨论课");
         }
     }
 
-    public KlassSeminar endSeminar(Teacher teacher,Long seminarId,Long classId){
-        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
-        if(klassSeminar!=null){
-            if(teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())){
+    public KlassSeminar endSeminar(Teacher teacher, Long seminarId, Long classId) {
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
+        if (klassSeminar != null) {
+            if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
                 //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
                 klassSeminar.setSeminarStatus(2);
-                if(klassSeminarDao.updateKlassSeminar(klassSeminar)==1){
+                if (klassSeminarDao.updateKlassSeminar(klassSeminar) == 1) {
                     return klassSeminar;
-                }
-                else{
+                } else {
                     return null;
                 }
+            } else {
+                throw new UnauthorizedOperationException("只有当前课的老师可结束此讨论课");
             }
-            else{
-                //todo 权限
-                return null;
-            }
-        }else{
-            //todo classSeminarnotFound
-            return null;
+        } else {
+            throw new RecordNotFoundException("找不到班级讨论课");
         }
     }
 }

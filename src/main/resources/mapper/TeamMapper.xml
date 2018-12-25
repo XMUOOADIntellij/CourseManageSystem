@@ -43,7 +43,7 @@
   <select id="selectTeamByKlassId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
-    from team
+    from klass_team
     where klass_id = #{id,jdbcType=BIGINT}
   </select>
 
@@ -62,14 +62,24 @@
     where team_id = #{id,jdbcType=BIGINT}
   </select>
 
-  <delete id="deleteTeam" parameterType="java.lang.Long" >
+  <delete id="deleteTeamByTeamId" parameterType="java.lang.Long" >
     delete from team
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  
-  <delete id="deleteTeamMembers" parameterType="java.lang.Long" >
+
+  <delete id="deleteTeamMembersByTeamId" parameterType="java.lang.Long" >
     delete from team_student
-    where student_id = #{id,jdbcType=BIGINT}
+    where team_id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteTeamMembersByMemberId" parameterType="java.lang.Long" >
+    delete from team_student
+    where student_id = #{id,jdbcType=BIGINT} and team_id = #{teamId,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteTeamFromKlass" parameterType="java.lang.Long" >
+    delete from klass_team
+    where team_id = #{id,jdbcType=BIGINT}
   </delete>
 
   <insert id="addTeam" useGeneratedKeys="true" keyProperty="record.id">

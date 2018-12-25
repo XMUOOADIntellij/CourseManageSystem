@@ -5,6 +5,12 @@ import org.apache.ibatis.type.Alias;
 
 import java.math.BigDecimal;
 
+
+/**
+ * 提问问题
+ * @author Y Jiang
+ * @date 2018/12/8
+ */
 @Alias("question")
 public class Question {
     private Long id;

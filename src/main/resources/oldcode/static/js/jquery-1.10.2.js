@@ -424,7 +424,7 @@
           return false;
         }
       } catch (e) {
-        // IE8,9 Will throw exceptions on certain host objects #9897
+        // IE8,9 Will throw exception on certain host objects #9897
         return false;
       }
       // Support: IE<9
@@ -3568,7 +3568,7 @@
   }
   jQuery.extend({
     cache: {},
-    // The following elements throw uncatchable exceptions if you
+    // The following elements throw uncatchable exception if you
     // attempt to add expando properties to them.
     noData: {
       applet: true,
@@ -8301,7 +8301,7 @@
             // Listener
             callback = function(_, isAbort) {
               var status, responseHeaders, statusText, responses;
-              // Firefox throws exceptions when accessing properties
+              // Firefox throws exception when accessing properties
               // of an xhr when a network error occurred
               // http://helpful.knobs-dials.com/index.php/Component_returned_failure_code:_0x80040111_(NS_ERROR_NOT_AVAILABLE)
               try {

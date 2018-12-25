@@ -1,5 +1,6 @@
 package com.group12.course.dao;
 
+import com.group12.course.exception.RecordNotFoundException;
 import com.group12.course.entity.*;
 import com.group12.course.mapper.RoundScoreMapper;
 import com.group12.course.mapper.SeminarScoreMapper;
@@ -208,7 +209,7 @@ public class ScoreDao {
                 updateSeminarScore(seminarScore);
             }
         } else {
-            //TODO SEMINARNOTFOUND
+            throw new RecordNotFoundException("未找到该班级的讨论课");
         }
     }
 

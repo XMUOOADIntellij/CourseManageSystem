@@ -19,7 +19,7 @@ public class KlassSeminarDao {
     KlassSeminarMapper klassSeminarMapper;
 
     public KlassSeminar selectKlassSeminarBySeminarIdAndClassId(Long seminarId,Long classId){
-         return klassSeminarMapper.listKlassSeminarBySeminarIdAndKlassId(seminarId,classId);
+         return klassSeminarMapper.selectKlassSeminarBySeminarIdAndKlassId(seminarId,classId);
     }
 
     public KlassSeminar selectKlassSeminarById(Long id){

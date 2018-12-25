@@ -1,5 +1,6 @@
 package com.group12.course.controller;
 
+import com.group12.course.exception.RecordNotFoundException;
 import com.group12.course.entity.*;
 import com.group12.course.service.AttendanceService;
 import com.group12.course.service.QuestionService;
@@ -49,6 +50,18 @@ public class SeminarController {
         seminarService.createSeminar(seminar,teacher);
 
         return new ResponseEntity<>(new SeminarVO(seminar), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{seminarId}")
+    public ResponseEntity<SeminarVO> selectSeminarBySeminarId(@PathVariable Long seminarId){
+
+        Seminar seminar = seminarService.selectSeminarById(seminarId);
+        if(seminar ==null){
+            throw  new RecordNotFoundException("Invalid seminar Id: "+seminarId);
+        }
+        else{
+            return new ResponseEntity<SeminarVO>(new SeminarVO(seminar), HttpStatus.OK);
+        }
     }
 
     /**
@@ -110,12 +123,6 @@ public class SeminarController {
     public SeminarVO selectKlassSeminarBySeminarIdAndClassId(@PathVariable Long seminarId, @PathVariable Long classId){
        KlassSeminar record =  seminarService.selectKlassSeminar(seminarId,classId);
        return new SeminarVO(record);
-    }
-
-
-    @GetMapping(value = "/{seminarId}")
-    public SeminarVO selectSeminarBySeminarId(@PathVariable Long seminarId){
-        return new SeminarVO(seminarService.selectSeminarById(seminarId));
     }
 
 
