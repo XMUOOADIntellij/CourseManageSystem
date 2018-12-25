@@ -61,7 +61,6 @@ public class AttendanceService {
 
     /**
      * 获得当前班级讨论课正在展示的小组
-     *
      * @param classId   班级
      * @param seminarId 讨论课
      * @return 正在展示的小组
@@ -77,17 +76,15 @@ public class AttendanceService {
     }
 
 
-
-
     /**
      * 获得自己组的展示报名
-     *
      * @param seminarId 讨论课id
      * @param student   学生对象
      * @return Attendance
      */
     public Attendance getTeamAttendance(Long seminarId, Student student) {
 
+        //todo 队伍有关
         //获得讨论课
         Seminar seminar = seminarDao.selectSeminarById(seminarId);
         if (seminar != null) {
@@ -110,6 +107,7 @@ public class AttendanceService {
     }
 
     public Integer changeAttendanceOrder(Attendance record, Student student) {
+        //todo 队伍有关
         Attendance attendance = attendanceDao.selectAttendanceById(record.getId());
         if (attendance != null) {
             if (attendance.getId().equals(
@@ -126,7 +124,7 @@ public class AttendanceService {
     }
 
     public Integer cancelAttendance(Long attendanceId, Student student) {
-
+        //todo 队伍有关
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
         if (attendance != null) {
             if (attendance.getId().equals(
@@ -143,6 +141,7 @@ public class AttendanceService {
     }
 
     public Long enrollAttendance(Long seminarId, Attendance attendance, Student student) {
+        //todo 队伍有关
         //获得讨论课
         Seminar seminar = seminarDao.selectSeminarById(seminarId);
         if (seminar != null) {

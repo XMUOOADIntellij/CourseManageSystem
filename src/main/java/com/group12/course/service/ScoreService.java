@@ -78,7 +78,6 @@ public class ScoreService {
 
     /**
      * 老师获得学生课程下的每轮成绩
-     *
      * @param teacher  老师对象
      * @param courseId 课程Id
      */

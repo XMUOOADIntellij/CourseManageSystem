@@ -292,5 +292,5 @@ public class SeminarService {
             return null;
         }
     }
-    
+
 }
