@@ -43,6 +43,14 @@ public class CourseService {
     }
 
     /**
+     * 获得所有课程
+     * @return
+     */
+    public List<Course> getAllCourse(){
+        return courseDao.getAllCourse();
+    }
+
+    /**
      * 根据课程id获得课程
      * @param courseId int
      * @return Course

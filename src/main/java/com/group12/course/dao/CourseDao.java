@@ -79,4 +79,7 @@ public class CourseDao {
         return courseMapper.selectCourseByTeacherId(teacherId);
     }
 
+    public List<Course> getAllCourse(){
+        return courseMapper.selectAllCourse();
+    }
 }

@@ -88,6 +88,25 @@ public class CourseController {
         }
     }
 
+
+    /**
+     * 获得所有课程
+     * @param response
+     */
+    @GetMapping(value="/allcourse",produces = "application/json; charset=utf-8")
+    public void getAllCourse( HttpServletResponse response) throws IOException {
+        List<Course> courseList = courseService.getAllCourse();
+        if (courseList.isEmpty()){
+            response.setStatus(404);
+        }
+        else {
+            response.setStatus(200);
+            String json = JSONObject.toJSONString(courseList);
+            response.getWriter().write(json);
+        }
+    }
+
+
     /**
      * 获得当前用户所有课程
      * @return List<Course>
@@ -145,6 +164,9 @@ public class CourseController {
         MemberLimitStrategy memberLimitStrategy = memberLimitStrategyService.selectMemberLimitStrategyByCourseId(courseId);
         courseVO.setMinMember(memberLimitStrategy.getMinMember());
         courseVO.setMaxMember(memberLimitStrategy.getMaxMember());
+
+        List<Course> courseList = conflictCourseStrategyService.getConflictCoure(courseId);
+        courseVO.setConflictCourseList(courseList);
 
         if(courseVO !=null){
             response.setStatus(200);
@@ -206,9 +228,7 @@ public class CourseController {
         String token = request.getHeader("Authorization");
         Student jwtStudent = Jwt.unSign(token,Student.class);
         if (jwtStudent!=null){
-            Team team = teamService.getTeamByStudentId(jwtStudent.getId());
-            /*TODO 这里的teamService方法有问题*/
-
+            Team team = teamService.getTeamByStudentIdAndCourseId(jwtStudent.getId(),courseId);
             if(team != null){
                 response.setStatus(200);
                 String json = JSONObject.toJSONString(team);
@@ -264,7 +284,7 @@ public class CourseController {
     }
 
     /**
-     * 在课程下创建班级并且可导入学生名
+     * 在课程下创建班级
      * @param courseId
      * @param response
      */
@@ -274,8 +294,6 @@ public class CourseController {
         Klass klass = new Klass(klassVO);
         klass.setCourse(courseService.getCourseById(courseId));
         int status = klassService.addKlass(klass);
-//        //导入学生名单
-//        int status2 = klassService.uploadStudentList(klass.getId(),file);
 
         if(status == 0){
             response.setStatus(404);
