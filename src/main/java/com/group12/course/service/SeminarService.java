@@ -7,6 +7,7 @@ import com.group12.course.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class SeminarService {
     CourseDao courseDao;
     @Autowired
     ScoreDao scoreDao;
+    @Autowired
+    KlassStudentDao klassStudentDao;
 
     /**
      * 判断当前老师 在讨论课共享从课程或主课程中
@@ -247,4 +250,47 @@ public class SeminarService {
             throw new RecordNotFoundException("找不到班级讨论课");
         }
     }
+
+    public KlassSeminar getCurrentSeminar(Teacher teacher) {
+        List<Course> courseList = courseDao.getCourseByTeacherId(teacher.getId());
+        if (courseList == null) {
+            return null;
+        } else {
+            //所有课程
+            for (Course course : courseList) {
+                //所有讨论课
+                for (Seminar seminar : seminarDao.listSeminarByCourseId(course.getId())) {
+                    //所有班级讨论课
+                    for (KlassSeminar klassSeminar : klassSeminarDao.listKlassSeminarBySeminarId(seminar.getId())){
+                        //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
+                        if(klassSeminar.getSeminarStatus() == 1){
+                            return klassSeminar;
+                        }
+                    }
+                }
+            }
+            return  null;
+        }
+    }
+
+    public KlassSeminar getCurrentSeminar(Student student){
+        //TODO 学生正在进行的讨论课
+        List<KlassStudent> klassStudents =klassStudentDao.selectKlassStudentByStudentId(student.getId());
+        if(klassStudents!=null){
+            List<Long> klassIdList = new ArrayList<>();
+            for(KlassStudent klassStudent : klassStudents){
+                klassIdList.add(klassStudent.getKlass().getId());
+            }
+
+            for(KlassSeminar klassSeminar: klassSeminarDao.listKlassSeminarByKlassIdList(klassIdList)){
+                if(klassSeminar.getSeminarStatus()==1){
+                    return  klassSeminar;
+                }
+            }
+            return null;
+        }else{
+            return null;
+        }
+    }
+    
 }

@@ -36,6 +36,33 @@ public class SeminarController {
     QuestionService questionService;
 
     /**
+     * 查找当前正在进行的讨论课
+     * @param request 请求jwt
+     * @return seminar
+     */
+    @GetMapping(value="")
+    public SeminarVO getCurrentSeminar(HttpServletRequest request){
+
+        String token = request.getHeader("Authorization");
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
+
+        Student student;
+        KlassSeminar klassseminar;
+        if(teacher==null){
+            student = Jwt.unSign(token,Student.class);
+            klassseminar = seminarService.getCurrentSeminar(student);
+        }else {
+            klassseminar = seminarService.getCurrentSeminar(teacher);
+        }
+        if(klassseminar==null){
+            return null;
+        }
+        else {
+            return new SeminarVO(klassseminar);
+        }
+    }
+
+    /**
      * 创建讨论课
      * @param seminarVo 讨论课信息
      * @return 讨论课id
@@ -128,6 +155,8 @@ public class SeminarController {
 
     //----------------------------------------------------------------------------------//
 
+
+
     /**
      ① 获得当前班级讨论课的展示报名
      ② 获得当前班级讨论课正在展示的小组presented
@@ -142,7 +171,7 @@ public class SeminarController {
 
         List<AttendanceVO> result = new ArrayList<>();
         if(presented!=null){
-            result.add(new AttendanceVO(attendanceService.getCurrentAttendance(classId,seminarId)));
+            result.add(new AttendanceVO(attendanceService.getCurrentAttendanceBySeminarIdAndClassId(classId,seminarId)));
         }
         else{
             for(Attendance item:attendanceService.getKlassSeminarAttendance(classId, seminarId)){

@@ -1,11 +1,8 @@
 package com.group12.course.service;
 
+import com.group12.course.dao.*;
 import com.group12.course.exception.RecordNotFoundException;
 import com.group12.course.exception.UnauthorizedOperationException;
-import com.group12.course.dao.AttendanceDao;
-import com.group12.course.dao.KlassSeminarDao;
-import com.group12.course.dao.SeminarDao;
-import com.group12.course.dao.TeamDao;
 import com.group12.course.entity.*;
 import com.group12.course.tools.FileUtil;
 import org.slf4j.Logger;
@@ -38,6 +35,8 @@ public class AttendanceService {
     TeamDao teamDao;
     @Autowired
     SeminarDao seminarDao;
+    @Autowired
+    CourseDao courseDao;
 
     private final String ServerFilePath = System.getProperty("user.dir") + System.getProperty("file.separator") + "file" + System.getProperty("file.separator");
     private final Logger logger = LoggerFactory.getLogger(AttendanceService.class);
@@ -67,7 +66,7 @@ public class AttendanceService {
      * @param seminarId 讨论课
      * @return 正在展示的小组
      */
-    public Attendance getCurrentAttendance(Long classId, Long seminarId) {
+    public Attendance getCurrentAttendanceBySeminarIdAndClassId(Long classId, Long seminarId) {
         KlassSeminar klassSeminar =
                 klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         if (klassSeminar != null) {
@@ -75,8 +74,10 @@ public class AttendanceService {
         } else {
             throw new RecordNotFoundException("找不到该班级讨论课");
         }
-
     }
+
+
+
 
     /**
      * 获得自己组的展示报名
@@ -244,7 +245,7 @@ public class AttendanceService {
                 throw new UnauthorizedOperationException("只能给自己组上传ppt");
             }
         } else {
-            throw  new RecordNotFoundException("上传ppt对应的展示报名不存在");
+            throw new RecordNotFoundException("上传ppt对应的展示报名不存在");
         }
     }
 
@@ -288,7 +289,7 @@ public class AttendanceService {
             try {
                 FileUtil.downloadAllFiles(response, url, fileName);
             } catch (Exception e) {
-                logger.trace("下载所有ppt出错: "+e.getMessage());
+                logger.trace("下载所有ppt出错: " + e.getMessage());
             }
         } else {
             throw new RecordNotFoundException("下载ppt的班级讨论课不存在");
@@ -308,36 +309,36 @@ public class AttendanceService {
             try {
                 FileUtil.downloadAllFiles(response, url, fileName);
             } catch (Exception e) {
-                logger.trace("下载所有ppt出错: "+e.getMessage());
+                logger.trace("下载所有ppt出错: " + e.getMessage());
             }
         } else {
             throw new RecordNotFoundException("下载报告的班级讨论课不存在");
         }
     }
 
-    public Attendance nextAttendance(Long seminarId,Long classId,Long attendanceId,Teacher teacher){
-        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId,classId);
-        if(klassSeminar!=null){
-            if(teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())){
+    public Attendance nextAttendance(Long seminarId, Long classId, Long attendanceId, Teacher teacher) {
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
+        if (klassSeminar != null) {
+            if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
                 Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
-                if(attendance!=null){
+                if (attendance != null) {
                     //当前小组状态更新
                     attendance.setPresented(false);
                     attendanceDao.updateAttendance(attendance);
 
                     //找到下一组，当前讨论课的展示小组序号+1
                     Attendance nextAttendance = attendanceDao.selectAttendanceByKlassSeminarIdAndTeamOrder(
-                            klassSeminar.getId(),attendance.getTeamOrder()+1
+                            klassSeminar.getId(), attendance.getTeamOrder() + 1
                     );
                     nextAttendance.setPresented(true);
-                    return  nextAttendance;
-                }else{
+                    return nextAttendance;
+                } else {
                     throw new RecordNotFoundException("Attendance不存在");
                 }
-            }else {
+            } else {
                 throw new UnauthorizedOperationException("此节讨论课的老师才能操作");
             }
-        }else{
+        } else {
             throw new RecordNotFoundException("该班级讨论课不存在");
         }
     }

@@ -72,4 +72,11 @@ public interface KlassSeminarMapper {
      * @return 班级讨论课列表
      */
     List<KlassSeminar> listKlassSeminarBySeminarIdList(@Param("seminarId") List<Long> seminarId);
+
+    /**
+     * 列出多个班级下的班级讨论课
+     * @param klassIdList 班级id列表
+     * @return 班级讨论课列表
+     */
+    List<KlassSeminar> listKlassSeminarByKlassIdList(@Param("klassIdList")List<Long>klassIdList);
 }

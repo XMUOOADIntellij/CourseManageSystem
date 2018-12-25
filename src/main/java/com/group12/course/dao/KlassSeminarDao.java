@@ -49,4 +49,8 @@ public class KlassSeminarDao {
     public List<KlassSeminar> listKlassSeminarBySeminarIdList(List<Long> seminarId){
         return klassSeminarMapper.listKlassSeminarBySeminarIdList(seminarId);
     }
+
+    public List<KlassSeminar> listKlassSeminarByKlassIdList(List<Long> klassIdList){
+        return klassSeminarMapper.listKlassSeminarByKlassIdList(klassIdList);
+    }
 }

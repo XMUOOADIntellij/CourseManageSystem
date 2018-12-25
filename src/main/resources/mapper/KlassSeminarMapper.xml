@@ -55,6 +55,16 @@
     </foreach>
   </select>
 
+  <select id="listKlassSeminarByKlassIdList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from klass_seminar
+    where klass_id in
+    <foreach collection="klassIdList" item="id" open="(" close=")" separator=",">
+      #{id,jdbcType=BIGINT}
+    </foreach>
+  </select>
+
   <delete id="deleteById" parameterType="java.lang.Long" >
     delete from klass_seminar
     where id = #{id,jdbcType=BIGINT}
