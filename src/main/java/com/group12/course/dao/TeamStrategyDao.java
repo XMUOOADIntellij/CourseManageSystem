@@ -5,21 +5,28 @@ import com.group12.course.mapper.TeamStrategyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Max;
+import java.util.List;
+
 @Component
 public class TeamStrategyDao {
 
     @Autowired
     TeamStrategyMapper teamStrategyMapper;
 
+    public int deleteTeamStrategyByCourseId(Long courseId){
+        return teamStrategyMapper.deleteTeamStrategyByCourseId(courseId);
+    }
+
     public int addTeamStrategy(TeamStrategy teamStrategy){
-        return teamStrategyMapper.addTeamStrategy(teamStrategy.getCourse().getId(),teamStrategy.getStrategy().getId(),teamStrategy.getStrategyName());
+        return teamStrategyMapper.addTeamStrategy(teamStrategy);
     }
 
     public TeamStrategy selectTeamStrategyByCourseIdAndStrategyName(Long courseId,String strategyName){
         return  teamStrategyMapper.selectTeamStrategyByCourseIdAndStrategyName(courseId,strategyName);
     }
 
-    public TeamStrategy selectTeamStrategyByCourseId(Long courseId){
+    public List<TeamStrategy> selectTeamStrategyByCourseId(Long courseId){
         return teamStrategyMapper.selectTeamStrategyByCourseId(courseId);
     }
 

@@ -2,118 +2,74 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.group12.course.mapper.TeamAndStrategyMapper" >
 
-    <resultMap id="ConflictCourseStrategyResultMap" type="com.group12.course.entity.strategy.ConflictCourseStrategy">
-        <association property="strategySecond" column="strategy_2_id"
+    <resultMap id="ConflictCourseStrategyResultMap" type="com.group12.course.entity.strategy.TeamAndStrategy">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="strategy" column="strategy_id"
                      select="com.group12.course.mapper.ConflictCourseStrategyMapper.selectConflictCourseStrategyById"
                      javaType="com.group12.course.entity.strategy.ConflictCourseStrategy"/>
     </resultMap>
 
-    <resultMap id="MemberLimitStrategyResultMap" type="com.group12.course.entity.strategy.MemberLimitStrategy">
-        <association property="strategySecond" column="strategy_2_id"
+
+    <resultMap id="MemberLimitStrategyResultMap" type="com.group12.course.entity.strategy.TeamAndStrategy">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="strategy" column="strategy_id"
                      select="com.group12.course.mapper.MemberLimitStrategyMapper.selectMemberLimitStrategyById"
                      javaType="com.group12.course.entity.strategy.MemberLimitStrategy"/>
     </resultMap>
 
-    <resultMap id="CourseMemberLimitStrategyResultMap" type="com.group12.course.entity.strategy.CourseMemberLimitStrategy">
-        <association property="strategySecond" column="strategy_2_id"
+
+    <resultMap id="CourseMemberLimitStrategyResultMap" type="com.group12.course.entity.strategy.TeamAndStrategy">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="strategy" column="strategy_id"
                      select="com.group12.course.mapper.ConflictCourseStrategyMapper.selectConflictCourseStrategyById"
                      javaType="com.group12.course.entity.strategy.ConflictCourseStrategy"/>
     </resultMap>
 
 
     <resultMap id="TeamAndStrategyResultMap" type="com.group12.course.entity.strategy.TeamAndStrategy">
-        <association property="strategySecond" column="strategy_2_id"
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="strategy" column="strategy_id"
                      select="com.group12.course.mapper.TeamAndStrategyMapper.selectTeamAndStrategyById"
                      javaType="com.group12.course.entity.strategy.TeamAndStrategy"/>
     </resultMap>
 
-    <resultMap id="TeamOrStrategyResultMap" type="com.group12.course.entity.strategy.TeamOrStrategy">
-        <association property="strategySecond" column="strategy_2_id"
+
+    <resultMap id="TeamOrStrategyResultMap" type="com.group12.course.entity.strategy.TeamAndStrategy">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
+
+        <association property="strategy" column="strategy_id"
                      select="com.group12.course.mapper.TeamOrStrategyMapper.selectTeamOrStrategyById"
                      javaType="com.group12.course.entity.strategy.TeamOrStrategy"/>
     </resultMap>
 
 
 
-
     <resultMap id="BaseResultMap" type="com.group12.course.entity.strategy.TeamAndStrategy">
-        <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="strategy_1_name" property="strategyFirstName" jdbcType="VARCHAR"/>
-        <result column="strategy_2_name" property="strategySecondName" jdbcType="VARCHAR"/>
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="strategy_name" property="strategyName" jdbcType="VARCHAR" />
 
-        <discriminator javaType="java.lang.String" column="strategy_1_name" >
-            <case value="conflict_course_strategy">
-                <association property="strategyFirst" column="strategy_1_id"
-                             select="com.group12.course.mapper.ConflictCourseStrategyMapper.selectConflictCourseStrategyById"
-                             javaType="com.group12.course.entity.strategy.ConflictCourseStrategy"/>
-                <discriminator javaType="java.lang.String" column="strategy_2_name">
-                    <case value="conflict_course_strategy" resultMap="ConflictCourseStrategyResultMap"/>
-                    <case value="member_limit_strategy" resultMap="MemberLimitStrategyResultMap"/>
-                    <case value="course_member_limit_strategy" resultMap="CourseMemberLimitStrategyResultMap"/>
-                    <case value="team_and_strategy" resultMap="TeamAndStrategyResultMap"/>
-                    <case value="team_or_strategy" resultMap="TeamOrStrategyResultMap"/>
-                </discriminator>
-            </case>
-
-            <case value="member_limit_strategy">
-                <association property="strategyFirst" column="strategy_1_id"
-                             select="com.group12.course.mapper.MemberLimitStrategyMapper.selectMemberLimitStrategyById"
-                             javaType="com.group12.course.entity.strategy.MemberLimitStrategy"/>
-                <discriminator javaType="java.lang.String" column="strategy_2_name">
-                    <case value="conflict_course_strategy" resultMap="ConflictCourseStrategyResultMap"/>
-                    <case value="member_limit_strategy" resultMap="MemberLimitStrategyResultMap"/>
-                    <case value="course_member_limit_strategy" resultMap="CourseMemberLimitStrategyResultMap"/>
-                    <case value="team_and_strategy" resultMap="TeamAndStrategyResultMap"/>
-                    <case value="team_or_strategy" resultMap="TeamOrStrategyResultMap"/>
-                </discriminator>
-            </case>
-
-            <case value="course_member_limit_strategy">
-                <association property="strategyFirst" column="strategy_1_id"
-                             select="com.group12.course.mapper.ConflictCourseStrategyMapper.selectConflictCourseStrategyById"
-                             javaType="com.group12.course.entity.strategy.ConflictCourseStrategy"/>
-                <discriminator javaType="java.lang.String" column="strategy_2_name">
-                    <case value="conflict_course_strategy" resultMap="ConflictCourseStrategyResultMap"/>
-                    <case value="member_limit_strategy" resultMap="MemberLimitStrategyResultMap"/>
-                    <case value="course_member_limit_strategy" resultMap="CourseMemberLimitStrategyResultMap"/>
-                    <case value="team_and_strategy" resultMap="TeamAndStrategyResultMap"/>
-                    <case value="team_or_strategy" resultMap="TeamOrStrategyResultMap"/>
-                </discriminator>
-            </case>
-
-            <case value="team_and_strategy">
-                <association property="strategyFirst" column="strategy_1_id"
-                             select="com.group12.course.mapper.TeamAndStrategyMapper.selectTeamAndStrategyById"
-                             javaType="com.group12.course.entity.strategy.TeamAndStrategy"/>
-                <discriminator javaType="java.lang.String" column="strategy_2_name">
-                    <case value="conflict_course_strategy" resultMap="ConflictCourseStrategyResultMap"/>
-                    <case value="member_limit_strategy" resultMap="MemberLimitStrategyResultMap"/>
-                    <case value="course_member_limit_strategy" resultMap="CourseMemberLimitStrategyResultMap"/>
-                    <case value="team_and_strategy" resultMap="TeamAndStrategyResultMap"/>
-                    <case value="team_or_strategy" resultMap="TeamOrStrategyResultMap"/>
-                </discriminator>
-            </case>
-
-            <case value="team_or_strategy">
-                <association property="strategyFirst" column="strategy_1_id"
-                             select="com.group12.course.mapper.TeamOrStrategyMapper.selectTeamOrStrategyById"
-                             javaType="com.group12.course.entity.strategy.TeamOrStrategy"/>
-                <discriminator javaType="java.lang.String" column="strategy_2_name">
-                    <case value="conflict_course_strategy" resultMap="ConflictCourseStrategyResultMap"/>
-                    <case value="member_limit_strategy" resultMap="MemberLimitStrategyResultMap"/>
-                    <case value="course_member_limit_strategy" resultMap="CourseMemberLimitStrategyResultMap"/>
-                    <case value="team_and_strategy" resultMap="TeamAndStrategyResultMap"/>
-                    <case value="team_or_strategy" resultMap="TeamOrStrategyResultMap"/>
-                </discriminator>
-            </case>
+        <discriminator javaType="java.lang.String" column="strategy_name">
+            <case value="conflict_course_strategy" resultMap="ConflictCourseStrategyResultMap"/>
+            <case value="member_limit_strategy" resultMap="MemberLimitStrategyResultMap"/>
+            <case value="course_member_limit_strategy" resultMap="CourseMemberLimitStrategyResultMap"/>
+            <case value="team_and_strategy" resultMap="TeamAndStrategyResultMap"/>
+            <case value="team_or_strategy" resultMap="TeamOrStrategyResultMap"/>
         </discriminator>
-
     </resultMap>
 
 
 
     <sql id="Base_Column_List" >
-    id, strategy_1_name,strategy_1_id,strategy_2_name,strategy_2_id
+    id, strategy_name,strategy_id
     </sql>
 
     <select id="selectTeamAndStrategyById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -123,5 +79,29 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
 
-
+    <insert id="addTeamAndStrategy" parameterType="com.group12.course.entity.strategy.TeamAndStrategy">
+        insert into team_and_strategy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="strategyName != null">
+                strategy_name,
+            </if>
+            <if test="strategyAndStrategy.strategy != null">
+                strategy_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id !=null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="strategyName != null">
+                #{strategyName,jdbcType=VARCHAR},
+            </if>
+            <if test="strategyAndStrategy.strategy != null ">
+                #{strategyAndStrategy.strategy.id,jdbcType=BIGINT}
+            </if>
+        </trim>
+    </insert>
 </mapper>

@@ -11,9 +11,11 @@ import com.group12.course.entity.Course;
 public class TeamStrategy {
     Course course;
 
-    Strategy strategy;
+    String strategySerial;
 
     String strategyName;
+
+    Strategy strategy;
 
     public Course getCourse() {
         return course;
@@ -23,12 +25,12 @@ public class TeamStrategy {
         this.course = course;
     }
 
-    public Strategy getStrategy() {
-        return strategy;
+    public String getStrategySerial() {
+        return strategySerial;
     }
 
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
+    public void setStrategySerial(String strategySerial) {
+        this.strategySerial = strategySerial;
     }
 
     public String getStrategyName() {
@@ -37,5 +39,13 @@ public class TeamStrategy {
 
     public void setStrategyName(String strategyName) {
         this.strategyName = strategyName;
+    }
+
+    public Strategy getStrategy() {
+        return strategy;
+    }
+
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
     }
 }

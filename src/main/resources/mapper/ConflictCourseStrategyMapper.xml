@@ -5,16 +5,12 @@
     <resultMap id="BaseResultMap" type="com.group12.course.entity.strategy.ConflictCourseStrategy" >
         <id column="id" property="id" jdbcType="BIGINT" />
 
-        <association property="courseFirst" select="com.group12.course.mapper.CourseMapper.selectCourseById"
-                     column="course_1_id" javaType="com.group12.course.entity.Course"/>
-
-        <association property="courseSecond" select="com.group12.course.mapper.CourseMapper.selectCourseById"
-                     column="course_2_id" javaType="com.group12.course.entity.Course"/>
-
+        <association property="course" select="com.group12.course.mapper.CourseMapper.selectCourseById"
+                     column="course_id" javaType="com.group12.course.entity.Course"/>
     </resultMap>
 
     <sql id="Base_Column_List" >
-    id, course_1_id,course_2_id
+    id, course_id
   </sql>
 
     <select id="selectConflictCourseStrategyById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -29,22 +25,22 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-    <insert id="addConflictCourseStrategy" useGeneratedKeys="true" keyProperty="conflictCourseStrategy.id" >
+    <insert id="addConflictCourseStrategy" parameterType="com.group12.course.entity.strategy.ConflictCourseStrategy" >
         insert into conflict_course_strategy
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="courseFirst != null" >
-                course_1_id,
+            <if test="id != null">
+                id,
             </if>
-            <if test="courseSecond != null" >
-                course_2_id,
+            <if test="course != null" >
+                course_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="courseFirst != null" >
-                #{courseFirst.id,jdbcType=BIGINT},
+            <if test="id != null">
+                #{id,jdbcType=BIGINT}
             </if>
-            <if test="courseSecond != null" >
-                #{courseSecond.id,jdbcType=BIGINT},
+            <if test="course != null" >
+                #{course.id,jdbcType=BIGINT},
             </if>
         </trim>
     </insert>
@@ -53,10 +49,7 @@
         update conflict_course_strategy
         <set >
             <if test="courseFirst != null" >
-                course_1_id = #{courseFirst.id,jdbcType=BIGINT},
-            </if>
-            <if test="courseSecond != null" >
-                course_1_id = #{courseSecond.id,jdbcType=BIGINT},
+                course_id = #{course.id,jdbcType=BIGINT},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
@@ -66,7 +59,7 @@
         select
         <include refid="Base_Column_List" />
         from conflict_course_strategy
-        where course_1_id = #{courseId,jdbcType=BIGINT}
+        where course_id = #{courseId,jdbcType=BIGINT}
     </select>
 
 
