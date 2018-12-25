@@ -208,12 +208,9 @@ public class CourseController {
     @GetMapping(value="/{courseId}/team",produces = "application/json; charset=utf-8")
     public void getTeamByCourseId(@PathVariable Long courseId,HttpServletRequest request,HttpServletResponse response) throws IOException {
 
-//        List<Team> teamVOList = teamService.getTeamByCourseId(courseId);
-//        String json = JSONObject.toJSONString(teamVOList);
-//        response.getWriter().write(json);
-        /*TODO team的根据课程id 查询所有小组信息*/
-
-
+        List<Team> teamVOList = courseService.getTeamByCourseId(courseId);
+        String json = JSONObject.toJSONString(teamVOList);
+        response.getWriter().write(json);
     }
 
 
