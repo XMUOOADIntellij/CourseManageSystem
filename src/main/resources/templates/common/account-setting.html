@@ -40,20 +40,23 @@
 
     <script src="../../static/js/core.js"></script>
     <link href="../../static/css/dashboard.css" rel="stylesheet" />
-       <!-- c3.js Charts Plugin -->
+    <!-- c3.js Charts Plugin -->
     <link href="../../static/plugins/charts-c3/plugin.css" rel="stylesheet" />
     <!-- gijgo datepicker Plugin -->
-    <link href="../../static/plugins/gijgo/css/gijgo.min.css" rel="stylesheet" />
+    <link
+      href="../../static/plugins/gijgo/css/gijgo.min.css"
+      rel="stylesheet"
+    />
     <script src="../../static/plugins/gijgo/js/gijgo.min.js"></script>
-     <!-- fab Plugin -->
+    <!-- fab Plugin -->
     <link href="../../static/plugins/fab/fab.css" rel="stylesheet" />
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
+    <script src="../../static/js/jwt.js"></script>
     <script src="../../static/js/control.js"></script>
     <script src="../../static/js/convert.js"></script>
-    <script src="../../static/js/user.js"></script>
+    <script src="../../static/js/user-request.js"></script>
     <script src="../../static/js/teacher.js"></script>
-    <script src="../../static/js/jwt.js"></script>
   </head>
   <body onload="return getUserInfo()">
     <div class="page">
@@ -286,7 +289,10 @@
 
                       <div class="form-group">
                         <label class="form-label">通知间隔</label>
-                        <select class="form-control custom-select" id="messageInterval">
+                        <select
+                          class="form-control custom-select"
+                          id="messageInterval"
+                        >
                           <option value="">1h</option>
                           <option value="">6h</option>
                           <option value="">12h</option>
@@ -294,7 +300,9 @@
                         </select>
                       </div>
                       <div class="form-footer">
-                        <button class="btn btn-primary btn-block" onclick="">Save</button>
+                        <button class="btn btn-primary btn-block" onclick="">
+                          Save
+                        </button>
                       </div>
                     </form>
                   </div>

@@ -1,6 +1,6 @@
 //测试通过
 function bindUser() {
-let ata = {account:$("#account").val(),password:$("#password").val()}
+  let ata = { account: $("#account").val(), password: $("#password").val() };
   $.ajax({
     type: "post",
     url: "http://xug98.cn:8080/user/login",
@@ -12,17 +12,18 @@ let ata = {account:$("#account").val(),password:$("#password").val()}
       alert("success");
       if (xhr.status === 200) {
         window.localStorage.setItem("jwt", data.jwt);
-        Cookies.set("id",data.id);
-        Cookies.set("account",data.account);
-        Cookies.set("role",data.role);
-        Cookies.set("name",data.name);
-        if(data.isActive===true){
-            if (data.role === "student") window.location.href = "./student/home.html";
-            else window.location.href = "./teacher/home.html";
-        }
-        else{
-            if (data.role === "student") window.location.href = "./student/active.html";
-            else window.location.href = "./teacher/active.html";
+        Cookies.set("id", data.id);
+        Cookies.set("account", data.account);
+        Cookies.set("role", data.role);
+        Cookies.set("name", data.name);
+        if (data.isActive === true) {
+          if (data.role === "student")
+            window.location.href = "./student/home.html";
+          else window.location.href = "./teacher/home.html";
+        } else {
+          if (data.role === "student")
+            window.location.href = "./student/active.html";
+          else window.location.href = "./teacher/active.html";
         }
       }
     },
@@ -36,7 +37,7 @@ let ata = {account:$("#account").val(),password:$("#password").val()}
 }
 //测试通过
 function getUserInfo() {
-$.ajax({
+  $.ajax({
     type: "get",
     url: "http://xug98.cn:8080/user/information",
     dataType: "json",
@@ -51,23 +52,23 @@ $.ajax({
       }
     },
     statusCode: {
-      401: function () {
+      401: function() {
         alert("未登录!");
-        window.location.href="./login";
+        window.location.href = "./login";
       },
-      403:function () {
+      403: function() {
         alert("未登录!");
-        window.location.href="./login";
+        window.location.href = "./login";
       }
-      }
+    }
   });
 }
 function sendPassword() {
-let ata=$("#account").val();
+  let ata = $("#account").val();
   console.log(ata);
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/user/password?account="+ata,
+    url: "http://xug98.cn:8080/user/password?account=" + ata,
     dataType: "json",
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
@@ -78,13 +79,12 @@ let ata=$("#account").val();
         window.location.href = "./login.html";
       }
     },
-    error: function(data){
+    error: function(data) {
       console.log(data);
       alert("fail");
-
     },
     statusCode: {
-      204: function(){
+      204: function() {
         alert("204"); //状态码存疑
         window.location.href = "./login.html";
       },
@@ -97,67 +97,64 @@ let ata=$("#account").val();
 }
 //状态码存疑
 function editPassword() {
-let ata = {
-    password:$("#password").val()
+  let ata = {
+    password: $("#password").val()
   };
-console.log(ata);
+  console.log(ata);
   $.ajax({
-    type:'put',
-    url: 'http://xug98.cn:8080/user/password',
+    type: "put",
+    url: "http://xug98.cn:8080/user/password",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
-    success: function (data,textStatus,xhr) {
-      if(xhr.status === 200){
+    success: function(data, textStatus, xhr) {
+      if (xhr.status === 200) {
         alert("修改成功");
         window.location.href = "./account-setting.html";
       }
     },
-    error: function(data){
+    error: function(data) {
       console.log(data);
       alert("fail");
       window.location.href = "./account-setting.html";
-
     },
-    statusCode:{
-      200:function(){
+    statusCode: {
+      200: function() {
         alert("修改成功");
-
       },
-      400: function () {
+      400: function() {
         alert("修改失败");
       }
-    },
+    }
   });
 }
 //状态码存疑
 function editEmail() {
-let ata = {
-    email:$("#email").val()
+  let ata = {
+    email: $("#email").val()
   };
   console.log(ata);
   $.ajax({
-    type:'put',
-    url: 'http://xug98.cn:8080/user/email',
+    type: "put",
+    url: "http://xug98.cn:8080/user/email",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
-    success: function (data,textStatus,xhr) {
-      if(xhr.status === 200){
+    success: function(data, textStatus, xhr) {
+      if (xhr.status === 200) {
         alert("修改成功");
         window.location.href = "./account-setting.html";
       }
     },
-/*    error: function(data){
+    /*    error: function(data){
       console.log(data);
       alert("fail");
 
     },*/
-    statusCode:{
-      200: function () {
+    statusCode: {
+      200: function() {
         alert("修改成功");
       }
-    },
+    }
   });
 }
-

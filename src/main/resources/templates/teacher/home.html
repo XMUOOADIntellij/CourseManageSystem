@@ -40,20 +40,24 @@
 
     <script src="../../static/js/core.js"></script>
     <link href="../../static/css/dashboard.css" rel="stylesheet" />
-       <!-- c3.js Charts Plugin -->
+    <!-- c3.js Charts Plugin -->
     <link href="../../static/plugins/charts-c3/plugin.css" rel="stylesheet" />
     <!-- gijgo datepicker Plugin -->
-    <link href="../../static/plugins/gijgo/css/gijgo.min.css" rel="stylesheet" />
+    <link
+      href="../../static/plugins/gijgo/css/gijgo.min.css"
+      rel="stylesheet"
+    />
     <script src="../../static/plugins/gijgo/js/gijgo.min.js"></script>
-     <!-- fab Plugin -->
+    <!-- fab Plugin -->
     <link href="../../static/plugins/fab/fab.css" rel="stylesheet" />
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
+    <script src="../../static/js/jwt.js"></script>
     <script src="../../static/js/control.js"></script>
     <script src="../../static/js/convert.js"></script>
-    <script src="../../static/js/user.js"></script>
-    <script src="../../static/js/teacher.js"></script>
-    <script src="../../static/js/jwt.js"></script>
+    <script src="../../static/js/user-request.js"></script>
+    <script src="../../static/js/tea-request.js"></script>
+    <script src="../../static/js/tea-generate.js"></script>
   </head>
   <body onload="init()">
     <div class="page">
@@ -137,7 +141,10 @@
                   <div
                     class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
                   >
-                    <a class="dropdown-item" href="../common/account-setting.html">
+                    <a
+                      class="dropdown-item"
+                      href="../common/account-setting.html"
+                    >
                       <i class="dropdown-icon fe fe-settings"></i> 个人设置
                     </a>
                     <a class="dropdown-item" href="./todo-list.html">
@@ -280,10 +287,10 @@
       </footer>
     </div>
   </body>
-<script>
-  function init() {
-    $("#name").html(Cookies.get("name"));
-    $("#account").html(Cookies.get("account"));
-  }
-</script>
+  <script>
+    function init() {
+      $("#name").html(Cookies.get("name"));
+      $("#account").html(Cookies.get("account"));
+    }
+  </script>
 </html>

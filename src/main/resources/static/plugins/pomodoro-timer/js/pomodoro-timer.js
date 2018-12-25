@@ -6,12 +6,6 @@ var remainingTime;
 
 var countdownHandle;
 
-var audio = new Audio("../../assets/plugins/pomodoro-timer/sounds/beep.mp3");
-
-$(document).ready(function() {
-  onPomodoroTimer();
-});
-
 function onPomodoroTimer() {
   stopTimer();
 
@@ -21,37 +15,8 @@ function onPomodoroTimer() {
 
   resetTimer();
 
-  $("#shortButton").removeClass("btn-success");
-  $("#longButton").removeClass("btn-success");
-  $("#pomodoroButton").addClass("btn-success");
-}
-
-function onShortTimer() {
-  stopTimer();
-
-  gHours = 0;
-  gMinutes = 0;
-  gSeconds = 0;
-
-  resetTimer();
-
-  $("#pomodoroButton").removeClass("btn-success");
-  $("#longButton").removeClass("btn-success");
-  $("#shortButton").addClass("btn-success");
-}
-
-function onLongTimer() {
-  stopTimer();
-
-  gHours = 0;
-  gMinutes = 0;
-  gSeconds = 0;
-
-  resetTimer();
-
-  $("#pomodoroButton").removeClass("btn-success");
-  $("#shortButton").removeClass("btn-success");
-  $("#longButton").addClass("btn-success");
+  $("#selectButton").addClass("btn-success");
+  $("#endButton").addClass("btn-success");
 }
 
 function onStartTimer() {
@@ -63,17 +28,6 @@ function onStopTimer() {
   stopTimer();
 }
 
-function onResetTimer() {
-  stopTimer();
-  resetTimer();
-}
-
-function startAlarm() {
-  if (remainingTime < 1000) {
-    audio.play();
-  }
-}
-
 function startTimer() {
   countdownHandle = setInterval(function() {
     decrementTimer();
@@ -82,7 +36,6 @@ function startTimer() {
 
 function stopTimer() {
   clearInterval(countdownHandle);
-  startAlarm();
 }
 
 function resetTimer() {
