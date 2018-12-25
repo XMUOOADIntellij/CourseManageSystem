@@ -1,12 +1,10 @@
 package com.group12.course.service;
 
-import com.group12.course.dao.CourseDao;
-import com.group12.course.dao.KlassStudentDao;
-import com.group12.course.dao.ShareSeminarApplicationDao;
-import com.group12.course.dao.ShareTeamApplicationDao;
+import com.group12.course.dao.*;
 import com.group12.course.entity.Course;
 import com.group12.course.entity.KlassStudent;
 import com.group12.course.entity.Student;
+import com.group12.course.entity.Team;
 import com.group12.course.entity.application.ShareSeminarApplication;
 import com.group12.course.entity.application.ShareTeamApplication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,8 @@ public class CourseService {
     ShareSeminarApplicationDao shareSeminarApplicationDao;
     @Autowired
     KlassStudentDao klassStudentDao;
+    @Autowired
+    TeamDao teamDao;
 
     /**
      * 获得当前用户所有课程
@@ -165,6 +165,7 @@ public class CourseService {
      * @return
      */
     public int handleTeamShare(Long teamShareId,Integer handler){
+
         return 0;
     }
 
@@ -177,6 +178,10 @@ public class CourseService {
      */
     public int handleSeminarShare(Long seminarShareId,Integer handler){
         return 0;
+    }
+
+    public List<Team> getTeamByCourseId(Long courseId){
+        return teamDao.getTeamByCourseId(courseId);
     }
 
 }
