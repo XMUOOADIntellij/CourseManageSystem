@@ -27,6 +27,7 @@
 
     <!--Dashboard Core-->
     <link href="../../static/css/dashboard.css" rel="stylesheet" />
+    <link href="../../static/css/tabler.css" rel="stylesheet" />
     <script src="../../static/js/vendors/jquery-3.2.1.min.js"></script>
     <script src="../../static/js/vendors/jquery-jvectormap-2.0.3.min.js"></script>
     <script src="../../static/js/vendors/jquery-jvectormap-de-merc.js"></script>
@@ -40,6 +41,7 @@
 
     <script src="../../static/js/core.js"></script>
     <link href="../../static/css/dashboard.css" rel="stylesheet" />
+    <link href="../../static/css/tabler.css" rel="stylesheet" />
     <!-- c3.js Charts Plugin -->
     <link href="../../static/plugins/charts-c3/plugin.css" rel="stylesheet" />
     <!-- gijgo datepicker Plugin -->
@@ -55,7 +57,7 @@
     <script src="../../static/js/jwt.js"></script>
     <script src="../../static/js/control.js"></script>
     <script src="../../static/js/convert.js"></script>
-    <script src="../../static/js/user-request.js"></script>
+    <script src="../../static/js/request.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
   <body onload="return getUserInfo()">
@@ -144,16 +146,14 @@
                       <i class="dropdown-icon fe fe-settings"></i> 个人设置
                     </a>
                     <a class="dropdown-item" href="../teacher/todo-list.html">
-                      <span class="float-right"
-                        ><span class="badge badge-primary">6</span></span
-                      >
+
                       <i class="dropdown-icon fe fe-mail"></i> 待办事项
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="help.html">
                       <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
                     </a>
-                    <a class="dropdown-item" href="../login.html">
+                    <a class="dropdown-item" href="login.html">
                       <i class="dropdown-icon fe fe-log-out"></i> 切换账户
                     </a>
                   </div>
@@ -173,19 +173,7 @@
         <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
           <div class="container">
             <div class="row align-items-center">
-              <div class="col-lg-3 ml-auto">
-                <form class="input-icon my-3 my-lg-0">
-                  <input
-                    class="form-control header-search"
-                    placeholder="Search&hellip;"
-                    tabindex="1"
-                    type="search"
-                  />
-                  <div class="input-icon-addon">
-                    <i class="fe fe-search"></i>
-                  </div>
-                </form>
-              </div>
+
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item pl-5">
@@ -199,8 +187,8 @@
                     >
                   </li>
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="../teacher/seminar-home.html"
-                      ><i class="fe fe-book-open"></i> 我的讨论课</a
+                    <a class="nav-link" href="../teacher/course-round.html"
+                      ><i class="fe fe-book-open"></i> 讨论课设置</a
                     >
                   </li>
                   <li class="nav-item pl-5">

@@ -2,7 +2,6 @@ var stompClient = null;
 function setConnected(connected) {}
 //403
 function connect() {
-<<<<<<< HEAD
   var socket = new SockJS("http://xug98.cn/Socket");
   stompClient = Stomp.over(socket);
   stompClient.connect(
@@ -21,7 +20,6 @@ function connect() {
       });
     }
   );
-=======
     var socket = new SockJS('http://localhost:8080/Socket');
     console.log("${createLink(uri: '/stomp')}");
     stompClient = Stomp.over(socket);
@@ -35,7 +33,6 @@ function connect() {
             showGreeting(JSON.parse(greeting.body).content);
         });
     });
->>>>>>> 9b4e378b7565fed88a6278917e68e11ece22e417
 }
 function disconnect() {
   if (stompClient != null) {

@@ -27,6 +27,7 @@
 
     <!--Dashboard Core-->
     <link href="../../static/css/dashboard.css" rel="stylesheet" />
+    <link href="../../static/css/tabler.css" rel="stylesheet" />
     <script src="../../static/js/vendors/jquery-3.2.1.min.js"></script>
     <script src="../../static/js/vendors/jquery-jvectormap-2.0.3.min.js"></script>
     <script src="../../static/js/vendors/jquery-jvectormap-de-merc.js"></script>
@@ -42,6 +43,7 @@
 
     <script src="../../static/js/core.js"></script>
     <link href="../../static/css/dashboard.css" rel="stylesheet" />
+    <link href="../../static/css/tabler.css" rel="stylesheet" />
     <!-- c3.js Charts Plugin -->
     <link href="../../static/plugins/charts-c3/plugin.css" rel="stylesheet" />
     <!-- gijgo datepicker Plugin -->
@@ -65,9 +67,8 @@
     <script src="../../static/js/jwt.js"></script>
     <script src="../../static/js/control.js"></script>
     <script src="../../static/js/convert.js"></script>
-    <script src="../../static/js/user-request.js"></script>
-    <script src="../../static/js/tea-request.js"></script>
-    <script src="../../static/js/tea-generate.js"></script>
+    <script src="../../static/js/request.js"></script>
+    <script src="../../static/js/teacher.js"></script>
 
     <script src="../../static/js/progress.js"></script>
   </head>
@@ -77,23 +78,78 @@
   >
     <div class="page">
       <div class="page-main">
-        <div class="header py-4"><!--header--></div>
+               <div class="header py-4">
+          <div class="container">
+            <div class="d-flex">
+              <a class="header-brand ml-1" href="./home.html">
+                <img
+                  alt="logo"
+                  class="header-brand-img"
+                  src="../../static/images/brand.png"
+                />
+              </a>
+              <div class="d-flex order-lg-2 ml-auto">
+                <div class="dropdown d-none d-md-flex">
+                  <a class="nav-link icon" href="todo-list.html">
+                    <i class="fe fe-bell"></i> <span class="nav-unread"></span>
+                  </a>
+                </div>
+                <div class="dropdown">
+                  <a
+                    class="nav-link pr-0 leading-none"
+                    data-toggle="dropdown"
+                    href="#"
+                  >
+                    <span
+                      class="avatar"
+                      style="background-image: url(../../static/images/male.png)"
+                    ></span>
+                    <span class="ml-2 d-none d-lg-block">
+                      <span class="text-default">Ming Qiu</span>
+                      <small class="text-muted d-block mt-1"
+                        >Administrator</small
+                      >
+                    </span>
+                  </a>
+                  <div
+                    class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                  >
+                    <a
+                      class="dropdown-item"
+                      href="../common/account-setting.html"
+                    >
+                      <i class="dropdown-icon fe fe-settings"></i> 个人设置
+                    </a>
+                    <a class="dropdown-item" href="./todo-list.html">
+
+                      <i class="dropdown-icon fe fe-mail"></i> 待办事项
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../common/help.html">
+                      <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
+                    </a>
+                    <a class="dropdown-item" href="../common/login.html">
+                      <i class="dropdown-icon fe fe-log-out"></i> 切换账户
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <a
+                class="header-toggler d-lg-none ml-3 ml-lg-0"
+                data-target="#headerMenuCollapse"
+                data-toggle="collapse"
+                href="#"
+              >
+                <span class="header-toggler-icon"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
           <div class="container">
             <div class="row align-items-center">
-              <div class="col-lg-3 ml-auto">
-                <form class="input-icon my-3 my-lg-0">
-                  <input
-                    class="form-control header-search"
-                    placeholder="Search&hellip;"
-                    tabindex="1"
-                    type="search"
-                  />
-                  <div class="input-icon-addon">
-                    <i class="fe fe-search"></i>
-                  </div>
-                </form>
-              </div>
+
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item pl-5">
@@ -106,11 +162,7 @@
                       ><i class="fe fe-book"></i> 我的课程</a
                     >
                   </li>
-                  <li class="nav-item pl-5">
-                    <a class="nav-link" href="./seminar-home.html"
-                      ><i class="fe fe-book-open"></i> 我的讨论课</a
-                    >
-                  </li>
+
                   <li class="nav-item pl-5">
                     <a class="nav-link" href="./progress.html"
                       ><i class="fe fe-play-circle"></i> 正在进行中</a
@@ -200,57 +252,39 @@
                                 id="selectButton"
                                 onclick="select();"
                               >
-                                抽取提问
+                                开始课堂
                               </button>
                               <button
                                 id="endButton"
                                 class="btn btn-default mx-lg-3 px-lg-6"
                                 onclick="end();"
                               >
-                                课程结束
+                                结束课堂
                               </button>
                             </span>
                           </h2>
                         </div>
                         <div class="panel panel-default">
                           <div class="panel-body text-center">
-                            <div class="timer-time timer-container mb-3">
-                              <div
-                                class="timer-time-set timer-box"
-                                id="currentTime"
-                              >
-                                <span id="hoursValue">00</span><span>:</span
-                                ><span id="minutesValue">00</span><span>:</span
-                                ><span id="secondsValue">00</span>
-                              </div>
-                              <div
-                                class="timer-time-set timer-box"
-                                id="nextTime"
-                              >
-                                <span id="hoursNext">00</span><span>:</span
-                                ><span id="minutesNext">00</span><span>:</span
-                                ><span id="secondsNext">00</span>
-                              </div>
-                            </div>
                             <div>
                               <button
                                 id="startButton"
                                 class="btn btn-primary btn-lg mx-lg-3 px-lg-5"
-                                onclick="start();onStartTimer()"
+                                onclick="start();"
                               >
                                 <i class="fe fe-play" aria-hidden="true"></i>
                               </button>
                               <button
                                 id="stopButton"
                                 class="btn btn-danger btn-lg mx-lg-3 px-lg-5"
-                                onclick="pause();onStopTimer()"
+                                onclick="pause();"
                               >
                                 <i class="fe fe-pause" aria-hidden="true"></i>
                               </button>
                               <button
                                 id="nextButton"
                                 class="btn btn-warning btn-lg mx-lg-3 px-lg-5"
-                                onclick="next();resetTimer()"
+                                onclick="next();"
                               >
                                 <i
                                   class="fe fe-fast-forward"
