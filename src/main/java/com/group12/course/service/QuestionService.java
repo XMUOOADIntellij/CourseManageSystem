@@ -25,7 +25,7 @@ public class QuestionService {
     @Autowired
     TeamDao teamDao;
     @Autowired
-    CourseDao courseDao;
+    KlassDao klassDao;
     @Autowired
     AttendanceDao attendanceDao;
 
@@ -60,17 +60,18 @@ public class QuestionService {
      * @param student   学生对象
      * @return Question
      */
-    public Question askQuestion(Long courseId, Long seminarId, Long classId, Question question, Student student) {
+    public Question askQuestion(Long seminarId, Long classId, Question question, Student student) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
-        Course course = courseDao.getCourse(courseId);
+        Klass klass = klassDao.getKlass(classId);
 
-        if (course != null) {
+        if (klass != null) {
             if (klassSeminar != null) {
                 question.setKlassSeminar(klassSeminar);
                 question.setStudent(student);
                 question.setScore(null);
                 question.setSelected(false);
 
+                Course course = klass.getCourse();
                 //属于被共享分组的课程
                 Team team;
                 if (course.getTeamMainCourse() != null) {
@@ -79,6 +80,7 @@ public class QuestionService {
                     team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), course.getId());
                 }
 
+                question.setTeam(team);
                 if (questionDao.insertQuetion(question) != 0) {
                     return question;
                 } else {
@@ -88,7 +90,7 @@ public class QuestionService {
                 throw new RecordNotFoundException("找不到班级讨论课");
             }
         } else {
-            throw new RecordNotFoundException("找不到课程");
+            throw new RecordNotFoundException("找不到班级");
         }
     }
 
@@ -110,7 +112,6 @@ public class QuestionService {
 
     /**
      * 老师抽取提问
-     *
      * @param teacher      老师对象
      * @param seminarId    讨论课
      * @param classId      班级

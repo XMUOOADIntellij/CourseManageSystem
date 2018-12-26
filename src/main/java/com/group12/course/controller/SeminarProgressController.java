@@ -92,12 +92,12 @@ public class SeminarProgressController {
     @MessageMapping("/Socket/course/courseId/seminar/{seminarId}/class/{classId}/question")
     @SendTo("/seminarSocket/question")
     public QuestionVO askQuestion(@DestinationVariable Long seminarId, @DestinationVariable Long classId,
-                                  @DestinationVariable Long courseId, Message message,QuestionVO questionVO){
+                                  Message message,QuestionVO questionVO){
 
         Student student = new Student();
         student.setId(1L);
 
-        Question question = questionService.askQuestion(courseId,seminarId,classId,new Question(questionVO),student);
+        Question question = questionService.askQuestion(seminarId,classId,new Question(questionVO),student);
         return new QuestionVO(question);
     }
 

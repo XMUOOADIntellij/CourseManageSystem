@@ -188,11 +188,11 @@ public class SeminarController {
      */
     @GetMapping(value = "/{seminarId}/class/{classId}/attendance")
     public AttendanceVO getTeamAttendance(@PathVariable Long seminarId,@PathVariable Long classId,
-                                          @RequestParam Long courseId, HttpServletRequest request){
+                                          HttpServletRequest request){
         String token = request.getHeader("Authorization");
         Student student = Jwt.unSign(token,Student.class);
         return new AttendanceVO(
-                attendanceService.getTeamAttendance(courseId,seminarId,classId,student)
+                attendanceService.getTeamAttendance(seminarId,classId,student)
         );
     }
 
@@ -202,13 +202,12 @@ public class SeminarController {
      */
     @PostMapping(value="/{seminarId}/class/{classId}/attendance")
     public Long enrollAttendance(@PathVariable Long seminarId,@RequestBody AttendanceVO attendanceVo,
-                                 @PathVariable Long classId,@RequestParam Long courseId,
-                                 HttpServletRequest request){
+                                 @PathVariable Long classId, HttpServletRequest request){
 
         String token = request.getHeader("Authorization");
         Student student = Jwt.unSign(token,Student.class);
         Attendance attendance = new Attendance(attendanceVo);
-        return attendanceService.enrollAttendance(courseId,seminarId,classId,attendance,student);
+        return attendanceService.enrollAttendance(seminarId,classId,attendance,student);
     }
 
     /**

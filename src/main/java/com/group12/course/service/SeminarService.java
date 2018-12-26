@@ -30,25 +30,6 @@ public class SeminarService {
     @Autowired
     KlassStudentDao klassStudentDao;
 
-    /**
-     * 判断当前老师 在讨论课共享从课程或主课程中
-     * @param teacher 老师
-     * @param course 课程
-     * @return Boolean
-     */
-    private Boolean inCourseOrInSubCourse(Teacher teacher,Course course){
-        if(courseDao.getCourse(course.getId())==null){
-            return  false;
-        }
-        else {
-            for(Course item:courseDao.getSubCourseBySeminarMainCourseId(course.getId())){
-                if(course.getTeacher().getId().equals(teacher.getId())){
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
 
     /**
      * 新建讨论课 Service层
@@ -169,10 +150,8 @@ public class SeminarService {
         }
 
         if (klassSeminar != null) {
-            //找到所属课程或主课程
-            Course course = klassSeminar.getSeminar().getCourse();
-            //老师属于从课程或者主课程
-            if (inCourseOrInSubCourse(teacher,course)) {
+            Course course = klassSeminar.getKlass().getCourse();
+            if (course.getTeacher().getId().equals(teacher.getId())) {
                 record.setId(klassSeminar.getId());
                 return klassSeminarDao.updateKlassSeminar(record);
             } else {
@@ -186,10 +165,8 @@ public class SeminarService {
     public KlassSeminar pauseSeminar(Teacher teacher, Long seminarId, Long classId) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         if (klassSeminar != null) {
-            //找到所属课程或主课程
-            Course course = klassSeminar.getSeminar().getCourse();
-            //老师属于从课程或者主课程
-            if (inCourseOrInSubCourse(teacher,course)) {
+            Course course = klassSeminar.getKlass().getCourse();
+            if (course.getTeacher().getId().equals(teacher.getId())) {
                 //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
                 klassSeminar.setSeminarStatus(3);
                 if (klassSeminarDao.updateKlassSeminar(klassSeminar) == 1) {
@@ -208,10 +185,8 @@ public class SeminarService {
     public KlassSeminar startSeminar(Teacher teacher, Long seminarId, Long classId) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         if (klassSeminar != null) {
-            //找到所属课程或主课程
-            Course course = klassSeminar.getSeminar().getCourse();
-            //老师属于从课程或者主课程
-            if (inCourseOrInSubCourse(teacher,course)) {
+            Course course = klassSeminar.getKlass().getCourse();
+            if (course.getTeacher().getId().equals(teacher.getId())) {
                 //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
                 klassSeminar.setSeminarStatus(1);
                 if (klassSeminarDao.updateKlassSeminar(klassSeminar) == 1) {
@@ -222,7 +197,7 @@ public class SeminarService {
                     return null;
                 }
             } else {
-                throw new UnauthorizedOperationException("only teacher in this course can operate");
+                throw new UnauthorizedOperationException("只有这节课的老师可以操作");
             }
         } else {
             throw new RecordNotFoundException("找不到班级讨论课");
@@ -232,10 +207,8 @@ public class SeminarService {
     public KlassSeminar endSeminar(Teacher teacher, Long seminarId, Long classId) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         if (klassSeminar != null) {
-            //找到所属课程或主课程
-            Course course = klassSeminar.getSeminar().getCourse();
-            //老师属于从课程或者主课程
-            if (inCourseOrInSubCourse(teacher,course)) {
+            Course course = klassSeminar.getKlass().getCourse();
+            if (course.getTeacher().getId().equals(teacher.getId())) {
                 //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
                 klassSeminar.setSeminarStatus(2);
                 if (klassSeminarDao.updateKlassSeminar(klassSeminar) == 1) {
