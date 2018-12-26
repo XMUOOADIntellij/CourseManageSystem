@@ -1,4 +1,4 @@
-package com.group12.course.interceptor;
+package com.group12.course.security;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
