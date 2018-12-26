@@ -1,13 +1,7 @@
 package com.group12.course.service;
 
-import com.group12.course.dao.CourseDao;
-import com.group12.course.dao.RoundDao;
-import com.group12.course.dao.RoundScoreDao;
-import com.group12.course.dao.SeminarDao;
-import com.group12.course.entity.Course;
-import com.group12.course.entity.Round;
-import com.group12.course.entity.RoundScore;
-import com.group12.course.entity.Seminar;
+import com.group12.course.dao.*;
+import com.group12.course.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +28,8 @@ public class RoundService {
     CourseDao courseDao;
     @Autowired
     SeminarDao seminarDao;
+    @Autowired
+    KlassRoundDao klassRoundDao;
 
     /**
      * 获取某轮次下的讨论课
@@ -139,6 +135,19 @@ public class RoundService {
         BigDecimal totalScore = calculateTotalScore(roundScore);
         roundScore.setTotalScore(totalScore);
         return roundScoreDao.updateRoundScore(roundScore);
+    }
+
+    /**
+     * 插入班级轮次记录
+     * @param klassRoundList
+     * @return
+     */
+    public int addKlassRoundList(List<KlassRound> klassRoundList){
+        int status = 1;
+        for (KlassRound klassRound:klassRoundList) {
+            status = klassRoundDao.addKlassRound(klassRound)==0?0:status;
+        }
+        return status;
     }
 
 }

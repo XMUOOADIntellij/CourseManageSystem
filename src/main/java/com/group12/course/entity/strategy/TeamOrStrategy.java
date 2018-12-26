@@ -4,7 +4,7 @@ public class TeamOrStrategy extends Strategy{
 
     private String strategyName;
 
-    private Strategy strategyt;
+    private Strategy strategy;
 
     public String getStrategyName() {
         return strategyName;
@@ -14,11 +14,11 @@ public class TeamOrStrategy extends Strategy{
         this.strategyName = strategyName;
     }
 
-    public Strategy getStrategyt() {
-        return strategyt;
+    public Strategy getStrategy() {
+        return strategy;
     }
 
-    public void setStrategyt(Strategy strategyt) {
-        this.strategyt = strategyt;
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
     }
 }

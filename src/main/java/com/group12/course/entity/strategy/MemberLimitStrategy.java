@@ -26,6 +26,15 @@ public class MemberLimitStrategy extends Strategy {
         this.maxMember = maxMember;
     }
 
+    @Override
+    public String toString() {
+        return "MemberLimitStrategy{" +
+                "minMember=" + minMember +
+                ", maxMember=" + maxMember +
+                ", id=" + id +
+                '}';
+    }
+
     public Integer getMinMember() {
         return minMember;
     }
@@ -42,25 +51,4 @@ public class MemberLimitStrategy extends Strategy {
         this.maxMember = maxMember;
     }
 
-    @Override
-    public Boolean judgeTeam(Team team){
-        int memberCount = 0;
-        Student leader = team.getLeader();
-        List<Student> member = team.getMembers();
-        if (member==null||member.isEmpty()){
-            memberCount=1;
-        }
-        else {
-            memberCount=member.size()+1;
-        }
-        if (memberCount<minMember){
-            return false;
-        }
-        else if (memberCount>maxMember){
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
 }

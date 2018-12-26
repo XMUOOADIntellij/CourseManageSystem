@@ -26,7 +26,4 @@ public class Strategy {
         this.id = id;
     }
 
-    public Boolean judgeTeam(Team team){
-        return true;
-    }
 }
