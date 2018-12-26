@@ -117,18 +117,16 @@ function getSeminarList(roundid) {
 }
 */
 function initCourseGrade() {
-  let aRound = getRoundList(); //轮次
-  for (let i = 0; i < aRound.length; i++) {
+
     let aRoundScore = getCourseScoreByRound(aRound[i].id); //总成绩
     let aSeminar = getSeminarList(aRound[i].id); //总成绩
     for (let j = 0; j < aRoundScore.length; j++) {
       for (let k = 0; k < aSeminar.length; k++) {
         let aSeminarScore = getSeminarScoreByTeam(
-          aSeminar[k].id,
-          aRoundScore[j].team.id
+1,        1
         ); //总成绩
       }
-    }
+
   }
 }
 function initCourseShare() {
@@ -149,5 +147,6 @@ function initTask() {
 }
 function initProgress() {
   getAttendanceByClass();
+  getCurrentAttendance();
   getQuestionList();
 }
