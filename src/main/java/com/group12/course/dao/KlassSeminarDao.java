@@ -58,25 +58,4 @@ public class KlassSeminarDao {
         return klassSeminarMapper.listKlassSeminarByKlassIdList(klassIdList);
     }
 
-    public Boolean checkTeacherHasKlassSeminar(Teacher teacher, Long klassSeminarId) {
-        KlassSeminar klassSeminar = selectKlassSeminarById(klassSeminarId);
-
-        if (klassSeminar != null) {
-           Course course = klassSeminar.getSeminar().getCourse();
-            if(course.getTeacher().getId().equals(teacher.getId())){
-                return  true;
-            }else{
-                //是从课程，被分享讨论课的情况
-                for(Course item:courseDao.getSubCourseBySeminarMainCourseId(course.getId())){
-                    if(item.getTeacher().getId().equals(teacher.getId())){
-                        return true;
-                    }
-                }
-                return false;
-            }
-        } else {
-            return false;
-        }
-
-    }
 }

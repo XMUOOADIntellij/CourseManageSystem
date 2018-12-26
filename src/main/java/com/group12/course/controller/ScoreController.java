@@ -38,14 +38,14 @@ public class ScoreController {
         return scoreService.modifyScoreByAttendance(teacher,new SeminarScore(seminarScoreVO),attendanceId);
     }
 
-    @PutMapping(value="/seminar/{seminarId}/score")
-    public Integer modifyScoreBySeminar(@PathVariable Long seminarId,@RequestBody SeminarScoreVO seminarScoreVO,
-                                        @RequestParam Long courseId, HttpServletRequest request){
+    @PutMapping(value="/seminar/{seminarId}/class/{classId}/score")
+    public Integer modifyScoreBySeminar(@PathVariable Long seminarId,@PathVariable Long classId,
+                                        @RequestBody SeminarScoreVO seminarScoreVO, HttpServletRequest request){
         String token = request.getHeader("Authorization");
         Teacher teacher = Jwt.unSign(token,Teacher.class);
 
         SeminarScore seminarScore = new SeminarScore(seminarScoreVO);
-        return scoreService.modiftScoreBySeminar(teacher,seminarScore,courseId,seminarId);
+        return scoreService.modiftScoreBySeminar(teacher,seminarScore,seminarId,classId);
     }
 
     /**
@@ -66,6 +66,7 @@ public class ScoreController {
         return scoreVOList;
     }
 
+
     @GetMapping(value = "/round/{roundId}/score")
     public List<SeminarScoreVO> getRoundSeminarScore(@PathVariable Long roundId,
                                                      @RequestBody SeminarScoreVO seminarScoreVO){
@@ -77,6 +78,13 @@ public class ScoreController {
         return  seminarScoreVOList;
     }
 
+    /**
+     * 获得某次班级讨论课成绩
+     * @param seminarId 讨论课id
+     * @param classId 班级id
+     * @param request 请求
+     * @return 讨论课成绩
+     */
     @GetMapping(value = "/seminar/{seminarId}/class/{classId}/score")
     public List<SeminarScoreVO> getKlassSeminarScore(@PathVariable Long seminarId,@PathVariable Long classId,
                                                      HttpServletRequest request){
@@ -90,9 +98,15 @@ public class ScoreController {
         return  seminarScoreVOList;
     }
 
+    /**
+     * 学生查看某次展示的成绩
+     * @param attendanceId 展示的id
+     * @return 讨论课成绩
+     */
     @GetMapping(value = "/attendance/{attendanceId}/score")
     public SeminarScoreVO getAttendanceScore(@PathVariable Long attendanceId){
         return new SeminarScoreVO(scoreService.getAttendanceScore(attendanceId));
     }
+
 
 }

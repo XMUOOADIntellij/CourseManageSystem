@@ -14,6 +14,7 @@ public class SeminarScoreVO {
 
     private  String seminarName;
     private  Long seminarId;
+    private  Long classId;
 
     private Long teamId;
 
@@ -79,15 +80,25 @@ public class SeminarScoreVO {
         this.totalScore = totalScore;
     }
 
+    public Long getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Long classId) {
+        this.classId = classId;
+    }
+
     public SeminarScoreVO(){}
     public SeminarScoreVO(SeminarScore seminarScore){
         this.seminarId = seminarScore.getKlassSeminar().getSeminar().getId();
         this.seminarName = seminarScore.getKlassSeminar().getSeminar().getSeminarName();
         this.teamId = seminarScore.getTeam().getId();
+        this.classId = seminarScore.getKlassSeminar().getKlass().getId();
         this.presentationScore = seminarScore.getPresentationScore();
         this.questionScore = seminarScore.getQuestionScore();
         this.reportScore = seminarScore.getReportScore();
         this.totalScore =seminarScore.getTotalScore();
+
 
     }
 

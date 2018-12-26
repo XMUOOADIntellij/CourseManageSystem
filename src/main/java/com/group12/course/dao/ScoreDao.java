@@ -306,6 +306,9 @@ public class ScoreDao {
         return roundScoreMapper.listRoundScoreByRoundIdList(roundId);
     }
 
+    public List<RoundScore> listRoundScoreByRoundIdListAndTeamId(List<Long> roundIdList,Long teamId){
+        return roundScoreMapper.listRoundScoreByRoundIdListAndTeamId(roundIdList,teamId);
+    }
     public List<SeminarScore> listSeminarScoreByKlassSeminarId(Long klassSeminarId) {
         return seminarScoreMapper.listSeminarScoreByKlassSeminarId(klassSeminarId);
     }

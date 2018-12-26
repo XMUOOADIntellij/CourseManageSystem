@@ -41,7 +41,7 @@ public class QuestionService {
     public List<Question> getAttendanceQuestion(Teacher teacher, Long seminarId, Long klassId, Long attendanceId) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, klassId);
         if (klassSeminar != null) {
-            if (klassSeminarDao.checkTeacherHasKlassSeminar(teacher, klassSeminar.getId())) {
+            if (klassSeminar.getKlass().getCourse().getTeacher().getId().equals(teacher.getId())) {
                 return questionDao.listQuestionByKlassSeminarIdAndAttendanceId(klassSeminar.getId(), attendanceId);
             } else {
                 throw new UnauthorizedOperationException("只有当前课的老师可查看");
@@ -99,7 +99,8 @@ public class QuestionService {
         Question question = questionDao.getQustionById(record.getId());
         if (question != null) {
             // 是当前老师课上的提问
-            if (klassSeminarDao.checkTeacherHasKlassSeminar(teacher, question.getKlassSeminar().getId())) {
+            if (question.getKlassSeminar().getKlass().getCourse()
+                    .getTeacher().getId().equals(teacher.getId())) {
                 return questionDao.updateQuestion(record);
             } else {
                 throw new UnauthorizedOperationException("只有当前课的老师可更改");
@@ -112,6 +113,7 @@ public class QuestionService {
 
     /**
      * 老师抽取提问
+     *
      * @param teacher      老师对象
      * @param seminarId    讨论课
      * @param classId      班级
@@ -124,7 +126,8 @@ public class QuestionService {
 
         if (!attendance.getPresented()) {
             if (klassSeminar != null) {
-                if (klassSeminarDao.checkTeacherHasKlassSeminar(teacher, klassSeminar.getId())) {
+                if (klassSeminar.getKlass().getCourse().getTeacher().getId()
+                        .equals(teacher.getId())) {
 
                     List<Question> questionList = questionDao.listQuestionByKlassSeminarId(klassSeminar.getId());
                     // 小组，此次讨论课被提问次数
@@ -173,4 +176,4 @@ public class QuestionService {
         }
     }
 
-    }
+}
