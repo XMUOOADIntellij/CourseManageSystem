@@ -31,8 +31,8 @@ public class TeamDao {
      * @return
      */
     public Integer getKlassLastTeamSerial(Long klassId){
-        List<Team> teams = teamMapper.selectTeamByKlassId(klassId);
-        if (teams==null||teams.isEmpty()){
+        List<Team> teams = listTeamByKlassId(klassId);
+        if (teams.isEmpty()){
             return 1;
         }
         else {
@@ -220,7 +220,16 @@ public class TeamDao {
      * @return 查询到的队伍对象
      * */
     public List<Team> listTeamByKlassId(Long klassId){
-        return teamMapper.selectTeamByKlassId(klassId);
+        List<Team> tempTeams = teamMapper.selectTeamByKlassId(klassId);
+        if (tempTeams==null){
+            return new ArrayList<>();
+        }
+        List<Team> teams = new ArrayList<>(tempTeams.size());
+        for (Team tempTeam:tempTeams){
+            tempTeam=teamMapper.selectTeamById(tempTeam.getId());
+            teams.add(tempTeam);
+        }
+        return teams;
     }
 
     /**
@@ -266,7 +275,6 @@ public class TeamDao {
             teamMapper.deleteTeamFromKlass(teamId);
             deleteTeamCount = teamMapper.deleteTeamMembersByTeamId(teamId);
             List<Team> teamList = teamMapper.selectTeamByKlassId(team.getKlass().getId());
-            System.out.println(teamList);
             int teamSerial = team.getTeamSerial();
             for (Team teams:teamList) {
                 System.out.println(teams);
