@@ -22,4 +22,6 @@ public interface KlassRoundMapper {
 
     int updateKlassRound(KlassRound record);
 
+    KlassRound selectKlassRoundByKlassIdAndRoundId(Long klassId,Long roundId);
+
 }

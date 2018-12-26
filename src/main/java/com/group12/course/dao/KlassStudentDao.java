@@ -1,5 +1,6 @@
 package com.group12.course.dao;
 
+import com.group12.course.entity.Klass;
 import com.group12.course.entity.KlassStudent;
 import com.group12.course.mapper.KlassStudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,16 @@ public class KlassStudentDao {
      */
     public int addKlassStudent(KlassStudent klassStudent){
         return klassStudentMapper.addKlassStudent(klassStudent);
+    }
+
+    /**
+     * 查找学生在某课程下的班级
+     * @param courseId
+     * @param studentId
+     * @return
+     */
+    public Klass selectKlassByCourseIdAndStudentId(Long courseId, Long studentId){
+        return klassStudentMapper.selectKlassStudentByCourseIdAndStudentId(courseId,studentId).getKlass();
     }
 
 }
