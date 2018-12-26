@@ -22,4 +22,6 @@ public interface KlassStudentMapper {
 
     int addKlassStudent(@Param("klassStudent") KlassStudent klassStudent);
 
+    KlassStudent selectKlassStudentByCourseIdAndStudentId(Long courseId,Long studentId);
+
 }
