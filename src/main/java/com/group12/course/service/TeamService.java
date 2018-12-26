@@ -1,8 +1,11 @@
 package com.group12.course.service;
 
+import com.group12.course.dao.KlassDao;
 import com.group12.course.dao.TeamDao;
+import com.group12.course.entity.Klass;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Team;
+import com.group12.course.exception.InformationException;
 import com.group12.course.exception.UnauthorizedOperationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,9 @@ public class TeamService {
     @Autowired
     TeamDao teamDao;
 
+    @Autowired
+    KlassDao klassDao;
+
     /**
      * 添加某个队伍
      *
@@ -25,6 +31,11 @@ public class TeamService {
      * @return 返回的队伍对象中包含新添加的对象的id
      * */
     public Team createTeam(Team team){
+        Klass klass = klassDao.getKlass(team.getKlass().getId());
+        if (klass==null){
+            throw new InformationException("课程 id 不存在");
+        }
+        team.setKlassSerial(klass.getKlassSerial());
         return teamDao.addTeam(team);
     }
 

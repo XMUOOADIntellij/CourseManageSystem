@@ -1,5 +1,12 @@
 package com.group12.course.entity.application;
 
+/**
+ * application 类
+ * 所有的申请都继承自它
+ *
+ * @author Xu Gang
+ * @date 2018年12月26日
+ */
 public class Application {
 
     private Long id;

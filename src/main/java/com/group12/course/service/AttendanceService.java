@@ -37,6 +37,8 @@ public class AttendanceService {
     SeminarDao seminarDao;
     @Autowired
     CourseDao courseDao;
+    @Autowired
+    KlassDao klassDao;
 
     private final String ServerFilePath = System.getProperty("user.dir") + System.getProperty("file.separator") + "file" + System.getProperty("file.separator");
     private final Logger logger = LoggerFactory.getLogger(AttendanceService.class);
@@ -61,6 +63,7 @@ public class AttendanceService {
 
     /**
      * 获得当前班级讨论课正在展示的小组
+     *
      * @param classId   班级
      * @param seminarId 讨论课
      * @return 正在展示的小组
@@ -78,48 +81,55 @@ public class AttendanceService {
 
     /**
      * 获得自己组的展示报名
-     * @param seminarId 讨论课id
-     * @param student   学生对象
-     * @return Attendance
+     *
+     * @param seminarId 讨论课
+     * @param classId   班级
+     * @param student   学生
+     * @return 展示报名
      */
-    public Attendance getTeamAttendance(Long seminarId, Student student) {
-
-        //todo 队伍有关
-        //获得讨论课
-        Seminar seminar = seminarDao.selectSeminarById(seminarId);
-        if (seminar != null) {
-            //学生所在队伍
-            Team team = teamDao.getTeamByStudentIdAndCourseId(
-                    student.getId(),
-                    seminar.getCourse().getId());
+    public Attendance getTeamAttendance(Long seminarId, Long classId, Student student) {
+        //获得班级
+        Klass klass = klassDao.getKlass(classId);
+        if (klass != null) {
+            Course course = klass.getCourse();
             //班级讨论课
-            KlassSeminar klassSeminar = klassSeminarDao.
-                    selectKlassSeminarBySeminarIdAndClassId(seminarId, team.getKlass().getId());
+            KlassSeminar klassSeminar;
+            klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
+
+            Course courseTeamMainCourse = course.getTeamMainCourse();
+            //学生所在队伍
+            Team team;
+            //无共享组队时
+            if (courseTeamMainCourse == null) {
+                team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), course.getId());
+            }
+            //共享组队时
+            else {
+                team = teamDao.getTeamByStudentIdAndCourseId(
+                        student.getId(), courseTeamMainCourse.getId());
+            }
+            //返回记录
             if (klassSeminar != null) {
                 return attendanceDao.
                         selectAttendanceByKlassSeminarIdAndTeamId(klassSeminar.getId(), team.getId());
             } else {
-                throw new RecordNotFoundException("找不到该班级讨论课");
+                return null;
             }
         } else {
-            throw new RecordNotFoundException("讨论课不存在");
+            throw new RecordNotFoundException("班级不存在");
         }
     }
 
     public Integer changeAttendanceOrder(Attendance record, Student student) {
-        //todo 队伍有关
         Attendance attendance = attendanceDao.selectAttendanceById(record.getId());
         if (attendance != null) {
-            if (attendance.getId().equals(
-                    getTeamAttendance(attendance.getKlassSeminar().getSeminar().getId(), student).getId()
-            )) {
+            if (teamDao.checkStudentIsInSpecialTeam(student.getId(), attendance.getTeam().getId())) {
                 return attendanceDao.updateAttendance(record);
             } else {
                 throw new UnauthorizedOperationException("只能更改自己组的展示顺序");
             }
         } else {
-            return null;
-            //AttendanceNotFound
+            throw new RecordNotFoundException("没有找到展示报名");
         }
     }
 
@@ -127,32 +137,39 @@ public class AttendanceService {
         //todo 队伍有关
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
         if (attendance != null) {
-            if (attendance.getId().equals(
-                    getTeamAttendance(attendance.getKlassSeminar().getSeminar().getId(), student).getId()
-            )) {
+            if (teamDao.checkStudentIsInSpecialTeam(student.getId(), attendance.getTeam().getId())) {
                 return attendanceDao.deleteAttendanceById(attendanceId);
             } else {
                 throw new UnauthorizedOperationException("只能取消自己组的报名");
             }
         } else {
-            return null;
-            //AttendanceNotFound
+            throw new RecordNotFoundException("没有找到展示报名");
         }
     }
 
-    public Long enrollAttendance(Long seminarId, Attendance attendance, Student student) {
-        //todo 队伍有关
-        //获得讨论课
-        Seminar seminar = seminarDao.selectSeminarById(seminarId);
-        if (seminar != null) {
+    public Long enrollAttendance(Long seminarId, Long classId, Attendance attendance, Student student) {
+        //获得课程
+        Klass klass = klassDao.getKlass(classId);
+
+        if (klass != null) {
+            Course course = klass.getCourse();
+            Course courseTeamMainCourse = course.getTeamMainCourse();
             //学生所在队伍
-            Team team = teamDao.getTeamByStudentIdAndCourseId(
-                    student.getId(),
-                    seminar.getCourse().getId());
+            Team team;
+            //无共享组队时
+            if (courseTeamMainCourse == null) {
+                team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), course.getId());
+            }
+            //共享组队时
+            else {
+                team = teamDao.getTeamByStudentIdAndCourseId(
+                        student.getId(), courseTeamMainCourse.getId());
+            }
             //班级讨论课
             KlassSeminar klassSeminar = klassSeminarDao.
-                    selectKlassSeminarBySeminarIdAndClassId(seminarId, team.getKlass().getId());
+                    selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
             if (klassSeminar != null) {
+                // todo 一轮下的报名数固定
                 attendance.setTeam(team);
                 attendance.setKlassSeminar(klassSeminar);
                 attendance.setPresented(false);
@@ -161,7 +178,7 @@ public class AttendanceService {
                 throw new RecordNotFoundException("找不到该班级讨论课");
             }
         } else {
-            throw new RecordNotFoundException("找不到该讨论课");
+            throw new RecordNotFoundException("找不到该班级");
         }
     }
 
@@ -178,8 +195,7 @@ public class AttendanceService {
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
         if (attendance != null) {
             //自己组的报名才能传
-            if (attendance.getId().equals(
-                    getTeamAttendance(attendance.getKlassSeminar().getSeminar().getId(), student).getId())) {
+            if (teamDao.checkStudentIsInSpecialTeam(student.getId(), attendance.getTeam().getId())) {
                 String filePath = ServerFilePath + System.getProperty("file.separator") + "report" + System.getProperty("file.separator")
                         + attendance.getKlassSeminar().getId() + System.getProperty("file.separator");
                 String fileName = attendance.getKlassSeminar().getKlass().getKlassSerial()
@@ -218,8 +234,7 @@ public class AttendanceService {
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
         if (attendance != null) {
             //自己组的报名才能传
-            if (attendance.getId().equals(
-                    getTeamAttendance(attendance.getKlassSeminar().getSeminar().getId(), student).getId())) {
+            if (teamDao.checkStudentIsInSpecialTeam(student.getId(), attendance.getTeam().getId())) {
                 String filePath = ServerFilePath + System.getProperty("file.separator") + "ppt" + System.getProperty("file.separator")
                         + attendance.getKlassSeminar().getId() + System.getProperty("file.separator");
                 String fileName = attendance.getKlassSeminar().getKlass().getKlassSerial()
@@ -258,10 +273,9 @@ public class AttendanceService {
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
         String fileUrl = attendance.getReportUrl();
         try {
-
             FileUtil.downloadFile(response, fileUrl, attendance.getReportName());
         } catch (Exception e) {
-            return;
+            logger.trace("下载报告出错: " + e.getMessage());
         }
     }
 
@@ -271,7 +285,7 @@ public class AttendanceService {
         try {
             FileUtil.downloadFile(response, fileUrl, attendance.getPptName());
         } catch (Exception e) {
-            return;
+            logger.trace("下载ppt出错: " + e.getMessage());
         }
     }
 
@@ -315,30 +329,26 @@ public class AttendanceService {
         }
     }
 
-    public Attendance nextAttendance(Long seminarId, Long classId, Long attendanceId, Teacher teacher) {
+    public Attendance nextAttendance(Long seminarId, Long classId, Long attendanceId) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         if (klassSeminar != null) {
-            if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
-                Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
-                if (attendance != null) {
-                    //当前小组状态更新
-                    attendance.setPresented(false);
-                    attendanceDao.updateAttendance(attendance);
+            Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+            if (attendance != null) {
+                //当前小组状态更新
+                attendance.setPresented(false);
+                attendanceDao.updateAttendance(attendance);
 
-                    //找到下一组，当前讨论课的展示小组序号+1
-                    Attendance nextAttendance = attendanceDao.selectAttendanceByKlassSeminarIdAndTeamOrder(
-                            klassSeminar.getId(), attendance.getTeamOrder() + 1
-                    );
-                    nextAttendance.setPresented(true);
-                    return nextAttendance;
-                } else {
-                    throw new RecordNotFoundException("Attendance不存在");
-                }
+                //找到下一组，当前讨论课的展示小组序号+1
+                Attendance nextAttendance = attendanceDao.selectAttendanceByKlassSeminarIdAndTeamOrder(
+                        klassSeminar.getId(), attendance.getTeamOrder() + 1
+                );
+                nextAttendance.setPresented(true);
+                return nextAttendance;
             } else {
-                throw new UnauthorizedOperationException("此节讨论课的老师才能操作");
+                throw new RecordNotFoundException("Attendance不存在");
             }
         } else {
-            throw new RecordNotFoundException("该班级讨论课不存在");
+            throw new UnauthorizedOperationException("此节讨论课的老师才能操作");
         }
     }
 }

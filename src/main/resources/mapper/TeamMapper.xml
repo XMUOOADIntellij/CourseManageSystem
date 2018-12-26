@@ -7,6 +7,7 @@
         <result column="team_name" property="teamName" jdbcType="VARCHAR" />
         <result column="status" property="status" jdbcType="BIT" />
         <result column="team_serial" property="teamSerial" jdbcType="BIT" />
+        <result column="klass_serial" property="klassSerial" jdbcType="BIT" />
 
         <association property="klass" select="com.group12.course.mapper.KlassMapper.selectKlassById"
                    column="klass_id" javaType="com.group12.course.entity.Klass"/>
@@ -20,10 +21,16 @@
         <id column="student_id" property="id" jdbcType="BIGINT" />
     </resultMap>
 
+  <resultMap id="teamAndKlassResultMap" type="com.group12.course.entity.Team" >
+    <id column="team_id" property="id" jdbcType="BIGINT" />
+    <association property="klass" select="com.group12.course.mapper.KlassMapper.selectKlassById"
+                 column="klass_id" javaType="com.group12.course.entity.Klass"/>
+  </resultMap>
+
     <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
     <sql id="Base_Column_List" >
-        id, course_id,klass_id, leader_id, team_name, team_serial,status
+        id, course_id,klass_id, leader_id, team_name, team_serial,klass_serial,status
     </sql>
 
   <select id="selectTeamById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -40,7 +47,7 @@
     where leader_id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="selectTeamByKlassId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectTeamByKlassId" resultMap="teamAndKlassResultMap" parameterType="java.lang.Long" >
     select
     klass_id,team_id
     from klass_team
@@ -109,6 +116,9 @@
       <if test="record.teamSerial != null" >
         team_serial,
       </if>
+      <if test="record.klassSerial != null" >
+        klass_serial,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="courseId != null" >
@@ -128,6 +138,9 @@
       </if>
       <if test="record.teamSerial != null" >
         #{record.teamSerial},
+      </if>
+      <if test="record.klassSerial != null" >
+        #{record.klassSerial},
       </if>
     </trim>
   </insert>
@@ -175,12 +188,6 @@
   <update id="updateTeam" parameterType="com.group12.course.entity.Team" >
     update team
     <set >
-      <if test="klassId != null" >
-        klass_id = #{klassId},
-      </if>
-      <if test="teamName != null" >
-        team_name = #{teamName},
-      </if>
       <if test="status != null" >
         status = #{status},
       </if>

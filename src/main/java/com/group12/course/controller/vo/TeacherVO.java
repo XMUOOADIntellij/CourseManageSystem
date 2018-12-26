@@ -1,5 +1,11 @@
 package com.group12.course.controller.vo;
 
+/**
+ * teacher 的 vo 对象
+ *
+ * @author Xu Gang
+ * @date 2018年12月26日
+ */
 public class TeacherVO {
     private Long id;
 
@@ -17,6 +23,16 @@ public class TeacherVO {
         this.account = account;
         this.email = email;
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "TeacherVO{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public Long getId() {

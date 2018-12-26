@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * 与分数相关 service
+ *
  * @author Y Jiang
  * @date 2018/12/22
  */
@@ -32,39 +33,52 @@ public class ScoreService {
     KlassSeminarDao klassSeminarDao;
     @Autowired
     AttendanceDao attendanceDao;
+    @Autowired
+    KlassDao klassDao;
 
+    /**
+     * 为某次的展示打分
+     *
+     * @param teacher      老师
+     * @param record       记录
+     * @param attendanceId 展示报名记录id
+     * @return 1成功 0失败
+     */
     public Integer modifyScoreByAttendance(Teacher teacher, SeminarScore record, Long attendanceId) {
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
-
-        SeminarScore seminarScore;
         if (attendance != null) {
-            seminarScore = scoreDao.selectSeminarScoreByKlassSeminarIdAndTeamId(
-                    attendance.getKlassSeminar().getId(), attendance.getTeam().getId());
-        } else {
-            throw new RecordNotFoundException("找不到班级讨论课");
-        }
-        if (teacher.getId().equals(seminarScore.getKlassSeminar().
-                getSeminar().getCourse().getTeacher().getId())) {
+            //检验老师的修改权限
+            if (attendance.getKlassSeminar().getKlass().getCourse()
+                    .getTeacher().getId().equals(teacher.getId())) {
+                record.setKlassSeminar(attendance.getKlassSeminar());
+                record.setTeam(attendance.getTeam());
 
-            record.setKlassSeminar(attendance.getKlassSeminar());
-            record.setTeam(attendance.getTeam());
-            return scoreDao.updateSeminarScore(seminarScore);
+                //进行时只更改，不刷新
+                if (attendance.getKlassSeminar().getSeminarStatus() == 1) {
+                    return scoreDao.updateSeminarScoreWhenAttendance(record);
+                } else {
+                    //结束后修改，刷新
+                    return scoreDao.updateSeminarScoreAfterKlass(record);
+                }
 
+            } else {
+                throw new UnauthorizedOperationException("只有当前课的老师可更改分数");
+            }
         } else {
-            throw new UnauthorizedOperationException("只有当前课的老师可更改分数");
+            throw new RecordNotFoundException("没有找到展示课报名记录");
         }
     }
 
-    public Integer modiftScoreBySeminar(Teacher teacher, SeminarScore seminarScore, Long seminarId) {
+    public Integer modiftScoreBySeminar(Teacher teacher, SeminarScore seminarScore, Long seminarId, Long classId) {
         Team team = teamDao.getTeamById(seminarScore.getTeam().getId());
         KlassSeminar klassSeminar;
         if (team != null) {
-            klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, team.getKlass().getId());
+            klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
             if (klassSeminar != null) {
-                if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
+                if (teacher.getId().equals(klassSeminar.getKlass().getCourse().getTeacher().getId())) {
                     seminarScore.setTeam(team);
                     seminarScore.setKlassSeminar(klassSeminar);
-                    return scoreDao.updateSeminarScore(seminarScore);
+                    return scoreDao.updateSeminarScoreAfterKlass(seminarScore);
                 } else {
                     throw new UnauthorizedOperationException("只有当前课的老师可更改分数");
                 }
@@ -78,6 +92,7 @@ public class ScoreService {
 
     /**
      * 老师获得学生课程下的每轮成绩
+     *
      * @param teacher  老师对象
      * @param courseId 课程Id
      */
@@ -87,14 +102,53 @@ public class ScoreService {
         List<Long> roundIdList = new ArrayList<>();
         if (course != null) {
             if (course.getTeacher().getId().equals(teacher.getId())) {
-                for (Round item : roundDao.getRoundByCourseId(course.getId())) {
-                    roundIdList.add(item.getId());
+                //查看有没有被共享讨论课
+                Course mainSeminarCourse = course.getSeminarMainCourse();
+                //如果没有被共享讨论课，轮是自己的
+                if (mainSeminarCourse == null) {
+                    for (Round item : roundDao.getRoundByCourseId(course.getId())) {
+                        roundIdList.add(item.getId());
+                    }
+                }
+                //如果共享了讨论课，轮是主课程的
+                else {
+                    for (Round item : roundDao.getRoundByCourseId(mainSeminarCourse.getId())) {
+                        roundIdList.add(item.getId());
+                    }
                 }
                 return scoreDao.listRoundScoreByRoundIdList(roundIdList);
             } else {
                 throw new UnauthorizedOperationException("只有当前课的老师可查看该课程所有成绩");
             }
         } else {
+            throw new RecordNotFoundException("找不到该课程记录");
+        }
+    }
+
+    public List<RoundScore> getCourseRoundScoreByStudent(Student student, Long courseId) {
+        Course course = courseDao.getCourse(courseId);
+        if(course!=null) {
+            Course teamMainCourse = course.getTeamMainCourse();
+            Course mainSeminarCourse = course.getSeminarMainCourse();
+            List<Long> roundIds = new ArrayList<>();
+            Team team;
+            if(teamMainCourse!=null){
+                team = teamDao.getTeamByStudentIdAndCourseId(student.getId(),teamMainCourse.getId());
+            }else{
+                team = teamDao.getTeamByStudentIdAndCourseId(student.getId(),courseId);
+            }
+            if (mainSeminarCourse == null) {
+                for (Round item : roundDao.getRoundByCourseId(course.getId())) {
+                    roundIds.add(item.getId());
+                }
+            }
+            else {
+                for (Round item : roundDao.getRoundByCourseId(mainSeminarCourse.getId())) {
+                    roundIds.add(item.getId());
+                }
+            }
+            return scoreDao.listRoundScoreByRoundIdListAndTeamId(roundIds,team.getId());
+        }else{
             throw new RecordNotFoundException("找不到该课程记录");
         }
     }
@@ -147,7 +201,7 @@ public class ScoreService {
                     attendance.getKlassSeminar().getId(), attendance.getTeam().getId()
             );
         } else {
-            throw new RecordNotFoundException("Attendance Not Found");
+            throw new RecordNotFoundException("找不到展示报名");
         }
 
     }

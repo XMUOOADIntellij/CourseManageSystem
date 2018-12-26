@@ -59,18 +59,29 @@ public class RequestController {
     }
 
     @PutMapping(value = "/teamvalid/{teamvalidId}", produces = "application/json; charset=utf-8")
-    public TeamValidApplication changeTeamValidStatus(@PathVariable Long teamvalidId, TeamValidApplicationVO teamValidApplicationVO, HttpServletRequest request, HttpServletResponse response)throws IOException {
+    public void changeTeamValidStatus(@PathVariable Long teamvalidId, TeamValidApplicationVO teamValidApplicationVO, HttpServletRequest request, HttpServletResponse response)throws IOException {
         String token = request.getHeader("Authorization");
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
+        int status = 0;
         if (jwtTeacher!=null){
             TeamValidApplication teamValidApplication = new TeamValidApplication(teamValidApplicationVO,jwtTeacher);
             teamValidApplication.setId(teamvalidId);
-            TeamValidApplication result = teamValidApplicationService.getTeamValidApplicationMapperById(teamValidApplication);
-            return result;
+            String result = teamValidApplicationVO.getHandletype();
+            switch (result){
+                case "accept":teamValidApplication.setStatus(1);break;
+                case "reject":teamValidApplication.setStatus(0);break;
+                default:response.setStatus(400);break;
+            }
+            status = teamValidApplicationService.changeApplicationStatus(teamValidApplication);
         }
         else {
             response.setStatus(403);
-            return new TeamValidApplication();
+        }
+        if (status==1){
+            response.setStatus(204);
+        }
+        else {
+            response.setStatus(404);
         }
     }
 }

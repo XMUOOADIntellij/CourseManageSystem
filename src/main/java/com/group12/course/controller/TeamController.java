@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
 import com.group12.course.entity.Team;
+import com.group12.course.entity.application.TeamValidApplication;
 import com.group12.course.service.TeamService;
+import com.group12.course.service.TeamValidApplicationService;
 import com.group12.course.tools.Jwt;
 import com.group12.course.controller.vo.TeamVO;
 import com.group12.course.controller.vo.TeamValidApplicationVO;
@@ -27,6 +29,9 @@ public class TeamController {
 
     @Autowired
     TeamService teamService;
+
+    @Autowired
+    TeamValidApplicationService teamValidApplicationService;
 
     /**
      * 添加某个队伍
@@ -172,10 +177,23 @@ public class TeamController {
     }
 
     @PostMapping(value = "/{teamId}/teamvalidrequest",produces = "application/json; charset=utf-8")
-    public void sendRequest(@RequestBody TeamValidApplicationVO teamValidApplicationVO, @PathVariable Long teamId, HttpServletResponse response)throws IOException {
-        //TeamValidApplication teamValidApplication = new TeamValidApplication(teamValidApplicationVO);
-
-        // TODO 前端不能回传老师的id，所以需要根据课程去找老师的id
+    public void sendRequest(@RequestBody TeamValidApplicationVO teamValidApplicationVO, @PathVariable Long teamId,HttpServletRequest request, HttpServletResponse response)throws IOException {
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        teamService.authCheck(jwtStudent,teamId);
+        Team team = new Team();
+        team.setId(teamId);
+        TeamValidApplication teamValidApplication = new TeamValidApplication();
+        teamValidApplication.setTeam(team);
+        teamValidApplication.setStatus(2);
+        teamValidApplication.setReason(teamValidApplicationVO.getReason());
+        int status = teamValidApplicationService.addApplication(teamValidApplication,teamValidApplicationVO.getCourseId());
+        if (status == 0){
+            response.setStatus(400);
+        }
+        else {
+            response.setStatus(200);
+        }
     }
 
     @PutMapping(value = "/{teamId}/approve",produces = "application/json; charset=utf-8")

@@ -74,4 +74,10 @@
         </trim>
     </insert>
 
+    <select id="selectKlassStudentByCourseIdAndStudentId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from klass_student
+        where course_id = #{courseId,jdbcType=BIGINT} and student_id = #{studentId,jdbcType=BIGINT}
+    </select>
 </mapper>

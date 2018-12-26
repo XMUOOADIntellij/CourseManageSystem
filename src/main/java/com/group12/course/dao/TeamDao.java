@@ -31,8 +31,8 @@ public class TeamDao {
      * @return
      */
     public Integer getKlassLastTeamSerial(Long klassId){
-        List<Team> teams = teamMapper.selectTeamByKlassId(klassId);
-        if (teams==null||teams.isEmpty()){
+        List<Team> teams = listTeamByKlassId(klassId);
+        if (teams.isEmpty()){
             return 1;
         }
         else {
@@ -161,7 +161,12 @@ public class TeamDao {
      * @param id 课程id
      * @return 返回一个包含所有队员的队伍*/
     public List<Team> getTeamByCourseId(Long id){
-        return teamMapper.selectTeamByCourseId(id);
+        List<Team> teams = teamMapper.selectTeamByCourseId(id);
+        List<Team> returnTeams = new ArrayList<>(0);
+        for (Team team:teams) {
+            returnTeams.add(getMembers(team));
+        }
+        return returnTeams;
     }
 
     /**
@@ -215,7 +220,16 @@ public class TeamDao {
      * @return 查询到的队伍对象
      * */
     public List<Team> listTeamByKlassId(Long klassId){
-        return teamMapper.selectTeamByKlassId(klassId);
+        List<Team> tempTeams = teamMapper.selectTeamByKlassId(klassId);
+        if (tempTeams==null){
+            return new ArrayList<>();
+        }
+        List<Team> teams = new ArrayList<>(tempTeams.size());
+        for (Team tempTeam:tempTeams){
+            tempTeam=teamMapper.selectTeamById(tempTeam.getId());
+            teams.add(tempTeam);
+        }
+        return teams;
     }
 
     /**
@@ -253,11 +267,26 @@ public class TeamDao {
      * @param teamId 队伍的id
      * @return 该 id 所在的队伍的id
      * */
+    @Transactional(rollbackFor = Exception.class)
     public int deleteTeamById(Long teamId){
+        Team team = teamMapper.selectTeamById(teamId);
         int deleteTeamCount=teamMapper.deleteTeamByTeamId(teamId);
         if (deleteTeamCount==1){
             teamMapper.deleteTeamFromKlass(teamId);
-            return teamMapper.deleteTeamMembersByTeamId(teamId);
+            deleteTeamCount = teamMapper.deleteTeamMembersByTeamId(teamId);
+            List<Team> teamList = teamMapper.selectTeamByKlassId(team.getKlass().getId());
+            int teamSerial = team.getTeamSerial();
+            for (Team teams:teamList) {
+                System.out.println(teams);
+                teams = teamMapper.selectTeamById(teams.getId());
+                System.out.println(teams);
+                int tempSerial = teams.getTeamSerial();
+                if (tempSerial>teamSerial){
+                    teams.setTeamSerial(teams.getTeamSerial()-1);
+                    changeTeam(teams);
+                }
+            }
+            return deleteTeamCount;
         }
         return -1;
     }

@@ -41,7 +41,7 @@ public class TeamValidApplication extends Application {
         this.team.setId(teamValidApplicationVO.getTeamId());
         this.teacher=teacher;
         this.reason = teamValidApplicationVO.getReason();
-        this.setStatus(0);
+        this.setStatus(2);
     }
 
     @Override

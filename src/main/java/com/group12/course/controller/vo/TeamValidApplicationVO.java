@@ -1,5 +1,11 @@
 package com.group12.course.controller.vo;
 
+/**
+ * 组队审核申请 TeamValidApplication vo 对象
+ *
+ * @author Xu Gang
+ * @date 2018年12月26日
+ */
 public class TeamValidApplicationVO {
 
     private Long id;
@@ -14,6 +20,8 @@ public class TeamValidApplicationVO {
 
     private String reason;
 
+    private String handletype;
+
     public TeamValidApplicationVO() {
     }
 
@@ -24,6 +32,19 @@ public class TeamValidApplicationVO {
         this.teamId = teamId;
         this.leaderId = leaderId;
         this.reason = reason;
+    }
+
+    @Override
+    public String toString() {
+        return "TeamValidApplicationVO{" +
+                "id=" + id +
+                ", courseId=" + courseId +
+                ", classId=" + classId +
+                ", teamId=" + teamId +
+                ", leaderId=" + leaderId +
+                ", reason='" + reason + '\'' +
+                ", handletype='" + handletype + '\'' +
+                '}';
     }
 
     public Long getId() {
@@ -72,5 +93,13 @@ public class TeamValidApplicationVO {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getHandletype() {
+        return handletype;
+    }
+
+    public void setHandletype(String handletype) {
+        this.handletype = handletype;
     }
 }

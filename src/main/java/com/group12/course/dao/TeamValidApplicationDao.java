@@ -8,6 +8,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * 组队审核申请 TeamValidApplication dao 层
+ *
+ * @author Xu Gang
+ * @date 2018年12月26日
+ */
 @Component
 public class TeamValidApplicationDao {
 
@@ -24,5 +30,9 @@ public class TeamValidApplicationDao {
 
     public int changeApplicationStatus(TeamValidApplication teamValidApplication){
         return teamValidApplicationMapper.updateTeamValidApplicationStatus(teamValidApplication);
+    }
+
+    public int addApplication(TeamValidApplication teamValidApplication){
+        return teamValidApplicationMapper.addTeamValidApplication(teamValidApplication);
     }
 }
