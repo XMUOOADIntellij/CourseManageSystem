@@ -31,7 +31,7 @@ function getCourseList() {
               "</span>";
 
           strVar +=
-            '<div class="card-options"><a class="card-options-collapse" data-toggle="card-collapse" href="#"><i class="fe fe-chevron-up mr-1"></i></a></div></div><div class="card-body p-0"><div class="list-group"><a href="./course-info.html" class="list-group-item list-group-item-action" onclick=""><span class="float-right"><i class="icon fe fe-chevron-right"></i></span> <span class="float-left"><i class="icon fe fe-book mr-3"></i> 课程信息</span></a> <a href="./course-class.html" class="list-group-item list-group-item-action"><span class="float-right"><i class="icon fe fe-chevron-right"></i></span> <span class="float-left"><i class="icon fe fe-briefcase mr-3"></i> 班级信息</span></a> <a href="./course-round.html" class="list-group-item list-group-item-action"><span class="float-right"><i class="icon fe fe-chevron-right"></i></span> <span class="float-left"><i class="icon fe fe-book-open mr-3"></i> 讨论课设置</span></a> <a href="./course-group.html" class="list-group-item list-group-item-action"><span class="float-right"><i class="icon fe fe-chevron-right"></i></span> <span class="float-left"><i class="icon fe fe-slack mr-3"></i> 学生组队</span></a> <a href="./course-grade.html" class="list-group-item list-group-item-action"><span class="float-right"><i class="icon fe fe-chevron-right"></i></span> <span class="float-left"><i class="icon fe fe-clipboard mr-3"></i> 学生成绩</span></a> <a href="./course-share.html" class="list-group-item list-group-item-action"><span class="float-right"><i class="icon fe fe-chevron-right"></i></span> <span class="float-left"><i class="icon fe fe-send mr-3"></i> 共享设置</span></a></div></div></div></div>';
+            '<div class="card-options"><a class="card-options-collapse" data-toggle="card-collapse" href="#"><i class="fe fe-chevron-up mr-1"></i></a></div></div><div class="card-body p-0"><div class="list-group"><a href="./course-info.html" class="list-group-item list-group-item-action" onclick=""><span class="float-right"><i class="icon fe fe-chevron-right"></i></span> <span class="float-left"><i class="icon fe fe-book mr-3"></i> 课程信息</span></a> <a href="./course-class.html" class="list-group-item list-group-item-action"><span class="float-right"><i class="icon fe fe-chevron-right"></i></span> <span class="float-left"><i class="icon fe fe-briefcase mr-3"></i> 班级信息</span></a> <a href="./seminar-round.html" class="list-group-item list-group-item-action"><span class="float-right"><i class="icon fe fe-chevron-right"></i></span> <span class="float-left"><i class="icon fe fe-book-open mr-3"></i> 讨论课设置</span></a> <a href="./course-group.html" class="list-group-item list-group-item-action"><span class="float-right"><i class="icon fe fe-chevron-right"></i></span> <span class="float-left"><i class="icon fe fe-slack mr-3"></i> 学生组队</span></a> <a href="./course-grade.html" class="list-group-item list-group-item-action"><span class="float-right"><i class="icon fe fe-chevron-right"></i></span> <span class="float-left"><i class="icon fe fe-clipboard mr-3"></i> 学生成绩</span></a> <a href="./course-share.html" class="list-group-item list-group-item-action"><span class="float-right"><i class="icon fe fe-chevron-right"></i></span> <span class="float-left"><i class="icon fe fe-send mr-3"></i> 共享设置</span></a></div></div></div></div>';
         }
         content.innerHTML = strVar;
       }
@@ -118,15 +118,10 @@ function getSeminarList(roundid) {
 */
 function initCourseGrade() {
 
-    let aRoundScore = getCourseScoreByRound(aRound[i].id); //总成绩
-    let aSeminar = getSeminarList(aRound[i].id); //总成绩
+    let aRoundScore = getRoundScoreByCourse(); //总成绩
     for (let j = 0; j < aRoundScore.length; j++) {
-      for (let k = 0; k < aSeminar.length; k++) {
-        let aSeminarScore = getSeminarScoreByTeam(
-1,        1
-        ); //总成绩
-      }
 
+        let aSeminarScore = getSeminarScoreByRound(); //总成绩
   }
 }
 function initCourseShare() {
@@ -146,6 +141,7 @@ function initTask() {
   getTeamValidTask();
 }
 function initProgress() {
+    getCurrentSeminar();
   getAttendanceByClass();
   getCurrentAttendance();
   getQuestionList();

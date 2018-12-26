@@ -21,7 +21,7 @@
     <link href="../favicon.ico" rel="icon" type="image/x-icon" />
     <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Generated: 2018-04-16 09:29:05 +0200 -->
-    <title>展示报告</title>
+    <title>讨论课报告</title>
     <!-- Font -->
     <link href="../../static/css/fontawesome.min.css" rel="stylesheet" />
 
@@ -60,26 +60,21 @@
     <script src="../../static/js/request.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body onload="getAttendanceByClass()">
+  <body onload="initStudent()">
     <div class="page">
       <div class="page-main">
-               <div class="header py-4">
+        <div class="header py-4">
           <div class="container">
             <div class="d-flex">
-              <a class="header-brand ml-1" href="./home.html">
+              <a class="header-brand ml-1" href=".">
                 <img
                   alt="logo"
                   class="header-brand-img"
                   src="../../static/images/brand.png"
-                />
+                />Cms
               </a>
               <div class="d-flex order-lg-2 ml-auto">
-                <div class="dropdown d-none d-md-flex">
-                  <a class="nav-link icon" href="todo-list.html">
-                    <i class="fe fe-bell"></i> <span class="nav-unread"></span>
-                  </a>
-                </div>
-                <div class="dropdown">
+<div class="dropdown">
                   <a
                     class="nav-link pr-0 leading-none"
                     data-toggle="dropdown"
@@ -90,7 +85,7 @@
                       style="background-image: url(../../static/images/male.png)"
                     ></span>
                     <span class="ml-2 d-none d-lg-block">
-                      <span class="text-default">Ming Qiu</span>
+                      <span class="text-default">Jane Pearson</span>
                       <small class="text-muted d-block mt-1"
                         >Administrator</small
                       >
@@ -99,22 +94,9 @@
                   <div
                     class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
                   >
-                    <a
-                      class="dropdown-item"
-                      href="../common/account-setting.html"
-                    >
-                      <i class="dropdown-icon fe fe-settings"></i> 个人设置
-                    </a>
-                    <a class="dropdown-item" href="./todo-list.html">
 
-                      <i class="dropdown-icon fe fe-mail"></i> 待办事项
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../common/help.html">
-                      <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
-                    </a>
                     <a class="dropdown-item" href="../common/login.html">
-                      <i class="dropdown-icon fe fe-log-out"></i> 切换账户
+                      <i class="dropdown-icon fe fe-log-out"></i> 退出登录
                     </a>
                   </div>
                 </div>
@@ -130,27 +112,20 @@
             </div>
           </div>
         </div>
-
         <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
           <div class="container">
             <div class="row align-items-center">
 
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
-                  <li class="nav-item pl-5">
-                    <a class="nav-link" href="./home.html"
-                      ><i class="fe fe-home"></i> 我的主页</a
-                    >
+                  <li class="nav-item">
+                    <a href="./teacher-home.html" class="nav-link "
+                      ><i class="fe fe-home"></i> 教师信息管理
+                    </a>
                   </li>
-                  <li class="nav-item pl-5">
-                    <a class="nav-link" href="./course-home.html"
-                      ><i class="fe fe-book"></i> 我的课程</a
-                    >
-                  </li>
-
-                  <li class="nav-item pl-5">
-                    <a class="nav-link" href="progress.html"
-                      ><i class="fe fe-play-circle"></i> 正在进行中</a
+                  <li class="nav-item">
+                    <a href="./student-home.html" class="nav-link active"
+                      ><i class="fe fe-image"></i> 学生信息管理</a
                     >
                   </li>
                 </ul>
@@ -158,89 +133,107 @@
             </div>
           </div>
         </div>
-        <div class="my-3 my-md-5 mt-5">
+        <div class="my-3 my-md-5">
           <div class="container">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="./course-home.html">我的课程</a>
-                </li>
-                <li class="breadcrumb-item">
-                  <a href="./course-round.html">讨论课设置</a>
-                </li></li>
-                <li class="breadcrumb-item">
-                  <a href="seminar-detail.html">讨论课详情</a>
-                </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  讨论课报告
+                  学生信息管理
                 </li>
               </ol>
             </nav>
-            <div class="row">
+            <div class="row row-cards">
               <div class="col-lg-12">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">讨论课报告</h3>
+                    <h3 class="card-title">学生信息管理</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="输入学工号/姓名"
+                        />
+                        <span class="input-group-append">
+                          <button class="btn btn-primary" type="button" onclick="searchStudent()">
+                            搜索
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">学生列表</h3>
                     <div class="card-options">
                       <a
-                        class="btn btn-lg btn-outline-primary mr-3"
-                        onclick="getPptByClass()"
-                        ><i class="fe fe-download mr-3"></i>下载全部课件</a
+                        href="./student-home-create.html"
+                        class="btn btn-outline-primary  py-1 px-2"
+                        role="button"
                       >
-                      <a
-                        class="btn btn-lg btn-outline-primary"
-                        onclick="getReportByClass()"
-                        ><i class="fe fe-download mr-3"></i>下载全部报告</a
+                        <i class="fe fe-plus-circle mr-3"></i>新建学生账户</a
                       >
                     </div>
                   </div>
+
                   <div class="table-responsive">
-                    <table class="table card-table table-vcenter text-nowrap">
+                    <table class="table card-table table-striped table-vcenter">
                       <thead>
                         <tr>
-                          <th class="w-1">No.</th>
-                          <th>课件</th>
+                          <th colspan="2">姓名</th>
+                          <th>学号</th>
+                          <th>电子邮箱</th>
                           <th></th>
-                          <th>报告</th>
-                          <th>状态</th>
-                          <th>打分</th>
                           <th></th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td><span class="text-muted">1-1</span></td>
-                          <td><a href="." class="text-inherit">1.pdf</a></td>
+                          <td class="w-1"><span class="avatar">N</span></td>
+                          <td>牛晓彤</td>
+                          <td>24320162202xxx</td>
+                          <td class="text-nowrap">24320162202xxx@xmu.edu.cn</td>
                           <td>
-                            <a
-                              class="icon"
-                              href="javascript:void(0)"
-                              onclick="getPptByAttendance()"
-                            >
-                              <i class="fe fe-download"></i>
-                            </a>
-                          </td>
-                          <td><a href="." class="text-inherit">1.pdf</a></td>
-                          <td class="text-left">
-                            <span class="badge badge-success">已打分</span>
+                            <a href="./student-home-update.html" class="icon"
+                              ><i class="fe fe-edit"></i
+                            ></a>
                           </td>
                           <td>
-                            <span class="status-icon bg-success"></span> 5.0
+                            <a href="#" class="icon"
+                              ><i class="fe fe-rotate-ccw"></i
+                            ></a>
                           </td>
                           <td>
-                            <a class="icon" href="javascript:void(0)">
-                              <i class="fe fe-edit"></i>
-                            </a>
+                            <a href="#" class="icon"
+                              ><i class="fe fe-trash"></i
+                            ></a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="w-1"><span class="avatar">N</span></td>
+                          <td>牛晓彤</td>
+                          <td>24320162202xxx</td>
+                          <td class="text-nowrap">24320162202xxx@xmu.edu.cn</td>
+                          <td>
+                            <a href="./student-home-update.html" class="icon"
+                              ><i class="fe fe-edit"></i
+                            ></a>
                           </td>
                           <td>
-                            <a
-                              class="icon"
-                              href="javascript:void(0)"
-                              onclick="getReportByAttendance()"
-                            >
-                              <i class="fe fe-download"></i>
-                            </a>
+                            <a href="#" class="icon" onclick="resetStudent()"
+                              ><i class="fe fe-rotate-ccw"></i
+                            ></a>
+                          </td>
+                          <td>
+                            <a href="#" class="icon" onclick="deleteStudent()"
+                              ><i class="fe fe-trash"></i
+                            ></a>
                           </td>
                         </tr>
                       </tbody>
@@ -253,18 +246,5 @@
         </div>
       </div>
     </div>
-
-    <footer class="footer">
-      <div class="container">
-        <div class="row align-items-center flex-row-reverse">
-          <div class="col-12 col-lg-auto mt-0 mt-lg-0 text-center">
-            Copyright © 2018
-            <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
-              >Cms</a
-            >.
-          </div>
-        </div>
-      </div>
-    </footer>
   </body>
 </html>

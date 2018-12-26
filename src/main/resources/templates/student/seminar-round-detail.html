@@ -66,7 +66,7 @@
         <div class="header py-4">
           <div class="container">
             <div class="d-flex">
-              <a class="header-brand ml-1" href="">
+              <a class="header-brand ml-1" href="./home.html">
                 <img
                   alt="logo"
                   class="header-brand-img"
@@ -74,53 +74,10 @@
                 />Cms
               </a>
               <div class="d-flex order-lg-2 ml-auto">
-                <div class="dropdown d-none d-md-flex">
-                  <a class="nav-link icon" data-toggle="dropdown">
+   <div class="dropdown d-none d-md-flex">
+                  <a class="nav-link icon" href="todo-list.html">
                     <i class="fe fe-bell"></i> <span class="nav-unread"></span>
                   </a>
-                  <div
-                    class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
-                  >
-                    <a class="dropdown-item d-flex" href="#">
-                      <span
-                        class="avatar mr-3 align-self-center"
-                        style="background-image: url(../../static/images/male.png)"
-                      ></span>
-                      <div>
-                        <strong>Nathan</strong> pushed new commit: Fix page load
-                        performance issue.
-                        <div class="small text-muted">10 minutes ago</div>
-                      </div>
-                    </a>
-                    <a class="dropdown-item d-flex" href="#">
-                      <span
-                        class="avatar mr-3 align-self-center"
-                        style="background-image: url(../../static/images/male.png)"
-                      ></span>
-                      <div>
-                        <strong>Alice</strong> started new task: Tabler UI
-                        design.
-                        <div class="small text-muted">1 hour ago</div>
-                      </div>
-                    </a>
-                    <a class="dropdown-item d-flex" href="#">
-                      <span
-                        class="avatar mr-3 align-self-center"
-                        style="background-image: url(../../static/images/male.png)"
-                      ></span>
-                      <div>
-                        <strong>Rose</strong> deployed new version of NodeJS
-                        REST Api V3
-                        <div class="small text-muted">2 hours ago</div>
-                      </div>
-                    </a>
-
-                    <a
-                      class="dropdown-item text-center text-muted-dark"
-                      href="#"
-                      >Mark all as read</a
-                    >
-                  </div>
                 </div>
                 <div class="dropdown">
                   <a
@@ -142,6 +99,14 @@
                   <div
                     class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
                   >
+                    <a class="dropdown-item" href="account-setting.html">
+                      <i class="dropdown-icon fe fe-settings"></i> 个人设置
+                    </a>
+                    <a class="dropdown-item" href="todo-list.html">
+
+                      <i class="dropdown-icon fe fe-mail"></i> 待办事项
+                    </a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="../common/help.html">
                       <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
                     </a>
@@ -165,29 +130,23 @@
         <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
           <div class="container">
             <div class="row align-items-center">
-              <div class="col-lg-3 ml-auto">
-                <form class="input-icon my-3 my-lg-0">
-                  <input
-                    class="form-control header-search"
-                    placeholder="Search&hellip;"
-                    tabindex="1"
-                    type="search"
-                  />
-                  <div class="input-icon-addon">
-                    <i class="fe fe-search"></i>
-                  </div>
-                </form>
-              </div>
+
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="./round-home.html"
-                      ><i class="fe fe-home"></i> 讨论课设置</a
+                    <a class="nav-link" href="./home.html"
+                      ><i class="fe fe-home"></i> 我的主页</a
                     >
                   </li>
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="./export-home.html"
-                      ><i class="fe fe-book-open"></i> 查看成绩</a
+                    <a class="nav-link" href="./course-home.html"
+                      ><i class="fe fe-book"></i> 我的课程</a
+                    >
+                  </li>
+
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="progress.html"
+                      ><i class="fe fe-play-circle"></i> 正在进行中</a
                     >
                   </li>
                 </ul>
@@ -200,7 +159,13 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="./round-home.html">讨论课设置</a>
+                  <a href="./course-home.html">我的课程</a>
+                </li>
+                <li class="breadcrumb-item">
+                  <a href="seminar-round.html">讨论课设置</a>
+                </li></li>
+                <li class="breadcrumb-item">
+                  <a href="seminar-round.html">讨论课设置</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
                   讨论课详情
@@ -208,7 +173,90 @@
               </ol>
             </nav>
             <div class="row row-cards">
-              <div class="col-lg-6">
+              <div class="col-md-6 col-lg-4">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <div class="h4">正在进行</div>
+                    <div class="display-4 font-weight-bold my-5">62</div>
+                    <div class="progress progress-sm my-1">
+                      <div
+                        class="progress-bar bg-green"
+                        style="width: 62%"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-right">
+                    <a
+                      class="btn btn-primary btn-block my-0"
+                      href="progress.html"
+                      hidden
+                      >开始课堂</a
+                    >
+                    <a class="btn btn-primary btn-block my-0" href="progress.html"
+                      >进入课堂</a
+                    >
+                  </div>
+                </div>
+                <div class="card p-3">
+                  <div class="d-flex align-items-center">
+                    <span class="stamp stamp-md bg-blue mr-3">
+                      <i class="fe fe-file-text"></i>
+                    </span>
+                    <div>
+                      <h4 class="m-0"><a href="./">报名 </a></h4>
+                      <small class="text-muted">12 个新的提交</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="card p-3">
+                  <div class="d-flex align-items-center">
+                    <span class="stamp stamp-md bg-blue mr-3">
+                      <i class="fe fe-file-text"></i>
+                    </span>
+                    <div>
+                      <h4 class="m-0"><a href="./">PPT提交 </a></h4>
+                      <small class="text-muted">12 个新的提交</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="card p-3">
+                  <div class="d-flex align-items-center">
+                    <span class="stamp stamp-md bg-blue mr-3">
+                      <i class="fe fe-file-text"></i>
+                    </span>
+                    <div>
+                      <h4 class="m-0"><a href="./">报告提交 </a></h4>
+                      <small class="text-muted">12 个新的提交</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="card p-3">
+                  <div class="d-flex align-items-center">
+                    <span class="stamp stamp-md bg-blue mr-3">
+                      <i class="fe fe-file-text"></i>
+                    </span>
+                    <div>
+                      <h4 class="m-0">
+                        <a href="seminar-round-detail-signup.html">报名情况 </a>
+                      </h4>
+                      <small class="text-muted">12 个新的提交</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card p-3">
+                  <div class="d-flex align-items-center">
+                    <span class="stamp stamp-md bg-blue mr-3">
+                      <i class="fe fe-file-text"></i>
+                    </span>
+                    <div>
+                      <h4 class="m-0"><a href="./seminar-round-detail-score.html">查看成绩 </a></h4>
+                      <small class="text-muted">12 个新的提交</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-8">
                 <div class="row">
                   <div class="col-12">
                     <div class="card">
@@ -880,116 +928,6 @@ Oh! Come and see the violence inherent in the system! Help, help, I'm being repr
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Invoices</h3>
-                    <div class="card-options">
-                      <a class="btn btn-lg btn-outline-primary py-1 px-2"
-                        ><i class="fe fe-download mr-3"></i>全部下载</a
-                      >
-                    </div>
-                  </div>
-                  <div class="table-responsive">
-                    <table class="table card-table table-vcenter text-nowrap">
-                      <thead>
-                        <tr>
-                          <th class="">次序</th>
-                          <th class="">状态</th>
-                          <th>小组</th>
-                          <th>PPT</th>
-                          <th></th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td><span class="text-muted">1</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-gray">已报名</button>
-                          </td>
-                          <td class="text-left">
-                            <a href="." class="text-inherit">1-1</a>
-                          </td>
-                          <td>
-                            <span class="status-icon bg-success"></span>
-                            <a href="." class="text-inherit">1.pdf</a>
-                          </td>
-                          <td></td>
-                          <td>
-                            <a class="icon" href="javascript:void(0)">
-                              <i class="fe fe-download"></i>
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><span class="text-muted">1</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-gray">已报名</button>
-                          </td>
-                          <td class="text-left">
-                            <a href="." class="text-inherit">1-1</a>
-                          </td>
-                          <td>
-                            <span class="status-icon bg-success"></span>
-                            <a href="." class="text-inherit">1.pdf</a>
-                          </td>
-                          <td></td>
-                          <td>
-                            <a class="icon" href="javascript:void(0)">
-                              <i class="fe fe-download"></i>
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><span class="text-muted">1</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-danger">
-                              取消报名
-                            </button>
-                          </td>
-                          <td class="text-left">
-                            <a href="." class="text-inherit">1-1</a>
-                          </td>
-                          <td>
-                            <span class="status-icon bg-success"></span>
-                            <a href="." class="text-inherit">1.pdf</a>
-                          </td>
-                          <td>
-                            <a class="icon" href="javascript:void(0)">
-                              <i class="fe fe-upload"></i>
-                            </a>
-                          </td>
-                          <td>
-                            <a class="icon" href="javascript:void(0)">
-                              <i class="fe fe-download"></i>
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><span class="text-muted">1</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-success">报名</button>
-                          </td>
-                          <td class="text-left">
-                            <a href="." class="text-inherit">1-1</a>
-                          </td>
-                          <td>
-                            <span class="status-icon bg-success"></span>
-                            <a href="." class="text-inherit">1.pdf</a>
-                          </td>
-                          <td></td>
-                          <td>
-                            <a class="icon" href="javascript:void(0)">
-                              <i class="fe fe-download"></i>
-                            </a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
                   </div>
                 </div>
               </div>
