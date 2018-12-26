@@ -2,13 +2,19 @@ package com.group12.course.service;
 
 import com.group12.course.dao.KlassDao;
 import com.group12.course.dao.TeamDao;
+import com.group12.course.dao.TeamStrategyDao;
 import com.group12.course.entity.Klass;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Team;
+import com.group12.course.entity.strategy.Strategy;
+import com.group12.course.entity.strategy.TeamStrategy;
 import com.group12.course.exception.InformationException;
 import com.group12.course.exception.UnauthorizedOperationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Team service 层对应接口的实现
@@ -23,6 +29,9 @@ public class TeamService {
 
     @Autowired
     KlassDao klassDao;
+
+    @Autowired
+    TeamStrategyDao teamStrategyDao;
 
     /**
      * 添加某个队伍
@@ -99,6 +108,19 @@ public class TeamService {
         if (student==null||!teamDao.checkStudentIsInSpecialTeam(student.getId(),teamId)){
             throw new UnauthorizedOperationException("只有该小组成员才可进行该操作");
         }
+    }
+
+    public Boolean checkTeamValidation(Team team){
+        List<TeamStrategy> strategyList = teamStrategyDao.selectTeamStrategyByCourseId(team.getCourse().getId());
+        if (strategyList==null||strategyList.isEmpty()){
+            return true;
+        }
+        List<Boolean> strategyCheck = new ArrayList<>(strategyList.size());
+        for (TeamStrategy teamStrategy:strategyList) {
+            Strategy currentStrategy =  teamStrategy.getStrategy();
+        }
+
+        return true;
     }
 
     /**

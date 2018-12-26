@@ -2,6 +2,7 @@ package com.group12.course.entity.strategy;
 
 
 import com.group12.course.entity.Course;
+import com.group12.course.entity.Team;
 
 /**
  * 课程互相冲突不可组队策略
@@ -28,4 +29,5 @@ public class ConflictCourseStrategy extends Strategy {
     public void setCourse(Course course) {
         this.course = course;
     }
+
 }

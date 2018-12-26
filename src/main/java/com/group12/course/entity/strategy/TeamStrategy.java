@@ -1,6 +1,7 @@
 package com.group12.course.entity.strategy;
 
 import com.group12.course.entity.Course;
+import com.group12.course.entity.Team;
 
 /**
  * 小组在某课程下的组队策略
@@ -48,4 +49,5 @@ public class TeamStrategy {
     public void setStrategy(Strategy strategy) {
         this.strategy = strategy;
     }
+
 }
