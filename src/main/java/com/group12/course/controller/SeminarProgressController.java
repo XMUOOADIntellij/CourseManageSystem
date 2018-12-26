@@ -20,7 +20,6 @@ import org.springframework.stereotype.Controller;
 /**
  * 讨论课进程 controller
  * 异步 WebSocket
- *
  * @author Y Jiang
  * @date 2018/12/23
  */
@@ -90,15 +89,16 @@ public class SeminarProgressController {
      * @param questionVO 提问体
      * @return
      */
-    @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/question")
+    @MessageMapping("/Socket/course/courseId/seminar/{seminarId}/class/{classId}/question")
     @SendTo("/seminarSocket/question")
     public QuestionVO askQuestion(@DestinationVariable Long seminarId, @DestinationVariable Long classId,
-                                  Message message,QuestionVO questionVO){
+                                  @DestinationVariable Long courseId, Message message,QuestionVO questionVO){
 
         Student student = new Student();
         student.setId(1L);
 
-        return new QuestionVO(questionService.askQuestion(seminarId,classId,new Question(questionVO),student));
+        Question question = questionService.askQuestion(courseId,seminarId,classId,new Question(questionVO),student);
+        return new QuestionVO(question);
     }
 
 
@@ -138,7 +138,7 @@ public class SeminarProgressController {
         Teacher teacher = new Teacher();
         teacher.setId(1L);
 
-        return new AttendanceVO(attendanceService.nextAttendance(seminarId,classId,attendanceId,teacher));
+        return new AttendanceVO(attendanceService.nextAttendance(seminarId,classId,attendanceId));
     }
 
 

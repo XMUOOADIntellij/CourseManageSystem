@@ -89,6 +89,7 @@ public class ScoreController {
         }
         return  seminarScoreVOList;
     }
+
     @GetMapping(value = "/attendance/{attendanceId}/score")
     public SeminarScoreVO getAttendanceScore(@PathVariable Long attendanceId){
         return new SeminarScoreVO(scoreService.getAttendanceScore(attendanceId));

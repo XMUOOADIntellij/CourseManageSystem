@@ -234,20 +234,6 @@ public class SeminarController {
     }
 
 
-    @GetMapping(value="/{seminarId}/class/{classId}/question")
-    public List<QuestionVO> getAllQuestion(@PathVariable Long seminarId, @PathVariable Long classId,
-                                           HttpServletRequest request){
-
-        String token = request.getHeader("Authorization");
-        Teacher teacher = Jwt.unSign(token,Teacher.class);
-
-        List<Question> questionlist = questionService.getAllQuestion(teacher,seminarId,classId);
-        List<QuestionVO> questionVOList = new ArrayList<>();
-        for(Question item:questionlist){
-            questionVOList.add(new QuestionVO(item));
-        }
-        return questionVOList;
-    }
 
 
     @GetMapping(value="/{seminarId}/class/{classId}/attendance/{attendanceId}/question")
