@@ -6,6 +6,7 @@ import com.group12.course.mapper.AdminMapper;
 import com.group12.course.mapper.KlassMapper;
 import com.group12.course.mapper.TeacherMapper;
 import com.group12.course.mapper.TeamMapper;
+import com.group12.course.service.TeamService;
 import com.group12.course.tools.DBUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
@@ -36,6 +37,9 @@ public class TeamDaoTest {
     private TeamDao teamDao;
 
     @Autowired
+    private TeamService teamService;
+
+    @Autowired
     private KlassMapper klassMapper;
 
     @Test
@@ -46,18 +50,21 @@ public class TeamDaoTest {
         leader.setId(14868L);
         testTeam.setLeader(leader);
         Course course = new Course();
-        course.setId(1L);
+        course.setId(16L);
         testTeam.setCourse(course);
         Klass klass = new Klass();
-        klass.setId(1L);
+        klass.setId(21L);
         testTeam.setKlass(klass);
         testTeam.setTeamName("hahaha");
         testTeam.setStatus(0);
-        System.out.println(teamDao.checkTeamValid(testTeam));
-        System.out.println(teamDao.checkMembersInTeam(testTeam));
-        testTeam=teamDao.addTeam(testTeam);
+        List<Team> teamList = teamMapper.selectTeamByKlassId(klass.getId());
+        for (Team temp: teamList) {
+            System.out.println(temp);
+        }
         int i = teamDao.getKlassLastTeamSerial(klass.getId());
         System.out.println(i);
+        testTeam=teamService.createTeam(testTeam);
+
         System.out.println(testTeam);
     }
 
