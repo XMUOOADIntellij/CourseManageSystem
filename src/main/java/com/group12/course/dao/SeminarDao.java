@@ -106,7 +106,7 @@ public class SeminarDao {
         }
         return null;
     }
-    
+
     /**
      * 通过id获得课程讨论课
      *
