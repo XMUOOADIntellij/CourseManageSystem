@@ -21,6 +21,14 @@ public class TeamInfoVO {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "TeamInfoVO{" +
+                "name='" + name + '\'' +
+                ", leader=" + leader +
+                ", members=" + members +
+                '}';
+    }
 
     public Student getLeader() {
         return leader;

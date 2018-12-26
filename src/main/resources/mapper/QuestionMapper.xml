@@ -41,6 +41,7 @@
     from question
     where klass_seminar_id =#{klassSeminarId,jdbcType=BIGINT}
     and attendance_id = #{attendanceId,jdbcType=BIGINT}
+    and is_selected = 1
   </select>
 
   <select id="listQuestionByKlassSeminarIdAndTeamId" resultMap="BaseResultMap" parameterType="java.lang.Long">

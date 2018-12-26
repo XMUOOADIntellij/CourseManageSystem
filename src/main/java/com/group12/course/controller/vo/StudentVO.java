@@ -2,6 +2,12 @@ package com.group12.course.controller.vo;
 
 import com.group12.course.entity.Student;
 
+/**
+ * student vo
+ *
+ * @author Xu Gang
+ * @date 2018年12月26日
+ */
 public class StudentVO {
 
     private Long id;

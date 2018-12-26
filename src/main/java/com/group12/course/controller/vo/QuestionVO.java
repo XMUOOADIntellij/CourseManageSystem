@@ -103,7 +103,7 @@ public class QuestionVO {
 
     public QuestionVO(Question question){
         this.id = question.getId();
-        this.klassSerial = question.getKlassSeminar().getKlass().getKlassSerial();
+        this.klassSerial = question.getTeam().getKlassSerial();
         this.account = question.getStudent().getAccount();
         this.studentName = question.getStudent().getStudentName();
         this.teamId =question.getTeam().getId();

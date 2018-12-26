@@ -6,6 +6,12 @@ import java.util.List;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Team;
 
+/**
+ *  team vo 对象
+ *
+ * @author Xu Gang
+ * @date 2018年12月26日
+ */
 public class TeamVO implements Serializable {
 
     private String name;
@@ -22,6 +28,8 @@ public class TeamVO implements Serializable {
 
     private Integer teamSerial;
 
+    private Integer klassSerial;
+
     public TeamVO() {
     }
 
@@ -31,6 +39,7 @@ public class TeamVO implements Serializable {
         this.members = team.getMembers();
         this.status = team.getStatus();
         this.teamSerial = team.getTeamSerial();
+        this.klassSerial = team.getKlassSerial();
     }
 
     @Override
@@ -43,6 +52,7 @@ public class TeamVO implements Serializable {
                 ", members=" + members +
                 ", status=" + status +
                 ", teamSerial=" + teamSerial +
+                ", klassSerial=" + klassSerial +
                 '}';
     }
 
@@ -86,7 +96,6 @@ public class TeamVO implements Serializable {
         this.members = members;
     }
 
-
     public Integer getStatus() {
         return status;
     }
@@ -101,5 +110,13 @@ public class TeamVO implements Serializable {
 
     public void setTeamSerial(Integer teamSerial) {
         this.teamSerial = teamSerial;
+    }
+
+    public Integer getKlassSerial() {
+        return klassSerial;
+    }
+
+    public void setKlassSerial(Integer klassSerial) {
+        this.klassSerial = klassSerial;
     }
 }

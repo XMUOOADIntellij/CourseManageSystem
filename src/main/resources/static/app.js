@@ -35,12 +35,12 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-function sendName() {
-    stompClient.send("/app/Socket/seminar/4/class/1/start", {}, null);
+function sendName(name) {
+    stompClient.send("/app/Socket/seminar/4/class/1/start", {"jwt":name}, null);
 }
 
 function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    $("#greetings").append("<tr><td>" + message+ message.header("jwt") + "</td></tr>");
 }
 
 $(function () {
@@ -49,6 +49,6 @@ $(function () {
     });
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+    $( "#send" ).click(function() { sendName( this.val()); });
 });
 
