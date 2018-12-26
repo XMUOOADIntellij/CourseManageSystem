@@ -18,12 +18,12 @@ function bindUser() {
                 Cookies.set("name", data.name);
                 if (data.isActive === true) {
                     if (data.role === "student")
-                        window.location.href = "./student/home.html";
-                    else window.location.href = "./teacher/home.html";
+                        window.location.href = "../student/home.html";
+                    else window.location.href = "../teacher/home.html";
                 } else {
                     if (data.role === "student")
-                        window.location.href = "./student/active.html";
-                    else window.location.href = "./teacher/active.html";
+                        window.location.href = "../student/active.html";
+                    else window.location.href = "../teacher/active.html";
                 }
             }
         },
@@ -309,7 +309,7 @@ function updateClass() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./seminar-detail.html";
+            window.location.href = "./seminar-round-detail.html";
         },
         error: function(data) {
             console.log(data);
@@ -499,7 +499,7 @@ function updateSeminarByClass() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./seminar-detail.html";
+            window.location.href = "./seminar-round-detail.html";
         },
         statusCode: {
             400: function() {
@@ -516,7 +516,7 @@ function getSeminarScoreByClass() {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "http://xug98.cn:8080/score/seminar/" +
             Cookies.get("seminar") +
             "/class/" +
             Cookies.get("class") +
@@ -554,11 +554,11 @@ function updateSeminarScoreByClass() {
     $.ajax({
         type: "put",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "http://xug98.cn:8080/score/seminar/" +
             Cookies.get("seminar") +
             "/class/" +
             Cookies.get("class") +
-            "/seminarscore",
+            "/score",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -604,7 +604,7 @@ function createCourse() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./course-round.html";
+            window.location.href = "./seminar-round.html";
         },
         error: function(data) {
             console.log(data);
@@ -614,7 +614,7 @@ function createCourse() {
             201: function(data) {
                 console.log(data);
                 alert("success");
-                window.location.href = "./course-round.html";
+                window.location.href = "./seminar-round.html";
             },
             400: function() {
                 $("#password").val("");
@@ -649,7 +649,7 @@ function createSeminar() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./course-round.html";
+            window.location.href = "./seminar-round.html";
         },
         statusCode: {
             400: function() {
@@ -716,7 +716,7 @@ function updateSeminar() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./course-round.html";
+            window.location.href = "./seminar-round.html";
         },
         statusCode: {
             400: function() {
@@ -995,7 +995,7 @@ function createTeam() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./course-round.html";
+            window.location.href = "./seminar-round.html";
         },
         error: function(data) {
             console.log(data);
@@ -1005,7 +1005,7 @@ function createTeam() {
             201: function(data) {
                 console.log(data);
                 alert("success");
-                window.location.href = "./course-round.html";
+                window.location.href = "./seminar-round.html";
             },
             400: function() {
                 $("#password").val("");
@@ -1113,7 +1113,7 @@ function createClass() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./course-round.html";
+            window.location.href = "./seminar-round.html";
         },
         error: function(data) {
             console.log(data);
@@ -1123,7 +1123,7 @@ function createClass() {
             201: function(data) {
                 console.log(data);
                 alert("success");
-                window.location.href = "./course-round.html";
+                window.location.href = "./seminar-round.html";
             },
             400: function() {
                 $("#password").val("");
@@ -1166,12 +1166,36 @@ function deleteCourse() {
     */
 }
 
-function getCourseScoreByRound(cid) {
+function getRoundScoreByCourse(cid) {
     Cookies.set("seminar", "1");
     Cookies.set("class", "1");
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/round/" + Cookies.get("round") + "/roundscore",
+        url: "http://xug98.cn:8080/score/course/" + Cookies.get("course") + "/score",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                // alert("获取成功");
+                console.log(data[i]);
+            }
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+function getSeminarScoreByRound(cid) {
+    Cookies.set("round", "1");
+    Cookies.set("class", "1");
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn:8080/score/round/" + Cookies.get("round") + "/score",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -1369,7 +1393,7 @@ function updateRound() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./course-round.html";
+            window.location.href = "./seminar-round.html";
         },
         statusCode: {
             400: function() {
@@ -1396,7 +1420,7 @@ function createRound() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./course-round.html";
+            window.location.href = "./seminar-round.html";
         },
         statusCode: {
             400: function() {
@@ -1426,7 +1450,7 @@ function createTeamShare() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./course-round.html";
+            window.location.href = "./seminar-round.html";
         },
         statusCode: {
             400: function() {
@@ -1456,7 +1480,7 @@ function createSeminarShare() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./course-round.html";
+            window.location.href = "./seminar-round.html";
         },
         statusCode: {
             400: function() {
