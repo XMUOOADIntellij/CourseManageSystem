@@ -42,6 +42,7 @@ public class QuestionDao {
     public List<Question> listQuestionByKlassSeminarIdAndTeamId(Long klassSeminarId,Long teamId){
         return questionMapper.listQuestionByKlassSeminarIdAndTeamId(klassSeminarId,teamId);
     }
+
     public List<Question> listQuestionByKlassSeminarId(Long klassSeminarId){
         return questionMapper.listQuestionByKlassSeminarId(klassSeminarId);
     }

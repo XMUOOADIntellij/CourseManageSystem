@@ -186,12 +186,13 @@ public class SeminarController {
      * @param seminarId 讨论课Id
      * @return 展示信息
      */
-    @GetMapping(value = "/{seminarId}/attendance")
-    public AttendanceVO getTeamAttendance(@PathVariable Long seminarId,HttpServletRequest request){
+    @GetMapping(value = "/{seminarId}/class/{classId}/attendance")
+    public AttendanceVO getTeamAttendance(@PathVariable Long seminarId,@PathVariable Long classId,
+                                          @RequestParam Long courseId, HttpServletRequest request){
         String token = request.getHeader("Authorization");
         Student student = Jwt.unSign(token,Student.class);
         return new AttendanceVO(
-                attendanceService.getTeamAttendance(seminarId,student)
+                attendanceService.getTeamAttendance(courseId,seminarId,classId,student)
         );
     }
 
@@ -199,14 +200,15 @@ public class SeminarController {
      * 报名某班级讨论课
      * @param seminarId  课程讨论课id
      */
-    @PostMapping(value="/{seminarId}/attendance")
+    @PostMapping(value="/{seminarId}/class/{classId}/attendance")
     public Long enrollAttendance(@PathVariable Long seminarId,@RequestBody AttendanceVO attendanceVo,
+                                 @PathVariable Long classId,@RequestParam Long courseId,
                                  HttpServletRequest request){
 
         String token = request.getHeader("Authorization");
         Student student = Jwt.unSign(token,Student.class);
         Attendance attendance = new Attendance(attendanceVo);
-        return attendanceService.enrollAttendance(seminarId,attendance,student);
+        return attendanceService.enrollAttendance(courseId,seminarId,classId,attendance,student);
     }
 
     /**
@@ -232,20 +234,6 @@ public class SeminarController {
     }
 
 
-    @GetMapping(value="/{seminarId}/class/{classId}/question")
-    public List<QuestionVO> getAllQuestion(@PathVariable Long seminarId, @PathVariable Long classId,
-                                           HttpServletRequest request){
-
-        String token = request.getHeader("Authorization");
-        Teacher teacher = Jwt.unSign(token,Teacher.class);
-
-        List<Question> questionlist = questionService.getAllQuestion(teacher,seminarId,classId);
-        List<QuestionVO> questionVOList = new ArrayList<>();
-        for(Question item:questionlist){
-            questionVOList.add(new QuestionVO(item));
-        }
-        return questionVOList;
-    }
 
 
     @GetMapping(value="/{seminarId}/class/{classId}/attendance/{attendanceId}/question")
