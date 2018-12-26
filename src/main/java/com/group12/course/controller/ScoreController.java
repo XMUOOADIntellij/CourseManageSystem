@@ -40,12 +40,12 @@ public class ScoreController {
 
     @PutMapping(value="/seminar/{seminarId}/score")
     public Integer modifyScoreBySeminar(@PathVariable Long seminarId,@RequestBody SeminarScoreVO seminarScoreVO,
-                                        HttpServletRequest request){
+                                        @RequestParam Long courseId, HttpServletRequest request){
         String token = request.getHeader("Authorization");
         Teacher teacher = Jwt.unSign(token,Teacher.class);
 
         SeminarScore seminarScore = new SeminarScore(seminarScoreVO);
-        return scoreService.modiftScoreBySeminar(teacher,seminarScore,seminarId);
+        return scoreService.modiftScoreBySeminar(teacher,seminarScore,courseId,seminarId);
     }
 
     /**

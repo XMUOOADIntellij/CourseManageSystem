@@ -88,6 +88,7 @@ public class SeminarScoreVO {
         this.questionScore = seminarScore.getQuestionScore();
         this.reportScore = seminarScore.getReportScore();
         this.totalScore =seminarScore.getTotalScore();
+
     }
 
     @Override

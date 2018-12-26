@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * 与分数相关 service
+ *
  * @author Y Jiang
  * @date 2018/12/22
  */
@@ -32,47 +33,47 @@ public class ScoreService {
     KlassSeminarDao klassSeminarDao;
     @Autowired
     AttendanceDao attendanceDao;
-
+    @Autowired
+    KlassDao klassDao;
 
     /**
      * 为某次的展示打分
-     * @param teacher 老师
-     * @param record 记录
+     * @param teacher      老师
+     * @param record       记录
      * @param attendanceId 展示报名记录id
      * @return 1成功 0失败
      */
     public Integer modifyScoreByAttendance(Teacher teacher, SeminarScore record, Long attendanceId) {
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
-
-        SeminarScore seminarScore;
-        if (attendance != null) {
-            seminarScore = scoreDao.selectSeminarScoreByKlassSeminarIdAndTeamId(
-                    attendance.getKlassSeminar().getId(), attendance.getTeam().getId());
-        } else {
-            throw new RecordNotFoundException("找不到班级讨论课");
-        }
-        if (teacher.getId().equals(seminarScore.getKlassSeminar().
-                getSeminar().getCourse().getTeacher().getId())) {
-
+        //检验老师的修改权限
+        if (klassSeminarDao.checkTeacherHasKlassSeminar(teacher, attendance.getKlassSeminar().getId())) {
             record.setKlassSeminar(attendance.getKlassSeminar());
             record.setTeam(attendance.getTeam());
-            return scoreDao.updateSeminarScore(seminarScore);
+
+            //进行时只更改，不刷新
+            if (attendance.getKlassSeminar().getSeminarStatus() == 1) {
+                return scoreDao.updateSeminarScoreWhenAttendance(record);
+            } else {
+                //结束后修改，刷新
+                return scoreDao.updateSeminarScoreAfterKlass(record);
+            }
 
         } else {
             throw new UnauthorizedOperationException("只有当前课的老师可更改分数");
         }
     }
 
-    public Integer modiftScoreBySeminar(Teacher teacher, SeminarScore seminarScore, Long seminarId) {
+    public Integer modiftScoreBySeminar(Teacher teacher, SeminarScore seminarScore,Long courseId, Long seminarId) {
         Team team = teamDao.getTeamById(seminarScore.getTeam().getId());
         KlassSeminar klassSeminar;
         if (team != null) {
+            //todo selectClassByCourseIdAndTeamId
             klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, team.getKlass().getId());
             if (klassSeminar != null) {
                 if (teacher.getId().equals(klassSeminar.getSeminar().getCourse().getTeacher().getId())) {
                     seminarScore.setTeam(team);
                     seminarScore.setKlassSeminar(klassSeminar);
-                    return scoreDao.updateSeminarScore(seminarScore);
+                    return scoreDao.updateSeminarScoreAfterKlass(seminarScore);
                 } else {
                     throw new UnauthorizedOperationException("只有当前课的老师可更改分数");
                 }
