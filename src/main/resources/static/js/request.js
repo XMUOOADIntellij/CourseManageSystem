@@ -1956,3 +1956,180 @@ function deleteTeamMember() {
         }
     });
 }
+
+function getMyAttendance(){
+    Cookies.set("seminar", "1");
+    Cookies.set("class", "1");
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn:8080/seminar/"+
+            Cookies.get("seminar") +"/class/"+
+                       Cookies.get("class") +
+            "/teamAttendance",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            if (xhr.status === 200) {
+                $("#account").html(data.account);
+                $("#email").val(data.email);
+                $("#name").html(data.name);
+            }
+        },
+        statusCode: {
+            401: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            },
+            403: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            }
+        }
+    });
+}
+function getAttendanceScore(){
+    Cookies.set("seminar", "1");
+    Cookies.set("class", "1");
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn:8080/score/attendance/"+
+            Cookies.get("attendance") +"/score",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            if (xhr.status === 200) {
+                $("#account").html(data.account);
+                $("#email").val(data.email);
+                $("#name").html(data.name);
+            }
+        },
+        statusCode: {
+            401: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            },
+            403: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            }
+        }
+    });
+}
+function createAttendance(){
+    Cookies.set("seminar", "1");
+    Cookies.set("class", "1");
+
+    let ata = {
+        courseId: Cookies.get("course")
+    };
+    console.log(ata);
+    alert("input");
+    $.ajax({
+        type: "post",
+        url: "http://xug98.cn:8080/seminar/"+ Cookies.get("seminar")+"/class/"+ Cookies.get("class")+"/attendance",
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            window.location.href = "./seminar-round.html";
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            }
+        }
+    });
+
+}
+function deleteAttendance() {
+    let cid = "2";
+    $.ajax({
+        type: "delete",
+        url: "http://xug98.cn:8080/attendance/" + cid,
+        dataType: "json",
+        contentType: "application/json;",
+        error: function(data, textStatus, xhr) {
+            console.log(cid);
+            alert("wrong");
+        },
+        success: function(data, textStatus, xhr) {
+            alert("成功");
+            console.log(data);
+        },
+
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            403: function() {
+                alert("用户权限不足");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+function updateAttendance() {
+    Cookies.set("attendanceId", "1");
+    let ata = {
+        teamOrder: "1"
+    };
+    console.log(ata);
+    $.ajax({
+        type: "put",
+        url: "http://xug98.cn:8080/attendance/" + Cookies.get("attendance"),
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            }
+        }
+    });
+    /*
+    window.location.reload();
+  */
+}
+function bindAdmin() {
+    let ata = { account: $("#account").val(), password: $("#password").val() };
+    $.ajax({
+        type: "post",
+        url: "http://xug98.cn:8080/admin/login",
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            if (xhr.status === 200) {
+                window.localStorage.setItem("jwt", data.jwt);
+                Cookies.set("id", data.id);
+                Cookies.set("account", data.account);
+                Cookies.set("role", data.role);
+                Cookies.set("name", data.name);
+                        window.location.href = "./teacher-home.html";
+
+            }
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            }
+        }
+    });
+}

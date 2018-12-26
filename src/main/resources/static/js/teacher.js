@@ -141,6 +141,7 @@ function initTask() {
   getTeamValidTask();
 }
 function initProgress() {
+    getCurrentSeminar();
   getAttendanceByClass();
   getCurrentAttendance();
   getQuestionList();

@@ -18,3 +18,11 @@ function initCourseGrade() {
     let aSeminarScore = getSeminarScoreByRound(); //总成绩
   }
 }
+function initDetailScore(){
+  getMyAttendance();
+  getAttendanceScore();
+}
+function initDetail(){
+  getSeminarByClass();
+  getMyAttendance();
+}

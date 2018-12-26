@@ -234,7 +234,7 @@
                         <tr>
                           <td><span class="text-muted">1</span></td>
                           <td>
-                            <button class="btn btn-sm btn-danger">
+                            <button class="btn btn-sm btn-danger" onclick="deleteAttendance()">
                               取消报名
                             </button>
                           </td>
@@ -254,7 +254,25 @@
                         <tr>
                           <td><span class="text-muted">1</span></td>
                           <td>
-                            <button class="btn btn-sm btn-success">报名</button>
+                            <button class="btn btn-sm btn-success" onclick="createAttendance()">报名</button>
+                          </td>
+                          <td class="text-left">
+                            <a href="." class="text-inherit">1-1</a>
+                          </td>
+                          <td>
+                            <span class="status-icon bg-success"></span>
+                            <a href="." class="text-inherit">1.pdf</a>
+                          </td>
+                          <td>
+                            <a class="icon" href="javascript:void(0)">
+                              <i class="fe fe-download"></i>
+                            </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><span class="text-muted">1</span></td>
+                          <td>
+                            <button class="btn btn-sm btn-warning" onclick="updateAttendance()">更改报名</button>
                           </td>
                           <td class="text-left">
                             <a href="." class="text-inherit">1-1</a>
