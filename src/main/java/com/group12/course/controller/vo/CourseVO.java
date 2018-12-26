@@ -31,6 +31,9 @@ public class CourseVO {
 
     private Integer minMember;
 
+
+
+
     List<Course> conflictCourseList;
 
     public String getcourseName() {
@@ -126,22 +129,5 @@ public class CourseVO {
         this.teamEndTime = course.getTeamEndTime();
     }
 
-//    public CourseVO(CourseMemberLimitStrategy courseMemberLimitStrategy){
-//        //组队规则属性
-//        this.minMember = courseMemberLimitStrategy.getMinMember();
-//        this.maxMember = courseMemberLimitStrategy.getMaxMember();
-//
-//        //课程属性
-//        Course course = courseMemberLimitStrategy.getCourse();
-//        this.id = course.getId();
-//        this.teacherId = course.getTeacher().getId();
-//        this.courseName = course.getcourseName();
-//        this.introduction = course.getIntroduction();
-//        this.presentationPercentage = course.getPresentationPercentage();
-//        this.questionPercentage = course.getQuestionPercentage();
-//        this.reportPercentage = course.getReportPercentage();
-//        this.teamStartTime = course.getTeamStartTime();
-//        this.teamEndTime = course.getTeamEndTime();
-//    }
 
 }
