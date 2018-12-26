@@ -39,6 +39,8 @@ public class AttendanceService {
     CourseDao courseDao;
     @Autowired
     KlassDao klassDao;
+    @Autowired
+    KlassRoundDao klassRoundDao;
 
     private final String ServerFilePath = System.getProperty("user.dir") + System.getProperty("file.separator") + "file" + System.getProperty("file.separator");
     private final Logger logger = LoggerFactory.getLogger(AttendanceService.class);
@@ -134,7 +136,6 @@ public class AttendanceService {
     }
 
     public Integer cancelAttendance(Long attendanceId, Student student) {
-        //todo 队伍有关
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
         if (attendance != null) {
             if (teamDao.checkStudentIsInSpecialTeam(student.getId(), attendance.getTeam().getId())) {
@@ -150,6 +151,7 @@ public class AttendanceService {
     public Long enrollAttendance(Long seminarId, Long classId, Attendance attendance, Student student) {
         //获得课程
         Klass klass = klassDao.getKlass(classId);
+        Seminar seminar = seminarDao.selectSeminarById(seminarId);
 
         if (klass != null) {
             Course course = klass.getCourse();
@@ -169,7 +171,9 @@ public class AttendanceService {
             KlassSeminar klassSeminar = klassSeminarDao.
                     selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
             if (klassSeminar != null) {
-                // todo 一轮下的报名数固定
+                KlassRound klassRound = klassRoundDao.getKlassRoundByKlassIdAndRoundId(klass.getId(),seminar.getRound().getId());
+
+
                 attendance.setTeam(team);
                 attendance.setKlassSeminar(klassSeminar);
                 attendance.setPresented(false);

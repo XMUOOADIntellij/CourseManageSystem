@@ -46,13 +46,12 @@ public class ScoreDao {
      * @param score 分数
      * @return BigDecimal均分
      */
-    private BigDecimal averageScore(List<BigDecimal> score) {
+    private BigDecimal averageScore(List<BigDecimal> score,Integer divisor) {
         BigDecimal result = new BigDecimal(0);
         for (BigDecimal item : score) {
             result = result.add(item);
         }
-        //TODO 换成除以每轮的报名数
-        return result.divide(new BigDecimal(score.size())).setScale(2, RoundingMode.HALF_DOWN);
+        return result.divide(new BigDecimal(divisor).setScale(2, RoundingMode.HALF_DOWN));
     }
 
     /**
@@ -101,10 +100,9 @@ public class ScoreDao {
      * @return RoundScore
      * Method 1->平均分 0->最高分
      */
-    private RoundScore calculateRoundScore(List<SeminarScore> seminarScores, Round round) {
+    private RoundScore calculateRoundScore(List<SeminarScore> seminarScores, Round round,Klass klass) {
 
         RoundScore roundScore = new RoundScore();
-
         List<BigDecimal> presentationScore = new ArrayList<>();
         List<BigDecimal> questionScore = new ArrayList<>();
         List<BigDecimal> reportScore = new ArrayList<>();
@@ -114,19 +112,23 @@ public class ScoreDao {
             reportScore.add(item.getReportScore());
         }
 
+        KlassRound klassRound = klassRoundDao.getKlassRoundByKlassIdAndRoundId(klass.getId(),round.getId());
+        //每轮下的报名数
+        Integer enrollNum = klassRound.getEnrollNumber();
+
         roundScore.setPresentationScore(
                 round.getPresentationScoreMethod() == 1 ?
-                        averageScore(presentationScore) : maxScore(presentationScore)
+                        averageScore(presentationScore,enrollNum) : maxScore(presentationScore)
         );
 
         roundScore.setReportScore(
                 round.getReportScoreMethod() == 1 ?
-                        averageScore(reportScore) : maxScore(reportScore)
+                        averageScore(reportScore,enrollNum) : maxScore(reportScore)
         );
 
         roundScore.setQuestionScore(
                 round.getQuestionScoreMethod() == 1 ?
-                        averageScore(questionScore) : maxScore(questionScore)
+                        averageScore(questionScore,enrollNum) : maxScore(questionScore)
         );
 
         return roundScore;
@@ -208,7 +210,7 @@ public class ScoreDao {
             //计算提问分
             seminarScore.setQuestionScore(
                     round.getQuestionScoreMethod().equals(1) ?
-                            averageScore(questionScoreList) : maxScore(questionScoreList)
+                            averageScore(questionScoreList,questionScoreList.size()) : maxScore(questionScoreList)
             );
             //更新并计算
             updateSeminarScoreAfterKlass(seminarScore);
@@ -262,14 +264,14 @@ public class ScoreDao {
 
         //根据班级讨论课和小组找到该轮该小组分数
         List<SeminarScore> seminarScoreList = new ArrayList<>();
-        for (KlassSeminar item : klassSeminarList) {
+        for (KlassSeminar item : klassSeminarList){
             seminarScoreList.add(
                     selectSeminarScoreByKlassSeminarIdAndTeamId(item.getId(), seminarScore.getTeam().getId())
             );
         }
         
         //计算RoundScore
-        RoundScore roundScore = calculateRoundScore(seminarScoreList, round);
+        RoundScore roundScore = calculateRoundScore(seminarScoreList,round,klass);
         roundScore.setTotalScore(
                 calculateTotalScore(roundScore.getPresentationScore(), roundScore.getQuestionScore(),
                         roundScore.getReportScore(), course)
