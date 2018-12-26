@@ -393,4 +393,8 @@ public class TeamDao {
     public int changeTeam(Team team){
         return teamMapper.updateTeam(team);
     }
+
+    public int deleteTeamFromKlassByKlassId(Long id){
+        return teamMapper.deleteTeamFromKlassByKlassId(id);
+    }
 }

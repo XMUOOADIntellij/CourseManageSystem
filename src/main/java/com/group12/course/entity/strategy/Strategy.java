@@ -1,5 +1,7 @@
 package com.group12.course.entity.strategy;
 
+import com.group12.course.entity.Team;
+
 /**
  * 策略类，无方法，仅供各详细策略继承
  *
@@ -22,5 +24,9 @@ public class Strategy {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Boolean judgeTeam(Team team){
+        return true;
     }
 }

@@ -95,6 +95,11 @@
     where team_id = #{id,jdbcType=BIGINT}
   </delete>
 
+  <delete id="deleteTeamFromKlassByKlassId" parameterType="java.lang.Long" >
+    delete from klass_team
+    where klass_id = #{id,jdbcType=BIGINT}
+  </delete>
+
   <insert id="addTeam" useGeneratedKeys="true" keyProperty="record.id">
     insert into team
     <trim prefix="(" suffix=")" suffixOverrides="," >

@@ -50,6 +50,14 @@ public interface TeamMapper {
     int deleteTeamFromKlass(Long id);
 
     /**
+     * 删除数据库中队伍与班级的记录
+     *
+     * @param id 主键代表队伍id
+     * @return 代表处理数量
+     * */
+    int deleteTeamFromKlassByKlassId(Long id);
+
+    /**
      * 在数据库中添加队伍的记录
      *
      * @param record 待添加的队伍
