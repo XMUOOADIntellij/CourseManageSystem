@@ -274,7 +274,6 @@ public class SeminarService {
     }
 
     public KlassSeminar getCurrentSeminar(Student student){
-        //TODO 学生正在进行的讨论课
         List<KlassStudent> klassStudents =klassStudentDao.selectKlassStudentByStudentId(student.getId());
         if(klassStudents!=null){
             List<Long> klassIdList = new ArrayList<>();

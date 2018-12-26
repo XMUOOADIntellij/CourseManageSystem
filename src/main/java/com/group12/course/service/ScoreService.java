@@ -33,6 +33,14 @@ public class ScoreService {
     @Autowired
     AttendanceDao attendanceDao;
 
+
+    /**
+     * 为某次的展示打分
+     * @param teacher 老师
+     * @param record 记录
+     * @param attendanceId 展示报名记录id
+     * @return 1成功 0失败
+     */
     public Integer modifyScoreByAttendance(Teacher teacher, SeminarScore record, Long attendanceId) {
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
 
