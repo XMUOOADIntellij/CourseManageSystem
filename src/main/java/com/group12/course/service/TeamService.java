@@ -1,16 +1,17 @@
 package com.group12.course.service;
 
-import com.group12.course.dao.KlassDao;
-import com.group12.course.dao.TeamDao;
-import com.group12.course.dao.TeamStrategyDao;
+import com.group12.course.dao.*;
 import com.group12.course.entity.Klass;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Team;
 import com.group12.course.entity.strategy.Strategy;
+import com.group12.course.entity.strategy.TeamAndStrategy;
 import com.group12.course.entity.strategy.TeamStrategy;
 import com.group12.course.exception.InformationException;
+import com.group12.course.exception.TeamInAuditingException;
 import com.group12.course.exception.UnauthorizedOperationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,6 +33,25 @@ public class TeamService {
 
     @Autowired
     TeamStrategyDao teamStrategyDao;
+
+    @Autowired
+    MemberLimitStrategyDao memberLimitStrategyDao;
+
+    @Autowired
+    ConflictCourseStrategyDao conflictCourseStrategyDao;
+
+    @Autowired
+    CourseMemberLimitStrategyDao courseMemberLimitStrategyDao;
+
+    @Autowired
+    TeamOrStrategyDao teamOrStrategyDao;
+
+    @Autowired
+    TeamAndStrategyDao teamAndStrategyDao;
+
+    private final int teamIsValid = 1;
+    private final int teamIsInvalid = 2;
+    private final int teamIsInAuditing = 0;
 
     /**
      * 添加某个队伍
@@ -86,11 +106,33 @@ public class TeamService {
      * 这个方法用于给现有的队伍添加组员
      *
      * @param team 新的队伍
-     * @param student 组员
      * @return 返回新的队伍对象
      * */
-    public Team addMember(Team team,Student student){
-        return teamDao.addTeamMembers(team,student);
+    public Team addMember(Team team){
+        checkTeamStatus(team);
+        Team returnTeam = teamDao.addTeamMembers(team);
+        Boolean status = checkTeamValidation(team);
+        if (!status){
+            returnTeam.setStatus(teamIsInvalid);
+            int i =teamDao.changeTeam(returnTeam);
+            throw new InformationException("队伍不合法");
+            // 记得此处提醒前端相关状态码为409
+        }
+        return returnTeam;
+    }
+
+    /**
+     * 检查此时该队伍是否在审核中
+     * 在审核中时不可对组员增删
+     * 若在审核中则直接抛出异常
+     * @throws TeamInAuditingException 队伍在审核中异常
+     * @param team 待检查队伍
+     */
+    private void checkTeamStatus(Team team){
+        team = teamDao.getTeamWithoutMembersById(team.getId());
+        if (team.getStatus()==teamIsInAuditing){
+            throw new TeamInAuditingException("队伍审核中，无法添加/删除组员");
+        }
     }
 
     /**
@@ -104,12 +146,25 @@ public class TeamService {
         return teamDao.getTeamByStudentIdAndCourseId(id, courseId);
     }
 
+    /**
+     * 权限判断，只有该小组的成员才可以进行相关操作
+     * 若不满足权限，则抛出异常
+     * @throws UnauthorizedOperationException 未授权异常
+     * @param student 操作学生
+     * @param teamId 操作的队伍
+     */
     public void authCheck(Student student,Long teamId){
         if (student==null||!teamDao.checkStudentIsInSpecialTeam(student.getId(),teamId)){
             throw new UnauthorizedOperationException("只有该小组成员才可进行该操作");
         }
     }
 
+    /**
+     * 检查队伍是否符合分组要求
+     *
+     * @param team 待检查队伍
+     * @return 是否符合，符合返回 true
+     */
     public Boolean checkTeamValidation(Team team){
         List<TeamStrategy> strategyList = teamStrategyDao.selectTeamStrategyByCourseId(team.getCourse().getId());
         if (strategyList==null||strategyList.isEmpty()){
@@ -117,9 +172,36 @@ public class TeamService {
         }
         List<Boolean> strategyCheck = new ArrayList<>(strategyList.size());
         for (TeamStrategy teamStrategy:strategyList) {
-            Strategy currentStrategy =  teamStrategy.getStrategy();
+            Boolean status=false;
+            switch (teamStrategy.getStrategyName()){
+                case "MemberLimitStrategy":
+                    status = memberLimitStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
+                    break;
+                case "TeamOrStrategy":
+                    status = teamOrStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
+                    break;
+                case "ConflictCourseStrategy":
+                    status = conflictCourseStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
+                    break;
+                case "CourseMemberLimitStrategy":
+                    status = courseMemberLimitStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
+                    break;
+                case "TeamAndStrategy":
+                    status = teamAndStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
+                    break;
+                default:
+                    // 默认不存在的时候默认为对的了（不影响其余的）
+                    status=true;
+                    break;
+            }
+            strategyCheck.add(status);
         }
-
+        for (Boolean status:strategyCheck) {
+            // 只要有一个不符合就不符合要求
+            if (!status){
+                return false;
+            }
+        }
         return true;
     }
 
@@ -131,6 +213,7 @@ public class TeamService {
      * @return 删除数量
      * */
     public int deleteTeamMember(Team team,Student student){
+        checkTeamStatus(team);
         return teamDao.deleteTeamMember(team,student);
     }
 }

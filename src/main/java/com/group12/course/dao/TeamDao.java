@@ -24,6 +24,8 @@ public class TeamDao {
     @Autowired
     StudentDao studentDao;
 
+    private final int defaultTeamStatus=1;
+
     /**
      * 获取当前班级下最新的队伍序号(最新的+1)
      *
@@ -148,11 +150,21 @@ public class TeamDao {
     /**
      * 根据 id 获取队伍
      *
-     * @param account 队伍id
+     * @param id 队伍id
      * @return 返回一个包含所有队员的队伍*/
-    public Team getTeamById(Long account){
-        Team team = teamMapper.selectTeamById(account);
+    public Team getTeamById(Long id){
+        Team team = teamMapper.selectTeamById(id);
         return getMembers(team);
+    }
+
+    /**
+     * 根据 id 获取队伍
+     *
+     * @param id 队伍id
+     * @return 返回一个包含所有队员的队伍*/
+    public Team getTeamWithoutMembersById(Long id){
+        Team team = teamMapper.selectTeamById(id);
+        return team;
     }
 
     /**
@@ -312,7 +324,7 @@ public class TeamDao {
         if (!checkTeamValid(team)||!checkMembersInTeam(team)){
             return new Team();
         }
-        team.setStatus(2);
+        team.setStatus(defaultTeamStatus);
         team.setTeamSerial(getKlassLastTeamSerial(team.getKlass().getId()));
         int addTeamCount=teamMapper.addTeam(team, team.getCourse().getId(),
                 team.getKlass().getId(),team.getLeader().getId());
@@ -353,29 +365,30 @@ public class TeamDao {
     /**
      * 这个方法用于给现有的队伍添加组员
      *
-     * @param team 新的队伍
-     * @param member 组员
+     * @param team 现有的队伍
      * @return 返回新的队伍对象
      * */
-    public Team addTeamMembers(Team team,Student member){
+    public Team addTeamMembers(Team team){
         team=teamMapper.selectTeamById(team.getId());
-        List<Long> memberInTeams = teamMapper.selectTeamIdByMembersId(member.getId());
-        for (Long id:memberInTeams) {
-            Team tempTeam = getTeamById(id);
-            if (tempTeam.getCourse().getId().equals(team.getCourse().getId())){
-                // 学生已在该课程下组队
+        for (Student member:team.getMembers()) {
+            List<Long> memberInTeams = teamMapper.selectTeamIdByMembersId(member.getId());
+            for (Long id:memberInTeams) {
+                Team tempTeam = getTeamById(id);
+                if (tempTeam.getCourse().getId().equals(team.getCourse().getId())){
+                    // 学生已在该课程下组队
+                    return new Team();
+                }
+            }
+            if (team.getId()==null){
+                // 传入的队伍信息不足
                 return new Team();
             }
-        }
-        if (team.getId()==null){
-            // 传入的队伍信息不足
-            return new Team();
-        }
-        int temp=teamMapper.addTeamMembers(team.getId(),member.getId());
-        if (temp==0){
-            // throw insert error
-            System.out.println("error insert team members:"+member.getId()+" at team:"+team.getId());
-            return new Team();
+            int temp=teamMapper.addTeamMembers(team.getId(),member.getId());
+            if (temp==0){
+                // throw insert error
+                System.out.println("error insert team members:"+member.getId()+" at team:"+team.getId());
+                return new Team();
+            }
         }
         return team;
     }

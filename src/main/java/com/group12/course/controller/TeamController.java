@@ -5,6 +5,7 @@ import com.group12.course.entity.Student;
 import com.group12.course.entity.Teacher;
 import com.group12.course.entity.Team;
 import com.group12.course.entity.application.TeamValidApplication;
+import com.group12.course.entity.strategy.TeamAndStrategy;
 import com.group12.course.service.TeamService;
 import com.group12.course.service.TeamValidApplicationService;
 import com.group12.course.tools.Jwt;
@@ -102,9 +103,18 @@ public class TeamController {
     }
 
     @PutMapping(value = "/{teamId}",produces = "application/json; charset=utf-8")
-    public Team updateTeam(@RequestBody TeamVO teamVO,@PathVariable String teamId, HttpServletResponse response)throws IOException {
-        /*暂时不实现了。不存在这个 api */
-        return new Team();
+    public Team updateTeam(@RequestBody TeamVO teamVO,@PathVariable Long teamId, HttpServletRequest request, HttpServletResponse response)throws IOException {
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        teamService.authCheck(jwtStudent,teamId);
+        Team team = teamService.addMember(new Team(teamVO));
+        if (team.getId()==null){
+            response.setStatus(400);
+        }
+        else {
+            response.setStatus(200);
+        }
+        return team;
     }
 
     /**
@@ -143,7 +153,7 @@ public class TeamController {
         teamService.authCheck(jwtStudent,teamId);
         Team team=new Team();
         team.setId(teamId);
-        Team count = teamService.addMember(team,student);
+        Team count = teamService.addMember(team);
         if (count.getId()!=null){
             response.setStatus(200);
         }
@@ -198,7 +208,7 @@ public class TeamController {
 
     @PutMapping(value = "/{teamId}/approve",produces = "application/json; charset=utf-8")
     public Team approveRequest(@RequestBody Team team,@PathVariable String teamId, HttpServletResponse response)throws IOException {
-        /*TODO*/
+        // 该api暂时不实现
         return new Team();
     }
 }
