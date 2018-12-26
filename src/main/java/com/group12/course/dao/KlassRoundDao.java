@@ -26,4 +26,8 @@ public class KlassRoundDao {
     public int updateKlassRound(KlassRound klass){
         return klassRoundMapper.updateKlassRound(klass);
     }
+
+    public KlassRound getKlassRoundByKlassIdAndRoundId(Long klassId,Long roundId){
+        return klassRoundMapper.selectKlassRoundByKlassIdAndRoundId(klassId,roundId);
+    }
 }

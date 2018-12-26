@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -46,9 +47,9 @@ public class SeminarProgressController {
      */
     @MessageMapping(value = "/Socket/seminar/{seminarId}/class/{classId}/start")
     @SendTo("/seminarSocket/progress")
-    public SeminarVO startSeminar(@DestinationVariable Long seminarId, @DestinationVariable Long classId,
+    public SeminarVO startSeminar(@Header("jwt")String token,@DestinationVariable Long seminarId, @DestinationVariable Long classId,
                                  Message message){
-
+        System.out.println(token);
         Teacher teacher = new Teacher();
         teacher.setId(1L);
         return new SeminarVO(seminarService.startSeminar(teacher,seminarId,classId));
@@ -61,11 +62,12 @@ public class SeminarProgressController {
      */
     @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/pause")
     @SendTo("/seminarSocket/progress")
-    public SeminarVO pauseSeminar(Message message, @DestinationVariable Long seminarId,
+    public SeminarVO pauseSeminar(@Header("jwt")String token, Message message, @DestinationVariable Long seminarId,
                                   @DestinationVariable Long classId) {
-
+        System.out.println(token);
         Teacher teacher = new Teacher();
         teacher.setId(1L);
+        System.out.println(token);
 
         return new SeminarVO(seminarService.pauseSeminar(teacher,seminarId,classId));
     }
@@ -74,6 +76,7 @@ public class SeminarProgressController {
     @SendTo("/seminarSocket/progress")
     public SeminarVO endSeminar(Message message, @DestinationVariable Long seminarId,
                                   @DestinationVariable Long classId) {
+
 
         Teacher teacher = new Teacher();
         teacher.setId(1L);
@@ -91,13 +94,13 @@ public class SeminarProgressController {
      */
     @MessageMapping("/Socket/course/courseId/seminar/{seminarId}/class/{classId}/question")
     @SendTo("/seminarSocket/question")
-    public QuestionVO askQuestion(@DestinationVariable Long seminarId, @DestinationVariable Long classId,
-                                  Message message,QuestionVO questionVO){
+    public QuestionVO askQuestion(@Header("jwt")String token,@DestinationVariable Long seminarId, @DestinationVariable Long classId,
+                                  @DestinationVariable Long courseId, Message message,QuestionVO questionVO){
 
         Student student = new Student();
         student.setId(1L);
-
-        Question question = questionService.askQuestion(seminarId,classId,new Question(questionVO),student);
+        System.out.println(token);
+        Question question = questionService.askQuestion(courseId,seminarId,classId,new Question(questionVO),student);
         return new QuestionVO(question);
     }
 
@@ -112,11 +115,11 @@ public class SeminarProgressController {
      */
     @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/attendance/{attendanceId}/question")
     @SendTo("/seminarSocket/question")
-    public QuestionVO answerQuestion(@DestinationVariable Long seminarId,@DestinationVariable Long classId,
+    public QuestionVO answerQuestion(@Header("jwt")String token,@DestinationVariable Long seminarId,@DestinationVariable Long classId,
                                      @DestinationVariable Long attendanceId,Message message){
         Teacher teacher = new Teacher();
         teacher.setId(1L);
-
+        System.out.println(token);
         return new QuestionVO(questionService.answerQuestion(
                 teacher,seminarId,classId,attendanceId));
     }
@@ -132,12 +135,13 @@ public class SeminarProgressController {
      */
     @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/attendance/{attendanceId}/next")
     @SendTo("/seminarSocket/attendance")
-    public AttendanceVO nextAttendance(@DestinationVariable Long seminarId, @DestinationVariable Long classId,
+    public AttendanceVO nextAttendance(@Header("jwt")String token,@DestinationVariable Long seminarId, @DestinationVariable Long classId,
                                        @DestinationVariable Long attendanceId, Message message){
 
         Teacher teacher = new Teacher();
         teacher.setId(1L);
 
+        System.out.println(token);
         return new AttendanceVO(attendanceService.nextAttendance(seminarId,classId,attendanceId));
     }
 

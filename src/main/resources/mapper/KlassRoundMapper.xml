@@ -21,6 +21,13 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
 
+    <select id="selectKlassRoundByKlassIdAndRoundId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from klass_round
+        where klass_id=#{klassId,jdbcType=BIGINT} and round_id=#{roundId,jdbcType=BIGINT}
+    </select>
+
     <delete id="deleteKlassRound" parameterType="java.lang.Long" >
     delete from klass_round
     where id = #{id,jdbcType=BIGINT}

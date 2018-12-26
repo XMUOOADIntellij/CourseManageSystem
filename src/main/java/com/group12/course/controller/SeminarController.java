@@ -186,7 +186,7 @@ public class SeminarController {
      * @param seminarId 讨论课Id
      * @return 展示信息
      */
-    @GetMapping(value = "/{seminarId}/class/{classId}/attendance")
+    @GetMapping(value = "/{seminarId}/class/{classId}/teamAttendance")
     public AttendanceVO getTeamAttendance(@PathVariable Long seminarId,@PathVariable Long classId,
                                           HttpServletRequest request){
         String token = request.getHeader("Authorization");

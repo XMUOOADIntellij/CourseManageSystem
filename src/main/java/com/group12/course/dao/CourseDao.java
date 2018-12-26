@@ -2,12 +2,14 @@ package com.group12.course.dao;
 
 import com.group12.course.entity.Course;
 import com.group12.course.entity.Klass;
+import com.group12.course.entity.KlassStudent;
 import com.group12.course.entity.strategy.ConflictCourseStrategy;
 import com.group12.course.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +27,8 @@ public class CourseDao {
     KlassDao klassDao;
     @Autowired
     TeamStrategyDao teamStrategyDao;
+    @Autowired
+    KlassStudentDao klassStudentDao;
 
     public Course getCourse(Long id){
         return courseMapper.selectCourseById(id);
@@ -82,6 +86,20 @@ public class CourseDao {
 
     public List<Course> getSubCourseBySeminarMainCourseId(Long seminarMainCourseId){
         return courseMapper.selectSubCourseBySeminarMainCourseId(seminarMainCourseId);
+    }
+
+    /**
+     * 根据学生id 查找所有课程
+     * @param studentId
+     * @return
+     */
+    public List<Course> getAllCoureseByStudentId(Long studentId){
+        List<KlassStudent> klassStudentList = klassStudentDao.selectKlassStudentByStudentId(studentId);
+        List<Course> courseList = new ArrayList<>();
+        for (KlassStudent klassStudent:klassStudentList) {
+            courseList.add(klassStudent.getCourse());
+        }
+        return courseList;
     }
 
 }
