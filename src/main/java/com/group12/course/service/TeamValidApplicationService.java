@@ -10,6 +10,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 组队审核申请 TeamValidApplication service 层
+ *
+ * @author Xu Gang
+ * @date 2018年12月26日
+ */
 @Service
 public class TeamValidApplicationService {
 

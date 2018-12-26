@@ -94,12 +94,12 @@ public class SeminarProgressController {
      */
     @MessageMapping("/Socket/course/courseId/seminar/{seminarId}/class/{classId}/question")
     @SendTo("/seminarSocket/question")
-    public QuestionVO askQuestion(@DestinationVariable Long seminarId, @DestinationVariable Long classId,
+    public QuestionVO askQuestion(@Header("jwt")String token,@DestinationVariable Long seminarId, @DestinationVariable Long classId,
                                   @DestinationVariable Long courseId, Message message,QuestionVO questionVO){
 
         Student student = new Student();
         student.setId(1L);
-
+        System.out.println(token);
         Question question = questionService.askQuestion(courseId,seminarId,classId,new Question(questionVO),student);
         return new QuestionVO(question);
     }
@@ -141,6 +141,7 @@ public class SeminarProgressController {
         Teacher teacher = new Teacher();
         teacher.setId(1L);
 
+        System.out.println(token);
         return new AttendanceVO(attendanceService.nextAttendance(seminarId,classId,attendanceId));
     }
 

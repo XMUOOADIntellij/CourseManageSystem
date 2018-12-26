@@ -34,13 +34,14 @@ class JwtVerificationAop {
     public void log() {}
 
     /**
-     * 前置通知
+     * 环绕通知
+     * 当 jwt 不合法时
+     * 不执行 controller 层的方法
      *
-     * @param proceedingJoinPoint
+     * @param proceedingJoinPoint 代表 controller 层的切点方法
      */
-    @Around("log()")//log()方法之前
+    @Around("log()")
     public Object checkJwt(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
-        //接收请求，记录请求
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (sra!=null){
             HttpServletRequest request = sra.getRequest();
