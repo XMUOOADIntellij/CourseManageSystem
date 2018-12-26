@@ -1,22 +1,19 @@
 package com.group12.course.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.group12.course.controller.vo.RoundScoreInfoVO;
-import com.group12.course.dao.SeminarDao;
+import com.group12.course.entity.KlassRound;
 import com.group12.course.entity.Round;
 import com.group12.course.entity.RoundScore;
 import com.group12.course.entity.Seminar;
 import com.group12.course.service.CourseService;
 import com.group12.course.service.RoundService;
 import com.group12.course.service.TeamService;
-import com.group12.course.controller.vo.RoundScoreVO;
 import com.group12.course.controller.vo.RoundVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +32,7 @@ public class RoundController {
     CourseService courseService;
     @Autowired
     TeamService teamService;
+
 
     /**
      * 获取某轮次下的所有讨论课
@@ -130,7 +128,6 @@ public class RoundController {
 
     /**
      * 获取某轮次下某组的成绩信息
-     *
      * @param response
      * @return
      */
@@ -148,29 +145,14 @@ public class RoundController {
 
 
     /*TODO 新增查看本轮次下所有班级的api路径*/
+    @PostMapping(value="/klassround",produces = "application/json;charset=utf-8")
+    public void createKlassRound(@RequestBody List<KlassRound> klassRoundList,HttpServletResponse response){
+        int status = roundService.addKlassRoundList(klassRoundList);
+        if (status == 0) {
+            response.setStatus(403);
+        } else {
+            response.setStatus(201);
+        }
+    }
 
-
-//    /**
-//     * 按id 修改轮次成绩信息
-//     * @param roundScoreInfoVO
-//     * @param roundId
-//     * @param teamId
-//     * @param response
-//     */
-//    @PutMapping(value = "/{roundId/team/{teamId}/roundscore", produces = "application/json;charset=utf-8")
-//    public void updateRoundScore(@RequestBody RoundScoreInfoVO roundScoreInfoVO, @PathVariable Long roundId, @PathVariable Long teamId, HttpServletResponse response) {
-//        RoundScore roundScore = new RoundScore();
-//        roundScore.setRound(roundService.getRound(roundId));
-//        roundScore.setTeam(teamService.getTeamByTeamId(teamId));
-//        roundScore.setPresentationScore(roundScoreInfoVO.getPresentationScore());
-//        roundScoreInfoVO.setQuestionScore(roundScoreInfoVO.getQuestionScore());
-//        roundScore.setReportScore(roundScoreInfoVO.getReportScore());
-//        int status = roundService.updateRoundScore(roundScore);
-//        if (status == 0) {
-//            response.setStatus(403);
-//        } else {
-//            response.setStatus(201);
-//        }
-//
-//   }
 }

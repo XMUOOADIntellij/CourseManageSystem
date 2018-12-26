@@ -75,6 +75,11 @@
     where seminar_id = #{seminarId,jdbcType=BIGINT}
   </delete>
 
+  <delete id="deleteByKlassId" parameterType="java.lang.Long" >
+    delete from klass_seminar
+    where klass_id = #{klassId,jdbcType=BIGINT}
+  </delete>
+
   <update id="updateKlassSeminar" parameterType="klassSeminar">
     update klass_seminar
     <set >

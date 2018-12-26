@@ -1,9 +1,12 @@
 package com.group12.course.dao;
 
+import com.group12.course.entity.Klass;
 import com.group12.course.entity.KlassRound;
 import com.group12.course.mapper.KlassRoundMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class KlassRoundDao {
@@ -19,8 +22,8 @@ public class KlassRoundDao {
         return klassRoundMapper.deleteKlassRound(id);
     }
 
-    public int addKlassRound(KlassRound klass){
-        return klassRoundMapper.addKlassRound(klass);
+    public int addKlassRound(KlassRound klassRound){
+        return klassRoundMapper.addKlassRound(klassRound);
     }
 
     public int updateKlassRound(KlassRound klass){
@@ -30,4 +33,5 @@ public class KlassRoundDao {
     public KlassRound getKlassRoundByKlassIdAndRoundId(Long klassId,Long roundId){
         return klassRoundMapper.selectKlassRoundByKlassIdAndRoundId(klassId,roundId);
     }
+
 }

@@ -100,24 +100,7 @@ public class SeminarDao {
      */
     public Integer deleteSeminarById(Long seminarId) {
         if (seminarMapper.selectSeminarById(seminarId) != null) {
-            List<KlassSeminar> klassSeminarList;
-            klassSeminarList = klassSeminarDao.listKlassSeminarBySeminarId(seminarId);
-
-            /**
-             *  根据找到的classseminar
-             *  删除attendance
-             *  删除question
-             *  删除seminar_score
-             */
-            for (KlassSeminar item : klassSeminarList) {
-                Long klassSeminarId = item.getId();
-                questionDao.deleteQuestionByKlassSeminarId(klassSeminarId);
-                attendanceDao.deleteAttendanceByKlassSeminarId(klassSeminarId);
-                scoreDao.deleteSeminarScoreByKlassSeminarId(klassSeminarId);
-            }
-            //然后删除class_seminar
             klassSeminarDao.deleteKlassSeminarBySeminarId(seminarId);
-
             //删除讨论课
             return seminarMapper.deleteSeminarById(seminarId);
         }

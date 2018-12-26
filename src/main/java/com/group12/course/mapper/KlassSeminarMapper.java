@@ -31,6 +31,12 @@ public interface KlassSeminarMapper {
     Integer deleteBySeminarId(Long seminarId);
 
     /**
+     * 通过班级id删除班级讨论课
+     * @param klassId 班级id
+     * @return 成功数目
+     */
+    Integer deleteByKlassId(Long klassId);
+    /**
      * 通过id查找班级讨论课
      * @param id 班级讨论课id
      * @return 班级讨论课记录
@@ -79,4 +85,11 @@ public interface KlassSeminarMapper {
      * @return 班级讨论课列表
      */
     List<KlassSeminar> listKlassSeminarByKlassIdList(@Param("klassIdList")List<Long>klassIdList);
+
+    /**
+     * 通过班级id列出班级讨论课
+     * @param klassId 班级id
+     * @return 班级讨论课列表
+     */
+    List<KlassSeminar> listKlassSeminarByKlassId(Long klassId);
 }
