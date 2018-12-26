@@ -60,7 +60,7 @@
     <script src="../../static/js/request.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body>
+  <body onload="initTeacher()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -157,7 +157,7 @@
                           placeholder="输入教工号/姓名"
                         />
                         <span class="input-group-append">
-                          <button class="btn btn-primary" type="button">
+                          <button class="btn btn-primary" type="button" onclick="searchTeacher()">
                             搜索
                           </button>
                         </span>
