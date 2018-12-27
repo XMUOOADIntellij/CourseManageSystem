@@ -30,13 +30,13 @@ public class CourseVO {
 
     private Integer teamMaxMember;
 
-    private Integer teamMingMember;
+    private Integer teamMinMember;
 
     private List<CourseMemberLimitVO> courseMemberLimitVOList;
 
     private Integer relation;
 
-    private List<List<Course>> conflictCourseLists;
+    private List<List<Long>> conflictCourseLists;
 
     public String getcourseName() {
         return courseName;
@@ -111,11 +111,11 @@ public class CourseVO {
     }
 
     public Integer getTeamMingMember() {
-        return teamMingMember;
+        return teamMinMember;
     }
 
     public void setTeamMingMember(Integer teamMingMember) {
-        this.teamMingMember = teamMingMember;
+        this.teamMinMember = teamMingMember;
     }
 
     public List<CourseMemberLimitVO> getCourseMemberLimitVOList() {
@@ -134,11 +134,11 @@ public class CourseVO {
         this.relation = relation;
     }
 
-    public List<List<Course>> getConflictCourseLists() {
+    public List<List<Long>> getConflictCourseLists() {
         return conflictCourseLists;
     }
 
-    public void setConflictCourseLists(List<List<Course>> conflictCourseLists) {
+    public void setConflictCourseLists(List<List<Long>> conflictCourseLists) {
         this.conflictCourseLists = conflictCourseLists;
     }
 
@@ -166,7 +166,7 @@ public class CourseVO {
                 ", teamStartTime=" + teamStartTime +
                 ", teamEndTime=" + teamEndTime +
                 ", teamMaxMember=" + teamMaxMember +
-                ", teamMingMember=" + teamMingMember +
+                ", teamMingMember=" + teamMinMember +
                 ", courseMemberLimitVOList=" + courseMemberLimitVOList +
                 ", CourseRequire=" + relation +
                 ", conflictCoursesList=" + conflictCourseLists +

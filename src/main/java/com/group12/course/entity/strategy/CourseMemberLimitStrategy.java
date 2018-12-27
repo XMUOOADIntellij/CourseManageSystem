@@ -29,7 +29,6 @@ public class CourseMemberLimitStrategy extends Strategy {
     }
 
     public CourseMemberLimitStrategy(CourseMemberLimitVO courseMemberLimitVO){
-        this.course = courseMemberLimitVO.getCourse();
         this.minMember = courseMemberLimitVO.getMinMember();
         this.maxMember = courseMemberLimitVO.getMaxMember();
     }
