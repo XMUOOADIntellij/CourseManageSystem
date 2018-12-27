@@ -20,19 +20,22 @@ function connect() {
       });
     }
   );
-    var socket = new SockJS('http://localhost:8080/Socket');
-    console.log("${createLink(uri: '/stomp')}");
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function(frame) {
-        setConnected(true);
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/seminarSocket/progress', function(greeting){
-            showGreeting(JSON.parse(greeting.body).content);
-        });
-        stompClient.subscribe('/seminarSocket/question', function(greeting){
-            showGreeting(JSON.parse(greeting.body).content);
-        });
-    });
+  var socket = new SockJS("http://localhost:8080/Socket");
+  console.log("${createLink(uri: '/stomp')}");
+  stompClient = Stomp.over(socket);
+  stompClient.connect(
+    {},
+    function(frame) {
+      setConnected(true);
+      console.log("Connected: " + frame);
+      stompClient.subscribe("/seminarSocket/progress", function(greeting) {
+        showGreeting(JSON.parse(greeting.body).content);
+      });
+      stompClient.subscribe("/seminarSocket/question", function(greeting) {
+        showGreeting(JSON.parse(greeting.body).content);
+      });
+    }
+  );
 }
 function disconnect() {
   if (stompClient != null) {

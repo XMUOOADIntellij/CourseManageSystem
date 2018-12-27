@@ -4,7 +4,7 @@ $.ajaxSetup({
       xhr.setRequestHeader("Authorization", localStorage.jwt);
     }
   },
-  error(data){
+  error(data) {
     console.log(data);
   },
   statusCode: {
@@ -15,6 +15,9 @@ $.ajaxSetup({
     403: function() {
       alert("未授权访问");
       window.location.href = "../../templates/common/login.html";
+    },
+    500: function() {
+      window.location.href = "../../templates/common/500.html";
     }
   }
 });
