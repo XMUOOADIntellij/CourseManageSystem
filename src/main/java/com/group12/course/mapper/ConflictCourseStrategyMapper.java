@@ -20,11 +20,7 @@ public interface ConflictCourseStrategyMapper {
 
     int updateConflictCourseStrategy(ConflictCourseStrategy record);
 
-    /**
-     * 根据课程id找到冲突课程记录
-     * @param courseId
-     * @return
-     */
-    ConflictCourseStrategy selectConflictCourseStrategyByCourseId(Long courseId);
+    List<ConflictCourseStrategy> selectAllConflictCourseStrategy();
+
 
 }

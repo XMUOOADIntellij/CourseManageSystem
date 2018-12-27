@@ -12,7 +12,7 @@ import java.util.List;
 public interface TeamStrategyMapper {
     int deleteTeamStrategyByCourseId(Long courseId);
 
-    int addTeamStrategy(TeamStrategy teamStrategy);
+    int addTeamStrategy(Long courseId,Integer strategySerial,String strategyName,Long strategyId);
 
     List<TeamStrategy> selectTeamStrategyByCourseId(Long id);
 
