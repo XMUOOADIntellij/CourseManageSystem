@@ -34,6 +34,7 @@
     <script src="../../static/js/vendors/jquery-jvectormap-world-mill.js"></script>
     <script src="../../static/js/vendors/jquery.sparkline.min.js"></script>
     <script src="../../static/js/vendors/jquery.tablesorter.min.js"></script>
+
     <script src="../../static/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="../../static/js/vendors/chart.bundle.min.js"></script>
     <script src="../../static/js/vendors/selectize.min.js"></script>
@@ -74,7 +75,7 @@
                 />Cms
               </a>
               <div class="d-flex order-lg-2 ml-auto">
-<div class="dropdown">
+                <div class="dropdown">
                   <a
                     class="nav-link pr-0 leading-none"
                     data-toggle="dropdown"
@@ -94,7 +95,6 @@
                   <div
                     class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
                   >
-
                     <a class="dropdown-item" href="../common/login.html">
                       <i class="dropdown-icon fe fe-log-out"></i> 退出登录
                     </a>
@@ -115,7 +115,6 @@
         <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
           <div class="container">
             <div class="row align-items-center">
-
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item">
@@ -157,7 +156,11 @@
                           placeholder="输入学工号/姓名"
                         />
                         <span class="input-group-append">
-                          <button class="btn btn-primary" type="button" onclick="searchStudent()">
+                          <button
+                            class="btn btn-primary"
+                            type="button"
+                            onclick="searchStudent()"
+                          >
                             搜索
                           </button>
                         </span>
