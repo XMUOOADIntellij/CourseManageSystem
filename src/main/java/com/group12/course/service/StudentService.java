@@ -35,7 +35,7 @@ public class StudentService {
      * @return 修改的个数
      * */
     public int updateStudent(Student student){
-        return studentDao.changeStudent(student);
+        return studentDao.changeStudentByID(student);
     }
 
     /**
