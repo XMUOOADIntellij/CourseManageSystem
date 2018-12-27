@@ -65,4 +65,10 @@ public interface QuestionMapper {
      * @return 问题list
      */
     List<Question> listQuestionByKlassSeminarIdAndTeamId(Long klassSeminarId,Long teamId);
+
+    /**
+     * 获得某次
+     * @return
+     */
+    Question selectUnselectQuestionByAttendanceIdAndStudentId(Long attendanceId,Long studentId);
 }

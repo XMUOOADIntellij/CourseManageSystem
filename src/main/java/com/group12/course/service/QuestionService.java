@@ -63,9 +63,9 @@ public class QuestionService {
     public Question askQuestion(Long seminarId, Long classId, Question question, Student student) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         Klass klass = klassDao.getKlass(classId);
-
         if (klass != null) {
             if (klassSeminar != null) {
+
                 question.setKlassSeminar(klassSeminar);
                 question.setStudent(student);
                 question.setScore(null);
@@ -79,7 +79,6 @@ public class QuestionService {
                 } else {
                     team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), course.getId());
                 }
-
                 question.setTeam(team);
                 if (questionDao.insertQuetion(question) != 0) {
                     return question;

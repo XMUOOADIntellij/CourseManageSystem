@@ -257,11 +257,6 @@ public class ScoreDao {
                 seminarScore.getKlassSeminar().getId(), seminarScore.getTeam().getId()
         );
 
-        //按照比例更改总分
-        seminarScore.setTotalScore(
-                calculateTotalScore(seminarScore.getPresentationScore(), seminarScore.getQuestionScore(),
-                        seminarScore.getReportScore(), course));
-
         seminarScoreMapper.updateSeminarScore(seminarScore);
 
         //更改RoundScore

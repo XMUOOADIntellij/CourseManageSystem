@@ -165,7 +165,7 @@ public class ScoreService {
     }
 
     /**
-     * 老师获得轮下的讨论课成绩
+     * 老师、学生获得轮下的讨论课成绩
      *
      * @param roundId 轮次id
      * @param teamId  队伍id

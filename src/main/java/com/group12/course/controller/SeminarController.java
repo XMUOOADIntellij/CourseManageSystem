@@ -73,6 +73,7 @@ public class SeminarController {
         String token = request.getHeader("Authorization");
         Teacher teacher = Jwt.unSign(token,Teacher.class);
 
+        System.out.println(seminarVo.getCourseId());
         Seminar seminar = new Seminar(seminarVo);
         seminarService.createSeminar(seminar,teacher);
 

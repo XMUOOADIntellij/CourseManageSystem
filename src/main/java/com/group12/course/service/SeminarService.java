@@ -45,7 +45,7 @@ public class SeminarService {
         record.setCourse(courseDao.getCourse(record.getCourse().getId()));
 
         if (course != null) {
-            if (course.getSeminarMainCourse() != null) {
+            if (course.getSeminarMainCourse() == null) {
                 if (course.getTeacher().getId().equals(
                         teacher.getId())) {
                     //为record增加serial
@@ -188,6 +188,7 @@ public class SeminarService {
             Course course = klassSeminar.getKlass().getCourse();
             if (course.getTeacher().getId().equals(teacher.getId())) {
                 //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
+
                 klassSeminar.setSeminarStatus(1);
                 if (klassSeminarDao.updateKlassSeminar(klassSeminar) == 1) {
                     //开始成功后，为该班级小组添加成绩记录
