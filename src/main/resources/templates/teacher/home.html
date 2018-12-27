@@ -60,7 +60,7 @@
     <script src="../../static/js/request.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body onload="init()">
+  <body onload="initHome()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -146,7 +146,11 @@
                       ><i class="fe fe-book"></i> 我的课程</a
                     >
                   </li>
-
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="./seminar-home.html"
+                    ><i class="fe fe-book-open"></i> 我的讨论课</a
+                    >
+                  </li>
                   <li class="nav-item pl-5">
                     <a class="nav-link" href="progress.html"
                       ><i class="fe fe-play-circle"></i> 正在进行中</a
@@ -227,10 +231,4 @@
       </footer>
     </div>
   </body>
-  <script>
-    function init() {
-      $("#name").html(Cookies.get("name"));
-      $("#account").html(Cookies.get("account"));
-    }
-  </script>
 </html>

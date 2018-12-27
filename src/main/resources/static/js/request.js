@@ -1,4 +1,4 @@
-//测试通过 dom
+//测试通过
 function bindUser() {
     let ata = { account: $("#account").val(), password: $("#password").val() };
     $.ajax({
@@ -63,9 +63,10 @@ function getUserInfo() {
         }
     });
 }
-//dom
+//
 function sendPassword() {
-    let ata = $("#account").val();
+    // let ata = $("#account").val();
+    let ata="333";
     console.log(ata);
     $.ajax({
         type: "get",
@@ -96,11 +97,10 @@ function sendPassword() {
         }
     });
 }
-//状态码存疑 dom
+//状态码存疑
 function editPassword() {
-    let ata = {
-        password: $("#password").val()
-    };
+    // let ata = {password: $("#password").val()};
+    let ata="222";
     console.log(ata);
     $.ajax({
         type: "put",
@@ -129,11 +129,14 @@ function editPassword() {
         }
     });
 }
-//状态码存疑 dom
+//状态码存疑
 function editEmail() {
+/*
     let ata = {
         email: $("#email").val()
     };
+*/
+    let ata="333@qq.com";
     console.log(ata);
     $.ajax({
         type: "put",
@@ -159,12 +162,13 @@ function editEmail() {
         }
     });
 }
-//dom
+//
 function activeTeacher() {
     // let ata = {account:$("#account").val(),password:$("#password").val()}
-    let ata = {
+/*    let ata = {
         password: $("#password").val()
-    };
+    };*/
+    let ata="555";
     console.log(ata);
     alert("input");
     $.ajax({
@@ -396,7 +400,7 @@ function getRoundList() {
 function getSeminarList(roundId) {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/round/" + roundId + "/seminar",
+        url: "http://xug98.cn:8080/round/" + "1" + "/seminar",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -629,13 +633,12 @@ function createCourse() {
 function createSeminar() {
     Cookies.set("course", "1");
     let ata = {
-        roundId: $("#select-round-id").val(),
-
-        seminarName: $("#name").val(),
-        introduction: $("#introduction").val(),
-        maxTeam: $("#select-max-team").val(),
-        visible: $("#switch-visible").is(":checked"),
-        seminarSerial: $("#select-seminar-serial").val(),
+        roundId: "1",
+        seminarName: "1",
+        introduction: "1",
+        maxTeam: "3",
+        visible: true,
+        seminarSerial: "1",
         enrollStartTime: convertTime($("#input-start").val()),
         enrollEndTime: convertTime($("#input-end").val()),
         courseId: Cookies.get("course")
@@ -698,15 +701,15 @@ function deleteSeminar() {
 function updateSeminar() {
     Cookies.set("seminar", "1");
     let ata = {
-        seminarName: $("#name").val(),
-        introduction: $("#introduction").val(),
-        maxTeam: $("#select-max-team").val(),
-        visible: $("#switch-visible").is(":checked"),
-        seminarSerial: $("#select-seminar-serial").val(),
+        roundId: "1",
+        seminarName: "1",
+        introduction: "1",
+        maxTeam: "3",
+        visible: true,
+        seminarSerial: "1",
         enrollStartTime: convertTime($("#input-start").val()),
         enrollEndTime: convertTime($("#input-end").val()),
-        roundId: $("#select-round-id").val(),
-        courseId: Cookies.get("courseId")
+        courseId: Cookies.get("course")
     };
     console.log(ata);
     $.ajax({
@@ -1774,8 +1777,8 @@ function updateQuestionScoreByTeam() {
 function activeStudent() {
     // let ata = {account:$("#account").val(),password:$("#password").val()}
     let ata = {
-        password: $("#password").val(),
-        email: $("#email").val()
+        password: "22",
+        email: "22@qq.com"
     };
     console.log(ata);
     alert("input");
@@ -2108,7 +2111,7 @@ function updateAttendance() {
 }
 //dom
 function bindAdmin() {
-    let ata = { account: $("#account").val(), password: $("#password").val() };
+    let ata = { account: "admin", password: "admin" };
     $.ajax({
         type: "post",
         url: "http://xug98.cn:8080/admin/login",

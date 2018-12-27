@@ -4,6 +4,9 @@ $.ajaxSetup({
       xhr.setRequestHeader("Authorization", localStorage.jwt);
     }
   },
+  error(data){
+    conosle.log(data);
+  },
   statusCode: {
     401: function() {
       alert("未授权访问");
