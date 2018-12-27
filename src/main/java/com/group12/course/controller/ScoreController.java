@@ -53,14 +53,15 @@ public class ScoreController {
      * @param courseId 课程id
      * @return 成绩列表
      */
-    @GetMapping(value = "/course/{courseId}/score")
-    public List<RoundScoreVO> getCourseScore(@PathVariable Long courseId,HttpServletRequest request) {
+    @GetMapping(value = "/course/{courseId}/round/{roundId}/score")
+    public List<RoundScoreVO> getCourseScore(@PathVariable Long courseId,@PathVariable Long roundId,
+                                             HttpServletRequest request) {
 
         String token = request.getHeader("Authorization");
         Teacher teacher = Jwt.unSign(token,Teacher.class);
 
         List<RoundScoreVO> scoreVOList = new ArrayList<>();
-        for (RoundScore item : scoreService.getCourseRoundScoreByTeacher(teacher, courseId)) {
+        for (RoundScore item : scoreService.getCourseRoundScoreByTeacher(teacher, courseId,roundId)) {
             scoreVOList.add(new RoundScoreVO(item));
         }
         return scoreVOList;
@@ -69,10 +70,10 @@ public class ScoreController {
 
     @GetMapping(value = "/round/{roundId}/score")
     public List<SeminarScoreVO> getRoundSeminarScore(@PathVariable Long roundId,
-                                                     @RequestBody SeminarScoreVO seminarScoreVO){
+                                                     @RequestParam Long teamId){
 
         List<SeminarScoreVO> seminarScoreVOList = new ArrayList<>();
-        for(SeminarScore seminarScore:scoreService.getRoundSeminarScore(roundId,seminarScoreVO.getTeamId())){
+        for(SeminarScore seminarScore:scoreService.getRoundSeminarScore(roundId,teamId)){
             seminarScoreVOList.add(new SeminarScoreVO(seminarScore));
         }
         return  seminarScoreVOList;

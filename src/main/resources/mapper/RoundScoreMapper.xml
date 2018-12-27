@@ -106,4 +106,15 @@
         </foreach>
     </select>
 
+    <select id="listRoundScoreByRoundIdAndTeamIdList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from round_score
+        where team_id in
+        <foreach collection="teamIdList" item="id" open="(" close=")" separator=",">
+            #{id,jdbcType=BIGINT}
+        </foreach>
+        and round_id =#{roundId,jdbcType=BIGINT}
+    </select>
+
 </mapper>

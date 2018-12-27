@@ -320,8 +320,8 @@ public class ScoreDao {
         return seminarScoreMapper.listSeminarScoreByKlassSeminarIdListAndTeamId(klassSeminarIdList, teamId);
     }
 
-    public List<RoundScore> listRoundScoreByRoundIdList(List<Long> roundId) {
-        return roundScoreMapper.listRoundScoreByRoundIdList(roundId);
+    public List<RoundScore> listRoundScoreByRoundIdAndTeamIdList(List<Long>teamIds,Long roundId) {
+        return roundScoreMapper.listRoundScoreByRoundIdAndTeamIdList(teamIds,roundId);
     }
 
     public List<RoundScore> listRoundScoreByRoundIdListAndTeamId(List<Long> roundIdList, Long teamId) {
