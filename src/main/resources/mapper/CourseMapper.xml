@@ -23,7 +23,7 @@
 
   </resultMap>
 
-  <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
+  <cache type="com.group12.course.tools.MybatisRedisCache" />
 
 
   <sql id="Base_Column_List" >

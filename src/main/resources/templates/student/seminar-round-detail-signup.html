@@ -34,6 +34,7 @@
     <script src="../../static/js/vendors/jquery-jvectormap-world-mill.js"></script>
     <script src="../../static/js/vendors/jquery.sparkline.min.js"></script>
     <script src="../../static/js/vendors/jquery.tablesorter.min.js"></script>
+
     <script src="../../static/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="../../static/js/vendors/chart.bundle.min.js"></script>
     <script src="../../static/js/vendors/selectize.min.js"></script>
@@ -71,14 +72,10 @@
                   alt="logo"
                   class="header-brand-img"
                   src="../../static/images/brand.png"
-                />Cms
+                />
+                XCms
               </a>
               <div class="d-flex order-lg-2 ml-auto">
-   <div class="dropdown d-none d-md-flex">
-                  <a class="nav-link icon" href="todo-list.html">
-                    <i class="fe fe-bell"></i> <span class="nav-unread"></span>
-                  </a>
-                </div>
                 <div class="dropdown">
                   <a
                     class="nav-link pr-0 leading-none"
@@ -90,24 +87,22 @@
                       style="background-image: url(../../static/images/male.png)"
                     ></span>
                     <span class="ml-2 d-none d-lg-block">
-                      <span class="text-default">Jane Pearson</span>
-                      <small class="text-muted d-block mt-1"
-                        >Administrator</small
-                      >
+                      <span class="text-default" id="header-name"></span>
+                      <small
+                        class="text-muted d-block mt-1"
+                        id="header-role"
+                      ></small>
                     </span>
                   </a>
                   <div
                     class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
                   >
-                    <a class="dropdown-item" href="account-setting.html">
+                    <a class="dropdown-item" href="./account-setting.html">
                       <i class="dropdown-icon fe fe-settings"></i> 个人设置
                     </a>
-                    <a class="dropdown-item" href="todo-list.html">
 
-                      <i class="dropdown-icon fe fe-mail"></i> 待办事项
-                    </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../common/help.html">
+                    <a class="dropdown-item" href="./help.html">
                       <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
                     </a>
                     <a class="dropdown-item" href="../common/login.html">
@@ -130,7 +125,6 @@
         <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
           <div class="container">
             <div class="row align-items-center">
-
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item pl-5">
@@ -145,10 +139,9 @@
                   </li>
                   <li class="nav-item pl-5">
                     <a class="nav-link" href="./seminar-home.html"
-                    ><i class="fe fe-book-open"></i> 我的讨论课</a
+                      ><i class="fe fe-book-open"></i> 我的讨论课</a
                     >
                   </li>
-
                   <li class="nav-item pl-5">
                     <a class="nav-link" href="progress.html"
                       ><i class="fe fe-play-circle"></i> 正在进行中</a
@@ -164,16 +157,16 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a href="./course-home.html">我的课程</a>
+                  <a href="./seminar-home.html">我的讨论课</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a href="seminar-round.html">讨论课设置</a>
-                </li></li>
+                  <a href="seminar-round.html">轮次信息</a>
+                </li>
                 <li class="breadcrumb-item">
                   <a href="seminar-round-detail.html">讨论课详情</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                  讨论课报告
+                  讨论课报名
                 </li>
               </ol>
             </nav>
@@ -239,7 +232,10 @@
                         <tr>
                           <td><span class="text-muted">1</span></td>
                           <td>
-                            <button class="btn btn-sm btn-danger" onclick="deleteAttendance()">
+                            <button
+                              class="btn btn-sm btn-danger"
+                              onclick="deleteAttendance()"
+                            >
                               取消报名
                             </button>
                           </td>
@@ -259,7 +255,12 @@
                         <tr>
                           <td><span class="text-muted">1</span></td>
                           <td>
-                            <button class="btn btn-sm btn-success" onclick="createAttendance()">报名</button>
+                            <button
+                              class="btn btn-sm btn-success"
+                              onclick="createAttendance()"
+                            >
+                              报名
+                            </button>
                           </td>
                           <td class="text-left">
                             <a href="." class="text-inherit">1-1</a>
@@ -277,7 +278,12 @@
                         <tr>
                           <td><span class="text-muted">1</span></td>
                           <td>
-                            <button class="btn btn-sm btn-warning" onclick="updateAttendance()">更改报名</button>
+                            <button
+                              class="btn btn-sm btn-warning"
+                              onclick="updateAttendance()"
+                            >
+                              更改报名
+                            </button>
                           </td>
                           <td class="text-left">
                             <a href="." class="text-inherit">1-1</a>
@@ -301,19 +307,19 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="row align-items-center flex-row-reverse">
-          <div class="col-12 col-lg-auto mt-0 mt-lg-0 text-center">
-            Copyright © 2018
-            <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
-              >Cms</a
-            >.
+      <footer class="footer">
+        <div class="container">
+          <div class="row align-items-center flex-row-reverse">
+            <div class="col-12 col-lg-auto mt-0 mt-lg-0 text-center">
+              Copyright © 2018
+              <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
+                >Cms</a
+              >.
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
   </body>
 </html>

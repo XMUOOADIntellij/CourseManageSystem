@@ -218,13 +218,13 @@ public class UserController {
         Student jwtStudent = Jwt.unSign(token,Student.class);
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
         // 区分传入的是学生还是教师，调用不同的 Service
-        if (jwtStudent!=null){
+        if (jwtStudent!=null&&user.getEmail()!=null){
             Student tempStudent=new Student(jwtStudent.getAccount());
             tempStudent.setId(jwtStudent.getId());
             tempStudent.setEmail(user.getEmail());
             modifyCount = studentService.updateStudent(tempStudent);
         }
-        else if (jwtTeacher!=null){
+        else if (jwtTeacher!=null&&user.getEmail()!=null){
             Teacher tempTeacher=new Teacher(jwtTeacher.getAccount());
             tempTeacher.setId(jwtTeacher.getId());
             tempTeacher.setEmail(user.getEmail());

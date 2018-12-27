@@ -34,6 +34,7 @@
     <script src="../../static/js/vendors/jquery-jvectormap-world-mill.js"></script>
     <script src="../../static/js/vendors/jquery.sparkline.min.js"></script>
     <script src="../../static/js/vendors/jquery.tablesorter.min.js"></script>
+
     <script src="../../static/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="../../static/js/vendors/chart.bundle.min.js"></script>
     <script src="../../static/js/vendors/selectize.min.js"></script>
@@ -72,6 +73,7 @@
                   class="header-brand-img"
                   src="../../static/images/brand.png"
                 />
+                XCms
               </a>
               <div class="d-flex order-lg-2 ml-auto">
                 <div class="dropdown d-none d-md-flex">
@@ -90,27 +92,24 @@
                       style="background-image: url(../../static/images/male.png)"
                     ></span>
                     <span class="ml-2 d-none d-lg-block">
-                      <span class="text-default">A</span>
-                      <small class="text-muted d-block mt-1"
-                        >Administrator</small
-                      >
+                      <span class="text-default" id="header-name"></span>
+                      <small
+                        class="text-muted d-block mt-1"
+                        id="header-role"
+                      ></small>
                     </span>
                   </a>
                   <div
                     class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
                   >
-                    <a
-                      class="dropdown-item"
-                      href="../common/account-setting.html"
-                    >
+                    <a class="dropdown-item" href="./account-setting.html">
                       <i class="dropdown-icon fe fe-settings"></i> 个人设置
                     </a>
                     <a class="dropdown-item" href="./todo-list.html">
-
                       <i class="dropdown-icon fe fe-mail"></i> 待办事项
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../common/help.html">
+                    <a class="dropdown-item" href="./help.html">
                       <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
                     </a>
                     <a class="dropdown-item" href="../common/login.html">
@@ -133,7 +132,6 @@
         <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
           <div class="container">
             <div class="row align-items-center">
-
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item pl-5">
@@ -148,7 +146,7 @@
                   </li>
                   <li class="nav-item pl-5">
                     <a class="nav-link" href="./seminar-home.html"
-                    ><i class="fe fe-book-open"></i> 我的讨论课</a
+                      ><i class="fe fe-book-open"></i> 我的讨论课</a
                     >
                   </li>
                   <li class="nav-item pl-5">

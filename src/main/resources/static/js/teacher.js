@@ -116,11 +116,11 @@ function getSeminarList(roundid) {
   });
 }
 */
+
 function initCourseGrade() {
 
     let aRoundScore = getRoundScoreByCourse(); //总成绩
     for (let j = 0; j < aRoundScore.length; j++) {
-
         let aSeminarScore = getSeminarScoreByRound(); //总成绩
   }
 }
@@ -149,4 +149,5 @@ function initProgress() {
 function initHome(){
     $("#name").html(Cookies.get("name"));
     $("#account").html(Cookies.get("account"));
+
 }
