@@ -176,6 +176,10 @@ function activeTeacher() {
         statusCode: {
             400: function() {
                 alert("无法注册！");
+            },
+            200: function() {
+                alert("注册成功");
+                window.location.href = "../common/login.html";
             }
         }
     });
@@ -1935,6 +1939,10 @@ function activeStudent() {
         statusCode: {
             400: function() {
                 alert("无法注册！");
+            },
+            200: function() {
+                alert("注册成功");
+                window.location.href = "../common/login.html";
             }
         }
     });
