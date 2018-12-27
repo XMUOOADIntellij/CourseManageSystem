@@ -11,7 +11,6 @@ import com.group12.course.tools.Jwt;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -79,6 +78,7 @@ public class CourseController {
                     for (CourseMemberLimitVO item : courseMemberLimitVOList) {
                         TeamOrStrategy teamOrStrategy = new TeamOrStrategy();
                         CourseMemberLimitStrategy courseMemberLimitStrategy = new CourseMemberLimitStrategy(item);
+                        courseMemberLimitStrategy.setCourse(courseService.getCourseById(item.getCourseId()));
                         strategyService.addCourseMembetLimitStrategy(courseMemberLimitStrategy);
                         teamOrStrategy.setStrategyName(strategyName3);
                         teamOrStrategy.getStrategyList().add(courseMemberLimitStrategy);
@@ -148,13 +148,13 @@ public class CourseController {
                 strategyService.addTeamStrategy(teamStrategy);
             }
             //记录冲突课程
-            List<List<Course>> conflictCourseLists = courseVO.getConflictCourseLists();
+            List<List<Long>> conflictCourseLists = courseVO.getConflictCourseLists();
             if(conflictCourseLists!=null && !conflictCourseLists.isEmpty()){
-                for (List<Course> conflictCourseList:conflictCourseLists) {
+                for (List<Long> conflictCourseList:conflictCourseLists) {
                     List<ConflictCourseStrategy> conflictCourseStrategyList = new ArrayList<>();
-                    for (Course course1:conflictCourseList) {
+                    for (Long courseId:conflictCourseList) {
                         ConflictCourseStrategy conflictCourseStrategy = new ConflictCourseStrategy();
-                        conflictCourseStrategy.setCourse(course1);
+                        conflictCourseStrategy.setCourse(courseService.getCourseById(courseId));
                         conflictCourseStrategyList.add(conflictCourseStrategy);
                     }
                     List<ConflictCourseStrategy> returnConflictCourseStrategyList = strategyService.addConflictCourseStrategyList(conflictCourseStrategyList);
