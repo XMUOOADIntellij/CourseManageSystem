@@ -21,7 +21,7 @@
     <link href="../favicon.ico" rel="icon" type="image/x-icon" />
     <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Generated: 2018-04-16 09:29:05 +0200 -->
-    <title>任务列表</title>
+    <title>我的主页</title>
     <!-- Font -->
     <link href="../../static/css/fontawesome.min.css" rel="stylesheet" />
 
@@ -60,7 +60,7 @@
     <script src="../../static/js/request.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body onload="initTask()">
+  <body onload="init()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -68,48 +68,38 @@
             <div class="d-flex">
               <a class="header-brand ml-1" href="./home.html">
                 <img
-                        alt="logo"
-                        class="header-brand-img"
-                        src="../../static/images/brand.png"
+                  alt="logo"
+                  class="header-brand-img"
+                  src="../../static/images/brand.png"
                 />
                 XCms
               </a>
               <div class="d-flex order-lg-2 ml-auto">
-                <div class="dropdown d-none d-md-flex">
-                  <a class="nav-link icon" href="todo-list.html">
-                    <i class="fe fe-bell"></i> <span class="nav-unread"></span>
-                  </a>
-                </div>
                 <div class="dropdown">
                   <a
-                          class="nav-link pr-0 leading-none"
-                          data-toggle="dropdown"
-                          href="#"
+                    class="nav-link pr-0 leading-none"
+                    data-toggle="dropdown"
+                    href="#"
                   >
                     <span
-                            class="avatar"
-                            style="background-image: url(../../static/images/male.png)"
+                      class="avatar"
+                      style="background-image: url(../../static/images/male.png)"
                     ></span>
                     <span class="ml-2 d-none d-lg-block">
                       <span class="text-default" id="header-name"></span>
-                      <small class="text-muted d-block mt-1" id="header-role"
-                      ></small
-                      >
+                      <small
+                        class="text-muted d-block mt-1"
+                        id="header-role"
+                      ></small>
                     </span>
                   </a>
                   <div
-                          class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                    class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
                   >
-                    <a
-                            class="dropdown-item"
-                            href="./account-setting.html"
-                    >
+                    <a class="dropdown-item" href="./account-setting.html">
                       <i class="dropdown-icon fe fe-settings"></i> 个人设置
                     </a>
-                    <a class="dropdown-item" href="./todo-list.html">
 
-                      <i class="dropdown-icon fe fe-mail"></i> 待办事项
-                    </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="./help.html">
                       <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
@@ -121,10 +111,10 @@
                 </div>
               </div>
               <a
-                      class="header-toggler d-lg-none ml-3 ml-lg-0"
-                      data-target="#headerMenuCollapse"
-                      data-toggle="collapse"
-                      href="#"
+                class="header-toggler d-lg-none ml-3 ml-lg-0"
+                data-target="#headerMenuCollapse"
+                data-toggle="collapse"
+                href="#"
               >
                 <span class="header-toggler-icon"></span>
               </a>
@@ -134,27 +124,26 @@
         <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
           <div class="container">
             <div class="row align-items-center">
-
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item pl-5">
                     <a class="nav-link" href="./home.html"
-                    ><i class="fe fe-home"></i> 我的主页</a
+                      ><i class="fe fe-home"></i> 我的主页</a
                     >
                   </li>
                   <li class="nav-item pl-5">
                     <a class="nav-link" href="./course-home.html"
-                    ><i class="fe fe-book"></i> 我的课程</a
+                      ><i class="fe fe-book"></i> 我的课程</a
                     >
                   </li>
                   <li class="nav-item pl-5">
                     <a class="nav-link" href="./seminar-home.html"
-                    ><i class="fe fe-book-open"></i> 我的讨论课</a
+                      ><i class="fe fe-book-open"></i> 我的讨论课</a
                     >
                   </li>
                   <li class="nav-item pl-5">
                     <a class="nav-link" href="progress.html"
-                    ><i class="fe fe-play-circle"></i> 正在进行中</a
+                      ><i class="fe fe-play-circle"></i> 正在进行中</a
                     >
                   </li>
                 </ul>
@@ -162,98 +151,38 @@
             </div>
           </div>
         </div>
-        <div class="my-3 my-md-5 mt-5">
+        <div class="my-3 my-md-5">
           <div class="container">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">
-                  我的消息
+                  获取帮助
                 </li>
               </ol>
             </nav>
-            <div class="row row-cards row-deck">
-              <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-12">
                 <div class="card">
-                  <div class="card-body d-flex flex-column">
-                    <h4><a href="#">申请OOAD课程 组队</a></h4>
-                    <div class="text-muted">
-                      OOAD课程2016(1)班的林晓明同学，向您申请组队。
-                    </div>
-                    <div class="text-muted">原因：组员生病</div>
-                    <div class="d-flex align-items-center pt-5 mt-auto">
-                      <div class="avatar avatar-md mr-3">Lxm</div>
-                      <div><a class="text-default">林晓明</a></div>
-
-                      <div class="ml-auto text-muted">
-                        <a
-                          href="javascript:void(0)"
-                          class="icon d-none d-md-inline-block ml-3"
-                          onclick="updateSeminarShare(false)"
-                          ><i class="fe fe-thumbs-down mr-1"></i
-                        ></a>
-                        <a
-                          href="javascript:void(0)"
-                          onclick="updateSeminarShare(true)"
-                          class="icon d-none d-md-inline-block ml-3"
-                          ><i class="fe fe-thumbs-up mr-1"></i
-                        ></a>
+                  <div class="card-body">
+                    <div class="text-wrap p-lg-6">
+                      <h3 id="build-tabler-locally">对系统有特殊需求</h3>
+                      <p>
+                        请给管理员发送邮件(<a href="">123456@qq.com</a
+                        >)，或者线下联系。
+                      </p>
+                      <div class="alert alert-warning">
+                        <strong>注意! </strong
+                        >管理员只负责对特殊数据的增添、删除或重置。
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="card">
-                  <div class="card-body d-flex flex-column">
-                    <h4><a href="#">共享OOAD课程 讨论课</a></h4>
-                    <div class="text-muted">
-                      邱明老师，向您发起共享OOAD课程讨论课的申请。
-                    </div>
-                    <div class="d-flex align-items-center pt-5 mt-auto">
-                      <div class="avatar avatar-md mr-3">Qm</div>
-                      <div><a class="text-default">邱明 老师</a></div>
-                      <div class="ml-auto text-muted">
-                        <a
-                          href="javascript:void(0)"
-                          class="icon d-none d-md-inline-block ml-3"
-                          onclick="updateTeamValid(false)"
-                          ><i class="fe fe-thumbs-down mr-1"></i
-                        ></a>
-                        <a
-                          href="javascript:void(0)"
-                          onclick="updateTeamValid(true)"
-                          class="icon d-none d-md-inline-block ml-3"
-                          ><i class="fe fe-thumbs-up mr-1"></i
-                        ></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="card">
-                  <div class="card-body d-flex flex-column">
-                    <h4><a href="#">共享OOAD课程 组队</a></h4>
-                    <div class="text-muted">
-                      邱明老师，向您发起共享OOAD课程组队的申请。
-                    </div>
-                    <div class="d-flex align-items-center pt-5 mt-auto">
-                      <div class="avatar avatar-md mr-3">Qm</div>
-                      <div><a class="text-default">邱明 老师</a></div>
-                      <div class="ml-auto text-muted">
-                        <a
-                          href="javascript:void(0)"
-                          class="icon d-none d-md-inline-block ml-3"
-                          onclick="updateTeamShare(false)"
-                          ><i class="fe fe-thumbs-down mr-1"></i
-                        ></a>
-                        <a
-                          href="javascript:void(0)"
-                          onclick="updateTeamShare(true)"
-                          class="icon d-none d-md-inline-block ml-3"
-                          ><i class="fe fe-thumbs-up mr-1"></i
-                        ></a>
-                      </div>
+                      <h3 id="bugs-and-feature-requests">
+                        发现系统的Bugs或有其他建议
+                      </h3>
+                      <p>
+                        请访问我们Github项目地址，<a
+                          href="https://github.com/tabler/tabler/issues/new"
+                          >创建一个issue</a
+                        >。
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -276,12 +205,4 @@
       </footer>
     </div>
   </body>
-  <script>
-    $(".list-group").on("click", "*", function() {
-      let cid = $(this)
-        .closest(".card")
-        .attr("id");
-      setCookie("course", cid);
-    });
-  </script>
 </html>

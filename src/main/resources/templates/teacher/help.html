@@ -60,7 +60,7 @@
   <script src="../../static/js/request.js"></script>
   <script src="../../static/js/teacher.js"></script>
 </head>
-<body onload="init()">
+<body onload="initHome()">
 <div class="page">
   <div class="page-main">
     <div class="header py-4">
@@ -75,6 +75,11 @@
             XCms
           </a>
           <div class="d-flex order-lg-2 ml-auto">
+            <div class="dropdown d-none d-md-flex">
+              <a class="nav-link icon" href="todo-list.html">
+                <i class="fe fe-bell"></i> <span class="nav-unread"></span>
+              </a>
+            </div>
             <div class="dropdown">
               <a
                       class="nav-link pr-0 leading-none"
@@ -101,7 +106,10 @@
                 >
                   <i class="dropdown-icon fe fe-settings"></i> 个人设置
                 </a>
+                <a class="dropdown-item" href="./todo-list.html">
 
+                  <i class="dropdown-icon fe fe-mail"></i> 待办事项
+                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="./help.html">
                   <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
@@ -159,57 +167,31 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">
-              我的主页
+              获取帮助
             </li>
           </ol>
         </nav>
         <div class="row">
-          <div class="col-lg-4">
+
+          <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
-                <div class="media">
-                      <span
-                              class="avatar avatar-xxl mr-5"
-                              style="background-image: url(../../static/images/male.png)"
-                      ></span>
-                  <div class="media-body">
-                    <h4 class="mt-4" id="name"></h4>
-                    <p class="text-muted mt-0" id="account"></p>
+                <div class="text-wrap p-lg-6">
+                  <h3 id="build-tabler-locally">对系统有特殊需求</h3>
+                  <p>请给管理员发送邮件(<a href="">123456@qq.com</a>)，或者线下联系。</p>
+                  <div class="alert alert-warning">
+                    <strong>注意!  </strong>管理员只负责对特殊数据的增添、删除或重置。
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-8">
-            <div class="card p-3">
-              <div class="d-flex align-items-center">
-                    <span class="stamp stamp-md bg-blue mr-3">
-                      <i class="fe fe-dollar-sign"></i>
-                    </span>
-                <div>
-                  <h5 class="m-0">
-                    <a href="./course-home.html">我的课程</a>
-                  </h5>
-                </div>
-              </div>
-            </div>
-            <div class="card p-3">
-              <div class="d-flex align-items-center">
-                    <span class="stamp stamp-md bg-blue mr-3">
-                      <i class="fe fe-dollar-sign"></i>
-                    </span>
-                <div>
-                  <h5 class="m-0">
-                    <a href="seminar-round.html">讨论课设置</a>
-                  </h5>
+                  <h3 id="bugs-and-feature-requests">发现系统的Bugs或有其他建议</h3>
+                  <p>请访问我们Github项目地址，<a href="https://github.com/tabler/tabler/issues/new">创建一个issue</a>。</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      </div>
     </div>
-  </div>
   <footer class="footer">
     <div class="container">
       <div class="row align-items-center flex-row-reverse">
