@@ -175,4 +175,8 @@ public class QuestionService {
         }
     }
 
+    public Question selectQuestionById(Long questionId){
+        return questionDao.getQustionById(questionId);
+    }
+
 }

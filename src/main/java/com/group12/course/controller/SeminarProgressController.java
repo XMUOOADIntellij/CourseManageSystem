@@ -47,8 +47,8 @@ public class SeminarProgressController {
      */
     @MessageMapping(value = "/Socket/seminar/{seminarId}/class/{classId}/start")
     @SendTo("/seminarSocket/progress")
-    public SeminarVO startSeminar(@Header("jwt")String token,@DestinationVariable Long seminarId, @DestinationVariable Long classId,
-                                 Message message){
+    public SeminarVO startSeminar(@Header("jwt")String token,@DestinationVariable Long seminarId,
+                                  @DestinationVariable Long classId, Message message){
         Teacher teacher = Jwt.unSign(token,Teacher.class);
         return new SeminarVO(seminarService.startSeminar(teacher,seminarId,classId));
     }
@@ -85,8 +85,8 @@ public class SeminarProgressController {
      */
     @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/question")
     @SendTo("/seminarSocket/question")
-    public QuestionVO askQuestion(@Header("jwt")String token,@DestinationVariable Long seminarId, @DestinationVariable Long classId,
-                                  Message message,QuestionVO questionVO){
+    public QuestionVO askQuestion(@Header("jwt")String token,@DestinationVariable Long seminarId,
+                                  @DestinationVariable Long classId, Message message,QuestionVO questionVO){
 
         Student student = Jwt.unSign(token,Student.class);
         Question question = questionService.askQuestion(seminarId,classId,new Question(questionVO),student);

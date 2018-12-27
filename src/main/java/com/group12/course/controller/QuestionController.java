@@ -38,5 +38,9 @@ public class QuestionController {
         return questionService.scoreQuestion(question,teacher);
     }
 
+    @GetMapping("/{questionId}")
+    public QuestionVO getQuestion(@PathVariable Long questionId){
+        return new QuestionVO(questionService.selectQuestionById(questionId));
+    }
 }
 
