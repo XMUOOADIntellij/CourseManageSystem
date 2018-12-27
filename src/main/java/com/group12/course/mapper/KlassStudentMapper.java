@@ -16,7 +16,11 @@ public interface KlassStudentMapper {
 
     List<KlassStudent> selectKlassStudentByStudentId(Long studentId);
 
+    List<KlassStudent> selectKlassStudentByKlassId(Long klassId);
+
     int deleteKlassStudentByKlassId(Long klassId);
+
+    int deleteKlassStudentByStudentId(Long studentId);
 
     int deleteKlassStudentByKlassIdAndStudentId(@Param("klassId") Long klassId,@Param("studentId") Long studentId);
 

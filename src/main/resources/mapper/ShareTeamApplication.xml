@@ -26,19 +26,16 @@
         where id=#{id,jdbcType=BIGINT}
     </select>
 
-    <select id="selectShareTeamApplicationByMainCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="selectShareTeamApplicationByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from share_team_application
-        where main_course_id=#{id,jdbcType=BIGINT}
+        where main_course_id=#{courseId,jdbcType=BIGINT} or sub_course_id=#{courseId,jdbcType=BIGINT}
     </select>
 
     <insert id="addShareTeamApplication" useGeneratedKeys="true" keyProperty="id">
         insert into share_team_application
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                id,
-            </if>
             <if test="mainCourse != null" >
                 main_course_id,
             </if>
@@ -53,9 +50,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                #{id},
-            </if>
             <if test="mainCourse != null" >
                 #{mainCourse.id},
             </if>
