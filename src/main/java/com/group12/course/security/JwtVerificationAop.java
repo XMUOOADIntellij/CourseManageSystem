@@ -30,6 +30,7 @@ class JwtVerificationAop {
     @Pointcut("!execution(public * com.group12.course.controller.UserController.login(..))" +
             "&& !execution(public * com.group12.course.controller.UserController.forgetPassword(..))" +
             "&& !execution(public * com.group12.course.controller.SeminarProgressController.*(..))" +
+            "&& !execution(public * com.group12.course.controller.AdminController.*(..))" +
             "&& execution(public * com.group12.course.controller.*.*(..))")
     public void log() {}
 
@@ -52,14 +53,6 @@ class JwtVerificationAop {
                 stopWatch.start();
                 Object result = proceedingJoinPoint.proceed();
                 stopWatch.stop();
-                HttpServletResponse response = sra.getResponse();
-                if (response!=null){
-                    Map<String,String> errorMessage = new HashMap<>(16);
-                    errorMessage.put("message","jwt token is expired");
-                    String json = JSON.toJSONString(errorMessage);
-                    response.setStatus(40);
-                    response.getWriter().write(json);
-                }
                 return result;
             }
             else {
