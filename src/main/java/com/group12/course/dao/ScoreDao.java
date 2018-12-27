@@ -257,8 +257,6 @@ public class ScoreDao {
                 seminarScore.getKlassSeminar().getId(), seminarScore.getTeam().getId()
         );
 
-        seminarScoreMapper.updateSeminarScore(seminarScore);
-
         //更改RoundScore
         Round round = seminarScore.getKlassSeminar().getSeminar().getRound();
         List<KlassSeminar> klassSeminarList = new ArrayList<>();
