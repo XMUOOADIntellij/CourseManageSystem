@@ -4,18 +4,18 @@ import com.group12.course.entity.Course;
 
 public class CourseMemberLimitVO {
 
-    private Course course;
+    private Long courseId;
 
     private Integer maxMember;
 
     private Integer minMember;
 
-    public Course getCourse() {
-        return course;
+    public Long getCourseId() {
+        return courseId;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
     }
 
     public Integer getMaxMember() {
@@ -37,7 +37,7 @@ public class CourseMemberLimitVO {
     @Override
     public String toString() {
         return "CourseMemberLimitVO{" +
-                "course=" + course +
+                "course=" + courseId +
                 ", maxMember=" + maxMember +
                 ", minMember=" + minMember +
                 '}';
