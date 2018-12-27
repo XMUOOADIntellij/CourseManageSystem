@@ -91,7 +91,6 @@ public class ScoreService {
     }
 
     /**
-     * 老师获得学生课程下的每轮成绩
      * 老师获得自己课程学生一轮下的成绩
      *
      * @param teacher  老师对象
@@ -120,6 +119,21 @@ public class ScoreService {
             }
         } else {
             throw new RecordNotFoundException("找不到该课程记录");
+        }
+    }
+
+    public RoundScore getCourseRoundScoreByStudent(Student student,Long courseId,Long roundId){
+        Course course = courseDao.getCourse(courseId);
+        if(course!=null){
+            Team team;
+            if(course.getTeamMainCourse()==null){
+                team = teamDao.getTeamByStudentIdAndCourseId(student.getId(),courseId);
+            }else{
+                team = teamDao.getTeamByStudentIdAndCourseId(student.getId(),course.getTeamMainCourse().getId());
+            }
+            return scoreDao.selectRoundScoreByRoundIdAndTeamId(roundId,team.getId());
+        }else{
+            throw new RecordNotFoundException("课程记录没有找到");
         }
     }
 

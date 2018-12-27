@@ -335,4 +335,8 @@ public class ScoreDao {
     public SeminarScore selectSeminarScoreByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {
         return seminarScoreMapper.selectSeminarScoreByKlassSeminarIdAndTeamId(klassSeminarId, teamId);
     }
+
+    public RoundScore selectRoundScoreByRoundIdAndTeamId(Long roundId,Long teamId){
+        return  roundScoreMapper.selectRoundScoreByRoundIdAndTeamId(roundId,teamId);
+    }
 }
