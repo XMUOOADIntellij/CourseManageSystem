@@ -81,7 +81,7 @@ public class TeamDao {
      * 否则为 false
      * */
     public Boolean checkLeaderInTeam(Team team, Course course){
-        if (checkStudentIsInTeam(team.getLeader(),course)){
+        if (!checkStudentIsInTeam(team.getLeader(),course)){
             //throw leader already in team exception
             System.out.println("leader is already in a team \n");
             return false;
@@ -140,7 +140,7 @@ public class TeamDao {
         Iterator<Student> iterator = team.getMembers().iterator();
         while (iterator.hasNext()){
             Student member = iterator.next();
-            if (checkStudentIsInTeam(team.getLeader(),team.getCourse())){
+            if (!checkStudentIsInTeam(team.getLeader(),team.getCourse())){
                 // throw members already in team exception
                 System.out.println();
                 throw new InformationException("成员："+ member + "已经在一个小组内了");
@@ -374,8 +374,13 @@ public class TeamDao {
      * @param team 现有的队伍
      * @return 返回新的队伍对象
      * */
+    @Transactional
     public Team addTeamMembers(Team team){
+        Course course = teamMapper.selectTeamById(team.getId()).getCourse();
         for (Student member:team.getMembers()) {
+            if (!checkStudentIsInTeam(member,course)){
+                throw new InformationException("组员已经组队");
+            }
             List<Long> memberInTeams = teamMapper.selectTeamIdByMembersId(member.getId());
             for (Long id:memberInTeams) {
                 Team tempTeam = getTeamById(id);
