@@ -1,5 +1,7 @@
 package com.group12.course.entity.application;
 
+import java.io.Serializable;
+
 /**
  * application 类
  * 所有的申请都继承自它
@@ -7,7 +9,7 @@ package com.group12.course.entity.application;
  * @author Xu Gang
  * @date 2018年12月26日
  */
-public class Application {
+public class Application implements Serializable {
 
     private Long id;
 

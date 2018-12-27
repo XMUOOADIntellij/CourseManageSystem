@@ -42,7 +42,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(InformationException.class)
-    public  final ResponseEntity<Object> handleInformationExeption(InformationException ex,WebRequest request){
+    public  final ResponseEntity<Object> handleInformationException(InformationException ex,WebRequest request){
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
         ErrorResponse error = new ErrorResponse("Illegal Information", details);

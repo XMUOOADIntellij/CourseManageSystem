@@ -56,7 +56,7 @@ class JwtVerificationAop {
                 return result;
             }
             else {
-                logger.error("jwt token is valid");
+                logger.error("jwt token is invalid");
                 HttpServletResponse response = sra.getResponse();
                 if (response!=null){
                     Map<String,String> errorMessage = new HashMap<>(16);

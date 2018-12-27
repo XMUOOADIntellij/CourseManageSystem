@@ -41,7 +41,8 @@ public class AttendanceService {
     KlassDao klassDao;
     @Autowired
     KlassRoundDao klassRoundDao;
-
+    @Autowired
+    KlassStudentDao klassStudentDao;
     private final String ServerFilePath = System.getProperty("user.dir") + System.getProperty("file.separator") + "file" + System.getProperty("file.separator");
     private final Logger logger = LoggerFactory.getLogger(AttendanceService.class);
 
@@ -172,7 +173,6 @@ public class AttendanceService {
                     selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
             if (klassSeminar != null) {
                 KlassRound klassRound = klassRoundDao.getKlassRoundByKlassIdAndRoundId(klass.getId(),seminar.getRound().getId());
-
 
                 attendance.setTeam(team);
                 attendance.setKlassSeminar(klassSeminar);
@@ -355,4 +355,5 @@ public class AttendanceService {
             throw new UnauthorizedOperationException("此节讨论课的老师才能操作");
         }
     }
+
 }

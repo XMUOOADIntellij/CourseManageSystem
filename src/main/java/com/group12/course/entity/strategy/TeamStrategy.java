@@ -3,6 +3,8 @@ package com.group12.course.entity.strategy;
 import com.group12.course.entity.Course;
 import com.group12.course.entity.Team;
 
+import java.util.List;
+
 /**
  * 小组在某课程下的组队策略
  *
@@ -10,13 +12,14 @@ import com.group12.course.entity.Team;
  * @date 2018年12月17日
  */
 public class TeamStrategy {
-    Course course;
+    
+    private Course course;
 
-    String strategySerial;
+    private Integer strategySerial;
 
-    String strategyName;
+    private String strategyName;
 
-    Strategy strategy;
+    private List<Strategy> strategyList;
 
     public Course getCourse() {
         return course;
@@ -26,11 +29,11 @@ public class TeamStrategy {
         this.course = course;
     }
 
-    public String getStrategySerial() {
+    public Integer getStrategySerial() {
         return strategySerial;
     }
 
-    public void setStrategySerial(String strategySerial) {
+    public void setStrategySerial(Integer strategySerial) {
         this.strategySerial = strategySerial;
     }
 
@@ -42,12 +45,21 @@ public class TeamStrategy {
         this.strategyName = strategyName;
     }
 
-    public Strategy getStrategy() {
-        return strategy;
+    public List<Strategy> getStrategyList() {
+        return strategyList;
     }
 
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
+    public void setStrategyList(List<Strategy> strategyList) {
+        this.strategyList = strategyList;
     }
 
+    @Override
+    public String toString() {
+        return "TeamStrategy{" +
+                "course=" + course +
+                ", strategySerial='" + strategySerial + '\'' +
+                ", strategyName='" + strategyName + '\'' +
+                ", strategyList=" + strategyList +
+                '}';
+    }
 }

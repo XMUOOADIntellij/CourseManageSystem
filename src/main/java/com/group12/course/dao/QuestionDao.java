@@ -35,6 +35,9 @@ public class QuestionDao {
         return questionMapper.selectQuestionById(id);
     }
 
+    public Question getUnselectQuestionAttendanceIdAndStudentId(Long klassSeminarId,Long studentId) {
+        return  questionMapper.selectUnselectQuestionByAttendanceIdAndStudentId(klassSeminarId,studentId);
+    }
     public List<Question> listQuestionByKlassSeminarIdAndAttendanceId(Long klassSeminarId,Long attendanceId){
         return questionMapper.listQuestionByKlassSeminarIdAndAttendanceId(klassSeminarId,attendanceId);
     }
@@ -46,4 +49,6 @@ public class QuestionDao {
     public List<Question> listQuestionByKlassSeminarId(Long klassSeminarId){
         return questionMapper.listQuestionByKlassSeminarId(klassSeminarId);
     }
+
+
 }

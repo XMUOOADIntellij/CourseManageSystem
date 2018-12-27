@@ -257,11 +257,6 @@ public class ScoreDao {
                 seminarScore.getKlassSeminar().getId(), seminarScore.getTeam().getId()
         );
 
-        //按照比例更改总分
-        seminarScore.setTotalScore(
-                calculateTotalScore(seminarScore.getPresentationScore(), seminarScore.getQuestionScore(),
-                        seminarScore.getReportScore(), course));
-
         seminarScoreMapper.updateSeminarScore(seminarScore);
 
         //更改RoundScore
@@ -320,8 +315,8 @@ public class ScoreDao {
         return seminarScoreMapper.listSeminarScoreByKlassSeminarIdListAndTeamId(klassSeminarIdList, teamId);
     }
 
-    public List<RoundScore> listRoundScoreByRoundIdList(List<Long> roundId) {
-        return roundScoreMapper.listRoundScoreByRoundIdList(roundId);
+    public List<RoundScore> listRoundScoreByRoundIdAndTeamIdList(List<Long>teamIds,Long roundId) {
+        return roundScoreMapper.listRoundScoreByRoundIdAndTeamIdList(teamIds,roundId);
     }
 
     public List<RoundScore> listRoundScoreByRoundIdListAndTeamId(List<Long> roundIdList, Long teamId) {
@@ -334,5 +329,9 @@ public class ScoreDao {
 
     public SeminarScore selectSeminarScoreByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {
         return seminarScoreMapper.selectSeminarScoreByKlassSeminarIdAndTeamId(klassSeminarId, teamId);
+    }
+
+    public RoundScore selectRoundScoreByRoundIdAndTeamId(Long roundId,Long teamId){
+        return  roundScoreMapper.selectRoundScoreByRoundIdAndTeamId(roundId,teamId);
     }
 }

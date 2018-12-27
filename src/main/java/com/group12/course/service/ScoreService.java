@@ -91,32 +91,29 @@ public class ScoreService {
     }
 
     /**
-     * 老师获得学生课程下的每轮成绩
+     * 老师获得自己课程学生一轮下的成绩
      *
      * @param teacher  老师对象
      * @param courseId 课程Id
+     * @param roundId  轮数id
      */
-    public List<RoundScore> getCourseRoundScoreByTeacher(Teacher teacher, Long courseId) {
+    public List<RoundScore> getCourseRoundScoreByTeacher(Teacher teacher, Long courseId, Long roundId) {
         Course course = courseDao.getCourse(courseId);
-
-        List<Long> roundIdList = new ArrayList<>();
         if (course != null) {
             if (course.getTeacher().getId().equals(teacher.getId())) {
-                //查看有没有被共享讨论课
-                Course mainSeminarCourse = course.getSeminarMainCourse();
-                //如果没有被共享讨论课，轮是自己的
-                if (mainSeminarCourse == null) {
-                    for (Round item : roundDao.getRoundByCourseId(course.getId())) {
-                        roundIdList.add(item.getId());
-                    }
+                //当前课程下有的队伍
+                List<Team> teams;
+                List<Long> teamIds = new ArrayList<>();
+                //如果没有被共享组队
+                if (course.getTeamMainCourse() == null) {
+                    teams = teamDao.getTeamByCourseId(courseId);
+                } else {
+                    teams = teamDao.getTeamByCourseId(course.getTeamMainCourse().getId());
                 }
-                //如果共享了讨论课，轮是主课程的
-                else {
-                    for (Round item : roundDao.getRoundByCourseId(mainSeminarCourse.getId())) {
-                        roundIdList.add(item.getId());
-                    }
+                for (Team item : teams) {
+                    teamIds.add(item.getId());
                 }
-                return scoreDao.listRoundScoreByRoundIdList(roundIdList);
+                return scoreDao.listRoundScoreByRoundIdAndTeamIdList(teamIds, roundId);
             } else {
                 throw new UnauthorizedOperationException("只有当前课的老师可查看该课程所有成绩");
             }
@@ -125,36 +122,50 @@ public class ScoreService {
         }
     }
 
+    public RoundScore getCourseRoundScoreByStudent(Student student,Long courseId,Long roundId){
+        Course course = courseDao.getCourse(courseId);
+        if(course!=null){
+            Team team;
+            if(course.getTeamMainCourse()==null){
+                team = teamDao.getTeamByStudentIdAndCourseId(student.getId(),courseId);
+            }else{
+                team = teamDao.getTeamByStudentIdAndCourseId(student.getId(),course.getTeamMainCourse().getId());
+            }
+            return scoreDao.selectRoundScoreByRoundIdAndTeamId(roundId,team.getId());
+        }else{
+            throw new RecordNotFoundException("课程记录没有找到");
+        }
+    }
+
     public List<RoundScore> getCourseRoundScoreByStudent(Student student, Long courseId) {
         Course course = courseDao.getCourse(courseId);
-        if(course!=null) {
+        if (course != null) {
             Course teamMainCourse = course.getTeamMainCourse();
             Course mainSeminarCourse = course.getSeminarMainCourse();
             List<Long> roundIds = new ArrayList<>();
             Team team;
-            if(teamMainCourse!=null){
-                team = teamDao.getTeamByStudentIdAndCourseId(student.getId(),teamMainCourse.getId());
-            }else{
-                team = teamDao.getTeamByStudentIdAndCourseId(student.getId(),courseId);
+            if (teamMainCourse != null) {
+                team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), teamMainCourse.getId());
+            } else {
+                team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), courseId);
             }
             if (mainSeminarCourse == null) {
                 for (Round item : roundDao.getRoundByCourseId(course.getId())) {
                     roundIds.add(item.getId());
                 }
-            }
-            else {
+            } else {
                 for (Round item : roundDao.getRoundByCourseId(mainSeminarCourse.getId())) {
                     roundIds.add(item.getId());
                 }
             }
-            return scoreDao.listRoundScoreByRoundIdListAndTeamId(roundIds,team.getId());
-        }else{
+            return scoreDao.listRoundScoreByRoundIdListAndTeamId(roundIds, team.getId());
+        } else {
             throw new RecordNotFoundException("找不到该课程记录");
         }
     }
 
     /**
-     * 老师获得轮下的讨论课成绩
+     * 老师、学生获得轮下的讨论课成绩
      *
      * @param roundId 轮次id
      * @param teamId  队伍id

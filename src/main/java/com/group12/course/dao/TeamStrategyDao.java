@@ -1,5 +1,6 @@
 package com.group12.course.dao;
 
+import com.group12.course.entity.strategy.TeamAndStrategy;
 import com.group12.course.entity.strategy.TeamStrategy;
 import com.group12.course.mapper.TeamStrategyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,12 @@ public class TeamStrategyDao {
     }
 
     public int addTeamStrategy(TeamStrategy teamStrategy){
-        return teamStrategyMapper.addTeamStrategy(teamStrategy);
+
+        List<TeamStrategy> teamStrategyList = teamStrategyMapper.selectTeamStrategyByCourseId(teamStrategy.getCourse().getId());
+        Integer count = teamStrategyList.size();
+        teamStrategy.setStrategySerial(count+1);
+
+        return teamStrategyMapper.addTeamStrategy(teamStrategy.getCourse().getId(),teamStrategy.getStrategySerial(),teamStrategy.getStrategyName(),teamStrategy.getStrategyList().get(0).getId());
     }
 
     public TeamStrategy selectTeamStrategyByCourseIdAndStrategyName(Long courseId,String strategyName){

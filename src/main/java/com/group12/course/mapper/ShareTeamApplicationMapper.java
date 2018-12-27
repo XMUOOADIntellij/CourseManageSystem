@@ -12,7 +12,7 @@ public interface ShareTeamApplicationMapper {
 
     ShareTeamApplication selectShareTeamApplicationById(Long id);
 
-    List<ShareTeamApplication> selectShareTeamApplicationByMainCourseId(Long mainCourseId);
+    List<ShareTeamApplication> selectShareTeamApplicationByCourseId(Long courseId);
 
     int addShareTeamApplication(ShareTeamApplication shareTeamApplication);
 

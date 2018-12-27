@@ -10,6 +10,7 @@ import com.group12.course.entity.strategy.TeamStrategy;
 import com.group12.course.exception.InformationException;
 import com.group12.course.exception.TeamInAuditingException;
 import com.group12.course.exception.UnauthorizedOperationException;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
@@ -109,7 +110,6 @@ public class TeamService {
      * @return 返回新的队伍对象
      * */
     public Team addMember(Team team){
-        checkTeamStatus(team);
         Team returnTeam = teamDao.addTeamMembers(team);
         Boolean status = checkTeamValidation(team);
         if (!status){
@@ -171,30 +171,42 @@ public class TeamService {
             return true;
         }
         List<Boolean> strategyCheck = new ArrayList<>(strategyList.size());
+        System.out.println(strategyList);
         for (TeamStrategy teamStrategy:strategyList) {
             Boolean status=false;
-            switch (teamStrategy.getStrategyName()){
-                case "MemberLimitStrategy":
-                    status = memberLimitStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
+            List<Strategy> strategies = teamStrategy.getStrategyList();
+            System.out.println(strategies);
+            for (Strategy strategy:strategies) {
+                switch (strategy.getStrategyType()){
+                    case "MemberLimitStrategy":
+                        status = memberLimitStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "TeamOrStrategy":
+                        status = teamOrStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "ConflictCourseStrategy":
+                        status = conflictCourseStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "CourseMemberLimitStrategy":
+                        status = courseMemberLimitStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "TeamAndStrategy":
+                        status = teamAndStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    default:
+                        // 默认不存在的时候默认为对的了（不影响其余的）
+                        status=true;
+                        break;
+                }
+                // 只要某条不符合，整体就不符合，不必继续判断
+                if (!status){
                     break;
-                case "TeamOrStrategy":
-                    status = teamOrStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-                    break;
-                case "ConflictCourseStrategy":
-                    status = conflictCourseStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-                    break;
-                case "CourseMemberLimitStrategy":
-                    status = courseMemberLimitStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-                    break;
-                case "TeamAndStrategy":
-                    status = teamAndStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-                    break;
-                default:
-                    // 默认不存在的时候默认为对的了（不影响其余的）
-                    status=true;
-                    break;
+                }
             }
             strategyCheck.add(status);
+            if (!status){
+                break;
+            }
         }
         for (Boolean status:strategyCheck) {
             // 只要有一个不符合就不符合要求
@@ -214,6 +226,15 @@ public class TeamService {
      * */
     public int deleteTeamMember(Team team,Student student){
         checkTeamStatus(team);
-        return teamDao.deleteTeamMember(team,student);
+        int count = teamDao.deleteTeamMember(team,student);
+        Team checkTeam = teamDao.getTeamById(team.getId());
+        Boolean status = checkTeamValidation(checkTeam);
+        if (!status){
+            checkTeam.setStatus(teamIsInvalid);
+            int i =teamDao.changeTeam(checkTeam);
+            throw new InformationException("队伍不合法");
+            // 记得此处提醒前端相关状态码为409
+        }
+        return count;
     }
 }

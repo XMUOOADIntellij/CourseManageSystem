@@ -2,6 +2,7 @@ package com.group12.course.controller;
 
 import com.group12.course.exception.RecordNotFoundException;
 import com.group12.course.entity.*;
+import com.group12.course.exception.UnauthorizedOperationException;
 import com.group12.course.service.AttendanceService;
 import com.group12.course.service.QuestionService;
 import com.group12.course.service.SeminarService;
@@ -73,8 +74,13 @@ public class SeminarController {
         String token = request.getHeader("Authorization");
         Teacher teacher = Jwt.unSign(token,Teacher.class);
 
-        Seminar seminar = new Seminar(seminarVo);
-        seminarService.createSeminar(seminar,teacher);
+        Seminar seminar;
+        if(teacher!=null){
+        seminar = new Seminar(seminarVo);
+        seminarService.createSeminar(seminar,teacher);}
+        else {
+            throw new UnauthorizedOperationException("只有老师能创建");
+        }
 
         return new ResponseEntity<>(new SeminarVO(seminar), HttpStatus.OK);
     }

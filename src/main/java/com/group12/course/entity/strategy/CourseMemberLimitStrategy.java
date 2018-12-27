@@ -1,5 +1,6 @@
 package com.group12.course.entity.strategy;
 
+import com.group12.course.controller.vo.CourseMemberLimitVO;
 import com.group12.course.entity.Course;
 
 /**
@@ -17,6 +18,7 @@ public class CourseMemberLimitStrategy extends Strategy {
     private Integer maxMember;
 
     public CourseMemberLimitStrategy() {
+        this.strategyType="CourseMemberLimitStrategy";
     }
 
     public CourseMemberLimitStrategy(Long id, Course course, Integer minMember, Integer maxMember) {
@@ -24,6 +26,12 @@ public class CourseMemberLimitStrategy extends Strategy {
         this.course = course;
         this.minMember = minMember;
         this.maxMember = maxMember;
+    }
+
+    public CourseMemberLimitStrategy(CourseMemberLimitVO courseMemberLimitVO){
+        this.course = courseMemberLimitVO.getCourse();
+        this.minMember = courseMemberLimitVO.getMinMember();
+        this.maxMember = courseMemberLimitVO.getMaxMember();
     }
 
     public Course getCourse() {
@@ -48,5 +56,14 @@ public class CourseMemberLimitStrategy extends Strategy {
 
     public void setMaxMember(Integer maxMember) {
         this.maxMember = maxMember;
+    }
+
+    @Override
+    public String toString() {
+        return "CourseMemberLimitStrategy{" +
+                "course=" + course +
+                ", minMember=" + minMember +
+                ", maxMember=" + maxMember +
+                '}';
     }
 }

@@ -66,4 +66,6 @@ public interface RoundScoreMapper {
      * @return 轮次分数列表
      */
     List<RoundScore> listRoundScoreByRoundIdList(@Param("roundIdList") List<Long> roundIdList);
+
+    List<RoundScore> listRoundScoreByRoundIdAndTeamIdList(@Param("teamIdList") List<Long>teamIdList,Long roundId);
 }

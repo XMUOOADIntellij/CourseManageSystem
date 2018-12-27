@@ -66,6 +66,6 @@ public class TeamDaoTest {
 
     @Test
     public void test1() {
-
+        Team team = teamDao.getTeamWithoutMembersById(3L);
     }
 }

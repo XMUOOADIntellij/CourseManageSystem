@@ -9,7 +9,9 @@ import com.group12.course.entity.Team;
  * @date 2018年12月17日
  */
 public class Strategy {
-    Long id;
+    protected Long id;
+
+    protected String strategyType;
 
     public Strategy() {
     }
@@ -26,4 +28,11 @@ public class Strategy {
         this.id = id;
     }
 
+    public String getStrategyType() {
+        return strategyType;
+    }
+
+    public void setStrategyType(String strategyType) {
+        this.strategyType = strategyType;
+    }
 }
