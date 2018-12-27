@@ -2153,9 +2153,11 @@ function getQuestionScore(questionId) {
 
 function updatePresentScore() {
     let ata = {
-        score: $("#attendance-score").val()
+        presentationScore: $("#present-score").val()
     };
-
+console.log(ata);
+let attendance=Cookies.get("attendance");
+alert(attendance);
     $.ajax({
         type: "put",
         url:

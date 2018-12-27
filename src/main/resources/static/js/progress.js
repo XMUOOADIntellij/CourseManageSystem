@@ -10,13 +10,13 @@ function connect() {
       setConnected(true);
       console.log("Connected: " + frame);
       stompClient.subscribe("/seminarSocket/progress", function(greeting) {
-        console.log(greeting);
+        console.log(JSON.parse(greeting.body));
       });
       stompClient.subscribe("/seminarSocket/question", function(greeting) {
-          console.log(greeting);
+          console.log(JSON.parse(greeting.body));
       });
       stompClient.subscribe("/seminarSocket/attendance", function(greeting) {
-          console.log(greeting);
+          tabClick(JSON.parse(greeting.body));
       });
     }
   );

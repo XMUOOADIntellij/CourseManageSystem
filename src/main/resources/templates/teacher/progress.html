@@ -71,7 +71,6 @@
     <script src="../../static/js/student.js"></script>
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
-    <script src="../../static/js/progress.js"></script>
 
   </head>
   <body onload="connect();getCurrentSeminar();">
@@ -304,12 +303,12 @@
                   <div class="col-md-8">
                     <div class="card">
                       <div class="card-header">
-                        <h3 class="card-title">提问队列</h3>
-                      </div>
+                        <h3 class="card-title mr-4">提问队列</h3>
+                        <span class="float-right"><span class="badge badge-primary" id="ques-number">0</span></span>                      </div>
                       <div class="card-body">
                         <div>
                           <div class="mb-3">
-                            <button class="btn btn-secondary btn-block">
+                            <button class="btn btn-secondary btn-block" onclick="select()">
                               抽取提问
                             </button>
                           </div>
@@ -378,6 +377,63 @@
     </div>
   </body>
 <script>
+  var stompClient = null;
+  function setConnected(connected) {}
+  //403
+  function connect() {
+    var socket = new SockJS("http://xug98.cn/Socket");
+    stompClient = Stomp.over(socket);
+    stompClient.connect(
+            {},
+            function(frame) {
+              setConnected(true);
+              console.log("Connected: " + frame);
+              stompClient.subscribe("/seminarSocket/progress", function(greeting) {
+                console.log(JSON.parse(greeting.body));
+              });
+              stompClient.subscribe("/seminarSocket/question", function(greeting) {
+                console.log(JSON.parse(greeting.body));
+              });
+              stompClient.subscribe("/seminarSocket/attendance", function(greeting) {
+                tabClick(JSON.parse(greeting.body).id);
+              });
+            }
+    );
+
+  }
+  function disconnect() {
+    if (stompClient != null) {
+      stompClient.disconnect();
+    }
+    setConnected(false);
+    alert("Disconnected");
+    return true;
+  }
+
+  function pause() {
+    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/pause", {"jwt":localStorage.jwt}, null);
+  }
+  function start() {
+
+    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/start", {"jwt":localStorage.jwt}, null);
+  }
+  function end() {
+    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/end", {"jwt":localStorage.jwt}, null);
+  }
+  function next() {
+    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/next", {"jwt":localStorage.jwt}, null);
+  }
+  function select() {
+    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/pause", {"jwt":localStorage.jwt}, null);
+
+  }
+  function ask() {
+    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/question", {}, null);
+
+  }
+  function showGreeting(message) {
+    console.log(message);
+  }
 
   function tabClick(attendanceId){
     Cookies.set("attendance",attendanceId);
