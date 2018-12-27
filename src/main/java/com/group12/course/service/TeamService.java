@@ -174,27 +174,31 @@ public class TeamService {
         List<Boolean> strategyCheck = new ArrayList<>(strategyList.size());
         for (TeamStrategy teamStrategy:strategyList) {
             Boolean status=false;
-//            switch (teamStrategy.getStrategyName()){
-//                case "MemberLimitStrategy":
-//                    status = memberLimitStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-//                    break;
-//                case "TeamOrStrategy":
-//                    status = teamOrStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-//                    break;
-//                case "ConflictCourseStrategy":
-//                    status = conflictCourseStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-//                    break;
-//                case "CourseMemberLimitStrategy":
-//                    status = courseMemberLimitStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-//                    break;
-//                case "TeamAndStrategy":
-//                    status = teamAndStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-//                    break;
-//                default:
-//                    // 默认不存在的时候默认为对的了（不影响其余的）
-//                    status=true;
-//                    break;
-//            }
+            List<Strategy> strategies = teamStrategy.getStrategyList();
+            for (Strategy strategy:strategies) {
+                switch (strategy.getStrategyType()){
+                    case "MemberLimitStrategy":
+                        status = memberLimitStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "TeamOrStrategy":
+                        status = teamOrStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "ConflictCourseStrategy":
+                        status = conflictCourseStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "CourseMemberLimitStrategy":
+                        status = courseMemberLimitStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "TeamAndStrategy":
+                        status = teamAndStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    default:
+                        // 默认不存在的时候默认为对的了（不影响其余的）
+                        status=true;
+                        break;
+                }
+            }
+
             strategyCheck.add(status);
         }
         for (Boolean status:strategyCheck) {

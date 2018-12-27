@@ -28,4 +28,5 @@ public class TeamAndStrategyDaoTest {
         }
         Assert.assertFalse(recordList.isEmpty());
     }
+
 }
