@@ -67,9 +67,7 @@ public class TeamDao {
             Long leaderId = team.getLeader().getId();
         }
         catch (NullPointerException e){
-            // throw team invalid Exception
-            System.out.println("team message invalid");
-            return false;
+            throw new InformationException("队伍信息不足");
         }
         return true;
     }
