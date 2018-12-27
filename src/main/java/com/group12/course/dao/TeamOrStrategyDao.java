@@ -50,17 +50,37 @@ public class TeamOrStrategyDao {
         List<Boolean> booleans=new ArrayList<>(teamOrStrategies.size());
         for (TeamOrStrategy teamOrStrategy:teamOrStrategies) {
             Boolean status=false;
-//            switch (teamOrStrategy.getStrategyName()){
-//                case "MemberLimitStrategy":status = memberLimitStrategyDao.judgeTeam(teamOrStrategy.getStrategy().getId(),team);break;
-//                case "TeamOrStrategy":status = judgeTeam(teamOrStrategy.getStrategy().getId(),team);break;
-//                case "ConflictCourseStrategy":status = conflictCourseStrategyDao.judgeTeam(teamOrStrategy.getStrategy().getId(),team);break;
-//                case "CourseMemberLimitStrategy":status = courseMemberLimitStrategyDao.judgeTeam(teamOrStrategy.getStrategy().getId(),team);break;
-//                case "TeamAndStrategy":status = teamAndStrategyDao.judgeTeam(teamOrStrategy.getStrategy().getId(),team);break;
-//                default:
-//                    // 默认不存在的时候默认为错的了（不影响其余的）
-//                    status=false;
-//                    break;
-//            }
+            List<Strategy> strategies = teamOrStrategy.getStrategyList();
+            for (Strategy strategy:strategies) {
+                switch (strategy.getStrategyType()){
+                    case "MemberLimitStrategy":
+                        status = memberLimitStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "TeamOrStrategy":
+                        status = judgeTeam(strategy.getId(),team);
+                        break;
+                    case "ConflictCourseStrategy":
+                        status = conflictCourseStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "CourseMemberLimitStrategy":
+                        status = courseMemberLimitStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "TeamAndStrategy":
+                        status = teamAndStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    default:
+                        // 默认不存在的时候默认为错的了（不影响其余的）
+                        status=false;
+                        break;
+                }
+                // 只要某条符合，全体就符合了，不必继续判断
+                if (status){
+                    break;
+                }
+            }
+            if (status){
+                break;
+            }
             booleans.add(status);
         }
         for (Boolean eachJudge:booleans) {

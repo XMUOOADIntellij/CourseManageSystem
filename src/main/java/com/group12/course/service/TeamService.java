@@ -197,8 +197,14 @@ public class TeamService {
                         status=true;
                         break;
                 }
+                // 只要某条不符合，整体就不符合，不必继续判断
+                if (!status){
+                    break;
+                }
             }
-
+            if (!status){
+                break;
+            }
             strategyCheck.add(status);
         }
         for (Boolean status:strategyCheck) {

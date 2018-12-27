@@ -44,7 +44,6 @@ public class ConflictCourseStrategyDao {
         if (conflictCourseStrategy==null||conflictCourseStrategy.isEmpty()){
             return true;
         }
-        List<Boolean> eachStrategyStatus = new ArrayList<>(conflictCourseStrategy.size());
         for (ConflictCourseStrategy strategy:conflictCourseStrategy) {
             Course course = strategy.getCourse();
             KlassStudent klassStudent = klassStudentMapper.selectKlassStudentByCourseIdAndStudentId(course.getId(),
