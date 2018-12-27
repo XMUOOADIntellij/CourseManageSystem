@@ -51,16 +51,6 @@ function getUserInfo() {
                 $("#name").html(data.name);
             }
         },
-        statusCode: {
-            401: function() {
-                alert("未登录!");
-                window.location.href = "./login";
-            },
-            403: function() {
-                alert("未登录!");
-                window.location.href = "./login";
-            }
-        }
     });
 }
 //

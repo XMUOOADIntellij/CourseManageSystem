@@ -58,7 +58,7 @@
     <script src="../../static/js/control.js"></script>
     <script src="../../static/js/convert.js"></script>
     <script src="../../static/js/request.js"></script>
-    <script src="../../static/js/teacher.js"></script>
+    <script src="../../static/js/user.js"></script>
   </head>
   <body onload="return getUserInfo()">
     <div class="page">
@@ -66,104 +66,65 @@
         <div class="header py-4">
           <div class="container">
             <div class="d-flex">
-              <a class="header-brand ml-1" href="../teacher/home.html">
+              <a class="header-brand ml-1" href="./home.html">
                 <img
-                  alt="logo"
-                  class="header-brand-img"
-                  src="../../static/images/brand.png"
-                />Cms
+                        alt="logo"
+                        class="header-brand-img"
+                        src="../../static/images/brand.png"
+                />
+                XCms
               </a>
               <div class="d-flex order-lg-2 ml-auto">
                 <div class="dropdown d-none d-md-flex">
-                  <a class="nav-link icon" data-toggle="dropdown">
+                  <a class="nav-link icon" href="todo-list.html">
                     <i class="fe fe-bell"></i> <span class="nav-unread"></span>
                   </a>
-                  <div
-                    class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
-                  >
-                    <a class="dropdown-item d-flex" href="#">
-                      <span
-                        class="avatar mr-3 align-self-center"
-                        style="background-image: url(../../static/images/male.png)"
-                      ></span>
-                      <div>
-                        <strong>Nathan</strong> pushed new commit: Fix page load
-                        performance issue.
-                        <div class="small text-muted">10 minutes ago</div>
-                      </div>
-                    </a>
-                    <a class="dropdown-item d-flex" href="#">
-                      <span
-                        class="avatar mr-3 align-self-center"
-                        style="background-image: url(../../static/images/male.png)"
-                      ></span>
-                      <div>
-                        <strong>Alice</strong> started new task: Tabler UI
-                        design.
-                        <div class="small text-muted">1 hour ago</div>
-                      </div>
-                    </a>
-                    <a class="dropdown-item d-flex" href="#">
-                      <span
-                        class="avatar mr-3 align-self-center"
-                        style="background-image: url(../../static/images/male.png)"
-                      ></span>
-                      <div>
-                        <strong>Rose</strong> deployed new version of NodeJS
-                        REST Api V3
-                        <div class="small text-muted">2 hours ago</div>
-                      </div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a
-                      class="dropdown-item text-center text-muted-dark"
-                      href="#"
-                      >Mark all as read</a
-                    >
-                  </div>
                 </div>
                 <div class="dropdown">
                   <a
-                    class="nav-link pr-0 leading-none"
-                    data-toggle="dropdown"
-                    href="#"
+                          class="nav-link pr-0 leading-none"
+                          data-toggle="dropdown"
+                          href="#"
                   >
                     <span
-                      class="avatar"
-                      style="background-image: url(../../static/images/male.png)"
+                            class="avatar"
+                            style="background-image: url(../../static/images/male.png)"
                     ></span>
                     <span class="ml-2 d-none d-lg-block">
-                      <span class="text-default">Jane Pearson</span>
-                      <small class="text-muted d-block mt-1"
-                        >Administrator</small
+                      <span class="text-default" id="header-name"></span>
+                      <small class="text-muted d-block mt-1" id="header-role"
+                      ></small
                       >
                     </span>
                   </a>
                   <div
-                    class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                          class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
                   >
-                    <a class="dropdown-item" href="account-setting.html">
+                    <a
+                            class="dropdown-item"
+                            href="./account-setting.html"
+                    >
                       <i class="dropdown-icon fe fe-settings"></i> 个人设置
                     </a>
-                    <a class="dropdown-item" href="../teacher/todo-list.html">
+                    <a class="dropdown-item" href="./todo-list.html">
 
                       <i class="dropdown-icon fe fe-mail"></i> 待办事项
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="help.html">
+                    <a class="dropdown-item" href="./help.html">
                       <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
                     </a>
-                    <a class="dropdown-item" href="login.html">
+                    <a class="dropdown-item" href="../common/login.html">
                       <i class="dropdown-icon fe fe-log-out"></i> 切换账户
                     </a>
                   </div>
                 </div>
               </div>
               <a
-                class="header-toggler d-lg-none ml-3 ml-lg-0"
-                data-target="#headerMenuCollapse"
-                data-toggle="collapse"
-                href="#"
+                      class="header-toggler d-lg-none ml-3 ml-lg-0"
+                      data-target="#headerMenuCollapse"
+                      data-toggle="collapse"
+                      href="#"
               >
                 <span class="header-toggler-icon"></span>
               </a>
@@ -177,23 +138,23 @@
               <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="../teacher/home.html"
-                      ><i class="fe fe-home"></i> 我的主页</a
+                    <a class="nav-link" href="./home.html"
+                    ><i class="fe fe-home"></i> 我的主页</a
                     >
                   </li>
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="../teacher/course-home.html"
-                      ><i class="fe fe-book"></i> 我的课程</a
+                    <a class="nav-link" href="./course-home.html"
+                    ><i class="fe fe-book"></i> 我的课程</a
                     >
                   </li>
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="../teacher/course-round.html"
-                      ><i class="fe fe-book-open"></i> 讨论课设置</a
+                    <a class="nav-link" href="./seminar-home.html"
+                    ><i class="fe fe-book-open"></i> 我的讨论课</a
                     >
                   </li>
                   <li class="nav-item pl-5">
-                    <a class="nav-link" href="../teacher/progress.html"
-                      ><i class="fe fe-play-circle"></i> 正在进行中</a
+                    <a class="nav-link" href="progress.html"
+                    ><i class="fe fe-play-circle"></i> 正在进行中</a
                     >
                   </li>
                 </ul>
@@ -275,18 +236,6 @@
                         </div>
                       </div>
 
-                      <div class="form-group">
-                        <label class="form-label">通知间隔</label>
-                        <select
-                          class="form-control custom-select"
-                          id="messageInterval"
-                        >
-                          <option value="">1h</option>
-                          <option value="">6h</option>
-                          <option value="">12h</option>
-                          <option value="">24h</option>
-                        </select>
-                      </div>
                       <div class="form-footer">
                         <button class="btn btn-primary btn-block" onclick="">
                           Save
