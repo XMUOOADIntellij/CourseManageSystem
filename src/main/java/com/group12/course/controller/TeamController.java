@@ -163,13 +163,13 @@ public class TeamController {
         teamService.authCheck(jwtStudent,teamId);
         Team team=new Team();
         team.setId(teamId);
-        Team count = teamService.addMember(team);
+        /*Team count = teamService.addMember(team);
         if (count.getId()!=null){
             response.setStatus(200);
         }
         else {
             response.setStatus(400);
-        }
+        }*/
     }
 
     /**
