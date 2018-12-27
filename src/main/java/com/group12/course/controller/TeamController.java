@@ -102,12 +102,21 @@ public class TeamController {
         }
     }
 
+    /**
+     * 一次性批量添加组员
+     *
+     * @param teamVO 包含新添加的组员
+     * @param teamId 队伍 id
+     * @return 返回添加后组员的对象
+     */
     @PutMapping(value = "/{teamId}",produces = "application/json; charset=utf-8")
     public Team updateTeam(@RequestBody TeamVO teamVO,@PathVariable Long teamId, HttpServletRequest request, HttpServletResponse response)throws IOException {
         String token = request.getHeader("Authorization");
         Student jwtStudent = Jwt.unSign(token,Student.class);
         teamService.authCheck(jwtStudent,teamId);
-        Team team = teamService.addMember(new Team(teamVO));
+        Team tempTeam = new Team(teamVO);
+        tempTeam.setId(teamId);
+        Team team = teamService.addMember(tempTeam);
         if (team.getId()==null){
             response.setStatus(400);
         }
@@ -140,7 +149,8 @@ public class TeamController {
 
     /**
      * 根据队伍 id 添加组员
-     *
+     * ！！已弃用该api
+     * 
      * @param teamId 队伍id
      * @param student 新加的学生
      * 成功返回200
