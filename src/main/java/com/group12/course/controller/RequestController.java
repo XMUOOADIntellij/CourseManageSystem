@@ -1,5 +1,6 @@
 package com.group12.course.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.group12.course.entity.Teacher;
 import com.group12.course.entity.application.TeamValidApplication;
 import com.group12.course.service.TeamValidApplicationService;
@@ -28,21 +29,26 @@ public class RequestController {
     TeamValidApplicationService teamValidApplicationService;
 
     @GetMapping(value = "/teamvalid",produces = "application/json; charset=utf-8")
-    public List<TeamValidApplication> getTeamValid(HttpServletRequest request, HttpServletResponse response)throws IOException {
+    public void getTeamValid(HttpServletRequest request, HttpServletResponse response)throws IOException {
         String token = request.getHeader("Authorization");
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
         if (jwtTeacher!=null){
             List<TeamValidApplication> list = teamValidApplicationService.getTeamValidApplicationListByTeacher(jwtTeacher);
-            return list;
+            String json = JSON.toJSONString(list);
+            response.getWriter().write(json);
         }
         else {
             response.setStatus(403);
-            return new ArrayList<>();
         }
     }
 
+    /**
+     * 获取特定请求的 id
+     *
+     * @param teamvalidId 审核请求的 id
+     */
     @GetMapping(value = "/teamvalid/{teamvalidId}",produces = "application/json; charset=utf-8")
-    public TeamValidApplication getTeamValidById(@PathVariable Long teamvalidId,HttpServletRequest request, HttpServletResponse response)throws IOException {
+    public void getTeamValidById(@PathVariable Long teamvalidId,HttpServletRequest request, HttpServletResponse response)throws IOException {
         String token = request.getHeader("Authorization");
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
         if (jwtTeacher!=null){
@@ -50,23 +56,30 @@ public class RequestController {
             teamValidApplication.setId(teamvalidId);
             teamValidApplication.setTeacher(jwtTeacher);
             TeamValidApplication result = teamValidApplicationService.getTeamValidApplicationMapperById(teamValidApplication);
-            return result;
+            String json = JSON.toJSONString(result);
+            response.getWriter().write(json);
+            response.setStatus(200);
         }
         else {
             response.setStatus(403);
-            return new TeamValidApplication();
         }
     }
 
+    /**
+     * 更改队伍审核请求
+     *
+     * @param teamvalidId 队伍审核的 id
+     * @param teamValidApplicationVO 审核对象
+     */
     @PutMapping(value = "/teamvalid/{teamvalidId}", produces = "application/json; charset=utf-8")
-    public void changeTeamValidStatus(@PathVariable Long teamvalidId, TeamValidApplicationVO teamValidApplicationVO, HttpServletRequest request, HttpServletResponse response)throws IOException {
+    public void changeTeamValidStatus(@PathVariable Long teamvalidId,@RequestBody TeamValidApplicationVO teamValidApplicationVO, HttpServletRequest request, HttpServletResponse response)throws IOException {
         String token = request.getHeader("Authorization");
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
         int status = 0;
-        if (jwtTeacher!=null){
-            TeamValidApplication teamValidApplication = new TeamValidApplication(teamValidApplicationVO,jwtTeacher);
-            teamValidApplication.setId(teamvalidId);
-            String result = teamValidApplicationVO.getHandletype();
+        TeamValidApplication teamValidApplication = new TeamValidApplication(teamValidApplicationVO,jwtTeacher);
+        teamValidApplication.setId(teamvalidId);
+        String result = teamValidApplicationVO.getHandletype();
+        if (jwtTeacher!=null&&result!=null){
             switch (result){
                 case "accept":teamValidApplication.setStatus(1);break;
                 case "reject":teamValidApplication.setStatus(0);break;

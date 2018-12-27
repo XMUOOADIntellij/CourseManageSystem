@@ -167,8 +167,7 @@ public class TeamDao {
      * @param id 队伍id
      * @return 返回一个包含所有队员的队伍*/
     public Team getTeamWithoutMembersById(Long id){
-        Team team = teamMapper.selectTeamById(id);
-        return team;
+        return teamMapper.selectTeamById(id);
     }
 
     /**
