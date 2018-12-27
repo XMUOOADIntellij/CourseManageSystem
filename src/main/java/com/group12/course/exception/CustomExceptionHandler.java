@@ -49,6 +49,14 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(TeamInAuditingException.class)
+    public  final ResponseEntity<Object> handleTeamInAuditingException(TeamInAuditingException ex,WebRequest request){
+        List<String> details = new ArrayList<>();
+        details.add(ex.getLocalizedMessage());
+        ErrorResponse error = new ErrorResponse("Team is in auditing", details);
+        return new ResponseEntity(error, HttpStatus.CONFLICT);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<String> details = new ArrayList<>();

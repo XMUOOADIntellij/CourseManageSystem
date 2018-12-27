@@ -26,9 +26,9 @@ public class Team implements Serializable {
     /**
      * status 代表队伍状态，
      * 0为审核中
-     * 1为已通过
-     * 2为已驳回
-     * 默认为 0 审核中
+     * 1为合法
+     * 2为不合法
+     * 默认为 1 合法
      * */
     private Integer status;
 

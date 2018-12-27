@@ -52,23 +52,13 @@ class JwtVerificationAop {
                 stopWatch.start();
                 Object result = proceedingJoinPoint.proceed();
                 stopWatch.stop();
-                double elapsedTime = stopWatch.getTime() / 1000.0;
-                Signature signature = proceedingJoinPoint.getSignature();
-                String infoString = "[" + signature.toShortString() + "][Elapsed time: " + elapsedTime + " s]";
-                if (elapsedTime > 1) {
-                    logger.error(infoString + "[Note that it's time consuming!]");
-                    HttpServletResponse response = sra.getResponse();
-                    if (response!=null){
-                        Map<String,String> errorMessage = new HashMap<>(16);
-                        errorMessage.put("message","jwt token is expired");
-                        String json = JSON.toJSONString(errorMessage);
-                        response.setStatus(40);
-                        response.getWriter().write(json);
-                    }
-                    return null;
-                }
-                else {
-                    logger.info(infoString);
+                HttpServletResponse response = sra.getResponse();
+                if (response!=null){
+                    Map<String,String> errorMessage = new HashMap<>(16);
+                    errorMessage.put("message","jwt token is expired");
+                    String json = JSON.toJSONString(errorMessage);
+                    response.setStatus(40);
+                    response.getWriter().write(json);
                 }
                 return result;
             }
