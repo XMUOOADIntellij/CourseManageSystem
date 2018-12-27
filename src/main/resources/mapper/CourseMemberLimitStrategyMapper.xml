@@ -55,7 +55,7 @@
     <update id="updateCourseMemberLimitStrategy" parameterType="com.group12.course.entity.strategy.CourseMemberLimitStrategy" >
         update course_member_limit_strategy
         <set >
-            <if test="courseFirst != null" >
+            <if test="course != null" >
                 course_id = #{course.id,jdbcType=BIGINT},
             </if>
             <if test="minMember != null" >

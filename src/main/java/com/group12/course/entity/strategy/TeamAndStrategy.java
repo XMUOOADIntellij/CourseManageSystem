@@ -1,10 +1,12 @@
 package com.group12.course.entity.strategy;
 
+import java.util.List;
+
 public class TeamAndStrategy extends Strategy{
 
     private String strategyName;
 
-    private Strategy strategy;
+    private List<Strategy> strategyList;
 
     public String getStrategyName() {
         return strategyName;
@@ -14,11 +16,19 @@ public class TeamAndStrategy extends Strategy{
         this.strategyName = strategyName;
     }
 
-    public Strategy getStrategy() {
-        return strategy;
+    public List<Strategy> getStrategyList() {
+        return strategyList;
     }
 
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
+    public void setStrategyList(List<Strategy> strategyList) {
+        this.strategyList = strategyList;
+    }
+
+    @Override
+    public String toString() {
+        return "TeamAndStrategy{" +
+                "strategyName='" + strategyName + '\'' +
+                ", strategyList=" + strategyList +
+                '}';
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  *
+ * relation为1表示均满足，为0表示满足其一
  */
 public class CourseVO {
 
@@ -27,14 +28,15 @@ public class CourseVO {
 
     private LocalDateTime teamEndTime;
 
-    private Integer maxMember;
+    private Integer teamMaxMember;
 
-    private Integer minMember;
+    private Integer teamMingMember;
 
+    private List<CourseMemberLimitVO> courseMemberLimitVOList;
 
+    private Integer relation;
 
-
-    List<Course> conflictCourseList;
+    private List<List<Course>> conflictCourseLists;
 
     public String getcourseName() {
         return courseName;
@@ -92,28 +94,52 @@ public class CourseVO {
         this.teamEndTime = teamEndTime;
     }
 
-    public Integer getMaxMember() {
-        return maxMember;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setMaxMember(Integer maxMember) {
-        this.maxMember = maxMember;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public Integer getMinMember() {
-        return minMember;
+    public Integer getTeamMaxMember() {
+        return teamMaxMember;
     }
 
-    public void setMinMember(Integer minMember) {
-        this.minMember = minMember;
+    public void setTeamMaxMember(Integer teamMaxMember) {
+        this.teamMaxMember = teamMaxMember;
     }
 
-    public List<Course> getConflictCourseList() {
-        return conflictCourseList;
+    public Integer getTeamMingMember() {
+        return teamMingMember;
     }
 
-    public void setConflictCourseList(List<Course> conflictCourseList) {
-        this.conflictCourseList = conflictCourseList;
+    public void setTeamMingMember(Integer teamMingMember) {
+        this.teamMingMember = teamMingMember;
+    }
+
+    public List<CourseMemberLimitVO> getCourseMemberLimitVOList() {
+        return courseMemberLimitVOList;
+    }
+
+    public void setCourseMemberLimitVOList(List<CourseMemberLimitVO> courseMemberLimitVOList) {
+        this.courseMemberLimitVOList = courseMemberLimitVOList;
+    }
+
+    public Integer getRelation() {
+        return relation;
+    }
+
+    public void setRelation(Integer relation) {
+        this.relation = relation;
+    }
+
+    public List<List<Course>> getConflictCourseLists() {
+        return conflictCourseLists;
+    }
+
+    public void setConflictCourseLists(List<List<Course>> conflictCourseLists) {
+        this.conflictCourseLists = conflictCourseLists;
     }
 
     public CourseVO(){}
@@ -129,5 +155,21 @@ public class CourseVO {
         this.teamEndTime = course.getTeamEndTime();
     }
 
-
+    @Override
+    public String toString() {
+        return "CourseVO{" +
+                "courseName='" + courseName + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", presentationPercentage=" + presentationPercentage +
+                ", questionPercentage=" + questionPercentage +
+                ", reportPercentage=" + reportPercentage +
+                ", teamStartTime=" + teamStartTime +
+                ", teamEndTime=" + teamEndTime +
+                ", teamMaxMember=" + teamMaxMember +
+                ", teamMingMember=" + teamMingMember +
+                ", courseMemberLimitVOList=" + courseMemberLimitVOList +
+                ", CourseRequire=" + relation +
+                ", conflictCoursesList=" + conflictCourseLists +
+                '}';
+    }
 }

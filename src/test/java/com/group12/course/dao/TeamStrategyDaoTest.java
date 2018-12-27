@@ -15,6 +15,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -37,9 +39,12 @@ public class TeamStrategyDaoTest {
 
     @Test
     @Rollback
-    public void testSelectTeamStrategyByCourseIdAndStrategyName(){
-        TeamStrategy record = teamStrategyMapper.selectTeamStrategyByCourseIdAndStrategyName(new Long(1),new String("member_limit_strategy"));
-        Assert.assertNotNull(record.getStrategy());
+    public void testSelectTeamStrategyByCourseId(){
+        List<TeamStrategy> recordList = teamStrategyMapper.selectTeamStrategyByCourseId(new Long(16));
+        for (TeamStrategy teamStrategy:recordList) {
+            System.out.print(teamStrategy);
+        }
+        Assert.assertFalse(recordList.isEmpty());
     }
 
 }

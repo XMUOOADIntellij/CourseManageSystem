@@ -32,10 +32,6 @@ public class TeamAndStrategyDao {
         return teamAndStrategyMapper.selectTeamAndStrategyById(id);
     }
 
-    public int addTeamAndStrategy(TeamAndStrategy teamAndStrategy){
-        return teamAndStrategyMapper.addTeamAndStrategy(teamAndStrategy);
-    }
-
     /**
      * 根据传入的 id 和 队伍
      * 判断该队伍是否符合该 id 的策略
@@ -52,27 +48,27 @@ public class TeamAndStrategyDao {
         List<Boolean> booleans=new ArrayList<>(teamAndStrategies.size());
         for (TeamAndStrategy teamAndStrategy:teamAndStrategies) {
             Boolean status=false;
-            switch (teamAndStrategy.getStrategyName()){
-                case "MemberLimitStrategy":
-                    status = memberLimitStrategyDao.judgeTeam(teamAndStrategy.getStrategy().getId(),team);
-                    break;
-                case "TeamOrStrategy":
-                    status = teamOrStrategyDao.judgeTeam(teamAndStrategy.getStrategy().getId(),team);
-                    break;
-                case "ConflictCourseStrategy":
-                    status = conflictCourseStrategyDao.judgeTeam(teamAndStrategy.getStrategy().getId(),team);
-                    break;
-                case "CourseMemberLimitStrategy":
-                    status = courseMemberLimitStrategyDao.judgeTeam(teamAndStrategy.getStrategy().getId(),team);
-                    break;
-                case "TeamAndStrategy":
-                    status = judgeTeam(teamAndStrategy.getStrategy().getId(),team);
-                    break;
-                default:
-                    // 默认不存在的时候默认为对的了（不影响其余的）
-                    status=true;
-                    break;
-            }
+//            switch (teamAndStrategy.getStrategyName()){
+//                case "MemberLimitStrategy":
+//                    status = memberLimitStrategyDao.judgeTeam(teamAndStrategy.getStrategy().getId(),team);
+//                    break;
+//                case "TeamOrStrategy":
+//                    status = teamOrStrategyDao.judgeTeam(teamAndStrategy.getStrategy().getId(),team);
+//                    break;
+//                case "ConflictCourseStrategy":
+//                    status = conflictCourseStrategyDao.judgeTeam(teamAndStrategy.getStrategy().getId(),team);
+//                    break;
+//                case "CourseMemberLimitStrategy":
+//                    status = courseMemberLimitStrategyDao.judgeTeam(teamAndStrategy.getStrategy().getId(),team);
+//                    break;
+//                case "TeamAndStrategy":
+//                    status = judgeTeam(teamAndStrategy.getStrategy().getId(),team);
+//                    break;
+//                default:
+//                    // 默认不存在的时候默认为对的了（不影响其余的）
+//                    status=true;
+//                    break;
+//            }
             booleans.add(status);
         }
         for (Boolean eachJudge:booleans) {
@@ -82,4 +78,35 @@ public class TeamAndStrategyDao {
         }
         return true;
     }
+
+    /**
+     * 计算下一条要插入的记录的id
+     * @return
+     */
+    public Long calculateId(){
+        Long maxId = new Long(0) ;
+        List<TeamAndStrategy> teamAndStrategyList = teamAndStrategyMapper.selectAllTeamAndStrategy();
+        if(teamAndStrategyList!=null && !teamAndStrategyList.isEmpty()) {
+            for (TeamAndStrategy teamAndStrategy : teamAndStrategyList) {
+                if (teamAndStrategy.getId() > maxId) {
+                    maxId = teamAndStrategy.getId();
+                }
+            }
+        }
+        return maxId + 1;
+    }
+
+    /**
+     * 添加与策略列表
+     * @param teamAndStrategyList
+     * @return 新添加的或策略的id
+     */
+    public List<TeamAndStrategy> addTeamAndStrategyList(List<TeamAndStrategy> teamAndStrategyList){
+        Long teamAndStrategyId = calculateId();
+        for (TeamAndStrategy teamAndStrategy:teamAndStrategyList) {
+            teamAndStrategyMapper.addTeamAndStrategy(teamAndStrategyId,teamAndStrategy.getStrategyName(),teamAndStrategy.getStrategyList().get(0).getId());
+        }
+        return selectTeamAndStrategyById(teamAndStrategyId);
+    }
+
 }

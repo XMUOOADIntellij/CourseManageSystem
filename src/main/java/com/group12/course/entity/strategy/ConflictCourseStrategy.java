@@ -30,4 +30,10 @@ public class ConflictCourseStrategy extends Strategy {
         this.course = course;
     }
 
+    @Override
+    public String toString() {
+        return "ConflictCourseStrategy{" +
+                "course=" + course +
+                '}';
+    }
 }

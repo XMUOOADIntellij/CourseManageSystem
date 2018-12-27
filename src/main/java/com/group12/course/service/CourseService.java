@@ -4,6 +4,7 @@ import com.group12.course.dao.*;
 import com.group12.course.entity.*;
 import com.group12.course.entity.application.ShareSeminarApplication;
 import com.group12.course.entity.application.ShareTeamApplication;
+import com.group12.course.entity.strategy.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,7 @@ public class CourseService {
     KlassSeminarDao klassSeminarDao;
     @Autowired
     ScoreDao scoreDao;
+
 
     /**
      * 获得当前用户所有课程
@@ -311,7 +313,6 @@ public class CourseService {
 
             //将共享的seminar插入到klass_seminar表
             List<Seminar> seminarList = seminarDao.listSeminarByCourseId(mainCourse.getId());
-//            List<Klass> klassList = klassDao.getAllKlassByCourseId(subCourse.getId());
             List<KlassSeminar> klassSeminarList = new ArrayList<>();
             for (Klass klass : klassList) {
                 for (Seminar seminar : seminarList) {

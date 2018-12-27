@@ -22,7 +22,10 @@ public class TeamAndStrategyDaoTest {
 
     @Test
     public void testSelectTeamAndStrategyById(){
-        List<TeamAndStrategy> record =  teamAndStrategyMapper.selectTeamAndStrategyById(new Long(1));
-        Assert.assertFalse(record.isEmpty());
+        List<TeamAndStrategy> recordList =  teamAndStrategyMapper.selectTeamAndStrategyById(new Long(1));
+        for (TeamAndStrategy teamAndStrategy:recordList) {
+            System.out.print(teamAndStrategy);
+        }
+        Assert.assertFalse(recordList.isEmpty());
     }
 }
