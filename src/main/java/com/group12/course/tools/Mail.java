@@ -44,15 +44,15 @@ public class Mail {
             final String sslFactory = "javax.net.ssl.SSLSocketFactory";
             // Get a Properties object
             Properties props = new Properties();
-            props.setProperty("mail.smtp.host", "smtp.qq.com");
+            props.setProperty("mail.smtp.host", "smtp.163.com");
             props.setProperty("mail.smtp.socketFactory.class", sslFactory);
             props.setProperty("mail.smtp.socketFactory.fallback", "false");
             props.setProperty("mail.smtp.port", "465");
             props.setProperty("mail.smtp.socketFactory.port", "465");
             props.put("mail.smtp.auth", "true");
 
-            final String username = "277030573@qq.com";
-            final String password = "xnmyetoesmpzbjjf";
+            final String username = "xmucms1_2@163.com";
+            final String password = "ooad18805925581";
             Session session = Session.getDefaultInstance(props, new Authenticator(){
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
