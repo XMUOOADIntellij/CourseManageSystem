@@ -41,7 +41,7 @@ public class KlassController {
             response.setStatus(404);
         }
         else{
-            response.setStatus(204);
+            response.setStatus(200);
         }
     }
 }
