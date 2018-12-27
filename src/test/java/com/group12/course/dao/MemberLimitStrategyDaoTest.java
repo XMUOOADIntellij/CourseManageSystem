@@ -20,6 +20,7 @@ public class MemberLimitStrategyDaoTest {
     @Test
     public void testSelectMemberLimitStrategyById(){
         MemberLimitStrategy record = memberLimitStrategyMapper.selectMemberLimitStrategyById(new Long(1));
+        System.out.print(record);
         Assert.assertNotNull(record.getMaxMember());
     }
 

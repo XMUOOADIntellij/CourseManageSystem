@@ -2,6 +2,7 @@ package com.group12.course.dao;
 
 import com.group12.course.entity.*;
 import com.group12.course.exception.InformationException;
+import com.group12.course.mapper.CourseMapper;
 import com.group12.course.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,9 @@ public class TeamDao {
 
     @Autowired
     StudentDao studentDao;
+
+    @Autowired
+    CourseMapper courseMapper;
 
     private final int defaultTeamStatus=1;
 
@@ -63,9 +67,7 @@ public class TeamDao {
             Long leaderId = team.getLeader().getId();
         }
         catch (NullPointerException e){
-            // throw team invalid Exception
-            System.out.println("team message invalid");
-            return false;
+            throw new InformationException("队伍信息不足");
         }
         return true;
     }
@@ -163,8 +165,7 @@ public class TeamDao {
      * @param id 队伍id
      * @return 返回一个包含所有队员的队伍*/
     public Team getTeamWithoutMembersById(Long id){
-        Team team = teamMapper.selectTeamById(id);
-        return team;
+        return teamMapper.selectTeamById(id);
     }
 
     /**
@@ -173,7 +174,12 @@ public class TeamDao {
      * @param id 课程id
      * @return 返回一个包含所有队员的队伍*/
     public List<Team> getTeamByCourseId(Long id){
-        List<Team> teams = teamMapper.selectTeamByCourseId(id);
+        Course course = courseMapper.selectCourseById(id);
+        Long courseId = id;
+        if (course.getTeamMainCourse()!=null){
+            courseId=course.getTeamMainCourse().getId();
+        }
+        List<Team> teams = teamMapper.selectTeamByCourseId(courseId);
         List<Team> returnTeams = new ArrayList<>(0);
         for (Team team:teams) {
             returnTeams.add(getMembers(team));
@@ -311,7 +317,7 @@ public class TeamDao {
      * @return 删除数量
      * */
     public int deleteTeamMember(Team team,Student member){
-        return teamMapper.deleteTeamMembersByMemberId(member.getId(),member.getId());
+        return teamMapper.deleteTeamMembersByMemberId(team.getId(),member.getId());
     }
 
     /**
@@ -369,7 +375,6 @@ public class TeamDao {
      * @return 返回新的队伍对象
      * */
     public Team addTeamMembers(Team team){
-        team=teamMapper.selectTeamById(team.getId());
         for (Student member:team.getMembers()) {
             List<Long> memberInTeams = teamMapper.selectTeamIdByMembersId(member.getId());
             for (Long id:memberInTeams) {
@@ -385,9 +390,7 @@ public class TeamDao {
             }
             int temp=teamMapper.addTeamMembers(team.getId(),member.getId());
             if (temp==0){
-                // throw insert error
-                System.out.println("error insert team members:"+member.getId()+" at team:"+team.getId());
-                return new Team();
+                throw new InformationException("插入队员出错了");
             }
         }
         return team;

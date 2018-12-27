@@ -10,6 +10,7 @@ import com.group12.course.entity.strategy.TeamStrategy;
 import com.group12.course.exception.InformationException;
 import com.group12.course.exception.TeamInAuditingException;
 import com.group12.course.exception.UnauthorizedOperationException;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
@@ -173,26 +174,36 @@ public class TeamService {
         List<Boolean> strategyCheck = new ArrayList<>(strategyList.size());
         for (TeamStrategy teamStrategy:strategyList) {
             Boolean status=false;
-            switch (teamStrategy.getStrategyName()){
-                case "MemberLimitStrategy":
-                    status = memberLimitStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
+            List<Strategy> strategies = teamStrategy.getStrategyList();
+            for (Strategy strategy:strategies) {
+                switch (strategy.getStrategyType()){
+                    case "MemberLimitStrategy":
+                        status = memberLimitStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "TeamOrStrategy":
+                        status = teamOrStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "ConflictCourseStrategy":
+                        status = conflictCourseStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "CourseMemberLimitStrategy":
+                        status = courseMemberLimitStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    case "TeamAndStrategy":
+                        status = teamAndStrategyDao.judgeTeam(strategy.getId(),team);
+                        break;
+                    default:
+                        // 默认不存在的时候默认为对的了（不影响其余的）
+                        status=true;
+                        break;
+                }
+                // 只要某条不符合，整体就不符合，不必继续判断
+                if (!status){
                     break;
-                case "TeamOrStrategy":
-                    status = teamOrStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-                    break;
-                case "ConflictCourseStrategy":
-                    status = conflictCourseStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-                    break;
-                case "CourseMemberLimitStrategy":
-                    status = courseMemberLimitStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-                    break;
-                case "TeamAndStrategy":
-                    status = teamAndStrategyDao.judgeTeam(teamStrategy.getStrategy().getId(),team);
-                    break;
-                default:
-                    // 默认不存在的时候默认为对的了（不影响其余的）
-                    status=true;
-                    break;
+                }
+            }
+            if (!status){
+                break;
             }
             strategyCheck.add(status);
         }

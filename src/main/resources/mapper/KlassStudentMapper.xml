@@ -31,9 +31,21 @@
         where student_id=#{studentId,jdbcType=BIGINT}
     </select>
 
+    <select id="selectKlassStudentByKlassId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from klass_student
+        where klass_id=#{klassId,jdbcType=BIGINT}
+    </select>
+
     <delete id="deleteKlassStudentByKlassId" parameterType="java.lang.Long">
         delete from klass_student
         where klass_id=#{klassId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteKlassStudentByStudentId" parameterType="java.lang.Long">
+        delete from klass_student
+        where student_id=#{studentId,jdbcType=BIGINT}
     </delete>
 
     <delete id="deleteKlassStudentByKlassIdAndStudentId" parameterType="java.lang.Long">

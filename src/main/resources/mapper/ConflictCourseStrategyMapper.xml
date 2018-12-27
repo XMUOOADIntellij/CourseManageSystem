@@ -55,11 +55,10 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectConflictCourseStrategyByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="selectAllConflictCourseStrategy" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from conflict_course_strategy
-        where course_id = #{courseId,jdbcType=BIGINT}
     </select>
 
 

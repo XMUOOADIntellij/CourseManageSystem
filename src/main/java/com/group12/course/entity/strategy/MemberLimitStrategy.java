@@ -18,6 +18,7 @@ public class MemberLimitStrategy extends Strategy {
     private Integer maxMember;
 
     public MemberLimitStrategy() {
+        this.strategyType="MemberLimitStrategy";
     }
 
     public MemberLimitStrategy(Long id, Integer minMember, Integer maxMember) {
@@ -32,6 +33,7 @@ public class MemberLimitStrategy extends Strategy {
                 "minMember=" + minMember +
                 ", maxMember=" + maxMember +
                 ", id=" + id +
+                ", strategyType='" + strategyType + '\'' +
                 '}';
     }
 

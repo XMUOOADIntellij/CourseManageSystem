@@ -3,6 +3,7 @@ package com.group12.course.dao;
 import com.group12.course.entity.Course;
 import com.group12.course.entity.Klass;
 import com.group12.course.entity.KlassStudent;
+import com.group12.course.entity.Student;
 import com.group12.course.mapper.KlassMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,7 +36,11 @@ public class KlassDao {
         //删除班级
         int status1 = klassMapper.deleteKlass(klassId);
         //删除学生与班级的关联
-        int status2 = klassStudentDao.deleteKlassStudentByKlassId(klassId);
+        int status2 = 1;
+        List<KlassStudent> klassStudentList = klassStudentDao.selectKlassStudentByKlassId(klassId);
+        if(!klassStudentList.isEmpty()){
+            status2 = klassStudentDao.deleteKlassStudentByKlassId(klassId);
+        }
         if(status1 ==0 || status2 == 0){
             return 0;
         }

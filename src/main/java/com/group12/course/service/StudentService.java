@@ -1,5 +1,6 @@
 package com.group12.course.service;
 
+import com.group12.course.dao.KlassStudentDao;
 import com.group12.course.dao.StudentDao;
 import com.group12.course.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class StudentService {
 
     @Autowired
     StudentDao studentDao;
+    @Autowired
+    KlassStudentDao klassStudentDao;
 
     /**
      * 学生登陆
@@ -93,6 +96,7 @@ public class StudentService {
      * @return 代表处理数量
      * */
     public int deleteStudent(Long id){
+        klassStudentDao.deleteKlassStudentByStudentId(id);
         return studentDao.deleteStudent(id);
     }
 

@@ -5,13 +5,15 @@ import com.group12.course.entity.Team;
 import com.group12.course.controller.vo.TeamValidApplicationVO;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /**
  * 队伍申请对象
  * @author Xu Gang
  * @date 2018年12月17日
  */
 @Component
-public class TeamValidApplication extends Application {
+public class TeamValidApplication extends Application implements Serializable {
 
     private Team team;
 

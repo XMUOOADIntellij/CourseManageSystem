@@ -207,7 +207,7 @@ public class TeamController {
         teamValidApplication.setTeam(team);
         teamValidApplication.setStatus(2);
         teamValidApplication.setReason(teamValidApplicationVO.getReason());
-        int status = teamValidApplicationService.addApplication(teamValidApplication,teamValidApplicationVO.getCourseId());
+        int status = teamValidApplicationService.addApplication(teamValidApplication);
         if (status == 0){
             response.setStatus(400);
         }

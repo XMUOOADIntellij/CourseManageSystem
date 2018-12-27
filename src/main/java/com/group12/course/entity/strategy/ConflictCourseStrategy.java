@@ -15,6 +15,7 @@ public class ConflictCourseStrategy extends Strategy {
     private Course course;
 
     public ConflictCourseStrategy() {
+        this.strategyType="ConflictCourseStrategy";
     }
 
     public ConflictCourseStrategy(Long id, Course course) {
@@ -30,4 +31,10 @@ public class ConflictCourseStrategy extends Strategy {
         this.course = course;
     }
 
+    @Override
+    public String toString() {
+        return "ConflictCourseStrategy{" +
+                "course=" + course +
+                '}';
+    }
 }

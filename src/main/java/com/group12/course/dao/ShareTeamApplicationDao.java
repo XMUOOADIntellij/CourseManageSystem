@@ -20,8 +20,8 @@ public class ShareTeamApplicationDao {
         return shareTeamApplicationMapper.selectShareTeamApplicationById(id);
     }
 
-    public List<ShareTeamApplication> selectShareTeamApplicationByMainCourseId(Long mainCourseId){
-        return shareTeamApplicationMapper.selectShareTeamApplicationByMainCourseId(mainCourseId);
+    public List<ShareTeamApplication> selectShareTeamApplicationByCourseId(Long courseId){
+        return shareTeamApplicationMapper.selectShareTeamApplicationByCourseId(courseId);
     }
 
     public int addShareTeamApplication(ShareTeamApplication shareTeamApplication){

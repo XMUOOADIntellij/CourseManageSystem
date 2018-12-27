@@ -3,6 +3,7 @@ package com.group12.course.service;
 import com.group12.course.dao.CourseDao;
 import com.group12.course.dao.TeamDao;
 import com.group12.course.dao.TeamValidApplicationDao;
+import com.group12.course.entity.Course;
 import com.group12.course.entity.Teacher;
 import com.group12.course.entity.Team;
 import com.group12.course.entity.application.TeamValidApplication;
@@ -54,8 +55,13 @@ public class TeamValidApplicationService {
         return teamValidApplicationDao.changeApplicationStatus(teamValidApplication);
     }
 
-    public int addApplication(TeamValidApplication teamValidApplication,Long courseId){
-        Teacher teacher = courseDao.getCourse(courseId).getTeacher();
+    public int addApplication(TeamValidApplication teamValidApplication){
+        Team team = teamDao.getTeamWithoutMembersById(teamValidApplication.getTeam().getId());
+        Course course = courseDao.getCourse(team.getCourse().getId());
+        if (course==null){
+            throw new InformationException("课程不存在！");
+        }
+        Teacher teacher = course.getTeacher();
         teamValidApplication.setTeacher(teacher);
         return teamValidApplicationDao.addApplication(teamValidApplication);
     }

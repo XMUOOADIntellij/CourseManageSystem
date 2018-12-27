@@ -24,21 +24,12 @@ public class ConflictCourseStrategyDao {
         return conflictCourseStrategyMapper.selectConflictCourseStrategyById(id);
     }
 
-    public int deleteConflictCourseStrategy(Long id){
-        return conflictCourseStrategyMapper.deleteConflictCourseStrategy(id);
-    }
 
     public int addConflictCourseStrategy(ConflictCourseStrategy record){
         return conflictCourseStrategyMapper.addConflictCourseStrategy(record);
     }
 
-    public int updateConflictCourseStrategy(ConflictCourseStrategy record){
-        return conflictCourseStrategyMapper.updateConflictCourseStrategy(record);
-    }
 
-    public ConflictCourseStrategy selectConflictCourseStrategyByCourseId(Long courseId){
-        return conflictCourseStrategyMapper.selectConflictCourseStrategyByCourseId(courseId);
-    }
 
     /**
      * 根据传入的 id 和 队伍
@@ -53,7 +44,6 @@ public class ConflictCourseStrategyDao {
         if (conflictCourseStrategy==null||conflictCourseStrategy.isEmpty()){
             return true;
         }
-        List<Boolean> eachStrategyStatus = new ArrayList<>(conflictCourseStrategy.size());
         for (ConflictCourseStrategy strategy:conflictCourseStrategy) {
             Course course = strategy.getCourse();
             KlassStudent klassStudent = klassStudentMapper.selectKlassStudentByCourseIdAndStudentId(course.getId(),
@@ -73,4 +63,37 @@ public class ConflictCourseStrategyDao {
         }
         return true;
     }
+
+    /**
+     * 计算下一条要插入的记录的id
+     * @return
+     */
+    public Long calculateId(){
+        Long maxId = new Long(0) ;
+        List<ConflictCourseStrategy> conflictCourseStrategyList = conflictCourseStrategyMapper.selectAllConflictCourseStrategy();
+        if(conflictCourseStrategyList!=null && !conflictCourseStrategyList.isEmpty()) {
+            for (ConflictCourseStrategy conflictCourseStrategy : conflictCourseStrategyList) {
+                if (conflictCourseStrategy.getId() > maxId) {
+                    maxId = conflictCourseStrategy.getId();
+                }
+            }
+        }
+        return maxId + 1;
+    }
+
+    /**
+     * 添加冲突课程策略列表
+     * @param conflictCourseStrategyList
+     * @return 新添加的冲突课程策略的id
+     */
+    public List<ConflictCourseStrategy> addConflictCourseStrategyList(List<ConflictCourseStrategy> conflictCourseStrategyList){
+        Long conflictCourseStrategyId = calculateId();
+        for (ConflictCourseStrategy conflictCourseStrategy:conflictCourseStrategyList) {
+            conflictCourseStrategy.setId(conflictCourseStrategyId);
+            conflictCourseStrategyMapper.addConflictCourseStrategy(conflictCourseStrategy);
+        }
+        return conflictCourseStrategyMapper.selectConflictCourseStrategyById(conflictCourseStrategyId);
+    }
+
+
 }
