@@ -29,7 +29,7 @@ function initDetail(){
 function getCurrentSeminar() {
   $.ajax({
     type: "get",
-    url: "/seminar",
+    url: "http://xug98.cn:8080/seminar",
     dataType: "json",
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
@@ -58,7 +58,7 @@ function getAttendanceByClass(klassId,seminarId) {
   $.ajax({
     type: "get",
     url:
-        "/seminar/" +
+        "http://xug98.cn:8080/seminar/" +
         seminarId +
         "/class/" +
         klassId +
@@ -118,7 +118,7 @@ function getQuestionList(attendanceId) {
   $.ajax({
     type: "get",
     url:
-        "/seminar/" +
+        "http://xug98.cn:8080/seminar/" +
         Cookies.get("seminar") +
         "/class/" +
         Cookies.get("class") +
