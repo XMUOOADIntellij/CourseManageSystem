@@ -18,6 +18,7 @@ public class CourseMemberLimitStrategy extends Strategy {
     private Integer maxMember;
 
     public CourseMemberLimitStrategy() {
+        this.strategyType="CourseMemberLimitStrategy";
     }
 
     public CourseMemberLimitStrategy(Long id, Course course, Integer minMember, Integer maxMember) {

@@ -8,6 +8,10 @@ public class TeamOrStrategy extends Strategy{
 
     private List<Strategy> strategyList;
 
+    public TeamOrStrategy() {
+        this.strategyType = "TeamOrStrategy";
+    }
+
     public String getStrategyName() {
         return strategyName;
     }
@@ -29,6 +33,8 @@ public class TeamOrStrategy extends Strategy{
         return "TeamOrStrategy{" +
                 "strategyName='" + strategyName + '\'' +
                 ", strategyList=" + strategyList +
+                ", id=" + id +
+                ", strategyType='" + strategyType + '\'' +
                 '}';
     }
 }

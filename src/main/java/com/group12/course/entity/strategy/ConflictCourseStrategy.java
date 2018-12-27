@@ -15,6 +15,7 @@ public class ConflictCourseStrategy extends Strategy {
     private Course course;
 
     public ConflictCourseStrategy() {
+        this.strategyType="ConflictCourseStrategy";
     }
 
     public ConflictCourseStrategy(Long id, Course course) {
