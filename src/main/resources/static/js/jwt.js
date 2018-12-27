@@ -5,7 +5,7 @@ $.ajaxSetup({
     }
   },
   error(data){
-    conosle.log(data);
+    console.log(data);
   },
   statusCode: {
     401: function() {
