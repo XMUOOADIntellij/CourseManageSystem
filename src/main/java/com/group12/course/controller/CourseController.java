@@ -149,23 +149,24 @@ public class CourseController {
             }
             //记录冲突课程
             List<List<Course>> conflictCourseLists = courseVO.getConflictCourseLists();
-            for (List<Course> conflictCourseList:conflictCourseLists) {
-                List<ConflictCourseStrategy> conflictCourseStrategyList = new ArrayList<>();
-                for (Course course1:conflictCourseList) {
-                    ConflictCourseStrategy conflictCourseStrategy = new ConflictCourseStrategy();
-                    conflictCourseStrategy.setCourse(course1);
-                    conflictCourseStrategyList.add(conflictCourseStrategy);
+            if(conflictCourseLists!=null && !conflictCourseLists.isEmpty()){
+                for (List<Course> conflictCourseList:conflictCourseLists) {
+                    List<ConflictCourseStrategy> conflictCourseStrategyList = new ArrayList<>();
+                    for (Course course1:conflictCourseList) {
+                        ConflictCourseStrategy conflictCourseStrategy = new ConflictCourseStrategy();
+                        conflictCourseStrategy.setCourse(course1);
+                        conflictCourseStrategyList.add(conflictCourseStrategy);
+                    }
+                    List<ConflictCourseStrategy> returnConflictCourseStrategyList = strategyService.addConflictCourseStrategyList(conflictCourseStrategyList);
+                    TeamStrategy teamStrategy = new TeamStrategy();
+                    teamStrategy.setCourse(course);
+                    teamStrategy.setStrategyName("ConflictCourseStrategy");
+                    for (ConflictCourseStrategy item:returnConflictCourseStrategyList) {
+                        teamStrategy.getStrategyList().add(item);
+                    }
+                    strategyService.addTeamStrategy(teamStrategy);
                 }
-                List<ConflictCourseStrategy> returnConflictCourseStrategyList = strategyService.addConflictCourseStrategyList(conflictCourseStrategyList);
-                TeamStrategy teamStrategy = new TeamStrategy();
-                teamStrategy.setCourse(course);
-                teamStrategy.setStrategyName("ConflictCourseStrategy");
-                for (ConflictCourseStrategy item:returnConflictCourseStrategyList) {
-                    teamStrategy.getStrategyList().add(item);
-                }
-                strategyService.addTeamStrategy(teamStrategy);
             }
-
 
             if(status1 == 0 || status2 == 0){
                 response.setStatus(403);
@@ -381,7 +382,7 @@ public class CourseController {
      * @param response
      */
     @PostMapping(value="/{courseId}/class",produces = "application/json; charset=utf-8")
-    public void createKlass(@PathVariable Long courseId, @RequestBody KlassVO klassVO, @RequestParam(required = false,value = "file") MultipartFile file, HttpServletResponse response){
+    public void createKlass(@PathVariable Long courseId, @RequestBody KlassVO klassVO,  HttpServletResponse response){
         //创建班级
         Klass klass = new Klass(klassVO);
         klass.setCourse(courseService.getCourseById(courseId));
@@ -405,7 +406,7 @@ public class CourseController {
      */
     @GetMapping(value="/{courseId}/teamshare",produces = "application/json; charset=utf-8")
     public void getTeamShareMessage(@PathVariable Long courseId, HttpServletResponse response) throws IOException {
-        List<ShareTeamApplication> shareTeamApplicationList = courseService.getShareTeamApplicationByMainCourseId(courseId);
+        List<ShareTeamApplication> shareTeamApplicationList = courseService.getShareTeamApplicationByCourseId(courseId);
         if(shareTeamApplicationList.isEmpty()){
             response.setStatus(404);
         }

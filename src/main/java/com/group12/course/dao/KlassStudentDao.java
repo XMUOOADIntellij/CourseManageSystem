@@ -34,6 +34,10 @@ public class KlassStudentDao {
         return klassStudentMapper.selectKlassStudentByStudentId(studentId);
     }
 
+    public List<KlassStudent> selectKlassStudentByKlassId(Long klassId){
+        return klassStudentMapper.selectKlassStudentByKlassId(klassId);
+    }
+
     /**
      * 根据班级id 删除学生班级记录
      * @param klassId
@@ -41,6 +45,10 @@ public class KlassStudentDao {
      */
     public int deleteKlassStudentByKlassId(Long klassId){
         return klassStudentMapper.deleteKlassStudentByKlassId(klassId);
+    }
+
+    public int deleteKlassStudentByStudentId(Long studentId){
+        return klassStudentMapper.deleteKlassStudentByStudentId(studentId);
     }
 
     /**

@@ -97,11 +97,11 @@ public class CourseService {
 
     /**
      * 根据课程id 查询共享分组信息
-     * @param mainCourseId
+     * @param courseId
      * @return
      */
-    public List<ShareTeamApplication> getShareTeamApplicationByMainCourseId(Long mainCourseId){
-        return shareTeamApplicationDao.selectShareTeamApplicationByMainCourseId(mainCourseId);
+    public List<ShareTeamApplication> getShareTeamApplicationByCourseId(Long courseId){
+        return shareTeamApplicationDao.selectShareTeamApplicationByCourseId(courseId);
     }
 
     /**
