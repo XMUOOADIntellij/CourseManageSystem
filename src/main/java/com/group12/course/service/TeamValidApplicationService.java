@@ -1,9 +1,12 @@
 package com.group12.course.service;
 
 import com.group12.course.dao.CourseDao;
+import com.group12.course.dao.TeamDao;
 import com.group12.course.dao.TeamValidApplicationDao;
 import com.group12.course.entity.Teacher;
+import com.group12.course.entity.Team;
 import com.group12.course.entity.application.TeamValidApplication;
+import com.group12.course.exception.InformationException;
 import org.aspectj.lang.annotation.Around;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,13 @@ public class TeamValidApplicationService {
     @Autowired
     CourseDao courseDao;
 
+    @Autowired
+    TeamDao teamDao;
+
+    private final int teamIsValid = 1;
+    private final int teamIsInvalid = 2;
+    private final int teamIsInAuditing = 0;
+
     public TeamValidApplication getTeamValidApplicationMapperById(TeamValidApplication teamValidApplication) {
         return teamValidApplicationDao.getTeamValidApplicationById(teamValidApplication);
     }
@@ -34,6 +44,13 @@ public class TeamValidApplicationService {
     }
 
     public int changeApplicationStatus(TeamValidApplication teamValidApplication){
+        Team team = teamValidApplication.getTeam();
+        switch (teamValidApplication.getStatus()){
+            case 1:team.setStatus(teamIsValid);break;
+            case 2:team.setStatus(teamIsValid);break;
+            default:throw new InformationException("小组申请更改状态信息有误");
+        }
+        teamDao.changeTeam(team);
         return teamValidApplicationDao.changeApplicationStatus(teamValidApplication);
     }
 
