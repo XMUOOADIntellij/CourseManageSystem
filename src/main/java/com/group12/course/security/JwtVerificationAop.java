@@ -24,6 +24,7 @@ import java.util.Map;
 class JwtVerificationAop {
 
     private final Logger logger = LoggerFactory.getLogger(com.group12.course.security.JwtVerificationAop.class);
+
     /**
      * 拦截 controller 包下所以方法
      */
@@ -32,7 +33,8 @@ class JwtVerificationAop {
             "&& !execution(public * com.group12.course.controller.SeminarProgressController.*(..))" +
             "&& !execution(public * com.group12.course.controller.AdminController.*(..))" +
             "&& execution(public * com.group12.course.controller.*.*(..))")
-    public void log() {}
+    public void log() {
+    }
 
     /**
      * 环绕通知
@@ -42,25 +44,25 @@ class JwtVerificationAop {
      * @param proceedingJoinPoint 代表 controller 层的切点方法
      */
     @Around("log()")
-    public Object checkJwt(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
+    public Object checkJwt(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (sra!=null){
+        if (sra != null) {
             HttpServletRequest request = sra.getRequest();
             String token = request.getHeader("Authorization");
             Boolean validJwt = Jwt.checkExpire(token);
-            if (validJwt){
+            if (validJwt) {
                 StopWatch stopWatch = new StopWatch();
                 stopWatch.start();
                 Object result = proceedingJoinPoint.proceed();
+
                 stopWatch.stop();
                 return result;
-            }
-            else {
+            } else {
                 logger.error("jwt token is invalid");
                 HttpServletResponse response = sra.getResponse();
-                if (response!=null){
-                    Map<String,String> errorMessage = new HashMap<>(16);
-                    errorMessage.put("message","jwt token is invalid");
+                if (response != null) {
+                    Map<String, String> errorMessage = new HashMap<>(16);
+                    errorMessage.put("message", "jwt token is invalid");
                     String json = JSON.toJSONString(errorMessage);
                     response.setStatus(403);
                     response.getWriter().write(json);
@@ -72,5 +74,6 @@ class JwtVerificationAop {
 
     }
 }
+
 
 
