@@ -110,7 +110,6 @@ public class TeamService {
      * @return 返回新的队伍对象
      * */
     public Team addMember(Team team){
-        checkTeamStatus(team);
         Team returnTeam = teamDao.addTeamMembers(team);
         Boolean status = checkTeamValidation(team);
         if (!status){
@@ -225,6 +224,15 @@ public class TeamService {
      * */
     public int deleteTeamMember(Team team,Student student){
         checkTeamStatus(team);
-        return teamDao.deleteTeamMember(team,student);
+        int count = teamDao.deleteTeamMember(team,student);
+        Team checkTeam = teamDao.getTeamById(team.getId());
+        Boolean status = checkTeamValidation(checkTeam);
+        if (!status){
+            checkTeam.setStatus(teamIsInvalid);
+            int i =teamDao.changeTeam(checkTeam);
+            throw new InformationException("队伍不合法");
+            // 记得此处提醒前端相关状态码为409
+        }
+        return count;
     }
 }
