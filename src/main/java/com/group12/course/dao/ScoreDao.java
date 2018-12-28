@@ -49,6 +49,9 @@ public class ScoreDao {
     private BigDecimal averageScore(List<BigDecimal> score, Integer divisor) {
         BigDecimal result = new BigDecimal(0);
         for (BigDecimal item : score) {
+            if (item == null) {
+                continue;
+            }
             result = result.add(item);
         }
         return result.divide(new BigDecimal(divisor).setScale(2, RoundingMode.HALF_DOWN));
@@ -63,7 +66,9 @@ public class ScoreDao {
     private BigDecimal maxScore(List<BigDecimal> score) {
         BigDecimal result = new BigDecimal(0);
         for (BigDecimal item : score) {
-            if (item.compareTo(result) > 0) {
+            if (item == null) {
+                continue;
+            } else if (item.compareTo(result) > 0) {
                 result = item;
             }
         }
@@ -112,9 +117,11 @@ public class ScoreDao {
             reportScore.add(item.getReportScore());
         }
 
+
         KlassRound klassRound = klassRoundDao.getKlassRoundByKlassIdAndRoundId(klass.getId(), round.getId());
         //每轮下的报名数
         Integer enrollNum = klassRound.getEnrollNumber();
+
 
         roundScore.setPresentationScore(
                 round.getPresentationScoreMethod() == 1 ?
@@ -226,7 +233,7 @@ public class ScoreDao {
 
         //更新roundScore
         if (klassSeminar != null) {
-            for(SeminarScore seminarScore :listSeminarScoreByKlassSeminarId(klassSeminarId)){
+            for (SeminarScore seminarScore : listSeminarScoreByKlassSeminarId(klassSeminarId)) {
                 seminarScore.setQuestionScore(new BigDecimal(0));
                 seminarScore.setPresentationScore(new BigDecimal(0));
                 seminarScore.setReportScore(new BigDecimal(0));
@@ -294,6 +301,7 @@ public class ScoreDao {
 
     /**
      * 讨论课进行时打分，不需要计算总分
+     *
      * @param seminarScore 记录
      * @return 1成功 0失败
      */
@@ -313,8 +321,8 @@ public class ScoreDao {
         return seminarScoreMapper.listSeminarScoreByKlassSeminarIdListAndTeamId(klassSeminarIdList, teamId);
     }
 
-    public List<RoundScore> listRoundScoreByRoundIdAndTeamIdList(List<Long>teamIds,Long roundId) {
-        return roundScoreMapper.listRoundScoreByRoundIdAndTeamIdList(teamIds,roundId);
+    public List<RoundScore> listRoundScoreByRoundIdAndTeamIdList(List<Long> teamIds, Long roundId) {
+        return roundScoreMapper.listRoundScoreByRoundIdAndTeamIdList(teamIds, roundId);
     }
 
     public List<RoundScore> listRoundScoreByRoundIdListAndTeamId(List<Long> roundIdList, Long teamId) {
@@ -329,7 +337,7 @@ public class ScoreDao {
         return seminarScoreMapper.selectSeminarScoreByKlassSeminarIdAndTeamId(klassSeminarId, teamId);
     }
 
-    public RoundScore selectRoundScoreByRoundIdAndTeamId(Long roundId,Long teamId){
-        return  roundScoreMapper.selectRoundScoreByRoundIdAndTeamId(roundId,teamId);
+    public RoundScore selectRoundScoreByRoundIdAndTeamId(Long roundId, Long teamId) {
+        return roundScoreMapper.selectRoundScoreByRoundIdAndTeamId(roundId, teamId);
     }
 }
