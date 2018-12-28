@@ -254,12 +254,17 @@ public class CourseController {
     @GetMapping(value="/allcourse",produces = "application/json; charset=utf-8")
     public void getAllCourse( HttpServletResponse response) throws IOException {
         List<Course> courseList = courseService.getAllCourse();
-        if (courseList.isEmpty()){
+        List<CourseBasicVO> courseBasicVOList = new ArrayList<>();
+        for (Course course:courseList) {
+            CourseBasicVO courseBasicVO = new CourseBasicVO(course);
+            courseBasicVOList.add(courseBasicVO);
+        }
+        if (courseBasicVOList.isEmpty()){
             response.setStatus(404);
         }
         else {
             response.setStatus(200);
-            String json = JSONObject.toJSONString(courseList);
+            String json = JSONObject.toJSONString(courseBasicVOList);
             response.getWriter().write(json);
         }
     }
@@ -275,12 +280,17 @@ public class CourseController {
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
         if (jwtTeacher!=null){
             List<Course> courseList = courseService.getCourseByTeacherId(jwtTeacher.getId());
-            if (courseList.isEmpty()){
+            List<CourseBasicVO> courseBasicVOList = new ArrayList<>();
+            for (Course course:courseList) {
+                CourseBasicVO courseBasicVO = new CourseBasicVO(course);
+                courseBasicVOList.add(courseBasicVO);
+            }
+            if (courseBasicVOList.isEmpty()){
                 response.setStatus(404);
             }
             else {
                 response.setStatus(200);
-                String json = JSONObject.toJSONString(courseList);
+                String json = JSONObject.toJSONString(courseBasicVOList);
                 response.getWriter().write(json);
             }
         }
@@ -347,14 +357,14 @@ public class CourseController {
     public void getTeamByCourseId(@PathVariable Long courseId,HttpServletRequest request,HttpServletResponse response) throws IOException {
 
         List<Team> teamList = courseService.getTeamByCourseId(courseId);
-        List<TeamVO> teamVOList = new ArrayList<>();
+        List<TeamBasicVO> teamBasicVOList = new ArrayList<>();
         for (Team team:teamList) {
-            TeamVO teamVO = new TeamVO(team);
-            teamVOList.add(teamVO);
+            TeamBasicVO teamBasicVO = new TeamBasicVO(team);
+            teamBasicVOList.add(teamBasicVO);
         }
-        if(!teamVOList.isEmpty()){
+        if(!teamBasicVOList.isEmpty()){
             response.setStatus(200);
-            String json = JSONObject.toJSONString(teamVOList);
+            String json = JSONObject.toJSONString(teamBasicVOList);
             response.getWriter().write(json);
         }
         else{
@@ -376,10 +386,10 @@ public class CourseController {
         Student jwtStudent = Jwt.unSign(token,Student.class);
         if (jwtStudent!=null){
             Team team = teamService.getTeamByStudentIdAndCourseId(jwtStudent.getId(),courseId);
-            TeamVO teamVO = new TeamVO(team);
-            if(teamVO != null){
+            TeamBasicVO teamBasicVO = new TeamBasicVO(team);
+            if(teamBasicVO != null){
                 response.setStatus(200);
-                String json = JSONObject.toJSONString(teamVO);
+                String json = JSONObject.toJSONString(teamBasicVO);
                 response.getWriter().write(json);
             }
             else{
