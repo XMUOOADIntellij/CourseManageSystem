@@ -58,7 +58,9 @@
     <script src="../../static/js/jwt.js"></script>
     <script src="../../static/js/control.js"></script>
     <script src="../../static/js/convert.js"></script>
-    <script src="../../static/js/request.js"></script>
+    <script src="../../static/js/user.js"></script>
+    <script src="../../static/js/student.js"></script>
+    <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
   <body onload="getCourseList()">
@@ -168,8 +170,8 @@
                 </li>
               </ol>
             </nav>
-            <div class="row" id="content">
-              <div class="col-md-6 col-xl-4">
+            <div class="row">
+              <div class="col-md-6 col-xl-4" id="content">
                 <!--id="courseId"-->
                 <div class="card">
                   <div class="card-header">
@@ -195,7 +197,7 @@
                       <a
                         href="./course-info.html"
                         class="list-group-item list-group-item-action"
-                        onclick=""
+                        onclick="jumpFromCourseHome()"
                       >
                         <span class="float-right">
                           <i class="icon fe fe-chevron-right"></i>
@@ -207,6 +209,7 @@
                       <a
                         href="./course-class.html"
                         class="list-group-item list-group-item-action"
+                        onclick="jumpFromCourseHome()"
                       >
                         <span class="float-right">
                           <i class="icon fe fe-chevron-right"></i>
@@ -218,6 +221,8 @@
                       <a
                         href="./course-round.html"
                         class="list-group-item list-group-item-action"
+                        onclick="jumpFromCourseHome()"
+
                       >
                         <span class="float-right">
                           <i class="icon fe fe-chevron-right"></i>
@@ -229,6 +234,8 @@
                       <a
                         href="course-team.html"
                         class="list-group-item list-group-item-action"
+                        onclick="jumpFromCourseHome()"
+
                       >
                         <span class="float-right">
                           <i class="icon fe fe-chevron-right"></i>
@@ -241,6 +248,8 @@
                       <a
                         href="course-score.html"
                         class="list-group-item list-group-item-action"
+                        onclick="jumpFromCourseHome()"
+
                       >
                         <span class="float-right">
                           <i class="icon fe fe-chevron-right"></i>
@@ -253,6 +262,8 @@
                       <a
                         href="./course-share.html"
                         class="list-group-item list-group-item-action"
+                        onclick="jumpFromCourseHome()"
+
                       >
                         <span class="float-right">
                           <i class="icon fe fe-chevron-right"></i>
@@ -279,7 +290,7 @@
       <footer class="footer">
         <div class="container">
           <div class="row align-items-center flex-row-reverse">
-            <div class="col-12 mt-0 mt-lg-0 text-center">
+            <div class="col-12 mt-0 mb-3 mt-lg-0 text-center">
               Copyright © 2018
               <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
                 >Cms</a
@@ -290,12 +301,5 @@
       </footer>
     </div>
   </body>
-  <script>
-    $(".list-group").on("click", "*", function() {
-      let cid = $(this)
-        .closest(".card")
-        .attr("id");
-      setCookie("course", cid);
-    });
-  </script>
+
 </html>

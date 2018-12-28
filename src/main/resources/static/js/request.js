@@ -196,6 +196,7 @@ function getCourseList() {
           console.log(data[i]);
         }
       }
+      return data;
     },
     statusCode: {
       400: function() {

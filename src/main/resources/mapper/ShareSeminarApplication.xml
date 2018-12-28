@@ -19,6 +19,8 @@
         id,main_course_id,sub_course_id,sub_course_teacher_id,status
     </sql>
 
+    <cache type="com.group12.course.tools.MybatisRedisCache" />
+
     <select id="selectShareSeminarApplicationById" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>

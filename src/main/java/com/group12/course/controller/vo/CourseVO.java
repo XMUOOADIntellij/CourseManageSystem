@@ -30,19 +30,19 @@ public class CourseVO {
 
     private Integer teamMaxMember;
 
-    private Integer teamMingMember;
+    private Integer teamMinMember;
 
     private List<CourseMemberLimitVO> courseMemberLimitVOList;
 
     private Integer relation;
 
-    private List<List<Course>> conflictCourseLists;
+    private List<List<Long>> conflictCourseLists;
 
-    public String getcourseName() {
+    public String getCourseName() {
         return courseName;
     }
 
-    public void setcourseName(String courseName) {
+    public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 
@@ -94,14 +94,6 @@ public class CourseVO {
         this.teamEndTime = teamEndTime;
     }
 
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
     public Integer getTeamMaxMember() {
         return teamMaxMember;
     }
@@ -110,12 +102,12 @@ public class CourseVO {
         this.teamMaxMember = teamMaxMember;
     }
 
-    public Integer getTeamMingMember() {
-        return teamMingMember;
+    public Integer getTeamMinMember() {
+        return teamMinMember;
     }
 
-    public void setTeamMingMember(Integer teamMingMember) {
-        this.teamMingMember = teamMingMember;
+    public void setTeamMinMember(Integer teamMinMember) {
+        this.teamMinMember = teamMinMember;
     }
 
     public List<CourseMemberLimitVO> getCourseMemberLimitVOList() {
@@ -134,11 +126,11 @@ public class CourseVO {
         this.relation = relation;
     }
 
-    public List<List<Course>> getConflictCourseLists() {
+    public List<List<Long>> getConflictCourseLists() {
         return conflictCourseLists;
     }
 
-    public void setConflictCourseLists(List<List<Course>> conflictCourseLists) {
+    public void setConflictCourseLists(List<List<Long>> conflictCourseLists) {
         this.conflictCourseLists = conflictCourseLists;
     }
 
@@ -166,7 +158,7 @@ public class CourseVO {
                 ", teamStartTime=" + teamStartTime +
                 ", teamEndTime=" + teamEndTime +
                 ", teamMaxMember=" + teamMaxMember +
-                ", teamMingMember=" + teamMingMember +
+                ", teamMingMember=" + teamMinMember +
                 ", courseMemberLimitVOList=" + courseMemberLimitVOList +
                 ", CourseRequire=" + relation +
                 ", conflictCoursesList=" + conflictCourseLists +

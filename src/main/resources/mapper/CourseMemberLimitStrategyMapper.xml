@@ -14,6 +14,8 @@
     id, course_id,min_member,max_member
   </sql>
 
+    <cache type="com.group12.course.tools.MybatisRedisCache" />
+
     <select id="selectCourseMemberLimitStrategyById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select
         <include refid="Base_Column_List" />

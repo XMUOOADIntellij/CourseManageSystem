@@ -16,6 +16,8 @@
     id, course_id, grade, klass_serial, klass_time, klass_location
   </sql>
 
+  <cache type="com.group12.course.tools.MybatisRedisCache" />
+
   <select id="selectKlassById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

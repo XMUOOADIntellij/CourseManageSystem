@@ -232,7 +232,13 @@ public class CourseService {
             }
             /*TODO 如果人数相等怎么办？*/
         }
-        return klassDao.getKlass(maxKlassId);
+        if(maxKlassId == 0){
+            return null;
+        }
+        else{
+            return klassDao.getKlass(maxKlassId);
+        }
+
     }
 
 
@@ -272,9 +278,12 @@ public class CourseService {
             //将班级小组信息插入到klass_team表
             List<Team> teamList = teamDao.getTeamByCourseId(mainCourse.getId());
             for (Team team:teamList) {
+
                 //对主课程的每个小组划分在从课程的班级
                 Klass klass = chooseKlassByCourseAndTeam(subCourse,team);
-               teamDao.addTeamIntoKlass(team,klass);
+                if(klass!=null){
+                    teamDao.addTeamIntoKlass(team,klass);
+                }
             }
             return 1;
         }
