@@ -13,7 +13,7 @@
 
     <sql id="Base_Column_List" >
     id, course_id
-  </sql>
+    </sql>
 
     <select id="selectConflictCourseStrategyById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select
@@ -39,7 +39,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null">
-                #{id,jdbcType=BIGINT}
+                #{id,jdbcType=BIGINT},
             </if>
             <if test="course != null" >
                 #{course.id,jdbcType=BIGINT},

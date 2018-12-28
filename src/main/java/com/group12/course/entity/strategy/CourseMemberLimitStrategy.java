@@ -3,13 +3,15 @@ package com.group12.course.entity.strategy;
 import com.group12.course.controller.vo.CourseMemberLimitVO;
 import com.group12.course.entity.Course;
 
+import java.io.Serializable;
+
 /**
  * 选某课程人数限制策略
  *
  * @author Xu Gang
  * @date 2018年12月17日
  */
-public class CourseMemberLimitStrategy extends Strategy {
+public class CourseMemberLimitStrategy extends Strategy implements Serializable {
 
     private Course course;
 

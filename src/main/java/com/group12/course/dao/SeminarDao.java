@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 
@@ -128,11 +129,19 @@ public class SeminarDao {
     }
 
     public List<Seminar> listSeminarByRoundId(Long roundId) {
-        return seminarMapper.listSeminarByRoundId(roundId);
+        try {
+            return  seminarMapper.listSeminarByRoundId(roundId);
+        }catch (ConcurrentModificationException e){
+            return seminarMapper.listSeminarByRoundId(roundId);
+        }
     }
 
     public List<Seminar> listSeminarByCourseId(Long courseId) {
-        return seminarMapper.listSeminarByCourseId(courseId);
+        try{
+            return  seminarMapper.listSeminarByCourseId(courseId);
+        }catch (ConcurrentModificationException e){
+            return seminarMapper.listSeminarByCourseId(courseId);
+        }
     }
 
 }

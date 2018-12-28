@@ -2,6 +2,8 @@ package com.group12.course.entity;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /**
  * KlassRoundDao 实体对象
  * @author Tan Xue
@@ -9,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class KlassRound {
+public class KlassRound implements Serializable {
 
     private Klass klass;
 

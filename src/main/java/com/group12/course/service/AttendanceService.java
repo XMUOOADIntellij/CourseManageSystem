@@ -153,10 +153,12 @@ public class AttendanceService {
         //获得课程
         Klass klass = klassDao.getKlass(classId);
         Seminar seminar = seminarDao.selectSeminarById(seminarId);
-
         if (klass != null) {
             Course course = klass.getCourse();
             Course courseTeamMainCourse = course.getTeamMainCourse();
+            KlassRound klassRound = klassRoundDao.getKlassRoundByKlassIdAndRoundId(klass.getId(), seminar.getRound().getId());
+            Integer enrollNum = klassRound.getEnrollNumber();
+
             //学生所在队伍
             Team team;
             //无共享组队时
@@ -168,16 +170,24 @@ public class AttendanceService {
                 team = teamDao.getTeamByStudentIdAndCourseId(
                         student.getId(), courseTeamMainCourse.getId());
             }
+
             //班级讨论课
             KlassSeminar klassSeminar = klassSeminarDao.
                     selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
-            if (klassSeminar != null) {
-                KlassRound klassRound = klassRoundDao.getKlassRoundByKlassIdAndRoundId(klass.getId(),seminar.getRound().getId());
 
+            if (klassSeminar != null) {
                 attendance.setTeam(team);
                 attendance.setKlassSeminar(klassSeminar);
                 attendance.setPresented(false);
-                return attendanceDao.insertAttendance(attendance);
+
+                Attendance record = attendanceDao.selectAttendanceByKlassSeminarIdAndTeamId(klassSeminar.getId(), team.getId());
+                if (record != null) {
+                    attendance.setId(record.getId());
+                    attendanceDao.updateAttendance(attendance);
+                    return  attendance.getId();
+                } else {
+                    return attendanceDao.insertAttendance(attendance);
+                }
             } else {
                 throw new RecordNotFoundException("找不到该班级讨论课");
             }

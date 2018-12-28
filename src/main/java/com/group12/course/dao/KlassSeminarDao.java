@@ -8,6 +8,7 @@ import com.group12.course.mapper.KlassSeminarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 /**
@@ -30,15 +31,17 @@ public class KlassSeminarDao {
     ScoreDao scoreDao;
 
     public KlassSeminar selectKlassSeminarBySeminarIdAndClassId(Long seminarId, Long classId) {
-        return klassSeminarMapper.selectKlassSeminarBySeminarIdAndKlassId(seminarId, classId);
+        KlassSeminar klassSeminar;
+        try{
+            klassSeminar = klassSeminarMapper.selectKlassSeminarBySeminarIdAndKlassId(seminarId, classId);
+        }catch (ConcurrentModificationException e){
+            klassSeminar = klassSeminarMapper.selectKlassSeminarBySeminarIdAndKlassId(seminarId, classId);
+        }
+        return klassSeminar;
     }
 
     public KlassSeminar selectKlassSeminarById(Long id) {
         return klassSeminarMapper.selectKlassSeminarById(id);
-    }
-
-    public List<KlassSeminar> listKlassSeminarBySeminarId(Long seminarId) {
-        return klassSeminarMapper.listKlassSeminarBySeminarId(seminarId);
     }
 
     public Integer insertKlassSeminarList(List<KlassSeminar> record) {
@@ -84,6 +87,10 @@ public class KlassSeminarDao {
         } else {
             return null;
         }
+    }
+
+    public List<KlassSeminar> listKlassSeminarBySeminarId(Long seminarId) {
+        return klassSeminarMapper.listKlassSeminarBySeminarId(seminarId);
     }
 
     public List<KlassSeminar> listKlassSeminarBySeminarIdList(List<Long> seminarId) {
