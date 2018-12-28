@@ -211,7 +211,6 @@
                       <h4 class="m-0">
                         <a href="course-round-detail-report.html">展示报名</a>
                       </h4>
-                      <small class="text-muted">12 个新的提交</small>
                     </div>
                   </div>
                 </div>
@@ -226,7 +225,6 @@
                           >讨论课成绩
                         </a>
                       </h4>
-                      <small class="text-muted">12 项待评分</small>
                     </div>
                   </div>
                 </div>
@@ -246,6 +244,7 @@
                               <input
                                 type="text"
                                 class="form-control"
+                                id="name"
                                 name="example-disabled-input"
                                 disabled
                               />
@@ -258,6 +257,7 @@
                                 class="form-control"
                                 name="example-textarea-input"
                                 rows="2"
+                                id="introduction"
                                 disabled
                               ></textarea>
                             </div>
@@ -265,29 +265,13 @@
                           <div class="col-md-6 col-lg-4">
                             <div class="form-group">
                               <label class="form-label">轮次</label>
-                              <select
-                                class="form-control custom-select"
-                                disabled
-                              >
-                                <option value="1" selected="selected"
-                                  >第一轮</option
-                                >
-                                <option value="2">第二轮</option>
-                              </select>
+                              <input class="form-control" id="round" name="example-text-input" placeholder="2016" type="text" disabled>
                             </div>
                           </div>
                           <div class="col-md-6 col-lg-4">
                             <div class="form-group">
                               <label class="form-label">课次</label>
-                              <select
-                                class="form-control custom-select"
-                                disabled
-                              >
-                                <option value="1" selected="selected"
-                                  >第一次</option
-                                >
-                                <option value="2">第二次</option>
-                              </select>
+                              <input class="form-control" id="seminarSerial" name="example-text-input" placeholder="2016" type="text" disabled>
                             </div>
                           </div>
                         </div>

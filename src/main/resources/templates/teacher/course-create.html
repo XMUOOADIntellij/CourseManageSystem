@@ -224,7 +224,7 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="form-label">组队人数</label>
+                          <label class="form-label">组队总人数</label>
                           <div class="row gutters-xs">
                             <div class="input-group col-6">
                               <span class="input-group-prepend">
@@ -261,101 +261,143 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <div class="row gutters-xs">
-                            <div class="col">
-                              <label class="form-label">组内性别</label>
-                            </div>
-                            <label class="col-auto custom-switch">
-                              <input
-                                class="custom-switch-input"
-                                name="custom-switch-checkbox"
-                                type="checkbox"
-                              />
-                              <span class="custom-switch-indicator"></span>
-                            </label>
-                          </div>
-                          <div class="row gutters-xs mb-3">
-                            <div class="input-group col-6">
-                              <span class="input-group-prepend">
-                                <span class="input-group-text"> 女生下限</span>
-                              </span>
-                              <select
-                                class="form-control custom-select"
-                                name="user[month]"
-                              >
-                                <option selected="selected" value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                              </select>
-                            </div>
-                            <div class="input-group col-6">
-                              <span class="input-group-prepend">
-                                <span class="input-group-text"> 女生上限</span>
-                              </span>
-                              <select
-                                class="form-control custom-select"
-                                name="user[month]"
-                              >
-                                <option selected="selected" value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="row gutters-xs">
-                            <div class="input-group col-6">
-                              <span class="input-group-prepend">
-                                <span class="input-group-text"> 男生下限</span>
-                              </span>
-                              <select
-                                class="form-control custom-select"
-                                name="user[month]"
-                              >
-                                <option selected="selected" value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                              </select>
-                            </div>
-                            <div class="input-group col-6">
-                              <span class="input-group-prepend">
-                                <span class="input-group-text"> 男生上限</span>
-                              </span>
-                              <select
-                                class="form-control custom-select"
-                                name="user[month]"
-                              >
-                                <option selected="selected" value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <div class="form-label">分组根据</div>
+                          <div class="form-label">选修课人数要求</div>
                           <label class="custom-switch">
                             <input
-                              class="custom-switch-input"
-                              name="custom-switch-checkbox"
-                              type="checkbox"
+                                    class="custom-switch-input"
+                                    name="custom-switch-checkbox"
+                                    type="checkbox"
                             />
                             <span class="custom-switch-indicator"></span>
                             <span class="custom-switch-description"
-                              >根据星座划分小组</span
+                            >根据星座划分小组</span
                             >
                           </label>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="form-label">组内选修课人数</label>
+                          <div class="card" style="max-height:11.5rem">
+                            <div class="table-responsive">
+                              <table
+                                      class="table card-table table-vcenter text-nowrap"
+                              >
+                                <thead>
+                                <tr>
+                                  <th class="w-auto"></th>
+                                  <th>课程名称</th>
+                                  <th>人数下限</th>
+                                  <th>人数上限</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td>1</td>
+                                  <td>5</td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td>1</td>
+                                  <td>5</td>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td>1</td>
+                                  <td>5</td>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td>1</td>
+                                  <td>5</td>
+                                </tr>
+
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-md-6 col-lg-5">
@@ -430,17 +472,152 @@
                         </div>
                         <div class="form-group">
                           <label class="form-label">冲突课程</label>
-                          <select class="form-control custom-select mb-3">
-                            <option value="">.Net 邱明</option>
-                          </select>
-                          <select class="form-control custom-select mb-3">
-                            <option value="">J2ee 王美红</option>
-                          </select>
-                          <a
-                            class="btn btn-green float-right"
-                            href="./course-create.html"
-                            >新增对象</a
-                          >
+                          <div class="card" style="max-height:15rem">
+                            <div class="table-responsive">
+                              <table
+                                      class="table card-table table-vcenter text-nowrap"
+                              >
+                                <thead>
+                                <tr>
+                                  <th class="w-auto"></th>
+                                  <th>课程名称</th>
+                                  <th>任课老师</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td>王美红</td>
+
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td>王美红</td>
+
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td>王美红</td>
+
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td>王美红</td>
+
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td>王美红</td>
+
+                                </tr>
+
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
