@@ -136,7 +136,9 @@ public class CourseController {
 
                         TeamAndStrategy teamAndStrategy = new TeamAndStrategy();
                         teamAndStrategy.setStrategyName(strategyName3);
-                        teamAndStrategy.getStrategyList().add(courseMemberLimitStrategy);
+                        List<Strategy> strategyList = new ArrayList<>(1);
+                        strategyList.add(courseMemberLimitStrategy);
+                        teamAndStrategy.setStrategyList(strategyList);
                         teamAndStrategyList.add(teamAndStrategy);
                     }
                     List<TeamAndStrategy> returnTeamAndStrategyList = strategyService.addTeamAndStrategyList(teamAndStrategyList);

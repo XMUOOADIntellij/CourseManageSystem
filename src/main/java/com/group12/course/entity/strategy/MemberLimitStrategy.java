@@ -3,6 +3,7 @@ package com.group12.course.entity.strategy;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Team;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @author Xu Gang
  * @date 2018年12月17日
  */
-public class MemberLimitStrategy extends Strategy {
+public class MemberLimitStrategy extends Strategy implements Serializable {
 
     private Integer minMember;
 
