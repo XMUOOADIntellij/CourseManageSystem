@@ -184,7 +184,7 @@ public class AttendanceService {
                 if (record != null) {
                     attendance.setId(record.getId());
                     attendanceDao.updateAttendance(attendance);
-                    return  attendance.getId();
+                    return attendance.getId();
                 } else {
                     return attendanceDao.insertAttendance(attendance);
                 }
@@ -210,7 +210,7 @@ public class AttendanceService {
         if (attendance != null) {
             //自己组的报名才能传
             if (teamDao.checkStudentIsInSpecialTeam(student.getId(), attendance.getTeam().getId())) {
-                String filePath = ServerFilePath + System.getProperty("file.separator") + "report" + System.getProperty("file.separator")
+                String filePath = ServerFilePath + "report" + System.getProperty("file.separator")
                         + attendance.getKlassSeminar().getId() + System.getProperty("file.separator");
                 String fileName = attendance.getKlassSeminar().getKlass().getKlassSerial()
                         + "_" + attendance.getTeam().getTeamSerial()
@@ -249,7 +249,7 @@ public class AttendanceService {
         if (attendance != null) {
             //自己组的报名才能传
             if (teamDao.checkStudentIsInSpecialTeam(student.getId(), attendance.getTeam().getId())) {
-                String filePath = ServerFilePath + System.getProperty("file.separator") + "ppt" + System.getProperty("file.separator")
+                String filePath = ServerFilePath + "ppt" + System.getProperty("file.separator")
                         + attendance.getKlassSeminar().getId() + System.getProperty("file.separator");
                 String fileName = attendance.getKlassSeminar().getKlass().getKlassSerial()
                         + "_" + attendance.getTeam().getTeamSerial()
@@ -310,13 +310,19 @@ public class AttendanceService {
         if (klassSeminar != null) {
             List<Attendance> attendanceList = attendanceDao.listAttendanceByKlassSeminarId(klassSeminar.getId());
             for (Attendance item : attendanceList) {
-                fileName.add(item.getPptName());
-                url.add(item.getPptUrl());
+                if (item.getPptName() != null) {
+                    fileName.add(item.getPptName());
+                    url.add(item.getPptUrl());
+                }
             }
-            try {
-                FileUtil.downloadAllFiles(response, url, fileName);
-            } catch (Exception e) {
-                logger.trace("下载所有ppt出错: " + e.getMessage());
+            if (fileName.size() != 0) {
+                try {
+                    FileUtil.downloadAllFiles(response, url, fileName);
+                } catch (Exception e) {
+                    logger.trace("下载所有ppt出错: " + e.getMessage());
+                }
+            } else {
+                throw new RecordNotFoundException("没有ppt文件");
             }
         } else {
             throw new RecordNotFoundException("下载ppt的班级讨论课不存在");
@@ -330,13 +336,19 @@ public class AttendanceService {
         if (klassSeminar != null) {
             List<Attendance> attendanceList = attendanceDao.listAttendanceByKlassSeminarId(klassSeminar.getId());
             for (Attendance item : attendanceList) {
-                fileName.add(item.getReportName());
-                url.add(item.getReportUrl());
+                if (item.getReportName() != null) {
+                    fileName.add(item.getReportName());
+                    url.add(item.getReportUrl());
+                }
             }
-            try {
-                FileUtil.downloadAllFiles(response, url, fileName);
-            } catch (Exception e) {
-                logger.trace("下载所有ppt出错: " + e.getMessage());
+            if (fileName.size() != 0) {
+                try {
+                    FileUtil.downloadAllFiles(response, url, fileName);
+                } catch (Exception e) {
+                    logger.trace("下载所有报告出错: " + e.getMessage());
+                }
+            } else {
+                throw new RecordNotFoundException("没有报告文件");
             }
         } else {
             throw new RecordNotFoundException("下载报告的班级讨论课不存在");
