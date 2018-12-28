@@ -59,11 +59,11 @@
     <script src="../../static/js/control.js"></script>
     <script src="../../static/js/convert.js"></script>
     <script src="../../static/js/user.js"></script>
-    <script src="../../static/js/student.js"></script>
+    <script src="../../static/js/teacher.js"></script>
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body onload="initRoundSetting()">
+  <body onload="getRoundInfo();getSeminarList();">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -288,19 +288,93 @@
                       <div class="col-md-6 col-lg-6">
                         <div class="form-group">
                           <label class="form-label">包含讨论课</label>
-                          <div class="row gutters-xs mb-3">
-                            <div class="col">
-                              <input type="text" class="form-control" />
+                          <div class="card" style="max-height:15rem">
+                            <div class="table-responsive">
+                              <table
+                                      class="table card-table table-vcenter text-nowrap"
+                              >
+                                <thead>
+                                <tr>
+                                  <th class="w-auto"></th>
+                                  <th>讨论课名称</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >24320162202888</span
+                                      >
+                                  </td>
+
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >24320162202888</span
+                                      >
+                                  </td>
+
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >24320162202888</span
+                                      >
+                                  </td>
+
+                                </tr>
+                                </tbody>
+                              </table>
                             </div>
-                            <span class="col-auto">
-                              <button class="btn btn-secondary" type="button">
-                                <i class="fe fe-trash"></i>
-                              </button>
-                            </span>
                           </div>
-                          <a class="btn btn-green float-right" href="."
-                            >新增讨论课</a
-                          >
                         </div>
                       </div>
                     </div>

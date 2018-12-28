@@ -6,7 +6,7 @@ $.ajaxSetup({
   },
   error(data) {
     console.log(data);
-  },
+  },/*
   statusCode: {
     401: function() {
       alert("未授权访问");
@@ -19,5 +19,5 @@ $.ajaxSetup({
     500: function() {
       window.location.href = "../../templates/common/500.html";
     }
-  }
+  }*/
 });

@@ -59,11 +59,11 @@
     <script src="../../static/js/control.js"></script>
     <script src="../../static/js/convert.js"></script>
     <script src="../../static/js/user.js"></script>
-    <script src="../../static/js/student.js"></script>
+    <script src="../../static/js/teacher.js"></script>
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body onload="getAttendanceByClass()">
+  <body onload="getReportByClass()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -165,12 +165,7 @@
           <div class="container">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="./course-home.html">我的课程</a>
-                </li>
-                <li class="breadcrumb-item">
-                  <a href="./course-round.html">课程轮次</a>
-                </li>
+
                 <li class="breadcrumb-item">
                   <a href="course-round-detail.html">讨论课详情</a>
                 </li>
@@ -186,14 +181,14 @@
                     <h3 class="card-title">讨论课报告</h3>
                     <div class="card-options">
                       <a
-                        class="btn btn-lg btn-outline-primary mr-3"
+                        class="btn btn-sm btn-outline-primary px-1 mr-3"
                         onclick="getPptByClass()"
-                        ><i class="fe fe-download mr-3"></i>下载全部课件</a
+                        ><i class="fe fe-download  mr-3"></i>全部课件</a
                       >
                       <a
-                        class="btn btn-lg btn-outline-primary"
+                        class="btn btn-sm  btn-outline-primary px-1"
                         onclick="getReportByClass()"
-                        ><i class="fe fe-download mr-3"></i>下载全部报告</a
+                        ><i class="fe fe-download mr-3"></i>全部报告</a
                       >
                     </div>
                   </div>
@@ -212,7 +207,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                       <!-- <tr>
                           <td><span class="text-muted">1-1</span></td>
                           <td><a href="." class="text-inherit">1.pdf</a></td>
                           <td>
@@ -245,7 +240,7 @@
                               <i class="fe fe-download"></i>
                             </a>
                           </td>
-                        </tr>
+                        </tr>-->
                       </tbody>
                     </table>
                   </div>
