@@ -1,8 +1,9 @@
 package com.group12.course.entity.strategy;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class TeamAndStrategy extends Strategy{
+public class TeamAndStrategy extends Strategy implements Serializable {
 
     private String strategyName;
 
