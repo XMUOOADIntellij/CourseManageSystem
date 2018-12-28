@@ -41,8 +41,7 @@ public class AttendanceService {
     KlassDao klassDao;
     @Autowired
     KlassRoundDao klassRoundDao;
-    @Autowired
-    KlassStudentDao klassStudentDao;
+
     private final String ServerFilePath = System.getProperty("user.dir") + System.getProperty("file.separator") + "file" + System.getProperty("file.separator");
     private final Logger logger = LoggerFactory.getLogger(AttendanceService.class);
 

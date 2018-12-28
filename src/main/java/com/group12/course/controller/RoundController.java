@@ -32,11 +32,6 @@ public class RoundController {
 
     @Autowired
     RoundService roundService;
-    @Autowired
-    CourseService courseService;
-    @Autowired
-    TeamService teamService;
-
 
     /**
      * 获取某轮次下的所有讨论课
