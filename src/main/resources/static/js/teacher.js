@@ -642,6 +642,69 @@ function getRoundList() {
         }
     });
 }
+function getRoundListForScore() {
+    console.log(Cookies.get("course"));
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/round",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                // alert("获取成功");
+                console.log("roundlist");
+                var content=document.getElementById("content");   //获取外围容器
+                var str="";
+                $.each(data, function(i, item) {
+                    console.log(item);
+                    str +='            <div class="col-md-6 col-lg-4" >\n' +
+                        '                <div class="card">\n' +
+                        '                  <div class="card-header">\n' +
+                        '                    <h3 class="card-title mr-4">第'+item.id+'轮</h3>\n' +
+                        '                    <div class="card-options">\n' +
+                        '                      <a\n' +
+                        '                        href="course-round-setting.html"\n' +
+                        '                        onclick="jumpFromRound('+item.id+')"' +
+                        '                        class="card-options-delete"\n' +
+                        '                        ><i class="fe fe-settings"></i\n' +
+                        '                      ></a>\n' +
+                        '                      <a\n' +
+                        '                        href="#round'+item.id+'"\n' +
+                        '                        class="card-options-collapse"\n' +
+                        '                        data-toggle="card-collapse"\n' +
+                        '                        ><i class="fe fe-chevron-up"></i\n' +
+                        '                      ></a>\n' +
+                        '                    </div>\n' +
+                        '                  </div>\n' +
+                        '                  <div class="card-body p-0" id="round'+item.id+'">\n' +
+                        '                    \n' +
+                        '                  </div>\n' +
+                        '                </div>\n' +
+                        '              </div>';
+                    content.innerHTML=str;
+                    getSeminarList(item.id);
+                });
+                content.innerHTML=str;
+
+
+
+            }
+        },
+        statusCode: {
+            400: function() {
+                alert("roundlist");
+
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("roundlist");
+
+                alert("未找到课程");
+            }
+        }
+    });
+}
+
 function getSeminarList(roundId) {
     $.ajax({
         type: "get",
@@ -771,7 +834,11 @@ function getSeminarByClass() {
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
                  alert("获取成功");
-                console.log(data);
+                $("#name").val(data.seminarName);
+                $("#introduction").val(data.introduction);
+                $("#round").val(data.roundId);
+                $("#seminarSerial").val(data.seminarSerial);
+
             }
             console.log(data);
 
@@ -786,11 +853,52 @@ function getSeminarByClass() {
         }
     });
 }
+function getSeminarByClassForUpdate() {
+    let seminarId=Cookies.get("seminar");
+    let classId=Cookies.get("class");
+    console.log(seminarId);
+    console.log(classId);
+
+    $.ajax({
+        type: "get",
+        url:
+            "http://xug98.cn:8080/seminar/" +
+            seminarId +
+            "/class/" +
+            classId,
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                alert("获取成功");
+                $("#name").val(data.seminarName);
+                $("#introduction").val(data.introduction);
+                $("#round").val(data.roundId);
+                $("#seminarSerial").val(data.seminarSerial);
+                $("#enrollStartTime").val(data.enrollStartTime);
+                $("#enrollEndTime").val(data.enrollEndTime);
+                $("#reportDdl").val(data.reportDdl);
+                $("#maxTeam").val(data.roundId);
+            }
+            console.log(data);
+
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+
 function updateSeminarByClass() {
 
 
     let ata = {
-        reportDdl: convertTime($("#input-deadline").val())
+        reportDdl: convertTime($("#reportDdl").val())
     };
     console.log(ata);
     $.ajax({
