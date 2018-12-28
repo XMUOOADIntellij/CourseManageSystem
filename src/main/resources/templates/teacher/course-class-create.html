@@ -59,7 +59,7 @@
     <script src="../../static/js/control.js"></script>
     <script src="../../static/js/convert.js"></script>
     <script src="../../static/js/user.js"></script>
-    <script src="../../static/js/student.js"></script>
+    <script src="../../static/js/teacher.js"></script>
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
@@ -184,109 +184,20 @@
                   </div>
                   <div class="card-body">
                     <div class="form-group">
-                      <label class="form-label">班级名称</label>
-                      <div class="row gutters-xs">
-                        <div class="col-md-3 col-lg-2 mb-3">
-                          <div class="input-group ">
-                            <span class="input-group-prepend">
-                              <span class="input-group-text">年级</span>
-                            </span>
-                            <select
-                              class="form-control custom-select"
-                              name="user[month]"
-                            >
-                              <option selected="selected" value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-md-3 col-lg-2">
-                          <div class="input-group ">
-                            <span class="input-group-prepend">
-                              <span class="input-group-text">班级</span>
-                            </span>
-                            <select
-                              class="form-control custom-select"
-                              name="user[month]"
-                            >
-                              <option selected="selected" value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
+                      <label class="form-label">年级</label>
+                      <input class="form-control" id="grade" name="example-text-input" placeholder="2016" type="text">
                     </div>
                     <div class="form-group">
-                      <label class="form-label">讨论课周次</label>
-                      <div class="row gutters-xs">
-                        <div class="col-md-3 col-lg-2">
-                          <div class="input-group">
-                            <span class="input-group-prepend">
-                              <span class="input-group-text">星期</span>
-                            </span>
-                            <select
-                              class="form-control custom-select"
-                              name="user[month]"
-                            >
-                              <option selected="selected" value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
+                      <label class="form-label">班级</label>
+                      <input class="form-control" id="class" name="example-text-input" placeholder="1" type="text">
                     </div>
                     <div class="form-group">
-                      <label class="form-label">讨论课节次</label>
-                      <div class="row gutters-xs">
-                        <div class="col-md-3 col-lg-2 mb-3">
-                          <div class="input-group">
-                            <span class="input-group-prepend">
-                              <span class="input-group-text"> 开始</span>
-                            </span>
-                            <select
-                              class="form-control custom-select"
-                              name="user[month]"
-                            >
-                              <option selected="selected" value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-md-3 col-lg-2">
-                          <div class="input-group">
-                            <span class="input-group-prepend">
-                              <span class="input-group-text">结束</span>
-                            </span>
-                            <select
-                              class="form-control custom-select"
-                              name="user[month]"
-                            >
-                              <option selected="selected" value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
+                      <label class="form-label">讨论课时间</label>
+                      <input class="form-control" id="time" name="example-text-input" placeholder="周三上午1,2节" type="text">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">讨论课地点</label>
+                      <input class="form-control" id="location" name="example-text-input" placeholder="海韵201" type="text">
                     </div>
                     <div class="form-group">
                       <div class="form-label">班级学生名单</div>

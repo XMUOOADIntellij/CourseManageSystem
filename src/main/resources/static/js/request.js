@@ -241,7 +241,7 @@ function getAllCourse() {
 }
 //success conflict未加
 function getCourseInfo() {
-  Cookies.set("course", "1");
+
   $.ajax({
     type: "get",
     url: "http://xug98.cn:8080/course/" + Cookies.get("course"),
@@ -265,8 +265,8 @@ function getCourseInfo() {
 }
 //success
 function getClassList() {
-  Cookies.set("course", "1");
-  Cookies.set("class", "1");
+
+
   $.ajax({
     type: "get",
     url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/class",
@@ -292,7 +292,7 @@ function getClassList() {
 }
 //405 谈雪 dom file选择
 function updateClass() {
-  Cookies.set("class", "1");
+
   var fileToUpload = $("#file").prop("files")[0];
   let ata = { file: fileToUpload };
   console.log(ata);
@@ -356,7 +356,7 @@ function deleteClass() {
 }
 //success
 function getRoundList() {
-  Cookies.set("course", "1");
+
   $.ajax({
     type: "get",
     url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/round",
@@ -419,7 +419,7 @@ function getSeminarList(roundId) {
 }
 //未部署
 function getSeminar() {
-  Cookies.set("seminar", "1");
+
   $.ajax({
     type: "get",
     url: "http://xug98.cn:8080/seminar/" + Cookies.get("seminar"),
@@ -447,8 +447,8 @@ function getSeminar() {
 }
 //success
 function getSeminarByClass() {
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
+
+
   $.ajax({
     type: "get",
     url:
@@ -476,8 +476,8 @@ function getSeminarByClass() {
 }
 //success dom 选择reportddl 一定要选
 function updateSeminarByClass() {
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
+
+
   let ata = {
     reportDdl: convertTime($("#input-deadline").val())
   };
@@ -507,8 +507,8 @@ function updateSeminarByClass() {
 }
 //未部署
 function getSeminarScoreByClass() {
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
+
+
   $.ajax({
     type: "get",
     url:
@@ -545,8 +545,8 @@ function updateSeminarScoreByClass() {
     questionScore: "5"
   };
   console.log(ata);
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
+
+
   $.ajax({
     type: "put",
     url:
@@ -621,7 +621,7 @@ function createCourse() {
 }
 //success dom
 function createSeminar() {
-  Cookies.set("course", "1");
+
   let ata = {
     roundId: "1",
     seminarName: "1",
@@ -689,7 +689,7 @@ function deleteSeminar() {
 }
 //success dom
 function updateSeminar() {
-  Cookies.set("seminar", "1");
+
   let ata = {
     roundId: "1",
     seminarName: "1",
@@ -723,8 +723,8 @@ function updateSeminar() {
 }
 //success
 function getAttendanceByClass() {
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
+
+
   let ata = {
     courseId: "1"
   };
@@ -765,8 +765,8 @@ function getAttendanceByClass() {
 }
 //无文件
 function getPptByClass() {
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
+
+
   $.ajax({
     type: "get",
     url:
@@ -799,8 +799,8 @@ function getPptByClass() {
 }
 //无文件
 function getReportByClass() {
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
+
+
   $.ajax({
     type: "get",
     url:
@@ -833,7 +833,7 @@ function getReportByClass() {
 }
 //无文件
 function getPptByAttendance() {
-  Cookies.set("attendance", "1");
+
   $.ajax({
     type: "get",
     url:
@@ -862,7 +862,7 @@ function getPptByAttendance() {
 }
 //无文件
 function getReportByAttendance() {
-  Cookies.set("attendance", "1");
+
   $.ajax({
     type: "get",
     url:
@@ -893,7 +893,7 @@ function getReportByAttendance() {
 }
 //新添加
 function getTeam() {
-  Cookies.set("course", "1");
+
   $.ajax({
     type: "get",
     url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/myTeam",
@@ -923,7 +923,7 @@ function getTeam() {
   });
 }
 function getMyTeam() {
-  Cookies.set("course", "1");
+
   $.ajax({
     type: "get",
     url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/team",
@@ -1006,7 +1006,7 @@ function createTeam() {
   });
 }
 function updateTeam() {
-  Cookies.set("team", "1");
+
   let member = [
     {
       id: 123
@@ -1057,7 +1057,7 @@ function updateTeam() {
 }
 
 function getNoTeam() {
-  Cookies.set("course", "1");
+
   $.ajax({
     type: "get",
     url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/noTeam",
@@ -1158,8 +1158,8 @@ function deleteCourse() {
 }
 
 function getRoundScoreByCourse(cid) {
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
+
+
   $.ajax({
     type: "get",
     url:
@@ -1183,8 +1183,8 @@ function getRoundScoreByCourse(cid) {
   });
 }
 function getSeminarScoreByRound(cid) {
-  Cookies.set("round", "1");
-  Cookies.set("class", "1");
+
+
   $.ajax({
     type: "get",
     url: "http://xug98.cn:8080/score/round/" + Cookies.get("round") + "/score",
@@ -1362,7 +1362,7 @@ function deleteTeamShare() {
 }
 
 function updateRound() {
-  Cookies.set("round", "1");
+
   let ata = {
     calculatePreType: "最高分",
     calculateQueType: "平均分",
@@ -1397,7 +1397,7 @@ function updateRound() {
 }
 
 function createRound() {
-  Cookies.set("course", "1");
+
   let ata = {
     courseId: Cookies.get("course")
   };
@@ -1424,7 +1424,7 @@ function createRound() {
 }
 
 function createTeamShare() {
-  Cookies.set("course", "1");
+
   let ata = {
     subCourseId: "1"
   };
@@ -1454,7 +1454,7 @@ function createTeamShare() {
 }
 
 function createSeminarShare() {
-  Cookies.set("course", "1");
+
   let ata = {
     subCourseId: "1"
   };
@@ -1571,7 +1571,7 @@ function getTeamValidTask() {
 }
 
 function updateTeamValid() {
-  Cookies.set("teamvalid", "1");
+
   let ata = {
     handletype: "accept"
   };
@@ -1599,7 +1599,7 @@ function updateTeamValid() {
 }
 
 function updateTeamShare() {
-  Cookies.set("teamshare", "1");
+
   let ata = {
     handletype: "accept"
   };
@@ -1627,7 +1627,7 @@ function updateTeamShare() {
 }
 
 function updateSeminarShare() {
-  Cookies.set("seminarshare", "1");
+
   let ata = {
     handletype: "accept"
   };
@@ -1657,9 +1657,9 @@ function updateSeminarShare() {
 }
 
 function getQuestionList() {
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
-  Cookies.set("attendance", "1");
+
+
+
 
   $.ajax({
     type: "get",
@@ -1701,7 +1701,7 @@ function updatePresentScoreByTeam() {
     presentationScore: "5"
   };
   console.log(ata);
-  Cookies.set("attendance", "1");
+
   $.ajax({
     type: "put",
     url:
@@ -1733,7 +1733,7 @@ function updateQuestionScoreByTeam() {
     score: "5"
   };
   console.log(ata);
-  Cookies.set("question", "1");
+
   $.ajax({
     type: "put",
     url: "http://xug98.cn:8080/question/" + Cookies.get("question"),
@@ -1822,8 +1822,8 @@ function getCurrentSeminar() {
   });
 }
 function getCurrentAttendance() {
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
+
+
   $.ajax({
     type: "get",
     url:
@@ -1949,8 +1949,8 @@ function deleteTeamMember() {
 }
 
 function getMyAttendance() {
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
+
+
   $.ajax({
     type: "get",
     url:
@@ -1983,8 +1983,8 @@ function getMyAttendance() {
   });
 }
 function getAttendanceScore() {
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
+
+
   $.ajax({
     type: "get",
     url:
@@ -2015,8 +2015,8 @@ function getAttendanceScore() {
   });
 }
 function createAttendance() {
-  Cookies.set("seminar", "1");
-  Cookies.set("class", "1");
+
+
 
   let ata = {
     courseId: Cookies.get("course")
@@ -2162,7 +2162,7 @@ function createTeacher() {
 }
 
 function updateTeacher() {
-  Cookies.set("teacher", "1");
+
 
   let ata = {
     account: "11111",
@@ -2192,7 +2192,7 @@ function updateTeacher() {
   });
 }
 function updateStudent() {
-  Cookies.set("student", "1");
+
 
   let ata = {
     account: "11111",
@@ -2222,7 +2222,7 @@ function updateStudent() {
   });
 }
 function deleteTeacher() {
-  Cookies.set("teacher", "1");
+
 
   console.log(ata);
   alert("input");
@@ -2245,7 +2245,7 @@ function deleteTeacher() {
   });
 }
 function deleteStudent() {
-  Cookies.set("student", "1");
+
 
   console.log(ata);
   alert("input");
@@ -2269,7 +2269,7 @@ function deleteStudent() {
 }
 
 function resetTeacher() {
-  Cookies.set("teacher", "1");
+
 
   console.log(ata);
   alert("input");
@@ -2292,7 +2292,7 @@ function resetTeacher() {
   });
 }
 function resetStudent() {
-  Cookies.set("student", "1");
+
 
   console.log(ata);
   alert("input");
@@ -2316,7 +2316,7 @@ function resetStudent() {
 }
 
 function searchTeacher() {
-  Cookies.set("teacher", "1");
+
   let ata = {
     identity: "1"
   };
@@ -2341,7 +2341,7 @@ function searchTeacher() {
   });
 }
 function searchStudent() {
-  Cookies.set("student", "1");
+
   let ata = {
     identity: "1"
   };
