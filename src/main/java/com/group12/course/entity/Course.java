@@ -153,7 +153,7 @@ public class Course implements Serializable {
 
     public Course(CourseVO courseVO) {
 
-        this.courseName = courseVO.getcourseName();
+        this.courseName = courseVO.getCourseName();
         this.introduction = courseVO.getIntroduction();
         this.presentationPercentage = courseVO.getPresentationPercentage();
         this.questionPercentage = courseVO.getQuestionPercentage();

@@ -1,6 +1,9 @@
 package com.group12.course.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.group12.course.controller.vo.RoundInfoVO;
+import com.group12.course.controller.vo.RoundScoreVO;
+import com.group12.course.controller.vo.SeminarVO;
 import com.group12.course.entity.KlassRound;
 import com.group12.course.entity.Round;
 import com.group12.course.entity.RoundScore;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,12 +47,17 @@ public class RoundController {
      */
     @GetMapping(value = "/{roundId}/seminar", produces = "application/json; charset=utf-8")
     public void getSeminarByRoundId(@PathVariable Long roundId, HttpServletResponse response) throws IOException {
+        List<SeminarVO> seminarVOList = new ArrayList<>();
         List<Seminar> seminarList = roundService.getSeminarByRoundId(roundId);
-        if (seminarList.isEmpty()) {
+        for (Seminar seminar:seminarList) {
+            SeminarVO seminarVO = new SeminarVO(seminar);
+            seminarVOList.add(seminarVO);
+        }
+        if (seminarVOList.isEmpty()) {
             response.setStatus(404);
         } else {
             response.setStatus(200);
-            String json = JSONObject.toJSONString(seminarList);
+            String json = JSONObject.toJSONString(seminarVOList);
             response.getWriter().write(json);
         }
     }
@@ -63,11 +72,12 @@ public class RoundController {
     @GetMapping(value = "/{roundId}", produces = "application/json;charset=utf-8")
     public void getRound(@PathVariable Long roundId, HttpServletResponse response) throws IOException {
         Round round = roundService.getRound(roundId);
-        if (round == null) {
+        RoundInfoVO roundInfoVO = new RoundInfoVO(round);
+        if (roundInfoVO == null) {
             response.setStatus(404);
         } else {
             response.setStatus(200);
-            String json = JSONObject.toJSONString(round);
+            String json = JSONObject.toJSONString(roundInfoVO);
             response.getWriter().write(json);
         }
     }
@@ -116,12 +126,18 @@ public class RoundController {
      */
     @GetMapping(value = "/{roundId}/roundscore", produces = "application/json;charset=utf-8")
     public void getRoundScoreByRoundId(@PathVariable Long roundId, HttpServletResponse response) throws IOException {
+        List<RoundScoreVO> roundScoreVOList = new ArrayList<>();
         List<RoundScore> roundScoreList = roundService.getRoundScoreByRoundId(roundId);
-        if (roundScoreList.isEmpty()) {
+        for (RoundScore roundScore:roundScoreList) {
+            RoundScoreVO roundScoreVO = new RoundScoreVO(roundScore);
+            roundScoreVOList.add(roundScoreVO);
+        }
+
+        if (roundScoreVOList.isEmpty()) {
             response.setStatus(404);
         } else {
             response.setStatus(200);
-            String json = JSONObject.toJSONString(roundScoreList);
+            String json = JSONObject.toJSONString(roundScoreVOList);
             response.getWriter().write(json);
         }
     }
@@ -134,17 +150,22 @@ public class RoundController {
     @GetMapping(value = "/{roundId}/team/{teamId}/roundscore", produces = "application/json;charset=utf-8")
     public void getTeamScoreByRoundIdAndTeamId(@PathVariable Long roundId, @PathVariable Long teamId, HttpServletResponse response) throws IOException {
         RoundScore roundScore = roundService.getRoundScoreByRoundIdAndTeamId(roundId, teamId);
-        if (roundScore == null) {
+        RoundScoreVO roundScoreVO = new RoundScoreVO(roundScore);
+        if (roundScoreVO == null) {
             response.setStatus(404);
         } else {
             response.setStatus(200);
-            String json = JSONObject.toJSONString(roundScore);
+            String json = JSONObject.toJSONString(roundScoreVO);
             response.getWriter().write(json);
         }
     }
 
 
-    /*TODO 新增查看本轮次下所有班级的api路径*/
+    /**
+     * 设置班级轮次报名次数
+     * @param klassRoundList
+     * @param response
+     */
     @PostMapping(value="/klassround",produces = "application/json;charset=utf-8")
     public void createKlassRound(@RequestBody List<KlassRound> klassRoundList,HttpServletResponse response){
         int status = roundService.addKlassRoundList(klassRoundList);

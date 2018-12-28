@@ -65,7 +65,7 @@ public class CourseDao {
     }
 
     public int addCourse(Course course){
-        return courseMapper.addCourse(course.getTeacher().getId(),course);
+        return courseMapper.addCourse(course);
     }
 
     public int updateCourse(Course course){
