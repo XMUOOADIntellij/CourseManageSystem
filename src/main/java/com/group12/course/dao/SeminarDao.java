@@ -31,12 +31,6 @@ public class SeminarDao {
     @Autowired
     KlassSeminarDao klassSeminarDao;
     @Autowired
-    QuestionDao questionDao;
-    @Autowired
-    AttendanceDao attendanceDao;
-    @Autowired
-    ScoreDao scoreDao;
-    @Autowired
     RoundDao roundDao;
 
     /**
