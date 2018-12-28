@@ -117,49 +117,6 @@ public class RoundController {
         }
     }
 
-    /**
-     * 根据轮次id 查找所有的成绩
-     *
-     * @param roundId
-     * @param response
-     * @return
-     */
-    @GetMapping(value = "/{roundId}/roundscore", produces = "application/json;charset=utf-8")
-    public void getRoundScoreByRoundId(@PathVariable Long roundId, HttpServletResponse response) throws IOException {
-        List<RoundScoreVO> roundScoreVOList = new ArrayList<>();
-        List<RoundScore> roundScoreList = roundService.getRoundScoreByRoundId(roundId);
-        for (RoundScore roundScore:roundScoreList) {
-            RoundScoreVO roundScoreVO = new RoundScoreVO(roundScore);
-            roundScoreVOList.add(roundScoreVO);
-        }
-
-        if (roundScoreVOList.isEmpty()) {
-            response.setStatus(404);
-        } else {
-            response.setStatus(200);
-            String json = JSONObject.toJSONString(roundScoreVOList);
-            response.getWriter().write(json);
-        }
-    }
-
-    /**
-     * 获取某轮次下某组的成绩信息
-     * @param response
-     * @return
-     */
-    @GetMapping(value = "/{roundId}/team/{teamId}/roundscore", produces = "application/json;charset=utf-8")
-    public void getTeamScoreByRoundIdAndTeamId(@PathVariable Long roundId, @PathVariable Long teamId, HttpServletResponse response) throws IOException {
-        RoundScore roundScore = roundService.getRoundScoreByRoundIdAndTeamId(roundId, teamId);
-        RoundScoreVO roundScoreVO = new RoundScoreVO(roundScore);
-        if (roundScoreVO == null) {
-            response.setStatus(404);
-        } else {
-            response.setStatus(200);
-            String json = JSONObject.toJSONString(roundScoreVO);
-            response.getWriter().write(json);
-        }
-    }
-
 
     /**
      * 设置班级轮次报名次数

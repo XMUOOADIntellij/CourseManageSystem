@@ -22,8 +22,6 @@ public class KlassSeminarDao {
     @Autowired
     KlassSeminarMapper klassSeminarMapper;
     @Autowired
-    CourseDao courseDao;
-    @Autowired
     QuestionDao questionDao;
     @Autowired
     AttendanceDao attendanceDao;
