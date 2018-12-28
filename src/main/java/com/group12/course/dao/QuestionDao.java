@@ -18,13 +18,15 @@ public class QuestionDao {
     @Autowired
     QuestionMapper questionMapper;
 
-    public Integer deleteQuestionByKlassSeminarId(Long klassSeminarId){
-        return questionMapper.deleteQuestionByKlassSeminarId(klassSeminarId);
-    }
+
 
     public Long insertQuetion(Question record){
         questionMapper.insertQuestion(record);
         return record.getId();
+    }
+
+    public Integer deleteQuestionByKlassSeminarId(Long klassSeminarId){
+        return questionMapper.deleteQuestionByKlassSeminarId(klassSeminarId);
     }
 
     public Integer updateQuestion(Question record){
@@ -38,6 +40,7 @@ public class QuestionDao {
     public Question getUnselectQuestionAttendanceIdAndStudentId(Long klassSeminarId,Long studentId) {
         return  questionMapper.selectUnselectQuestionByAttendanceIdAndStudentId(klassSeminarId,studentId);
     }
+
     public List<Question> listQuestionByKlassSeminarIdAndAttendanceId(Long klassSeminarId,Long attendanceId){
         return questionMapper.listQuestionByKlassSeminarIdAndAttendanceId(klassSeminarId,attendanceId);
     }

@@ -44,16 +44,26 @@ public class AttendanceDao {
         return true;
     }
 
-    public Attendance selectAttendanceByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {
-        return attendanceMapper.selectAttendanceByKlassSeminarIdAndTeamId(klassSeminarId, teamId);
+    public Long insertAttendance(Attendance record) {
+        if (record.getTeam() != null &&
+                record.getKlassSeminar() != null &&
+                record.getTeamOrder() != null &&
+                record.getPresented() != null) {
+            KlassSeminar klassSeminar = record.getKlassSeminar();
+            if ((!orderExist(listAttendanceByKlassSeminarId(klassSeminar.getId()), record.getTeamOrder()))
+                    && orderLegal(klassSeminar.getSeminar(), record.getTeamOrder())) {
+                attendanceMapper.insertAttendance(record);
+                return record.getId();
+            } else {
+                throw new InformationException("Team Order 已存在或不合法");
+            }
+        } else {
+            throw new InformationException("Attendance 必要字段不存在");
+        }
     }
 
     public List<Attendance> listAttendanceByKlassSeminarId(Long klassSeminarId) {
         return attendanceMapper.listAttendanceByKlassSeminarId(klassSeminarId);
-    }
-
-    public Attendance selectAttendanceById(Long attendanceId) {
-        return attendanceMapper.selectAttendanceById(attendanceId);
     }
 
     public Integer updateAttendance(Attendance record) {
@@ -85,26 +95,16 @@ public class AttendanceDao {
         return attendanceMapper.deleteAttendanceByKlassSeminarId(klassSeminarId);
     }
 
-    public Long insertAttendance(Attendance record) {
-        if (record.getTeam() != null &&
-                record.getKlassSeminar() != null &&
-                record.getTeamOrder() != null &&
-                record.getPresented() != null) {
-            KlassSeminar klassSeminar = record.getKlassSeminar();
-            if ((!orderExist(listAttendanceByKlassSeminarId(klassSeminar.getId()), record.getTeamOrder()))
-                    && orderLegal(klassSeminar.getSeminar(), record.getTeamOrder())) {
-                attendanceMapper.insertAttendance(record);
-                return record.getId();
-            } else {
-                throw new InformationException("Team Order 已存在或不合法");
-            }
-        } else {
-            throw new InformationException("Attendance 必要字段不存在");
-        }
+    public Attendance selectAttendanceById(Long attendanceId) {
+        return attendanceMapper.selectAttendanceById(attendanceId);
     }
 
     public Attendance selectPresentedAttendanceByKlassSeminarId(Long klassSeminarId) {
         return attendanceMapper.selectPresentedAttendanceByKlassSeminarId(klassSeminarId);
+    }
+
+    public Attendance selectAttendanceByKlassSeminarIdAndTeamId(Long klassSeminarId, Long teamId) {
+        return attendanceMapper.selectAttendanceByKlassSeminarIdAndTeamId(klassSeminarId, teamId);
     }
 
     public Attendance selectAttendanceByKlassSeminarIdAndTeamOrder(Long klassSeminar,Integer teamOrder){

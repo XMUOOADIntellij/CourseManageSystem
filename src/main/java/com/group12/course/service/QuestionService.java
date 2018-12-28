@@ -79,11 +79,15 @@ public class QuestionService {
                 } else {
                     team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), course.getId());
                 }
-                question.setTeam(team);
-                if (questionDao.insertQuetion(question) != 0) {
-                    return question;
-                } else {
+                if (teamDao.checkStudentIsInSpecialTeam(student.getId(), team.getId())) {
                     return null;
+                } else {
+                    question.setTeam(team);
+                    if (questionDao.insertQuetion(question) != 0) {
+                        return question;
+                    } else {
+                        return null;
+                    }
                 }
             } else {
                 throw new RecordNotFoundException("找不到班级讨论课");
@@ -175,7 +179,7 @@ public class QuestionService {
         }
     }
 
-    public Question selectQuestionById(Long questionId){
+    public Question selectQuestionById(Long questionId) {
         return questionDao.getQustionById(questionId);
     }
 
