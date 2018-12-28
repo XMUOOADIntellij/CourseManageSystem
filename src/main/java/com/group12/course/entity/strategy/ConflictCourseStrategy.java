@@ -4,13 +4,15 @@ package com.group12.course.entity.strategy;
 import com.group12.course.entity.Course;
 import com.group12.course.entity.Team;
 
+import java.io.Serializable;
+
 /**
  * 课程互相冲突不可组队策略
  *
  * @author Xu Gang
  * @date 2018年12月17日
  */
-public class ConflictCourseStrategy extends Strategy {
+public class ConflictCourseStrategy extends Strategy implements Serializable {
 
     private Course course;
 

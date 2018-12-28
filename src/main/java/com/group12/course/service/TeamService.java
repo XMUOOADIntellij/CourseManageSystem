@@ -170,12 +170,10 @@ public class TeamService {
         if (strategyList==null||strategyList.isEmpty()){
             return true;
         }
-        List<Boolean> strategyCheck = new ArrayList<>(strategyList.size());
-        System.out.println(strategyList);
+        Boolean strategyCheck = true;
         for (TeamStrategy teamStrategy:strategyList) {
             Boolean status=false;
             List<Strategy> strategies = teamStrategy.getStrategyList();
-            System.out.println(strategies);
             for (Strategy strategy:strategies) {
                 switch (strategy.getStrategyType()){
                     case "MemberLimitStrategy":
@@ -203,18 +201,12 @@ public class TeamService {
                     break;
                 }
             }
-            strategyCheck.add(status);
+            strategyCheck=status;
             if (!status){
                 break;
             }
         }
-        for (Boolean status:strategyCheck) {
-            // 只要有一个不符合就不符合要求
-            if (!status){
-                return false;
-            }
-        }
-        return true;
+        return strategyCheck;
     }
 
     /**

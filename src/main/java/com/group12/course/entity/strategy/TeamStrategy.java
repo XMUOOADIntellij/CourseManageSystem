@@ -3,6 +3,7 @@ package com.group12.course.entity.strategy;
 import com.group12.course.entity.Course;
 import com.group12.course.entity.Team;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @author Xu Gang
  * @date 2018年12月17日
  */
-public class TeamStrategy {
+public class TeamStrategy implements Serializable {
     
     private Course course;
 
