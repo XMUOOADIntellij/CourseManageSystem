@@ -55,161 +55,30 @@ public class CourseController {
         String token = request.getHeader("Authorization");
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
         if(jwtTeacher!=null){
+
+            //添加课程
             Course course = new Course(courseVO);
             course.setTeacher(jwtTeacher);
-            int status1 = courseService.addCourse(course);
-
-
             //记录组队人数限制策略
-            String strategyName1 = "MemberLimitStrategy";
             MemberLimitStrategy memberLimitStrategy = new MemberLimitStrategy();
             memberLimitStrategy.setMinMember(courseVO.getTeamMinMember());
             memberLimitStrategy.setMaxMember(courseVO.getTeamMaxMember());
-            int status2 = strategyService.addMemberLimitStrategy(memberLimitStrategy);
-
             //记录选修课人数限制策略
             List<CourseMemberLimitVO> courseMemberLimitVOList = courseVO.getCourseMemberLimitVOList();
-            if(courseMemberLimitVOList!=null && !courseMemberLimitVOList.isEmpty()) {
-                String strategyName2;
-                String strategyName3 = "CourseMemberLimitStrategy";
-                if (courseVO.getRelation() == 0) {
-                    //0表示满足其一，或关系
-                    strategyName2 = "TeamOrStrategy";
-                    List<TeamOrStrategy> teamOrStrategyList = new ArrayList<>();
-                    for (CourseMemberLimitVO item : courseMemberLimitVOList) {
-
-                        CourseMemberLimitStrategy courseMemberLimitStrategy = new CourseMemberLimitStrategy(item);
-                        courseMemberLimitStrategy.setCourse(courseService.getCourseById(item.getCourseId()));
-                        strategyService.addCourseMembetLimitStrategy(courseMemberLimitStrategy);
-
-                        TeamOrStrategy teamOrStrategy = new TeamOrStrategy();
-                        teamOrStrategy.setStrategyName(strategyName3);
-                        List<Strategy> strategyList = new ArrayList<>();
-                        strategyList.add(courseMemberLimitStrategy);
-                        teamOrStrategy.setStrategyList(strategyList);
-
-                        teamOrStrategyList.add(teamOrStrategy);
-                    }
-                    List<TeamOrStrategy> returnTeamOrStrategyList = strategyService.addTeamOrStrategyList(teamOrStrategyList);
-
-                    //组队人数限制策略和选修课人数限制策略是与关系
-                    List<TeamAndStrategy> teamAndStrategyList1 = new ArrayList<>();
-
-                    TeamAndStrategy teamAndStrategy1 = new TeamAndStrategy();
-                    teamAndStrategy1.setStrategyName(strategyName1);
-                    List<Strategy> strategyList = new ArrayList<>();
-                    strategyList.add(memberLimitStrategy);
-                    teamAndStrategy1.setStrategyList(strategyList);
-                    teamAndStrategyList1.add(teamAndStrategy1);
-
-                    TeamAndStrategy teamAndStrategy2 = new TeamAndStrategy();
-                    teamAndStrategy2.setStrategyName(strategyName2);
-                    List<Strategy> strategyList1 = new ArrayList<>();
-                    for (TeamOrStrategy teamOrStrategy : returnTeamOrStrategyList) {
-                        strategyList1.add(teamOrStrategy);
-                    }
-                    teamAndStrategy2.setStrategyList(strategyList1);
-
-                    List<TeamAndStrategy> returnTeamAndStrategyList1 = strategyService.addTeamAndStrategyList(teamAndStrategyList1);
-
-                    //将策略加到team_strategy表中
-                    TeamStrategy teamStrategy = new TeamStrategy();
-                    teamStrategy.setCourse(course);
-                    teamStrategy.setStrategyName(new String("TeamAndStrategy"));
-                    List<Strategy> strategyList2 = new ArrayList<>();
-                    for (TeamAndStrategy teamAndStrategy : returnTeamAndStrategyList1) {
-                        strategyList2.add(teamAndStrategy);
-                    }
-                    teamStrategy.setStrategyList(strategyList2);
-
-                    strategyService.addTeamStrategy(teamStrategy);
-
-                } else {
-                    //1表示均满足，与关系
-                    strategyName2 = "TeamAndStrategy";
-                    List<TeamAndStrategy> teamAndStrategyList = new ArrayList<>();
-                    for (CourseMemberLimitVO item : courseMemberLimitVOList) {
-
-                        CourseMemberLimitStrategy courseMemberLimitStrategy = new CourseMemberLimitStrategy(item);
-                        courseMemberLimitStrategy.setCourse(courseService.getCourseById(item.getCourseId()));
-                        strategyService.addCourseMembetLimitStrategy(courseMemberLimitStrategy);
-
-                        TeamAndStrategy teamAndStrategy = new TeamAndStrategy();
-                        teamAndStrategy.setStrategyName(strategyName3);
-                        List<Strategy> strategyList = new ArrayList<>(1);
-                        strategyList.add(courseMemberLimitStrategy);
-                        teamAndStrategy.setStrategyList(strategyList);
-                        teamAndStrategyList.add(teamAndStrategy);
-                    }
-                    List<TeamAndStrategy> returnTeamAndStrategyList = strategyService.addTeamAndStrategyList(teamAndStrategyList);
-
-                    //组队人数限制策略和选修课人数限制策略是与关系
-                    List<TeamAndStrategy> teamAndStrategyList1 = new ArrayList<>();
-
-                    TeamAndStrategy teamAndStrategy1 = new TeamAndStrategy();
-                    teamAndStrategy1.setStrategyName(strategyName1);
-
-                    List<Strategy> strategyList = new ArrayList<>();
-                    strategyList.add(memberLimitStrategy);
-                    teamAndStrategy1.setStrategyList(strategyList);
-                    teamAndStrategyList1.add(teamAndStrategy1);
-
-
-                    TeamAndStrategy teamAndStrategy2 = new TeamAndStrategy();
-                    teamAndStrategy2.setStrategyName(strategyName2);
-                    List<Strategy> strategyList1 = new ArrayList<>();
-                    for (TeamAndStrategy teamAndStrategy : returnTeamAndStrategyList) {
-                        strategyList1.add(teamAndStrategy);
-                    }
-                    teamAndStrategy2.setStrategyList(strategyList1);
-
-                    List<TeamAndStrategy> returnTeamAndStrategyList2 = strategyService.addTeamAndStrategyList(teamAndStrategyList1);
-
-                    //将策略加到team_strategy表中
-                    TeamStrategy teamStrategy = new TeamStrategy();
-                    teamStrategy.setCourse(course);
-                    teamStrategy.setStrategyName(new String("TeamAndStrategy"));
-                    List<Strategy> strategyList2 = new ArrayList<>();
-                    for (TeamAndStrategy teamAndStrategy : returnTeamAndStrategyList2) {
-                        strategyList2.add(teamAndStrategy);
-                    }
-                    teamStrategy.setStrategyList(strategyList2);
-                    strategyService.addTeamStrategy(teamStrategy);
-                }
+            List<CourseMemberLimitStrategy> courseMemberLimitStrategyList = new ArrayList<>();
+            for (CourseMemberLimitVO courseMemberLimitVO:courseMemberLimitVOList) {
+                CourseMemberLimitStrategy courseMemberLimitStrategy = new CourseMemberLimitStrategy(courseMemberLimitVO);
+                courseMemberLimitStrategy.setCourse(courseService.getCourseById(courseMemberLimitVO.getCourseId()));
+                courseMemberLimitStrategyList.add(courseMemberLimitStrategy);
             }
-            else {
-                TeamStrategy teamStrategy = new TeamStrategy();
-                teamStrategy.setCourse(course);
-                teamStrategy.setStrategyName(strategyName1);
-                List<Strategy> strategyList = new ArrayList<>();
-                strategyList.add(memberLimitStrategy);
-                teamStrategy.setStrategyList(strategyList);
-                strategyService.addTeamStrategy(teamStrategy);
-            }
+            //记录选修课人数限制策略之间的关系
+            Integer relation = courseVO.getRelation();
             //记录冲突课程
             List<List<Long>> conflictCourseLists = courseVO.getConflictCourseLists();
-            if(conflictCourseLists!=null && !conflictCourseLists.isEmpty()){
-                for (List<Long> conflictCourseList:conflictCourseLists) {
-                    List<ConflictCourseStrategy> conflictCourseStrategyList = new ArrayList<>();
-                    for (Long courseId:conflictCourseList) {
-                        ConflictCourseStrategy conflictCourseStrategy = new ConflictCourseStrategy();
-                        conflictCourseStrategy.setCourse(courseService.getCourseById(courseId));
-                        conflictCourseStrategyList.add(conflictCourseStrategy);
-                    }
-                    List<ConflictCourseStrategy> returnConflictCourseStrategyList = strategyService.addConflictCourseStrategyList(conflictCourseStrategyList);
-                    TeamStrategy teamStrategy = new TeamStrategy();
-                    teamStrategy.setCourse(course);
-                    teamStrategy.setStrategyName("ConflictCourseStrategy");
-                    List<Strategy> strategyList = new ArrayList<>();
-                    for (ConflictCourseStrategy item:returnConflictCourseStrategyList) {
-                        strategyList.add(item);
-                    }
-                    teamStrategy.setStrategyList(strategyList);
-                    strategyService.addTeamStrategy(teamStrategy);
-                }
-            }
 
-            if(status1 == 0 || status2 == 0){
+            int status = courseService.createCourse(course,memberLimitStrategy, courseMemberLimitStrategyList,relation,conflictCourseLists);
+
+            if(status == 0){
                 response.setStatus(403);
             }
             else{
