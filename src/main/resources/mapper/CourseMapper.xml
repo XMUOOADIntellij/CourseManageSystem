@@ -25,7 +25,6 @@
 
   <cache type="com.group12.course.tools.MybatisRedisCache" />
 
-
   <sql id="Base_Column_List" >
     id, teacher_id, course_name, introduction, presentation_percentage, question_percentage,
     report_percentage, team_start_time, team_end_time,team_main_course_id,seminar_main_course_id
@@ -54,70 +53,70 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="addCourse" useGeneratedKeys="true" keyProperty="record.id" >
+  <insert id="addCourse" useGeneratedKeys="true" keyProperty="id" >
     insert into course
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="teacherId != null" >
+      <if test="teacher != null" >
         teacher_id,
       </if>
-      <if test="record.courseName != null" >
+      <if test="courseName != null" >
         course_name,
       </if>
-      <if test="record.introduction != null" >
+      <if test="introduction != null" >
         introduction,
       </if>
-      <if test="record.presentationPercentage != null" >
+      <if test="presentationPercentage != null" >
         presentation_percentage,
       </if>
-      <if test="record.questionPercentage != null" >
+      <if test="questionPercentage != null" >
         question_percentage,
       </if>
-      <if test="record.reportPercentage != null" >
+      <if test="reportPercentage != null" >
         report_percentage,
       </if>
-      <if test="record.teamStartTime != null" >
+      <if test="teamStartTime != null" >
         team_start_time,
       </if>
-      <if test="record.teamEndTime != null" >
+      <if test="teamEndTime != null" >
         team_end_time,
       </if>
-      <if test="record.teamMainCourse!=null">
+      <if test="teamMainCourse!=null">
         team_main_course_id,
       </if>
-      <if test="record.seminarMainCourse!=null">
+      <if test="seminarMainCourse!=null">
         seminar_main_course_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="teacherId != null" >
-        #{teacherId,jdbcType=BIGINT},
+      <if test="teacher != null" >
+        #{teacher.id,jdbcType=BIGINT},
       </if>
-      <if test="record.courseName != null" >
-        #{record.courseName,jdbcType=VARCHAR},
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
       </if>
-      <if test="record.introduction != null" >
-        #{record.introduction,jdbcType=VARCHAR},
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
       </if>
-      <if test="record.presentationPercentage != null" >
-        #{record.presentationPercentage,jdbcType=BIT},
+      <if test="presentationPercentage != null" >
+        #{presentationPercentage,jdbcType=BIT},
       </if>
-      <if test="record.questionPercentage != null" >
-        #{record.questionPercentage,jdbcType=BIT},
+      <if test="questionPercentage != null" >
+        #{questionPercentage,jdbcType=BIT},
       </if>
-      <if test="record.reportPercentage != null" >
-        #{record.reportPercentage,jdbcType=BIT},
+      <if test="reportPercentage != null" >
+        #{reportPercentage,jdbcType=BIT},
       </if>
-      <if test="record.teamStartTime != null" >
-        #{record.teamStartTime,jdbcType=TIMESTAMP},
+      <if test="teamStartTime != null" >
+        #{teamStartTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.teamEndTime != null" >
-        #{record.teamEndTime,jdbcType=TIMESTAMP},
+      <if test="teamEndTime != null" >
+        #{teamEndTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.teamMainCourse!=null">
-        #{record.teamMainCourse.id,jdbcType=BIGINT}
+      <if test="teamMainCourse!=null">
+        #{teamMainCourse.id,jdbcType=BIGINT}
       </if>
-      <if test="record.seminarMainCourse!=null">
-        #{record.seminarMainCourse.id,jdbcType=BIGINT}
+      <if test="seminarMainCourse!=null">
+        #{seminarMainCourse.id,jdbcType=BIGINT}
       </if>
     </trim>
   </insert>

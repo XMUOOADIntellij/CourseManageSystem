@@ -38,11 +38,11 @@ public class CourseVO {
 
     private List<List<Long>> conflictCourseLists;
 
-    public String getcourseName() {
+    public String getCourseName() {
         return courseName;
     }
 
-    public void setcourseName(String courseName) {
+    public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 
@@ -94,14 +94,6 @@ public class CourseVO {
         this.teamEndTime = teamEndTime;
     }
 
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
     public Integer getTeamMaxMember() {
         return teamMaxMember;
     }
@@ -110,12 +102,12 @@ public class CourseVO {
         this.teamMaxMember = teamMaxMember;
     }
 
-    public Integer getTeamMingMember() {
+    public Integer getTeamMinMember() {
         return teamMinMember;
     }
 
-    public void setTeamMingMember(Integer teamMingMember) {
-        this.teamMinMember = teamMingMember;
+    public void setTeamMinMember(Integer teamMinMember) {
+        this.teamMinMember = teamMinMember;
     }
 
     public List<CourseMemberLimitVO> getCourseMemberLimitVOList() {

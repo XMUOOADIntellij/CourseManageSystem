@@ -59,10 +59,11 @@ public class CourseController {
             course.setTeacher(jwtTeacher);
             int status1 = courseService.addCourse(course);
 
+
             //记录组队人数限制策略
             String strategyName1 = "MemberLimitStrategy";
             MemberLimitStrategy memberLimitStrategy = new MemberLimitStrategy();
-            memberLimitStrategy.setMinMember(courseVO.getTeamMingMember());
+            memberLimitStrategy.setMinMember(courseVO.getTeamMinMember());
             memberLimitStrategy.setMaxMember(courseVO.getTeamMaxMember());
             int status2 = strategyService.addMemberLimitStrategy(memberLimitStrategy);
 
@@ -76,67 +77,101 @@ public class CourseController {
                     strategyName2 = "TeamOrStrategy";
                     List<TeamOrStrategy> teamOrStrategyList = new ArrayList<>();
                     for (CourseMemberLimitVO item : courseMemberLimitVOList) {
-                        TeamOrStrategy teamOrStrategy = new TeamOrStrategy();
+
                         CourseMemberLimitStrategy courseMemberLimitStrategy = new CourseMemberLimitStrategy(item);
                         courseMemberLimitStrategy.setCourse(courseService.getCourseById(item.getCourseId()));
                         strategyService.addCourseMembetLimitStrategy(courseMemberLimitStrategy);
+
+                        TeamOrStrategy teamOrStrategy = new TeamOrStrategy();
                         teamOrStrategy.setStrategyName(strategyName3);
-                        teamOrStrategy.getStrategyList().add(courseMemberLimitStrategy);
+                        List<Strategy> strategyList = new ArrayList<>();
+                        strategyList.add(courseMemberLimitStrategy);
+                        teamOrStrategy.setStrategyList(strategyList);
+
                         teamOrStrategyList.add(teamOrStrategy);
                     }
                     List<TeamOrStrategy> returnTeamOrStrategyList = strategyService.addTeamOrStrategyList(teamOrStrategyList);
+
                     //组队人数限制策略和选修课人数限制策略是与关系
                     List<TeamAndStrategy> teamAndStrategyList1 = new ArrayList<>();
+
                     TeamAndStrategy teamAndStrategy1 = new TeamAndStrategy();
                     teamAndStrategy1.setStrategyName(strategyName1);
-                    teamAndStrategy1.getStrategyList().add(memberLimitStrategy);
+                    List<Strategy> strategyList = new ArrayList<>();
+                    strategyList.add(memberLimitStrategy);
+                    teamAndStrategy1.setStrategyList(strategyList);
                     teamAndStrategyList1.add(teamAndStrategy1);
+
                     TeamAndStrategy teamAndStrategy2 = new TeamAndStrategy();
                     teamAndStrategy2.setStrategyName(strategyName2);
+                    List<Strategy> strategyList1 = new ArrayList<>();
                     for (TeamOrStrategy teamOrStrategy : returnTeamOrStrategyList) {
-                        teamAndStrategy2.getStrategyList().add(teamOrStrategy);
+                        strategyList1.add(teamOrStrategy);
                     }
+                    teamAndStrategy2.setStrategyList(strategyList1);
+
                     List<TeamAndStrategy> returnTeamAndStrategyList1 = strategyService.addTeamAndStrategyList(teamAndStrategyList1);
+
                     //将策略加到team_strategy表中
                     TeamStrategy teamStrategy = new TeamStrategy();
                     teamStrategy.setCourse(course);
                     teamStrategy.setStrategyName(new String("TeamAndStrategy"));
+                    List<Strategy> strategyList2 = new ArrayList<>();
                     for (TeamAndStrategy teamAndStrategy : returnTeamAndStrategyList1) {
-                        teamStrategy.getStrategyList().add(teamAndStrategy);
+                        strategyList2.add(teamAndStrategy);
                     }
+                    teamStrategy.setStrategyList(strategyList2);
+
                     strategyService.addTeamStrategy(teamStrategy);
+
                 } else {
                     //1表示均满足，与关系
                     strategyName2 = "TeamAndStrategy";
                     List<TeamAndStrategy> teamAndStrategyList = new ArrayList<>();
                     for (CourseMemberLimitVO item : courseMemberLimitVOList) {
-                        TeamAndStrategy teamAndStrategy = new TeamAndStrategy();
+
                         CourseMemberLimitStrategy courseMemberLimitStrategy = new CourseMemberLimitStrategy(item);
+                        courseMemberLimitStrategy.setCourse(courseService.getCourseById(item.getCourseId()));
                         strategyService.addCourseMembetLimitStrategy(courseMemberLimitStrategy);
+
+                        TeamAndStrategy teamAndStrategy = new TeamAndStrategy();
                         teamAndStrategy.setStrategyName(strategyName3);
                         teamAndStrategy.getStrategyList().add(courseMemberLimitStrategy);
                         teamAndStrategyList.add(teamAndStrategy);
                     }
                     List<TeamAndStrategy> returnTeamAndStrategyList = strategyService.addTeamAndStrategyList(teamAndStrategyList);
+
                     //组队人数限制策略和选修课人数限制策略是与关系
                     List<TeamAndStrategy> teamAndStrategyList1 = new ArrayList<>();
+
                     TeamAndStrategy teamAndStrategy1 = new TeamAndStrategy();
                     teamAndStrategy1.setStrategyName(strategyName1);
-                    teamAndStrategy1.getStrategyList().add(memberLimitStrategy);
+
+                    List<Strategy> strategyList = new ArrayList<>();
+                    strategyList.add(memberLimitStrategy);
+                    teamAndStrategy1.setStrategyList(strategyList);
                     teamAndStrategyList1.add(teamAndStrategy1);
+
+
                     TeamAndStrategy teamAndStrategy2 = new TeamAndStrategy();
                     teamAndStrategy2.setStrategyName(strategyName2);
+                    List<Strategy> strategyList1 = new ArrayList<>();
                     for (TeamAndStrategy teamAndStrategy : returnTeamAndStrategyList) {
-                        teamAndStrategy2.getStrategyList().add(teamAndStrategy);
+                        strategyList1.add(teamAndStrategy);
                     }
+                    teamAndStrategy2.setStrategyList(strategyList1);
+
                     List<TeamAndStrategy> returnTeamAndStrategyList2 = strategyService.addTeamAndStrategyList(teamAndStrategyList1);
+
                     //将策略加到team_strategy表中
                     TeamStrategy teamStrategy = new TeamStrategy();
                     teamStrategy.setCourse(course);
                     teamStrategy.setStrategyName(new String("TeamAndStrategy"));
+                    List<Strategy> strategyList2 = new ArrayList<>();
                     for (TeamAndStrategy teamAndStrategy : returnTeamAndStrategyList2) {
-                        teamStrategy.getStrategyList().add(teamAndStrategy);
+                        strategyList2.add(teamAndStrategy);
                     }
+                    teamStrategy.setStrategyList(strategyList2);
                     strategyService.addTeamStrategy(teamStrategy);
                 }
             }
@@ -144,7 +179,9 @@ public class CourseController {
                 TeamStrategy teamStrategy = new TeamStrategy();
                 teamStrategy.setCourse(course);
                 teamStrategy.setStrategyName(strategyName1);
-                teamStrategy.getStrategyList().add(memberLimitStrategy);
+                List<Strategy> strategyList = new ArrayList<>();
+                strategyList.add(memberLimitStrategy);
+                teamStrategy.setStrategyList(strategyList);
                 strategyService.addTeamStrategy(teamStrategy);
             }
             //记录冲突课程
@@ -161,9 +198,11 @@ public class CourseController {
                     TeamStrategy teamStrategy = new TeamStrategy();
                     teamStrategy.setCourse(course);
                     teamStrategy.setStrategyName("ConflictCourseStrategy");
+                    List<Strategy> strategyList = new ArrayList<>();
                     for (ConflictCourseStrategy item:returnConflictCourseStrategyList) {
-                        teamStrategy.getStrategyList().add(item);
+                        strategyList.add(item);
                     }
+                    teamStrategy.setStrategyList(strategyList);
                     strategyService.addTeamStrategy(teamStrategy);
                 }
             }
@@ -215,12 +254,17 @@ public class CourseController {
     @GetMapping(value="/allcourse",produces = "application/json; charset=utf-8")
     public void getAllCourse( HttpServletResponse response) throws IOException {
         List<Course> courseList = courseService.getAllCourse();
-        if (courseList.isEmpty()){
+        List<CourseBasicVO> courseBasicVOList = new ArrayList<>();
+        for (Course course:courseList) {
+            CourseBasicVO courseBasicVO = new CourseBasicVO(course);
+            courseBasicVOList.add(courseBasicVO);
+        }
+        if (courseBasicVOList.isEmpty()){
             response.setStatus(404);
         }
         else {
             response.setStatus(200);
-            String json = JSONObject.toJSONString(courseList);
+            String json = JSONObject.toJSONString(courseBasicVOList);
             response.getWriter().write(json);
         }
     }
@@ -236,12 +280,17 @@ public class CourseController {
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
         if (jwtTeacher!=null){
             List<Course> courseList = courseService.getCourseByTeacherId(jwtTeacher.getId());
-            if (courseList.isEmpty()){
+            List<CourseBasicVO> courseBasicVOList = new ArrayList<>();
+            for (Course course:courseList) {
+                CourseBasicVO courseBasicVO = new CourseBasicVO(course);
+                courseBasicVOList.add(courseBasicVO);
+            }
+            if (courseBasicVOList.isEmpty()){
                 response.setStatus(404);
             }
             else {
                 response.setStatus(200);
-                String json = JSONObject.toJSONString(courseList);
+                String json = JSONObject.toJSONString(courseBasicVOList);
                 response.getWriter().write(json);
             }
         }
@@ -259,12 +308,18 @@ public class CourseController {
     @GetMapping(value="/{courseId}/round",produces = "application/json; charset=utf-8")
     public void getRoundByCourseId(@PathVariable Long courseId,HttpServletResponse response) throws IOException {
         List<Round> roundList = roundService.getRoundByCourseId(courseId);
-        if(roundList.isEmpty()){
+        List<RoundInfoVO> roundInfoVOList = new ArrayList<>();
+        for (Round round:roundList) {
+            RoundInfoVO roundInfoVO = new RoundInfoVO(round);
+            roundInfoVOList.add(roundInfoVO);
+        }
+
+        if(roundInfoVOList.isEmpty()){
             response.setStatus(404);
         }
         else{
             response.setStatus(200);
-            String json = JSONObject.toJSONString(roundList);
+            String json = JSONObject.toJSONString(roundInfoVOList);
             response.getWriter().write(json);
         }
     }
@@ -301,9 +356,20 @@ public class CourseController {
     @GetMapping(value="/{courseId}/team",produces = "application/json; charset=utf-8")
     public void getTeamByCourseId(@PathVariable Long courseId,HttpServletRequest request,HttpServletResponse response) throws IOException {
 
-        List<Team> teamVOList = courseService.getTeamByCourseId(courseId);
-        String json = JSONObject.toJSONString(teamVOList);
-        response.getWriter().write(json);
+        List<Team> teamList = courseService.getTeamByCourseId(courseId);
+        List<TeamBasicVO> teamBasicVOList = new ArrayList<>();
+        for (Team team:teamList) {
+            TeamBasicVO teamBasicVO = new TeamBasicVO(team);
+            teamBasicVOList.add(teamBasicVO);
+        }
+        if(!teamBasicVOList.isEmpty()){
+            response.setStatus(200);
+            String json = JSONObject.toJSONString(teamBasicVOList);
+            response.getWriter().write(json);
+        }
+        else{
+            response.setStatus(404);
+        }
     }
 
 
@@ -320,9 +386,10 @@ public class CourseController {
         Student jwtStudent = Jwt.unSign(token,Student.class);
         if (jwtStudent!=null){
             Team team = teamService.getTeamByStudentIdAndCourseId(jwtStudent.getId(),courseId);
-            if(team != null){
+            TeamBasicVO teamBasicVO = new TeamBasicVO(team);
+            if(teamBasicVO != null){
                 response.setStatus(200);
-                String json = JSONObject.toJSONString(team);
+                String json = JSONObject.toJSONString(teamBasicVO);
                 response.getWriter().write(json);
             }
             else{
@@ -364,12 +431,17 @@ public class CourseController {
     @GetMapping(value="/{courseId}/class",produces = "application/json; charset=utf-8")
     public void getKlassByCourseId(@PathVariable Long courseId,HttpServletResponse response) throws IOException {
         List<Klass> klassList = klassService.getAllKlassByCourseId(courseId);
-        if (klassList.isEmpty()){
+        List<KlassInfoVO> klassInfoVOList = new ArrayList<>();
+        for (Klass klass:klassList) {
+            KlassInfoVO klassInfoVO = new KlassInfoVO(klass);
+            klassInfoVOList.add(klassInfoVO);
+        }
+        if (klassInfoVOList.isEmpty()){
             response.setStatus(404);
         }
         else {
             response.setStatus(200);
-            String json = JSONObject.toJSONString(klassList);
+            String json = JSONObject.toJSONString(klassInfoVOList);
             response.getWriter().write(json);
         }
     }
@@ -407,12 +479,17 @@ public class CourseController {
     @GetMapping(value="/{courseId}/teamshare",produces = "application/json; charset=utf-8")
     public void getTeamShareMessage(@PathVariable Long courseId, HttpServletResponse response) throws IOException {
         List<ShareTeamApplication> shareTeamApplicationList = courseService.getShareTeamApplicationByCourseId(courseId);
-        if(shareTeamApplicationList.isEmpty()){
+        List<ShareTeamApplicationVO> shareTeamApplicationVOList = new ArrayList<>();
+        for (ShareTeamApplication shareTeamApplication:shareTeamApplicationList) {
+            ShareTeamApplicationVO shareTeamApplicationVO = new ShareTeamApplicationVO(shareTeamApplication);
+            shareTeamApplicationVOList.add(shareTeamApplicationVO);
+        }
+        if(shareTeamApplicationVOList.isEmpty()){
             response.setStatus(404);
         }
         else{
             response.setStatus(200);
-            String json = JSONObject.toJSONString(shareTeamApplicationList);
+            String json = JSONObject.toJSONString(shareTeamApplicationVOList);
             response.getWriter().write(json);
         }
     }
@@ -426,12 +503,18 @@ public class CourseController {
     @GetMapping(value="/{courseId}/seminarshare",produces = "application/json; charset=utf-8")
     public void getSeminarShareMessage(@PathVariable Long courseId, HttpServletResponse response) throws IOException {
         List<ShareSeminarApplication> shareSeminarApplicationList = courseService.getShareSeminarApplicationByMainCourseId(courseId);
-        if(shareSeminarApplicationList.isEmpty()){
+        List<ShareSeminarApplicationVO> shareSeminarApplicationVOList = new ArrayList<>();
+        for (ShareSeminarApplication shareSeminarApplication:shareSeminarApplicationList) {
+            ShareSeminarApplicationVO shareSeminarApplicationVO = new ShareSeminarApplicationVO(shareSeminarApplication);
+            shareSeminarApplicationVOList.add(shareSeminarApplicationVO);
+        }
+
+        if(shareSeminarApplicationVOList.isEmpty()){
             response.setStatus(404);
         }
         else{
             response.setStatus(200);
-            String json = JSONObject.toJSONString(shareSeminarApplicationList);
+            String json = JSONObject.toJSONString(shareSeminarApplicationVOList);
             response.getWriter().write(json);
         }
 

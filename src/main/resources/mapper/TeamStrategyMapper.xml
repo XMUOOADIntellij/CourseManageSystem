@@ -74,7 +74,7 @@
     course_id,strategy_serial,strategy_name,strategy_id
     </sql>
 
-
+    <cache type="com.group12.course.tools.MybatisRedisCache" />
 
     <select id="selectTeamStrategyByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select

@@ -66,6 +66,8 @@
     id, strategy_name,strategy_id
     </sql>
 
+    <cache type="com.group12.course.tools.MybatisRedisCache" />
+
     <select id="selectTeamAndStrategyById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select
         <include refid="Base_Column_List" />
