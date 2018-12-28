@@ -246,7 +246,6 @@
                               <input
                                 type="text"
                                 class="form-control"
-                                id="name"
                                 name="example-disabled-input"
                                 disabled
                               />
@@ -259,7 +258,6 @@
                                 class="form-control"
                                 name="example-textarea-input"
                                 rows="2"
-                                id="introduction"
                                 disabled
                               ></textarea>
                             </div>
@@ -267,13 +265,29 @@
                           <div class="col-md-6 col-lg-4">
                             <div class="form-group">
                               <label class="form-label">轮次</label>
-                              <input class="form-control" id="round" name="example-text-input" placeholder="2016" type="text" disabled>
+                              <select
+                                class="form-control custom-select"
+                                disabled
+                              >
+                                <option value="1" selected="selected"
+                                  >第一轮</option
+                                >
+                                <option value="2">第二轮</option>
+                              </select>
                             </div>
                           </div>
                           <div class="col-md-6 col-lg-4">
                             <div class="form-group">
                               <label class="form-label">课次</label>
-                              <input class="form-control" id="seminarSerial" name="example-text-input" placeholder="2016" type="text" disabled>
+                              <select
+                                class="form-control custom-select"
+                                disabled
+                              >
+                                <option value="1" selected="selected"
+                                  >第一次</option
+                                >
+                                <option value="2">第二次</option>
+                              </select>
                             </div>
                           </div>
                         </div>

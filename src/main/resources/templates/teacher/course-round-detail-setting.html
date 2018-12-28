@@ -63,7 +63,7 @@
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body onload="getSeminarByClassForUpdate()">
+  <body onload="getSeminarByClass()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -196,7 +196,6 @@
                             name="example-text-input"
                             placeholder="Text.."
                             type="text"
-                            disabled
                           />
                         </div>
                         <div class="form-group">
@@ -210,14 +209,30 @@
                             id="introduction"
                             placeholder="不多于500"
                             rows="6"
-                            disabled
                           ></textarea>
                         </div>
-                          <div class="form-group">
-                            <label class="form-label">课次</label>
-                            <input class="form-control" id="seminarSerial" name="example-text-input" placeholder="2016" type="text" disabled>
+                        <div class="form-group">
+                          <label class="form-label">讨论课序号</label>
+                          <div class="row gutters-xs">
+                            <div class="input-group col-md-6 col-lg-3 ">
+                              <span class="input-group-prepend">
+                                <span class="input-group-text">课次</span>
+                              </span>
+                              <select
+                                class="form-control custom-select"
+                                id="select-seminar-serial"
+                              >
+                                <option selected="selected" value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                              </select>
+                            </div>
                           </div>
                         </div>
+                      </div>
                     </div>
                     <div class="row">
                       <div class="col-12">
@@ -229,10 +244,9 @@
                             <label class="col-auto custom-switch">
                               <input
                                 class="custom-switch-input"
-                                id="visible"
+                                id="switch-visible"
                                 name="custom-switch-checkbox"
                                 type="checkbox"
-                                disabled
                               />
                               <span class="custom-switch-indicator"></span>
                             </label>
@@ -249,7 +263,7 @@
                                             >展示报名开始时间</label
                                           >
                                           <div class="row gutters-xs px-1">
-                                            <input id="enrollStartTime" disabled />
+                                            <input id="input-start" />
                                           </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -257,16 +271,32 @@
                                             >展示报名结束时间</label
                                           >
                                           <div class="row gutters-xs px-1">
-                                            <input id="enrollEndTime" disabled />
+                                            <input id="input-end" />
                                           </div>
                                         </div>
                                       </div>
                                     </div>
                                     <div class="form-group">
+                                      <label class="form-label"
+                                        >最多报名组数</label
+                                      >
                                       <div class="row gutters-xs">
-                                        <div class="col-lg-6">
-                                          <label class="form-label">最多报名组数</label>
-                                          <input class="form-control" id="maxTem" name="example-text-input" disabled placeholder="2016" type="text">
+                                        <div class="input-group col-6">
+                                          <select
+                                            class="form-control custom-select"
+                                            id="select-max-team"
+                                          >
+                                            <option
+                                              selected="selected"
+                                              value="1"
+                                              >1</option
+                                            >
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                          </select>
                                         </div>
                                       </div>
                                     </div>
@@ -289,16 +319,30 @@
                                                                 </label>
                                                               </div>
                                                             </div>-->
-
-                                      <div class="form-group">
-                                        <div class="row gutters-xs">
-                                          <div class="col-lg-6">
-                                        <label class="form-label">轮次</label>
-                                        <input class="form-control" id="round" name="example-text-input" placeholder="2016" type="text" disabled>
-                                          </div>
+                                    <div class="form-group">
+                                      <label class="form-label">所属轮次</label>
+                                      <div class="row gutters-xs">
+                                        <div class="input-group col-6">
+                                          <select
+                                            id="select-round-id"
+                                            class="form-control custom-select"
+                                            name="user[month]"
+                                          >
+                                            <option
+                                              selected="selected"
+                                              value="0"
+                                              >新建轮次</option
+                                            >
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                          </select>
                                         </div>
                                       </div>
-
+                                    </div>
                                     <div class="form-group">
                                       <div class="row gutters-xs">
                                         <div class="col-lg-6">
@@ -306,7 +350,7 @@
                                             >展示报告截至时间</label
                                           >
                                           <div class="row gutters-xs px-1">
-                                            <input id="reportDdl" />
+                                            <input id="input-deadline" />
                                           </div>
                                         </div>
                                       </div>
@@ -354,17 +398,17 @@
     </div>
   </body>
   <script>
-    $("#enrollEndTime").datetimepicker({
+    $("#input-start").datetimepicker({
       uiLibrary: "bootstrap4",
       modal: true,
       footer: true
     });
-    $("#enrollStartTime").datetimepicker({
+    $("#input-end").datetimepicker({
       uiLibrary: "bootstrap4",
       modal: true,
       footer: true
     });
-    $("#reportDdl").datetimepicker({
+    $("#input-deadline").datetimepicker({
       uiLibrary: "bootstrap4",
       modal: true,
       footer: true
