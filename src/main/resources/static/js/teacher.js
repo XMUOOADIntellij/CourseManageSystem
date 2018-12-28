@@ -844,7 +844,55 @@ function getSeminarScoreByClass() {
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
                 // alert("获取成功");
-                console.log(data);
+                console.log("roundlist");
+                var content=document.getElementById("content");   //获取外围容器
+                var str="";
+                $.each(data, function(i, item) {
+                    console.log(item);
+                    str +='<tr>\n' +
+                        '                          <td><span class="text-muted">1-1</span></td>\n' +
+                        '                          <td>\n' +
+                        '                            <span class="status-icon bg-success"></span> 5.0\n' +
+                        '                          </td>\n' +
+                        '                          <td>\n' +
+                        '                            <span class="status-icon bg-success"></span> 5.0\n' +
+                        '                          </td>\n' +
+                        '                          <td>\n' +
+                        '                            <span class="status-icon bg-success"></span> 5.0\n' +
+                        '                          </td>\n' +
+                        '                          <td>\n' +
+                        '                            <a\n' +
+                        '                              class="icon"\n' +
+                        '                              href="javascript:void(0)"\n' +
+                        '                              onclick="updateSeminarScoreByClass()"\n' +
+                        '                            >\n' +
+                        '                              <i class="fe fe-edit"></i>\n' +
+                        '                            </a>\n' +
+                        '                          </td>\n' +
+                        '                        </tr>\n' +
+                        '\n' +
+                        '                        <tr>\n' +
+                        '                          <td><span class="text-muted">1-2</span></td>\n' +
+                        '                          <td>\n' +
+                        '                            <span class="status-icon bg-success"></span> 5.0\n' +
+                        '                          </td>\n' +
+                        '                          <td>\n' +
+                        '                            <span class="status-icon bg-success"></span> 5.0\n' +
+                        '                          </td>\n' +
+                        '                          <td>\n' +
+                        '                            <span class="status-icon bg-success"></span> 5.0\n' +
+                        '                          </td>\n' +
+                        '                          <td>\n' +
+                        '                            <a class="icon" href="javascript:void(0)">\n' +
+                        '                              <i class="fe fe-edit"></i>\n' +
+                        '                            </a>\n' +
+                        '                          </td>\n' +
+                        '                        </tr>';
+                    content.innerHTML=str;
+                    getTeamTotalScoreByRound(item.id);
+                });
+                content.innerHTML=str;
+
             }
         },
         statusCode: {
@@ -888,7 +936,7 @@ function getReportByClass() {
         }
     });
 }
-//讨论课详情设置
+//修改讨论课详情设置
 function getSeminarByClassForUpdate() {
     let seminarId=Cookies.get("seminar");
     let classId=Cookies.get("class");
@@ -911,11 +959,13 @@ function getSeminarByClassForUpdate() {
                 $("#introduction").val(data.introduction);
                 $("#round").val(data.roundId);
                 $("#seminarSerial").val(data.seminarSerial);
-                $("#enrollStartTime").val(data.enrollStartTime);
-                $("#enrollEndTime").val(data.enrollEndTime);
-                $("#reportDdl").val(data.reportDdl);
+                let start=reconvertTime(data.enrollStartTime);
+                let end=reconvertTime(data.enrollEndTime);
+                $("#enrollStartTime").val(start);
+                $("#enrollEndTime").val(end);
+                let ddl=reconvertTime(data.reportDdl);
+                $("#reportDdl").val(ddl);
                 $("#maxTeam").val(data.roundId);
-                $("#visible").check(data.visible);
 
             }
             console.log(data);
@@ -931,8 +981,6 @@ function getSeminarByClassForUpdate() {
         }
     });
 }
-
-
 
 function updateSeminarByClass() {
 
