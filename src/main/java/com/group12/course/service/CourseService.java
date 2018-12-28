@@ -1,5 +1,6 @@
 package com.group12.course.service;
 
+import com.group12.course.controller.vo.CourseMemberLimitVO;
 import com.group12.course.dao.*;
 import com.group12.course.entity.*;
 import com.group12.course.entity.application.ShareSeminarApplication;
@@ -40,41 +41,213 @@ public class CourseService {
     KlassSeminarDao klassSeminarDao;
     @Autowired
     ScoreDao scoreDao;
+    @Autowired
+    TeamStrategyDao teamStrategyDao;
+    @Autowired
+    TeamAndStrategyDao teamAndStrategyDao;
+    @Autowired
+    TeamOrStrategyDao teamOrStrategyDao;
+    @Autowired
+    ConflictCourseStrategyDao conflictCourseStrategyDao;
+    @Autowired
+    MemberLimitStrategyDao memberLimitStrategyDao;
+    @Autowired
+    CourseMemberLimitStrategyDao courseMemberLimitStrategyDao;
 
 
     /**
      * 获得当前用户所有课程
+     *
+     * @param teacherId 老师ID
      * @return List<Course>
-     * @param  teacherId 老师ID
      */
-    public List<Course> getCourseByTeacherId(Long teacherId){
+    public List<Course> getCourseByTeacherId(Long teacherId) {
         return courseDao.getCourseByTeacherId(teacherId);
     }
 
     /**
      * 获得所有课程
+     *
      * @return
      */
-    public List<Course> getAllCourse(){
+    public List<Course> getAllCourse() {
         return courseDao.getAllCourse();
     }
 
     /**
      * 根据课程id获得课程
+     *
      * @param courseId int
      * @return Course
      */
-    public Course getCourseById(Long courseId){
+    public Course getCourseById(Long courseId) {
         return courseDao.getCourse(courseId);
     }
 
     /**
-     * 增加课程
+     * 创建课程
+     *
      * @param course
      * @return Course
      */
-    public int addCourse(Course course){
-        return courseDao.addCourse(course);
+    public int createCourse(Course course, MemberLimitStrategy memberLimitStrategy,
+                            List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, Integer relation, List<List<Long>> conflictCourseLists) {
+
+        //添加课程
+        int status1 = courseDao.addCourse(course);
+
+        //记录组队人数限制策略
+        String strategyName1 = "MemberLimitStrategy";
+        int status2 = memberLimitStrategyDao.addMemberLimitStrategy(memberLimitStrategy);
+
+        //记录选修课人数限制策略
+        if (courseMemberLimitStrategyList != null && !courseMemberLimitStrategyList.isEmpty()) {
+            String strategyName2;
+            String strategyName3 = "CourseMemberLimitStrategy";
+            if (relation == 0) {
+                //0表示满足其一，或关系
+                strategyName2 = "TeamOrStrategy";
+                List<TeamOrStrategy> teamOrStrategyList = new ArrayList<>();
+
+                for (CourseMemberLimitStrategy courseMemberLimitStrategy : courseMemberLimitStrategyList) {
+                    courseMemberLimitStrategyDao.addCourseMemberLimitStrategy(courseMemberLimitStrategy);
+
+                    TeamOrStrategy teamOrStrategy = new TeamOrStrategy();
+                    teamOrStrategy.setStrategyName(strategyName3);
+                    List<Strategy> strategyList = new ArrayList<>();
+                    strategyList.add(courseMemberLimitStrategy);
+                    teamOrStrategy.setStrategyList(strategyList);
+
+                    teamOrStrategyList.add(teamOrStrategy);
+                }
+                List<TeamOrStrategy> returnTeamOrStrategyList = teamOrStrategyDao.addTeamOrStrategyList(teamOrStrategyList);
+
+
+                //组队人数限制策略和选修课人数限制策略是与关系
+                List<TeamAndStrategy> teamAndStrategyList1 = new ArrayList<>();
+
+                TeamAndStrategy teamAndStrategy1 = new TeamAndStrategy();
+                teamAndStrategy1.setStrategyName(strategyName1);
+                List<Strategy> strategyList = new ArrayList<>();
+                strategyList.add(memberLimitStrategy);
+                teamAndStrategy1.setStrategyList(strategyList);
+                teamAndStrategyList1.add(teamAndStrategy1);
+
+                TeamAndStrategy teamAndStrategy2 = new TeamAndStrategy();
+                teamAndStrategy2.setStrategyName(strategyName2);
+                List<Strategy> strategyList1 = new ArrayList<>();
+                for (TeamOrStrategy teamOrStrategy : returnTeamOrStrategyList) {
+                    strategyList1.add(teamOrStrategy);
+                }
+                teamAndStrategy2.setStrategyList(strategyList1);
+                teamAndStrategyList1.add(teamAndStrategy2);
+
+                List<TeamAndStrategy> returnTeamAndStrategyList1 = teamAndStrategyDao.addTeamAndStrategyList(teamAndStrategyList1);
+
+
+                //将策略加到team_strategy表中
+                TeamStrategy teamStrategy = new TeamStrategy();
+                teamStrategy.setCourse(course);
+                teamStrategy.setStrategyName(new String("TeamAndStrategy"));
+                List<Strategy> strategyList2 = new ArrayList<>();
+                for (TeamAndStrategy teamAndStrategy : returnTeamAndStrategyList1) {
+                    strategyList2.add(teamAndStrategy);
+                }
+                teamStrategy.setStrategyList(strategyList2);
+
+                teamStrategyDao.addTeamStrategy(teamStrategy);
+
+            } else {
+                //1表示均满足，与关系
+                strategyName2 = "TeamAndStrategy";
+                List<TeamAndStrategy> teamAndStrategyList = new ArrayList<>();
+                for (CourseMemberLimitStrategy courseMemberLimitStrategy : courseMemberLimitStrategyList) {
+
+                    courseMemberLimitStrategyDao.addCourseMemberLimitStrategy(courseMemberLimitStrategy);
+
+                    TeamAndStrategy teamAndStrategy = new TeamAndStrategy();
+                    teamAndStrategy.setStrategyName(strategyName3);
+                    List<Strategy> strategyList = new ArrayList<>(1);
+                    strategyList.add(courseMemberLimitStrategy);
+                    teamAndStrategy.setStrategyList(strategyList);
+                    teamAndStrategyList.add(teamAndStrategy);
+                }
+                List<TeamAndStrategy> returnTeamAndStrategyList = teamAndStrategyDao.addTeamAndStrategyList(teamAndStrategyList);
+
+
+                //组队人数限制策略和选修课人数限制策略是与关系
+                List<TeamAndStrategy> teamAndStrategyList1 = new ArrayList<>();
+
+                TeamAndStrategy teamAndStrategy1 = new TeamAndStrategy();
+                teamAndStrategy1.setStrategyName(strategyName1);
+                List<Strategy> strategyList = new ArrayList<>();
+                strategyList.add(memberLimitStrategy);
+                teamAndStrategy1.setStrategyList(strategyList);
+                teamAndStrategyList1.add(teamAndStrategy1);
+
+                TeamAndStrategy teamAndStrategy2 = new TeamAndStrategy();
+                teamAndStrategy2.setStrategyName(strategyName2);
+                List<Strategy> strategyList1 = new ArrayList<>();
+                for (TeamAndStrategy teamAndStrategy : returnTeamAndStrategyList) {
+                    strategyList1.add(teamAndStrategy);
+                }
+                teamAndStrategy2.setStrategyList(strategyList1);
+                teamAndStrategyList1.add(teamAndStrategy2);
+
+                List<TeamAndStrategy> returnTeamAndStrategyList2 = teamAndStrategyDao.addTeamAndStrategyList(teamAndStrategyList1);
+
+
+                //将策略加到team_strategy表中
+                TeamStrategy teamStrategy = new TeamStrategy();
+                teamStrategy.setCourse(course);
+                teamStrategy.setStrategyName(new String("TeamAndStrategy"));
+                List<Strategy> strategyList2 = new ArrayList<>();
+                for (TeamAndStrategy teamAndStrategy : returnTeamAndStrategyList2) {
+                    strategyList2.add(teamAndStrategy);
+                }
+                teamStrategy.setStrategyList(strategyList2);
+                teamStrategyDao.addTeamStrategy(teamStrategy);
+            }
+        } else {
+            TeamStrategy teamStrategy = new TeamStrategy();
+            teamStrategy.setCourse(course);
+            teamStrategy.setStrategyName(strategyName1);
+            List<Strategy> strategyList = new ArrayList<>();
+            strategyList.add(memberLimitStrategy);
+            teamStrategy.setStrategyList(strategyList);
+            teamStrategyDao.addTeamStrategy(teamStrategy);
+        }
+
+
+        //记录冲突课程
+        if (conflictCourseLists != null && !conflictCourseLists.isEmpty()) {
+            for (List<Long> conflictCourseList : conflictCourseLists) {
+                List<ConflictCourseStrategy> conflictCourseStrategyList = new ArrayList<>();
+                for (Long courseId : conflictCourseList) {
+                    ConflictCourseStrategy conflictCourseStrategy = new ConflictCourseStrategy();
+                    conflictCourseStrategy.setCourse(courseDao.getCourse(courseId));
+                    conflictCourseStrategyList.add(conflictCourseStrategy);
+                }
+                List<ConflictCourseStrategy> returnConflictCourseStrategyList = conflictCourseStrategyDao.addConflictCourseStrategyList(conflictCourseStrategyList);
+                TeamStrategy teamStrategy = new TeamStrategy();
+                teamStrategy.setCourse(course);
+                teamStrategy.setStrategyName("ConflictCourseStrategy");
+                List<Strategy> strategyList = new ArrayList<>();
+                for (ConflictCourseStrategy item : returnConflictCourseStrategyList) {
+                    strategyList.add(item);
+                }
+                teamStrategy.setStrategyList(strategyList);
+                teamStrategyDao.addTeamStrategy(teamStrategy);
+            }
+        }
+
+        if(status1 == 0 || status2 == 0){
+            return 0;
+        }
+        else{
+            return 1;
+        }
+
     }
 
     /**
