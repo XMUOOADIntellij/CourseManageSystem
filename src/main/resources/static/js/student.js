@@ -201,3 +201,49 @@ function activeStudent() {
   });
   return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
 }
+
+//课程组队
+function getTeam() {
+    console.log(Cookies.get("course"));
+    $.ajax({
+        type: "get",
+        async : false,
+
+        url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/team",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                // alert("获取成功");
+                console.log("roundlist");
+                var content=document.getElementById("content");
+
+                let str="";
+                let status="valid";
+                //获取外围容器
+                $.each(data, function(i, team) {
+                    console.log(team);
+
+                    if(team.status==0) status="invalid";
+                    let innerStr="";
+                    innerStr += '\n'
+                    // TODO
+                });
+                content.innerHTML=str;
+
+            }
+        },
+        statusCode: {
+            400: function() {
+                alert("Team");
+
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("Team");
+
+                alert("未找到课程");
+            }
+        }
+    });
+}
