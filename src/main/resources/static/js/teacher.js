@@ -1439,15 +1439,12 @@ function createCourse() {
     };
     let conflictdata="";
 
-    $('#content1').find('#node').html('whatever you want your html to be');
-    var content2=document.getElementById("content2");   //获取外围容器
-    let item1=content1.children(".custom-control-input")
-    console.log(content1);
-
-    console.log(item.children(".custom-control-input"));
+    let courseList=$('#content1').children(".custom-control-input");
+   console.log(courseList);
 
 
-        var str1="";
+
+    var str1="";
     var str2="";
     let ata = {
         "courseName": $("#courseName").val(),
