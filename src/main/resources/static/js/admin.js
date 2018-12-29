@@ -217,7 +217,6 @@ function createTeacher() {
 
 
 
-//页面跳转 Cookie缓存
 function jumpFromCourseHome(courseId){
     Cookies.set("course",courseId);
 }
