@@ -263,11 +263,15 @@ public class SeminarController {
         String token = request.getHeader("Authorization");
         Teacher teacher = Jwt.unSign(token, Teacher.class);
 
+        List<QuestionVO> questionVOList = null;
         List<Question> questionlist = questionService.getAttendanceQuestion(teacher, seminarId, classId, attendanceId);
-        List<QuestionVO> questionVOList = new ArrayList<>();
-        for (Question item : questionlist) {
-            questionVOList.add(new QuestionVO(item));
+        if (questionlist != null) {
+            questionVOList = new ArrayList<>();
+            for (Question item : questionlist) {
+                questionVOList.add(new QuestionVO(item));
+            }
         }
+
         return questionVOList;
     }
 

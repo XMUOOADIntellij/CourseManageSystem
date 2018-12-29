@@ -78,16 +78,20 @@ public class SeminarProgressController {
      * 学生提问
      * @param seminarId 讨论课id
      * @param classId 班级id
-     * @param questionVO 提问体
-     * @return
+     * @param attendanceId 被提问的展示id
+     * @return 问题
      */
-    @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/question")
+    @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/attendance/{attendanceId}/askQuestion")
     @SendTo("/seminarSocket/question")
     public QuestionVO askQuestion(@Header("jwt")String token,@DestinationVariable Long seminarId,
-                                  @DestinationVariable Long classId,QuestionVO questionVO){
+                                  @DestinationVariable Long classId,@DestinationVariable Long attendanceId){
 
         Student student = Jwt.unSign(token,Student.class);
-        Question question = questionService.askQuestion(seminarId,classId,new Question(questionVO),student);
+        Question record = new Question();
+        record.setAttendance(new Attendance());
+        record.getAttendance().setId(attendanceId);
+
+        Question question = questionService.askQuestion(seminarId,classId,record,student);
         return new QuestionVO(question);
     }
 
@@ -99,7 +103,7 @@ public class SeminarProgressController {
      * @param attendanceId 被提问的展示id
      * @return 提问
      */
-    @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/attendance/{attendanceId}/question")
+    @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/attendance/{attendanceId}/selectQuestion")
     @SendTo("/seminarSocket/question")
     public QuestionVO selectQuestion(@Header("jwt")String token,@DestinationVariable Long seminarId,@DestinationVariable Long classId,
                                      @DestinationVariable Long attendanceId){
