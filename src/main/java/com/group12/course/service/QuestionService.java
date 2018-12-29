@@ -162,7 +162,7 @@ public class QuestionService {
                             return item;
                         } else if (count < minCount) {
                             result = item;
-                            minCount = questionCount.get(item.getTeam().getId());
+                            minCount = count;
                         }
                     }
                     return result;
