@@ -2,7 +2,7 @@ var stompClient = null;
 function setConnected(connected) {}
 //403
 function connect() {
-  var socket = new SockJS("http://xug98.cn/Socket");
+  var socket = new SockJS("/Socket");
   stompClient = Stomp.over(socket);
   stompClient.connect(
     {},

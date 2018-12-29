@@ -29,7 +29,7 @@ function initDetail(){
 function getCurrentSeminar() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/seminar",
+    url: "/seminar",
     dataType: "json",
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
@@ -58,7 +58,7 @@ function getAttendanceByClass(klassId,seminarId) {
   $.ajax({
     type: "get",
     url:
-        "http://xug98.cn:8080/seminar/" +
+        "/seminar/" +
         seminarId +
         "/class/" +
         klassId +
@@ -116,7 +116,7 @@ function getQuestionList(attendanceId) {
   $.ajax({
     type: "get",
     url:
-        "http://xug98.cn:8080/seminar/" +
+        "/seminar/" +
         Cookies.get("seminar") +
         "/class/" +
         Cookies.get("class") +
@@ -179,7 +179,7 @@ function activeStudent() {
   alert("input");
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/student/active",
+    url: "/student/active",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -209,7 +209,7 @@ function getTeam() {
         type: "get",
         async : false,
 
-        url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/team",
+        url: "/course/" + Cookies.get("course") + "/team",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {

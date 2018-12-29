@@ -21,7 +21,7 @@ function activeTeacher() {
     alert("input");
     $.ajax({
         type: "put",
-        url: "http://xug98.cn:8080/teacher/active",
+        url: "/teacher/active",
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -50,7 +50,7 @@ function sendPassword() {
     console.log(ata);
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/user/password?account=" + ata,
+        url: "/user/password?account=" + ata,
         dataType: "json",
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
@@ -86,7 +86,7 @@ function initHome(){
 function getUserInfo() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/user/information",
+        url: "/user/information",
         dataType: "json",
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
@@ -106,7 +106,7 @@ function editPassword() {
     console.log(ata);
     $.ajax({
         type: "put",
-        url: "http://xug98.cn:8080/user/password",
+        url: "/user/password",
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -141,7 +141,7 @@ function editEmail() {
     console.log(ata);
     $.ajax({
         type: "put",
-        url: "http://xug98.cn:8080/user/email",
+        url: "/user/email",
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -167,7 +167,7 @@ function editEmail() {
 function getCourseList() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/course",
+        url: "/course",
         dataType: "json",
         async : false,
 
@@ -309,7 +309,7 @@ function getCourseList() {
 function getClassItems() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/class",
+        url: "/course/" + Cookies.get("course") + "/class",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -395,7 +395,7 @@ function getRoundList() {
     console.log(courseId);
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/round",
+        url: "/course/" + Cookies.get("course") + "/round",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -455,7 +455,7 @@ function getRoundList() {
 function getSeminarList(roundId) {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/round/" + roundId + "/seminar",
+        url: "/round/" + roundId + "/seminar",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -540,7 +540,7 @@ function getSeminarList(roundId) {
 function getClassList(seminarId) {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/class",
+        url: "/course/" + Cookies.get("course") + "/class",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -587,7 +587,7 @@ function getRoundListForScore() {
     console.log(Cookies.get("course"));
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/round",
+        url: "/course/" + Cookies.get("course") + "/round",
         dataType: "json",
         async : false,
         contentType: "application/json;",
@@ -645,7 +645,7 @@ function getTeamTotalScoreByRound(roundId) {
         async : false,
 
         url:
-            "http://xug98.cn:8080/course/" + Cookies.get("course") + "/round/"+ roundId + "/score",
+            "/course/" + Cookies.get("course") + "/round/"+ roundId + "/score",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -734,7 +734,7 @@ function getTeamDetailScoreByRound(roundId,teamId) {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/round/" + roundId + "/score?teamId="+ teamId,
+            "/round/" + roundId + "/score?teamId="+ teamId,
         dataType: "json",
         async : false,
         contentType: "application/json;",
@@ -797,7 +797,7 @@ function getSeminarByClass() {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "/seminar/" +
             seminarId +
             "/class/" +
             classId,
@@ -832,7 +832,7 @@ function getSeminarScoreByClass() {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "/seminar/" +
             Cookies.get("seminar") +
             "/class/" +
             Cookies.get("class") +
@@ -889,7 +889,7 @@ function getReportByClass() {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "/seminar/" +
             Cookies.get("seminar") +
             "/class/" +
             Cookies.get("class") +
@@ -925,7 +925,7 @@ function getSeminarByClassForUpdate() {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "/seminar/" +
             seminarId +
             "/class/" +
             classId,
@@ -967,7 +967,7 @@ function getTeam() {
         type: "get",
         async : false,
 
-        url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/team",
+        url: "/course/" + Cookies.get("course") + "/team",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -1055,7 +1055,7 @@ function getTeam() {
 function getTeamShareList() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/course/" + Cookies.get("course") + "/teamshare",
+        url: "/course/" + Cookies.get("course") + "/teamshare",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -1143,7 +1143,7 @@ function getTeamShareList() {
 function getAllCourse() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/course/allcourse",
+        url: "/course/allcourse",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -1235,7 +1235,7 @@ function getAllCourse() {
 function getCourseInfo() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/course/" + Cookies.get("course"),
+        url: "/course/" + Cookies.get("course"),
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -1374,7 +1374,7 @@ function updateSeminarByClass() {
     $.ajax({
         type: "put",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "/seminar/" +
             Cookies.get("seminar") +
             "/class/" +
             Cookies.get("class"),
@@ -1408,7 +1408,7 @@ function updateSeminarScoreByClass() {
     $.ajax({
         type: "put",
         url:
-            "http://xug98.cn:8080/score/seminar/" +
+            "/score/seminar/" +
             Cookies.get("seminar") +
             "/class/" +
             Cookies.get("class") +
@@ -1476,7 +1476,7 @@ function createCourse() {
     alert(ata);
     $.ajax({
         type: "post",
-        url: "http://xug98.cn:8080/course",
+        url: "/course",
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -1519,7 +1519,7 @@ function createSeminar() {
     alert("input");
     $.ajax({
         type: "post",
-        url: "http://xug98.cn:8080/seminar",
+        url: "/seminar",
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -1540,7 +1540,7 @@ function deleteSeminar() {
     let cid = "2";
     $.ajax({
         type: "delete",
-        url: "http://xug98.cn:8080/seminar/" + cid,
+        url: "/seminar/" + cid,
         dataType: "json",
         contentType: "application/json;",
         error: function(data, textStatus, xhr) {
@@ -1584,7 +1584,7 @@ function updateSeminar() {
     console.log(ata);
     $.ajax({
         type: "put",
-        url: "http://xug98.cn:8080/seminar/" + Cookies.get("seminar"),
+        url: "/seminar/" + Cookies.get("seminar"),
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -1606,7 +1606,7 @@ function getAttendanceByClass() {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "/seminar/" +
             Cookies.get("seminar") +
             "/class/" +
             Cookies.get("class") +
@@ -1666,7 +1666,7 @@ function getPptByClass() {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "/seminar/" +
             Cookies.get("seminar") +
             "/class/" +
             Cookies.get("class") +
@@ -1698,7 +1698,7 @@ function getReportByClass() {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "/seminar/" +
             Cookies.get("seminar") +
             "/class/" +
             Cookies.get("class") +
@@ -1730,7 +1730,7 @@ function getPptByAttendance() {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/attendance/" + Cookies.get("attendance") + "/ppt",
+            "/attendance/" + Cookies.get("attendance") + "/ppt",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -1758,7 +1758,7 @@ function getReportByAttendance() {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/attendance/" +
+            "/attendance/" +
             Cookies.get("attendance") +
             "/report",
         dataType: "json",
@@ -1801,7 +1801,7 @@ function createClass() {
     alert(Cookies.get("course"));
     $.ajax({
         type: "post",
-        url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/class",
+        url: "/course/" + Cookies.get("course") + "/class",
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -1831,7 +1831,7 @@ function deleteCourse(courseId) {
     let cid = "2";
     $.ajax({
         type: "delete",
-        url: "http://xug98.cn:8080/course/" + courseId,
+        url: "/course/" + courseId,
         dataType: "json",
         contentType: "application/json;",
         error: function(data, textStatus, xhr) {
@@ -1863,7 +1863,7 @@ function getRoundScoreByCourse() {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/score/course/" + Cookies.get("course") + "/score",
+            "/score/course/" + Cookies.get("course") + "/score",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -1887,7 +1887,7 @@ function getSeminarScoreByRound(cid) {
 
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/score/round/" + Cookies.get("round") + "/score",
+        url: "/score/round/" + Cookies.get("round") + "/score",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -1912,7 +1912,7 @@ function getSeminarScoreByTeam(sid, tid) {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "/seminar/" +
             Cookies.get("seminar") +
             "/team/" +
             Cookies.get("team") +
@@ -1938,7 +1938,7 @@ function getSeminarScoreByTeam(sid, tid) {
 function getTeamShareList() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/course/" + Cookies.get("course") + "/teamshare",
+        url: "/course/" + Cookies.get("course") + "/teamshare",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -1966,7 +1966,7 @@ function getTeamShareList() {
 function getSeminarShareList() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/course/" + Cookies.get("course") + "/seminarshare",
+        url: "/course/" + Cookies.get("course") + "/seminarshare",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -1995,7 +1995,7 @@ function deleteSeminarShare() {
     let cid = "2";
     $.ajax({
         type: "delete",
-        url: "http://xug98.cn:8080/course/seminarshare/" + cid,
+        url: "/course/seminarshare/" + cid,
         dataType: "json",
         contentType: "application/json;",
         error: function(data, textStatus, xhr) {
@@ -2027,7 +2027,7 @@ function deleteTeamShare() {
     let cid = "2";
     $.ajax({
         type: "delete",
-        url: "http://xug98.cn:8080/course/teamshare/" + cid,
+        url: "/course/teamshare/" + cid,
         dataType: "json",
         contentType: "application/json;",
         error: function(data, textStatus, xhr) {
@@ -2072,7 +2072,7 @@ function updateRound() {
     console.log(ata);
     $.ajax({
         type: "put",
-        url: "http://xug98.cn:8080/round/" + Cookies.get("round"),
+        url: "/round/" + Cookies.get("round"),
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -2098,7 +2098,7 @@ function createRound() {
     alert("input");
     $.ajax({
         type: "post",
-        url: "http://xug98.cn:8080/round",
+        url: "/round",
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -2125,7 +2125,7 @@ function createTeamShare() {
     $.ajax({
         type: "post",
         url:
-            "http://xug98.cn:8080/course/" +
+            "/course/" +
             Cookies.get("course") +
             "/teamsharerequest",
         dataType: "json",
@@ -2154,7 +2154,7 @@ function createSeminarShare() {
     $.ajax({
         type: "post",
         url:
-            "http://xug98.cn:8080/course/" +
+            "/course/" +
             Cookies.get("course") +
             "/seminarsharerequest",
         dataType: "json",
@@ -2178,7 +2178,7 @@ function createSeminarShare() {
 function getTeamShareTask() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/request/teamshare",
+        url: "/request/teamshare",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -2205,7 +2205,7 @@ function getTeamShareTask() {
 function getSeminarShareTask() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/request/seminarshare",
+        url: "/request/seminarshare",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -2233,7 +2233,7 @@ function getSeminarShareTask() {
 function getTeamValidTask() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/request/teamvaild",
+        url: "/request/teamvaild",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -2268,7 +2268,7 @@ function updateTeamValid() {
     console.log(ata);
     $.ajax({
         type: "put",
-        url: "http://xug98.cn:8080/request/teamvalid/" + Cookies.get("teamvalid"),
+        url: "/request/teamvalid/" + Cookies.get("teamvalid"),
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -2296,7 +2296,7 @@ function updateTeamShare() {
     console.log(ata);
     $.ajax({
         type: "put",
-        url: "http://xug98.cn:8080/request/teamshare/" + Cookies.get("teamshare"),
+        url: "/request/teamshare/" + Cookies.get("teamshare"),
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -2325,7 +2325,7 @@ function updateSeminarShare() {
     $.ajax({
         type: "put",
         url:
-            "http://xug98.cn:8080/request/seminarshare/" +
+            "/request/seminarshare/" +
             Cookies.get("seminarshare"),
         dataType: "json",
         data: JSON.stringify(ata),
@@ -2351,7 +2351,7 @@ function getQuestionList(attendanceId) {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "/seminar/" +
             Cookies.get("seminar") +
             "/class/" +
             Cookies.get("class") +
@@ -2415,7 +2415,7 @@ function updatePresentScoreByTeam() {
     $.ajax({
         type: "put",
         url:
-            "http://xug98.cn:8080/attendance/" + Cookies.get("attendance") + "/score",
+            "/attendance/" + Cookies.get("attendance") + "/score",
         dataType: "json",
         data: JSON.stringify(ata),
 
@@ -2446,7 +2446,7 @@ function updateQuestionScoreByTeam() {
 
     $.ajax({
         type: "put",
-        url: "http://xug98.cn:8080/question/" + Cookies.get("question"),
+        url: "/question/" + Cookies.get("question"),
         dataType: "json",
         data: JSON.stringify(ata),
 
@@ -2471,7 +2471,7 @@ function updateQuestionScoreByTeam() {
 function getCurrentSeminar() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/seminar",
+        url: "/seminar",
         dataType: "json",
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
@@ -2506,7 +2506,7 @@ function getRoundScoreByTeam(sid, tid) {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/round/" +
+            "/round/" +
             Cookies.get("round") +
             "/team/" +
             Cookies.get("team") +
@@ -2536,7 +2536,7 @@ function getAttendanceScore(attendanceId) {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/attendance/" +
+            "/attendance/" +
             attendanceId +
             "/score",
         dataType: "json",
@@ -2566,7 +2566,7 @@ function getQuestionScore(questionId) {
     $.ajax({
         type: "get",
         url:
-            "http://xug98.cn:8080/question/" +
+            "/question/" +
             questionId,
         dataType: "json",
         contentType: "application/json",
@@ -2601,7 +2601,7 @@ alert(attendance);
     $.ajax({
         type: "put",
         url:
-            "http://xug98.cn:8080/attendance/" +
+            "/attendance/" +
             Cookies.get("attendance")+"/score",
         dataType: "json",
         data: JSON.stringify(ata),
@@ -2634,7 +2634,7 @@ function updateQuestionScore() {
     $.ajax({
         type: "put",
         url:
-            "http://xug98.cn:8080/question/" +
+            "/question/" +
             Cookies.get("question"),
         dataType: "json",
         data: JSON.stringify(ata),
@@ -2671,7 +2671,7 @@ function createAttendance() {
     $.ajax({
         type: "post",
         url:
-            "http://xug98.cn:8080/seminar/" +
+            "/seminar/" +
             Cookies.get("seminar") +
             "/class/" +
             Cookies.get("class") +
@@ -2696,7 +2696,7 @@ function deleteAttendance() {
     let cid = "2";
     $.ajax({
         type: "delete",
-        url: "http://xug98.cn:8080/attendance/" + cid,
+        url: "/attendance/" + cid,
         dataType: "json",
         contentType: "application/json;",
         error: function(data, textStatus, xhr) {
@@ -2729,7 +2729,7 @@ function updateAttendance() {
     console.log(ata);
     $.ajax({
         type: "put",
-        url: "http://xug98.cn:8080/attendance/" + Cookies.get("attendance"),
+        url: "/attendance/" + Cookies.get("attendance"),
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -2752,7 +2752,7 @@ function updateAttendance() {
 function getRoundInfo() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn:8080/round/" + Cookies.get("round"),
+        url: "/round/" + Cookies.get("round"),
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -2780,7 +2780,7 @@ function updateClass(classId) {
     console.log(ata);
     $.ajax({
         type: "put",
-        url: "http://xug98.cn:8080/class/" + Cookies.get("class"),
+        url: "/class/" + Cookies.get("class"),
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -2805,7 +2805,7 @@ function updateClass(classId) {
 function deleteClass(classId) {
     $.ajax({
         type: "delete",
-        url: "http://xug98.cn:8080/class/" + classId,
+        url: "/class/" + classId,
         dataType: "json",
         contentType: "application/json;",
         error: function(data, textStatus, xhr) {
