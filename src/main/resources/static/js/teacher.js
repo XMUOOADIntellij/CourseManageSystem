@@ -1163,8 +1163,7 @@ function getAllCourse() {
                     '                                              type="checkbox"\n' +
                     '                                              class="custom-control-input"\n' +
                     '                                              name="example-checkbox1"\n' +
-
-                    '                                              value="option1"\n' +
+                    '                                              value="'+item.id+'"\n' +
                     '                                      />\n' +
                     '                                      <span\n' +
                     '                                              class="custom-control-label"\n' +
@@ -1437,40 +1436,35 @@ function createCourse() {
     let conflict = {
         courseId: "2"
     };
-    let conflictdata="";
+    let conflictdata="[";
 
-    var childCheckBoxes = $("tbody.check1 ul li input[type='checkbox']");
-    let i=0;
-    for(i;i<checkitems.length;i++)
+    var childCheckBoxes = $("tbody.check1 tr td label input[type='checkbox']");
+    var childValue = $("tbody.check1 tr td input[type='text']");
+    var values = "";
+    var i;
+    for(i=0; i< childCheckBoxes.length; i++)
     {
-        console.log(checkitems[i].value);
+        if(childCheckBoxes[i].checked==true)
+            conflictdata += '{ "courseId":'+childCheckBoxes[i].value+',"maxMember":'+childValue[i/2].value+',"minMember":'+childValue[i/2+1].value+'}';
     }
-
-   console.log(checkitems);
-
+    conflictdata += ']';
 
 
     var str1="";
     var str2="";
     let ata = {
-        "courseName": $("#courseName").val(),
-        "introduction": $("#introduction").val(),
-        "presentationPercentage": $("#presentationPercentage").val(),
-        "questionPercentage": $("#questionPercentage").val(),
-        "reportPercentage": $("#reportPercentage").val(),
-        "teamStartTime": convertTime($("#teamStartTime").val()),
-        "teamEndTime": convertTime($("#teamEndTime").val()),
-        "teamMaxMember": $("#teamMaxMember").val(),
-        "teamMinMember": $("#teamMinMember").val(),
-        "courseMemberLimitVOList": [
-            {
-                "courseId": 20,
-                "maxMember": 5,
-                "minMember": 1
-            }
-        ],
-        "relation": 1,
-        "conflictCourseLists": [
+        courseName: $("#courseName").val(),
+        introduction: $("#introduction").val(),
+        presentationPercentage: $("#presentationPercentage").val(),
+        questionPercentage: $("#questionPercentage").val(),
+        reportPercentage: $("#reportPercentage").val(),
+        teamStartTime: convertTime($("#teamStartTime").val()),
+        teamEndTime: convertTime($("#teamEndTime").val()),
+        teamMaxMember: $("#teamMaxMember").val(),
+        teamMinMember: $("#teamMinMember").val(),
+        courseMemberLimitVOList:conflictdata,
+        relation: 1,
+        conflictCourseLists: [
             [
                 17,
                 20
@@ -1478,8 +1472,8 @@ function createCourse() {
         ]
     };
 
-    ;
-    console.log(ata);
+
+    alert(ata);
     $.ajax({
         type: "post",
         url: "http://xug98.cn:8080/course",
