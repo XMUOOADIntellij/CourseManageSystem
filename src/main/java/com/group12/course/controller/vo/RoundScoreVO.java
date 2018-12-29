@@ -102,7 +102,7 @@ public class RoundScoreVO {
 
     public RoundScoreVO(RoundScore roundScore){
         this.roundSerial = roundScore.getRound().getRoundSerial();
-        this.classSerial = roundScore.getTeam().getKlass().getKlassSerial();
+        this.classSerial = roundScore.getTeam().getKlassSerial();
         this.teamSerial  = roundScore.getTeam().getTeamSerial();
 
         this.presentationScore = roundScore.getPresentationScore();
