@@ -1439,8 +1439,14 @@ function createCourse() {
     };
     let conflictdata="";
 
-    let courseList=$('#content1').children(".custom-control-input");
-   console.log(courseList);
+    var childCheckBoxes = $("tbody.check1 ul li input[type='checkbox']");
+    let i=0;
+    for(i;i<checkitems.length;i++)
+    {
+        console.log(checkitems[i].value);
+    }
+
+   console.log(checkitems);
 
 
 
