@@ -74,7 +74,6 @@ public class QuestionService {
                     question.setSelected(false);
 
                     Course course = klass.getCourse();
-
                     //属于被共享分组的课程
                     Team team;
                     if (course.getTeamMainCourse() != null) {
