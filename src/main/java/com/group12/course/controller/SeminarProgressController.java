@@ -90,7 +90,7 @@ public class SeminarProgressController {
         Question record = new Question();
         record.setAttendance(new Attendance());
         record.getAttendance().setId(attendanceId);
-        
+
         Question question = questionService.askQuestion(seminarId,classId,record,student);
         return new QuestionVO(question);
     }

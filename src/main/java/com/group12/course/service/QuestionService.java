@@ -63,28 +63,34 @@ public class QuestionService {
     public Question askQuestion(Long seminarId, Long classId, Question question, Student student) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         Klass klass = klassDao.getKlass(classId);
+        Attendance attendance = attendanceDao.selectAttendanceById(question.getAttendance().getId());
+
         if (klass != null) {
             if (klassSeminar != null) {
+                if (attendance != null) {
+                    question.setKlassSeminar(klassSeminar);
+                    question.setStudent(student);
+                    question.setScore(null);
+                    question.setSelected(false);
 
-                question.setKlassSeminar(klassSeminar);
-                question.setStudent(student);
-                question.setScore(null);
-                question.setSelected(false);
+                    Course course = klass.getCourse();
 
-                Course course = klass.getCourse();
-
-                //属于被共享分组的课程
-                Team team;
-                if (course.getTeamMainCourse() != null) {
-                    team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), course.getTeamMainCourse().getId());
+                    //属于被共享分组的课程
+                    Team team;
+                    if (course.getTeamMainCourse() != null) {
+                        team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), course.getTeamMainCourse().getId());
+                    } else {
+                        team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), course.getId());
+                    }
+                    question.setTeam(team);
+                    if (!team.getId().equals(attendance.getTeam().getId())) {
+                        questionDao.insertQuetion(question);
+                        return question;
+                    } else {
+                        throw new UnauthorizedOperationException("不能提问自己的小组");
+                    }
                 } else {
-                    team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), course.getId());
-                }
-                question.setTeam(team);
-                if (questionDao.insertQuetion(question) != 0) {
-                    return question;
-                } else {
-                    return null;
+                    throw new RecordNotFoundException("被提问的展示不存在");
                 }
             } else {
                 throw new RecordNotFoundException("找不到班级讨论课");
@@ -159,11 +165,15 @@ public class QuestionService {
                     for (Question item : attendanceQuestion) {
                         Integer count = questionCount.get(item.getTeam().getId());
                         if (count == null) {
+                            item.setSelected(true);
                             return item;
                         } else if (count < minCount) {
                             result = item;
                             minCount = count;
                         }
+                    }
+                    if (result != null) {
+                        result.setSelected(true);
                     }
                     return result;
                 } else {
