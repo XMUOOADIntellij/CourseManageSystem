@@ -175,251 +175,264 @@
             </nav>
             <div class="row">
               <div class="col-12">
-                <form
-                  action="./course-home.html"
-                  class="card"
-                  method="post"
-                  onsubmit="return deleteCourse();"
-                >
+                <div class="card">
                   <div class="card-header">
                     <h3 class="card-title">课程信息</h3>
                   </div>
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-md-12 col-lg-7">
+                      <div class="col-12">
                         <div class="form-group">
-                          <label class="form-label">成绩计算规则</label>
-                          <div class="input-group mb-3">
-                            <span class="input-group-prepend">
-                              <span class="input-group-text"> 课堂展示</span>
-                            </span>
-                            <select
-                                    class="form-control custom-select"
-                                    name="grade[present]"
-                                    disabled
-                            >
-                              <option value="0.1">10%</option>
-                              <option value="0.2">20%</option>
-                              <option value="0.3" selected="selected"
-                              >30%</option
-                              >
-                              <option value="0.4">40%</option>
-                              <option value="0.5">50%</option>
-                              <option value="0.6">60%</option>
-                              <option value="0.7">70%</option>
-                              <option value="0.8">80%</option>
-                              <option value="0.9">90%</option>
-                              <option value="1.0">100%</option>
-                            </select>
-                          </div>
-                          <div class="input-group mb-3">
-                            <span class="input-group-prepend">
-                              <span class="input-group-text"> 课堂提问</span>
-                            </span>
-                            <select
-                                    class="form-control custom-select"
-                                    name="grade[ask]"
-                                    disabled
-                            >
-                              <option value="0.1">10%</option>
-                              <option value="0.2">20%</option>
-                              <option value="0.3" selected="selected"
-                              >30%</option
-                              >
-                              <option value="0.4">40%</option>
-                              <option value="0.5">50%</option>
-                              <option value="0.6">60%</option>
-                              <option value="0.7">70%</option>
-                              <option value="0.8">80%</option>
-                              <option value="0.9">90%</option>
-                              <option value="1.0">100%</option>
-                            </select>
-                          </div>
-                          <div class="input-group ">
-                            <span class="input-group-prepend">
-                              <span class="input-group-text"> 书面报告</span>
-                            </span>
-                            <select
-                                    class="form-control custom-select"
-                                    name="grade[report]"
-                                    disabled
-                            >
-                              <option value="0.1">10%</option>
-                              <option value="0.2">20%</option>
-                              <option value="0.3">30%</option>
-                              <option value="0.4" selected="selected"
-                              >40%</option
-                              >
-                              <option value="0.5">50%</option>
-                              <option value="0.6">60%</option>
-                              <option value="0.7">70%</option>
-                              <option value="0.8">80%</option>
-                              <option value="0.9">90%</option>
-                              <option value="1.0">100%</option>
-                            </select>
-                          </div>
+                          <label class="form-label">课程名称</label>
+                          <input
+                                  class="form-control"
+                                  name="example-text-input"
+                                  placeholder="Text.."
+                                  type="text"
+                                  id="courseName"
+                          />
                         </div>
+                        <div class="form-group">
+                          <label class="form-label"
+                          >课程要求
+                            <span class="form-label-small">/500</span></label
+                          >
+                          <textarea
+                                  class="form-control"
+                                  name="example-textarea-input"
+                                  placeholder="Content.."
+                                  rows="6"
+                                  id="introduction"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 col-lg-7">
                         <div class="form-group">
                           <div class="row gutters-xs">
                             <div class="col-lg-6">
-                              <label class="form-label"
-                              >组队开始时间</label
-                              >
+                              <label class="form-label">组队开始时间</label>
                               <div class="row gutters-xs px-1">
-                                <input id="input-start" />
+                                <input id="teamStartTime" />
                               </div>
                             </div>
                             <div class="col-lg-6">
-                              <label class="form-label"
-                              >组队结束时间</label
-                              >
+                              <label class="form-label">组队结束时间</label>
                               <div class="row gutters-xs px-1">
-                                <input id="input-end" />
+                                <input id="teamEndTime" />
                               </div>
                             </div>
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="form-label">组队人数</label>
+                          <label class="form-label">组队总人数</label>
                           <div class="row gutters-xs">
                             <div class="input-group col-6">
                               <span class="input-group-prepend">
                                 <span class="input-group-text"> 人数下限</span>
                               </span>
-                              <select
-                                class="form-control custom-select"
-                                name="user[month]"
-                                disabled
-                              >
-                                <option selected="selected" value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                              </select>
+                              <input
+                                      class="form-control"
+                                      name="example-text-input"
+                                      placeholder="Text.."
+                                      type="text"
+                                      id="minMember"
+                              />
                             </div>
                             <div class="input-group col-6">
                               <span class="input-group-prepend">
                                 <span class="input-group-text"> 人数上限</span>
                               </span>
-                              <select
-                                class="form-control custom-select"
-                                name="user[month]"
-                                disabled
-                              >
-                                <option selected="selected" value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <div class="row gutters-xs">
-                            <div class="col">
-                              <label class="form-label">组内性别</label>
-                            </div>
-                            <label class="col-auto custom-switch">
                               <input
-                                class="custom-switch-input"
-                                name="custom-switch-checkbox"
-                                type="checkbox"
-                                disabled
+                                      class="form-control"
+                                      name="example-text-input"
+                                      placeholder="Text.."
+                                      type="text"
+                                      id="maxMember"
                               />
-                              <span class="custom-switch-indicator"></span>
-                            </label>
-                          </div>
-                          <div class="row gutters-xs mb-3">
-                            <div class="input-group col-6">
-                              <span class="input-group-prepend">
-                                <span class="input-group-text"> 女生下限</span>
-                              </span>
-                              <select
-                                class="form-control custom-select"
-                                name="user[month]"
-                                disabled
-                              >
-                                <option selected="selected" value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                              </select>
-                            </div>
-                            <div class="input-group col-6">
-                              <span class="input-group-prepend">
-                                <span class="input-group-text"> 女生上限</span>
-                              </span>
-                              <select
-                                class="form-control custom-select"
-                                name="user[month]"
-                                disabled
-                              >
-                                <option selected="selected" value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="row gutters-xs">
-                            <div class="input-group col-6">
-                              <span class="input-group-prepend">
-                                <span class="input-group-text"> 男生下限</span>
-                              </span>
-                              <select
-                                class="form-control custom-select"
-                                name="user[month]"
-                                disabled
-                              >
-                                <option selected="selected" value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                              </select>
-                            </div>
-                            <div class="input-group col-6">
-                              <span class="input-group-prepend">
-                                <span class="input-group-text"> 男生上限</span>
-                              </span>
-                              <select
-                                class="form-control custom-select"
-                                name="user[month]"
-                                disabled
-                              >
-                                <option selected="selected" value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                              </select>
                             </div>
                           </div>
                         </div>
                         <div class="form-group">
-                          <div class="form-label">分组根据</div>
-                          <label class="custom-switch">
-                            <input
-                              class="custom-switch-input"
-                              name="custom-switch-checkbox"
-                              type="checkbox"
-                              disabled
-                            />
-                            <span class="custom-switch-indicator"></span>
-                            <span class="custom-switch-description"
-                              >根据星座划分小组</span
-                            >
-                          </label>
+                          <label class="form-label">选修课人数要求</label>
+                          <div class="row gutters-xs">
+                            <div class="input-group col-6">
+                              <select
+                                      class="form-control custom-select"
+                                      name="user[month]"
+                              >
+                                <option selected="selected" value="1">均满足</option>
+                                <option value="2">满足其一</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="form-label">组内选修课人数</label>
+                          <div class="card" style="max-height:11.5rem">
+                            <div class="table-responsive">
+                              <table
+                                      class="table card-table table-vcenter text-nowrap"
+                              >
+                                <thead>
+                                <tr>
+                                  <th class="w-auto"></th>
+                                  <th>课程名称</th>
+                                  <th>人数下限</th>
+                                  <th>人数上限</th>
+                                </tr>
+                                </thead>
+                                <tbody id="content1">
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td> <input
+                                          class="form-control"
+                                          name="example-text-input"
+                                          placeholder="Text.."
+                                          type="text"
+                                  /></td>
+                                  <td> <input
+                                          class="form-control"
+                                          name="example-text-input"
+                                          placeholder="Text.."
+                                          type="text"
+                                  /></td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td> <input
+                                          class="form-control"
+                                          name="example-text-input"
+                                          placeholder="Text.."
+                                          type="text"
+                                  /></td>
+                                  <td> <input
+                                          class="form-control"
+                                          name="example-text-input"
+                                          placeholder="Text.."
+                                          type="text"
+                                  /></td>
+                                </tr>
+
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td> <input
+                                          class="form-control"
+                                          name="example-text-input"
+                                          placeholder="Text.."
+                                          type="text"
+                                  /></td>
+                                  <td> <input
+                                          class="form-control"
+                                          name="example-text-input"
+                                          placeholder="Text.."
+                                          type="text"
+                                  /></td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td> <input
+                                          class="form-control"
+                                          name="example-text-input"
+                                          placeholder="Text.."
+                                          type="text"
+                                  /></td>
+                                  <td> <input
+                                          class="form-control"
+                                          name="example-text-input"
+                                          placeholder="Text.."
+                                          type="text"
+                                  /></td>
+                                </tr>
+
+
+
+
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-md-6 col-lg-5">
@@ -429,98 +442,96 @@
                             <span class="input-group-prepend">
                               <span class="input-group-text"> 课堂展示</span>
                             </span>
-                            <select
-                              class="form-control custom-select"
-                              name="grade[present]"
-                              disabled
-                            >
-                              <option value="0.1">10%</option>
-                              <option value="0.2">20%</option>
-                              <option value="0.3" selected="selected"
-                                >30%</option
-                              >
-                              <option value="0.4">40%</option>
-                              <option value="0.5">50%</option>
-                              <option value="0.6">60%</option>
-                              <option value="0.7">70%</option>
-                              <option value="0.8">80%</option>
-                              <option value="0.9">90%</option>
-                              <option value="1.0">100%</option>
-                            </select>
-                          </div>
+                            <input
+                                    class="form-control"
+                                    name="example-text-input"
+                                    placeholder="Text.."
+                                    type="text"
+                                    id="presentationPercentage"
+                            />                          </div>
                           <div class="input-group mb-3">
                             <span class="input-group-prepend">
                               <span class="input-group-text"> 课堂提问</span>
                             </span>
-                            <select
-                              class="form-control custom-select"
-                              name="grade[ask]"
-                              disabled
-                            >
-                              <option value="0.1">10%</option>
-                              <option value="0.2">20%</option>
-                              <option value="0.3" selected="selected"
-                                >30%</option
-                              >
-                              <option value="0.4">40%</option>
-                              <option value="0.5">50%</option>
-                              <option value="0.6">60%</option>
-                              <option value="0.7">70%</option>
-                              <option value="0.8">80%</option>
-                              <option value="0.9">90%</option>
-                              <option value="1.0">100%</option>
-                            </select>
-                          </div>
+                            <input
+                                    class="form-control"
+                                    name="example-text-input"
+                                    placeholder="Text.."
+                                    type="text"
+                                    id="questionPercentage"
+                            />                          </div>
                           <div class="input-group ">
                             <span class="input-group-prepend">
                               <span class="input-group-text"> 书面报告</span>
                             </span>
-                            <select
-                              class="form-control custom-select"
-                              name="grade[report]"
-                              disabled
-                            >
-                              <option value="0.1">10%</option>
-                              <option value="0.2">20%</option>
-                              <option value="0.3">30%</option>
-                              <option value="0.4" selected="selected"
-                                >40%</option
-                              >
-                              <option value="0.5">50%</option>
-                              <option value="0.6">60%</option>
-                              <option value="0.7">70%</option>
-                              <option value="0.8">80%</option>
-                              <option value="0.9">90%</option>
-                              <option value="1.0">100%</option>
-                            </select>
-                          </div>
+                            <input
+                                    class="form-control"
+                                    name="example-text-input"
+                                    placeholder="Text.."
+                                    type="text"
+                                    id="reportPercentage"
+                            />                          </div>
                         </div>
                         <div class="form-group">
                           <label class="form-label">冲突课程</label>
-                          <select
-                            class="form-control custom-select mb-3"
-                            disabled
-                          >
-                            <option value="">.Net 邱明</option>
-                          </select>
-                          <select
-                            class="form-control custom-select mb-3"
-                            disabled
-                          >
-                            <option value="">J2ee 王美红</option>
-                          </select>
+                          <div class="card" style="max-height:15rem">
+                            <div class="table-responsive">
+                              <table
+                                      class="table card-table table-vcenter text-nowrap"
+                              >
+                                <thead>
+                                <tr>
+                                  <th class="w-auto"></th>
+                                  <th>课程名称</th>
+                                </tr>
+                                </thead>
+                                <tbody id="content2">
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+
+                                </tr>
+
+
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="card-footer text-right">
-                    <div class="d-flex">
-                      <button class="btn btn-primary ml-auto" type="submit">
-                        删除课程
-                      </button>
+                    <div class="card-footer text-right">
+                        <div class="d-flex">
+                            <button
+                                    class="btn btn-primary ml-auto"
+                                    onclick="getAllCourse()"
+                            >
+                                修改信息
+                            </button>
+                        </div>
                     </div>
-                  </div>
-                </form>
+
+                </div>
               </div>
             </div>
           </div>
@@ -541,12 +552,12 @@
     </div>
   </body>
   <script>
-    $("#input-start").datetimepicker({
+    $("#teamStartTime").datetimepicker({
       uiLibrary: "bootstrap4",
       modal: true,
       footer: true
     });
-    $("#input-end").datetimepicker({
+    $("#teamEndTime").datetimepicker({
       uiLibrary: "bootstrap4",
       modal: true,
       footer: true
