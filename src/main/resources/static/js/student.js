@@ -93,7 +93,6 @@ function getAttendanceByClass(klassId,seminarId) {
           });
           Cookies.set("attendance",currentId);
           tabContent.innerHTML=strTab;
-          getAttendanceScore(currentId);
           getQuestionList(currentId);
         }
       }
