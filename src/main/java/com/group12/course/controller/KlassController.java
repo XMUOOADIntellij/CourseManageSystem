@@ -7,6 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @author Tan Xue
+ */
 @RestController
 @RequestMapping("/class")
 public class KlassController {

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * @author Tan Xue
+ */
 @Component
 public class ShareSeminarApplicationDao {
 

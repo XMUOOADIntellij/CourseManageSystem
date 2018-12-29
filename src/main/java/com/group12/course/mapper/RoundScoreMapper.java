@@ -67,5 +67,11 @@ public interface RoundScoreMapper {
      */
     List<RoundScore> listRoundScoreByRoundIdList(@Param("roundIdList") List<Long> roundIdList);
 
+    /**
+     *  列出
+     * @param teamIdList
+     * @param roundId
+     * @return
+     */
     List<RoundScore> listRoundScoreByRoundIdAndTeamIdList(@Param("teamIdList") List<Long>teamIdList,Long roundId);
 }

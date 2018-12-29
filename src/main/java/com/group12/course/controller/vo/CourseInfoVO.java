@@ -5,6 +5,9 @@ import com.group12.course.entity.strategy.TeamStrategy;
 
 import java.util.List;
 
+/**
+ * @author Tan Xue
+ */
 public class CourseInfoVO {
 
     private Course course;

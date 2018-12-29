@@ -2,6 +2,9 @@ package com.group12.course.controller.vo;
 
 import com.group12.course.entity.Klass;
 
+/**
+ * @author Tan Xue
+ */
 public class KlassInfoVO {
 
     private Long id;

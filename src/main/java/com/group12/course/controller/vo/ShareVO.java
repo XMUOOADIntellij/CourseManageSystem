@@ -1,5 +1,8 @@
 package com.group12.course.controller.vo;
 
+/**
+ * @author Tan Xue
+ */
 public class ShareVO {
 
     private String courseName;

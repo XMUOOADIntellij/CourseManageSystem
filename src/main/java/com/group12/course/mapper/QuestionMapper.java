@@ -67,7 +67,9 @@ public interface QuestionMapper {
     List<Question> listQuestionByKlassSeminarIdAndTeamId(Long klassSeminarId,Long teamId);
 
     /**
-     * 获得某次
+     * 选择
+     * @param attendanceId
+     * @param studentId
      * @return
      */
     Question selectUnselectQuestionByAttendanceIdAndStudentId(Long attendanceId,Long studentId);
