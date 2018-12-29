@@ -6,19 +6,52 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * @author Tan Xue
+ */
 @Mapper
 @Component
 public interface ShareTeamApplicationMapper {
 
+    /**
+     *  查询
+     * @param id
+     * @return
+     */
     ShareTeamApplication selectShareTeamApplicationById(Long id);
 
+    /**
+     *  查询
+     * @param courseId
+     * @return
+     */
     List<ShareTeamApplication> selectShareTeamApplicationByCourseId(Long courseId);
 
+    /**
+     * 添加
+     * @param shareTeamApplication
+     * @return
+     */
     int addShareTeamApplication(ShareTeamApplication shareTeamApplication);
 
+    /**
+     * 修改
+     * @param shareTeamApplication
+     * @return
+     */
     int updateShareTeamApplication(ShareTeamApplication shareTeamApplication);
 
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
     int deleteShareTeamApplication(Long id);
 
+    /**
+     * 删除
+     * @param mainCourseId
+     * @return
+     */
     int deleteShareTeamApplicationByMainCourseId(Long mainCourseId);
 }

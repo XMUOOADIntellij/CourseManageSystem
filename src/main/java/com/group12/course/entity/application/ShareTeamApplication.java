@@ -3,6 +3,9 @@ package com.group12.course.entity.application;
 import com.group12.course.entity.Course;
 import com.group12.course.entity.Teacher;
 
+/**
+ * @author Tan Xue
+ */
 public class ShareTeamApplication extends Application {
 
     private Course mainCourse;

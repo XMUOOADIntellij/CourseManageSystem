@@ -2,6 +2,9 @@ package com.group12.course.controller.vo;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Tan Xue
+ */
 public class RoundScoreInfoVO {
 
     private BigDecimal presentationScore;
@@ -9,6 +12,15 @@ public class RoundScoreInfoVO {
     private BigDecimal questionScore;
 
     private BigDecimal reportScore;
+
+    @Override
+    public String toString() {
+        return "RoundScoreInfoVO{" +
+                "presentationScore=" + presentationScore +
+                ", questionScore=" + questionScore +
+                ", reportScore=" + reportScore +
+                '}';
+    }
 
     public BigDecimal getPresentationScore() {
         return presentationScore;
