@@ -31,12 +31,6 @@ public class SeminarDao {
     @Autowired
     KlassSeminarDao klassSeminarDao;
     @Autowired
-    QuestionDao questionDao;
-    @Autowired
-    AttendanceDao attendanceDao;
-    @Autowired
-    ScoreDao scoreDao;
-    @Autowired
     RoundDao roundDao;
 
     /**
@@ -70,9 +64,6 @@ public class SeminarDao {
                 courseIdList.add(item.getId());
             }
 
-            //Seminar表插入记录
-            seminarMapper.insertSeminar(record);
-
             //寻找主课程以及从课程下的班级
             classRecord = klassDao.getAllKlassByCourseIdList(courseIdList);
 
@@ -87,6 +78,8 @@ public class SeminarDao {
             }
             //插入班级讨论课记录
             klassSeminarDao.insertKlassSeminarList(klassSeminarsRecord);
+            //插入讨论课记录
+            seminarMapper.insertSeminar(record);
             return record.getId();
         } else {
             throw new InformationException("讨论课不属于任何课程");

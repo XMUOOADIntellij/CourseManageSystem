@@ -26,7 +26,7 @@ public class Application {
         //  单个数据大小
         factory.setMaxFileSize(DataSize.ofMegabytes(15L));
         /// 总上传数据大小
-        factory.setMaxRequestSize(DataSize.ofKilobytes(20L));
+        factory.setMaxRequestSize(DataSize.ofMegabytes(15L));
         return factory.createMultipartConfig();
     }
 

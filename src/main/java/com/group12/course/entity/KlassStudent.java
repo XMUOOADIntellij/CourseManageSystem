@@ -1,9 +1,11 @@
 package com.group12.course.entity;
+import java.io.Serializable;
 
 /**
  * @author Tan Xue
  */
-public class KlassStudent {
+
+public class KlassStudent implements Serializable {
 
     private Klass klass;
 

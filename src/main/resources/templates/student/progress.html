@@ -74,7 +74,7 @@
     <script src="../../static/js/student.js"></script>
 
   </head>
-  <body onload="connect();getCurrentSeminar();">
+  <body onload="connect(); getCurrentSeminar();">
   <!--onbeforeunload="return disconnect()"
   onload="onPomodoroTimer();connect();initProgress()"-->
 
@@ -260,7 +260,7 @@
     }
 
     function ask() {
-      stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/question", {}, null);
+      stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/question", {"jwt":localStorage.jwt}, null);
 
     }
     function showGreeting(message) {

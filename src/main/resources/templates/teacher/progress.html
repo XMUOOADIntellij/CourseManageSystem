@@ -424,11 +424,11 @@
     stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/next", {"jwt":localStorage.jwt}, null);
   }
   function select() {
-    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/pause", {"jwt":localStorage.jwt}, null);
+    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/question", {"jwt":localStorage.jwt}, null);
 
   }
   function ask() {
-    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/question", {}, null);
+    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/question", {"jwt":localStorage.jwt}, null);
 
   }
   function showGreeting(message) {

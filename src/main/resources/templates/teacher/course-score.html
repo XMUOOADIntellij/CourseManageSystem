@@ -63,7 +63,7 @@
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body onload="getRoundScoreByCourse()">
+  <body onload="getRoundListForScore()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -173,7 +173,7 @@
                 </li>
               </ol>
             </nav>
-            <div class="row">
+            <div class="row" id="content">
               <div class="col-lg-6">
                 <div class="card card-collapsed">
                   <div class="card-header">
@@ -219,51 +219,7 @@
                                 <th></th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <span class="text-muted">用例分析</span>
-                                </td>
-                                <td>
-                                  <span class="status-icon bg-success"></span>
-                                  5.0
-                                </td>
-                                <td>
-                                  <span class="status-icon bg-success"></span>
-                                  5.0
-                                </td>
-                                <td>
-                                  <span class="status-icon bg-success"></span>
-                                  5.0
-                                </td>
-                                <td>
-                                  <a class="icon" href="javascript:void(0)">
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <span class="text-muted">界面原型</span>
-                                </td>
-                                <td>
-                                  <span class="status-icon bg-success"></span>
-                                  5.0
-                                </td>
-                                <td>
-                                  <span class="status-icon bg-success"></span>
-                                  5.0
-                                </td>
-                                <td>
-                                  <span class="status-icon bg-success"></span>
-                                  5.0
-                                </td>
-                                <td>
-                                  <a class="icon" href="javascript:void(0)">
-                                    <i class="fe fe-edit"></i>
-                                  </a>
-                                </td>
-                              </tr>
+                            <tbody id="teamid">
                               <tr>
                                 <td><span class="text-muted">总成绩</span></td>
                                 <td>

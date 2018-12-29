@@ -101,11 +101,11 @@ public class SeminarProgressController {
      */
     @MessageMapping("/Socket/seminar/{seminarId}/class/{classId}/attendance/{attendanceId}/question")
     @SendTo("/seminarSocket/question")
-    public QuestionVO answerQuestion(@Header("jwt")String token,@DestinationVariable Long seminarId,@DestinationVariable Long classId,
+    public QuestionVO selectQuestion(@Header("jwt")String token,@DestinationVariable Long seminarId,@DestinationVariable Long classId,
                                      @DestinationVariable Long attendanceId){
 
         Teacher teacher = Jwt.unSign(token,Teacher.class);
-        return new QuestionVO(questionService.answerQuestion(
+        return new QuestionVO(questionService.selectQuestion(
                 teacher,seminarId,classId,attendanceId));
     }
 

@@ -104,12 +104,8 @@ public class ScoreService {
                 //当前课程下有的队伍
                 List<Team> teams;
                 List<Long> teamIds = new ArrayList<>();
-                //如果没有被共享组队
-                if (course.getTeamMainCourse() == null) {
-                    teams = teamDao.getTeamByCourseId(courseId);
-                } else {
-                    teams = teamDao.getTeamByCourseId(course.getTeamMainCourse().getId());
-                }
+                teams = teamDao.getTeamByCourseId(courseId);
+
                 for (Team item : teams) {
                     teamIds.add(item.getId());
                 }

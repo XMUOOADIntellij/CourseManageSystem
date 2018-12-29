@@ -23,8 +23,6 @@ public class RoundService {
     @Autowired
     RoundDao roundDao;
     @Autowired
-    RoundScoreDao roundScoreDao;
-    @Autowired
     CourseDao courseDao;
     @Autowired
     SeminarDao seminarDao;
@@ -88,24 +86,6 @@ public class RoundService {
     }
 
     /**
-     * 获取某伦次下的所有成绩
-     * @param roundId
-     * @return
-     */
-    public List<RoundScore> getRoundScoreByRoundId(Long roundId){
-        return roundScoreDao.getRoundScoreByRoundId(roundId);
-    }
-
-    /**
-     * 获取某伦次下某个小组的成绩
-     * @param roundId
-     * @return
-     */
-    public RoundScore getRoundScoreByRoundIdAndTeamId(Long roundId,Long teamId){
-        return roundScoreDao.getRoundScoreByRoundIdAndTeamId(roundId,teamId);
-    }
-
-    /**
      * 根据展示成绩、提问成绩、报告成绩以及计分策略计算每轮的总成绩
      * @param roundScore
      * @return
@@ -125,17 +105,6 @@ public class RoundService {
         return totalScore;
     }
 
-    /**
-     * 更新某伦次下某小组的成绩
-     * @param roundScore
-     * @return
-     */
-    public int updateRoundScore(RoundScore roundScore){
-
-        BigDecimal totalScore = calculateTotalScore(roundScore);
-        roundScore.setTotalScore(totalScore);
-        return roundScoreDao.updateRoundScore(roundScore);
-    }
 
     /**
      * 插入班级轮次记录
