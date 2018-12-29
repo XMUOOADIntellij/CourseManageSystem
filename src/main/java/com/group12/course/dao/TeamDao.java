@@ -374,7 +374,7 @@ public class TeamDao {
      * @param team 现有的队伍
      * @return 返回新的队伍对象
      * */
-    @Transactional
+    @Transactional("")
     public Team addTeamMembers(Team team){
         Course course = teamMapper.selectTeamById(team.getId()).getCourse();
         for (Student member:team.getMembers()) {

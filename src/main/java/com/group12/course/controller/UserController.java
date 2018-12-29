@@ -56,6 +56,7 @@ public class UserController {
                 temp.setId(returnStudent.getId());
                 temp.setAccount(returnStudent.getAccount());
                 temp.setTeacherName(returnStudent.getStudentName());
+                temp.setActive(returnStudent.getActive());
                 isTeacher=false;
                 token = Jwt.sign(returnStudent,tokenLifeCycle);
             }

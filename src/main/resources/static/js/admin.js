@@ -1,9 +1,221 @@
-function initTeacher(){
-    getAllStudent();
+//登录页面
+function bindAdmin() {
+    let ata = { account: $("#account").val(), password: $("#password").val() };
+    $.ajax({
+        type: "post",
+        url: "http://xug98.cn:8080/admin/login",
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            if (xhr.status === 200) {
+                window.localStorage.setItem("jwt", data.jwt);
+                Cookies.set("id", data.id);
+                Cookies.set("account", data.account);
+                Cookies.set("role", data.role);
+                Cookies.set("name", data.name);
+                window.location.href = "./teacher-home.html";
+            }
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            }
+        }
+    });
 }
-function initStudent(){
-    getAllTeacher();
+//通过教工号查找教师服务器返回400
+function searchTeacher() {
+
+    let ata = {
+        identity: $("#identity").val()
+    };
+    console.log(ata);
+    alert("input");
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn:8080/teacher/searchTeacher",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            window.location.href = "./seminar-round.html";
+        },
+        statusCode: {
+            400: function() {
+                $("#identity").val("");
+                alert("无此用户");
+            }
+        }
+    });
 }
+//通过学号查找学生，服务器返回400
+function searchStudent() {
+
+    let ata = {
+        identity: $("#identity").val()
+    };
+    console.log(ata);
+    alert("input");
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn:8080/student/searchStudent",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            window.location.href = "./seminar-round.html";
+        },
+        statusCode: {
+            400: function() {
+                $("#identity").val("");
+                alert("无此用户！");
+            }
+        }
+    });
+}
+//删除教师
+function deleteTeacher() {
+    let ata = {
+        identity: $("#identity").val()
+    };
+
+    console.log(ata);
+    $.ajax({
+        type: "delete",
+        url: "http://xug98.cn:8080/teacher/" + Cookies.get("teacher"),
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            window.location.reload();
+
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+            }
+        }
+    });
+}
+//删除学生
+function deleteStudent() {
+
+
+    let ata = {
+        identity: $("#identity").val()
+    };
+
+    console.log(ata);
+    $.ajax({
+        type: "delete",
+        url: "http://xug98.cn:8080/teacher/" + Cookies.get("student"),
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            window.location.reload();
+
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+            }
+        }
+    });
+}
+
+function updateTeacher() {
+
+
+    let ata = {
+        account: $("#account").val(),
+        email: $("#email").val(),
+        name: $("#name").val()
+    };
+    console.log(ata);
+    alert("input");
+    $.ajax({
+        type: "put",
+        url:
+            "http://xug98.cn:8080/teacher/" + Cookies.get("teacher") + "/information",
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            window.location.href = "./seminar-round.html";
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            }
+        }
+    });
+}
+//创建教师用户，服务器返回403
+function createTeacher() {
+    let ata = {
+        account:$("#account").val(),
+        initial_password: $("#initial_password").val(),
+        name: $("#name").val(),
+        email:$("#email").val()
+    };
+    console.log(ata);
+    alert("input");
+    $.ajax({
+        type: "post",
+        url: "http://xug98.cn:8080/teacher",
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            window.location.href = "./seminar-round.html";
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            }
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //页面跳转 Cookie缓存
 function jumpFromCourseHome(courseId){
@@ -183,423 +395,8 @@ function editEmail() {
     });
 }
 //课程主页
-function getCourseList() {
-    $.ajax({
-        type: "get",
-        url: "http://xug98.cn/course",
-        dataType: "json",
-        contentType: "application/json;",
-        success: function(data, textStatus, xhr) {
-            if (xhr.status === 200) {
-                // alert("获取成功");
-                console.log("courselist");
-                var content=document.getElementById("content");   //获取外围容器
-                var str="";
-                $.each(data, function(i, item) {
-                    console.log(item);
-                    let courseType="副";
-                    if(item.teamMainCourse===null) courseType="主";
-                    str +='            <div class="col-md-6 col-lg-4" >\n' +
-                        '                <div class="card">\n' +
-                        '                  <div class="card-header">\n' +
-                        '                    <h3 class="card-title mr-4">'+item.courseName+'</h3>\n' +
-                        '                    <span class="btn btn-outline-secondary py-0">主</span>\n' +
-                        '                    <div class="card-options">\n' +
-                        '                      <a\n' +
-                        '                        href="#"\n' +
-                        '                        class="card-options-remove"\n' +
-                        '                        onclick="deleteCourse('+item.id+')"\n' +
-                        '                        ><i class="fe fe-trash"></i\n' +
-                        '                      ></a>\n' +
-                        '                      <a\n' +
-                        '                        class="card-options-collapse"\n' +
-                        '                        data-toggle="card-collapse"\n' +
-                        '                        href="#"\n' +
-                        '                        ><i class="fe fe-chevron-up mr-1"></i\n' +
-                        '                      ></a>\n' +
-                        '                    </div>\n' +
-                        '                  </div>\n' +
-                        '                  <div class="card-body p-0">\n' +
-                        '                    <div class="list-group">\n' +
-                        '                      <a\n' +
-                        '                        href="./course-info.html"\n' +
-                        '                        class="list-group-item list-group-item-action"\n' +
-                        '                        onclick="jumpFromCourseHome('+item.id+')"\n' +
-                        '                      >\n' +
-                        '                        <span class="float-right">\n' +
-                        '                          <i class="icon fe fe-chevron-right"></i>\n' +
-                        '                        </span>\n' +
-                        '                        <span class="float-left">\n' +
-                        '                          <i class="icon fe fe-book mr-3"></i> 课程信息\n' +
-                        '                        </span>\n' +
-                        '                      </a>\n' +
-                        '                      <a\n' +
-                        '                        href="./course-class.html"\n' +
-                        '                        class="list-group-item list-group-item-action"\n' +
-                        '                        onclick="jumpFromCourseHome('+item.id+')"\n' +
-                        '                      >\n' +
-                        '                        <span class="float-right">\n' +
-                        '                          <i class="icon fe fe-chevron-right"></i>\n' +
-                        '                        </span>\n' +
-                        '                        <span class="float-left">\n' +
-                        '                          <i class="icon fe fe-briefcase mr-3"></i> 班级信息\n' +
-                        '                        </span>\n' +
-                        '                      </a>\n' +
-                        '                      <a\n' +
-                        '                        href="./course-round.html"\n' +
-                        '                        class="list-group-item list-group-item-action"\n' +
-                        '                        onclick="jumpFromCourseHome('+item.id+')"\n' +
-                        '\n' +
-                        '                      >\n' +
-                        '                        <span class="float-right">\n' +
-                        '                          <i class="icon fe fe-chevron-right"></i>\n' +
-                        '                        </span>\n' +
-                        '                        <span class="float-left">\n' +
-                        '                          <i class="icon fe fe-book-open mr-3"></i> 课程轮次\n' +
-                        '                        </span>\n' +
-                        '                      </a>\n' +
-                        '                      <a\n' +
-                        '                        href="course-team.html"\n' +
-                        '                        class="list-group-item list-group-item-action"\n' +
-                        '                        onclick="jumpFromCourseHome('+item.id+')"\n' +
-                        '\n' +
-                        '                      >\n' +
-                        '                        <span class="float-right">\n' +
-                        '                          <i class="icon fe fe-chevron-right"></i>\n' +
-                        '                        </span>\n' +
-                        '                        <span class="float-left">\n' +
-                        '                          <i class="icon fe fe-slack mr-3"></i> 学生组队\n' +
-                        '                        </span>\n' +
-                        '                      </a>\n' +
-                        '\n' +
-                        '                      <a\n' +
-                        '                        href="course-score.html"\n' +
-                        '                        class="list-group-item list-group-item-action"\n' +
-                        '                        onclick="jumpFromCourseHome('+item.id+')"\n' +
-                        '\n' +
-                        '                      >\n' +
-                        '                        <span class="float-right">\n' +
-                        '                          <i class="icon fe fe-chevron-right"></i>\n' +
-                        '                        </span>\n' +
-                        '                        <span class="float-left">\n' +
-                        '                          <i class="icon fe fe-clipboard mr-3"></i> 学生成绩\n' +
-                        '                        </span>\n' +
-                        '                      </a>\n' +
-                        '\n' +
-                        '                      <a\n' +
-                        '                        href="./course-share.html"\n' +
-                        '                        class="list-group-item list-group-item-action"\n' +
-                        '                        onclick="jumpFromCourseHome('+item.id+')"\n' +
-                        '\n' +
-                        '                      >\n' +
-                        '                        <span class="float-right">\n' +
-                        '                          <i class="icon fe fe-chevron-right"></i>\n' +
-                        '                        </span>\n' +
-                        '                        <span class="float-left">\n' +
-                        '                          <i class="icon fe fe-send mr-3"></i> 共享设置\n' +
-                        '                        </span>\n' +
-                        '                      </a>\n' +
-                        '                    </div>\n' +
-                        '                  </div>\n' +
-                        '                </div>\n'+
-                        '                </div>\n';
-
-                })
-                content.innerHTML=str;
-
-            }
-            return data;
-        },
-        statusCode: {
-            400: function() {
-                alert("courselist");
-                alert("错误的ID格式");
-            },
-            404: function() {
-                alert("courselist");
-                alert("未找到课程");
-            }
-        }
-    });
-}
-//班级信息界面
-function getClassItems() {
-    $.ajax({
-        type: "get",
-        url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/class",
-        dataType: "json",
-        contentType: "application/json;",
-        success: function(data, textStatus, xhr) {
-            if (xhr.status === 200) {
-                // alert("获取成功");
-                console.log("classlist");
-                var content=document.getElementById("content");   //获取外围容器
-                var str="";
-                $.each(data, function(i, item) {
-                    console.log(item);
-                    let courseType="副";
-                    if(item.teamMainCourse===null) courseType="主";
-                    str +='    <div class="card">\n' +
-                        '                  <div class="card-header">\n' +
-                        '                    <h3 class="card-title">'+item.grade+'-'+item.klassSerial+'</h3>\n' +
-                        '                    <div class="card-options">\n' +
-                        '                      <a\n' +
-                        '                        href="#"\n' +
-                        '                        class="card-options-remove"\n' +
-                        '                        onclick="deleteClass('+item.id+')"\n' +
-                        '                        ><i class="fe fe-trash"></i\n' +
-                        '                      ></a>\n' +
-                        '                      <a\n' +
-                        '                        href="#"\n' +
-                        '                        class="card-options-collapse"\n' +
-                        '                        data-toggle="card-collapse"\n' +
-                        '                        ><i class="fe fe-chevron-up"></i\n' +
-                        '                      ></a>\n' +
-                        '                    </div>\n' +
-                        '                  </div>\n' +
-                        '\n' +
-                        '                  <div class="card-body">\n' +
-                        '                    <div>\n' +
-                        '                      <div class="form-group">\n' +
-                        '                        <label class="form-label">讨论课时间</label>\n' +
-                        '                        <input class="form-control" id="time" type="text" placeholder="'+item.klassTime+'" readonly="">\n' +
-                        '                      </div>\n' +
-                        '                      <div class="form-group">\n' +
-                        '                        <label class="form-label">讨论课地点</label>\n' +
-                        '                        <input class="form-control" id="location" type="text" placeholder="'+item.klassLocation+'" readonly="">\n' +
-                        '                      </div>\n' +
-                        '                      <div class="form-group">\n' +
-                        '                        <div class="form-label">班级学生名单</div>\n' +
-                        '                        <div class="custom-file">\n' +
-                        '                          <input\n' +
-                        '                            type="file"\n' +
-                        '                            id="file'+item.id+'"\n' +
-                        '                            class="custom-file-input"\n' +
-                        '                            name="example-file-input-custom"\n' +
-                        '                          />\n' +
-                        '                          <label class="custom-file-label">选择文件</label>\n' +
-                        '                        </div>\n' +
-                        '                      </div>\n' +
-                        '\n' +
-                        '                      <div class="form-footer">\n' +
-                        '                        <button\n' +
-                        '                          class="btn btn-primary btn-block"\n' +
-                        '                          onclick="updateClass('+item.id+')"\n' +
-                        '                        >\n' +
-                        '                          确认修改\n' +
-                        '                        </button>\n' +
-                        '                      </div>\n' +
-                        '                    </div>\n' +
-                        '                  </div>\n' +
-                        '                </div>';
-                })
-                content.innerHTML=str;
-
-            }
-        },
-        statusCode: {
-            400: function() {
-                alert("错误的ID格式");
-            },
-            404: function() {
-                alert("未找到课程");
-            }
-        }
-    });
-}
-//轮次设置页面
-function getRoundList() {
-    console.log(Cookies.get("course"));
-    $.ajax({
-        type: "get",
-        url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/round",
-        dataType: "json",
-        contentType: "application/json;",
-        success: function(data, textStatus, xhr) {
-            if (xhr.status === 200) {
-                // alert("获取成功");
-                console.log("roundlist");
-                var content=document.getElementById("content");   //获取外围容器
-                var str="";
-                $.each(data, function(i, item) {
-                    console.log(item);
-                    str +='            <div class="col-md-6 col-lg-4" >\n' +
-                        '                <div class="card">\n' +
-                        '                  <div class="card-header">\n' +
-                        '                    <h3 class="card-title mr-4">第'+item.id+'轮</h3>\n' +
-                        '                    <div class="card-options">\n' +
-                        '                      <a\n' +
-                        '                        href="course-round-setting.html"\n' +
-                        '                        onclick="jumpFromRound('+item.id+')"' +
-                        '                        class="card-options-delete"\n' +
-                        '                        ><i class="fe fe-settings"></i\n' +
-                        '                      ></a>\n' +
-                        '                      <a\n' +
-                        '                        href="#round'+item.id+'"\n' +
-                        '                        class="card-options-collapse"\n' +
-                        '                        data-toggle="card-collapse"\n' +
-                        '                        ><i class="fe fe-chevron-up"></i\n' +
-                        '                      ></a>\n' +
-                        '                    </div>\n' +
-                        '                  </div>\n' +
-                        '                  <div class="card-body p-0" id="round'+item.id+'">\n' +
-                        '                    \n' +
-                        '                  </div>\n' +
-                        '                </div>\n' +
-                        '              </div>';
-                    content.innerHTML=str;
-                    getSeminarList(item.id);
-                });
-                content.innerHTML=str;
 
 
-
-            }
-        },
-        statusCode: {
-            400: function() {
-                alert("roundlist");
-
-                alert("错误的ID格式");
-            },
-            404: function() {
-                alert("roundlist");
-
-                alert("未找到课程");
-            }
-        }
-    });
-}
-function getSeminarList(roundId) {
-    $.ajax({
-        type: "get",
-        url: "http://xug98.cn/round/" + roundId + "/seminar",
-        dataType: "json",
-        contentType: "application/json;",
-        success: function(data, textStatus, xhr) {
-            if (xhr.status === 200) {
-                // alert("获取成功");
-                console.log("seminarList");
-                var content=document.getElementById("round"+roundId);   //获取外围容器
-                var str="";
-                $.each(data, function(i, item) {
-                    console.log(item);
-                    str +='                    <div class="card m-0">\n' +
-                        '                      <div class="card-header">\n' +
-                        '                        <div class="d-flex align-items-center">\n' +
-                        '                          <span class="">\n' +
-                        '                            <i class="icon fe fe-book-open mr-3"></i>\n'
-                        +item.seminarName+
-                        '                          </span>\n' +
-                        '                        </div>\n' +
-                        '                        <div class="card-options">\n' +
-                        '                          <a\n' +
-                        '                            href="course-round-detail-setting.html"\n' +
-                        '                            class="card-options-delete"\n' +
-                        '                            ><i class="fe fe-settings"></i\n' +
-                        '                          ></a>\n' +
-                        '                          <a\n' +
-                        '                            onclick="deleteSeminar('+item.id+')"\n' +
-                        '                            class="card-options-delete"\n' +
-                        '                            ><i class="fe fe-trash"></i\n' +
-                        '                          ></a>\n' +
-                        '                          <a\n' +
-                        '                            class="card-options-collapse"\n' +
-                        '                            data-toggle="card-collapse"\n' +
-                        '                            href="#seminar'+item.id+'"\n' +
-                        '                            ><i class="fe fe-chevron-up mr-1"></i\n' +
-                        '                          ></a>\n' +
-                        '                        </div>\n' +
-                        '                      </div>\n' +
-                        '                      <div class="card-body p-0" id="seminar'+item.id+'">\n' +
-                        '<div class="table-responsive">\n' +
-                        '                          <table\n' +
-                        '                            class="table card-table table-vcenter text-nowrap"\n' +
-                        '                          >\n' +
-                        '                            <tbody id="'+item.id+'">\n' +
-                        '                      \n' +
-                        '                            </tbody>\n' +
-                        '                          </table>\n' +
-                        '                        </div>'+
-                        '                      </div>\n' +
-                        '                    </div>\n';
-                });
-                content.innerHTML=str;
-                $.each(data, function(i, item) {
-                    console.log(item);
-                    Cookies.set("class",item.id);
-                    getClassList(item.id);
-                });
-
-
-
-            }
-        },
-        statusCode: {
-            500: function(data) {
-
-                alert("seminarList");
-                alert("错误的ID格式");
-            },
-            400: function() {
-                alert("seminarList");
-
-                alert("错误的ID格式");
-            },
-            404: function() {
-                alert("seminarList");
-
-                alert("未找到课程");
-            }
-        }
-    });
-}
-function getClassList(serminarId) {
-    $.ajax({
-        type: "get",
-        url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/class",
-        dataType: "json",
-        contentType: "application/json;",
-        success: function(data, textStatus, xhr) {
-            if (xhr.status === 200) {
-                // alert("获取成功");
-                console.log("classlist");
-                var content=document.getElementById(serminarId);   //获取外围容器
-                var str="";
-                $.each(data, function(i, item) {
-                    console.log(item);
-                    let courseType="副";
-                    if(item.teamMainCourse===null) courseType="主";
-                    str +='<tr>\n' +
-                        '                                <td>\n' +
-                        '                                  <span class="text-muted">'+item.grade+'-'+item.klassSerial+'</span>\n' +
-                        '                                </td>\n' +
-                        '\n' +
-                        '                                <td>\n' +
-                        '                                  <a\n' +
-                        '                                    class="icon float-right"\n' +
-                        '                                    href="course-round-detail.html"\n' +
-                        '                        onclick="jumpFromRoundClass('+item.id+')"\n' +
-                        '                                  >\n' +
-                        '                                    <i class="fe fe-chevron-right"></i>\n' +
-                        '                                  </a>\n' +
-                        '                                </td>\n' +
-                        '                              </tr>';
-                });
-                content.innerHTML=str;
-
-            }
-        },
-        statusCode: {
-            400: function() {
-                alert("错误的ID格式");
-            },
-            404: function() {
-                alert("未找到课程");
-            }
-        }
-    });
-}
 //学生成绩界面
 function getRoundListForScore() {
     console.log(Cookies.get("course"));
@@ -2422,37 +2219,9 @@ function updateAttendance() {
       window.location.reload();
     */
 }
-//dom
-function bindAdmin() {
-    let ata = { account: "admin", password: "admin" };
-    $.ajax({
-        type: "post",
-        url: "http://xug98.cn:8080/admin/login",
-        dataType: "json",
-        data: JSON.stringify(ata),
-        contentType: "application/json",
-        success: function(data, textStatus, xhr) {
-            console.log(data);
-            alert("success");
-            if (xhr.status === 200) {
-                window.localStorage.setItem("jwt", data.jwt);
-                Cookies.set("id", data.id);
-                Cookies.set("account", data.account);
-                Cookies.set("role", data.role);
-                Cookies.set("name", data.name);
-                window.location.href = "./teacher-home.html";
-            }
-        },
-        statusCode: {
-            400: function() {
-                $("#password").val("");
-                alert("用户名或密码错误！");
-            }
-        }
-    });
-}
 
-function createTeacher() {
+
+/**function createTeacher() {
     let ata = {
         account: "11111",
         email: "11111@qq.com",
@@ -2478,7 +2247,7 @@ function createTeacher() {
             }
         }
     });
-}
+}**/
 function updateTeacher() {
 
 
@@ -2539,7 +2308,7 @@ function updateStudent() {
         }
     });
 }
-function deleteTeacher() {
+/**function deleteTeacher() {
 
 
     console.log(ata);
@@ -2561,8 +2330,8 @@ function deleteTeacher() {
             }
         }
     });
-}
-function deleteStudent() {
+}**/
+/**function deleteStudent() {
 
 
     console.log(ata);
@@ -2584,7 +2353,7 @@ function deleteStudent() {
             }
         }
     });
-}
+}**/
 
 function resetTeacher() {
 
@@ -2633,7 +2402,7 @@ function resetStudent() {
     });
 }
 
-function searchTeacher() {
+/**function searchTeacher() {
 
     let ata = {
         identity: "1"
@@ -2657,8 +2426,8 @@ function searchTeacher() {
             }
         }
     });
-}
-function searchStudent() {
+}**/
+/**function searchStudent() {
 
     let ata = {
         identity: "1"
@@ -2682,7 +2451,7 @@ function searchStudent() {
             }
         }
     });
-}
+}**/
 function getAllTeacher() {
     $.ajax({
         type: "get",
