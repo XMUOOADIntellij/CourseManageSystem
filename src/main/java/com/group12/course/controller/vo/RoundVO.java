@@ -10,6 +10,15 @@ public class RoundVO {
 
     private Integer questionScoreMethod;
 
+    @Override
+    public String toString() {
+        return "RoundVO{" +
+                "presentationScoreMethod=" + presentationScoreMethod +
+                ", reportScoreMethod=" + reportScoreMethod +
+                ", questionScoreMethod=" + questionScoreMethod +
+                '}';
+    }
+
     public Integer getPresentationScoreMethod() {
         return presentationScoreMethod;
     }

@@ -125,17 +125,13 @@ public class CourseController {
     @GetMapping(value="/allcourse",produces = "application/json; charset=utf-8")
     public void getAllCourse( HttpServletResponse response) throws IOException {
         List<Course> courseList = courseService.getAllCourse();
-        List<CourseBasicVO> courseBasicVOList = new ArrayList<>();
-        for (Course course:courseList) {
-            CourseBasicVO courseBasicVO = new CourseBasicVO(course);
-            courseBasicVOList.add(courseBasicVO);
-        }
-        if (courseBasicVOList.isEmpty()){
+        
+        if (courseList.isEmpty()){
             response.setStatus(404);
         }
         else {
             response.setStatus(200);
-            String json = JSONObject.toJSONString(courseBasicVOList);
+            String json = JSONObject.toJSONString(courseList);
             response.getWriter().write(json);
         }
     }

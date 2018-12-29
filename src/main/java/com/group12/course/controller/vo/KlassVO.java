@@ -10,6 +10,16 @@ public class KlassVO {
 
     private String klassLocation;
 
+    @Override
+    public String toString() {
+        return "KlassVO{" +
+                "grade=" + grade +
+                ", klassSerial=" + klassSerial +
+                ", klassTime='" + klassTime + '\'' +
+                ", klassLocation='" + klassLocation + '\'' +
+                '}';
+    }
+
     public Long getGrade() {
         return grade;
     }

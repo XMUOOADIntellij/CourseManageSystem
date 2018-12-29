@@ -91,7 +91,8 @@ public class CourseService {
      * @return Course
      */
     public int createCourse(Course course, MemberLimitStrategy memberLimitStrategy,
-                            List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, Integer relation, List<List<Long>> conflictCourseLists) {
+                            List<CourseMemberLimitStrategy> courseMemberLimitStrategyList,
+                            Integer relation, List<List<Long>> conflictCourseLists) {
 
         //添加课程
         int status1 = courseDao.addCourse(course);

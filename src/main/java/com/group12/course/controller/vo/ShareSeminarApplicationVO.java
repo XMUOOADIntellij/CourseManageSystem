@@ -14,6 +14,17 @@ public class ShareSeminarApplicationVO {
 
     private Integer status;
 
+    @Override
+    public String toString() {
+        return "ShareSeminarApplicationVO{" +
+                "id=" + id +
+                ", mainCourseId=" + mainCourseId +
+                ", subCourseId=" + subCourseId +
+                ", subCourseTeacherId=" + subCourseTeacherId +
+                ", status=" + status +
+                '}';
+    }
+
     public ShareSeminarApplicationVO(ShareSeminarApplication shareSeminarApplication){
         this.id = shareSeminarApplication.getId();
         this.mainCourseId = shareSeminarApplication.getMainCourse().getId();
