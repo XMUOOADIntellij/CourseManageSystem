@@ -72,6 +72,7 @@ public class QuestionService {
                 question.setSelected(false);
 
                 Course course = klass.getCourse();
+
                 //属于被共享分组的课程
                 Team team;
                 if (course.getTeamMainCourse() != null) {
@@ -79,15 +80,11 @@ public class QuestionService {
                 } else {
                     team = teamDao.getTeamByStudentIdAndCourseId(student.getId(), course.getId());
                 }
-                if (teamDao.checkStudentIsInSpecialTeam(student.getId(), team.getId())) {
-                    return null;
+                question.setTeam(team);
+                if (questionDao.insertQuetion(question) != 0) {
+                    return question;
                 } else {
-                    question.setTeam(team);
-                    if (questionDao.insertQuetion(question) != 0) {
-                        return question;
-                    } else {
-                        return null;
-                    }
+                    return null;
                 }
             } else {
                 throw new RecordNotFoundException("找不到班级讨论课");
@@ -123,11 +120,12 @@ public class QuestionService {
      * @param attendanceId 被抽取的展示
      * @return Question
      */
-    public Question answerQuestion(Teacher teacher, Long seminarId, Long classId, Long attendanceId) {
+    public Question selectQuestion(Teacher teacher, Long seminarId, Long classId, Long attendanceId) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
 
-        if (!attendance.getPresented()) {
+        //被提问的队伍正在展示
+        if (attendance.getPresented()) {
             if (klassSeminar != null) {
                 if (klassSeminar.getKlass().getCourse().getTeacher().getId()
                         .equals(teacher.getId())) {
