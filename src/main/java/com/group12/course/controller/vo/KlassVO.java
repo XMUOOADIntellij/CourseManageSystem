@@ -1,13 +1,22 @@
 package com.group12.course.controller.vo;
 
+import javax.validation.constraints.NotEmpty;
+
+/**
+ * @author Tan Xue
+ */
 public class KlassVO {
 
+    @NotEmpty(message="年级不能为空")
     private Long grade;
 
+    @NotEmpty(message="班级序号不能为空")
     private Integer klassSerial;
 
+    @NotEmpty(message="上课时间不能为空")
     private String klassTime;
 
+    @NotEmpty(message="上课地点不能为空")
     private String klassLocation;
 
     @Override

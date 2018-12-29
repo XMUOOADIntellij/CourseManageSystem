@@ -1,7 +1,9 @@
 package com.group12.course.controller.vo;
 
-import com.group12.course.entity.Course;
 
+/**
+ * @author Tan Xue
+ */
 public class CourseMemberLimitVO {
 
     private Long courseId;

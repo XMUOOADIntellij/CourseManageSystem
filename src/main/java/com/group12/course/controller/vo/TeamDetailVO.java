@@ -4,6 +4,9 @@ import com.group12.course.entity.Student;
 
 import java.util.List;
 
+/**
+ * @author Tan Xue
+ */
 public class TeamDetailVO {
 
     private String name;

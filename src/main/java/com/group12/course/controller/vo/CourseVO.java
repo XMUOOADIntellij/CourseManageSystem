@@ -5,27 +5,33 @@ import com.group12.course.entity.Teacher;
 import com.group12.course.entity.strategy.ConflictCourseStrategy;
 import com.group12.course.entity.strategy.CourseMemberLimitStrategy;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.List;
-
 /**
- *
+ * @author Tan Xue
  * relation为1表示均满足，为0表示满足其一
  */
 public class CourseVO {
 
+    @NotEmpty(message="课程名称不能为空")
     private String courseName;
 
     private String introduction;
 
+    @NotEmpty(message="展示占比不能为空")
     private Integer presentationPercentage;
 
+    @NotEmpty(message="提问占比不能为空")
     private Integer questionPercentage;
 
+    @NotEmpty(message="报告占比不能为空")
     private Integer reportPercentage;
 
+    @NotEmpty(message="组队开始时间不能为空")
     private LocalDateTime teamStartTime;
 
+    @NotEmpty(message="组队结束时间不能为空")
     private LocalDateTime teamEndTime;
 
     private Integer teamMaxMember;

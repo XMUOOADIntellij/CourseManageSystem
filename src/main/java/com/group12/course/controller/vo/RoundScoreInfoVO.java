@@ -2,6 +2,9 @@ package com.group12.course.controller.vo;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Tan Xue
+ */
 public class RoundScoreInfoVO {
 
     private BigDecimal presentationScore;

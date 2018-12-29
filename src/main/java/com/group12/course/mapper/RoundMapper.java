@@ -17,13 +17,38 @@ import java.util.List;
 @Component
 public interface RoundMapper {
 
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
     int deleteRound(Long id);
 
+    /**
+     *  添加
+     * @param record
+     * @return
+     */
     int addRound(Round record);
 
+    /**
+     *  选择
+     * @param id
+     * @return
+     */
     Round selectRoundById(Long id);
 
+    /**
+     * 修改
+     * @param record
+     * @return
+     */
     int updateRound(Round record);
 
+    /**
+     *  选择
+     * @param id
+     * @return
+     */
     List<Round> selectRoundByCourseId(Long id);
 }

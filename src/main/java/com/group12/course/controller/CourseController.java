@@ -125,7 +125,7 @@ public class CourseController {
     @GetMapping(value="/allcourse",produces = "application/json; charset=utf-8")
     public void getAllCourse( HttpServletResponse response) throws IOException {
         List<Course> courseList = courseService.getAllCourse();
-        
+
         if (courseList.isEmpty()){
             response.setStatus(404);
         }

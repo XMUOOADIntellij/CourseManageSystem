@@ -16,16 +16,40 @@ import java.util.List;
 @Component
 public interface KlassRoundMapper {
 
+    /**
+     * 删除班级轮次
+     * @param id
+     * @return
+     */
     int deleteKlassRound(Long id);
 
+    /**
+     * 添加班级轮次
+     * @param record
+     * @return
+     */
     int addKlassRound(KlassRound record);
 
+    /**
+     * 查询班级轮次
+     * @param id
+     * @return
+     */
     KlassRound selectKlassRoundById(Long id);
 
+    /**
+     * 修改班级轮次
+     * @param record
+     * @return
+     */
     int updateKlassRound(KlassRound record);
 
+    /**
+     * 根据班级id 和轮次id查找班级轮次记录
+     * @param klassId
+     * @param roundId
+     * @return
+     */
     KlassRound selectKlassRoundByKlassIdAndRoundId(Long klassId,Long roundId);
-
-    int addKlassRoundList(List<KlassRound> klassRoundList);
 
 }

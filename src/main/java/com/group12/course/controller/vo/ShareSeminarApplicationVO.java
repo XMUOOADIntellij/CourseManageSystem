@@ -2,6 +2,9 @@ package com.group12.course.controller.vo;
 
 import com.group12.course.entity.application.ShareSeminarApplication;
 
+/**
+ * @author Tan Xue
+ */
 public class ShareSeminarApplicationVO {
 
     private Long id;

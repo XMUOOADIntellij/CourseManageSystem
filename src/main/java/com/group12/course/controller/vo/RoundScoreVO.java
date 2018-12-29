@@ -113,4 +113,19 @@ public class RoundScoreVO {
         this.roundId = roundScore.getRound().getId();
         this.teamId = roundScore.getTeam().getId();
     }
+
+    @Override
+    public String toString() {
+        return "RoundScoreVO{" +
+                "roundId=" + roundId +
+                ", roundSerial=" + roundSerial +
+                ", teamId=" + teamId +
+                ", teamSerial=" + teamSerial +
+                ", classSerial=" + classSerial +
+                ", reportScore=" + reportScore +
+                ", presentationScore=" + presentationScore +
+                ", questionScore=" + questionScore +
+                ", totalScore=" + totalScore +
+                '}';
+    }
 }

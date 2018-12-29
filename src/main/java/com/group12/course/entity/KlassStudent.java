@@ -1,5 +1,8 @@
 package com.group12.course.entity;
 
+/**
+ * @author Tan Xue
+ */
 public class KlassStudent {
 
     private Klass klass;

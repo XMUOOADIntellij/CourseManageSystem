@@ -64,7 +64,7 @@ public class RoundService {
      * @param courseId
      * @return
      */
-    public int countRoundByCourseId(Long courseId){
+    public Integer countRoundByCourseId(Long courseId){
         List<Round> roundList = roundDao.getRoundByCourseId(courseId);
         Integer count = roundList.size();
         return count;
