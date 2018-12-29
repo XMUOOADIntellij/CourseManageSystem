@@ -2,6 +2,9 @@ package com.group12.course.controller.vo;
 
 import com.group12.course.entity.Round;
 
+/**
+ * @author Tan Xue
+ */
 public class RoundInfoVO {
 
     private Long id;

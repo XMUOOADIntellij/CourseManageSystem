@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * @author Tan Xue
+ */
 @Component
 public class TeamStrategyDao {
 
@@ -27,16 +30,6 @@ public class TeamStrategyDao {
 
 
     public int deleteTeamStrategyByCourseId(Long courseId){
-
-
-        //            List<ConflictCourseStrategy> conflictCourseStrategyList = conflictCourseStrategyDao.selectConflictCourseStrategyByCourseId(id);
-        //删除该课程的冲突记录
-//            int status2 = 1;
-//            for (ConflictCourseStrategy conflictCourseStrategy:conflictCourseStrategyList) {
-//                Long conflictCourseStrategyId = conflictCourseStrategy.getId();
-//                status2 = conflictCourseStrategyDao.deleteConflictCourseStrategy(conflictCourseStrategyId)==0?0:status2;
-//            }
-
         return teamStrategyMapper.deleteTeamStrategyByCourseId(courseId);
     }
 

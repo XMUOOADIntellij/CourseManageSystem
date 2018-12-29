@@ -4,6 +4,9 @@ import com.group12.course.entity.Course;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author Tan Xue
+ */
 public class CourseBasicVO {
 
     private Long id;
