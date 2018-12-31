@@ -1778,8 +1778,8 @@ function getTeam() {
 function getTeamShareList() {
     $.ajax({
         type: "get",
-        // url: "http://xug98.cn/course/" + Cookies.get("course") + "/teamshare",
-        url: "../../static/json/team-share.json",
+        url: "http://xug98.cn/course/" + Cookies.get("course") + "/teamshare",
+        // url: "../../static/json/team-share.json",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -1881,8 +1881,8 @@ function getTeamShareList() {
 function getSeminarShareList() {
     $.ajax({
         type: "get",
-        // url: "http://xug98.cn/course/" + Cookies.get("course") + "/seminarshare",
-        url: "../../static/json/seminar-share.json",
+        url: "http://xug98.cn/course/" + Cookies.get("course") + "/seminarshare",
+        // url: "../../static/json/seminar-share.json",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -2052,14 +2052,16 @@ function createShare()
 {
     let myPath="";
     let myType=$("#shareType").val();
-    if(myType==1) myPath="teamsharerequest";
-    if(myType==2) myPath="seminarsharerequest";
+    if(myType==1) myPath="seminarsharerequest";
+    if(myType==2) myPath="teamsharerequest";
     let subCourses=[{id:$("#shareCourse").val()}];
 
     let ata = {
         subCourseIdList: subCourses,
     };
-    console.log(ata);
+    let myUrl="http://xug98.cn/course/" + Cookies.get("course") + "/"+myPath;
+    console.log(ata)
+    console.log(myUrl);
     alert("input");
     $.ajax({
         type: "post",
