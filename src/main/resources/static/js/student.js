@@ -20,7 +20,7 @@ function activeStudent() {
   alert("input");
   $.ajax({
     type: "put",
-    url: "http://xug98.cn/student/active",
+    url: "/student/active",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -50,50 +50,6 @@ function initHome(){
 }
 
 //课程组队
-function getTeam() {
-    console.log(Cookies.get("course"));
-    $.ajax({
-        type: "get",
-        async : false,
-
-        url: "http://xug98.cn/course/" + Cookies.get("course") + "/team",
-        dataType: "json",
-        contentType: "application/json;",
-        success: function(data, textStatus, xhr) {
-            if (xhr.status === 200) {
-                // alert("获取成功");
-                console.log("roundlist");
-                var content=document.getElementById("content");
-
-                let str="";
-                let status="valid";
-                //获取外围容器
-                $.each(data, function(i, team) {
-                    console.log(team);
-
-                    if(team.status==0) status="invalid";
-                    let innerStr="";
-                    innerStr += '\n'
-                    // TODO
-                });
-                content.innerHTML=str;
-
-            }
-        },
-        statusCode: {
-            400: function() {
-                alert("Team");
-
-                alert("错误的ID格式");
-            },
-            404: function() {
-                alert("Team");
-
-                alert("未找到课程");
-            }
-        }
-    });
-}
 function getTeam() {
     $.ajax({
         type: "get",
@@ -127,16 +83,15 @@ function getMyTeam() {
 
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/course/" + Cookies.get("course") + "/team",
+        url: "http://xug98.cn/course/" + Cookies.get("course") + "/myTeam",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
                 // alert("获取成功");
-                console.log("Team");
-                for (let i = 0; i < data.length; i++) {
-                    console.log(data[i]);
-                }
+                console.log("data");
+                Cookies.set("team",data.id);
+
             }
         },
         statusCode: {
@@ -153,14 +108,55 @@ function getMyTeam() {
         }
     });
 }
+function requestTeamValid(){
+    $.ajax({
+        type: "post",
+        url: "http://xug98.cn/team/"+Cookies.get("team")+"/teamvalidrequest",
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            window.location.href = "./seminar-round.html";
+        },
+        error: function(data) {
+            console.log(data);
+            alert("fail");
+        },
+        statusCode: {
+            201: function(data) {
+                console.log(data);
+                alert("success");
+            },
+            400: function() {
+                $("#password").val("");
+                alert("fail！");
+            }
+        }
+    });
+
+}
 
 function createTeam() {
     let member = [
         {
-            id: 20420162201582
+            id: 24320162202847,
+        },
+        {
+            id: 24320162202888,
+
+        },
+        {
+            id:24320162202904,
+
+        },
+        {
+            id: 24320162202934
         }
     ];
     let myId=Cookies.get("account");
+    let myCourse=Cookies.get("course");
     let leader = [
         {
             id: myId
@@ -168,9 +164,9 @@ function createTeam() {
     ];
     let ata = {
         id: 1,
-        name: "4-2 早早鸟小组",
+        name: "1-2 Intellij",
         course: {
-            id: 1
+            id: myCourse
         },
         class: {
             id: 1
@@ -207,30 +203,25 @@ function createTeam() {
         }
     });
 }
-function updateTeam() {
+
+function addTeamMembers() {
     let member = [
         {
-            id: 123
+            id: 20420162201582
         },
         {
-            id: 124
-        }
-    ];
-    let leader = [
-        {
-            id: 123
+            id: 20420162201666
         }
     ];
     let ata = {
         id: 1,
-        name: "4-2 早早鸟小组",
+        name: "1-2 Intellij",
         course: {
             id: 1
         },
         class: {
             id: 1
         },
-        leader: leader,
         members: member,
         valid: true
     };
@@ -244,6 +235,11 @@ function updateTeam() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
+        },
+        error:function() {
+            alert("error");
+            let myTeam=Cookies.get("team");
+            requestTeamValid();
         },
         statusCode: {
             400: function() {
@@ -288,7 +284,7 @@ function getNoTeam() {
 function deleteTeamMember() {
     let cid = "2";
     let ata = {
-        id: "1"
+        id: "24320162202888",
     };
     $.ajax({
         type: "delete",
