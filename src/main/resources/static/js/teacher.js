@@ -1098,7 +1098,7 @@ function createSeminar() {
         roundId: Cookies.get("round"),
         seminarName: $("#name").val(),
         introduction: $("#introduction").val(),
-        maxTeam: "3",
+        maxTeam: $("#select-max-team").val(),
         visible: true,
         seminarSerial: $("#select-seminar-serial").val(),
         enrollStartTime: convertTime($("#input-start").val()),
@@ -1116,7 +1116,7 @@ function createSeminar() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./seminar-round.html";
+            window.location.href = "./course-seminar.html";
         },
         statusCode: {
             400: function() {
