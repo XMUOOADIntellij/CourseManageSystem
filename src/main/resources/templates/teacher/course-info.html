@@ -475,11 +475,67 @@
 
                       </div>
                     </div>
-                    <div class="row" id="content2">
-                      <div class="col-md-6">
+
+                    <div class="row">
+                      <div class="col-12">
+                        <label class="form-label mb-3">冲突课程
+                         </label>
+                      </div>
+
+                    </div>
+                    <div class="row" id="content3">
+                      <div class="col-md-6 col-lg-6">
                         <div class="form-group">
-                          <label class="form-label">冲突课程</label>
-                          <div class="card" style="max-height:15rem">
+
+                          <div class="card" style="max-height:12rem">
+                            <div class="table-responsive">
+                              <table
+                                      class="table card-table table-vcenter text-nowrap"
+                              >
+                                <thead>
+                                <tr>
+                                  <th class="w-auto"></th>
+                                  <th>课程名称</th>
+                                </tr>
+                                </thead>
+                                <tbody >
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+
+                                </tr>
+
+
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+
+                          <div class="card" style="max-height:12rem">
                             <div class="table-responsive">
                               <table
                                       class="table card-table table-vcenter text-nowrap"
@@ -491,21 +547,49 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+
+                                </tr>
+
+
                                 </tbody>
                               </table>
                             </div>
                           </div>
                         </div>
+
                       </div>
+
                     </div>
                   </div>
                     <div class="card-footer text-right">
                         <div class="d-flex">
                             <button
                                     class="btn btn-primary ml-auto"
-                                    onclick="getAllCourse()"
+                                    onclick="deleteCourse()"
                             >
-                                修改信息
+                                删除课程
                             </button>
                         </div>
                     </div>

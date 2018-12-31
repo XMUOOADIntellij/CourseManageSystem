@@ -50,6 +50,91 @@ function initHome(){
   $("#account").html(Cookies.get("account"));
 }
 
+
+//账户设置页面
+function getUserInfo() {
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/user/information",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            if (xhr.status === 200) {
+                $("#account").html(data.account);
+                $("#email").val(data.email);
+                $("#name").html(data.name);
+            }
+        }
+    });
+}
+//修改密码
+function editPassword() {
+    // let ata = {password: $("#password").val()};
+    let ata = "222";
+    console.log(ata);
+    $.ajax({
+        type: "put",
+        url: "http://xug98.cn/user/password",
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                alert("修改成功");
+                window.location.href = "./account-setting.html";
+            }
+        },
+        error: function(data) {
+            console.log(data);
+            alert("fail");
+            window.location.href = "./account-setting.html";
+        },
+        statusCode: {
+            200: function() {
+                alert("修改成功");
+            },
+            400: function() {
+                alert("修改失败");
+            }
+        }
+    });
+}
+//修改邮箱
+function editEmail() {
+    /*
+      let ata = {
+          email: $("#email").val()
+      };
+  */
+    let ata = "333@qq.com";
+    console.log(ata);
+    $.ajax({
+        type: "put",
+        url: "http://xug98.cn/user/email",
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                alert("修改成功");
+                window.location.href = "./account-setting.html";
+            }
+        },
+        /*    error: function(data){
+              console.log(data);
+              alert("fail");
+
+            },*/
+        statusCode: {
+            200: function() {
+                alert("修改成功");
+            }
+        }
+    });
+}
+
 //课程组队
 function getTeam() {
     console.log(Cookies.get("course"));
@@ -199,7 +284,6 @@ function requestTeamValid(){
     });
 
 }
-
 function createTeam() {
     let members = [
         {
@@ -265,7 +349,6 @@ function createTeam() {
         }
     });
 }
-
 function addTeamMembers() {
     let member = [
         {
@@ -314,9 +397,7 @@ function addTeamMembers() {
       window.location.reload();
     */
 }
-    //success
 function getNoTeam() {
-
     $.ajax({
         type: "get",
         url: "http://xug98.cn/course/" + Cookies.get("course") + "/noTeam",

@@ -192,12 +192,6 @@ function getCourseList() {
                         '                    <span class="btn btn-outline-secondary py-0">'+courseType+'</span>\n' +
                         '                    <div class="card-options">\n' +
                         '                      <a\n' +
-                        '                        href="#"\n' +
-                        '                        class="card-options-remove"\n' +
-                        '                        onclick="deleteCourse('+item.id+')"\n' +
-                        '                        ><i class="fe fe-trash"></i\n' +
-                        '                      ></a>\n' +
-                        '                      <a\n' +
                         '                        class="card-options-collapse"\n' +
                         '                        data-toggle="card-collapse"\n' +
                         '                        href="#"\n' +
@@ -310,25 +304,50 @@ function getCourseList() {
 }
     //创建课程
 function createCourse() {
-/*
     let conflict = {
         courseId: "2"
     };
     let conflictdata="[";
 
-    let childCheckBoxes = $("tbody.check1 tr td label input[type='checkbox']");
-    let childValue = $("tbody.check1 tr td input[type='text']");
+    let childCheckBoxes1 = $("tbody.check1 tr td label input[type='checkbox']");
+    let childValue1 = $("tbody.check1 tr td input[type='text']");
     let values = "";
     let i;
-    for(i=0; i< childCheckBoxes.length; i++)
-    {
-        if(childCheckBoxes[i].checked==true)
-            conflictdata += '{ "courseId":'+childCheckBoxes[i].value+',"maxMember":'+childValue[i/2].value+',"minMember":'+childValue[i/2+1].value+'}';
+    for (i = 0; i < childCheckBoxes1.length; i++) {
+        if (childCheckBoxes1[i].checked == true) {
+            if (conflictdata !== "[") conflictdata += ',';
+            conflictdata += '{ "courseId":' + childCheckBoxes1[i].value + ',"maxMember":' + childValue1[2 * i].value + ',"minMember":' + childValue1[i * 2 + 1].value + '}';
+        }
+
     }
     conflictdata += ']';
-*/
-    let str1="";
-    let str2="";
+    console.log(conflictdata);
+
+    let conflictclass="[";
+
+    let childGroup = $("tbody.check2").each(function(){
+        if (conflictclass !== "[") conflictclass += ',';
+
+        let conflictInner="[";
+        let childCheckBoxes2=$(this).find("tr td label input[type='checkbox']");
+        let childValue2 = $(this).find("tr td input[type='text']");
+        values = "";
+        let j;
+        for (j = 0; j < childCheckBoxes2.length; j++) {
+            if (childCheckBoxes2[j].checked == true) {
+                if (conflictInner !== "[") conflictInner += ',';
+                conflictInner += childCheckBoxes2[j].value;
+            }
+
+        }
+        conflictInner += ']';
+        conflictclass+=conflictInner;
+
+    });
+    conflictclass += ']';
+
+    console.log(conflictclass);
+
     let ata = {
         courseName: $("#courseName").val(),
         introduction: $("#introduction").val(),
@@ -339,18 +358,9 @@ function createCourse() {
         teamEndTime: convertTime($("#teamEndTime").val()),
         teamMaxMember: $("#maxMember").val(),
         teamMinMember: $("#minMember").val(),
-        courseMemberLimitVOList:[{
-            courseId: 20,
-            maxMember: 5,
-            minMember: 1
-        }],
+        courseMemberLimitVOList:conflictdata,
         relation: 1,
-        conflictCourseLists: [
-            [
-                17,
-                20
-            ]
-        ]
+        conflictCourseLists: conflictclass
     };
 
     console.log(ata);
@@ -381,6 +391,33 @@ function createCourse() {
             }
         }
     });
+}
+function addConflictsGroup(){
+    let content3=document.getElementById("content3");   //获取外围容器
+    let content2=document.getElementById("content2");   //获取外围容器
+
+    content3.innerHTML+='<div class="col-md-6 col-lg-6">\n' +
+        '                        <div class="form-group">\n' +
+        '\n' +
+        '                          <div class="card" style="max-height:12rem">\n' +
+        '                            <div class="table-responsive">\n' +
+        '                              <table\n' +
+        '                                      class="table card-table table-vcenter text-nowrap"\n' +
+        '                              >\n' +
+        '                                <thead>\n' +
+        '                                <tr>\n' +
+        '                                  <th class="w-auto"></th>\n' +
+        '                                  <th>课程名称</th>\n' +
+        '                                </tr>\n' +
+        '                                </thead>\n' +
+        '                                <tbody class="check2">\n' + content2.innerHTML
+        '                                </tbody>\n' +
+        '                              </table>\n' +
+        '                            </div>\n' +
+        '                          </div>\n' +
+        '                        </div>\n' +
+        '\n' +
+        '                      </div>';
 }
 function getAllCourse() {
     $.ajax({
@@ -440,7 +477,7 @@ function getAllCourse() {
                     '                                              type="checkbox"\n' +
                     '                                              class="custom-control-input"\n' +
                     '                                          id="2content'+item.id+'"\n' +
-                    '                                              value="option1"\n' +
+                    '                                              value="'+item.id+'"\n' +
                     '                                      />\n' +
                     '                                      <span\n' +
                     '                                              class="custom-control-label"\n' +
@@ -472,7 +509,8 @@ function getAllCourse() {
         }
     });
 }
-function deleteCourse(courseId) {
+function deleteCourse() {
+    let courseId=Cookies.get("course");
     $.ajax({
         type: "delete",
         url: "http://xug98.cn/course/" + courseId,
@@ -499,9 +537,9 @@ function deleteCourse(courseId) {
             }
         }
     });
-    /*
-        window.location.reload();
-      */
+
+        window.location.href("./course-home.html");
+
 }
 
 
@@ -1376,11 +1414,9 @@ function getSeminarByClassForUpdate() {
     });}
     //新建讨论课 seminar_Id cannot be null
 function createSeminar() {
-
     let ata = {
         // roundId: $('#select-round-id').val(),
         roundId: "26",
-
         seminarName: $("#name").val(),
         introduction: $("#introduction").val(),
         maxTeam: $("#select-max-team").val(),
@@ -1411,6 +1447,7 @@ function createSeminar() {
         }
     });
 }
+
 
 
 //学生成绩界面
@@ -2054,20 +2091,31 @@ function createShare()
     let myType=$("#shareType").val();
     if(myType==1) myPath="seminarsharerequest";
     if(myType==2) myPath="teamsharerequest";
-    let subCourses=[{id:$("#shareCourse").val()}];
 
-    let ata = {
-        subCourseIdList: subCourses,
-    };
-    let myUrl="http://xug98.cn/course/" + Cookies.get("course") + "/"+myPath;
-    console.log(ata)
-    console.log(myUrl);
-    alert("input");
+    let conflictclass="";
+
+    let childGroup = $("tbody.check2").each(function(){
+        let conflictInner="[";
+        let childCheckBoxes2=$(this).find("tr td label input[type='checkbox']");
+        let childValue2 = $(this).find("tr td input[type='text']");
+        values = "";
+        let j;
+        for (j = 0; j < childCheckBoxes2.length; j++) {
+            if (childCheckBoxes2[j].checked == true) {
+                if (conflictInner !== "[") conflictInner += ',';
+                conflictInner += childCheckBoxes2[j].value;
+            }
+        }
+        conflictInner += ']';
+        conflictclass+=conflictInner;
+
+    });
+    console.log(conflictclass);
     $.ajax({
         type: "post",
         url: "http://xug98.cn/course/" + Cookies.get("course") + "/"+myPath,
         dataType: "json",
-        data: JSON.stringify(ata),
+        data: JSON.stringify(conflictclass),
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
@@ -2082,6 +2130,64 @@ function createShare()
         }
     });
 }
+function getAllCourseForShare() {
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/course/allcourse",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+
+            let content2=document.getElementById("content2");   //获取外围容器
+            let str2="";
+            $.each(data, function(i, item) {
+                str2+='<tr>\n' +
+                    '                                  <td>\n' +
+                    '                                    <label\n' +
+                    '                                            class="custom-control custom-checkbox"\n' +
+                    '                                    >\n' +
+                    '                                      <input\n' +
+                    '                                              type="checkbox"\n' +
+                    '                                              class="custom-control-input"\n' +
+                    '                                          id="2content'+item.id+'"\n' +
+                    '                                              value="'+item.id+'"\n' +
+                    '                                      />\n' +
+                    '                                      <span\n' +
+                    '                                              class="custom-control-label"\n' +
+                    '                                      ></span>\n' +
+                    '                                    </label>\n' +
+                    '                                  </td>\n' +
+                    '                                  <td>\n' +
+                    '                                      <span class="text-muted"\n' +
+                    '                                      >'+item.courseName+'</span\n' +
+                    '                                      >\n' +
+                    '                                  </td>\n' +
+                    '                                  <td>\n' +
+                    '                                      <span class="text-muted"\n' +
+                    '                                      >'+(item.teacher).teacherName+'</span\n' +
+                    '                                      >\n' +
+                    '                                  </td>\n' +
+                    '\n' +
+                    '                                </tr>';
+
+            });
+            content2.innerHTML=str2;
+
+        },
+        statusCode: {
+            400: function() {
+                alert("courselist");
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("courselist");
+                alert("未找到课程");
+            }
+        }
+    });
+}
+
 
 //课程信息
 function getCourseInfo() {
@@ -2106,8 +2212,8 @@ function getCourseInfo() {
                 $("#teamEndTime").val(data.course.teamEndTime);
                 let strategyList=data.teamStrategyList;
             let content1=document.getElementById("content1");   //获取外围容器
-            let content2=document.getElementById("content2");   //获取外围容器
-            content2.innerHTML='<label class="form-label">冲突课程</label>\n';
+            let content3=document.getElementById("content3");   //获取外围容器
+            content3.innerHTML='';
 
             let str1="";
 
@@ -2212,7 +2318,10 @@ function getCourseInfo() {
                                 '                                  </td>\n' +
                                 '\n' +
                                 '                                </tr>\n';
-                            str2=' <div class="card" style="max-height:15rem">\n' +
+                            str2='                      <div class="col-md-6 col-lg-6">\n' +
+                                '                        <div class="form-group">\n' +
+                                '\n' +
+                                '                          <div class="card" style="max-height:12rem">\n' +
                                 '                            <div class="table-responsive">\n' +
                                 '                              <table\n' +
                                 '                                      class="table card-table table-vcenter text-nowrap"\n' +
@@ -2221,18 +2330,21 @@ function getCourseInfo() {
                                 '                                <tr>\n' +
                                 '                                  <th class="w-auto"></th>\n' +
                                 '                                  <th>课程名称</th>\n' +
-                                '                                  <th>任课教师</th>\n' +
                                 '                                </tr>\n' +
                                 '                                </thead>\n' +
-                                '                                <tbody>\n' +strInner+
+                                '                                <tbody class="check2">' +strInner+
                                 '                                </tbody>\n' +
                                 '                              </table>\n' +
-                                '                            </div>';
+                                '                            </div>\n' +
+                                '                          </div>\n' +
+                                '                        </div>\n' +
+                                '\n' +
+                                '                      </div>\n';
 
 
 
                     });
-                    content2.innerHTML+=str2;
+                    content3.innerHTML+=str2;
                 }
             });
 
@@ -2412,6 +2524,125 @@ function updateTeamValid(handletype,id,e) {
     });
 
     window.location.reload();
+}
+function getTeamShareTask() {
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/" ,
+        url: "data.json",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                // alert("获取成功");
+                console.log("classlist");
+                var content=document.getElementById("content");   //获取外围容器
+                var str="";
+
+                $.each(data, function(i, item) {
+                    console.log(item);
+                    str +=' <div class="col-lg-4">\n' +
+                        '                <div class="card">\n' +
+                        '                  <div class="card-body d-flex flex-column">\n' +
+                        '                    <h4><a href="#">共享'+item.courseName+'课程 组队</a></h4>\n' +
+                        '                    <div class="text-muted">\n' +
+                        '                      '+item.teacherName+'老师，向您发起共享'+item.courseName+'课程组队的申请。\n' +
+                        '                    </div>\n' +
+                        '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
+                        '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
+                        '                      <div><a class="text-default">'+item.teacherName+'</a></div>\n' +
+                        '\n' +
+                        '                      <div class="ml-auto text-muted">\n' +
+                        '                        <a\n' +
+                        '                          href="javascript:void(0)"\n' +
+                        '                          class="icon d-none d-md-inline-block ml-3"\n' +
+                        '                          onclick="updateTeamShare("reject",'+item.id+')"\n' +
+                        '                          ><i class="fe fe-thumbs-down mr-1"></i\n' +
+                        '                        ></a>\n' +
+                        '                        <a\n' +
+                        '                          href="javascript:void(0)"\n' +
+                        '                          onclick="updateTeamShare("accept",'+item.id+')"\n' +
+                        '                          class="icon d-none d-md-inline-block ml-3"\n' +
+                        '                          ><i class="fe fe-thumbs-up mr-1"></i\n' +
+                        '                        ></a>\n' +
+                        '                      </div>\n' +
+                        '                    </div>\n' +
+                        '                  </div>\n' +
+                        '                </div>\n' +
+                        '              </div>';
+                });
+                content.innerHTML=str;
+
+            }
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+function getSeminarShareTask() {
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/request/teamvaild" ,
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                // alert("获取成功");
+                console.log("classlist");
+                var content=document.getElementById("content");   //获取外围容器
+                var str="";
+
+                $.each(data, function(i, item) {
+                    console.log(item);
+                    str +=' <div class="col-lg-4">\n' +
+                        '                <div class="card">\n' +
+                        '                  <div class="card-body d-flex flex-column">\n' +
+                        '                    <h4><a href="#">申请'+item.courseName+'课程 讨论课</a></h4>\n' +
+                        '                    <div class="text-muted">\n' +
+                        '                      '+item.teacherName+'老师，向您发起共享'+item.teacherName+'课程讨论课的申请。\n' +
+                        '                    </div>\n' +
+                        '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
+                        '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
+                        '                      <div><a class="text-default">'+item.teacherName+' 老师</a></div>\n' +
+                        '\n' +
+                        '                      <div class="ml-auto text-muted">\n' +
+                        '                        <a\n' +
+                        '                          href="javascript:void(0)"\n' +
+                        '                          class="icon d-none d-md-inline-block ml-3"\n' +
+                        '                          onclick="updateSeminarShare("reject",'+item.id+')"\n' +
+                        '                          ><i class="fe fe-thumbs-down mr-1"></i\n' +
+                        '                        ></a>\n' +
+                        '                        <a\n' +
+                        '                          href="javascript:void(0)"\n' +
+                        '                          onclick="updateSeminarShare("accept",'+item.id+')"\n' +
+                        '                          class="icon d-none d-md-inline-block ml-3"\n' +
+                        '                          ><i class="fe fe-thumbs-up mr-1"></i\n' +
+                        '                        ></a>\n' +
+                        '                      </div>\n' +
+                        '                    </div>\n' +
+                        '                  </div>\n' +
+                        '                </div>\n' +
+                        '              </div>';
+                });
+                content.innerHTML=str;
+
+            }
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
 }
 
 //进行中
