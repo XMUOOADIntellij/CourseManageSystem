@@ -19,7 +19,7 @@
         id,main_course_id,sub_course_id,sub_course_teacher_id,status
     </sql>
 
-    <cache type="com.group12.course.tools.MybatisRedisCache" />
+    <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
     <select id="selectShareTeamApplicationById" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select

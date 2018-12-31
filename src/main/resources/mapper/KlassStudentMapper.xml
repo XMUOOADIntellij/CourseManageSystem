@@ -17,7 +17,7 @@
     klass_id, student_id,course_id,team_id
   </sql>
 
-    <cache type="com.group12.course.tools.MybatisRedisCache" />
+    <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
     <select id="selectKlassStudentByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select

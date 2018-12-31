@@ -25,7 +25,7 @@
     seminar_serial, enroll_start_time, enroll_end_time
   </sql>
 
-  <cache type="com.group12.course.tools.MybatisRedisCache" />
+  <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
   <select id="selectSeminarById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
