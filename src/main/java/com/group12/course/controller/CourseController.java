@@ -363,17 +363,12 @@ public class CourseController {
     @GetMapping(value="/{courseId}/teamshare",produces = "application/json; charset=utf-8")
     public void getTeamShareMessage(@PathVariable Long courseId, HttpServletResponse response) throws IOException {
         List<ShareTeamApplication> shareTeamApplicationList = courseService.getShareTeamApplicationByCourseId(courseId);
-        List<ShareTeamApplicationVO> shareTeamApplicationVOList = new ArrayList<>();
-        for (ShareTeamApplication shareTeamApplication:shareTeamApplicationList) {
-            ShareTeamApplicationVO shareTeamApplicationVO = new ShareTeamApplicationVO(shareTeamApplication);
-            shareTeamApplicationVOList.add(shareTeamApplicationVO);
-        }
-        if(shareTeamApplicationVOList.isEmpty()){
+        if(shareTeamApplicationList.isEmpty()){
             response.setStatus(404);
         }
         else{
             response.setStatus(200);
-            String json = JSONObject.toJSONString(shareTeamApplicationVOList);
+            String json = JSONObject.toJSONString(shareTeamApplicationList);
             response.getWriter().write(json);
         }
     }
@@ -387,18 +382,12 @@ public class CourseController {
     @GetMapping(value="/{courseId}/seminarshare",produces = "application/json; charset=utf-8")
     public void getSeminarShareMessage(@PathVariable Long courseId, HttpServletResponse response) throws IOException {
         List<ShareSeminarApplication> shareSeminarApplicationList = courseService.getShareSeminarApplicationByMainCourseId(courseId);
-        List<ShareSeminarApplicationVO> shareSeminarApplicationVOList = new ArrayList<>();
-        for (ShareSeminarApplication shareSeminarApplication:shareSeminarApplicationList) {
-            ShareSeminarApplicationVO shareSeminarApplicationVO = new ShareSeminarApplicationVO(shareSeminarApplication);
-            shareSeminarApplicationVOList.add(shareSeminarApplicationVO);
-        }
-
-        if(shareSeminarApplicationVOList.isEmpty()){
+        if(shareSeminarApplicationList.isEmpty()){
             response.setStatus(404);
         }
         else{
             response.setStatus(200);
-            String json = JSONObject.toJSONString(shareSeminarApplicationVOList);
+            String json = JSONObject.toJSONString(shareSeminarApplicationList);
             response.getWriter().write(json);
         }
 
