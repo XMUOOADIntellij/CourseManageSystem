@@ -16,7 +16,7 @@
     id, course_id, round_serial, presentation_score_method, report_score_method, question_score_method
   </sql>
 
-  <cache type="com.group12.course.tools.MybatisRedisCache" />
+  <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
   <select id="selectRoundById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 

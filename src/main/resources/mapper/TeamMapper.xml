@@ -27,7 +27,7 @@
                  column="klass_id" javaType="com.group12.course.entity.Klass"/>
   </resultMap>
 
-    <cache type="com.group12.course.tools.MybatisRedisCache" />
+    <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
     <sql id="Base_Column_List" >
         id, course_id,klass_id, leader_id, team_name, team_serial,klass_serial,status
