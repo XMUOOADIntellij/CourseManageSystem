@@ -101,14 +101,17 @@ public class RoundController {
      * @param response
      */
     @PostMapping(value = "", produces = "application/json;charset=utf-8")
-    public void createRound(@RequestParam Long courseId, HttpServletResponse response) {
+    public void createRound(@RequestParam Long courseId, HttpServletResponse response) throws IOException {
         /* 需要前端传回courseId*/
-
-        Long status = roundService.addRound(courseId);
-        if (status == 0) {
-            response.setStatus(403);
-        } else {
+        Long roundId = roundService.addRound(courseId);
+        if (roundId != null) {
             response.setStatus(201);
+            String json = JSONObject.toJSONString(roundService.getRound(roundId));
+            response.getWriter().write(json);
+
+        } else {
+            response.setStatus(403);
+
         }
     }
 

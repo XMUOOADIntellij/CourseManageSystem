@@ -38,9 +38,6 @@
     <insert id="addShareSeminarApplication" useGeneratedKeys="true" keyProperty="id">
         insert into share_seminar_application
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                id,
-            </if>
             <if test="mainCourse != null" >
                 main_course_id,
             </if>
@@ -55,9 +52,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
-                #{id},
-            </if>
             <if test="mainCourse != null" >
                 #{mainCourse.id},
             </if>
