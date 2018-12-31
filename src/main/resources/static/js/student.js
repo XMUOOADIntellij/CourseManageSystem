@@ -14,13 +14,14 @@ function jumpFromRoundClass(seminarId,classId){
 function activeStudent() {
   // let ata = {account:$("#account").val(),password:$("#password").val()}
       let ata = {
-        password: $("#password").val()
+        password: $("#password").val(),
+          email:$("#email").val()
     };
   console.log(ata);
   alert("input");
   $.ajax({
     type: "put",
-    url: "/student/active",
+    url: "http://xug98.cn/student/active",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -410,3 +411,95 @@ function getCourseList() {
     }
   });
 }
+
+
+//进行中
+function getAttendanceByClass() {
+    $.ajax({
+        type: "get",
+        url:
+            "/seminar/" +
+            Cookies.get("seminar") +
+            "/class/" +
+            Cookies.get("class") +
+            "/attendance",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                alert("获取成功");
+                if (xhr.status === 200) {
+                    // alert("获取成功");
+                    console.log("courselist");
+                    let tabContent=document.getElementById("nav-content");   //获取外围容器
+                    let strTab="";
+                    let currentId=data[0].id;
+                    $.each(data, function(i, item) {
+                        if (item.presented===true)
+                            currentId=item.id;
+                    });
+                    $.each(data, function(i, item) {
+                        console.log(item);
+                        let navClass="list-group-item list-group-item-action d-flex align-items-center px-1 py-3";
+                        if (item.id==currentId)
+                        {
+                            navClass="list-group-item list-group-item-action d-flex align-items-center active px-1 py-3";
+                        }
+
+                        strTab+='<a class="'+navClass+'" id="'+item.id+'" href="#" onclick="tabClick('+item.id+')">' +
+                            '                      <span class="icon mr-3"><i class="fe fe-inbox"></i></span\n' +
+                            '                      >'+item.classSerial+'-'+item.teamSerial+'<span class="ml-auto badge badge-primary"></span>\n' +
+                            '                    </a>';
+                    });
+                    Cookies.set("attendance",currentId);
+                    tabContent.innerHTML=strTab;
+                }
+            }
+        },
+        error: function(data) {
+            console.log(data);
+            alert("fail");
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+function getCurrentSeminar() {
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/seminar",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("getCurrentSeminar success");
+            if (xhr.status === 200) {
+                Cookies.set("class",data.klassId);
+                Cookies.set("seminar",data.seminarId);
+                getAttendanceByClass();
+            }
+        },
+        error: function(data){
+            console.log(data);
+            alert("error");
+
+        },
+        statusCode: {
+            401: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            },
+            403: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            }
+        }
+    });
+}
+
