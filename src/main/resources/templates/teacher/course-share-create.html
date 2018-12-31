@@ -63,7 +63,7 @@
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body onload="initShareCreate()">
+  <body onload="">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -186,35 +186,19 @@
                     <div class="row">
                       <div class="col-12">
                         <div class="form-group">
-                          <div class="form-label mb-3">共享类型</div>
-                          <div class="custom-controls-stacked">
-                            <label
-                              class="custom-control custom-radio custom-control-inline"
-                            >
-                              <input
-                                checked=""
-                                class="custom-control-input"
-                                name="example-inline-radios"
-                                type="radio"
-                                value="option1"
-                              />
-                              <span class="custom-control-label "
-                                >共享分组</span
+                          <label class="form-label">共享类型</label>
+                          <div class="row gutters-xs">
+                            <div class="col-6">
+                              <select
+                                      class="form-control custom-select"
+                                      name="share[course]"
+                                      id="shareType"
                               >
-                            </label>
-                            <label
-                              class="custom-control custom-radio custom-control-inline"
-                            >
-                              <input
-                                class="custom-control-input"
-                                name="example-inline-radios"
-                                type="radio"
-                                value="option2"
-                              />
-                              <span class="custom-control-label "
-                                >共享讨论课</span
-                              >
-                            </label>
+                                <option value="1">共享</option>
+                                <option value="2">.Net</option>
+                              </select>
+                            </div>
+
                           </div>
                         </div>
                         <div class="form-group">
@@ -224,6 +208,7 @@
                               <select
                                 class="form-control custom-select"
                                 name="share[course]"
+                                id="shareType"
                               >
                                 <option value="">J2ee</option>
                                 <option value="1">.Net</option>
@@ -233,9 +218,10 @@
                               <select
                                 class="form-control custom-select"
                                 name="share[teacher]"
+                                id="shareTeacher"
                               >
-                                <option value="">王美红</option>
-                                <option value="1">邱明</option>
+                                <option value="4">王美红</option>
+                                <option value="3">邱明</option>
                               </select>
                             </div>
                           </div>
