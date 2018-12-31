@@ -162,7 +162,7 @@ public class CourseController {
                 response.getWriter().write(json);
             }
         }
-        if(jwtStudent!= null){
+        else if(jwtStudent!= null){
             List<Course> courseList = courseService.getCourseByStudentId(jwtStudent.getId());
             List<CourseBasicVO> courseBasicVOList = new ArrayList<>();
             for (Course course:courseList) {
@@ -178,7 +178,7 @@ public class CourseController {
                 response.getWriter().write(json);
             }
         }
-        else {
+        else{
             response.setStatus(403);
         }
     }
