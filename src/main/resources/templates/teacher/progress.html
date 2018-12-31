@@ -231,7 +231,7 @@
                                       id="startButton"
                                       class="btn btn-primary btn-lg mx-lg-3 px-lg-5"
                                       type="submit"
-                                      onclick="start()"
+                                      onclick="continu()"
                               >
                                 <i class="fe fe-play" aria-hidden="true"></i>
                               </button>
@@ -415,6 +415,10 @@
   function start() {
 
     stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/start", {"jwt":localStorage.jwt}, null);
+  }
+  function continu() {
+
+    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/continu", {"jwt":localStorage.jwt}, null);
   }
   function end() {
     stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/end", {"jwt":localStorage.jwt}, null);
