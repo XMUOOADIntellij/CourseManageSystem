@@ -35,7 +35,7 @@ public class KlassStudentDao {
      */
     public List<KlassStudent> selectKlassStudentByStudentId(Long studentId){
         return klassStudentMapper.selectKlassStudentByStudentId(studentId);
-        
+
     }
 
     public List<KlassStudent> selectKlassStudentByKlassId(Long klassId){
