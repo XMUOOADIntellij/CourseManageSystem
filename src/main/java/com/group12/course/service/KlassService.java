@@ -85,19 +85,20 @@ public class KlassService {
         for (Student student:students) {
             //如果账户已经存在，则先删除
             Student tempStudent = studentDao.getStudent(student.getAccount());
-            if(tempStudent==null){
+            if(tempStudent==null) {
                 //插入学生账户
-                student.setEmail(student.getAccount()+"@stu.xmu.edu.cn");
+                student.setEmail(student.getAccount() + "@stu.xmu.edu.cn");
                 studentDao.addStudent(student);
-
-                tempStudent = studentDao.getStudent(student.getAccount());
-
-                KlassStudent klassStudent = new KlassStudent();
-                klassStudent.setKlass(klass);
-                klassStudent.setCourse(course);
-                klassStudent.setStudent(tempStudent);
-                klassStudentDao.addKlassStudent(klassStudent);
             }
+
+            tempStudent = studentDao.getStudent(student.getAccount());
+
+            KlassStudent klassStudent = new KlassStudent();
+            klassStudent.setKlass(klass);
+            klassStudent.setCourse(course);
+            klassStudent.setStudent(tempStudent);
+            klassStudentDao.addKlassStudent(klassStudent);
+
 
         }
         return 1;
