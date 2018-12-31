@@ -2252,7 +2252,7 @@ function getCurrentSeminar() {
             if (xhr.status === 200) {
                 Cookies.set("class",data.klassId);
                 Cookies.set("seminar",data.seminarId);
-                getAttendanceByClass(data.klassId, data.seminarId);
+                getAttendanceByClass();
             }
         },
         error: function(data){
