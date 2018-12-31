@@ -66,10 +66,9 @@
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/jwt.js"></script>
-    <script src="../../static/js/control.js"></script>
+
+    <script src="../../static/js/fast-json.js"></script>
     <script src="../../static/js/convert.js"></script>
-    <script src="../../static/js/user.js"></script>
-    <script src="../../static/js/student.js"></script>
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/student.js"></script>
 
@@ -238,7 +237,7 @@
     function setConnected(connected) {}
     //403
     function connect() {
-      var socket = new SockJS("http://xug98.cn/Socket");
+      var socket = new SockJS("/Socket");
       stompClient = Stomp.over(socket);
       stompClient.connect(
               {},

@@ -36,7 +36,7 @@ public class UserController {
 
     /**
      * 用户登陆
-     *
+     * 
      * @param user 前端传入的用户对象
      * 若登陆成功，返回 200
      * 若登陆失败，返回 400

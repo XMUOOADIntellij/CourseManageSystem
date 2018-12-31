@@ -1,0 +1,35 @@
+[
+  {
+  "id": 1,
+  "status": "1",
+  "mainCourse": {
+    "courseName": "OOAD",
+    "teacher": {
+      "teacherName": "邱明"
+    }
+  },
+    "subCourse": {
+      "courseName": "J2EE",
+      "teacher": {
+        "teacherName": "王美红"
+      }
+    }
+  },
+  {
+    "id": 1,
+    "status": "1",
+    "mainCourse": {
+      "courseName": "算法",
+      "teacher": {
+        "teacherName": "刘昆宏"
+      }
+    },
+    "subCourse": {
+      "courseName": "OOAD",
+      "teacher": {
+        "teacherName": "邱明"
+      }
+    }
+  }
+
+]

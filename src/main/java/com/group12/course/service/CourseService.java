@@ -8,6 +8,7 @@ import com.group12.course.entity.application.ShareTeamApplication;
 import com.group12.course.entity.strategy.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,20 +92,22 @@ public class CourseService {
      * @param course
      * @return Course
      */
+    @Transactional(rollbackFor = {Exception.class})
     public int createCourse(Course course, MemberLimitStrategy memberLimitStrategy,
                             List<CourseMemberLimitStrategy> courseMemberLimitStrategyList,
                             Integer relation, List<List<Long>> conflictCourseLists) {
 
+        int status = 1;
         //添加课程
-        int status1 = courseDao.addCourse(course);
+        status = courseDao.addCourse(course)==0?0:status;
 
         //记录组队人数限制策略
-        int status2 = memberLimitStrategyDao.addMemberLimitStrategy(memberLimitStrategy);
+        status = memberLimitStrategyDao.addMemberLimitStrategy(memberLimitStrategy)==0?0:status;
 
         //记录选修课人数限制策略
         if (courseMemberLimitStrategyList != null && !courseMemberLimitStrategyList.isEmpty()) {
             for (CourseMemberLimitStrategy courseMemberLimitStrategy : courseMemberLimitStrategyList) {
-                courseMemberLimitStrategyDao.addCourseMemberLimitStrategy(courseMemberLimitStrategy);
+                status=courseMemberLimitStrategyDao.addCourseMemberLimitStrategy(courseMemberLimitStrategy)==0?0:status;
             }
             if (relation == 0) {
                 //0表示满足其一，或关系
@@ -120,7 +123,7 @@ public class CourseService {
 
                 //将策略加到team_strategy表中
                 TeamStrategy teamStrategy = strategyService.getTeamStrategy(course,returnTeamAndStrategyList);
-                teamStrategyDao.addTeamStrategy(teamStrategy);
+                status = teamStrategyDao.addTeamStrategy(teamStrategy)==0?0:status;
 
             } else {
                 //1表示均满足，与关系
@@ -135,11 +138,11 @@ public class CourseService {
 
                 //将策略加到team_strategy表中
                 TeamStrategy teamStrategy = strategyService.getTeamStrategy(course,returnTeamAndStrategyList2);
-                teamStrategyDao.addTeamStrategy(teamStrategy);
+                status = teamStrategyDao.addTeamStrategy(teamStrategy)==0?0:status;
             }
         } else {
             TeamStrategy teamStrategy = strategyService.getTeamStrategy(course,memberLimitStrategy);
-            teamStrategyDao.addTeamStrategy(teamStrategy);
+            status = teamStrategyDao.addTeamStrategy(teamStrategy)==0?0:status;
         }
 
         //记录冲突课程
@@ -147,12 +150,12 @@ public class CourseService {
             for (List<Long> conflictCourseList : conflictCourseLists) {
                 List<ConflictCourseStrategy> conflictCourseStrategyList = strategyService.getConflictCourseStrategyList(conflictCourseList);
                 List<ConflictCourseStrategy> returnConflictCourseStrategyList = conflictCourseStrategyDao.addConflictCourseStrategyList(conflictCourseStrategyList);
-                TeamStrategy teamStrategy = strategyService.getTeamStrategy2(course,conflictCourseStrategyList);
-                teamStrategyDao.addTeamStrategy(teamStrategy);
+                TeamStrategy teamStrategy = strategyService.getTeamStrategy2(course,returnConflictCourseStrategyList);
+                status = teamStrategyDao.addTeamStrategy(teamStrategy)==0?0:status;
             }
         }
 
-        if(status1 == 0 || status2 == 0){
+        if(status == 0){
             return 0;
         }
         else{
@@ -246,12 +249,13 @@ public class CourseService {
      * @return
      */
     public List<Student> getStudentNoTeam(Long courseId){
-
+        Course course = courseDao.getCourse(courseId);
         List<Student> studentNoTeamList = new ArrayList<>();
         List<KlassStudent> klassStudentList = klassStudentDao.selectKlassStudentByCourseId(courseId);
         for (KlassStudent klassStudent:klassStudentList) {
-            if(klassStudent.getTeam()!=null){
-                studentNoTeamList.add(klassStudent.getStudent());
+            Student student = klassStudent.getStudent();
+            if(teamDao.checkStudentIsInTeam(student,course)){
+                studentNoTeamList.add(student);
             }
         }
         return studentNoTeamList;

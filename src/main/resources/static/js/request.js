@@ -3,7 +3,7 @@ function bindUser() {
   let ata = { account: $("#account").val(), password: $("#password").val() };
   $.ajax({
     type: "post",
-    url: "http://xug98.cn:8080/user/login",
+    url: "http://xug98.cn/user/login",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -39,7 +39,7 @@ function bindUser() {
 function getUserInfo() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/user/information",
+    url: "http://xug98.cn/user/information",
     dataType: "json",
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
@@ -59,7 +59,7 @@ function sendPassword() {
   console.log(ata);
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/user/password?account=" + ata,
+    url: "http://xug98.cn/user/password?account=" + ata,
     dataType: "json",
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
@@ -93,7 +93,7 @@ function editPassword() {
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/user/password",
+    url: "http://xug98.cn/user/password",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -129,7 +129,7 @@ function editEmail() {
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/user/email",
+    url: "http://xug98.cn/user/email",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -162,7 +162,7 @@ function activeTeacher() {
   alert("input");
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/teacher/active",
+    url: "http://xug98.cn/teacher/active",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -214,7 +214,7 @@ function getCourseList() {
 function getAllCourse() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/course/allcourse",
+    url: "http://xug98.cn/course/allcourse",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -244,7 +244,7 @@ function getCourseInfo() {
 
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/course/" + Cookies.get("course"),
+    url: "http://xug98.cn/course/" + Cookies.get("course"),
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -269,7 +269,7 @@ function getClassList() {
 
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/class",
+    url: "http://xug98.cn/course/" + Cookies.get("course") + "/class",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -298,7 +298,7 @@ function updateClass() {
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/class/" + Cookies.get("class"),
+    url: "http://xug98.cn/class/" + Cookies.get("class"),
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -325,7 +325,7 @@ function deleteClass() {
   let cid = "1";
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn:8080/class/" + cid,
+    url: "http://xug98.cn/class/" + cid,
     dataType: "json",
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
@@ -359,7 +359,7 @@ function getRoundList() {
 
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/round",
+    url: "http://xug98.cn/course/" + Cookies.get("course") + "/round",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -390,7 +390,7 @@ function getRoundList() {
 function getSeminarList(roundId) {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/round/" + "1" + "/seminar",
+    url: "http://xug98.cn/round/" + "1" + "/seminar",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -422,7 +422,7 @@ function getSeminar() {
 
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/seminar/" + Cookies.get("seminar"),
+    url: "http://xug98.cn/seminar/" + Cookies.get("seminar"),
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -452,7 +452,7 @@ function getSeminarByClass() {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/seminar/" +
+      "/seminar/" +
       Cookies.get("seminar") +
       "/class/" +
       Cookies.get("class"),
@@ -485,7 +485,7 @@ function updateSeminarByClass() {
   $.ajax({
     type: "put",
     url:
-      "http://xug98.cn:8080/seminar/" +
+      "/seminar/" +
       Cookies.get("seminar") +
       "/class/" +
       Cookies.get("class"),
@@ -512,7 +512,7 @@ function getSeminarScoreByClass() {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/score/seminar/" +
+      "/score/seminar/" +
       Cookies.get("seminar") +
       "/class/" +
       Cookies.get("class") +
@@ -550,7 +550,7 @@ function updateSeminarScoreByClass() {
   $.ajax({
     type: "put",
     url:
-      "http://xug98.cn:8080/score/seminar/" +
+      "/score/seminar/" +
       Cookies.get("seminar") +
       "/class/" +
       Cookies.get("class") +
@@ -593,7 +593,7 @@ function createCourse() {
   console.log(ata);
   $.ajax({
     type: "post",
-    url: "http://xug98.cn:8080/course",
+    url: "http://xug98.cn/course",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -637,7 +637,7 @@ function createSeminar() {
   alert("input");
   $.ajax({
     type: "post",
-    url: "http://xug98.cn:8080/seminar",
+    url: "http://xug98.cn/seminar",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -659,7 +659,7 @@ function deleteSeminar() {
   let cid = "2";
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn:8080/seminar/" + cid,
+    url: "http://xug98.cn/seminar/" + cid,
     dataType: "json",
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
@@ -704,7 +704,7 @@ function updateSeminar() {
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/seminar/" + Cookies.get("seminar"),
+    url: "http://xug98.cn/seminar/" + Cookies.get("seminar"),
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -733,7 +733,7 @@ function getAttendanceByClass() {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/seminar/" +
+      "/seminar/" +
       Cookies.get("seminar") +
       "/class/" +
       Cookies.get("class") +
@@ -770,7 +770,7 @@ function getPptByClass() {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/seminar/" +
+      "/seminar/" +
       Cookies.get("seminar") +
       "/class/" +
       Cookies.get("class") +
@@ -804,7 +804,7 @@ function getReportByClass() {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/seminar/" +
+      "/seminar/" +
       Cookies.get("seminar") +
       "/class/" +
       Cookies.get("class") +
@@ -837,7 +837,7 @@ function getPptByAttendance() {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/attendance/" + Cookies.get("attendance") + "/ppt",
+      "/attendance/" + Cookies.get("attendance") + "/ppt",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -866,7 +866,7 @@ function getReportByAttendance() {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/attendance/" +
+      "/attendance/" +
       Cookies.get("attendance") +
       "/report",
     dataType: "json",
@@ -896,7 +896,7 @@ function getTeam() {
 
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/myTeam",
+    url: "http://xug98.cn/course/" + Cookies.get("course") + "/myTeam",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -926,7 +926,7 @@ function getMyTeam() {
 
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/team",
+    url: "http://xug98.cn/course/" + Cookies.get("course") + "/team",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -979,7 +979,7 @@ function createTeam() {
   console.log(ata);
   $.ajax({
     type: "post",
-    url: "http://xug98.cn:8080/team",
+    url: "http://xug98.cn/team",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -1036,7 +1036,7 @@ function updateTeam() {
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/team/" + Cookies.get("team"),
+    url: "http://xug98.cn/team/" + Cookies.get("team"),
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -1060,7 +1060,7 @@ function getNoTeam() {
 
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/noTeam",
+    url: "http://xug98.cn/course/" + Cookies.get("course") + "/noTeam",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -1097,7 +1097,7 @@ function createClass() {
   console.log(ata);
   $.ajax({
     type: "post",
-    url: "http://xug98.cn:8080/course/" + Cookies.get("course") + "/class",
+    url: "http://xug98.cn/course/" + Cookies.get("course") + "/class",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -1128,7 +1128,7 @@ function deleteCourse() {
   let cid = "2";
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn:8080/course/" + cid,
+    url: "http://xug98.cn/course/" + cid,
     dataType: "json",
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
@@ -1163,7 +1163,7 @@ function getRoundScoreByCourse(cid) {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/score/course/" + Cookies.get("course") + "/score",
+      "/score/course/" + Cookies.get("course") + "/score",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -1187,7 +1187,7 @@ function getSeminarScoreByRound(cid) {
 
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/score/round/" + Cookies.get("round") + "/score",
+    url: "http://xug98.cn/score/round/" + Cookies.get("round") + "/score",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -1213,7 +1213,7 @@ function getSeminarScoreByTeam(sid, tid) {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/seminar/" +
+      "/seminar/" +
       Cookies.get("seminar") +
       "/team/" +
       Cookies.get("team") +
@@ -1299,7 +1299,7 @@ function deleteSeminarShare() {
   let cid = "2";
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn:8080/course/seminarshare/" + cid,
+    url: "http://xug98.cn/course/seminarshare/" + cid,
     dataType: "json",
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
@@ -1332,7 +1332,7 @@ function deleteTeamShare() {
   let cid = "2";
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn:8080/course/teamshare/" + cid,
+    url: "http://xug98.cn/course/teamshare/" + cid,
     dataType: "json",
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
@@ -1378,7 +1378,7 @@ function updateRound() {
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/round/" + Cookies.get("round"),
+    url: "http://xug98.cn/round/" + Cookies.get("round"),
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -1405,7 +1405,7 @@ function createRound() {
   alert("input");
   $.ajax({
     type: "post",
-    url: "http://xug98.cn:8080/round",
+    url: "http://xug98.cn/round",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -1433,7 +1433,7 @@ function createTeamShare() {
   $.ajax({
     type: "post",
     url:
-      "http://xug98.cn:8080/course/" +
+      "/course/" +
       Cookies.get("course") +
       "/teamsharerequest",
     dataType: "json",
@@ -1463,7 +1463,7 @@ function createSeminarShare() {
   $.ajax({
     type: "post",
     url:
-      "http://xug98.cn:8080/course/" +
+      "/course/" +
       Cookies.get("course") +
       "/seminarsharerequest",
     dataType: "json",
@@ -1578,7 +1578,7 @@ function updateTeamValid() {
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/request/teamvalid/" + Cookies.get("teamvalid"),
+    url: "http://xug98.cn/request/teamvalid/" + Cookies.get("teamvalid"),
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -1606,7 +1606,7 @@ function updateTeamShare() {
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/request/teamshare/" + Cookies.get("teamshare"),
+    url: "http://xug98.cn/request/teamshare/" + Cookies.get("teamshare"),
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -1635,7 +1635,7 @@ function updateSeminarShare() {
   $.ajax({
     type: "put",
     url:
-      "http://xug98.cn:8080/request/seminarshare/" +
+      "/request/seminarshare/" +
       Cookies.get("seminarshare"),
     dataType: "json",
     data: JSON.stringify(ata),
@@ -1664,7 +1664,7 @@ function getQuestionList() {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/seminar/" +
+      "/seminar/" +
       Cookies.get("seminar") +
       "/class/" +
       Cookies.get("class") +
@@ -1705,7 +1705,7 @@ function updatePresentScoreByTeam() {
   $.ajax({
     type: "put",
     url:
-      "http://xug98.cn:8080/attendance/" + Cookies.get("attendance") + "/score",
+      "/attendance/" + Cookies.get("attendance") + "/score",
     dataType: "json",
     data: JSON.stringify(ata),
 
@@ -1736,7 +1736,7 @@ function updateQuestionScoreByTeam() {
 
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/question/" + Cookies.get("question"),
+    url: "http://xug98.cn/question/" + Cookies.get("question"),
     dataType: "json",
     data: JSON.stringify(ata),
 
@@ -1769,7 +1769,7 @@ function activeStudent() {
   alert("input");
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/student/active",
+    url: "http://xug98.cn/student/active",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -1797,7 +1797,7 @@ function activeStudent() {
 function getCurrentSeminar() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/seminar",
+    url: "http://xug98.cn/seminar",
     dataType: "json",
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
@@ -1827,7 +1827,7 @@ function getCurrentAttendance() {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/seminar/" +
+      "/seminar/" +
       Cookies.get("seminar") +
       "/attendance?presented=true",
     dataType: "json",
@@ -1859,7 +1859,7 @@ function getRoundScoreByTeam(sid, tid) {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/round/" +
+      "/round/" +
       Cookies.get("round") +
       "/team/" +
       Cookies.get("team") +
@@ -1887,7 +1887,7 @@ function deleteTeam() {
   let cid = "2";
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn:8080/team/" + cid,
+    url: "http://xug98.cn/team/" + cid,
     dataType: "json",
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
@@ -1920,7 +1920,7 @@ function deleteTeamMember() {
   };
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn:8080/team/" + cid + "/remove",
+    url: "http://xug98.cn/team/" + cid + "/remove",
     dataType: "json",
     data: JSON.stringify(ata),
 
@@ -1954,7 +1954,7 @@ function getMyAttendance() {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/seminar/" +
+      "/seminar/" +
       Cookies.get("seminar") +
       "/class/" +
       Cookies.get("class") +
@@ -1988,7 +1988,7 @@ function getAttendanceScore() {
   $.ajax({
     type: "get",
     url:
-      "http://xug98.cn:8080/score/attendance/" +
+      "/score/attendance/" +
       Cookies.get("attendance") +
       "/score",
     dataType: "json",
@@ -2026,7 +2026,7 @@ function createAttendance() {
   $.ajax({
     type: "post",
     url:
-      "http://xug98.cn:8080/seminar/" +
+      "/seminar/" +
       Cookies.get("seminar") +
       "/class/" +
       Cookies.get("class") +
@@ -2051,7 +2051,7 @@ function deleteAttendance() {
   let cid = "2";
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn:8080/attendance/" + cid,
+    url: "http://xug98.cn/attendance/" + cid,
     dataType: "json",
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
@@ -2084,7 +2084,7 @@ function updateAttendance() {
   console.log(ata);
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/attendance/" + Cookies.get("attendance"),
+    url: "http://xug98.cn/attendance/" + Cookies.get("attendance"),
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -2108,7 +2108,7 @@ function bindAdmin() {
   let ata = { account: "admin", password: "admin" };
   $.ajax({
     type: "post",
-    url: "http://xug98.cn:8080/admin/login",
+    url: "http://xug98.cn/admin/login",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -2143,7 +2143,7 @@ function createTeacher() {
   alert("input");
   $.ajax({
     type: "post",
-    url: "http://xug98.cn:8080/teacher",
+    url: "http://xug98.cn/teacher",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -2174,7 +2174,7 @@ function updateTeacher() {
   $.ajax({
     type: "put",
     url:
-      "http://xug98.cn:8080/teacher/" + Cookies.get("teacher") + "/information",
+      "/teacher/" + Cookies.get("teacher") + "/information",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -2204,7 +2204,7 @@ function updateStudent() {
   $.ajax({
     type: "put",
     url:
-      "http://xug98.cn:8080/student/" + Cookies.get("student") + "/information",
+      "/student/" + Cookies.get("student") + "/information",
     dataType: "json",
     data: JSON.stringify(ata),
     contentType: "application/json",
@@ -2228,7 +2228,7 @@ function deleteTeacher() {
   alert("input");
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn:8080/teacher/" + Cookies.get("teacher"),
+    url: "http://xug98.cn/teacher/" + Cookies.get("teacher"),
     dataType: "json",
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
@@ -2251,7 +2251,7 @@ function deleteStudent() {
   alert("input");
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn:8080/student/" + Cookies.get("student"),
+    url: "http://xug98.cn/student/" + Cookies.get("student"),
     dataType: "json",
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
@@ -2275,7 +2275,7 @@ function resetTeacher() {
   alert("input");
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/teacher/" + Cookies.get("teacher") + "/password",
+    url: "http://xug98.cn/teacher/" + Cookies.get("teacher") + "/password",
     dataType: "json",
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
@@ -2298,7 +2298,7 @@ function resetStudent() {
   alert("input");
   $.ajax({
     type: "put",
-    url: "http://xug98.cn:8080/student/" + Cookies.get("student") + "/password",
+    url: "http://xug98.cn/student/" + Cookies.get("student") + "/password",
     dataType: "json",
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
@@ -2324,7 +2324,7 @@ function searchTeacher() {
   alert("input");
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn:8080/teacher/searchTeacher",
+    url: "http://xug98.cn/teacher/searchTeacher",
     dataType: "json",
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
@@ -2349,7 +2349,7 @@ function searchStudent() {
   alert("input");
   $.ajax({
     type: "delete",
-    url: "http://xug98.cn:8080/student/searchStudent",
+    url: "http://xug98.cn/student/searchStudent",
     dataType: "json",
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
@@ -2368,7 +2368,7 @@ function searchStudent() {
 function getAllTeacher() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/teacher",
+    url: "http://xug98.cn/teacher",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -2396,7 +2396,7 @@ function getAllTeacher() {
 function getAllStudent() {
   $.ajax({
     type: "get",
-    url: "http://xug98.cn:8080/student",
+    url: "http://xug98.cn/student",
     dataType: "json",
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
@@ -2410,6 +2410,179 @@ function getAllStudent() {
     error: function(data) {
       console.log(data);
       alert("fail");
+    },
+    statusCode: {
+      400: function() {
+        alert("错误的ID格式");
+      },
+      404: function() {
+        alert("未找到课程");
+      }
+    }
+  });
+}
+
+
+function updateTeamShare(handletype,id) {
+
+  let ata = {
+    handletype: handletype
+  };
+  console.log(ata);
+  $.ajax({
+    type: "put",
+    url: "http://xug98.cn:8080/request/teamvalid/" +id,
+    dataType: "json",
+    data: JSON.stringify(ata),
+    contentType: "application/json",
+    success: function(data, textStatus, xhr) {
+      console.log(data);
+      alert("success");
+    },
+    statusCode: {
+      400: function() {
+        $("#password").val("");
+        alert("用户名或密码错误！");
+      }
+    }
+  });
+
+  window.location.reload();
+}
+function updateSeminarShare(handletype,id) {
+
+  let ata = {
+    handletype: "accept"
+  };
+  console.log(ata);
+  $.ajax({
+    type: "put",
+    url: "http://xug98.cn:8080/request/teamvalid/" +id,
+    dataType: "json",
+    data: JSON.stringify(ata),
+    contentType: "application/json",
+    success: function(data, textStatus, xhr) {
+      console.log(data);
+      alert("success");
+    },
+    statusCode: {
+      400: function() {
+        $("#password").val("");
+        alert("用户名或密码错误！");
+      }
+    }
+  });
+
+  window.location.reload();
+}
+function getTeamShareTask() {
+  $.ajax({
+    type: "get",
+    // url: "http://xug98.cn/request/teamvaild" ,
+    url: "data.json",
+    dataType: "json",
+    contentType: "application/json;",
+    success: function(data, textStatus, xhr) {
+      if (xhr.status === 200) {
+        // alert("获取成功");
+        console.log("classlist");
+        var content=document.getElementById("content");   //获取外围容器
+        var str="";
+
+        $.each(data, function(i, item) {
+          console.log(item);
+          str +=' <div class="col-lg-4">\n' +
+              '                <div class="card">\n' +
+              '                  <div class="card-body d-flex flex-column">\n' +
+              '                    <h4><a href="#">共享'+item.courseName+'课程 组队</a></h4>\n' +
+              '                    <div class="text-muted">\n' +
+              '                      '+item.teacherName+'老师，向您发起共享'+item.courseName+'课程组队的申请。\n' +
+              '                    </div>\n' +
+              '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
+              '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
+              '                      <div><a class="text-default">'+item.teacherName+'</a></div>\n' +
+              '\n' +
+              '                      <div class="ml-auto text-muted">\n' +
+              '                        <a\n' +
+              '                          href="javascript:void(0)"\n' +
+              '                          class="icon d-none d-md-inline-block ml-3"\n' +
+              '                          onclick="updateTeamShare("reject",'+item.id+')"\n' +
+              '                          ><i class="fe fe-thumbs-down mr-1"></i\n' +
+              '                        ></a>\n' +
+              '                        <a\n' +
+              '                          href="javascript:void(0)"\n' +
+              '                          onclick="updateTeamShare("accept",'+item.id+')"\n' +
+              '                          class="icon d-none d-md-inline-block ml-3"\n' +
+              '                          ><i class="fe fe-thumbs-up mr-1"></i\n' +
+              '                        ></a>\n' +
+              '                      </div>\n' +
+              '                    </div>\n' +
+              '                  </div>\n' +
+              '                </div>\n' +
+              '              </div>';
+        });
+        content.innerHTML=str;
+
+      }
+    },
+    statusCode: {
+      400: function() {
+        alert("错误的ID格式");
+      },
+      404: function() {
+        alert("未找到课程");
+      }
+    }
+  });
+}
+function getSeminarShareTask() {
+  $.ajax({
+    type: "get",
+    url: "http://xug98.cn/request/teamvaild" ,
+    dataType: "json",
+    contentType: "application/json;",
+    success: function(data, textStatus, xhr) {
+      if (xhr.status === 200) {
+        // alert("获取成功");
+        console.log("classlist");
+        var content=document.getElementById("content");   //获取外围容器
+        var str="";
+
+        $.each(data, function(i, item) {
+          console.log(item);
+          str +=' <div class="col-lg-4">\n' +
+              '                <div class="card">\n' +
+              '                  <div class="card-body d-flex flex-column">\n' +
+              '                    <h4><a href="#">申请'+item.courseName+'课程 讨论课</a></h4>\n' +
+              '                    <div class="text-muted">\n' +
+              '                      '+item.teacherName+'老师，向您发起共享'+item.teacherName+'课程讨论课的申请。\n' +
+              '                    </div>\n' +
+              '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
+              '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
+              '                      <div><a class="text-default">'+item.teacherName+' 老师</a></div>\n' +
+              '\n' +
+              '                      <div class="ml-auto text-muted">\n' +
+              '                        <a\n' +
+              '                          href="javascript:void(0)"\n' +
+              '                          class="icon d-none d-md-inline-block ml-3"\n' +
+              '                          onclick="updateSeminarShare("reject",'+item.id+')"\n' +
+              '                          ><i class="fe fe-thumbs-down mr-1"></i\n' +
+              '                        ></a>\n' +
+              '                        <a\n' +
+              '                          href="javascript:void(0)"\n' +
+              '                          onclick="updateSeminarShare("accept",'+item.id+')"\n' +
+              '                          class="icon d-none d-md-inline-block ml-3"\n' +
+              '                          ><i class="fe fe-thumbs-up mr-1"></i\n' +
+              '                        ></a>\n' +
+              '                      </div>\n' +
+              '                    </div>\n' +
+              '                  </div>\n' +
+              '                </div>\n' +
+              '              </div>';
+        });
+        content.innerHTML=str;
+
+      }
     },
     statusCode: {
       400: function() {

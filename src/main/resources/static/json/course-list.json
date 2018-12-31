@@ -1,0 +1,34 @@
+[
+  {
+    "courseName": "OOAD",
+    "id": 1,
+    "introduction": "xxx",
+    "presentationPercentage": 40,
+    "questionPercentage": 30,
+    "reportPercentage": 30,
+    "teamStartTime": "2018-11-01T00:00:00",
+    "teamEndTime": "2018-11-30T00:00:00",
+    "teacher": {
+      "teacherName": "邱明",
+      "id:": 3,
+      "account": "2007100012",
+      "email": "mingqiu@xmu.edu.cn"
+    }
+  },
+  {
+    "courseName": "J2EE",
+    "id": 2,
+    "introduction": "xxx",
+    "presentationPercentage": 40,
+    "questionPercentage": 30,
+    "reportPercentage": 30,
+    "teamStartTime": "2018-11-01T00:00:00",
+    "teamEndTime": "2018-11-30T00:00:00",
+    "teacher": {
+      "teacherName": "邱明",
+      "id:": 3,
+      "account": "2007100012",
+      "email": "mingqiu@xmu.edu.cn"
+    }
+  }
+]

@@ -56,10 +56,11 @@
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/jwt.js"></script>
-    <script src="../../static/js/control.js"></script>
+
+    <script src="../../static/js/fast-json.js"></script>
     <script src="../../static/js/convert.js"></script>
     <script src="../../static/js/user.js"></script>
-    <script src="../../static/js/student.js"></script>
+    <script src="../../static/js/admin.js"></script>
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/admin.js"></script>
   </head>
@@ -88,10 +89,11 @@
                       style="background-image: url(../../static/images/male.png)"
                     ></span>
                     <span class="ml-2 d-none d-lg-block">
-                      <span class="text-default">Jane Pearson</span>
-                      <small class="text-muted d-block mt-1"
-                        >Administrator</small
-                      >
+                      <span class="text-default" id="header-name"></span>
+                      <small
+                        class="text-muted d-block mt-1"
+                        id="header-role"
+                      ></small>
                     </span>
                   </a>
                   <div
