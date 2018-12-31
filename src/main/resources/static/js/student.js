@@ -63,7 +63,7 @@ function getTeam() {
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
                 // alert("获取成功");
-                console.log("roundlist");
+                console.log("team success");
                 let content=document.getElementById("content");
 
                 let str="";
@@ -201,23 +201,23 @@ function requestTeamValid(){
 }
 
 function createTeam() {
-    let member = [
+    let members = [
         {
-            id: 24320162202847,
+            id: 115,
         },
         {
-            id: 24320162202888,
+            id: 127,
 
         },
         {
-            id:24320162202904,
+            id:134,
 
         },
         {
-            id: 24320162202934
+            id: 145
         }
     ];
-    let myId=Cookies.get("account");
+    let myId=Cookies.get("id");
     let myCourse=Cookies.get("course");
     let leader = [
         {
@@ -234,7 +234,7 @@ function createTeam() {
             id: 1
         },
         leader: leader,
-        members: member
+        members: members
     };
     console.log(ata);
     $.ajax({
@@ -314,6 +314,7 @@ function addTeamMembers() {
       window.location.reload();
     */
 }
+    //success
 function getNoTeam() {
 
     $.ajax({
@@ -324,10 +325,9 @@ function getNoTeam() {
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
                 // alert("获取成功");
-                console.log("NoTeam");
+                console.log("NoTeam success");
                 for (let i = 0; i < data.length; i++) {
                     console.log(data[i]);
-                    getSeminarList(data[i].id);
                 }
             }
         },
