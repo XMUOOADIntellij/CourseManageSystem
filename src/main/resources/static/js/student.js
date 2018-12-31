@@ -382,8 +382,8 @@ function deleteTeamMember() {
 function getCourseList() {
   $.ajax({
     type: "get",
-    // url: "http://xug98.cn/course",
-    url: "../../static/json/course-list.json",
+    url: "http://xug98.cn/course",
+    // url: "../../static/json/course-list.json",
     dataType: "json",
     async : false,
     contentType: "application/json;",

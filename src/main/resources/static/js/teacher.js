@@ -668,41 +668,19 @@ function createClass() {
 function updateClass(classId) {
     var formData = new FormData();
     var fileField = document.getElementById("file"+classId);
-
-    formData.append('username', 'abc123');
-    formData.append('avatar', fileField.files[0]);
-
-    fetch("http://xug98.cn/class/" + Cookies.get("class"), {
-        method: 'PUT',
-        body: formData
-    })
-        .then(response => response.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', JSON.stringify(response)));
-    let fileToUpload = document.getElementById("file"+classId);
-    let ata = { file: fileToUpload.val() };
-    console.log(ata);
+    formData.append( 'file', fileField.files[0] );
     $.ajax({
-        type: "put",
         url: "http://xug98.cn/class/" + Cookies.get("class"),
-        dataType: "json",
-        data: JSON.stringify(ata),
-        contentType: "application/json",
-        success: function(data, textStatus, xhr) {
-            console.log(data);
-            alert("success");
-            window.location.href = "./seminar-round-detail.html";
+        data: formData,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function(data){
+            alert(data);
         },
-        error: function(data) {
+        error: function(data){
             console.log(data);
-
-            alert("fail");
-        },
-        statusCode: {
-            400: function() {
-                $("#password").val("");
-                alert("用户名或密码错误！");
-            }
+            alert("上传失败");
         }
     });
 }
@@ -896,26 +874,131 @@ function getClassList(seminarId) {
         }
     });
 }
-    //修改轮次设置
-function updateSeminarByClass() {
+    //创建轮次
+function createRound() {
     let ata = {
-        reportDdl: convertTime($("#reportDdl").val())
+        courseId: Cookies.get("course")
+    };
+    console.log(ata);
+    alert("input");
+    $.ajax({
+        type: "post",
+        url: "http://xug98.cn/round?courseId="+Cookies.get("course"),
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            window.location.href = "./course-round-setting.html";
+        },
+
+
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            },
+            201: function() {
+                alert("success");
+                window.location.href = "./course-round-create.html";
+            }
+        }
+    });
+}
+    //创建讨论课设置
+function createRoundForScore() {
+    let ata = {
+        presentationScoreMethod: $("#present-grade").val(),
+        reportScoreMethod: $("#report-grade").val(),
+        questionScoreMethod: $("#ask-grade").val()
     };
     console.log(ata);
     $.ajax({
         type: "put",
-        url:
-            "/seminar/" +
-            Cookies.get("seminar") +
-            "/class/" +
-            Cookies.get("class"),
+        // url: "http://xug98.cn/round/" + Cookies.get("round"),
+        url: "http://xug98.cn/round/26",
+
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function() {
+            console.log("score success");
+            // window.location.href = "./course-round.html";
+        },
+        error:function(data){
+            conosle.log("score error");
+            console.log(data);
+        },
+
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            },
+            201: function() {
+                console.log("score success");
+                // window.location.href = "./course-round.html";
+            }
+        }
+    });
+}
+function createRoundForClass() {
+    let ata = [
+        {
+            "klass": {
+                "id": 29
+            },
+            "round": {
+                "id": 26
+            },
+            "enrollNumber": 2
+        }
+    ];
+    console.log(ata);
+    $.ajax({
+        type: "post",
+        url: "http://xug98.cn/round/klassround",
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function() {
+            console.log("class success");
+            // window.location.href = "./course-round.html";
+        },
+        error:function(data){
+            console.log("class error");
+            console.log(data);
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            },
+            201: function() {
+                console.log("class success");
+                // window.location.href = "./course-round.html";
+            }
+        }
+    });
+}
+//修改讨论课设置
+function updateRoundForScore() {
+    let ata = {
+        presentationScoreMethod: $("#present-grade").val(),
+        reportScoreMethod: $("#report-grade").val(),
+        questionScoreMethod: $("#ask-grade").val()
+    };
+    console.log(ata);
+    $.ajax({
+        type: "put",
+        url: "http://xug98.cn/round/" + Cookies.get("round"),
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./seminar-round-detail.html";
+            window.location.href = "./seminar-round.html";
         },
         statusCode: {
             400: function() {
@@ -925,6 +1008,7 @@ function updateSeminarByClass() {
         }
     });
 }
+
 
 //讨论课详情
 function getSeminarByClass() {
@@ -1215,6 +1299,36 @@ function getReportByAttendance(attendanceId) {
         }
     });
 }
+    //修改讨论课详情设置
+function updateSeminarByClass() {
+    let ata = {
+        reportDdl: convertTime($("#reportDdl").val())
+    };
+    console.log(ata);
+    $.ajax({
+        type: "put",
+        url:
+            "/seminar/" +
+            Cookies.get("seminar") +
+            "/class/" +
+            Cookies.get("class"),
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            window.location.href = "./seminar-round-detail.html";
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            }
+        }
+    });
+}
+
 
     //修改讨论课详情设置
 function getSeminarByClassForUpdate() {
@@ -1260,11 +1374,13 @@ function getSeminarByClassForUpdate() {
             }
         }
     });}
-    //新建讨论课
+    //新建讨论课 seminar_Id cannot be null
 function createSeminar() {
 
     let ata = {
-        roundId: Cookies.get("round"),
+        // roundId: $('#select-round-id').val(),
+        roundId: "26",
+
         seminarName: $("#name").val(),
         introduction: $("#introduction").val(),
         maxTeam: $("#select-max-team").val(),
