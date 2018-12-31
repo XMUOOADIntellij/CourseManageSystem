@@ -52,6 +52,15 @@ public class SeminarProgressController {
         return new SeminarVO(seminarService.startSeminar(teacher,seminarId,classId));
     }
 
+
+    @MessageMapping(value = "/Socket/seminar/{seminarId}/class/{classId}/continue")
+    @SendTo("/seminarSocket/progress")
+    public SeminarVO continueSeminar(@Header("jwt")String token,@DestinationVariable Long seminarId,
+                                  @DestinationVariable Long classId){
+        Teacher teacher = Jwt.unSign(token,Teacher.class);
+        return new SeminarVO(seminarService.continueSeminar(teacher,seminarId,classId));
+    }
+
     /**
      * 处理发往 /app/seminar/pause的消息
      * 暂停讨论课
