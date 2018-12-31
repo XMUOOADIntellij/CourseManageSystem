@@ -142,11 +142,28 @@ public class CourseController {
      * @return List<Course>
      */
     @GetMapping(value="",produces = "application/json; charset=utf-8")
-    public void getCourseByTeacherId(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void getCourseByUserId(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String token = request.getHeader("Authorization");
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
+        Student jwtStudent = Jwt.unSign(token,Student.class);
         if (jwtTeacher!=null){
             List<Course> courseList = courseService.getCourseByTeacherId(jwtTeacher.getId());
+            List<CourseBasicVO> courseBasicVOList = new ArrayList<>();
+            for (Course course:courseList) {
+                CourseBasicVO courseBasicVO = new CourseBasicVO(course);
+                courseBasicVOList.add(courseBasicVO);
+            }
+            if (courseBasicVOList.isEmpty()){
+                response.setStatus(404);
+            }
+            else {
+                response.setStatus(200);
+                String json = JSONObject.toJSONString(courseBasicVOList);
+                response.getWriter().write(json);
+            }
+        }
+        if(jwtStudent!= null){
+            List<Course> courseList = courseService.getCourseByStudentId(jwtStudent.getId());
             List<CourseBasicVO> courseBasicVOList = new ArrayList<>();
             for (Course course:courseList) {
                 CourseBasicVO courseBasicVO = new CourseBasicVO(course);
