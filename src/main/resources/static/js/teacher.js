@@ -363,7 +363,7 @@ function createCourse() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./seminar-round.html";
+            window.location.href = "./course-home.html";
         },
         error: function(data) {
             console.log(data);
@@ -373,7 +373,7 @@ function createCourse() {
             201: function(data) {
                 console.log(data);
                 alert("success");
-                window.location.href = "./seminar-round.html";
+                window.location.href = "./course-home.html";
             },
             400: function() {
                 $("#password").val("");
@@ -558,7 +558,6 @@ function getClassItems() {
                         '                            type="file"\n' +
                         '                            id="file'+item.id+'"\n' +
                         '                            class="custom-file-input"\n' +
-                        '                            name="example-file-input-custom"\n' +
                         '                          />\n' +
                         '                          <label class="custom-file-label">选择文件</label>\n' +
                         '                        </div>\n' +
@@ -668,7 +667,7 @@ function createClass() {
     //修改班级
 function updateClass(classId) {
     let fileToUpload = document.getElementById("file"+classId);
-    let ata = { file: fileToUpload.prop("files")[0] };
+    let ata = { file: fileToUpload.val() };
     console.log(ata);
     $.ajax({
         type: "put",
@@ -1047,6 +1046,66 @@ function getReportByClass() {
         }
     });
 }
+function getAttendanceByClass() {
+    let mySeminar=Cookies.get("seminar");
+    let myClass=Cookies.get("class");
+    alert(mySeminar);
+    alert(myClass);
+
+    $.ajax({
+        type: "get",
+        url:
+            "/seminar/" +
+            Cookies.get("seminar") +
+            "/class/" +
+            Cookies.get("class") +
+            "/attendance",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            var content=document.getElementById("content");   //获取外围容器
+            var str="";
+            $.each(data, function(i, item) {
+                console.log(item);
+                str +='                        <tr>\n' +
+                    '                          <td>'+item.name+'</td>\n' +
+                    '                          <td>'+item.account+'</td>\n' +
+                    '                          <td class="text-nowrap">'+item.email+'</td>\n' +
+                    '                          <td>\n' +
+                    '                            <a href="./student-home-update.html" class="icon"\n' +
+                    '                        onclick="jumpFromStudentHome('+item.id+')"\n' +
+                    '                              ><i class="fe fe-edit"></i\n' +
+                    '                            ></a>\n' +
+                    '                          </td>\n' +
+                    '                          <td>\n' +
+                    '                            <a href="#" class="icon" onclick="resetStudent('+item.id+')"\n' +
+                    '                              ><i class="fe fe-rotate-ccw"></i\n' +
+                    '                            ></a>\n' +
+                    '                          </td>\n' +
+                    '                          <td>\n' +
+                    '                            <a href="#" class="icon" onclick="deleteStudent('+item.id+')"\n' +
+                    '                              ><i class="fe fe-trash"></i\n' +
+                    '                            ></a>\n' +
+                    '                          </td>\n' +
+                    '                        </tr>\n';
+            });
+            content.innerHTML=str;
+        },
+        error: function(data) {
+            console.log(data);
+            alert("fail");
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+
     //修改讨论课详情设置
 function getSeminarByClassForUpdate() {
     let seminarId=Cookies.get("seminar");
@@ -1090,8 +1149,8 @@ function getSeminarByClassForUpdate() {
                 alert("未找到课程");
             }
         }
-    });
-}
+    });}
+    //新建讨论课
 function createSeminar() {
 
     let ata = {
@@ -1694,6 +1753,42 @@ function deleteSeminarShare(shareId) {
 
 
 }
+    //新建共享
+function createShare()
+{
+    let myPath="";
+    let myType=$("#shareType");
+    let ata = {
+        roundId: Cookies.get("round"),
+        introduction: $("#introduction").val(),
+        maxTeam: $("#select-max-team").val(),
+        visible: true,
+        seminarSerial: $("#select-seminar-serial").val(),
+        enrollStartTime: convertTime($("#input-start").val()),
+        enrollEndTime: convertTime($("#input-end").val()),
+        courseId: Cookies.get("course")
+    };
+    console.log(ata);
+    alert("input");
+    $.ajax({
+        type: "post",
+        url: myPath,
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            window.location.href = "./course-seminar.html";
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            }
+        }
+    });
+}
 
 //课程信息
 function getCourseInfo() {
@@ -2090,13 +2185,12 @@ function getAttendanceByClass() {
 
     $.ajax({
         type: "get",
-/*        url:
+        url:
             "/seminar/" +
             Cookies.get("seminar") +
             "/class/" +
             Cookies.get("class") +
-            "/attendance",*/
-        url:"",
+            "/attendance",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -2158,7 +2252,7 @@ function getCurrentSeminar() {
             if (xhr.status === 200) {
                 Cookies.set("class",data.klassId);
                 Cookies.set("seminar",data.seminarId);
-                getAttendanceByClass(data.klassId, data.seminarId);
+                getAttendanceByClass();
             }
         },
         error: function(data){

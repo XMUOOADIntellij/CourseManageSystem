@@ -62,7 +62,7 @@
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body onload="getReportByClass()">
+  <body onload="getAttendanceByClass()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -205,8 +205,8 @@
                           <th></th>
                         </tr>
                       </thead>
-                      <tbody>
-                       <!-- <tr>
+                      <tbody id="content">
+                        <tr>
                           <td><span class="text-muted">1-1</span></td>
                           <td><a href="." class="text-inherit">1.pdf</a></td>
                           <td>
@@ -239,7 +239,7 @@
                               <i class="fe fe-download"></i>
                             </a>
                           </td>
-                        </tr>-->
+                        </tr>
                       </tbody>
                     </table>
                   </div>
