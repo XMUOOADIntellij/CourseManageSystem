@@ -1046,7 +1046,7 @@ function getReportByClass() {
         }
     });
 }
-function getAttendanceByClass() {
+function getAttendanceItemsByClass() {
     let mySeminar=Cookies.get("seminar");
     let myClass=Cookies.get("class");
     alert(mySeminar);
@@ -1757,22 +1757,19 @@ function deleteSeminarShare(shareId) {
 function createShare()
 {
     let myPath="";
-    let myType=$("#shareType");
+    let myType=$("#shareType").val();
+    if(myType==1) myPath="teamsharerequest";
+    if(myType==2) myPath="seminarsharerequest";
+    let subCourses=[{id:16}];
+
     let ata = {
-        roundId: Cookies.get("round"),
-        introduction: $("#introduction").val(),
-        maxTeam: $("#select-max-team").val(),
-        visible: true,
-        seminarSerial: $("#select-seminar-serial").val(),
-        enrollStartTime: convertTime($("#input-start").val()),
-        enrollEndTime: convertTime($("#input-end").val()),
-        courseId: Cookies.get("course")
+        subCourseIdList: subCourses,
     };
     console.log(ata);
     alert("input");
     $.ajax({
         type: "post",
-        url: myPath,
+        url: "http://xug98.cn/course/" + Cookies.get("course") + "/"+myPath,
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -2182,7 +2179,6 @@ function getQuestionList(attendanceId) {
     });
 }
 function getAttendanceByClass() {
-
     $.ajax({
         type: "get",
         url:
