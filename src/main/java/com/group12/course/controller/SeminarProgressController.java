@@ -53,6 +53,13 @@ public class SeminarProgressController {
     }
 
 
+    /**
+     * 继续讨论课
+     * @param token 令牌
+     * @param seminarId 讨论课id
+     * @param classId 班级id
+     * @return seminar
+     */
     @MessageMapping(value = "/Socket/seminar/{seminarId}/class/{classId}/continue")
     @SendTo("/seminarSocket/progress")
     public SeminarVO continueSeminar(@Header("jwt")String token,@DestinationVariable Long seminarId,
