@@ -76,10 +76,10 @@ public class SeminarDao {
                 tempKlassSeminar.setReportDdl(null);
                 klassSeminarsRecord.add(tempKlassSeminar);
             }
-            //插入班级讨论课记录
-            klassSeminarDao.insertKlassSeminarList(klassSeminarsRecord);
             //插入讨论课记录
             seminarMapper.insertSeminar(record);
+            //插入班级讨论课记录
+            klassSeminarDao.insertKlassSeminarList(klassSeminarsRecord);
             return record.getId();
         } else {
             throw new InformationException("讨论课不属于任何课程");

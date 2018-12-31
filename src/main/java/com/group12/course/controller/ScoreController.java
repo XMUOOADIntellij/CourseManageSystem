@@ -30,7 +30,6 @@ public class ScoreController {
     @Autowired
     ScoreService scoreService;
 
-
     @PutMapping(value = "/seminar/{seminarId}/class/{classId}/score")
     public Integer modifyScoreBySeminar(@PathVariable Long seminarId, @PathVariable Long classId,
                                         @RequestBody SeminarScoreVO seminarScoreVO, HttpServletRequest request) {
