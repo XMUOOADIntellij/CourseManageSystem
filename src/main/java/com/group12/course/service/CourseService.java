@@ -249,12 +249,13 @@ public class CourseService {
      * @return
      */
     public List<Student> getStudentNoTeam(Long courseId){
-
+        Course course = courseDao.getCourse(courseId);
         List<Student> studentNoTeamList = new ArrayList<>();
         List<KlassStudent> klassStudentList = klassStudentDao.selectKlassStudentByCourseId(courseId);
         for (KlassStudent klassStudent:klassStudentList) {
-            if(klassStudent.getTeam()!=null){
-                studentNoTeamList.add(klassStudent.getStudent());
+            Student student = klassStudent.getStudent();
+            if(teamDao.checkStudentIsInTeam(student,course)){
+                studentNoTeamList.add(student);
             }
         }
         return studentNoTeamList;
