@@ -61,13 +61,13 @@
         </discriminator>
     </resultMap>
 
-    <cache type="com.group12.course.tools.MybatisRedisCache" />
+    <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
     <sql id="Base_Column_List" >
     id, strategy_name,strategy_id
     </sql>
 
-    <cache type="com.group12.course.tools.MybatisRedisCache" />
+    <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
     <select id="selectTeamOrStrategyById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select

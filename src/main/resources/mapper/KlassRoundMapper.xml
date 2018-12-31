@@ -14,7 +14,7 @@
     klass_id, round_id,enroll_number
   </sql>
 
-    <cache type="com.group12.course.tools.MybatisRedisCache" />
+    <!--<cache type="com.group12.course.tools.MybatisRedisCache" />-->
 
     <select id="selectKlassRoundById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select
