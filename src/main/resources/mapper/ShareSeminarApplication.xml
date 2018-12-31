@@ -28,11 +28,11 @@
         where id=#{id,jdbcType=BIGINT}
     </select>
 
-    <select id="selectShareSeminarApplicationByMainCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="selectShareSeminarApplicationByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List"/>
         from share_seminar_application
-        where main_course_id=#{id,jdbcType=BIGINT}
+        where main_course_id=#{id,jdbcType=BIGINT} or sub_course_id=#{id,jdbcType=BIGINT}
     </select>
 
     <insert id="addShareSeminarApplication" useGeneratedKeys="true" keyProperty="id">

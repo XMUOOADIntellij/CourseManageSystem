@@ -25,7 +25,7 @@ public interface ShareSeminarApplicationMapper {
      * @param mainCourseId
      * @return
      */
-    List<ShareSeminarApplication> selectShareSeminarApplicationByMainCourseId(Long mainCourseId);
+    List<ShareSeminarApplication> selectShareSeminarApplicationByCourseId(Long mainCourseId);
 
     /**
      * 添加
