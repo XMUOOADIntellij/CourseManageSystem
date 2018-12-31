@@ -58,13 +58,28 @@ public class CourseService {
     StrategyService strategyService;
 
     /**
-     * 获得当前用户所有课程
+     * 获得当前教师所有课程
      *
      * @param teacherId 老师ID
      * @return List<Course>
      */
     public List<Course> getCourseByTeacherId(Long teacherId) {
         return courseDao.getCourseByTeacherId(teacherId);
+    }
+
+    /**
+     * 获得当前学生的所有课程
+     * @param studentId
+     * @return
+     */
+    public List<Course> getCourseByStudentId(Long studentId){
+        List<KlassStudent> klassStudentList = klassStudentDao.selectKlassStudentByStudentId(studentId);
+        List<Course> courseList = new ArrayList<>();
+        for (KlassStudent klassStudent:klassStudentList) {
+            Course course = klassStudent.getCourse();
+            courseList.add(course);
+        }
+        return courseList;
     }
 
     /**

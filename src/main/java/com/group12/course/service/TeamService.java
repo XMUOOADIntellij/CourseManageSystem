@@ -66,7 +66,14 @@ public class TeamService {
             throw new InformationException("课程 id 不存在");
         }
         team.setKlassSerial(klass.getKlassSerial());
-        return teamDao.addTeam(team);
+
+        Team checkTeam = teamDao.addTeam(team);
+        Boolean status = checkTeamValidation(checkTeam);
+        if (!status){
+            checkTeam.setStatus(teamIsInvalid);
+            teamDao.changeTeam(checkTeam);
+        }
+        return checkTeam;
     }
 
     /**
