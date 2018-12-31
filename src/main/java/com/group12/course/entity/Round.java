@@ -8,6 +8,7 @@ import java.io.Serializable;
  * Round 实体对象
  * @author Tan Xue
  * @date 2018/12/12
+ * 0表示平均分，1表示最高分
  */
 public class Round implements Serializable {
     private Long id;
