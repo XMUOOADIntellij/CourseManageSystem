@@ -56,10 +56,8 @@
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/jwt.js"></script>
-    <script src="../../static/js/control.js"></script>
+    <script src="../../static/js/fast-json.js"></script>
     <script src="../../static/js/convert.js"></script>
-    <script src="../../static/js/user.js"></script>
-    <script src="../../static/js/teacher.js"></script>
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
@@ -181,7 +179,7 @@
                   </div>
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-12">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="form-label">课程名称</label>
                           <input
@@ -206,9 +204,43 @@
                           ></textarea>
                         </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12 col-lg-7">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="form-label">成绩计算规则</label>
+                          <div class="input-group mb-3">
+                            <span class="input-group-prepend">
+                              <span class="input-group-text"> 课堂展示</span>
+                            </span>
+                            <input
+                                    class="form-control"
+                                    name="example-text-input"
+                                    placeholder="Text.."
+                                    type="text"
+                                    id="presentationPercentage"
+                            />                          </div>
+                          <div class="input-group mb-3">
+                            <span class="input-group-prepend">
+                              <span class="input-group-text"> 课堂提问</span>
+                            </span>
+                            <input
+                                    class="form-control"
+                                    name="example-text-input"
+                                    placeholder="Text.."
+                                    type="text"
+                                    id="questionPercentage"
+                            />                          </div>
+                          <div class="input-group ">
+                            <span class="input-group-prepend">
+                              <span class="input-group-text"> 书面报告</span>
+                            </span>
+                            <input
+                                    class="form-control"
+                                    name="example-text-input"
+                                    placeholder="Text.."
+                                    type="text"
+                                    id="reportPercentage"
+                            />                          </div>
+                        </div>
                         <div class="form-group">
                           <div class="row gutters-xs">
                             <div class="col-lg-6">
@@ -225,6 +257,11 @@
                             </div>
                           </div>
                         </div>
+
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="form-label">组队总人数</label>
                           <div class="row gutters-xs">
@@ -268,10 +305,11 @@
                             </div>
                           </div>
                         </div>
-
+                      </div>
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="form-label">组内选修课人数</label>
-                          <div class="card" style="max-height:11.5rem">
+                          <div class="card" style="max-height:8rem">
                             <div class="table-responsive">
                               <table
                                       class="table card-table table-vcenter text-nowrap"
@@ -434,44 +472,11 @@
                             </div>
                           </div>
                         </div>
+
                       </div>
-                      <div class="col-md-6 col-lg-5">
-                        <div class="form-group">
-                          <label class="form-label">成绩计算规则</label>
-                          <div class="input-group mb-3">
-                            <span class="input-group-prepend">
-                              <span class="input-group-text"> 课堂展示</span>
-                            </span>
-                            <input
-                                    class="form-control"
-                                    name="example-text-input"
-                                    placeholder="Text.."
-                                    type="text"
-                                    id="presentationPercentage"
-                            />                          </div>
-                          <div class="input-group mb-3">
-                            <span class="input-group-prepend">
-                              <span class="input-group-text"> 课堂提问</span>
-                            </span>
-                            <input
-                                    class="form-control"
-                                    name="example-text-input"
-                                    placeholder="Text.."
-                                    type="text"
-                                    id="questionPercentage"
-                            />                          </div>
-                          <div class="input-group ">
-                            <span class="input-group-prepend">
-                              <span class="input-group-text"> 书面报告</span>
-                            </span>
-                            <input
-                                    class="form-control"
-                                    name="example-text-input"
-                                    placeholder="Text.."
-                                    type="text"
-                                    id="reportPercentage"
-                            />                          </div>
-                        </div>
+                    </div>
+                    <div class="row" id="content2">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label class="form-label">冲突课程</label>
                           <div class="card" style="max-height:15rem">
@@ -485,33 +490,7 @@
                                   <th>课程名称</th>
                                 </tr>
                                 </thead>
-                                <tbody id="content2">
-                                <tr>
-                                  <td>
-                                    <label
-                                            class="custom-control custom-checkbox"
-                                    >
-                                      <input
-                                              type="checkbox"
-                                              class="custom-control-input"
-                                              name="example-checkbox1"
-                                              value="option1"
-                                              checked=""
-                                      />
-                                      <span
-                                              class="custom-control-label"
-                                      ></span>
-                                    </label>
-                                  </td>
-                                  <td>
-                                      <span class="text-muted"
-                                      >J2EE</span
-                                      >
-                                  </td>
-
-                                </tr>
-
-
+                                <tbody>
                                 </tbody>
                               </table>
                             </div>

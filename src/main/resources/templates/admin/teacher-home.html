@@ -56,14 +56,13 @@
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/jwt.js"></script>
-    <script src="../../static/js/control.js"></script>
+
+    <script src="../../static/js/fast-json.js"></script>
     <script src="../../static/js/convert.js"></script>
     <script src="../../static/js/user.js"></script>
-    <script src="../../static/js/student.js"></script>
-    <script src="../../static/js/user.js"></script>
-    <script src="../../static/js/teacher.js"></script>
+    <script src="../../static/js/admin.js"></script>
   </head>
-  <body onload="initTeacher()">
+  <body onload="getAllTeacher()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -88,10 +87,11 @@
                       style="background-image: url(../../static/images/male.png)"
                     ></span>
                     <span class="ml-2 d-none d-lg-block">
-                      <span class="text-default">Jane Pearson</span>
-                      <small class="text-muted d-block mt-1"
-                        >Administrator</small
-                      >
+                      <span class="text-default" id="header-name"></span>
+                      <small
+                        class="text-muted d-block mt-1"
+                        id="header-role"
+                      ></small>
                     </span>
                   </a>
                   <div
@@ -190,7 +190,7 @@
                     <table class="table card-table table-striped table-vcenter">
                       <thead>
                         <tr>
-                          <th colspan="2">姓名</th>
+                          <th>姓名</th>
                           <th>教工号</th>
                           <th>电子邮箱</th>
                           <th></th>
@@ -198,9 +198,8 @@
                           <th></th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="content">
                         <tr>
-                          <td class="w-1"><span class="avatar">Q</span></td>
                           <td>邱明</td>
                           <td>24320162202xxx</td>
                           <td class="text-nowrap">24320162202xxx@xmu.edu.cn</td>

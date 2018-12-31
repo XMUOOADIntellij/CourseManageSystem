@@ -1,0 +1,119 @@
+[
+  {
+  "id": 1,
+  "reason": "...",
+  "status": "2",
+  "teacher": {
+    "account": "20007100012",
+    "active": "true",
+    "email": "mingqiu@xmu.edu.cn",
+    "id": 3,
+    "password": "123456",
+    "teacherName": "邱明"
+  },
+  "team": {
+    "course": {
+      "courseName": "OOAD",
+      "id":  "16",
+      "introduction": "面向对象的分析与设计"
+    },
+    "id": 3,
+    "klass": {
+      "course": {
+        "$ref": "$.team.course"
+      },
+      "grade": "2016",
+      "id": 22,
+      "klassLocation": "海韵",
+      "klassSerial": 2
+    },
+    "klassSerial": "2",
+    "leader": {
+      "account": "21620162203180",
+      "active": false,
+      "id": 160,
+      "studentName": "邱明"
+
+    }
+
+  }
+},
+  {
+    "id": 2,
+    "reason": "sadd",
+    "status": "1",
+    "teacher": {
+      "account": "20007100012",
+      "active": "true",
+      "email": "mingqiu@xmu.edu.cn",
+      "id": 3,
+      "password": "123456",
+      "teacherName": "邱明"
+    },
+    "team": {
+      "course": {
+        "courseName": "J2ee",
+        "id":  "16",
+        "introduction": "面向对象的分析与设计"
+      },
+      "id": 3,
+      "klass": {
+        "course": {
+          "$ref": "$.team.course"
+        },
+        "grade": "2016",
+        "id": 22,
+        "klassLocation": "海韵",
+        "klassSerial": 2
+      },
+      "klassSerial": "2",
+      "leader": {
+        "account": "21620162203180",
+        "active": false,
+        "id": 160,
+        "studentName": "邱明"
+
+      }
+
+    }
+  },
+  {
+    "id": 3,
+    "reason": "sadd",
+    "status": "0",
+    "teacher": {
+      "account": "20007100012",
+      "active": "true",
+      "email": "mingqiu@xmu.edu.cn",
+      "id": 3,
+      "password": "123456",
+      "teacherName": "邱明"
+    },
+    "team": {
+      "course": {
+        "courseName": ".Net",
+        "id":  "16",
+        "introduction": "面向对象的分析与设计"
+      },
+      "id": 3,
+      "klass": {
+        "course": {
+          "$ref": "$.team.course"
+        },
+        "grade": "2016",
+        "id": 22,
+        "klassLocation": "海韵",
+        "klassSerial": 2
+      },
+      "klassSerial": "2",
+      "leader": {
+        "account": "21620162203180",
+        "active": false,
+        "id": 160,
+        "studentName": "邱明"
+
+      }
+
+    }
+  }
+]

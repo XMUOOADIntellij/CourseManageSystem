@@ -34,7 +34,6 @@
     <script src="../../static/js/vendors/jquery-jvectormap-world-mill.js"></script>
     <script src="../../static/js/vendors/jquery.sparkline.min.js"></script>
     <script src="../../static/js/vendors/jquery.tablesorter.min.js"></script>
-
     <script src="../../static/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="../../static/js/vendors/chart.bundle.min.js"></script>
     <script src="../../static/js/vendors/selectize.min.js"></script>
@@ -46,25 +45,27 @@
     <link href="../../static/css/tabler.css" rel="stylesheet" />
     <!-- c3.js Charts Plugin -->
     <link href="../../static/plugins/charts-c3/plugin.css" rel="stylesheet" />
-    <!-- gijgo datepicker Plugin -->
-    <link
-      href="../../static/plugins/gijgo/css/gijgo.min.css"
-      rel="stylesheet"
-    />
-    <script src="../../static/plugins/gijgo/js/gijgo.min.js"></script>
+
     <!-- fab Plugin -->
     <link href="../../static/plugins/fab/fab.css" rel="stylesheet" />
+
+
+      <!-- gijgo datepicker Plugin -->
+      <link
+              href="../../static/plugins/gijgo/css/gijgo.min.css"
+              rel="stylesheet"
+      />
+      <script src="../../static/plugins/gijgo/js/gijgo.min.js"></script>
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/jwt.js"></script>
-    <script src="../../static/js/control.js"></script>
+
+    <script src="../../static/js/fast-json.js"></script>
     <script src="../../static/js/convert.js"></script>
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
-    <script src="../../static/js/user.js"></script>
-    <script src="../../static/js/teacher.js"></script>
   </head>
-  <body onload="getTeamShareList()">
+  <body onload="getTeamShareList();getSeminarShareList();">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -174,8 +175,8 @@
                 </li>
               </ol>
             </nav>
-            <div class="row">
-              <div class="col-md-6 col-xl-4">
+            <div class="row" id="content">
+             <!-- <div class="col-md-6 col-xl-4">
                 <div class="card">
                   <div class="card-header">
                     <h3 class="card-title mr-4">OOAD</h3>
@@ -280,7 +281,7 @@
                     </form>
                   </div>
                 </div>
-              </div>
+              </div>-->
             </div>
           </div>
           <nav class="fab">
@@ -306,41 +307,8 @@
       </footer>
     </div>
 
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModalCenter"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">...</div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
+
   </body>
+
 </html>

@@ -56,15 +56,16 @@
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/jwt.js"></script>
-    <script src="../../static/js/control.js"></script>
+
+    <script src="../../static/js/fast-json.js"></script>
     <script src="../../static/js/convert.js"></script>
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
-    <script src="../../static/js/user.js"></script>
-    <script src="../../static/js/teacher.js"></script>
   </head>
-  <body onload=" getTeamShareTask();getSeminarShareTask();getTeamValidTask();">
-    <div class="page">
+  <!--<body onload=" getTeamShareTask();getSeminarShareTask();getTeamValidTask();">-->
+  <body onload="getTeamValidTask()">
+
+  <div class="page">
       <div class="page-main">
         <div class="header py-4">
           <div class="container">
@@ -170,8 +171,8 @@
                 </li>
               </ol>
             </nav>
-            <div class="row row-cards row-deck">
-              <div class="col-lg-4">
+            <div class="row row-cards row-deck" id="content">
+              <!--<div class="col-lg-4">
                 <div class="card">
                   <div class="card-body d-flex flex-column">
                     <h4><a href="#">申请OOAD课程 组队</a></h4>
@@ -186,14 +187,14 @@
                       <div class="ml-auto text-muted">
                         <a
                           href="javascript:void(0)"
-                          class="icon d-none d-md-inline-block ml-3"
+                     class="icon d-inline-block ml-3"
                           onclick="updateSeminarShare(false)"
                           ><i class="fe fe-thumbs-down mr-1"></i
                         ></a>
                         <a
                           href="javascript:void(0)"
                           onclick="updateSeminarShare(true)"
-                          class="icon d-none d-md-inline-block ml-3"
+                     class="icon d-inline-block ml-3"
                           ><i class="fe fe-thumbs-up mr-1"></i
                         ></a>
                       </div>
@@ -214,14 +215,14 @@
                       <div class="ml-auto text-muted">
                         <a
                           href="javascript:void(0)"
-                          class="icon d-none d-md-inline-block ml-3"
+                     class="icon d-inline-block ml-3"
                           onclick="updateTeamValid(false)"
                           ><i class="fe fe-thumbs-down mr-1"></i
                         ></a>
                         <a
                           href="javascript:void(0)"
                           onclick="updateTeamValid(true)"
-                          class="icon d-none d-md-inline-block ml-3"
+                     class="icon d-inline-block ml-3"
                           ><i class="fe fe-thumbs-up mr-1"></i
                         ></a>
                       </div>
@@ -242,21 +243,23 @@
                       <div class="ml-auto text-muted">
                         <a
                           href="javascript:void(0)"
-                          class="icon d-none d-md-inline-block ml-3"
+                     class="icon d-inline-block ml-3"
                           onclick="updateTeamShare(false)"
                           ><i class="fe fe-thumbs-down mr-1"></i
                         ></a>
                         <a
                           href="javascript:void(0)"
                           onclick="updateTeamShare(true)"
-                          class="icon d-none d-md-inline-block ml-3"
-                          ><i class="fe fe-thumbs-up mr-1"></i
+                     class="icon d-inline-block ml-3"
+                          ><i class="fe fe-thumbs-up mr-1"
+                              style="color:lightblue;"
+                        ></i
                         ></a>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>-->
             </div>
           </div>
         </div>
