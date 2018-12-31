@@ -26,14 +26,18 @@ public class ShareTeamApplicationDao {
 
     public List<ShareTeamApplication> selectShareTeamApplicationByTeacherId(Long teacherId){
         List<ShareTeamApplication> shareTeamApplicationList = new ArrayList<>();
+        //为主课程时
         List<Course> courseList = courseDao.getCourseByTeacherId(teacherId);
         for (Course course:courseList) {
-            List<ShareTeamApplication> shareTeamApplicationList1 = shareTeamApplicationMapper.selectShareTeamApplicationByCourseId(course.getId());
+            List<ShareTeamApplication> shareTeamApplicationList1 = shareTeamApplicationMapper.selectShareTeamApplicationByMainCourseId(course.getId());
             if(!shareTeamApplicationList1.isEmpty()&&shareTeamApplicationList1!=null){
-                for (ShareTeamApplication shareTeamApplication:shareTeamApplicationList1) {
-                    shareTeamApplicationList.add(shareTeamApplication);
-                }
+                shareTeamApplicationList.addAll(shareTeamApplicationList1);
             }
+        }
+        //为从课程时
+        List<ShareTeamApplication> shareTeamApplicationList2 = shareTeamApplicationMapper.selectShareTeamApplicationBySubCourseTeacherId(teacherId);
+        if(shareTeamApplicationList2!=null){
+            shareTeamApplicationList.addAll(shareTeamApplicationList2);
         }
         return shareTeamApplicationList;
     }

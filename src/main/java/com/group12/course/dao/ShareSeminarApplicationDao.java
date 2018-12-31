@@ -27,13 +27,17 @@ public class ShareSeminarApplicationDao {
     public List<ShareSeminarApplication> selectShareSeminarApplicationByTeacherId(Long teacherId){
         List<ShareSeminarApplication> shareSeminarApplicationList = new ArrayList<>();
         List<Course> courseList = courseDao.getCourseByTeacherId(teacherId);
+        //为主课程时
         for (Course course:courseList) {
-            List<ShareSeminarApplication> shareSeminarApplicationList1 = shareSeminarApplicationMapper.selectShareSeminarApplicationByCourseId(course.getId());
+            List<ShareSeminarApplication> shareSeminarApplicationList1 = shareSeminarApplicationMapper.selectShareSeminarApplicationByMainCourseId(course.getId());
             if(shareSeminarApplicationList1!=null&&!shareSeminarApplicationList1.isEmpty()){
-                for (ShareSeminarApplication shareSeminarApplication:shareSeminarApplicationList1) {
-                    shareSeminarApplicationList.add(shareSeminarApplication);
-                }
+                shareSeminarApplicationList.addAll(shareSeminarApplicationList1);
             }
+        }
+        //为从课程时
+        List<ShareSeminarApplication> shareSeminarApplicationList2 = shareSeminarApplicationMapper.selectShareSeminarApplicationBySubCourseTeacherId(teacherId);
+        if(shareSeminarApplicationList2!=null){
+            shareSeminarApplicationList.addAll(shareSeminarApplicationList2);
         }
         return shareSeminarApplicationList;
     }
