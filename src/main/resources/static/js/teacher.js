@@ -20,7 +20,7 @@ function activeTeacher() {
     alert("input");
     $.ajax({
         type: "put",
-        url: "/teacher/active",
+        url: "http://xug98.cn/teacher/active",
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -666,6 +666,19 @@ function createClass() {
 }
     //修改班级
 function updateClass(classId) {
+    var formData = new FormData();
+    var fileField = document.getElementById("file"+classId);
+
+    formData.append('username', 'abc123');
+    formData.append('avatar', fileField.files[0]);
+
+    fetch("http://xug98.cn/class/" + Cookies.get("class"), {
+        method: 'PUT',
+        body: formData
+    })
+        .then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', JSON.stringify(response)));
     let fileToUpload = document.getElementById("file"+classId);
     let ata = { file: fileToUpload.val() };
     console.log(ata);
@@ -954,7 +967,6 @@ function getSeminarByClass() {
 function getSeminarScoreByClass() {
     console.log( Cookies.get("seminar"));
     console.log( Cookies.get("class"));
-
     $.ajax({
         type: "get",
         url:
@@ -1068,28 +1080,126 @@ function getAttendanceItemsByClass() {
             $.each(data, function(i, item) {
                 console.log(item);
                 str +='                        <tr>\n' +
-                    '                          <td>'+item.name+'</td>\n' +
-                    '                          <td>'+item.account+'</td>\n' +
-                    '                          <td class="text-nowrap">'+item.email+'</td>\n' +
+                    '                          <td><span class="text-muted">'+item.classSerial+'-'+item.teamSerial+'</span></td>\n' +
+                    '                          <td><a href="." class="text-inherit">'+item.pptName+'</a></td>\n' +
                     '                          <td>\n' +
-                    '                            <a href="./student-home-update.html" class="icon"\n' +
-                    '                        onclick="jumpFromStudentHome('+item.id+')"\n' +
-                    '                              ><i class="fe fe-edit"></i\n' +
-                    '                            ></a>\n' +
+                    '                            <a\n' +
+                    '                              class="icon"\n' +
+                    '                              href="javascript:void(0)"\n' +
+                    '                              onclick="getPptByAttendance('+item.id+')"\n' +
+                    '                            >\n' +
+                    '                              <i class="fe fe-download"></i>\n' +
+                    '                            </a>\n' +
+                    '                          </td>\n' +
+                    '                          <td><a href="." class="text-inherit">'+item.reportName+'</a></td>\n' +
+                    '                          <td id=attendance"'+item.id+'">\n' +
+                    '                            <span class="status-icon bg-success"></span> 5.0\n' +
                     '                          </td>\n' +
                     '                          <td>\n' +
-                    '                            <a href="#" class="icon" onclick="resetStudent('+item.id+')"\n' +
-                    '                              ><i class="fe fe-rotate-ccw"></i\n' +
-                    '                            ></a>\n' +
+                    '                            <a class="icon" href="javascript:void(0)">\n' +
+                    '                              <i class="fe fe-edit"></i>\n' +
+                    '                            </a>\n' +
                     '                          </td>\n' +
                     '                          <td>\n' +
-                    '                            <a href="#" class="icon" onclick="deleteStudent('+item.id+')"\n' +
-                    '                              ><i class="fe fe-trash"></i\n' +
-                    '                            ></a>\n' +
+                    '                            <a\n' +
+                    '                              class="icon"\n' +
+                    '                              href="javascript:void(0)"\n' +
+                    '                              onclick="getReportByAttendance('+item.id+')"\n' +
+                    '                            >\n' +
+                    '                              <i class="fe fe-download"></i>\n' +
+                    '                            </a>\n' +
                     '                          </td>\n' +
                     '                        </tr>\n';
+                getAttendanceItemReportScore(item.id);
             });
             content.innerHTML=str;
+        },
+        error: function(data) {
+            console.log(data);
+            alert("fail");
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+function getAttendanceItemReportScore(attendanceId) {
+    $.ajax({
+        type: "get",
+        url:
+            "/attendance/" +
+            attendanceId +
+            "/score",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            if (xhr.status === 200) {
+                var content=document.getElementById("attendance"+attendanceId);   //获取外围容器
+                var str='<span class="status-icon bg-success"></span>'+data.reportScore;
+                content.innerHTML=str;
+            }
+        },
+        statusCode: {
+            401: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            },
+            403: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            }
+        }
+    });
+}
+function getPptByAttendance(attendanceId) {
+    $.ajax({
+        type: "get",
+        url:
+            "/attendance/" + attendanceId + "/ppt",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                alert("获取成功");
+                console.log(data);
+            }
+        },
+        error: function(data) {
+            console.log(data);
+            alert("fail");
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+function getReportByAttendance(attendanceId) {
+
+    $.ajax({
+        type: "get",
+        url:
+            "/attendance/" +
+            attendanceId +
+            "/report",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                alert("获取成功");
+                console.log(data);
+            }
         },
         error: function(data) {
             console.log(data);
@@ -1479,6 +1589,70 @@ function getTeam() {
                 alert("Team");
 
                 alert("未找到课程");
+            },
+            403: function() {
+                console.log("roundlist");
+                let content=document.getElementById("content");
+
+                let str="";
+                let status="valid";
+                //获取外围容器
+                $.each(data, function(i, team) {
+                    console.log(team);
+
+                    if(team.status==0) status="invalid";
+                    let innerStr="";
+                    innerStr += '\n' +
+                        '                          <tr>\n' +
+                        '                            <td class="text-nowrap">' + team.leader.studentName + '</td>\n' +
+                        '                            <td>' + team.leader.account + '</td>\n' +
+                        '                            <td>组长</td>\n' +
+                        '                          </tr>';
+
+                    $.each(team.members, function (i, item) {
+                        // console.log(item);
+                        innerStr += '\n' +
+                            '                          <tr>\n' +
+                            '                            <td class="text-nowrap">' + item.studentName + '</td>\n' +
+                            '                            <td>' + item.account + '</td>\n' +
+                            '                            <td>组员</td>\n' +
+                            '                          </tr>';
+                    });
+                    str+='              <div class="col-lg-4">\n' +
+                        '                <div class="card card-collapsed">\n' +
+                        '                  <div class="card-header">\n' +
+                        '                    <div class="d-flex align-items-center">\n' +
+                        '                      <span class="stamp stamp-md bg-blue ml-1 mr-4">'+team.klassSerial+'-'+team.teamSerial+'</span>\n' +
+                        '                      <div>\n' +
+                        '                        <h4 class="m-0"><small>'+team.name+'</small></h4>\n' +
+                        '                        <small class="text-danger">'+status+'</small>\n' +
+                        '                      </div>\n' +
+                        '                    </div>\n' +
+                        '                    <div class="card-options">\n' +
+                        '                      <a\n' +
+                        '                        class="card-options-collapse"\n' +
+                        '                        data-toggle="card-collapse"\n' +
+                        '                        href="#"\n' +
+                        '                        ><i class="fe fe-chevron-up mr-1"></i\n' +
+                        '                      ></a>\n' +
+                        '                    </div>\n' +
+                        '                  </div>\n' +
+                        '                  <div class="card-body p-0">\n' +
+                        '                    <div class="table-responsive">\n' +
+                        '                      <table\n' +
+                        '                        class="table card-table table-striped table-vcenter"\n' +
+                        '                      >\n' +
+                        '                        <tbody>\n' +
+                        innerStr +
+                        '                        </tbody>\n' +
+                        '                      </table>\n' +
+                        '                    </div>\n' +
+                        '                  </div>\n' +
+                        '                </div>\n' +
+                        '              </div>\n';
+                });
+                content.innerHTML=str;
+
             }
         }
     });
@@ -1488,13 +1662,15 @@ function getTeam() {
 function getTeamShareList() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/course/" + Cookies.get("course") + "/teamshare",
-        // url: "../../static/json/team-share.json",
+        // url: "http://xug98.cn/course/" + Cookies.get("course") + "/teamshare",
+        url: "../../static/json/team-share.json",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                alert("获取team成功");
+                console.log(data);
+
                 let content=document.getElementById("content");   //获取外围容器
                 let str="";
                 $.each(data, function(i, item) {
@@ -1502,7 +1678,7 @@ function getTeamShareList() {
                     let strTeacher='';
                     let strCourse='';
                     let myName=Cookies.get("name");
-                    console.log(item);
+                    // console.log(item);
                     let itemMain=(item).mainCourse;
                     let itemSub=(item).subCourse;
                     if  ((itemMain.teacher).teacherName==myName)
@@ -1589,21 +1765,23 @@ function getTeamShareList() {
 function getSeminarShareList() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/course/" + Cookies.get("course") + "/seminarshare",
-        // url: "../../static/json/seminar-share.json",
+        // url: "http://xug98.cn/course/" + Cookies.get("course") + "/seminarshare",
+        url: "../../static/json/seminar-share.json",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                alert("获取seminar成功");
                 let content=document.getElementById("content");   //获取外围容器
                 let str="";
+                console.log(data);
+
                 $.each(data, function(i, item) {
                     let strStatus='';
                     let strTeacher='';
                     let strCourse='';
                     let myName=Cookies.get("name");
-                    console.log(item);
+                    // console.log(item);
                     let itemMain=(item).mainCourse;
                     let itemSub=(item).subCourse;
                     if  ((itemMain.teacher).teacherName==myName)
@@ -1760,7 +1938,7 @@ function createShare()
     let myType=$("#shareType").val();
     if(myType==1) myPath="teamsharerequest";
     if(myType==2) myPath="seminarsharerequest";
-    let subCourses=[{id:16}];
+    let subCourses=[{id:$("#shareCourse").val()}];
 
     let ata = {
         subCourseIdList: subCourses,
@@ -2269,7 +2447,6 @@ function getCurrentSeminar() {
     });
 }
 function getAttendanceScore(attendanceId) {
-
     $.ajax({
         type: "get",
         url:
