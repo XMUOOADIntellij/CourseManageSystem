@@ -32,7 +32,14 @@
         select
         <include refid="Base_Column_List"/>
         from share_seminar_application
-        where main_course_id=#{id,jdbcType=BIGINT}
+        where main_course_id=#{mainCourseId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectShareSeminarApplicationBySubCourseTeacherId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from share_seminar_application
+        where sub_course_teacher_id=#{subCourseTeacherId,jdbcType=BIGINT}
     </select>
 
     <insert id="addShareSeminarApplication" useGeneratedKeys="true" keyProperty="id">

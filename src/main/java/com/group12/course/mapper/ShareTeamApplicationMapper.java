@@ -21,11 +21,20 @@ public interface ShareTeamApplicationMapper {
     ShareTeamApplication selectShareTeamApplicationById(Long id);
 
     /**
-     *  查询
-     * @param courseId
+     *  根据主课程id查询
+     * @param mainCourseId
      * @return
      */
-    List<ShareTeamApplication> selectShareTeamApplicationByCourseId(Long courseId);
+    List<ShareTeamApplication> selectShareTeamApplicationByMainCourseId(Long mainCourseId);
+
+
+    /**
+     * 根据从课程教师id查询
+     * @param subCourseTeacherId
+     * @return
+     */
+    List<ShareTeamApplication> selectShareTeamApplicationBySubCourseTeacherId(Long subCourseTeacherId);
+
 
     /**
      * 添加

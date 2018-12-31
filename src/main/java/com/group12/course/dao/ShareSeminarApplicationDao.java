@@ -6,6 +6,7 @@ import com.group12.course.mapper.ShareSeminarApplicationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,8 +24,22 @@ public class ShareSeminarApplicationDao {
         return shareSeminarApplicationMapper.selectShareSeminarApplicationById(id);
     }
 
-    public List<ShareSeminarApplication> selectShareSeminarApplicationByMainCourseId(Long mainCourseId){
-        return shareSeminarApplicationMapper.selectShareSeminarApplicationByMainCourseId(mainCourseId);
+    public List<ShareSeminarApplication> selectShareSeminarApplicationByTeacherId(Long teacherId){
+        List<ShareSeminarApplication> shareSeminarApplicationList = new ArrayList<>();
+        List<Course> courseList = courseDao.getCourseByTeacherId(teacherId);
+        //为主课程时
+        for (Course course:courseList) {
+            List<ShareSeminarApplication> shareSeminarApplicationList1 = shareSeminarApplicationMapper.selectShareSeminarApplicationByMainCourseId(course.getId());
+            if(shareSeminarApplicationList1!=null&&!shareSeminarApplicationList1.isEmpty()){
+                shareSeminarApplicationList.addAll(shareSeminarApplicationList1);
+            }
+        }
+        //为从课程时
+        List<ShareSeminarApplication> shareSeminarApplicationList2 = shareSeminarApplicationMapper.selectShareSeminarApplicationBySubCourseTeacherId(teacherId);
+        if(shareSeminarApplicationList2!=null){
+            shareSeminarApplicationList.addAll(shareSeminarApplicationList2);
+        }
+        return shareSeminarApplicationList;
     }
 
     public int addShareSeminarApplication(ShareSeminarApplication shareSeminarApplication){
