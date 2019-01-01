@@ -187,109 +187,7 @@ onload="onPomodoroTimer();connect();initProgress()"-->
             </div>
           </div>
           <div class="col-9 col-md-10">
-            <div class="row">
-              <div class="col-md-8">
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">展示时间</h3>
-                  </div>
-                  <div class="card-body">
-                    <div class="content-heading mb-3">
-                      <h2 class="text-center m-0">
-                            <span>
-                              <button
-                                      class="btn btn-default mx-lg-3 px-lg-6"
-                                      type="submit"
-                                      onclick="start()"
-                              >
-                                开始展示
-                              </button>
-                              <button
-                                      class="btn btn-default mx-lg-3 px-lg-6"
-                                      type="submit"
-                                      onclick="next()"
-                              >
-                                下一组
-                              </button>
-                            </span>
-                      </h2>
-                    </div>
-                    <div class="panel panel-default">
-                      <div class="panel-body text-center">
 
-                        <div>
-
-                          <button
-                                  id="startButton"
-                                  class="btn btn-primary btn-lg mx-lg-3 px-lg-5"
-                                  type="submit"
-                                  onclick="continu()"
-                          >
-                            <i class="fe fe-play" aria-hidden="true"></i>
-                          </button>
-                          <button
-                                  id="stopButton"
-                                  class="btn btn-danger btn-lg mx-lg-3 px-lg-5"
-                                  type="submit"
-                                  onclick="pause()"
-                          >
-                            <i class="fe fe-pause" aria-hidden="true"></i>
-                          </button>
-                          <button
-                                  id="restartButton"
-                                  class="btn btn-warning btn-lg mx-lg-3 px-lg-5"
-                                  type="submit"
-                                  onclick="next()"
-                          >
-                            <i
-                                    class="fe fe-rotate-ccw"
-                                    aria-hidden="true"
-                            ></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">展示打分</h3>
-                  </div>
-                  <div class="card-body">
-                    <div class="form-group">
-                      <div class="input-group ">
-                        <div class="input-group-prepend">
-                          <button style="min-width: 2.5em" class="btn btn-decrement btn-white" type="button">
-                            <strong>-</strong>
-                          </button>
-                        </div>
-                        <input type="text" id="present-score" style="text-align: center" class="form-control">
-                        <div class="input-group-append">
-                          <button style="min-width: 2.5em" class="btn btn-increment btn-white" type="button">
-                            <strong>+</strong>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <button class="btn btn-primary btn-block" onclick="updatePresentScore()">确认修改</button>
-                    </div>
-                  </div>
-                  <div class="card-footer" hidden>
-                    <div class="d-flex">
-                      <a class="btn btn-link" href="./course-home.html"
-                      >取消</a
-                      >
-                      <button class="btn btn-primary ml-auto" type="submit">
-                        确认修改
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="row mt-3">
               <div class="col-md-8">
                 <div class="card">
@@ -299,8 +197,8 @@ onload="onPomodoroTimer();connect();initProgress()"-->
                   <div class="card-body">
                     <div>
                       <div class="mb-3">
-                        <button class="btn btn-secondary btn-block" onclick="select()">
-                          抽取提问
+                        <button class="btn btn-secondary btn-block" onclick="quesClick()">
+                          提问
                         </button>
                       </div>
                       <div class="list-group list-group-transparent mb-0" id="ques-content">
@@ -405,27 +303,6 @@ onload="onPomodoroTimer();connect();initProgress()"-->
     return true;
   }
 
-  function pause() {
-    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/pause", {"jwt":localStorage.jwt}, null);
-  }
-  function start() {
-
-    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/start", {"jwt":localStorage.jwt}, null);
-  }
-  function continu() {
-
-    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/continu", {"jwt":localStorage.jwt}, null);
-  }
-  function end() {
-    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/end", {"jwt":localStorage.jwt}, null);
-  }
-  function next() {
-    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/next", {"jwt":localStorage.jwt}, null);
-  }
-  function select() {
-    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/selectQuestion", {"jwt":localStorage.jwt}, null);
-
-  }
 
   function showGreeting(message) {
     console.log(message);
