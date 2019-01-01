@@ -80,7 +80,14 @@ public class KlassStudentDao {
      * @return
      */
     public Klass selectKlassByCourseIdAndStudentId(Long courseId, Long studentId){
-        return klassStudentMapper.selectKlassStudentByCourseIdAndStudentId(courseId,studentId).getKlass();
+
+        KlassStudent klassStudent= klassStudentMapper.selectKlassStudentByCourseIdAndStudentId(courseId,studentId);
+        if(klassStudent!=null){
+            return klassStudent.getKlass();
+        }
+        else{
+            return null;
+        }
     }
 
 }
