@@ -312,7 +312,7 @@ function createCourse() {
     for (i = 0; i < childCheckBoxes1.length; i++) {
         if (childCheckBoxes1[i].checked == true) {
             if (conflictdata !== "[") conflictdata += ',';
-            conflictdata += '{courseId:' + childCheckBoxes1[i].value + ',maxMember:' + childValue1[2 * i].value + ',minMember:' + childValue1[i * 2 + 1].value + '}';
+            conflictdata += '{"courseId":' + childCheckBoxes1[i].value + ',"maxMember":' + childValue1[2 * i].value + ',"minMember":' + childValue1[i * 2 + 1].value + '}';
         }
 
     }
@@ -343,12 +343,6 @@ function createCourse() {
     conflictclass += ']';
 
     console.log(conflictclass);
-    conflictclass="[['17','20']]";
-    conflictdata="[{" +
-        "courseId:'20'," +
-        "maxMember:'5'," +
-        "minMember:'1'" +
-        "}]";
 
     let ata = {
         courseName: $("#courseName").val(),
@@ -364,13 +358,13 @@ function createCourse() {
         relation: 1,
         conflictCourseLists: conflictclass
     };
-
+    let myData=JSON.stringify(ata);
     console.log(ata);
     $.ajax({
         type: "post",
         url: "http://xug98.cn/course",
         dataType: "json",
-        data: JSON.stringify(ata),
+        data: myData,
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
@@ -512,7 +506,7 @@ function getAllCourse() {
     });
 }
 function deleteCourse() {
-    var result = confirm("确定删除学生?");
+    var result = confirm("确定删除课程?");
     if (result) {
         let courseId = Cookies.get("course");
         $.ajax({
@@ -538,11 +532,13 @@ function deleteCourse() {
                 },
                 404: function () {
                     alert("未找到课程");
+                },
+                204: function(){
+
                 }
             }
         });
 
-        window.location.href("./course-home.html");
     }
 
 }
@@ -615,7 +611,7 @@ function getCourseListForSeminar() {
 function getClassItems() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/course/" + Cookies.get("course"),
+        url: "http://xug98.cn/course/" + Cookies.get("course")+"/class",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -966,9 +962,8 @@ function getClassList(seminarId) {
                         '                                  </a>\n' +
                         '                                </td>\n' +
                         '                              </tr>';
-                    content.innerHTML+=str;
-
                 });
+                content.innerHTML+=str;
 
             }
         },
