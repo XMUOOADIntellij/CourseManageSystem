@@ -56,7 +56,7 @@ public class KlassController {
 
 
 
-    @GetMapping(value="/{courseId}class",produces = "application/json; charset=utf-8")
+    @GetMapping(value="/{courseId}/class",produces = "application/json; charset=utf-8")
     public void getKlassByCourseIdAndStudentId(@PathVariable Long courseId,HttpServletRequest request,HttpServletResponse response) throws IOException {
         String token = request.getHeader("Authorization");
         Student jwtStudent = Jwt.unSign(token,Student.class);
