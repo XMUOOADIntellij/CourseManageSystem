@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
@@ -183,7 +184,7 @@ public class SeminarService {
         }
     }
 
-    public KlassSeminar startSeminar(Teacher teacher, Long seminarId, Long classId) {
+    public KlassSeminar continueSeminar(Teacher teacher, Long seminarId, Long classId) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         if (klassSeminar != null) {
             Course course = klassSeminar.getKlass().getCourse();
@@ -206,23 +207,23 @@ public class SeminarService {
         }
     }
 
-    public KlassSeminar continueSeminar(Teacher teacher, Long seminarId, Long classId) {
+    public KlassSeminar startSeminar(Teacher teacher, Long seminarId, Long classId) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         List<Attendance> attendanceList = attendanceDao.listAttendanceByKlassSeminarId(klassSeminar.getId());
         if (klassSeminar != null) {
             Course course = klassSeminar.getKlass().getCourse();
             if (course.getTeacher().getId().equals(teacher.getId())) {
                 //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
-
                 klassSeminar.setSeminarStatus(1);
                 if (klassSeminarDao.updateKlassSeminar(klassSeminar) == 1) {
-                    //第一个展示的队伍初始化
-                    for(Attendance attendance:attendanceList){
-                        if(attendance.getTeamOrder()==1){
-                            attendance.setPresented(true);
+                    attendanceList.sort(new Comparator<Attendance>() {
+                        @Override
+                        public int compare(Attendance o1, Attendance o2) {
+                            return o1.getTeamOrder().compareTo(o2.getTeamOrder());
                         }
-                    }
-                    return klassSeminar;
+                    });
+                    attendanceList.get(0).setPresented(true);
+                    return  klassSeminar;
                 } else {
                     return null;
                 }
