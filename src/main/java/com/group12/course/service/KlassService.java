@@ -105,4 +105,8 @@ public class KlassService {
 
     }
 
+    public Klass getKlassByCourseIdAndStudentId(Long courseId,Long studentId){
+        return klassStudentDao.selectKlassByCourseIdAndStudentId(courseId,studentId);
+    }
+
 }

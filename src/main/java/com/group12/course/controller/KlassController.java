@@ -1,11 +1,17 @@
 package com.group12.course.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.group12.course.entity.Klass;
+import com.group12.course.entity.Student;
 import com.group12.course.service.KlassService;
+import com.group12.course.tools.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author Tan Xue
@@ -46,5 +52,28 @@ public class KlassController {
         else{
             response.setStatus(200);
         }
+    }
+
+
+
+    @GetMapping(value="/{courseId}/class",produces = "application/json; charset=utf-8")
+    public void getKlassByCourseIdAndStudentId(@PathVariable Long courseId,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String token = request.getHeader("Authorization");
+        Student jwtStudent = Jwt.unSign(token,Student.class);
+        if(jwtStudent!=null){
+            Klass klass = klassService.getKlassByCourseIdAndStudentId(courseId,jwtStudent.getId());
+            if(klass!=null){
+                response.setStatus(200);
+                String json = JSONObject.toJSONString(klass);
+                response.getWriter().write(json);
+            }
+            else{
+                response.setStatus(404);
+            }
+        }
+        else{
+            response.setStatus(403);
+        }
+
     }
 }

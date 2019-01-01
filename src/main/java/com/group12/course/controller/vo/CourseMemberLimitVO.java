@@ -39,7 +39,7 @@ public class CourseMemberLimitVO {
     @Override
     public String toString() {
         return "CourseMemberLimitVO{" +
-                "course=" + courseId +
+                "courseId=" + courseId +
                 ", maxMember=" + maxMember +
                 ", minMember=" + minMember +
                 '}';
