@@ -45,14 +45,9 @@
     <link href="../../static/css/tabler.css" rel="stylesheet" />
     <!-- c3.js Charts Plugin -->
     <link href="../../static/plugins/charts-c3/plugin.css" rel="stylesheet" />
-    <!-- gijgo datepicker Plugin -->
-    <link
-      href="../../static/plugins/gijgo/css/gijgo.min.css"
-      rel="stylesheet"
-    />
+
     <script src="../../static/plugins/gijgo/js/gijgo.min.js"></script>
-    <!-- fab Plugin -->
-    <link href="../../static/plugins/fab/fab.css" rel="stylesheet" />
+
     <!-- Customize -->
     <link href="../../static/css/style.css" rel="stylesheet" />
     <script src="../../static/js/jwt.js"></script>
@@ -62,7 +57,7 @@
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/student.js"></script>
   </head>
-  <body onload="getMyTeam();getNoTeam();">
+  <body onload="getMyTeamForSetting();getNoTeamForSetting();">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -185,8 +180,8 @@
                                 <table
                                   class="table card-table table-striped table-vcenter"
                                 >
-                                  <tbody>
-                                    <tr>
+                                  <tbody id="content">
+                                 <!--   <tr>
                                       <td class="w-1">
                                         <span class="avatar">L</span>
                                       </td>
@@ -289,7 +284,7 @@
                                           <i class="fe fe-trash"></i>
                                         </a>
                                       </td>
-                                    </tr>
+                                    </tr>-->
                                   </tbody>
                                 </table>
                               </div>
@@ -307,14 +302,14 @@
                               >
                                 <thead>
                                   <tr>
-                                    <th class="w-auto"></th>
-                                    <th colspan="2">姓名</th>
+                                    <th></th>
+                                    <th>姓名</th>
                                     <th>学号</th>
                                     <th>所属课程</th>
                                   </tr>
                                 </thead>
-                                <tbody>
-                                  <tr>
+                                <tbody id="content-no" class="check1">
+                            <!--      <tr>
                                     <td>
                                       <label
                                         class="custom-control custom-checkbox"
@@ -400,7 +395,7 @@
                                       ></span>
                                       J2ee
                                     </td>
-                                  </tr>
+                                  </tr>-->
                                 </tbody>
                               </table>
                             </div>
@@ -413,15 +408,9 @@
                         <a class="btn btn-link" href="course-team.html">取消</a>
                         <button
                           class="btn btn-primary ml-auto"
-                          onclick="deleteTeamMember()"
-                        >
-                          退出小组
-                        </button>
-                        <button
-                          class="btn btn-primary ml-auto"
                           onclick="addTeamMembers()"
                         >
-                          确认修改
+                          确认添加
                         </button>
                       </div>
                     </div>
@@ -445,5 +434,21 @@
         </div>
       </div>
     </footer>
+
+
   </body>
+<script>
+  // 修改弹出框的title, 显示弹框
+  function ShowCreateModal(title){
+    $("#createFileTitle").text(title);
+    $('#createFileMModal').modal('show');
+  }
+  // 关闭弹框， 获取输入值，然后执行逻辑
+  $("#createFileSureBut").click(function (){
+    $("#createFileMModal").modal("hide");
+    var inputFileName = $("#fileName").val();
+    console.log("input file name : " + inputFileName);
+  });
+
+</script>
 </html>

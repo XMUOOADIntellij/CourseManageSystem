@@ -62,7 +62,7 @@
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/student.js"></script>
   </head>
-  <body onload="getTeam();getNoTeam()">
+  <body onload="getMyTeam();getTeam();getNoTeam()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -167,8 +167,8 @@
             </nav>
             <div class="row">
               <div class="col-lg-8">
-                <div class="row">
-                  <div class="col-lg-6">
+                <div class="row" id="content">
+                 <!-- <div class="col-lg-6">
                     <div class="card">
                       <div class="card-header">
                         <div class="d-flex align-items-center">
@@ -379,7 +379,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div>-->
                 </div>
               </div>
               <div class="col-lg-4">
@@ -404,39 +404,8 @@
                       <table
                         class="table card-table table-striped table-vcenter"
                       >
-                        <tbody>
-                          <tr>
-                            <td class="w-1"><span class="avatar">L</span></td>
-                            <td class="text-nowrap">林晓明</td>
-                            <td>24320162202xxx</td>
-                            <td>组长</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">N</span></td>
-                            <td class="text-nowrap">牛晓彤</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">J</span></td>
+                        <tbody id="content-no">
 
-                            <td class="text-nowrap">蒋耀</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">X</span></td>
-
-                            <td class="text-nowrap">徐刚</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
-                          <tr>
-                            <td><span class="avatar">T</span></td>
-                            <td class="text-nowrap">谈雪</td>
-                            <td>24320162202xxx</td>
-                            <td>组员</td>
-                          </tr>
                         </tbody>
                       </table>
                     </div>
