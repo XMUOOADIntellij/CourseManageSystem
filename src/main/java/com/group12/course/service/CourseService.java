@@ -123,6 +123,7 @@ public class CourseService {
         if (courseMemberLimitStrategyList != null && !courseMemberLimitStrategyList.isEmpty()) {
             for (CourseMemberLimitStrategy courseMemberLimitStrategy : courseMemberLimitStrategyList) {
                 status=courseMemberLimitStrategyDao.addCourseMemberLimitStrategy(courseMemberLimitStrategy)==0?0:status;
+
             }
             if (relation == 0) {
                 //0表示满足其一，或关系

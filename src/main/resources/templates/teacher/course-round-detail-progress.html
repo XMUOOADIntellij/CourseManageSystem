@@ -419,7 +419,7 @@
   }
   function continu() {
 
-    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/continu", {"jwt":localStorage.jwt}, null);
+    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/continue", {"jwt":localStorage.jwt}, null);
   }
   function end() {
     stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/end", {"jwt":localStorage.jwt}, null);
