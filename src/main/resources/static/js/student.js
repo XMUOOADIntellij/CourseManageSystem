@@ -598,7 +598,7 @@ function createTeam() {
 
     }
     conflictdata += ']';
-    addData="{memebers:"+conflictdata+"}";
+    addData='{"memebers":'+conflictdata+'}';
     console.log(addData);
     let myId=Cookies.get("id");
     let myCourse=Cookies.get("course");
