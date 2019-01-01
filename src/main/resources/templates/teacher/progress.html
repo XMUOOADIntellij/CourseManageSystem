@@ -312,7 +312,6 @@
                             </button>
                           </div>
                           <div class="list-group list-group-transparent mb-0" id="ques-content">
-
                           </div>
                         </div>
                       </div>
@@ -389,12 +388,16 @@
               console.log("Connected: " + frame);
               stompClient.subscribe("/seminarSocket/progress", function(greeting) {
                 console.log(JSON.parse(greeting.body));
+                receiveStatus(JSON.parse(greeting.body));
+
               });
               stompClient.subscribe("/seminarSocket/question", function(greeting) {
                 console.log(JSON.parse(greeting.body));
+                receiveQues(JSON.parse(greeting.body));
               });
               stompClient.subscribe("/seminarSocket/attendance", function(greeting) {
-                tabClick(JSON.parse(greeting.body).id);
+                console.log(JSON.parse(greeting.body));
+                receiveNext(JSON.parse(greeting.body));
               });
             }
     );
@@ -446,16 +449,7 @@
     getAttendanceScore(attendanceId);
   }
 
-  function quesClick(questionId){
-    Cookies.set("question",questionId);
-    let cDoms=document.getElementById("ques-content").children;
-    let i;
-    for (i = 0; i < cDoms.length; i++) {
-      cDoms[i].setAttribute("class","list-group-item list-group-item-action d-flex align-items-center  px-0");
-    }
-    document.getElementById(questionId).setAttribute("class","list-group-item list-group-item-action d-flex align-items-center active px-1 py-3");
-    getQuestionScore(questionId);
-  }
+
 </script>
 
 </html>
