@@ -1,0 +1,125 @@
+[
+  {
+    "course": {
+      "courseName": "OOAD",
+      "id":  "16",
+      "introduction": "面向对象的分析与设计"
+    },
+    "id": 3,
+    "klass": {
+      "course": {
+        "$ref": "$.team.course"
+      },
+      "grade": "2016",
+      "id": 22,
+      "klassLocation": "海韵",
+      "klassSerial": 2
+    },
+    "klassSerial": "2",
+    "leader": {
+      "account": "21620162203180",
+      "active": false,
+      "id": 160,
+      "studentName": "邱明"
+    },
+    "members": [
+      {
+        "account": "21620162203180",
+        "active": false,
+        "id": 160,
+        "studentName": "邱明"
+      },
+      {
+        "account": "21620162203180",
+        "active": false,
+        "id": 160,
+        "studentName": "邱明"
+      }
+    ],
+    "status": 1,
+    "teamName": "Intellij",
+    "teamSerial": 6
+  },
+  {
+    "course": {
+      "courseName": "OOAD",
+      "id":  "16",
+      "introduction": "面向对象的分析与设计"
+    },
+    "id": 3,
+    "klass": {
+      "course": {
+        "$ref": "$.team.course"
+      },
+      "grade": "2016",
+      "id": 22,
+      "klassLocation": "海韵",
+      "klassSerial": 2
+    },
+    "klassSerial": "2",
+    "leader": {
+      "account": "21620162203180",
+      "active": false,
+      "id": 160,
+      "studentName": "邱明"
+    },
+    "members": [
+      {
+        "account": "21620162203180",
+        "active": false,
+        "id": 160,
+        "studentName": "邱明"
+      },
+      {
+        "account": "21620162203180",
+        "active": false,
+        "id": 160,
+        "studentName": "邱明"
+      }
+    ],
+    "status": 1,
+    "teamName": "Intellij",
+    "teamSerial": 6
+  },
+  {
+    "course": {
+      "courseName": "OOAD",
+      "id":  "16",
+      "introduction": "面向对象的分析与设计"
+    },
+    "id": 3,
+    "klass": {
+      "course": {
+        "$ref": "$.team.course"
+      },
+      "grade": "2016",
+      "id": 22,
+      "klassLocation": "海韵",
+      "klassSerial": 2
+    },
+    "klassSerial": "2",
+    "leader": {
+      "account": "21620162203180",
+      "active": false,
+      "id": 160,
+      "studentName": "邱明"
+    },
+    "members": [
+      {
+        "account": "21620162203180",
+        "active": false,
+        "id": 160,
+        "studentName": "邱明"
+      },
+      {
+        "account": "21620162203180",
+        "active": false,
+        "id": 160,
+        "studentName": "邱明"
+      }
+    ],
+    "status": 1,
+    "teamName": "Intellij",
+    "teamSerial": 6
+  }
+]

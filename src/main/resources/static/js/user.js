@@ -7,7 +7,7 @@ function bindUser() {
     let ata = { account: $("#account").val(), password: $("#password").val() };
     $.ajax({
         type: "post",
-        url: "http://xug98.cn/user/login",
+        url: "/user/login",
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",

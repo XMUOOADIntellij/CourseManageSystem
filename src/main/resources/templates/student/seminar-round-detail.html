@@ -64,7 +64,7 @@
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body class="">
+  <body class="getSeminarByClass()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -267,60 +267,39 @@
                             <div class="form-group">
                               <label class="form-label">主题</label>
                               <input
-                                type="text"
-                                class="form-control"
-                                name="example-disabled-input"
-                                disabled
+                                      type="text"
+                                      class="form-control"
+                                      id="name"
+                                      name="example-disabled-input"
+                                      disabled
                               />
                             </div>
                             <div class="form-group">
                               <label class="form-label"
-                                >要求 <span class="form-label-small"></span
+                              >要求 <span class="form-label-small"></span
                               ></label>
                               <textarea
-                                class="form-control"
-                                name="example-textarea-input"
-                                rows="2"
-                                disabled
+                                      class="form-control"
+                                      name="example-textarea-input"
+                                      rows="2"
+                                      id="introduction"
+                                      disabled
                               ></textarea>
                             </div>
                           </div>
                           <div class="col-md-6 col-lg-4">
                             <div class="form-group">
                               <label class="form-label">轮次</label>
-                              <select
-                                class="form-control custom-select"
-                                disabled
-                              >
-                                <option value="1" selected="selected"
-                                  >第一轮</option
-                                >
-                                <option value="2">第二轮</option>
-                              </select>
+                              <input class="form-control" id="round" name="example-text-input" placeholder="2016" type="text" disabled>
                             </div>
                           </div>
                           <div class="col-md-6 col-lg-4">
                             <div class="form-group">
                               <label class="form-label">课次</label>
-                              <select
-                                class="form-control custom-select"
-                                disabled
-                              >
-                                <option value="1" selected="selected"
-                                  >第一次</option
-                                >
-                                <option value="2">第二次</option>
-                              </select>
+                              <input class="form-control" id="seminarSerial" name="example-text-input" placeholder="2016" type="text" disabled>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="card-footer text-right">
-                        <a
-                          class="btn btn-primary btn-lg my-0"
-                          href="seminar-round-detail-setting.html"
-                          >修改轮次设置</a
-                        >
                       </div>
                     </div>
                   </div>

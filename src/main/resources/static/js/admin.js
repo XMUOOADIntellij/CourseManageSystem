@@ -8,7 +8,7 @@ function bindAdmin() {
     let ata = { account: $("#account").val(), password: $("#password").val() };
     $.ajax({
         type: "post",
-        url: "http://xug98.cn/admin/login",
+        url: "/admin/login",
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -37,8 +37,8 @@ function bindAdmin() {
 function getAllStudent() {
     $.ajax({
         type: "get",
-        // url: "http://xug98.cn/student",
-        url: "../../static/json/student-all.json",
+        url: "/student",
+        // url: "../../static/json/student-all.json",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -98,7 +98,7 @@ function searchStudent() {
         alert("input");
         $.ajax({
             type: "get",
-            url: "http://xug98.cn/student/searchStudent",
+            url: "/student/searchStudent",
             dataType: "json",
             contentType: "application/json",
             success: function(data, textStatus, xhr) {
@@ -147,7 +147,7 @@ function deleteStudent(studentId) {
     if (result) {
         $.ajax({
             type: "delete",
-            url: "http://xug98.cn/student/" + studentId,
+            url: "/student/" + studentId,
             dataType: "json",
             contentType: "application/json",
             success: function (data, textStatus, xhr) {
@@ -197,7 +197,7 @@ function updateStudent() {
 function getStudentInfo() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/student/"+Cookies.get("student")+"/information",
+        url: "/student/"+Cookies.get("student")+"/information",
         dataType: "json",
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
@@ -219,7 +219,7 @@ function resetStudent() {
         alert("input");
         $.ajax({
             type: "put",
-            url: "http://xug98.cn/student/" + Cookies.get("student") + "/password",
+            url: "/student/" + Cookies.get("student") + "/password",
             dataType: "json",
             contentType: "application/json",
             success: function (data, textStatus, xhr) {
@@ -242,8 +242,8 @@ function resetStudent() {
 function getAllTeacher() {
     $.ajax({
         type: "get",
-        // url: "http://xug98.cn/teacher",
-        url: "../../static/json/teacher-all.json",
+        url: "/teacher",
+        // url: "../../static/json/teacher-all.json",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
@@ -304,7 +304,7 @@ function createTeacher() {
     alert("input");
     $.ajax({
         type: "post",
-        url: "http://xug98.cn/teacher",
+        url: "/teacher",
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -332,7 +332,7 @@ function searchTeacher() {
         alert("input");
         $.ajax({
             type: "get",
-            url: "http://xug98.cn/student/searchTeacher",
+            url: "/student/searchTeacher",
             dataType: "json",
             contentType: "application/json",
             success: function(data, textStatus, xhr) {
@@ -380,7 +380,7 @@ function deleteTeacher(teacherId) {
     if (result) {
         $.ajax({
             type: "delete",
-            url: "http://xug98.cn/teacher/" + teacherId,
+            url: "/teacher/" + teacherId,
             dataType: "json",
             contentType: "application/json",
             success: function (data, textStatus, xhr) {
@@ -430,7 +430,7 @@ function updateTeacher() {
 function getTeacherInfo() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/teacher/"+Cookies.get("teacher")+"/information",
+        url: "/teacher/"+Cookies.get("teacher")+"/information",
         dataType: "json",
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
@@ -453,7 +453,7 @@ function resetTeacher() {
         alert("input");
         $.ajax({
             type: "put",
-            url: "http://xug98.cn/teacher/" + Cookies.get("teacher") + "/password",
+            url: "/teacher/" + Cookies.get("teacher") + "/password",
             dataType: "json",
             contentType: "application/json",
             success: function (data, textStatus, xhr) {

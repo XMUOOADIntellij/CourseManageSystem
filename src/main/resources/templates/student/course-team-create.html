@@ -62,7 +62,7 @@
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/student.js"></script>
   </head>
-  <body onload="">
+  <body onload="getNoTeamForSetting();getAllClassForCreate();">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -181,7 +181,7 @@
                           <label class="form-label">小组名</label>
                           <input
                             class="form-control"
-                            name="example-text-input"
+                            id="name"
                             placeholder="Text.."
                             type="text"
                           />
@@ -190,7 +190,7 @@
                           <label class="form-label">所属班级</label>
                           <div class="row gutters-xs">
                             <div class="col-12">
-                              <select class="form-control custom-select">
+                              <select class="form-control custom-select" id="select-content">
                                 <option value="1">1班</option>
                                 <option value="2">2班</option>
                                 <option value="3">3班</option>
@@ -212,116 +212,108 @@
                       </div>
                       <div class="col-md-9">
                         <div class="form-group">
-                          <label class="form-label">未组队学生</label>
+                          <label class="form-label">添加成员</label>
                           <div class="card" style="max-height:15rem">
                             <div class="table-responsive">
                               <table
-                                class="table card-table table-vcenter text-nowrap"
+                                      class="table card-table table-vcenter text-nowrap"
                               >
                                 <thead>
-                                  <tr>
-                                    <th class="w-auto"></th>
-                                    <th>学号</th>
-                                    <th>姓名</th>
-                                    <th>性别</th>
-                                    <th>所属课程</th>
-                                    <th></th>
-                                  </tr>
+                                <tr>
+                                  <th></th>
+                                  <th>姓名</th>
+                                  <th>学号</th>
+                                  <th>所属课程</th>
+                                </tr>
                                 </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>
-                                      <label
-                                        class="custom-control custom-checkbox"
-                                      >
-                                        <input
-                                          type="checkbox"
-                                          class="custom-control-input"
-                                          name="example-checkbox1"
-                                          value="option1"
-                                          checked=""
-                                        />
-                                        <span
-                                          class="custom-control-label"
-                                        ></span>
-                                      </label>
-                                    </td>
-                                    <td>
-                                      <span class="text-muted"
-                                        >24320162202888</span
-                                      >
-                                    </td>
-                                    <td>牛晓彤</td>
-                                    <td>女</td>
-                                    <td>
-                                      <span
-                                        class="status-icon bg-orange"
-                                      ></span>
-                                      J2ee
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label
-                                        class="custom-control custom-checkbox"
-                                      >
-                                        <input
-                                          type="checkbox"
-                                          class="custom-control-input"
-                                          name="example-checkbox1"
-                                          value="option1"
-                                          checked=""
-                                        />
-                                        <span
-                                          class="custom-control-label"
-                                        ></span>
-                                      </label>
-                                    </td>
-                                    <td>
-                                      <span class="text-muted"
-                                        >24320162202888</span
-                                      >
-                                    </td>
-                                    <td>牛晓彤</td>
-                                    <td>女</td>
-                                    <td>
-                                      <span
-                                        class="status-icon bg-orange"
-                                      ></span>
-                                      J2ee
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label
-                                        class="custom-control custom-checkbox"
-                                      >
-                                        <input
-                                          type="checkbox"
-                                          class="custom-control-input"
-                                          name="example-checkbox1"
-                                          value="option1"
-                                          checked=""
-                                        />
-                                        <span
-                                          class="custom-control-label"
-                                        ></span>
-                                      </label>
-                                    </td>
-                                    <td>
-                                      <span class="text-muted"
-                                        >24320162202888</span
-                                      >
-                                    </td>
-                                    <td>牛晓彤</td>
-                                    <td>女</td>
-                                    <td>
-                                      <span
-                                        class="status-icon bg-orange"
-                                      ></span>
-                                      J2ee
-                                    </td>
-                                  </tr>
+                                <tbody id="content-no" class="check1">
+                                <!--      <tr>
+                                        <td>
+                                          <label
+                                            class="custom-control custom-checkbox"
+                                          >
+                                            <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                            />
+                                            <span
+                                              class="custom-control-label"
+                                            ></span>
+                                          </label>
+                                        </td>
+                                        <td class="w-1">
+                                          <span class="avatar">L</span>
+                                        </td>
+                                        <td class="text-nowrap">林晓明</td>
+                                        <td>24320162202xxx</td>
+                                        <td>
+                                          <span
+                                            class="status-icon bg-orange"
+                                          ></span>
+                                          J2ee
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <label
+                                            class="custom-control custom-checkbox"
+                                          >
+                                            <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                            />
+                                            <span
+                                              class="custom-control-label"
+                                            ></span>
+                                          </label>
+                                        </td>
+                                        <td class="w-1">
+                                          <span class="avatar">L</span>
+                                        </td>
+                                        <td class="text-nowrap">林晓明</td>
+                                        <td>24320162202xxx</td>
+                                        <td>
+                                          <span
+                                            class="status-icon bg-orange"
+                                          ></span>
+                                          J2ee
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td>
+                                          <label
+                                            class="custom-control custom-checkbox"
+                                          >
+                                            <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                            />
+                                            <span
+                                              class="custom-control-label"
+                                            ></span>
+                                          </label>
+                                        </td>
+                                        <td class="w-1">
+                                          <span class="avatar">L</span>
+                                        </td>
+                                        <td class="text-nowrap">林晓明</td>
+                                        <td>24320162202xxx</td>
+                                        <td>
+                                          <span
+                                            class="status-icon bg-orange"
+                                          ></span>
+                                          J2ee
+                                        </td>
+                                      </tr>-->
                                 </tbody>
                               </table>
                             </div>
