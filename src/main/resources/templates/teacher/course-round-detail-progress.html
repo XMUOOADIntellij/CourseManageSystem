@@ -268,17 +268,8 @@
                       <div class="card-body">
                         <div class="form-group">
                           <div class="input-group ">
-                            <div class="input-group-prepend">
-                              <button style="min-width: 2.5em" class="btn btn-decrement btn-white" type="button">
-                                <strong>-</strong>
-                              </button>
-                            </div>
+
                             <input type="text" id="present-score" style="text-align: center" class="form-control">
-                            <div class="input-group-append">
-                              <button style="min-width: 2.5em" class="btn btn-increment btn-white" type="button">
-                                <strong>+</strong>
-                              </button>
-                            </div>
                           </div>
                         </div>
                         <div class="form-group">
@@ -327,15 +318,9 @@
                         <div class="form-group">
                           <div class="input-group ">
                             <div class="input-group-prepend">
-                              <button style="min-width: 2.5em" class="btn btn-decrement btn-white" type="button">
-                                <strong>-</strong>
-                              </button>
                             </div>
                             <input type="text" id="question-score" style="text-align: center" class="form-control">
                             <div class="input-group-append">
-                              <button style="min-width: 2.5em" class="btn btn-increment btn-white" type="button">
-                                <strong>+</strong>
-                              </button>
                             </div>
                           </div>
                         </div>
@@ -389,13 +374,15 @@
               console.log("Connected: " + frame);
               stompClient.subscribe("/seminarSocket/progress", function(greeting) {
                 console.log(JSON.parse(greeting.body));
+                receiveStatus(JSON.parse(greeting.body));
               });
               stompClient.subscribe("/seminarSocket/question", function(greeting) {
                 console.log(JSON.parse(greeting.body));
+                receiveQues(JSON.parse(greeting.body));
               });
               stompClient.subscribe("/seminarSocket/attendance", function(greeting) {
                 console.log(JSON.parse(greeting.body));
-                tabClick(JSON.parse(greeting.body).id);
+                receiveNext(JSON.parse(greeting.body));
               });
             }
     );
@@ -436,6 +423,45 @@
     console.log(message);
   }
 
+  function receiveQues(data){
+     if(data.selected==true){
+       let str="抽取提问的是"+data.klassSerial+"-"
+       +data.teamSerial+"的"+data.studentName;
+       let content=document.getElementById("ques-number");   //获取外围容器
+       content.text=parseInt(content.text)-1;
+       alert(str);
+     }
+     else{
+       let content=document.getElementById("ques-number");   //获取外围容器
+       content.text=parseInt(content.text)+1;
+       alert(str);
+     }
+
+  }
+
+  function receiveNext(data){
+
+
+  }
+  function receiveStatus(data){
+    if(data.status==1){
+      let str="讨论课已开始" ;
+      alert(str);
+    }//1开始 2 结束 3 暂停 0 未开始
+    if(data.status==2){
+      let str="讨论课已结束" ;
+      alert(str);
+    }//1开始 2 结束 3 暂停 0 未开始
+    if(data.status==3){
+      let str="讨论课已暂停" ;
+      alert(str);
+    }//1开始 2 结束 3 暂停 0 未开始
+    if(data.status==0){
+      let str="讨论课未开始" ;
+      alert(str);
+    }//1开始 2 结束 3 暂停 0 未开始
+
+  }
   function tabClick(attendanceId){
     Cookies.set("attendance",attendanceId);
     let cDoms=document.getElementById("nav-content").children;
