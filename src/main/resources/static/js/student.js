@@ -593,7 +593,7 @@ function createTeam() {
     for (i = 0; i < childCheckBoxes1.length; i++) {
         if (childCheckBoxes1[i].checked == true) {
             if (conflictdata !== "[") conflictdata += ',';
-            conflictdata += '{ id:' + childCheckBoxes1[i].value + '}';
+            conflictdata += '{"id":' + childCheckBoxes1[i].value + '}';
         }
 
     }
@@ -690,7 +690,7 @@ function addTeamMembers() {
     for (i = 0; i < childCheckBoxes1.length; i++) {
         if (childCheckBoxes1[i].checked == true) {
             if (conflictdata !== "[") conflictdata += ',';
-            conflictdata += '{ id:' + childCheckBoxes1[i].value + '}';
+            conflictdata += '{"id":' + childCheckBoxes1[i].value + '}';
         }
 
     }
@@ -920,7 +920,39 @@ function getCourseList() {
     }
   });
 }
+function getClassByCourse(){
+    $ajax({
+        type: "get",
+        url: "http://xug98.cn/seminar",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("getCurrentSeminar success");
+            if (xhr.status === 200) {
+                Cookies.set("class",data.klassId);
+                Cookies.set("seminar",data.seminarId);
+                getAttendanceByClass();
+            }
+        },
+        error: function(data){
+            console.log(data);
+            alert("error");
 
+        },
+        statusCode: {
+            401: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            },
+            403: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            }
+        }
+    });
+
+}
 
 //进行中
 function getAttendanceByClass() {
@@ -954,7 +986,7 @@ function getAttendanceByClass() {
                             navClass="list-group-item list-group-item-action d-flex align-items-center active px-1 py-3";
                         }
 
-                        strTab+='<a class="'+navClass+'" id="'+item.id+'" href="#" onclick="tabClick('+item.id+')">' +
+                        strTab+='<a class="'+navClass+'" id="'+item.id+'" href="#">' +
                             '                      <span class="icon mr-3"><i class="fe fe-inbox"></i></span\n' +
                             '                      >'+item.classSerial+'-'+item.teamSerial+'<span class="ml-auto badge badge-primary"></span>\n' +
                             '                    </a>';

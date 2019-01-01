@@ -534,7 +534,8 @@ function deleteCourse() {
                     alert("未找到课程");
                 },
                 204: function(){
-
+                    alert("成功");
+                    window.location.href = "./course-home.html";
                 }
             }
         });
@@ -760,7 +761,7 @@ function createClass() {
             201: function(data) {
                 console.log(data);
                 alert("success");
-                window.location.href = "./seminar-round.html";
+                window.location.href = "./class-round.html";
             },
             400: function() {
                 $("#password").val("");
