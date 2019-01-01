@@ -56,6 +56,7 @@ public class CourseController {
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
         if(jwtTeacher!=null){
 
+            System.out.print(courseVO);
             //添加课程
             Course course = new Course(courseVO);
             course.setTeacher(jwtTeacher);
