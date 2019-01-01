@@ -598,7 +598,6 @@ function createTeam() {
 
     }
     conflictdata += ']';
-    addData='{"memebers":'+conflictdata+'}';
     console.log(addData);
     let myId=Cookies.get("id");
     let myCourse=Cookies.get("course");
@@ -616,7 +615,7 @@ function createTeam() {
             id: $("#select-content").val()
         },
         leader: leader,
-        members: addData
+        members: conflictdata
     };
     console.log(ata);
     $.ajax({
