@@ -1,12 +1,17 @@
 package com.group12.course.sevice;
 
+import com.alibaba.fastjson.JSONObject;
+import com.group12.course.controller.vo.QuestionVO;
 import com.group12.course.dao.AttendanceDao;
+import com.group12.course.dao.QuestionDao;
 import com.group12.course.dao.TeacherDao;
 import com.group12.course.entity.Attendance;
 import com.group12.course.entity.Seminar;
 import com.group12.course.entity.Teacher;
 import com.group12.course.service.AttendanceService;
+import com.group12.course.service.QuestionService;
 import com.group12.course.service.SeminarService;
+import org.json.JSONString;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +34,8 @@ public class SeminarServiceTest extends AbstractTransactionalJUnit4SpringContext
     TeacherDao teacherDao;
     @Autowired
     AttendanceDao attendanceDao;
+    @Autowired
+    QuestionService questionService;
 
     @Test
     public void testCreateSeminar(){
@@ -88,4 +95,12 @@ public class SeminarServiceTest extends AbstractTransactionalJUnit4SpringContext
         }
     }
 
+    @Test
+    public void selectQuesiton(){
+        Teacher teacher =teacherDao.getTeacher("2007100012");
+        seminarService.startSeminar(teacher,10L,21L);
+
+        System.out.println(
+                new QuestionVO(questionService.selectQuestion(teacher,10L,21L,63L)));
+    }
 }
