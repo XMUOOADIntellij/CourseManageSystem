@@ -265,7 +265,13 @@
     function showGreeting(message) {
       console.log(message);
     }
-
+    function receiveNext(data){
+        let str="抽取提问的是"+data.klassSerial+"-"
+                +data.teamSerial+"的"+data.studentName;
+        let content=document.getElementById("ques-number");   //获取外围容器
+        content.text=parseInt(content.text)-1;
+        alert(str);
+    }
     function tabClick(attendanceId){
       Cookies.set("attendance",attendanceId);
       let cDoms=document.getElementById("nav-content").children;

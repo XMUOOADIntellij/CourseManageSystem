@@ -593,7 +593,7 @@ function createTeam() {
     for (i = 0; i < childCheckBoxes1.length; i++) {
         if (childCheckBoxes1[i].checked == true) {
             if (conflictdata !== "[") conflictdata += ',';
-            conflictdata += '{"id":' + childCheckBoxes1[i].value + '}';
+            conflictdata += '{id:' + childCheckBoxes1[i].value + '}';
         }
 
     }
@@ -601,28 +601,24 @@ function createTeam() {
     console.log(addData);
     let myId=Cookies.get("id");
     let myCourse=Cookies.get("course");
-    let leader = [
+    let leader =
         {
             id: myId
-        }
-    ];
+        };
     let ata = {
         name: $("#name").val(),
-        course: {
-            id: myCourse
-        },
-        class: {
-            id: $("#select-content").val()
-        },
+        courseId: myCourse,
+        classId: $("#select-content").val(),
         leader: leader,
         members: conflictdata
     };
+
     console.log(ata);
     $.ajax({
         type: "post",
         url: "http://xug98.cn/team",
         dataType: "json",
-        data: JSON.stringify(ata),
+        data:JSON.stringify(ata),
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);

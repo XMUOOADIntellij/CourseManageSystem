@@ -90,11 +90,6 @@
                 XCms
               </a>
               <div class="d-flex order-lg-2 ml-auto">
-                <div class="dropdown d-none d-md-flex">
-                  <a class="nav-link icon" href="todo-list.html">
-                    <i class="fe fe-bell"></i> <span class="nav-unread"></span>
-                  </a>
-                </div>
                 <div class="dropdown">
                   <a
                     class="nav-link pr-0 leading-none"
@@ -118,9 +113,6 @@
                   >
                     <a class="dropdown-item" href="./account-setting.html">
                       <i class="dropdown-icon fe fe-settings"></i> 个人设置
-                    </a>
-                    <a class="dropdown-item" href="./todo-list.html">
-                      <i class="dropdown-icon fe fe-mail"></i> 待办事项
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="./help.html">
@@ -387,14 +379,18 @@
             function(frame) {
               setConnected(true);
               console.log("Connected: " + frame);
-              stompClient.subscribe("http://xug98.cn/seminarSocket/progress", function(greeting) {
+              stompClient.subscribe("/seminarSocket/progress", function(greeting) {
                 console.log(JSON.parse(greeting.body));
+                receiveStatus(JSON.parse(greeting.body));
+
               });
-              stompClient.subscribe("http://xug98.cn/seminarSocket/question", function(greeting) {
+              stompClient.subscribe("/seminarSocket/question", function(greeting) {
                 console.log(JSON.parse(greeting.body));
+                receiveQues(JSON.parse(greeting.body));
               });
-              stompClient.subscribe("http://xug98.cn/seminarSocket/attendance", function(greeting) {
-                tabClick(JSON.parse(greeting.body).id);
+              stompClient.subscribe("/seminarSocket/attendance", function(greeting) {
+                console.log(JSON.parse(greeting.body));
+                receiveNext(JSON.parse(greeting.body));
               });
             }
     );
@@ -444,6 +440,45 @@
     }
     document.getElementById(attendanceId).setAttribute("class","list-group-item list-group-item-action d-flex align-items-center active px-1 py-3");
     getAttendanceScore(attendanceId);
+  }
+
+  function receiveQues(data){
+    if(data.selected==true){
+      let str="抽取提问的是"+data.klassSerial+"-"
+              +data.teamSerial+"的"+data.studentName;
+      let content=document.getElementById("ques-number");   //获取外围容器
+      content.text=parseInt(content.text)-1;
+      alert(str);
+    }
+    else{
+      let content=document.getElementById("ques-number");   //获取外围容器
+      content.text=parseInt(content.text)+1;
+      alert(str);
+    }
+
+  }
+  function receiveStatus(data){
+    if(data.status==1){
+      let str="讨论课已开始" ;
+      alert(str);
+    }//1开始 2 结束 3 暂停 0 未开始
+    if(data.status==2){
+      let str="讨论课已结束" ;
+      alert(str);
+    }//1开始 2 结束 3 暂停 0 未开始
+    if(data.status==3){
+      let str="讨论课已暂停" ;
+      alert(str);
+    }//1开始 2 结束 3 暂停 0 未开始
+    if(data.status==0){
+      let str="讨论课未开始" ;
+      alert(str);
+    }//1开始 2 结束 3 暂停 0 未开始
+
+  }
+  function receiveNext(data){
+      let myAttendanceId=data.id;
+      tabClick(myAttendanceId);
   }
 
   function quesClick(questionId){
