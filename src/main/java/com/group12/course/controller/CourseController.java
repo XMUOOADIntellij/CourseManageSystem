@@ -56,6 +56,7 @@ public class CourseController {
         Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
         if(jwtTeacher!=null){
 
+            System.out.print(courseVO);
             //添加课程
             Course course = new Course(courseVO);
             course.setTeacher(jwtTeacher);
@@ -67,6 +68,7 @@ public class CourseController {
             List<CourseMemberLimitVO> courseMemberLimitVOList = courseVO.getCourseMemberLimitVOList();
             List<CourseMemberLimitStrategy> courseMemberLimitStrategyList = new ArrayList<>();
             for (CourseMemberLimitVO courseMemberLimitVO:courseMemberLimitVOList) {
+                System.out.print(courseMemberLimitVO);
                 CourseMemberLimitStrategy courseMemberLimitStrategy = new CourseMemberLimitStrategy(courseMemberLimitVO);
                 courseMemberLimitStrategy.setCourse(courseService.getCourseById(courseMemberLimitVO.getCourseId()));
                 courseMemberLimitStrategyList.add(courseMemberLimitStrategy);
