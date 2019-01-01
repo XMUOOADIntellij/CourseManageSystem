@@ -394,6 +394,7 @@
                 console.log(JSON.parse(greeting.body));
               });
               stompClient.subscribe("/seminarSocket/attendance", function(greeting) {
+                console.log(JSON.parse(greeting.body));
                 tabClick(JSON.parse(greeting.body).id);
               });
             }
