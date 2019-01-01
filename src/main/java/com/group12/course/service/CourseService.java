@@ -122,7 +122,6 @@ public class CourseService {
         //记录选修课人数限制策略
         if (courseMemberLimitStrategyList != null && !courseMemberLimitStrategyList.isEmpty()) {
             for (CourseMemberLimitStrategy courseMemberLimitStrategy : courseMemberLimitStrategyList) {
-                System.out.print(courseMemberLimitStrategy);
                 status=courseMemberLimitStrategyDao.addCourseMemberLimitStrategy(courseMemberLimitStrategy)==0?0:status;
 
             }
