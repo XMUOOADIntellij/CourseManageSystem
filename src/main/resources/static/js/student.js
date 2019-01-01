@@ -601,11 +601,10 @@ function createTeam() {
     console.log(addData);
     let myId=Cookies.get("id");
     let myCourse=Cookies.get("course");
-    let leader = [
+    let leader =
         {
             id: myId
-        }
-    ];
+        };
     let ata = {
         name: $("#name").val(),
         course: {

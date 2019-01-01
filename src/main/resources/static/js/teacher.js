@@ -1473,8 +1473,7 @@ function getSeminarByClassForUpdate() {
     //新建讨论课 seminar_Id cannot be null
 function createSeminar() {
     let ata = {
-        // roundId: $('#select-round-id').val(),
-        roundId: "26",
+        roundId: $('#select-round-id').val(),
         seminarName: $("#name").val(),
         introduction: $("#introduction").val(),
         maxTeam: $("#select-max-team").val(),
@@ -1495,7 +1494,7 @@ function createSeminar() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./course-seminar.html";
+            window.location.href = "./course-round.html";
         },
         statusCode: {
             400: function() {
