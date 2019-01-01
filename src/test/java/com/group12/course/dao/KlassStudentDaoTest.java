@@ -44,4 +44,11 @@ public class KlassStudentDaoTest {
 
         klassStudentMapper.deleteKlassStudentByKlassIdAndStudentId(klass.getId(),klassStudent.getStudent().getId());
     }
+
+    @Test
+    public void testSelectKlassByCourseIdAndStudentId(){
+        KlassStudent klassStudent = klassStudentMapper.selectKlassStudentByCourseIdAndStudentId(new Long(16),new Long(134));
+        System.out.print(klassStudent.getKlass());
+        Assert.assertNotNull(klassStudent);
+    }
 }

@@ -47,4 +47,13 @@ public class KlassStudent implements Serializable {
         this.team = team;
     }
 
+    @Override
+    public String toString() {
+        return "KlassStudent{" +
+                "klass=" + klass +
+                ", student=" + student +
+                ", course=" + course +
+                ", team=" + team +
+                '}';
+    }
 }
