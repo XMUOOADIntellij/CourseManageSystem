@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+      name="viewport"
+    />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <meta content="en" http-equiv="Content-Language" />
+    <meta content="#2d89ef" name="msapplication-TileColor" />
+    <meta content="#4188c9" name="theme-color" />
+    <meta
+      content="black-translucent"
+      name="apple-mobile-web-app-status-bar-style"
+    />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="yes" name="mobile-web-app-capable" />
+    <meta content="True" name="HandheldFriendly" />
+    <meta content="320" name="MobileOptimized" />
+    <link href="../favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <!-- Generated: 2018-04-16 09:29:05 +0200 -->
+    <title>正在进行中</title>
+    <!-- Font -->
+    <link href="../../static/css/fontawesome.min.css" rel="stylesheet" />
+
+    <!--Dashboard Core-->
+    <link href="../../static/css/dashboard.css" rel="stylesheet" />
+    <link href="../../static/css/tabler.css" rel="stylesheet" />
+    <script src="../../static/js/vendors/jquery-3.2.1.min.js"></script>
+    <script src="../../static/js/vendors/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="../../static/js/vendors/jquery-jvectormap-de-merc.js"></script>
+    <script src="../../static/js/vendors/jquery-jvectormap-world-mill.js"></script>
+    <script src="../../static/js/vendors/jquery.sparkline.min.js"></script>
+    <script src="../../static/js/vendors/jquery.tablesorter.min.js"></script>
+
+    <script src="../../static/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="../../static/js/vendors/chart.bundle.min.js"></script>
+    <script src="../../static/js/vendors/selectize.min.js"></script>
+    <script src="../../static/js/vendors/sockjs-1.0.2.min.js"></script>
+    <script src="../../static/js/vendors/stomp.min.js"></script>
+    <script src="../../static/js/vendors/js.cookie-2.2.0.min.js"></script>
+
+    <script src="../../static/js/core.js"></script>
+    <link href="../../static/css/dashboard.css" rel="stylesheet" />
+    <link href="../../static/css/tabler.css" rel="stylesheet" />
+    <!-- c3.js Charts Plugin -->
+    <link href="../../static/plugins/charts-c3/plugin.css" rel="stylesheet" />
+    <!-- gijgo datepicker Plugin -->
+    <link
+      href="../../static/plugins/gijgo/css/gijgo.min.css"
+      rel="stylesheet"
+    />
+    <script src="../../static/plugins/gijgo/js/gijgo.min.js"></script>
+    <!-- fab Plugin -->
+    <link href="../../static/plugins/fab/fab.css" rel="stylesheet" />
+    <!--Pomodoro-timer-->
+    <link
+      href="../../static/plugins/pomodoro-timer/css/pomodoro-timer.css"
+      rel="stylesheet"
+    />
+    <script src="../../static/plugins/pomodoro-timer/js/pomodoro-timer.js"></script>
+
+    <!-- Customize -->
+    <link href="../../static/css/style.css" rel="stylesheet" />
+    <script src="../../static/js/jwt.js"></script>
+
+    <script src="../../static/js/fast-json.js"></script>
+    <script src="../../static/js/convert.js"></script>
+    <script src="../../static/js/user.js"></script>
+    <script src="../../static/js/teacher.js"></script>
+
+  </head>
+  <body onload="connect(); getAttendanceByClass()">
+    <!--onbeforeunload="return disconnect()"
+    onload="onPomodoroTimer();connect();initProgress()"-->
+
+    <div class="page">
+      <div class="page-main">
+        <div class="header py-4">
+          <div class="container">
+            <div class="d-flex">
+              <a class="header-brand ml-1" href="./home.html">
+                <img
+                  alt="logo"
+                  class="header-brand-img"
+                  src="../../static/images/brand.png"
+                />
+                XCms
+              </a>
+              <div class="d-flex order-lg-2 ml-auto">
+                <div class="dropdown d-none d-md-flex">
+                  <a class="nav-link icon" href="todo-list.html">
+                    <i class="fe fe-bell"></i> <span class="nav-unread"></span>
+                  </a>
+                </div>
+                <div class="dropdown">
+                  <a
+                    class="nav-link pr-0 leading-none"
+                    data-toggle="dropdown"
+                    href="#"
+                  >
+                    <span
+                      class="avatar"
+                      style="background-image: url(../../static/images/male.png)"
+                    ></span>
+                    <span class="ml-2 d-none d-lg-block">
+                      <span class="text-default" id="header-name"></span>
+                      <small
+                        class="text-muted d-block mt-1"
+                        id="header-role"
+                      ></small>
+                    </span>
+                  </a>
+                  <div
+                    class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                  >
+                    <a class="dropdown-item" href="./account-setting.html">
+                      <i class="dropdown-icon fe fe-settings"></i> 个人设置
+                    </a>
+                    <a class="dropdown-item" href="./todo-list.html">
+                      <i class="dropdown-icon fe fe-mail"></i> 待办事项
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="./help.html">
+                      <i class="dropdown-icon fe fe-help-circle"></i> 获取帮助
+                    </a>
+                    <a class="dropdown-item" href="../common/login.html">
+                      <i class="dropdown-icon fe fe-log-out"></i> 切换账户
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <a
+                class="header-toggler d-lg-none ml-3 ml-lg-0"
+                data-target="#headerMenuCollapse"
+                data-toggle="collapse"
+                href="#"
+              >
+                <span class="header-toggler-icon"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg order-lg-first">
+                <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="./home.html"
+                      ><i class="fe fe-home"></i> 我的主页</a
+                    >
+                  </li>
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="./course-home.html"
+                      ><i class="fe fe-book"></i> 我的课程</a
+                    >
+                  </li>
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="./seminar-home.html"
+                      ><i class="fe fe-book-open"></i> 我的讨论课</a
+                    >
+                  </li>
+                  <li class="nav-item pl-5">
+                    <a class="nav-link" href="progress.html"
+                      ><i class="fe fe-play-circle"></i> 正在进行中</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">正在进行</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  业务流程分析
+                </li>
+              </ol>
+            </nav>
+            <div class="row">
+              <div class="col-3 col-md-2 pr-0">
+                <div>
+                  <div class="mb-3">
+                    <span class="btn btn-secondary btn-block">展示</span>
+                  </div>
+                  <div id="nav-content" class="list-group list-group-transparent mb-0">
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-9 col-md-10">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">展示时间</h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="content-heading mb-3">
+                          <h2 class="text-center m-0">
+                            <span>
+                              <button
+                                      class="btn btn-default mx-lg-3 px-lg-6"
+                                      type="submit"
+                                      onclick="start()"
+                              >
+                                开始展示
+                              </button>
+                              <button
+                                      class="btn btn-default mx-lg-3 px-lg-6"
+                                      type="submit"
+                                      onclick="next()"
+                              >
+                                下一组
+                              </button>
+                            </span>
+                          </h2>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-body text-center">
+
+                            <div>
+
+                              <button
+                                      id="startButton"
+                                      class="btn btn-primary btn-lg mx-lg-3 px-lg-5"
+                                      type="submit"
+                                      onclick="continu()"
+                              >
+                                <i class="fe fe-play" aria-hidden="true"></i>
+                              </button>
+                              <button
+                                      id="stopButton"
+                                      class="btn btn-danger btn-lg mx-lg-3 px-lg-5"
+                                      type="submit"
+                                      onclick="pause()"
+                              >
+                                <i class="fe fe-pause" aria-hidden="true"></i>
+                              </button>
+                              <button
+                                      id="restartButton"
+                                      class="btn btn-warning btn-lg mx-lg-3 px-lg-5"
+                                      type="submit"
+                                      onclick="next()"
+                              >
+                                <i
+                                        class="fe fe-rotate-ccw"
+                                        aria-hidden="true"
+                                ></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">展示打分</h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="form-group">
+                          <div class="input-group ">
+                            <div class="input-group-prepend">
+                              <button style="min-width: 2.5em" class="btn btn-decrement btn-white" type="button">
+                                <strong>-</strong>
+                              </button>
+                            </div>
+                            <input type="text" id="present-score" style="text-align: center" class="form-control">
+                            <div class="input-group-append">
+                              <button style="min-width: 2.5em" class="btn btn-increment btn-white" type="button">
+                                <strong>+</strong>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <button class="btn btn-primary btn-block" onclick="updatePresentScore()">确认修改</button>
+                        </div>
+                      </div>
+                      <div class="card-footer" hidden>
+                        <div class="d-flex">
+                          <a class="btn btn-link" href="./course-home.html"
+                          >取消</a
+                          >
+                          <button class="btn btn-primary ml-auto" type="submit">
+                            确认修改
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-8">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title mr-4">提问队列</h3>
+                        <span class="float-right"><span class="badge badge-primary" id="ques-number">0</span></span>                      </div>
+                      <div class="card-body">
+                        <div>
+                          <div class="mb-3">
+                            <button class="btn btn-secondary btn-block" onclick="select()">
+                              抽取提问
+                            </button>
+                          </div>
+                          <div class="list-group list-group-transparent mb-0" id="ques-content">
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">提问打分</h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="form-group">
+                          <div class="input-group ">
+                            <div class="input-group-prepend">
+                              <button style="min-width: 2.5em" class="btn btn-decrement btn-white" type="button">
+                                <strong>-</strong>
+                              </button>
+                            </div>
+                            <input type="text" id="question-score" style="text-align: center" class="form-control">
+                            <div class="input-group-append">
+                              <button style="min-width: 2.5em" class="btn btn-increment btn-white" type="button">
+                                <strong>+</strong>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <button class="btn btn-primary btn-block" onclick="updateQuestionScore()">确认修改</button>
+                        </div>
+                      </div>
+                      <div class="card-footer" hidden>
+                        <div class="d-flex">
+                          <a class="btn btn-link" href="./course-home.html"
+                          >取消</a
+                          >
+                          <button class="btn btn-primary ml-auto" type="submit">
+                            确认修改
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      <footer class="footer">
+        <div class="container">
+          <div class="row align-items-center flex-row-reverse">
+            <div class="col-12 mt-0 mb-3 mt-lg-0 text-center">
+              Copyright © 2018
+              <a href="https://github.com/XMUOOADIntellij/CourseManageSystem"
+                >Cms</a
+              >.
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+<script>
+  var stompClient = null;
+  function setConnected(connected) {}
+  //403
+  function connect() {
+    var socket = new SockJS("http://xug98.cn/Socket");
+    stompClient = Stomp.over(socket);
+    stompClient.connect(
+            {},
+            function(frame) {
+              setConnected(true);
+              console.log("Connected: " + frame);
+              stompClient.subscribe("http://xug98.cn/seminarSocket/progress", function(greeting) {
+                console.log(JSON.parse(greeting.body));
+              });
+              stompClient.subscribe("http://xug98.cn/seminarSocket/question", function(greeting) {
+                console.log(JSON.parse(greeting.body));
+              });
+              stompClient.subscribe("http://xug98.cn/seminarSocket/attendance", function(greeting) {
+                tabClick(JSON.parse(greeting.body).id);
+              });
+            }
+    );
+
+  }
+  function disconnect() {
+    if (stompClient != null) {
+      stompClient.disconnect();
+    }
+    setConnected(false);
+    alert("Disconnected");
+    return true;
+  }
+
+  function pause() {
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/pause", {"jwt":localStorage.jwt}, null);
+  }
+  function start() {
+
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/start", {"jwt":localStorage.jwt}, null);
+  }
+  function continu() {
+
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/continu", {"jwt":localStorage.jwt}, null);
+  }
+  function end() {
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/end", {"jwt":localStorage.jwt}, null);
+  }
+  function next() {
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/next", {"jwt":localStorage.jwt}, null);
+  }
+  function select() {
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/selectQuestion", {"jwt":localStorage.jwt}, null);
+
+  }
+
+  function showGreeting(message) {
+    console.log(message);
+  }
+
+  function tabClick(attendanceId){
+    Cookies.set("attendance",attendanceId);
+    let cDoms=document.getElementById("nav-content").children;
+    let i;
+    for (i = 0; i < cDoms.length; i++) {
+      cDoms[i].setAttribute("class","list-group-item list-group-item-action d-flex align-items-center px-1 py-3");
+    }
+    document.getElementById(attendanceId).setAttribute("class","list-group-item list-group-item-action d-flex align-items-center active px-1 py-3");
+    getAttendanceScore(attendanceId);
+  }
+
+  function quesClick(questionId){
+    Cookies.set("question",questionId);
+    let cDoms=document.getElementById("ques-content").children;
+    let i;
+    for (i = 0; i < cDoms.length; i++) {
+      cDoms[i].setAttribute("class","list-group-item list-group-item-action d-flex align-items-center  px-0");
+    }
+    document.getElementById(questionId).setAttribute("class","list-group-item list-group-item-action d-flex align-items-center active px-1 py-3");
+    getQuestionScore(questionId);
+  }
+</script>
+
+</html>
