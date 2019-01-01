@@ -1,7 +1,7 @@
 package com.group12.course.service.serviceimpl;
 
 import com.group12.course.dao.UserDao;
-import com.group12.course.entity.FileHandler;
+import com.group12.course.tools.FileHandler;
 import com.group12.course.entity.Mail;
 import com.group12.course.entity.VerificationCode;
 import com.group12.course.service.UserService;
