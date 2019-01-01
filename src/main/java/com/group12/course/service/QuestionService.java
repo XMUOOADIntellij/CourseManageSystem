@@ -163,16 +163,18 @@ public class QuestionService {
                     int minCount = Integer.MAX_VALUE;
                     for (Question item : attendanceQuestion) {
                         Integer count = questionCount.get(item.getTeam().getId());
-                        if (count == null) {
+                        if (count == null&&!item.getSelected()) {
                             item.setSelected(true);
+                            questionDao.updateQuestion(item);
                             return item;
-                        } else if (count < minCount) {
+                        } else if (count < minCount&&!item.getSelected()) {
                             result = item;
                             minCount = count;
                         }
                     }
                     if (result != null) {
                         result.setSelected(true);
+                        questionDao.updateQuestion(result);
                     }
                     return result;
                 } else {
