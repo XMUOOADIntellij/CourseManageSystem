@@ -199,20 +199,20 @@ public class CourseService {
 
     /**
      * 根据课程id 查询共享分组信息
-     * @param courseId
+     * @param teacherId
      * @return
      */
-    public List<ShareTeamApplication> getShareTeamApplicationByCourseId(Long courseId){
-        return shareTeamApplicationDao.selectShareTeamApplicationByCourseId(courseId);
+    public List<ShareTeamApplication> getShareTeamApplicationByTeacherId(Long teacherId){
+        return shareTeamApplicationDao.selectShareTeamApplicationByTeacherId(teacherId);
     }
 
     /**
      * 根据课程id 查询共享讨论课信息
-     * @param mainCourseId
+     * @param teacherId
      * @return
      */
-    public List<ShareSeminarApplication> getShareSeminarApplicationByMainCourseId(Long mainCourseId){
-        return shareSeminarApplicationDao.selectShareSeminarApplicationByMainCourseId(mainCourseId);
+    public List<ShareSeminarApplication> getShareSeminarApplicationByTeacherId(Long teacherId){
+        return shareSeminarApplicationDao.selectShareSeminarApplicationByTeacherId(teacherId);
     }
 
     /**
@@ -317,10 +317,12 @@ public class CourseService {
         List<KlassStudent> klassStudentList = new ArrayList<>();
         for (Student student:studentList) {
             Klass klass = klassStudentDao.selectKlassByCourseIdAndStudentId(course.getId(),student.getId());
-            for (Map klassCount:klassCountList) {
-                if(Long.valueOf(klassCount.get("klassId").toString()).equals(klass.getId())){
-                    Integer number = Integer.parseInt(klassCount.get("number").toString())+1;
-                    klassCount.put("number",number);
+            if(klass!=null){
+                for (Map klassCount:klassCountList) {
+                    if(Long.valueOf(klassCount.get("klassId").toString()).equals(klass.getId())){
+                        Integer number = Integer.parseInt(klassCount.get("number").toString())+1;
+                        klassCount.put("number",number);
+                    }
                 }
             }
         }
@@ -335,7 +337,7 @@ public class CourseService {
             }
             /*T如果人数相等怎么办？*/
         }
-        if(maxKlassId == 0){
+        if(maxNumber == 0){
             return null;
         }
         else{

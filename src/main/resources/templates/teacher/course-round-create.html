@@ -243,13 +243,10 @@
                             </span>
                             <select
                               class="form-control custom-select"
-                              name="grade[present]"
+                              id="present-grade"
                             >
-                              <option selected="selected" value="1"
-                                >最低分</option
-                              >
-                              <option value="2">平均分</option>
-                              <option value="3">最高分</option>
+                              <option value="0" selected="selected">平均分</option>
+                              <option value="1">最高分</option>
                             </select>
                           </div>
                           <div class="input-group mb-3">
@@ -258,13 +255,10 @@
                             </span>
                             <select
                               class="form-control custom-select"
-                              name="grade[ask]"
+                              id="ask-grade"
                             >
-                              <option selected="selected" value="1"
-                                >最低分</option
-                              >
-                              <option value="2">平均分</option>
-                              <option value="3">最高分</option>
+                              <option value="0" selected="selected">平均分</option>
+                              <option value="1">最高分</option>
                             </select>
                           </div>
                           <div class="input-group ">
@@ -273,33 +267,12 @@
                             </span>
                             <select
                               class="form-control custom-select"
-                              name="grade[report]"
+                              id="report-grade"
                             >
-                              <option selected="selected" value="1"
-                                >最低分</option
-                              >
-                              <option value="2">平均分</option>
-                              <option value="3">最高分</option>
+                              <option value="0" selected="selected">平均分</option>
+                              <option value="1">最高分</option>
                             </select>
                           </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6 col-lg-6">
-                        <div class="form-group">
-                          <label class="form-label">包含讨论课</label>
-                          <div class="row gutters-xs mb-3">
-                            <div class="col">
-                              <input type="text" class="form-control" />
-                            </div>
-                            <span class="col-auto">
-                              <button class="btn btn-secondary" type="button">
-                                <i class="fe fe-trash"></i>
-                              </button>
-                            </span>
-                          </div>
-                          <a class="btn btn-green float-right" href="."
-                            >新增讨论课</a
-                          >
                         </div>
                       </div>
                     </div>
@@ -311,7 +284,7 @@
                       >
                       <button
                         class="btn btn-primary ml-auto"
-                        onclick="createRound()"
+                        onclick="createRoundForScore();createRoundForClass();"
                       >
                         确认创建
                       </button>

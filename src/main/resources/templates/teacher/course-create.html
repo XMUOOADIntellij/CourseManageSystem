@@ -325,7 +325,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="check1" id="content1">
-                                <tr>
+                                <!--<tr>
                                   <td>
                                     <label
                                             class="custom-control custom-checkbox"
@@ -359,42 +359,6 @@
                                           type="text"
                                   /></td>
                                 </tr>
-                                <tr>
-                                  <td>
-                                    <label
-                                            class="custom-control custom-checkbox"
-                                    >
-                                      <input
-                                              type="checkbox"
-                                              class="custom-control-input"
-                                              name="example-checkbox1"
-                                              value="option1"
-                                              checked=""
-                                      />
-                                      <span
-                                              class="custom-control-label"
-                                      ></span>
-                                    </label>
-                                  </td>
-                                  <td>
-                                      <span class="text-muted"
-                                      >J2EE</span
-                                      >
-                                  </td>
-                                  <td> <input
-                                          class="form-control"
-                                          name="example-text-input"
-                                          placeholder="Text.."
-                                          type="text"
-                                  /></td>
-                                  <td> <input
-                                          class="form-control"
-                                          name="example-text-input"
-                                          placeholder="Text.."
-                                          type="text"
-                                  /></td>
-                                </tr>
-
                                 <tr>
                                   <td>
                                     <label
@@ -465,10 +429,41 @@
                                           type="text"
                                   /></td>
                                 </tr>
-
-
-
-
+                                <tr>
+                                  <td>
+                                    <label
+                                            class="custom-control custom-checkbox"
+                                    >
+                                      <input
+                                              type="checkbox"
+                                              class="custom-control-input"
+                                              name="example-checkbox1"
+                                              value="option1"
+                                              checked=""
+                                      />
+                                      <span
+                                              class="custom-control-label"
+                                      ></span>
+                                    </label>
+                                  </td>
+                                  <td>
+                                      <span class="text-muted"
+                                      >J2EE</span
+                                      >
+                                  </td>
+                                  <td> <input
+                                          class="form-control"
+                                          name="example-text-input"
+                                          placeholder="Text.."
+                                          type="text"
+                                  /></td>
+                                  <td> <input
+                                          class="form-control"
+                                          name="example-text-input"
+                                          placeholder="Text.."
+                                          type="text"
+                                  /></td>
+                                </tr>-->
                                 </tbody>
                               </table>
                             </div>
@@ -481,16 +476,16 @@
                       <div class="col-12">
                         <label class="form-label mb-3">冲突课程
                           <a
-                                  href="./teacher-home-create.html"
                                   class="btn btn-sm btn-outline-primary ml-3"
                                   role="button"
+                                  onclick="addConflictsGroup()"
                           >
                             <i class="fe fe-plus-circle mr-3"></i>增加冲突组</a
                           ></label>
                       </div>
 
                     </div>
-                    <div class="row">
+                    <div class="row" id="content3">
                       <div class="col-md-6 col-lg-6">
                         <div class="form-group">
 
@@ -505,33 +500,7 @@
                                   <th>课程名称</th>
                                 </tr>
                                 </thead>
-                                <tbody id="content2">
-                                <tr>
-                                  <td>
-                                    <label
-                                            class="custom-control custom-checkbox"
-                                    >
-                                      <input
-                                              type="checkbox"
-                                              class="custom-control-input"
-                                              name="example-checkbox1"
-                                              value="option1"
-                                              checked=""
-                                      />
-                                      <span
-                                              class="custom-control-label"
-                                      ></span>
-                                    </label>
-                                  </td>
-                                  <td>
-                                      <span class="text-muted"
-                                      >J2EE</span
-                                      >
-                                  </td>
-
-                                </tr>
-
-
+                                <tbody class="check2" id="content2">
                                 </tbody>
                               </table>
                             </div>
@@ -539,6 +508,7 @@
                         </div>
 
                       </div>
+
                     </div>
                     </div>
                   </div>

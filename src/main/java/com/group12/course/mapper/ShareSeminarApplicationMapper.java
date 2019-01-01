@@ -21,11 +21,19 @@ public interface ShareSeminarApplicationMapper {
     ShareSeminarApplication selectShareSeminarApplicationById(Long id);
 
     /**
-     * 选择
+     * 根据主课程id查找共享信息
      * @param mainCourseId
      * @return
      */
     List<ShareSeminarApplication> selectShareSeminarApplicationByMainCourseId(Long mainCourseId);
+
+    /**
+     * 根据从课程教师id查找共享信息
+     * @param subCourseTeacherId
+     * @return
+     */
+    List<ShareSeminarApplication> selectShareSeminarApplicationBySubCourseTeacherId(Long subCourseTeacherId);
+
 
     /**
      * 添加

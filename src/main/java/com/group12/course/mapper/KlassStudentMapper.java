@@ -72,6 +72,6 @@ public interface KlassStudentMapper {
      * @param studentId
      * @return
      */
-    KlassStudent selectKlassStudentByCourseIdAndStudentId(Long courseId,Long studentId);
+    KlassStudent selectKlassStudentByCourseIdAndStudentId(@Param("courseId") Long courseId,@Param("studentId") Long studentId);
 
 }

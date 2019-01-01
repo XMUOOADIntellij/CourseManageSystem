@@ -50,20 +50,166 @@ function initHome(){
   $("#account").html(Cookies.get("account"));
 }
 
-//课程组队
-function getTeam() {
+
+//账户设置页面
+function getUserInfo() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/course/" + Cookies.get("course") + "/myTeam",
+        url: "http://xug98.cn/user/information",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            if (xhr.status === 200) {
+                $("#account").html(data.account);
+                $("#email").val(data.email);
+                $("#name").html(data.name);
+            }
+        }
+    });
+}
+//修改密码
+function editPassword() {
+    // let ata = {password: $("#password").val()};
+    let ata = "222";
+    console.log(ata);
+    $.ajax({
+        type: "put",
+        url: "http://xug98.cn/user/password",
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                alert("修改成功");
+                window.location.href = "./account-setting.html";
+            }
+        },
+        error: function(data) {
+            console.log(data);
+            alert("fail");
+            window.location.href = "./account-setting.html";
+        },
+        statusCode: {
+            200: function() {
+                alert("修改成功");
+            },
+            400: function() {
+                alert("修改失败");
+            }
+        }
+    });
+}
+//修改邮箱
+function editEmail() {
+    /*
+      let ata = {
+          email: $("#email").val()
+      };
+  */
+    let ata = "333@qq.com";
+    console.log(ata);
+    $.ajax({
+        type: "put",
+        url: "http://xug98.cn/user/email",
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                alert("修改成功");
+                window.location.href = "./account-setting.html";
+            }
+        },
+        /*    error: function(data){
+              console.log(data);
+              alert("fail");
+
+            },*/
+        statusCode: {
+            200: function() {
+                alert("修改成功");
+            }
+        }
+    });
+}
+
+//课程组队
+function getTeam() {
+    console.log(Cookies.get("course"));
+    $.ajax({
+        type: "get",
+        async : false,
+
+        url: "http://xug98.cn/course/" + Cookies.get("course") + "/team",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
                 // alert("获取成功");
-                console.log("Team");
-                for (let i = 0; i < data.length; i++) {
-                    console.log(data[i]);
-                }
+                console.log("team success");
+                let content=document.getElementById("content");
+
+                let str="";
+                let status="valid";
+                //获取外围容器
+                $.each(data, function(i, team) {
+                    console.log(team);
+
+                    if(team.status==0) status="invalid";
+                    let innerStr="";
+                    innerStr += '\n' +
+                        '                          <tr>\n' +
+                        '                            <td class="text-nowrap">' + team.leader.studentName + '</td>\n' +
+                        '                            <td>' + team.leader.account + '</td>\n' +
+                        '                            <td>组长</td>\n' +
+                        '                          </tr>';
+
+                    $.each(team.members, function (i, item) {
+                        // console.log(item);
+                        innerStr += '\n' +
+                            '                          <tr>\n' +
+                            '                            <td class="text-nowrap">' + item.studentName + '</td>\n' +
+                            '                            <td>' + item.account + '</td>\n' +
+                            '                            <td>组员</td>\n' +
+                            '                          </tr>';
+                    });
+                    str+='              <div class="col-lg-4">\n' +
+                        '                <div class="card card-collapsed">\n' +
+                        '                  <div class="card-header">\n' +
+                        '                    <div class="d-flex align-items-center">\n' +
+                        '                      <span class="stamp stamp-md bg-blue ml-1 mr-4">'+team.klassSerial+'-'+team.teamSerial+'</span>\n' +
+                        '                      <div>\n' +
+                        '                        <h4 class="m-0"><small>'+team.name+'</small></h4>\n' +
+                        '                        <small class="text-danger">'+status+'</small>\n' +
+                        '                      </div>\n' +
+                        '                    </div>\n' +
+                        '                    <div class="card-options">\n' +
+                        '                      <a\n' +
+                        '                        class="card-options-collapse"\n' +
+                        '                        data-toggle="card-collapse"\n' +
+                        '                        href="#"\n' +
+                        '                        ><i class="fe fe-chevron-up mr-1"></i\n' +
+                        '                      ></a>\n' +
+                        '                    </div>\n' +
+                        '                  </div>\n' +
+                        '                  <div class="card-body p-0">\n' +
+                        '                    <div class="table-responsive">\n' +
+                        '                      <table\n' +
+                        '                        class="table card-table table-striped table-vcenter"\n' +
+                        '                      >\n' +
+                        '                        <tbody>\n' +
+                        innerStr +
+                        '                        </tbody>\n' +
+                        '                      </table>\n' +
+                        '                    </div>\n' +
+                        '                  </div>\n' +
+                        '                </div>\n' +
+                        '              </div>\n';
+                });
+                content.innerHTML=str;
+
             }
         },
         statusCode: {
@@ -138,25 +284,24 @@ function requestTeamValid(){
     });
 
 }
-
 function createTeam() {
-    let member = [
+    let members = [
         {
-            id: 24320162202847,
+            id: 115,
         },
         {
-            id: 24320162202888,
+            id: 127,
 
         },
         {
-            id:24320162202904,
+            id:134,
 
         },
         {
-            id: 24320162202934
+            id: 145
         }
     ];
-    let myId=Cookies.get("account");
+    let myId=Cookies.get("id");
     let myCourse=Cookies.get("course");
     let leader = [
         {
@@ -173,7 +318,7 @@ function createTeam() {
             id: 1
         },
         leader: leader,
-        members: member
+        members: members
     };
     console.log(ata);
     $.ajax({
@@ -204,7 +349,6 @@ function createTeam() {
         }
     });
 }
-
 function addTeamMembers() {
     let member = [
         {
@@ -254,7 +398,6 @@ function addTeamMembers() {
     */
 }
 function getNoTeam() {
-
     $.ajax({
         type: "get",
         url: "http://xug98.cn/course/" + Cookies.get("course") + "/noTeam",
@@ -263,10 +406,9 @@ function getNoTeam() {
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
                 // alert("获取成功");
-                console.log("NoTeam");
+                console.log("NoTeam success");
                 for (let i = 0; i < data.length; i++) {
                     console.log(data[i]);
-                    getSeminarList(data[i].id);
                 }
             }
         },
@@ -321,8 +463,8 @@ function deleteTeamMember() {
 function getCourseList() {
   $.ajax({
     type: "get",
-    // url: "http://xug98.cn/course",
-    url: "../../static/json/course-list.json",
+    url: "http://xug98.cn/course",
+    // url: "../../static/json/course-list.json",
     dataType: "json",
     async : false,
     contentType: "application/json;",

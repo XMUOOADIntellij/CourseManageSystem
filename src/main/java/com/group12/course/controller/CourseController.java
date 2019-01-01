@@ -356,50 +356,52 @@ public class CourseController {
 
     /**
      * 获取分组共享信息
-     * @param courseId
      * @param response
      * @return
      */
-    @GetMapping(value="/{courseId}/teamshare",produces = "application/json; charset=utf-8")
-    public void getTeamShareMessage(@PathVariable Long courseId, HttpServletResponse response) throws IOException {
-        List<ShareTeamApplication> shareTeamApplicationList = courseService.getShareTeamApplicationByCourseId(courseId);
-        List<ShareTeamApplicationVO> shareTeamApplicationVOList = new ArrayList<>();
-        for (ShareTeamApplication shareTeamApplication:shareTeamApplicationList) {
-            ShareTeamApplicationVO shareTeamApplicationVO = new ShareTeamApplicationVO(shareTeamApplication);
-            shareTeamApplicationVOList.add(shareTeamApplicationVO);
-        }
-        if(shareTeamApplicationVOList.isEmpty()){
-            response.setStatus(404);
+    @GetMapping(value="/teamshare",produces = "application/json; charset=utf-8")
+    public void getTeamShareMessage(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String token = request.getHeader("Authorization");
+        Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
+        if(jwtTeacher!=null){
+            List<ShareTeamApplication> shareTeamApplicationList = courseService.getShareTeamApplicationByTeacherId(jwtTeacher.getId());
+            if(shareTeamApplicationList.isEmpty()){
+                response.setStatus(404);
+            }
+            else{
+                response.setStatus(200);
+                String json = JSONObject.toJSONString(shareTeamApplicationList);
+                response.getWriter().write(json);
+            }
         }
         else{
-            response.setStatus(200);
-            String json = JSONObject.toJSONString(shareTeamApplicationVOList);
-            response.getWriter().write(json);
+            response.setStatus(403);
         }
+
     }
 
     /**
      * 获取讨论课共享信息
-     * @param courseId
      * @param response
      * @return
      */
-    @GetMapping(value="/{courseId}/seminarshare",produces = "application/json; charset=utf-8")
-    public void getSeminarShareMessage(@PathVariable Long courseId, HttpServletResponse response) throws IOException {
-        List<ShareSeminarApplication> shareSeminarApplicationList = courseService.getShareSeminarApplicationByMainCourseId(courseId);
-        List<ShareSeminarApplicationVO> shareSeminarApplicationVOList = new ArrayList<>();
-        for (ShareSeminarApplication shareSeminarApplication:shareSeminarApplicationList) {
-            ShareSeminarApplicationVO shareSeminarApplicationVO = new ShareSeminarApplicationVO(shareSeminarApplication);
-            shareSeminarApplicationVOList.add(shareSeminarApplicationVO);
-        }
-
-        if(shareSeminarApplicationVOList.isEmpty()){
-            response.setStatus(404);
+    @GetMapping(value="/seminarshare",produces = "application/json; charset=utf-8")
+    public void getSeminarShareMessage(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String token = request.getHeader("Authorization");
+        Teacher jwtTeacher = Jwt.unSign(token,Teacher.class);
+        if(jwtTeacher!=null){
+            List<ShareSeminarApplication> shareSeminarApplicationList = courseService.getShareSeminarApplicationByTeacherId(jwtTeacher.getId());
+            if(shareSeminarApplicationList.isEmpty()){
+                response.setStatus(404);
+            }
+            else{
+                response.setStatus(200);
+                String json = JSONObject.toJSONString(shareSeminarApplicationList);
+                response.getWriter().write(json);
+            }
         }
         else{
-            response.setStatus(200);
-            String json = JSONObject.toJSONString(shareSeminarApplicationVOList);
-            response.getWriter().write(json);
+            response.setStatus(403);
         }
 
     }

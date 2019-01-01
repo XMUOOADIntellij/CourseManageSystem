@@ -1,0 +1,44 @@
+[
+  {
+    "id": 60,
+    "teamOrder": 1,
+    "presented": false,
+    "reportName": null,
+    "reportUrl": null,
+    "pptName": null,
+    "pptUrl": null,
+    "classId": null,
+    "classSerial": 1,
+    "teamId": null,
+    "teamSerial": 1,
+    "seminarId": null
+  },
+  {
+    "id": 61,
+    "teamOrder": 2,
+    "presented": false,
+    "reportName": null,
+    "reportUrl": null,
+    "pptName": null,
+    "pptUrl": null,
+    "classId": null,
+    "classSerial": 1,
+    "teamId": null,
+    "teamSerial": 2,
+    "seminarId": null
+  },
+  {
+    "id": 62,
+    "teamOrder": 3,
+    "presented": false,
+    "reportName": null,
+    "reportUrl": null,
+    "pptName": null,
+    "pptUrl": null,
+    "classId": null,
+    "classSerial": 1,
+    "teamId": null,
+    "teamSerial": 4,
+    "seminarId": null
+  }
+]
