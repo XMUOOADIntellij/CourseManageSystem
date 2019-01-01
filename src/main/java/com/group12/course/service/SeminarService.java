@@ -222,7 +222,9 @@ public class SeminarService {
                             return o1.getTeamOrder().compareTo(o2.getTeamOrder());
                         }
                     });
-                    attendanceList.get(0).setPresented(true);
+                    Attendance record = attendanceList.get(0);
+                    record.setPresented(true);
+                    attendanceDao.updateAttendance(record);
                     return  klassSeminar;
                 } else {
                     return null;

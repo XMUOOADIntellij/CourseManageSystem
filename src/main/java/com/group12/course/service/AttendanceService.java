@@ -372,10 +372,17 @@ public class AttendanceService {
                         return o1.getTeamOrder().compareTo(o2.getTeamOrder());
                     }
                 });
-                for(int i=0;i<attendanceList.size();i++){
-                    if(attendanceList.get(i).getTeamOrder().equals(attendance.getTeamOrder())){
-                        return attendanceList.get(i+1);
+                Attendance result = null;
+                for (int i = 0; i < attendanceList.size(); i++) {
+                    if (attendanceList.get(i).getTeamOrder().equals(attendance.getTeamOrder())) {
+                        result = attendanceList.get(i + 1);
                     }
+                }
+                if (result != null) {
+                    result.setPresented(true);
+                    attendance.setPresented(false);
+                    attendanceDao.updateAttendance(result);
+                    attendanceDao.updateAttendance(attendance);
                 }
                 return null;
             } else {
