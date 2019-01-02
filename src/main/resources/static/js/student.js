@@ -76,12 +76,6 @@ function getCourseListForSeminar() {
                         '                    <div class="card-category">'+item.courseName+'</div>\n' +
                         '                    <ul class="list-unstyled leading-loose">\n' +
                         '                      <li><strong>主课程</strong></li>\n' +
-                        '                      <li>\n' +
-                        '                        <i\n' +
-                        '                          aria-hidden="true"\n' +
-                        '                          class="fe fe-clock text-danger mr-2"\n' +
-                        '                        ></i>\n' +
-                        '                      </li>\n' +
                         '                    </ul>\n' +
                         '                    <div class="text-center mt-6">\n' +
                         '                      <a\n' +
@@ -113,8 +107,6 @@ function getCourseListForSeminar() {
         }
     });
 }
-
-
 
 //账户设置页面
 function getUserInfo() {
@@ -948,6 +940,133 @@ function getClassByCourse(){
 }
 
 
+//轮次设置页面
+function getRoundList() {
+    let courseId=Cookies.get("course");
+    console.log(courseId);
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/course/" + Cookies.get("course") + "/round",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                // alert("获取成功");
+                // console.log("roundlist");
+                let content=document.getElementById("content");   //获取外围容器
+                let str="";
+                $.each(data, function(i, item) {
+                    console.log(item);
+                    str +='            <div class="col-md-6 col-lg-4" >\n' +
+                        '                <div class="card">\n' +
+                        '                  <div class="card-header">\n' +
+                        '                    <h3 class="card-title mr-4">第'+item.roundSerial+'轮</h3>\n' +
+                        '                    <div class="card-options">\n' +
+                        '                      <a\n' +
+                        '                        class="card-options-collapse"\n' +
+                        '                        data-toggle="card-collapse"\n' +
+                        '                        ><i class="fe fe-chevron-up"></i\n' +
+                        '                      ></a>\n' +
+                        '                    </div>\n' +
+                        '                  </div>\n' +
+                        '                  <div class="card-body p-0" id="round'+item.id+'">\n' +
+                        '                    \n' +
+                        '                  </div>\n' +
+                        '                </div>\n' +
+                        '              </div>';
+                    content.innerHTML=str;
+                    getSeminarList(item.id);
+
+                });
+                content.innerHTML=str;
+            }
+
+        },
+        statusCode: {
+            400: function() {
+                alert("roundlist");
+
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("roundlist");
+
+                alert("未找到课程");
+            }
+        }
+    });
+}
+function getSeminarList(roundId) {
+    console.log(roundId);
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/round/" + roundId + "/seminar",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            // alert("获取成功");
+            // console.log("seminarList");
+            let content=document.getElementById("round"+roundId);   //获取外围容器
+            let str="";
+            $.each(data, function(i, item) {
+                console.log(item);
+                str +='                    <div class="card m-0">\n' +
+                    '                      <div class="card-header">\n' +
+                    '                        <div class="d-flex align-items-center">\n' +
+                    '                          <span class="text-smallest">\n' +
+                    '                            <i class="icon fe fe-book-open mr-3"></i>\n'
+                    +item.seminarName+
+                    '                          </span>\n' +
+                    '                        </div>\n' +
+                    '                        <div class="card-options">\n' +
+                    '                          <a\n' +
+                    '                            class="card-options-collapse"\n' +
+                    '                            data-toggle="card-collapse"\n' +
+                    '                        href="./seminar-round-detail.html"\n' +
+                    '                        onclick="jumpFromRound('+roundId+')"' +
+                    '                            href="#"\n' +
+                    '                            ><i class="fe fe-chevron-right mr-1"></i\n' +
+                    '                          ></a>\n' +
+                    '                        </div>\n' +
+                    '                      </div>\n' +
+                    '                      <div class="card-body p-0" id="seminar'+item.seminarId+'">\n' +
+                    '<div class="table-responsive">\n' +
+                    '                          <table\n' +
+                    '                            class="table card-table table-vcenter text-nowrap"\n' +
+                    '                          >\n' +
+                    '                            <tbody id="seminar-'+item.seminarId+'">\n' +
+                    '                      \n' +
+                    '                            </tbody>\n' +
+                    '                          </table>\n' +
+                    '                        </div>'+
+                    '                      </div>\n' +
+                    '                    </div>\n';
+
+            });
+            content.innerHTML=str;
+            $.each(data, function(i, item) {
+                console.log(item);
+            });
+        },
+        statusCode: {
+            500: function(data) {
+
+                alert("seminarList");
+                alert("错误的ID格式");
+            },
+            400: function() {
+                alert("seminarList");
+
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("seminarList");
+
+                alert("未找到课程");
+            }
+        }
+    });
+}
 
 //进行中
 function getAttendanceByClass() {
@@ -1096,3 +1215,286 @@ function getQuestionList(attendanceId) {
 }
 
 
+
+//讨论课详情
+function getSeminarByClass() {
+    let seminarId=Cookies.get("seminar");
+    let classId=Cookies.get("class");
+    //
+    // console.log(seminarId);
+    // console.log(classId);
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/seminar/" +
+            seminarId +
+            "/class/" +
+            classId,
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                alert("获取成功");
+                $("#name").val(data.seminarName);
+                $("#introduction").val(data.introduction);
+                $("#round").val(data.roundId);
+                $("#seminarSerial").val(data.seminarSerial);
+
+            }
+            console.log(data);
+
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+function getSeminarScoreByClass() {
+    console.log( Cookies.get("seminar"));
+    console.log( Cookies.get("class"));
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/seminar/" +
+            Cookies.get("seminar") +
+            "/class/" +
+            Cookies.get("class") +
+            "/score",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                // alert("获取成功");
+                console.log("roundlist");
+                let content=document.getElementById("content");   //获取外围容器
+                let str="";
+                $.each(data, function(i, item) {
+                    console.log(item);
+                    str +='                        <tr>\n' +
+                        '                          <td><span class="text-muted">1-1</span></td>\n' +
+                        '                          <td>\n' +
+                        '                            <span class="status-icon bg-success"></span> 5.0\n' +
+                        '                          </td>\n' +
+                        '                          <td>\n' +
+                        '                            <span class="status-icon bg-success"></span> 5.0\n' +
+                        '                          </td>\n' +
+                        '                          <td>\n' +
+                        '                            <span class="status-icon bg-success"></span> 5.0\n' +
+                        '                          </td>\n' +
+                        '                          <td>\n' +
+                        '                            <a\n' +
+                        '                              class="icon"\n' +
+                        '                              href="javascript:void(0)"\n' +
+                        '                              onclick="updateSeminarScoreByClass()"\n' +
+                        '                            >\n' +
+                        '                              <i class="fe fe-edit"></i>\n' +
+                        '                            </a>\n' +
+                        '                          </td>\n' +
+                        '                        </tr>\n';
+                    content.innerHTML=str;
+                    getTeamTotalScoreByRound(item.id);
+                });
+                content.innerHTML=str;
+
+            }
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+function getReportByClass() {
+    let mySeminar=Cookies.get("seminar");
+    let myClass=Cookies.get("class");
+    alert(mySeminar);
+    alert(myClass);
+
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/seminar/" +
+            Cookies.get("seminar") +
+            "/class/" +
+            Cookies.get("class") +
+            "/report",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                alert("获取成功");
+            }
+        },
+        error: function(data) {
+            console.log(data);
+            alert("fail");
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+function getAttendanceItemsByClass() {
+    let mySeminar=Cookies.get("seminar");
+    let myClass=Cookies.get("class");
+    alert(mySeminar);
+    alert(myClass);
+
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/seminar/" +
+            Cookies.get("seminar") +
+            "/class/" +
+            Cookies.get("class") +
+            "/attendance",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            var content=document.getElementById("content");   //获取外围容器
+            var str="";
+            $.each(data, function(i, item) {
+                console.log(item);
+                str +='                        <tr>\n' +
+                    '                          <td><span class="text-muted">'+item.classSerial+'-'+item.teamSerial+'</span></td>\n' +
+                    '                          <td><a href="." class="text-inherit">'+item.pptName+'</a></td>\n' +
+                    '                          <td>\n' +
+                    '                            <a\n' +
+                    '                              class="icon"\n' +
+                    '                              href="javascript:void(0)"\n' +
+                    '                              onclick="getPptByAttendance('+item.id+')"\n' +
+                    '                            >\n' +
+                    '                              <i class="fe fe-download"></i>\n' +
+                    '                            </a>\n' +
+                    '                          </td>\n' +
+                    '                          <td><a href="." class="text-inherit">'+item.reportName+'</a></td>\n' +
+                    '                          <td id=attendance"'+item.id+'">\n' +
+                    '                            <span class="status-icon bg-success"></span> 5.0\n' +
+                    '                          </td>\n' +
+                    '                          <td>\n' +
+                    '                            <a class="icon" href="javascript:void(0)">\n' +
+                    '                              <i class="fe fe-edit"></i>\n' +
+                    '                            </a>\n' +
+                    '                          </td>\n' +
+                    '                          <td>\n' +
+                    '                            <a\n' +
+                    '                              class="icon"\n' +
+                    '                              href="javascript:void(0)"\n' +
+                    '                              onclick="getReportByAttendance('+item.id+')"\n' +
+                    '                            >\n' +
+                    '                              <i class="fe fe-download"></i>\n' +
+                    '                            </a>\n' +
+                    '                          </td>\n' +
+                    '                        </tr>\n';
+                getAttendanceItemReportScore(item.id);
+            });
+            content.innerHTML=str;
+        },
+        error: function(data) {
+            console.log(data);
+            alert("fail");
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+function getAttendanceItemReportScore(attendanceId) {
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/attendance/" +
+            attendanceId +
+            "/score",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+            if (xhr.status === 200) {
+                var content=document.getElementById("attendance"+attendanceId);   //获取外围容器
+                var str='<span class="status-icon bg-success"></span>'+data.reportScore;
+                content.innerHTML=str;
+            }
+        },
+        statusCode: {
+            401: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            },
+            403: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            }
+        }
+    });
+}
+function getPptByAttendance(attendanceId) {
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/attendance/" + attendanceId + "/ppt",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                alert("获取成功");
+                console.log(data);
+            }
+        },
+        error: function(data) {
+            console.log(data);
+            alert("fail");
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}
+function getReportByAttendance(attendanceId) {
+
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/attendance/" +
+            attendanceId +
+            "/report",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                alert("获取成功");
+                console.log(data);
+            }
+        },
+        error: function(data) {
+            console.log(data);
+            alert("fail");
+        },
+        statusCode: {
+            400: function() {
+                alert("错误的ID格式");
+            },
+            404: function() {
+                alert("未找到课程");
+            }
+        }
+    });
+}

@@ -64,7 +64,7 @@
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/student.js"></script>
   </head>
-  <body>
+  <body onload="getRoundList()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -168,7 +168,7 @@
                 </li>
               </ol>
             </nav>
-            <div class="row">
+            <div class="row" id="content">
               <div class="col-md-6 col-lg-4">
                 <div class="card">
                   <div class="card-header">
