@@ -6,6 +6,7 @@ function jumpFromTeacherHome(teacherId){
 //登录页面
 function bindAdmin() {
     let ata = { account: $("#account").val(), password: $("#password").val() };
+    console.log(ata);
     $.ajax({
         type: "post",
         url: "http://xug98.cn/admin/login",
@@ -49,7 +50,7 @@ function getAllStudent() {
                 $.each(data, function(i, item) {
                     console.log(item);
                     str +='                        <tr>\n' +
-                        '                          <td>'+item.name+'</td>\n' +
+                        '                          <td>'+item.studentName+'</td>\n' +
                         '                          <td>'+item.account+'</td>\n' +
                         '                          <td class="text-nowrap">'+item.email+'</td>\n' +
                         '                          <td>\n' +
@@ -253,7 +254,7 @@ function getAllTeacher() {
                 $.each(data, function(i, item) {
                     console.log(item);
                     str +='                        <tr>\n' +
-                        '                          <td>'+item.name+'</td>\n' +
+                        '                          <td>'+item.teacherName+'</td>\n' +
                         '                          <td>'+item.account+'</td>\n' +
                         '                          <td class="text-nowrap">'+item.email+'</td>\n' +
                         '                          <td>\n' +

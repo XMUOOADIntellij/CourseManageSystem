@@ -62,7 +62,7 @@
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/admin.js"></script>
   </head>
-  <body onload="initStudent()">
+  <body onload="getAllStudent()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -176,13 +176,6 @@
                   <div class="card-header">
                     <h3 class="card-title">学生列表</h3>
                     <div class="card-options">
-                      <a
-                        href="./student-home-create.html"
-                        class="btn btn-outline-primary  py-1 px-2"
-                        role="button"
-                      >
-                        <i class="fe fe-plus-circle mr-3"></i>新建学生账户</a
-                      >
                     </div>
                   </div>
 
@@ -190,7 +183,7 @@
                     <table class="table card-table table-striped table-vcenter">
                       <thead>
                         <tr>
-                          <th colspan="2">姓名</th>
+                          <th>姓名</th>
                           <th>学号</th>
                           <th>电子邮箱</th>
                           <th></th>
@@ -198,7 +191,7 @@
                           <th></th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="content">
                         <tr>
                           <td class="w-1"><span class="avatar">N</span></td>
                           <td>牛晓彤</td>
