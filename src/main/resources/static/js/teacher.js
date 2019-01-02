@@ -776,7 +776,8 @@ function updateClass(classId) {
         type: 'POST',
         success: function(data){
             console.log(data);
-            alert("上传成功");
+            alert
+            ("上传成功");
         },
         error: function(data){
             console.log(data);
@@ -2283,22 +2284,29 @@ function createShare()
         conflictclass+=conflictInner;
 
     });
-    console.log(conflictclass);
+    let  myStr=JSON.stringify(conflictclass);
+    console.log(myStr);
     $.ajax({
         type: "post",
         url: "http://xug98.cn/course/" + Cookies.get("course") + "/"+myPath,
         dataType: "json",
-        data: JSON.stringify(conflictclass),
+        data: conflictclass,
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
             console.log("success");
             window.location.href = "./course-seminar.html";
         },
+        error: function(data){
+          console.log(data);
+        },
         statusCode: {
             400: function() {
                 $("#password").val("");
                 console.log("用户名或密码错误！");
+            },
+            201: function(){
+                console.log("success");
             }
         }
     });
