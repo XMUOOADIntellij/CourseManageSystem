@@ -776,7 +776,7 @@ function updateClass(classId) {
         type: 'POST',
         success: function(data){
             console.log(data);
-            console.log("上传成功");
+            alert("上传成功");
         },
         error: function(data){
             console.log(data);
