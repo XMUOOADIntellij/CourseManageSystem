@@ -440,8 +440,6 @@
   }
 
   function receiveNext(data){
-
-
   }
   function receiveStatus(data){
     if(data.status==1){
@@ -480,8 +478,8 @@
     for (i = 0; i < cDoms.length; i++) {
       cDoms[i].setAttribute("class","list-group-item list-group-item-action d-flex align-items-center  px-0");
     }
-    document.getElementById(questionId).setAttribute("class","list-group-item list-group-item-action d-flex align-items-center active px-1 py-3");
-    getQuestionScore(questionId);
+      document.getElementById(questionId).setAttribute("class","list-group-item list-group-item-action d-flex align-items-center active px-1 py-3");
+      getQuestionScore(questionId);
   }
 </script>
 

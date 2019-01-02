@@ -1995,9 +1995,6 @@ function getAttendanceScore() {
   });
 }
 function createAttendance() {
-
-
-
   let ata = {
     courseId: Cookies.get("course")
   };
@@ -2141,8 +2138,6 @@ function createTeacher() {
 }
 
 function updateTeacher() {
-
-
   let ata = {
     account: "11111",
     email: "11111@qq.com",

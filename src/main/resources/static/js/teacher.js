@@ -303,44 +303,41 @@ function createCourse() {
     let conflict = {
         courseId: "2"
     };
-    let conflictdata="[";
 
     let childCheckBoxes1 = $("tbody.check1 tr td label input[type='checkbox']");
     let childValue1 = $("tbody.check1 tr td input[type='text']");
     let values = "";
     let i;
+
+    let conflictdata = [];
+
     for (i = 0; i < childCheckBoxes1.length; i++) {
         if (childCheckBoxes1[i].checked == true) {
-            if (conflictdata !== "[") conflictdata += ',';
-            conflictdata += '{"courseId":' + childCheckBoxes1[i].value + ',"maxMember":' + childValue1[2 * i].value + ',"minMember":' + childValue1[i * 2 + 1].value + '}';
+            let conflict = {};
+            conflict.courseId = childCheckBoxes1[i].value;
+            conflict.maxMember = childValue1[2 * i].value;
+            conflict.minMember = childValue1[i * 2 + 1].value;
+            conflictdata.push(conflict);
         }
 
     }
-    conflictdata += ']';
     console.log(conflictdata);
 
-    let conflictclass="[";
+    let conflictclass = [];
 
     let childGroup = $("tbody.check2").each(function(){
-        if (conflictclass !== "[") conflictclass += ',';
-
-        let conflictInner="[";
+        let conflictInner = [];
         let childCheckBoxes2=$(this).find("tr td label input[type='checkbox']");
         let childValue2 = $(this).find("tr td input[type='text']");
         values = "";
         let j;
         for (j = 0; j < childCheckBoxes2.length; j++) {
             if (childCheckBoxes2[j].checked == true) {
-                if (conflictInner !== "[") conflictInner += ',';
-                conflictInner += childCheckBoxes2[j].value;
+                conflictInner.push(childCheckBoxes2[j].value);
             }
-
         }
-        conflictInner += ']';
-        conflictclass+=conflictInner;
-
+        conflictclass.push(conflictInner);
     });
-    conflictclass += ']';
 
     console.log(conflictclass);
 
@@ -645,36 +642,36 @@ function getClassItems() {
                         '                  </div>\n' +
                         '\n' +
                         '                  <div class="card-body">\n' +
-                        '                    <div>\n' +
+                        '                    <form enctype="multipate/form-data" id="'+'form'+item.id+'">\n' +
                         '                      <div class="form-group">\n' +
                         '                        <label class="form-label">讨论课时间</label>\n' +
-                        '                        <input class="form-control"  name="example-text-input" placeholder="'+item.klassTime+'" type="text" readonly="">\n' +
+                        '                        <input class="form-control"  name="text-input" placeholder="'+item.klassTime+'" type="text" readonly="">\n' +
                         '                      </div>\n' +
                         '                      <div class="form-group">\n' +
                         '                        <label class="form-label">讨论课地点</label>\n' +
-                        '                        <input class="form-control"  name="example-text-input" placeholder="'+item.klassLocation+'" type="text" readonly="">\n' +
+                        '                        <input class="form-control"  name="text-input" ' +
+                        'placeholder="'+item.klassLocation+'" type="text" readonly="">\n' +
                         '                      </div>\n' +
                         '                      <div class="form-group">\n' +
-                        '                        <div class="form-label">班级学生名单</div>\n' +
-                        '                        <div class="custom-file">\n' +
+                        '                        <label class="form-label">班级学生名单</label>\n' +
                         '                          <input\n' +
                         '                            type="file"\n' +
                         '                            id="file'+item.id+'"\n' +
-                        '                            class="custom-file-input"\n' +
+                        '                            class="form-control"\n' +
+                        'name="file"'+
                         '                          />\n' +
-                        '                          <label class="custom-file-label">选择文件</label>\n' +
-                        '                        </div>\n' +
                         '                      </div>\n' +
                         '\n' +
                         '                      <div class="form-footer">\n' +
                         '                        <button\n' +
                         '                          class="btn btn-primary btn-block"\n' +
+                        'type="button"'+
                         '                          onclick="updateClass('+item.id+')"\n' +
                         '                        >\n' +
                         '                          确认修改\n' +
                         '                        </button>\n' +
                         '                      </div>\n' +
-                        '                    </div>\n' +
+                        '                    </form>\n' +
                         '                  </div>\n' +
                         '                </div>\n' +
                         '              </div>\n';
@@ -772,9 +769,10 @@ function createClass() {
 }
     //修改班级
 function updateClass(classId) {
-    var formData = new FormData();
-    var fileField = document.getElementById("file"+classId);
-    formData.append( 'file', fileField.files[0] );
+    alert("upload");
+    let content=document.getElementById("form"+classId);   //获取外围容器
+    let formData = new FormData(content);
+
     $.ajax({
         url: "http://xug98.cn/class/" + Cookies.get("class"),
         data: formData,
@@ -783,9 +781,11 @@ function updateClass(classId) {
         type: 'POST',
         success: function(data){
             alert(data);
+            alert("上传成功");
         },
         error: function(data){
             console.log(data);
+            alert(data);
             alert("上传失败");
         }
     });
@@ -2849,8 +2849,10 @@ function getCurrentSeminar() {
             },
             200:function(data){
                 if(status=="null")
+                {
                     alert("没有正在进行的讨论课");
                     window.history.back();
+                }
             }
         }
     });
@@ -2868,7 +2870,6 @@ function getAttendanceScore(attendanceId) {
             alert("success");
             if (xhr.status === 200) {
                 $("#present-score").val(data.presentationScore);
-
             }
         },
         statusCode: {
