@@ -325,7 +325,10 @@ onload="onPomodoroTimer();connect();initProgress()"-->
     let myAttendanceId=data.id;
     tabClick(myAttendanceId);
   }
+  function ask() {
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/ask", {"jwt":localStorage.jwt}, null);
 
+  }
   function quesClick(questionId){
     Cookies.set("question",questionId);
     let cDoms=document.getElementById("ques-content").children;
