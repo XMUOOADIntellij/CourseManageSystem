@@ -42,7 +42,13 @@ public class QuestionService {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, klassId);
         if (klassSeminar != null) {
             if (klassSeminar.getKlass().getCourse().getTeacher().getId().equals(teacher.getId())) {
-                return questionDao.listQuestionByKlassSeminarIdAndAttendanceId(klassSeminar.getId(), attendanceId);
+                List<Question> questions = new ArrayList<>();
+                for(Question item : questionDao.listQuestionByKlassSeminarIdAndAttendanceId(klassSeminar.getId(), attendanceId)){
+                   if(item.getSelected()){
+                       questions.add(item);
+                   }
+                }
+                return questions;
             } else {
                 throw new UnauthorizedOperationException("只有当前课的老师可查看");
             }
@@ -163,16 +169,18 @@ public class QuestionService {
                     int minCount = Integer.MAX_VALUE;
                     for (Question item : attendanceQuestion) {
                         Integer count = questionCount.get(item.getTeam().getId());
-                        if (count == null) {
+                        if (count == null&&!item.getSelected()) {
                             item.setSelected(true);
+                            questionDao.updateQuestion(item);
                             return item;
-                        } else if (count < minCount) {
+                        } else if (count < minCount&&!item.getSelected()) {
                             result = item;
                             minCount = count;
                         }
                     }
                     if (result != null) {
                         result.setSelected(true);
+                        questionDao.updateQuestion(result);
                     }
                     return result;
                 } else {

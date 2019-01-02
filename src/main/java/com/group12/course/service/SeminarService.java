@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
@@ -29,7 +30,8 @@ public class SeminarService {
     ScoreDao scoreDao;
     @Autowired
     KlassStudentDao klassStudentDao;
-
+    @Autowired
+    AttendanceDao attendanceDao;
 
     /**
      * 新建讨论课 Service层
@@ -182,7 +184,7 @@ public class SeminarService {
         }
     }
 
-    public KlassSeminar startSeminar(Teacher teacher, Long seminarId, Long classId) {
+    public KlassSeminar continueSeminar(Teacher teacher, Long seminarId, Long classId) {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         if (klassSeminar != null) {
             Course course = klassSeminar.getKlass().getCourse();
@@ -194,6 +196,36 @@ public class SeminarService {
                     //开始成功后，为该班级小组添加成绩记录
                     scoreDao.initialScoreBeforeKlassSeminar(klassSeminar.getId());
                     return klassSeminar;
+                } else {
+                    return null;
+                }
+            } else {
+                throw new UnauthorizedOperationException("只有这节课的老师可以操作");
+            }
+        } else {
+            throw new RecordNotFoundException("找不到班级讨论课");
+        }
+    }
+
+    public KlassSeminar startSeminar(Teacher teacher, Long seminarId, Long classId) {
+        KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
+        List<Attendance> attendanceList = attendanceDao.listAttendanceByKlassSeminarId(klassSeminar.getId());
+        if (klassSeminar != null) {
+            Course course = klassSeminar.getKlass().getCourse();
+            if (course.getTeacher().getId().equals(teacher.getId())) {
+                //讨论课所处状态，未开始0，正在进行1，已结束2，暂停3
+                klassSeminar.setSeminarStatus(1);
+                if (klassSeminarDao.updateKlassSeminar(klassSeminar) == 1) {
+                    attendanceList.sort(new Comparator<Attendance>() {
+                        @Override
+                        public int compare(Attendance o1, Attendance o2) {
+                            return o1.getTeamOrder().compareTo(o2.getTeamOrder());
+                        }
+                    });
+                    Attendance record = attendanceList.get(0);
+                    record.setPresented(true);
+                    attendanceDao.updateAttendance(record);
+                    return  klassSeminar;
                 } else {
                     return null;
                 }

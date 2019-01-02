@@ -3,8 +3,11 @@ package com.group12.course.exception;
 
 import java.util.List;
 
+
 /**
  * 错误返回的实体
+ * @author Y Jiang
+ * @date  2018/12/25
  */
 public class ErrorResponse {
 

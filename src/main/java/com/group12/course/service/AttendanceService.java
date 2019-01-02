@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -358,17 +359,32 @@ public class AttendanceService {
         KlassSeminar klassSeminar = klassSeminarDao.selectKlassSeminarBySeminarIdAndClassId(seminarId, classId);
         if (klassSeminar != null) {
             Attendance attendance = attendanceDao.selectAttendanceById(attendanceId);
+            List<Attendance> attendanceList = attendanceDao.listAttendanceByKlassSeminarId(klassSeminar.getId());
             if (attendance != null) {
                 //当前小组状态更新
                 attendance.setPresented(false);
                 attendanceDao.updateAttendance(attendance);
 
-                //找到下一组，当前讨论课的展示小组序号+1
-                Attendance nextAttendance = attendanceDao.selectAttendanceByKlassSeminarIdAndTeamOrder(
-                        klassSeminar.getId(), attendance.getTeamOrder() + 1
-                );
-                nextAttendance.setPresented(true);
-                return nextAttendance;
+                //找到下一组
+                attendanceList.sort(new Comparator<Attendance>() {
+                    @Override
+                    public int compare(Attendance o1, Attendance o2) {
+                        return o1.getTeamOrder().compareTo(o2.getTeamOrder());
+                    }
+                });
+                Attendance result = null;
+                for (int i = 0; i < attendanceList.size(); i++) {
+                    if (attendanceList.get(i).getTeamOrder().equals(attendance.getTeamOrder())) {
+                        result = attendanceList.get(i + 1);
+                    }
+                }
+                if (result != null) {
+                    result.setPresented(true);
+                    attendance.setPresented(false);
+                    attendanceDao.updateAttendance(result);
+                    attendanceDao.updateAttendance(attendance);
+                }
+                return null;
             } else {
                 throw new RecordNotFoundException("Attendance不存在");
             }
