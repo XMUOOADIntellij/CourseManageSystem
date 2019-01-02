@@ -3,6 +3,7 @@ package com.group12.course.mapper;
 import com.group12.course.entity.Student;
 import com.group12.course.entity.Team;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -84,7 +85,7 @@ public interface TeamMapper {
      * @param klassId  队员 id
      * @return 代表处理数量
      * */
-    int addTeamIntoKlass(Long teamId,Long klassId);
+    int addTeamIntoKlass(@Param("teamId") Long teamId,@Param("klassId") Long klassId);
 
     /**
      * 获取数据库中队伍的记录

@@ -370,11 +370,8 @@ public class CourseService {
             return 1;
         }
         else{
-            //删除从课程中原来的分组
-            List<Klass> klassList = klassDao.getAllKlassByCourseId(subCourse.getId());
-            for (Klass klass:klassList) {
-                teamDao.deleteTeamFromKlassByKlassId(klass.getId());
-            }
+            shareTeamApplication.setStatus(1);
+            shareTeamApplicationDao.updateShareTeamApplication(shareTeamApplication);
 
             //修改从课程的teamMainCourse
             Course mainCourse = shareTeamApplication.getMainCourse();
@@ -416,17 +413,16 @@ public class CourseService {
             return 1;
         }
         else {
-            //删除从课程中原来的的讨论课
-            List<Klass> klassList = klassDao.getAllKlassByCourseId(subCourse.getId());
-            for (Klass klass:klassList) {
-                klassSeminarDao.deleteKlassSeminarByKlassId(klass.getId());
-            }
+
+            shareSeminarApplication.setStatus(1);
+            shareSeminarApplicationDao.updateSeminarApplication(shareSeminarApplication);
             //修改从课程的seminarMainCourse
             Course mainCourse = shareSeminarApplication.getMainCourse();
             subCourse.setSeminarMainCourse(mainCourse);
             courseDao.updateCourse(subCourse);
 
             //将共享的seminar插入到klass_seminar表
+            List<Klass> klassList = klassDao.getAllKlassByCourseId(subCourse.getId());
             List<Seminar> seminarList = seminarDao.listSeminarByCourseId(mainCourse.getId());
             List<KlassSeminar> klassSeminarList = new ArrayList<>();
             for (Klass klass : klassList) {
