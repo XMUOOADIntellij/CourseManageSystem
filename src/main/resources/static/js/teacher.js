@@ -1098,7 +1098,7 @@ function updateRoundForScore() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./seminar-round.html";
+            window.location.href = "./course-round-detail-score.html";
         },
         statusCode: {
             400: function() {

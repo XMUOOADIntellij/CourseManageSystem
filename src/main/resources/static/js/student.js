@@ -555,7 +555,7 @@ let ata = {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./seminar-round.html";
+            window.location.href = "./course-team.html";
         },
         error: function(data) {
             console.log(data);
@@ -613,21 +613,21 @@ function createTeam() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./seminar-round.html";
-        },
-        error: function(data) {
-            console.log(data);
-            alert("fail");
+            window.location.href = "./course-team.html";
         },
         statusCode: {
             201: function(data) {
                 console.log(data);
                 alert("success");
-                window.location.href = "./seminar-round.html";
+                window.location.href = "./course-team.html";
             },
-            400: function() {
-                $("#password").val("");
-                alert("用户名或密码错误！");
+            statusCode: {
+                400: function() {
+                    var result = confirm("无法添加成员,确认发起特殊申请?");
+                    if (result) {
+                        window.location.herf="./course-team-request.html";
+                    }
+                }
             }
         }
     });
@@ -703,7 +703,7 @@ function addTeamMembers() {
             400: function() {
                 var result = confirm("无法添加成员,确认发起特殊申请?");
                 if (result) {
-                   windwos.location.herf="./course-team-request.html";
+                   window.location.herf="./course-team-request.html";
                 }
             }
         }
@@ -753,6 +753,9 @@ function deleteTeamMember(teamId,id) {
     let ata = {
         id: id
     };
+    console.log(ata);
+    console.log(teamId);
+
     $.ajax({
         type: "delete",
         url: "http://xug98.cn/team/" + teamId + "/remove",
@@ -1213,6 +1216,9 @@ function getQuestionList(attendanceId) {
         }
     });
 }
+
+
+//讨论课详情
 function getMyAttendance() {
     $.ajax({
         type: "get",
@@ -1222,30 +1228,93 @@ function getMyAttendance() {
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
-            if (xhr.status === 200) {
-                alert("获取成功");
-                if (xhr.status === 200) {
-                    // alert("获取成功");
-                    console.log("my attendance success");
-                    Cookies.set("attendance",data.id);
-
-                }
-            }
+            console.log("courselist");
+            var content=document.getElementById("left-content");   //获取外围容器
+            var str="";
+            Cookie.set("attendance",data.id);
+            str+='        <div class="card p-3">\n' +
+                '                  <div class="d-flex align-items-center">\n' +
+                '                    <span class="stamp stamp-md bg-blue mr-3">\n' +
+                '                      <i class="fe fe-file-text"></i>\n' +
+                '                    </span>\n' +
+                '                    <div>\n' +
+                '                      <h4 class="m-0"><a onclick="deleteAttendance()">取消报名 </a></h4>\n' +
+                '                    </div>\n' +
+                '                  </div>\n' +
+                '                </div>';
+            content.innerHTML=str;
         },
         statusCode: {
             400: function() {
                 alert("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                var content=document.getElementById("left-content");   //获取外围容器
+                var str="";
+                str+='        <div class="card p-3">\n' +
+                    '                  <div class="d-flex align-items-center">\n' +
+                    '                    <span class="stamp stamp-md bg-blue mr-3">\n' +
+                    '                      <i class="fe fe-file-text"></i>\n' +
+                    '                    </span>\n' +
+                    '                    <div>\n' +
+                    '                      <h4 class="m-0"><a onclick="createAttendance()">报名 </a></h4>\n' +
+                    '                    </div>\n' +
+                    '                  </div>\n' +
+                    '                </div>';
+                content.innerHTML=str;
             }
         }
     });
 }
+function getMySeminar() {
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/seminar",
+        dataType: "json",
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("getCurrentSeminar success");
+            Cookies.set("curSeminar",data.seminarId);
+            getAttendanceByClass();
 
+        },
+        error: function(data){
+            console.log(data);
+            alert("error");
 
-
-//讨论课详情
+        },
+        statusCode: {
+            401: function() {
+                alert("未登录!");
+                window.location.href = "./login";
+            },
+            404: function() {
+                var content=document.getElementById("left-content");   //获取外围容器
+                var str="";
+                str+='                <div class="card">\n' +
+                    '                  <div class="card-body text-center">\n' +
+                    '                    <div class="h3 my-5">未开始</div>\n' +
+                    '                    <div class="progress progress-sm my-1">\n' +
+                    '                      <div\n' +
+                    '                        class="progress-bar bg-green"\n' +
+                    '                        style="width: 0%"\n' +
+                    '                      ></div>\n' +
+                    '                    </div>\n' +
+                    '                  </div>\n' +
+                    '                  <div class="card-footer text-right">\n' +
+                    '                    <a\n' +
+                    '                      class="btn btn-primary btn-block my-0"\n' +
+                    '                      href="seminar-round-detail-progress.html"\n' +
+                    '                      >进入课堂</a\n' +
+                    '                    >\n' +
+                    '                  </div>\n' +
+                    '                </div>\n';
+                content.innerHTML=str;
+            }
+        }
+    });
+}
 function getSeminarByClass() {
     let seminarId=Cookies.get("seminar");
     let classId=Cookies.get("class");
@@ -1551,7 +1620,7 @@ function createAttendance() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-            window.location.href = "./seminar-round.html";
+            window.location.href = "./course-round.html";
         },
         statusCode: {
             400: function() {
