@@ -13,7 +13,7 @@ function bindUser() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             if (xhr.status === 200) {
                 window.localStorage.setItem("jwt", data.jwt);
                 Cookies.set("id", data.id);
@@ -34,7 +34,7 @@ function bindUser() {
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });

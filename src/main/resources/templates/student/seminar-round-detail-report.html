@@ -62,7 +62,7 @@
     <script src="../../static/js/user.js"></script>
     <script src="../../static/js/teacher.js"></script>
   </head>
-  <body onload="getAttendanceByClassForReport()">
+  <body onload="getAttendanceItemsByClass()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -160,7 +160,92 @@
             </div>
           </div>
         </div>
-        <div class="my-3 my-md-5 mt-5"></div>
+        <div class="my-3 my-md-5 mt-5">
+          <div class="container">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+
+                <li class="breadcrumb-item">
+                  <a href="course-round-detail.html">讨论课详情</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  讨论课报告
+                </li>
+              </ol>
+            </nav>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">讨论课报告</h3>
+                    <div class="card-options">
+                      <a
+                        class="btn btn-sm btn-outline-primary px-1 mr-3"
+                        onclick="getPptByClass()"
+                        ><i class="fe fe-download  mr-3"></i>全部课件</a
+                      >
+                      <a
+                        class="btn btn-sm  btn-outline-primary px-1"
+                        onclick="getReportByClass()"
+                        ><i class="fe fe-download mr-3"></i>全部报告</a
+                      >
+                    </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table card-table table-vcenter text-nowrap">
+                      <thead>
+                        <tr>
+                          <th class="w-1">No.</th>
+                          <th>课件</th>
+                          <th></th>
+                          <th>报告</th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody id="content">
+                        <tr>
+                          <td><span class="text-muted">1-1</span></td>
+                          <td><a href="." class="text-inherit">1.pdf</a></td>
+                          <td>
+                            <a
+                              class="icon"
+                              href="javascript:void(0)"
+                              onclick="getPptByAttendance()"
+                            >
+                              <i class="fe fe-download"></i>
+                            </a>
+                          </td>
+                          <td><a href="." class="text-inherit">1.pdf</a></td>
+                          <td class="text-left">
+                            <span class="badge badge-success">已打分</span>
+                          </td>
+                          <td>
+                            <span class="status-icon bg-success"></span> 5.0
+                          </td>
+                          <td>
+                            <a class="icon" href="javascript:void(0)">
+                              <i class="fe fe-edit"></i>
+                            </a>
+                          </td>
+                          <td>
+                            <a
+                              class="icon"
+                              href="javascript:void(0)"
+                              onclick="getReportByAttendance()"
+                            >
+                              <i class="fe fe-download"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

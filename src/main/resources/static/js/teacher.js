@@ -17,7 +17,7 @@ function activeTeacher() {
     let ata = {
           password: $("#password").val()
       };
-    alert("input");
+    console.log("input");
     $.ajax({
         type: "put",
         url: "http://xug98.cn/teacher/active",
@@ -26,16 +26,16 @@ function activeTeacher() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                alert("注册成功");
+                console.log("注册成功");
                 window.location.href = "../common/login.html";
             }
         },
         statusCode: {
             400: function() {
-                alert("无法注册！");
+                console.log("无法注册！");
             },
             200: function() {
-                alert("注册成功");
+                console.log("注册成功");
                 window.location.href = "../common/login.html";
             }
         }
@@ -53,24 +53,24 @@ function sendPassword() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(xhr.status);
-            alert("success");
+            console.log("success");
             if (xhr.status === 200) {
-                alert("200");
+                console.log("200");
                 window.location.href = "./login.html";
             }
         },
         error: function(data) {
             console.log(data);
-            alert("fail");
+            console.log("fail");
         },
         statusCode: {
             204: function() {
-                alert("204"); //状态码存疑
+                console.log("204"); //状态码存疑
                 window.location.href = "./login.html";
             },
             400: function() {
                 $("#account").val("");
-                alert("没有此账户！");
+                console.log("没有此账户！");
             }
         }
     });
@@ -91,7 +91,7 @@ function getUserInfo() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             if (xhr.status === 200) {
                 $("#account").html(data.account);
                 $("#email").val(data.email);
@@ -112,21 +112,21 @@ function editPassword() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                alert("修改成功");
+                console.log("修改成功");
                 window.location.href = "./account-setting.html";
             }
         },
         error: function(data) {
             console.log(data);
-            alert("fail");
+            console.log("fail");
             window.location.href = "./account-setting.html";
         },
         statusCode: {
             200: function() {
-                alert("修改成功");
+                console.log("修改成功");
             },
             400: function() {
-                alert("修改失败");
+                console.log("修改失败");
             }
         }
     });
@@ -145,18 +145,18 @@ function editEmail() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                alert("修改成功");
+                console.log("修改成功");
                 window.location.href = "./account-setting.html";
             }
         },
         /*    error: function(data){
               console.log(data);
-              alert("fail");
+              console.log("fail");
 
             },*/
         statusCode: {
             200: function() {
-                alert("修改成功");
+                console.log("修改成功");
             }
         }
     });
@@ -173,7 +173,7 @@ function getCourseList() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 console.log("courselist");
                 let content=document.getElementById("content");   //获取外围容器
                 let str="";
@@ -288,12 +288,12 @@ function getCourseList() {
         },
         statusCode: {
             400: function() {
-                alert("courselist");
-                alert("错误的ID格式");
+                console.log("courselist");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("courselist");
-                alert("未找到课程");
+                console.log("courselist");
+                console.log("未找到课程");
             }
         }
     });
@@ -365,22 +365,22 @@ function createCourse() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             window.location.href = "./course-home.html";
         },
         error: function(data) {
             console.log(data);
-            alert("fail");
+            console.log("fail");
         },
         statusCode: {
             201: function(data) {
                 console.log(data);
-                alert("success");
+                console.log("success");
                 window.location.href = "./course-home.html";
             },
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
@@ -492,12 +492,12 @@ function getAllCourse() {
         },
         statusCode: {
             400: function() {
-                alert("courselist");
-                alert("错误的ID格式");
+                console.log("courselist");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("courselist");
-                alert("未找到课程");
+                console.log("courselist");
+                console.log("未找到课程");
             }
         }
     });
@@ -513,25 +513,25 @@ function deleteCourse() {
             contentType: "application/json;",
             error: function (data, textStatus, xhr) {
                 console.log(cid);
-                alert("wrong");
+                console.log("wrong");
             },
             success: function (data, textStatus, xhr) {
-                alert("成功");
+                console.log("成功");
                 console.log(data);
             },
 
             statusCode: {
                 400: function () {
-                    alert("错误的ID格式");
+                    console.log("错误的ID格式");
                 },
                 403: function () {
-                    alert("用户权限不足");
+                    console.log("用户权限不足");
                 },
                 404: function () {
-                    alert("未找到课程");
+                    console.log("未找到课程");
                 },
                 204: function(){
-                    alert("成功");
+                    console.log("成功");
                     window.location.href = "./course-home.html";
                 }
             }
@@ -552,7 +552,7 @@ function getCourseListForSeminar() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 console.log("courselist");
                 let content=document.getElementById("content");   //获取外围容器
                 let str="";
@@ -588,12 +588,12 @@ function getCourseListForSeminar() {
         },
         statusCode: {
             400: function() {
-                alert("courselist");
-                alert("错误的ID格式");
+                console.log("courselist");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("courselist");
-                alert("未找到课程");
+                console.log("courselist");
+                console.log("未找到课程");
             }
         }
     });
@@ -609,7 +609,7 @@ function getClassItems() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 console.log("classlist");
                 let content=document.getElementById("content");   //获取外围容器
                 let str="";
@@ -678,10 +678,10 @@ function getClassItems() {
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -697,27 +697,27 @@ function deleteClass(classId) {
             contentType: "application/json;",
             error: function (data, textStatus, xhr) {
                 console.log(cid);
-                alert("wrong");
+                console.log("wrong");
             },
             success: function (data, textStatus, xhr) {
-                alert("成功");
+                console.log("成功");
                 if (xhr.status === 204) {
-                    alert("成功");
+                    console.log("成功");
                     console.log(data);
                 }
             },
             statusCode: {
                 400: function () {
-                    alert("错误的ID格式");
+                    console.log("错误的ID格式");
                 },
                 403: function () {
-                    alert("用户权限不足");
+                    console.log("用户权限不足");
                 },
                 404: function () {
-                    alert("未找到课程");
+                    console.log("未找到课程");
                 },
                 200: function () {
-                    alert("成功");
+                    console.log("成功");
                 }
             }
         });
@@ -733,7 +733,7 @@ function createClass() {
         klassTime:$("#time").val(),
     };
     console.log(ata);
-    alert(Cookies.get("course"));
+    console.log(Cookies.get("course"));
     $.ajax({
         type: "post",
         url: "http://xug98.cn/course/" + Cookies.get("course") + "/class",
@@ -742,29 +742,29 @@ function createClass() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             window.location.href="./course-class.html";
         },
         error: function(data) {
             console.log(data);
-            alert("fail");
+            console.log("fail");
         },
         statusCode: {
             201: function(data) {
                 console.log(data);
-                alert("success");
+                console.log("success");
                 window.location.href = "./class-round.html";
             },
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
 }
     //修改班级
 function updateClass(classId) {
-    alert("upload");
+    console.log("upload");
     let content=document.getElementById("form"+classId);   //获取外围容器
     let formData = new FormData(content);
 
@@ -775,13 +775,13 @@ function updateClass(classId) {
         contentType: false,
         type: 'POST',
         success: function(data){
-            alert(data);
-            alert("上传成功");
+            console.log(data);
+            console.log("上传成功");
         },
         error: function(data){
             console.log(data);
-            alert(data);
-            alert("上传失败");
+            console.log(data);
+            console.log("上传失败");
         }
     });
 }
@@ -797,7 +797,7 @@ function getRoundList() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 // console.log("roundlist");
                 let content=document.getElementById("content");   //获取外围容器
                 let str="";
@@ -837,14 +837,14 @@ function getRoundList() {
         },
         statusCode: {
             400: function() {
-                alert("roundlist");
+                console.log("roundlist");
 
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("roundlist");
+                console.log("roundlist");
 
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -857,7 +857,7 @@ function getSeminarList(roundId) {
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 // console.log("seminarList");
                 let content=document.getElementById("round"+roundId);   //获取外围容器
                 let str="";
@@ -913,18 +913,18 @@ function getSeminarList(roundId) {
         statusCode: {
             500: function(data) {
 
-                alert("seminarList");
-                alert("错误的ID格式");
+                console.log("seminarList");
+                console.log("错误的ID格式");
             },
             400: function() {
-                alert("seminarList");
+                console.log("seminarList");
 
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("seminarList");
+                console.log("seminarList");
 
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -937,7 +937,7 @@ function getClassList(seminarId) {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 // console.log("classlist");
                 let content=document.getElementById("seminar-"+seminarId);   //获取外围容器
                 let str="";
@@ -965,10 +965,10 @@ function getClassList(seminarId) {
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -979,7 +979,7 @@ function createRound() {
         courseId: Cookies.get("course")
     };
     console.log(ata);
-    alert("input");
+    console.log("input");
     $.ajax({
         type: "post",
         url: "http://xug98.cn/round?courseId="+Cookies.get("course"),
@@ -987,7 +987,7 @@ function createRound() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             window.location.href = "./course-round-setting.html";
         },
 
@@ -995,10 +995,10 @@ function createRound() {
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             },
             201: function() {
-                alert("success");
+                console.log("success");
                 window.location.href = "./course-round-create.html";
             }
         }
@@ -1032,7 +1032,7 @@ function createRoundForScore() {
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             },
             201: function() {
                 console.log("score success");
@@ -1072,7 +1072,7 @@ function createRoundForClass() {
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             },
             201: function() {
                 console.log("class success");
@@ -1097,13 +1097,13 @@ function updateRoundForScore() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             window.location.href = "./course-round-detail-score.html";
         },
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
@@ -1127,7 +1127,7 @@ function getSeminarByClass() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                alert("获取成功");
+                console.log("获取成功");
                 $("#name").val(data.seminarName);
                 $("#introduction").val(data.introduction);
                 $("#round").val(data.roundId);
@@ -1139,10 +1139,10 @@ function getSeminarByClass() {
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -1161,7 +1161,7 @@ function getSeminarScoreByClass() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 console.log("roundlist");
                 let content=document.getElementById("content");   //获取外围容器
                 let str="";
@@ -1197,10 +1197,10 @@ function getSeminarScoreByClass() {
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -1208,8 +1208,8 @@ function getSeminarScoreByClass() {
 function getReportByClass() {
     let mySeminar=Cookies.get("seminar");
     let myClass=Cookies.get("class");
-    alert(mySeminar);
-    alert(myClass);
+    console.log(mySeminar);
+    console.log(myClass);
 
     $.ajax({
         type: "get",
@@ -1222,28 +1222,84 @@ function getReportByClass() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                alert("获取成功");
+                console.log("获取成功");
             }
         },
         error: function(data) {
             console.log(data);
-            alert("fail");
+            console.log("fail");
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
 }
+function getAttendanceByClassForReport() {
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/seminar/" +
+            Cookies.get("seminar") +
+            "/class/" +
+            Cookies.get("class") +
+            "/attendance",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            if (xhr.status === 200) {
+                console.log("获取成功");
+                if (xhr.status === 200) {
+                    // console.log("获取成功");
+                    console.log("courselist");
+                    let tabContent=document.getElementById("nav-content");   //获取外围容器
+                    let strTab="";
+                    let currentId=data[0].id;
+                    $.each(data, function(i, item) {
+                        if (item.presented===true)
+                            currentId=item.id;
+                    });
+                    $.each(data, function(i, item) {
+                        console.log(item);
+                        let navClass="list-group-item list-group-item-action d-flex align-items-center px-1 py-3";
+                        if (item.id==currentId)
+                        {
+                            navClass="list-group-item list-group-item-action d-flex align-items-center active px-1 py-3";
+                        }
+
+                        strTab+='<a class="'+navClass+'" id="'+item.id+'" href="#" onclick="tabClick('+item.id+')">' +
+                            '                      <span class="icon mr-3"><i class="fe fe-inbox"></i></span\n' +
+                            '                      >'+item.classSerial+'-'+item.teamSerial+'<span class="ml-auto badge badge-primary"></span>\n' +
+                            '                    </a>';
+                    });
+                    Cookies.set("attendance",currentId);
+                    tabContent.innerHTML=strTab;
+                }
+            }
+        },
+        error: function(data) {
+            console.log(data);
+            console.log("fail");
+        },
+        statusCode: {
+            400: function() {
+                console.log("错误的ID格式");
+            },
+            404: function() {
+                console.log("未找到课程");
+            }
+        }
+    });
+}
+
 function getAttendanceItemsByClass() {
     let mySeminar=Cookies.get("seminar");
     let myClass=Cookies.get("class");
-    alert(mySeminar);
-    alert(myClass);
+    console.log(mySeminar);
+    console.log(myClass);
 
     $.ajax({
         type: "get",
@@ -1272,9 +1328,7 @@ function getAttendanceItemsByClass() {
                     '                            </a>\n' +
                     '                          </td>\n' +
                     '                          <td><a href="." class="text-inherit">'+item.reportName+'</a></td>\n' +
-                    '                          <td id=attendance"'+item.id+'">\n' +
-                    '                            <span class="status-icon bg-success"></span> 5.0\n' +
-                    '                          </td>\n' +
+
                     '                          <td>\n' +
                     '                            <a class="icon" href="javascript:void(0)">\n' +
                     '                              <i class="fe fe-edit"></i>\n' +
@@ -1296,18 +1350,86 @@ function getAttendanceItemsByClass() {
         },
         error: function(data) {
             console.log(data);
-            alert("fail");
+            console.log("fail");
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
 }
+function getScoreItemsByClass() {
+    let mySeminar=Cookies.get("seminar");
+    let myClass=Cookies.get("class");
+    console.log(mySeminar);
+    console.log(myClass);
+
+    $.ajax({
+        type: "get",
+        url: "http://xug98.cn/seminar/" +
+            Cookies.get("seminar") +
+            "/class/" +
+            Cookies.get("class") +
+            "/attendance",
+        dataType: "json",
+        contentType: "application/json;",
+        success: function(data, textStatus, xhr) {
+            var content=document.getElementById("content");   //获取外围容器
+            var str="";
+            $.each(data, function(i, item) {
+                console.log(item);
+                str +='                        <tr>\n' +
+                    '                          <td><span class="text-muted">'+item.classSerial+'-'+item.teamSerial+'</span></td>\n' +
+                    '                          <td><a href="." class="text-inherit">'+item.pptName+'</a></td>\n' +
+                    '                          <td>\n' +
+                    '                            <a\n' +
+                    '                              class="icon"\n' +
+                    '                              href="javascript:void(0)"\n' +
+                    '                              onclick="getPptByAttendance('+item.id+')"\n' +
+                    '                            >\n' +
+                    '                              <i class="fe fe-download"></i>\n' +
+                    '                            </a>\n' +
+                    '                          </td>\n' +
+                    '                          <td><a href="." class="text-inherit">'+item.reportName+'</a></td>\n' +
+
+                    '                          <td>\n' +
+                    '                            <a class="icon" href="javascript:void(0)">\n' +
+                    '                              <i class="fe fe-edit"></i>\n' +
+                    '                            </a>\n' +
+                    '                          </td>\n' +
+                    '                          <td>\n' +
+                    '                            <a\n' +
+                    '                              class="icon"\n' +
+                    '                              href="javascript:void(0)"\n' +
+                    '                              onclick="getReportByAttendance('+item.id+')"\n' +
+                    '                            >\n' +
+                    '                              <i class="fe fe-download"></i>\n' +
+                    '                            </a>\n' +
+                    '                          </td>\n' +
+                    '                        </tr>\n';
+                getAttendanceItemReportScore(item.id);
+            });
+            content.innerHTML=str;
+        },
+        error: function(data) {
+            console.log(data);
+            console.log("fail");
+        },
+        statusCode: {
+            400: function() {
+                console.log("错误的ID格式");
+            },
+            404: function() {
+                console.log("未找到课程");
+            }
+        }
+    });
+}
+
 function getAttendanceItemReportScore(attendanceId) {
     $.ajax({
         type: "get",
@@ -1318,7 +1440,7 @@ function getAttendanceItemReportScore(attendanceId) {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             if (xhr.status === 200) {
                 var content=document.getElementById("attendance"+attendanceId);   //获取外围容器
                 var str='<span class="status-icon bg-success"></span>'+data.reportScore;
@@ -1327,11 +1449,11 @@ function getAttendanceItemReportScore(attendanceId) {
         },
         statusCode: {
             401: function() {
-                alert("未登录!");
+                console.log("未登录!");
                 window.location.href = "./login";
             },
             403: function() {
-                alert("未登录!");
+                console.log("未登录!");
                 window.location.href = "./login";
             }
         }
@@ -1345,20 +1467,20 @@ function getPptByAttendance(attendanceId) {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                alert("获取成功");
+                console.log("获取成功");
                 console.log(data);
             }
         },
         error: function(data) {
             console.log(data);
-            alert("fail");
+            console.log("fail");
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -1374,20 +1496,20 @@ function getReportByAttendance(attendanceId) {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                alert("获取成功");
+                console.log("获取成功");
                 console.log(data);
             }
         },
         error: function(data) {
             console.log(data);
-            alert("fail");
+            console.log("fail");
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -1409,13 +1531,13 @@ function updateSeminarByClass() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             window.location.href = "./seminar-round-detail.html";
         },
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
@@ -1439,7 +1561,7 @@ function getSeminarByClassForUpdate() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                alert("获取成功");
+                console.log("获取成功");
                 $("#name").val(data.seminarName);
                 $("#introduction").val(data.introduction);
                 $("#round").val(data.roundId);
@@ -1458,10 +1580,10 @@ function getSeminarByClassForUpdate() {
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });}
@@ -1479,7 +1601,7 @@ function createSeminar() {
         courseId: Cookies.get("course")
     };
     console.log(ata);
-    alert("input");
+    console.log("input");
     $.ajax({
         type: "post",
         url: "http://xug98.cn/seminar",
@@ -1488,13 +1610,13 @@ function createSeminar() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             window.location.href = "./course-round.html";
         },
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
@@ -1513,7 +1635,7 @@ function getRoundListForScore() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 // console.log("roundlist");
                 let content=document.getElementById("content");   //获取外围容器
                 let str="";
@@ -1547,14 +1669,14 @@ function getRoundListForScore() {
         },
         statusCode: {
             400: function() {
-                alert("roundlist");
+                console.log("roundlist");
 
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("roundlist");
+                console.log("roundlist");
 
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -1569,7 +1691,7 @@ function getTeamTotalScoreByRound(roundId) {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                 // alert("获取成功");
+                 // console.log("获取成功");
                 // console.log("teamscore");
                 let content=document.getElementById("round"+roundId);   //获取外围容器
                 let str="";
@@ -1640,10 +1762,10 @@ function getTeamTotalScoreByRound(roundId) {
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -1658,7 +1780,7 @@ function getTeamDetailScoreByRound(roundId,teamId) {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 // console.log("teamscore");
                 // console.log(roundId+'T'+teamId);
 
@@ -1696,10 +1818,10 @@ function getTeamDetailScoreByRound(roundId,teamId) {
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -1716,7 +1838,7 @@ function getTeam() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 console.log("roundlist");
                 let content=document.getElementById("content");
 
@@ -1782,14 +1904,14 @@ function getTeam() {
         },
         statusCode: {
             400: function() {
-                alert("Team");
+                console.log("Team");
 
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("Team");
+                console.log("Team");
 
-                alert("未找到课程");
+                console.log("未找到课程");
             },
             403: function() {
                 console.log("roundlist");
@@ -1869,19 +1991,21 @@ function getTeamShareList() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                alert("获取team成功");
+                console.log("获取team成功");
                 console.log(data);
 
                 let content=document.getElementById("content");   //获取外围容器
                 let str="";
                 $.each(data, function(i, item) {
+                    console.log(item);
+
                     let strStatus='';
                     let strTeacher='';
                     let strCourse='';
                     let myName=Cookies.get("name");
                     // console.log(item);
-                    let itemMain=(item).mainCourse;
-                    let itemSub=(item).subCourse;
+                    let itemMain=item["mainCourse"];
+                    let itemSub=item.subCourse;
                     if  ((itemMain.teacher).teacherName==myName)
                     {
                         strTeacher=(itemSub.teacher).teacherName;
@@ -1953,12 +2077,12 @@ function getTeamShareList() {
         },
         statusCode: {
             400: function() {
-                alert("teamsharelist");
-                alert("错误的ID格式");
+                console.log("teamsharelist");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("teamsharelist");
-                alert("未找到课程");
+                console.log("teamsharelist");
+                console.log("未找到课程");
             }
         }
     });
@@ -1972,19 +2096,20 @@ function getSeminarShareList() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                alert("获取seminar成功");
+                console.log("获取seminar成功");
                 let content=document.getElementById("content");   //获取外围容器
                 let str="";
                 console.log(data);
 
                 $.each(data, function(i, item) {
+                    console.log(item);
                     let strStatus='';
                     let strTeacher='';
                     let strCourse='';
                     let myName=Cookies.get("name");
                     // console.log(item);
-                    let itemMain=(item).mainCourse;
-                    let itemSub=(item).subCourse;
+                    let itemMain=item["mainCourse"];
+                    let itemSub=item.subCourse;
                     if  ((itemMain.teacher).teacherName==myName)
                     {
                         strTeacher=(itemSub.teacher).teacherName;
@@ -2056,12 +2181,12 @@ function getSeminarShareList() {
         },
         statusCode: {
             400: function() {
-                alert("teamsharelist");
-                alert("错误的ID格式");
+                console.log("teamsharelist");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("teamsharelist");
-                alert("未找到课程");
+                console.log("teamsharelist");
+                console.log("未找到课程");
             }
         }
     });
@@ -2077,21 +2202,21 @@ function deleteTeamShare(shareId) {
             contentType: "application/json;",
             error: function(data, textStatus, xhr) {
                 console.log(cid);
-                alert("wrong");
+                console.log("wrong");
             },
             success: function(data, textStatus, xhr) {
-                alert("成功");
+                console.log("成功");
                 console.log(data);
             },
             statusCode: {
                 400: function() {
-                    alert("错误的ID格式");
+                    console.log("错误的ID格式");
                 },
                 403: function() {
-                    alert("用户权限不足");
+                    console.log("用户权限不足");
                 },
                 404: function() {
-                    alert("未找到课程");
+                    console.log("未找到课程");
                 }
             }
         });
@@ -2110,21 +2235,21 @@ function deleteSeminarShare(shareId) {
             contentType: "application/json;",
             error: function(data, textStatus, xhr) {
                 console.log(cid);
-                alert("wrong");
+                console.log("wrong");
             },
             success: function(data, textStatus, xhr) {
-                alert("成功");
+                console.log("成功");
                 console.log(data);
             },
             statusCode: {
                 400: function() {
-                    alert("错误的ID格式");
+                    console.log("错误的ID格式");
                 },
                 403: function() {
-                    alert("用户权限不足");
+                    console.log("用户权限不足");
                 },
                 404: function() {
-                    alert("未找到课程");
+                    console.log("未找到课程");
                 }
             }
         });
@@ -2167,13 +2292,13 @@ function createShare()
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             window.location.href = "./course-seminar.html";
         },
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
@@ -2225,12 +2350,12 @@ function getAllCourseForShare() {
         },
         statusCode: {
             400: function() {
-                alert("courselist");
-                alert("错误的ID格式");
+                console.log("courselist");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("courselist");
-                alert("未找到课程");
+                console.log("courselist");
+                console.log("未找到课程");
             }
         }
     });
@@ -2250,7 +2375,7 @@ function getCourseInfo() {
             Fastjson.format(data);
             console.log(data);
 
-                // alert("获取成功");
+                // console.log("获取成功");
                 $("#courseName").val(data.course.courseName);
                 $("#introduction").val(data.course.introduction);
                 $("#round").val(data.course.roundId);
@@ -2404,10 +2529,10 @@ function getCourseInfo() {
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -2417,14 +2542,14 @@ function getCourseInfo() {
 function getTeamValidTask() {
     $.ajax({
         type: "get",
-        url:  "http://xug98.cn/request/teamvaild",
+        url:  "http://xug98.cn/request/teamvalid",
         // url: "../../static/json/team-valid.json",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
-                console.log("classlist");
+                // console.log("获取成功");
+                console.log("getTeamValidTask");
                 let content=document.getElementById("content");   //获取外围容器
                 let str1="";
                 let str2="";
@@ -2469,7 +2594,7 @@ function getTeamValidTask() {
                             '                </div>\n' +
                             '              </div>';
                     }
-                    if(item.status=='2') {
+                    if(item.status=='0') {
                         strDown='<i class="fe fe-thumbs-down mr-1" style="color:#e57373;"></i>';
                         str2 +=' <div class="col-lg-4">\n' +
                             '                <div class="card">\n' +
@@ -2502,7 +2627,7 @@ function getTeamValidTask() {
                             '                </div>\n' +
                             '              </div>';
                     }
-                    if(item.status=='0') {
+                    if(item.status=='2') {
                         str1 +=' <div class="col-lg-4">\n' +
                             '                <div class="card">\n' +
                             '                  <div class="card-body d-flex flex-column">\n' +
@@ -2524,7 +2649,7 @@ function getTeamValidTask() {
                             '</a>\n' +
                             '                        <a\n' +
                             '                          href="javascript:void(0)"\n' +
-                            '                          onclick="updateTeamValid(\'accept\','+item.id+',this)"\n' +
+                            '                          onclick="updateTeamValid(\'accept\','+item.id+')"\n' +
                             '                          class="icon  ml-3"\n' +
                             '                          >' +strUp+
                             '</a>\n' +
@@ -2535,15 +2660,15 @@ function getTeamValidTask() {
                             '              </div>';
                     }
                 });
-                content.innerHTML=str1+str2;
+                content.innerHTML+=str1+str2;
             }
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             },
         }
     });
@@ -2562,12 +2687,12 @@ function updateTeamValid(handletype,id) {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
         },
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
@@ -2580,7 +2705,7 @@ function updateSeminarShare(handletype,id) {
     };
     console.log(ata);
     let obj=$(e);
-    alert(obj);
+    console.log(obj);
     $.ajax({
         type: "put",
         url: "http://xug98.cn/course/seminarshare/" +id,
@@ -2589,12 +2714,12 @@ function updateSeminarShare(handletype,id) {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
         },
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
@@ -2606,8 +2731,6 @@ function updateTeamShare(handletype,id) {
         handletype: handletype
     };
     console.log(ata);
-    let obj=$(e);
-    alert(obj);
     $.ajax({
         type: "put",
         url: "http://xug98.cn/course/teamshare/" +id,
@@ -2616,12 +2739,12 @@ function updateTeamShare(handletype,id) {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
         },
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
@@ -2632,14 +2755,14 @@ function updateTeamShare(handletype,id) {
 function getTeamShareTask() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/course/teamshare" ,
-        // url: "data.json",
+        url:  "http://xug98.cn/course/teamshare",
+        // url: "../../static/json/team-valid.json",
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
-                console.log("classlist");
+                // console.log("获取成功");
+                console.log("getTeamShareTask");
                 let content=document.getElementById("content");   //获取外围容器
                 let str1="";
                 let str2="";
@@ -2648,22 +2771,22 @@ function getTeamShareTask() {
                     let strUp='<i class="fe fe-thumbs-up mr-1"></i>';
                     let strDown='<i class="fe fe-thumbs-down mr-1"></i>';
                     console.log(item);
-                    let itemCourse=(item.team).mainCourse;
-                    let itemKlass=(item.team).klass;
-                    let itemTeacher=(itemCourse).teacher;
-                    if(item.status=='1') {
+                    let itemCourse=(item).mainCourse;
+                    let itemTea=(itemCourse).teacher;
+
+                    if(item.status==='1') {
                         strUp='<i class="fe fe-thumbs-up mr-1" style="color:#8BC34A;"></i>';
                         str2 +=' <div class="col-lg-4">\n' +
                             '                <div class="card">\n' +
                             '                  <div class="card-body d-flex flex-column">\n' +
-                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 组队</a></h4>\n' +
+                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 共享组队</a></h4>\n' +
                             '                    <div class="text-muted">\n' +
-                            '                      '+itemCourse.courseName+'课程'+itemTeacher.teacherName+'老师向您申请分享组队\n' +
+                            '                      '+itemCourse.courseName+'课程'+'的'+itemTea.teacherName+'老师向您申请共享组队\n' +
                             '                    </div>\n' +
 
                             '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
                             '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
-                            '                      <div><a class="text-default">'+itemTeacher.teacherName+' </a></div>\n' +
+                            '                      <div><a class="text-default">'+itemTea.teacherName+' </a></div>\n' +
                             '\n' +
                             '                      <div class="ml-auto text-muted">\n' +
                             '                        <a\n' +
@@ -2684,30 +2807,30 @@ function getTeamShareTask() {
                             '                </div>\n' +
                             '              </div>';
                     }
-                    if(item.status=='2') {
+                    if(item.status==='0') {
                         strDown='<i class="fe fe-thumbs-down mr-1" style="color:#e57373;"></i>';
                         str2 +=' <div class="col-lg-4">\n' +
                             '                <div class="card">\n' +
                             '                  <div class="card-body d-flex flex-column">\n' +
-                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 组队</a></h4>\n' +
+                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 共享组队</a></h4>\n' +
                             '                    <div class="text-muted">\n' +
-                            '                      '+itemCourse.courseName+'课程'+itemKlass.klassSerial+'班的'+itemStu.studentName+'同学向您申请组队\n' +
+                            '                      '+itemCourse.courseName+'课程'+'的'+itemTea.teacherName+'老师向您申请共享组队\n' +
                             '                    </div>\n' +
-                            '<div class="text-muted">原因：'+item.reason+'</div>'+
+
                             '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
                             '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
-                            '                      <div><a class="text-default">'+itemStu.studentName+' </a></div>\n' +
+                            '                      <div><a class="text-default">'+itemTea.teacherName+' </a></div>\n' +
                             '\n' +
                             '                      <div class="ml-auto text-muted">\n' +
                             '                        <a\n' +
                             '                          href="javascript:void(0)"\n' +
                             '                          class="icon ml-3"\n' +
-                            '                          onclick="updateTeamValid(\'reject\','+item.id+')"\n' +
+                            '                          onclick="updateTeamShare(\'reject\','+item.id+')"\n' +
                             '                          >' +strDown+
                             '</a>\n' +
                             '                        <a\n' +
                             '                          href="javascript:void(0)"\n' +
-                            '                          onclick="updateTeamValid(\'accept\','+item.id+',this)"\n' +
+                            '                          onclick="updateTeamShare(\'accept\','+item.id+')"\n' +
                             '                          class="icon  ml-3"\n' +
                             '                          >' +strUp+
                             '</a>\n' +
@@ -2717,29 +2840,29 @@ function getTeamShareTask() {
                             '                </div>\n' +
                             '              </div>';
                     }
-                    if(item.status=='0') {
-                        str1 +=' <div class="col-lg-4">\n' +
+                    else{
+                        str2 +=' <div class="col-lg-4">\n' +
                             '                <div class="card">\n' +
                             '                  <div class="card-body d-flex flex-column">\n' +
-                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 组队</a></h4>\n' +
+                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程的共享组队</a></h4>\n' +
                             '                    <div class="text-muted">\n' +
-                            '                      '+itemCourse.courseName+'课程'+itemKlass.klassSerial+'班的'+itemStu.studentName+'同学向您申请组队\n' +
+                            '                      '+itemCourse.courseName+'课程'+'的'+itemTea.teacherName+'老师向您申请共享组队\n' +
                             '                    </div>\n' +
-                            '<div class="text-muted">原因：'+item.reason+'</div>'+
+
                             '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
                             '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
-                            '                      <div><a class="text-default">'+itemStu.studentName+' </a></div>\n' +
+                            '                      <div><a class="text-default">'+itemTea.teacherName+' </a></div>\n' +
                             '\n' +
                             '                      <div class="ml-auto text-muted">\n' +
                             '                        <a\n' +
                             '                          href="javascript:void(0)"\n' +
                             '                          class="icon ml-3"\n' +
-                            '                          onclick="updateTeamValid(\'reject\','+item.id+')"\n' +
+                            '                          onclick="updateTeamShare(\'reject\','+item.id+')"\n' +
                             '                          >' +strDown+
                             '</a>\n' +
                             '                        <a\n' +
                             '                          href="javascript:void(0)"\n' +
-                            '                          onclick="updateTeamValid(\'accept\','+item.id+',this)"\n' +
+                            '                          onclick="updateTeamShare(\'accept\','+item.id+')"\n' +
                             '                          class="icon  ml-3"\n' +
                             '                          >' +strUp+
                             '</a>\n' +
@@ -2749,17 +2872,18 @@ function getTeamShareTask() {
                             '                </div>\n' +
                             '              </div>';
                     }
+
                 });
-                content.innerHTML+=str1+str2;
+                content.innerHTML=str2;
             }
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
-            }
+                console.log("未找到课程");
+            },
         }
     });
 }
@@ -2771,8 +2895,8 @@ function getSeminarShareTask() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
-                console.log("classlist");
+                // console.log("获取成功");
+                console.log("getSeminarShareTask");
                 let content=document.getElementById("content");   //获取外围容器
                 let str1="";
                 let str2="";
@@ -2781,9 +2905,43 @@ function getSeminarShareTask() {
                     let strUp='<i class="fe fe-thumbs-up mr-1"></i>';
                     let strDown='<i class="fe fe-thumbs-down mr-1"></i>';
                     console.log(item);
-                    let itemCourse=(item.team).mainCourse;
-                    let itemKlass=(item.team).klass;
+                    let itemCourse=(item).mainCourse;
+                    let itemKlass=(item).klass;
                     let itemTeacher=(itemCourse).teacher;
+
+                        strDown='<i class="fe fe-thumbs-down mr-1" style="color:#e57373;"></i>';
+                        str2 +=' <div class="col-lg-4">\n' +
+                            '                <div class="card">\n' +
+                            '                  <div class="card-body d-flex flex-column">\n' +
+                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 组队</a></h4>\n' +
+                            '                    <div class="text-muted">\n' +
+                            '                      '+itemCourse.courseName+'课程'+'的'+itemTeacher.teacherName+'老师向您申请组队\n' +
+                            '                    </div>\n' +
+                            '<div class="text-muted">原因：'+item.reason+'</div>'+
+                            '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
+                            '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
+                            '                      <div><a class="text-default">'+itemTeacher.teacherName+' </a></div>\n' +
+                            '\n' +
+                            '                      <div class="ml-auto text-muted">\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          class="icon ml-3"\n' +
+                            '                          onclick="updateTeamValid(\'reject\','+item.id+')"\n' +
+                            '                          >' +strDown+
+                            '</a>\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          onclick="updateTeamValid(\'accept\','+item.id+',this)"\n' +
+                            '                          class="icon  ml-3"\n' +
+                            '                          >' +strUp+
+                            '</a>\n' +
+                            '                      </div>\n' +
+                            '                    </div>\n' +
+                            '                  </div>\n' +
+                            '                </div>\n' +
+                            '              </div>';
+
+
                     if(item.status=='1') {
                         strUp='<i class="fe fe-thumbs-up mr-1" style="color:#8BC34A;"></i>';
                         str2 +=' <div class="col-lg-4">\n' +
@@ -2817,39 +2975,6 @@ function getSeminarShareTask() {
                             '                </div>\n' +
                             '              </div>';
                     }
-                    if(item.status=='2') {
-                        strDown='<i class="fe fe-thumbs-down mr-1" style="color:#e57373;"></i>';
-                        str2 +=' <div class="col-lg-4">\n' +
-                            '                <div class="card">\n' +
-                            '                  <div class="card-body d-flex flex-column">\n' +
-                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 组队</a></h4>\n' +
-                            '                    <div class="text-muted">\n' +
-                            '                      '+itemCourse.courseName+'课程'+itemKlass.klassSerial+'班的'+itemStu.studentName+'同学向您申请组队\n' +
-                            '                    </div>\n' +
-                            '<div class="text-muted">原因：'+item.reason+'</div>'+
-                            '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
-                            '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
-                            '                      <div><a class="text-default">'+itemStu.studentName+' </a></div>\n' +
-                            '\n' +
-                            '                      <div class="ml-auto text-muted">\n' +
-                            '                        <a\n' +
-                            '                          href="javascript:void(0)"\n' +
-                            '                          class="icon ml-3"\n' +
-                            '                          onclick="updateTeamValid(\'reject\','+item.id+')"\n' +
-                            '                          >' +strDown+
-                            '</a>\n' +
-                            '                        <a\n' +
-                            '                          href="javascript:void(0)"\n' +
-                            '                          onclick="updateTeamValid(\'accept\','+item.id+',this)"\n' +
-                            '                          class="icon  ml-3"\n' +
-                            '                          >' +strUp+
-                            '</a>\n' +
-                            '                      </div>\n' +
-                            '                    </div>\n' +
-                            '                  </div>\n' +
-                            '                </div>\n' +
-                            '              </div>';
-                    }
                     if(item.status=='0') {
                         str1 +=' <div class="col-lg-4">\n' +
                             '                <div class="card">\n' +
@@ -2883,15 +3008,18 @@ function getSeminarShareTask() {
                             '              </div>';
                     }
                 });
+                console.log(str1);
+                console.log(str2);
+
                 content.innerHTML+=str1+str2;
             }
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -2913,7 +3041,7 @@ function getQuestionList(attendanceId) {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                alert("获取成功");
+                console.log("获取成功");
                 let quesContent=document.getElementById("ques-content");   //获取外围容器
                 let currentId=data[0].id;
                 let str="";
@@ -2944,14 +3072,14 @@ function getQuestionList(attendanceId) {
         },
         error: function(data) {
             console.log(data);
-            alert("fail");
+            console.log("fail");
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -2968,9 +3096,9 @@ function getAttendanceByClass() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                alert("获取成功");
+                console.log("获取成功");
                 if (xhr.status === 200) {
-                    // alert("获取成功");
+                    // console.log("获取成功");
                     console.log("courselist");
                     let tabContent=document.getElementById("nav-content");   //获取外围容器
                     let strTab="";
@@ -3001,14 +3129,14 @@ function getAttendanceByClass() {
         },
         error: function(data) {
             console.log(data);
-            alert("fail");
+            console.log("fail");
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -3023,7 +3151,7 @@ function getCurrentSeminar() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             status="success";
-            alert("getCurrentSeminar success");
+            console.log("getCurrentSeminar success");
             if (xhr.status === 200) {
                 Cookies.set("class",data.klassId);
                 Cookies.set("seminar",data.seminarId);
@@ -3032,22 +3160,22 @@ function getCurrentSeminar() {
         },
         error: function(data){
             console.log(data);
-            alert("error");
+            console.log("error");
 
         },
         statusCode: {
             401: function() {
-                alert("未登录!");
+                console.log("未登录!");
                 window.location.href = "./login";
             },
             403: function() {
-                alert("未登录!");
+                console.log("未登录!");
                 window.location.href = "./login";
             },
             200:function(data){
                 if(status=="null")
                 {
-                    alert("没有正在进行的讨论课");
+                    console.log("没有正在进行的讨论课");
                     window.history.back();
                 }
             }
@@ -3064,18 +3192,18 @@ function getAttendanceScore(attendanceId) {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             if (xhr.status === 200) {
                 $("#present-score").val(data.presentationScore);
             }
         },
         statusCode: {
             401: function() {
-                alert("未登录!");
+                console.log("未登录!");
                 window.location.href = "./login";
             },
             403: function() {
-                alert("未登录!");
+                console.log("未登录!");
                 window.location.href = "./login";
             }
         }
@@ -3091,7 +3219,7 @@ function getQuestionScore(questionId) {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             if (xhr.status === 200) {
                 $("#question-score").val(data.score);
 
@@ -3099,11 +3227,11 @@ function getQuestionScore(questionId) {
         },
         statusCode: {
             401: function() {
-                alert("未登录!");
+                console.log("未登录!");
                 window.location.href = "./login";
             },
             403: function() {
-                alert("未登录!");
+                console.log("未登录!");
                 window.location.href = "./login";
             }
         }
@@ -3115,7 +3243,7 @@ function updatePresentScore() {
     };
     console.log(ata);
     let attendance=Cookies.get("attendance");
-    alert(attendance);
+    console.log(attendance);
     $.ajax({
         type: "put",
         url: "http://xug98.cn/attendance/" +
@@ -3126,18 +3254,18 @@ function updatePresentScore() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             if (xhr.status === 200) {
-                alert("修改打分成功");
+                console.log("修改打分成功");
             }
         },
         statusCode: {
             401: function() {
-                alert("未登录!");
+                console.log("未登录!");
                 window.location.href = "./login";
             },
             403: function() {
-                alert("未登录!");
+                console.log("未登录!");
                 window.location.href = "./login";
             }
         }
@@ -3158,18 +3286,18 @@ function updateQuestionScore() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             if (xhr.status === 200) {
-                alert("修改打分成功");
+                console.log("修改打分成功");
             }
         },
         statusCode: {
             401: function() {
-                alert("未登录!");
+                console.log("未登录!");
                 window.location.href = "./login";
             },
             403: function() {
-                alert("未登录!");
+                console.log("未登录!");
                 window.location.href = "./login";
             }
         }

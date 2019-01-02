@@ -63,7 +63,7 @@
     <script src="../../static/js/student.js"></script>
 
   </head>
-  <body onload="getMySeminar();getMyAttendance();getSeminarByClass()">
+  <body onload="getClassByCourse();getMySeminar();getMyAttendance();getSeminarByClass()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -171,86 +171,7 @@
             </nav>
             <div class="row row-cards">
               <div class="col-md-6 col-lg-4" id="left-content">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <div class="h3 my-5">正在进行</div>
-                    <div class="progress progress-sm my-1">
-                      <div
-                        class="progress-bar bg-green"
-                        style="width: 50%"
-                      ></div>
-                    </div>
-                  </div>
-                  <div class="card-footer text-right">
-                    <a
-                      class="btn btn-primary btn-block my-0"
-                      href="seminar-round-detail-progress.html"
-                      hidden
-                      >开始课堂</a
-                    >
-                    <a
-                      class="btn btn-primary btn-block my-0"
-                      href="seminar-round-detail-progress.html"
-                      >进入课堂</a
-                    >
-                  </div>
-                </div>
-                <div class="card p-3">
-                  <div class="d-flex align-items-center">
-                    <span class="stamp stamp-md bg-blue mr-3">
-                      <i class="fe fe-file-text"></i>
-                    </span>
-                    <div>
-                      <h4 class="m-0"><a onclick="createAttendance()">报名 </a></h4>
-                    </div>
-                  </div>
-                </div>
-                <div class="card p-3">
-                  <div class="d-flex align-items-center">
-                    <span class="stamp stamp-md bg-blue mr-3">
-                      <i class="fe fe-file-text"></i>
-                    </span>
-                    <div>
-                      <h4 class="m-0"><a href="./">PPT提交 </a></h4>
-                    </div>
-                  </div>
-                </div>
-                <div class="card p-3">
-                  <div class="d-flex align-items-center">
-                    <span class="stamp stamp-md bg-blue mr-3">
-                      <i class="fe fe-file-text"></i>
-                    </span>
-                    <div>
-                      <h4 class="m-0"><a href="./">报告提交 </a></h4>
-                    </div>
-                  </div>
-                </div>
-                <div class="card p-3">
-                  <div class="d-flex align-items-center">
-                    <span class="stamp stamp-md bg-blue mr-3">
-                      <i class="fe fe-file-text"></i>
-                    </span>
-                    <div>
-                      <h4 class="m-0">
-                        <a href="seminar-round-detail-signup.html">报名情况 </a>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-                <div class="card p-3">
-                  <div class="d-flex align-items-center">
-                    <span class="stamp stamp-md bg-blue mr-3">
-                      <i class="fe fe-file-text"></i>
-                    </span>
-                    <div>
-                      <h4 class="m-0">
-                        <a href="./seminar-round-detail-score.html"
-                          >查看成绩
-                        </a>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
+
               </div>
               <div class="col-md-6 col-lg-8">
                 <div class="row">
