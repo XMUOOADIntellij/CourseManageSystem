@@ -149,7 +149,7 @@
         team_end_time = #{teamEndTime,jdbcType=TIMESTAMP},
       </if>
       <if test="teamMainCourse != null">
-        team_main_course_id = #{teamMainCourse.id,jdbcType=BIGINT}
+        team_main_course_id = #{teamMainCourse.id,jdbcType=BIGINT},
       </if>
       <if test="seminarMainCourse != null">
         seminar_main_course_id = #{seminarMainCourse.id,jdbcType=BIGINT}
