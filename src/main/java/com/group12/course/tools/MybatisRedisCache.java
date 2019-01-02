@@ -65,7 +65,7 @@ public class MybatisRedisCache implements Cache {
     @Override
     public Object getObject(Object key) {
         Object value = SerializeUtil.unserialize(redisClient.get(SerializeUtil.serialize(key.toString())));
-        
+
         return value;
     }
 
