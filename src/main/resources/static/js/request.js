@@ -9,7 +9,7 @@ function bindUser() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       if (xhr.status === 200) {
         window.localStorage.setItem("jwt", data.jwt);
         Cookies.set("id", data.id);
@@ -30,7 +30,7 @@ function bindUser() {
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -44,7 +44,7 @@ function getUserInfo() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       if (xhr.status === 200) {
         $("#account").html(data.account);
         $("#email").val(data.email);
@@ -64,24 +64,24 @@ function sendPassword() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(xhr.status);
-      alert("success");
+      console.log("success");
       if (xhr.status === 200) {
-        alert("200");
+        console.log("200");
         window.location.href = "./login.html";
       }
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       204: function() {
-        alert("204"); //状态码存疑
+        console.log("204"); //状态码存疑
         window.location.href = "./login.html";
       },
       400: function() {
         $("#account").val("");
-        alert("没有此账户！");
+        console.log("没有此账户！");
       }
     }
   });
@@ -99,21 +99,21 @@ function editPassword() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        alert("修改成功");
+        console.log("修改成功");
         window.location.href = "./account-setting.html";
       }
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
       window.location.href = "./account-setting.html";
     },
     statusCode: {
       200: function() {
-        alert("修改成功");
+        console.log("修改成功");
       },
       400: function() {
-        alert("修改失败");
+        console.log("修改失败");
       }
     }
   });
@@ -135,18 +135,18 @@ function editEmail() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        alert("修改成功");
+        console.log("修改成功");
         window.location.href = "./account-setting.html";
       }
     },
     /*    error: function(data){
           console.log(data);
-          alert("fail");
+          console.log("fail");
 
         },*/
     statusCode: {
       200: function() {
-        alert("修改成功");
+        console.log("修改成功");
       }
     }
   });
@@ -159,7 +159,7 @@ function activeTeacher() {
     };*/
   let ata = "555";
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "put",
     url: "http://xug98.cn/teacher/active",
@@ -168,13 +168,13 @@ function activeTeacher() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        alert("注册成功");
+        console.log("注册成功");
         window.location.href = "../common/login.html";
       }
     },
     statusCode: {
       400: function() {
-        alert("无法注册！");
+        console.log("无法注册！");
       }
     }
   });
@@ -189,7 +189,7 @@ function getCourseList() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("courselist");
 
         for (let i = 0; i < data.length; i++) {
@@ -200,12 +200,12 @@ function getCourseList() {
     },
     statusCode: {
       400: function() {
-        alert("courselist");
-        alert("错误的ID格式");
+        console.log("courselist");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("courselist");
-        alert("未找到课程");
+        console.log("courselist");
+        console.log("未找到课程");
       }
     }
   });
@@ -219,7 +219,7 @@ function getAllCourse() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("courselist");
 
         for (let i = 0; i < data.length; i++) {
@@ -229,12 +229,12 @@ function getAllCourse() {
     },
     statusCode: {
       400: function() {
-        alert("courselist");
-        alert("错误的ID格式");
+        console.log("courselist");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("courselist");
-        alert("未找到课程");
+        console.log("courselist");
+        console.log("未找到课程");
       }
     }
   });
@@ -249,16 +249,16 @@ function getCourseInfo() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log(data);
       }
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -274,7 +274,7 @@ function getClassList() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
         }
@@ -282,10 +282,10 @@ function getClassList() {
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -304,18 +304,18 @@ function updateClass() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round-detail.html";
     },
     error: function(data) {
       console.log(data);
 
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -330,25 +330,25 @@ function deleteClass() {
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
       console.log(cid);
-      alert("wrong");
+      console.log("wrong");
     },
     success: function(data, textStatus, xhr) {
-      alert("成功");
+      console.log("成功");
 
       if (xhr.status === 204) {
-        alert("成功");
+        console.log("成功");
         console.log(data);
       }
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       403: function() {
-        alert("用户权限不足");
+        console.log("用户权限不足");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -364,7 +364,7 @@ function getRoundList() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("roundlist");
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
@@ -374,14 +374,14 @@ function getRoundList() {
     },
     statusCode: {
       400: function() {
-        alert("roundlist");
+        console.log("roundlist");
 
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("roundlist");
+        console.log("roundlist");
 
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -395,7 +395,7 @@ function getSeminarList(roundId) {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("seminarList");
 
         for (let i = 0; i < data.length; i++) {
@@ -405,14 +405,14 @@ function getSeminarList(roundId) {
     },
     statusCode: {
       400: function() {
-        alert("seminarList");
+        console.log("seminarList");
 
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("seminarList");
+        console.log("seminarList");
 
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -427,20 +427,20 @@ function getSeminar() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log(data[i]);
       }
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -459,16 +459,16 @@ function getSeminarByClass() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log(data);
       }
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -492,13 +492,13 @@ function updateSeminarByClass() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round-detail.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -518,16 +518,16 @@ function getSeminarScoreByClass() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log(data[i]);
       }
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -555,16 +555,16 @@ function updateSeminarScoreByClass() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log(data[i]);
       }
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -595,22 +595,22 @@ function createCourse() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       201: function(data) {
         console.log(data);
-        alert("success");
+        console.log("success");
         window.location.href = "./seminar-round.html";
       },
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -630,7 +630,7 @@ function createSeminar() {
     courseId: Cookies.get("course")
   };
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "post",
     url: "http://xug98.cn/seminar",
@@ -639,13 +639,13 @@ function createSeminar() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -660,22 +660,22 @@ function deleteSeminar() {
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
       console.log(cid);
-      alert("wrong");
+      console.log("wrong");
     },
     success: function(data, textStatus, xhr) {
-      alert("成功");
+      console.log("成功");
       console.log(data);
     },
 
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       403: function() {
-        alert("用户权限不足");
+        console.log("用户权限不足");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -706,13 +706,13 @@ function updateSeminar() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -738,7 +738,7 @@ function getAttendanceByClass() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        alert("获取成功");
+        console.log("获取成功");
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
         }
@@ -746,14 +746,14 @@ function getAttendanceByClass() {
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -773,20 +773,20 @@ function getPptByClass() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        alert("获取成功");
+        console.log("获取成功");
         console.log(data);
       }
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -806,20 +806,20 @@ function getReportByClass() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        alert("获取成功");
+        console.log("获取成功");
         console.log(data);
       }
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -834,20 +834,20 @@ function getPptByAttendance() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        alert("获取成功");
+        console.log("获取成功");
         console.log(data);
       }
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -864,20 +864,20 @@ function getReportByAttendance() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        alert("获取成功");
+        console.log("获取成功");
         console.log(data);
       }
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -892,7 +892,7 @@ function getTeam() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("Team");
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
@@ -901,14 +901,14 @@ function getTeam() {
     },
     statusCode: {
       400: function() {
-        alert("Team");
+        console.log("Team");
 
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("Team");
+        console.log("Team");
 
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -922,7 +922,7 @@ function getMyTeam() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("Team");
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
@@ -931,14 +931,14 @@ function getMyTeam() {
     },
     statusCode: {
       400: function() {
-        alert("Team");
+        console.log("Team");
 
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("Team");
+        console.log("Team");
 
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -976,22 +976,22 @@ function createTeam() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       201: function(data) {
         console.log(data);
-        alert("success");
+        console.log("success");
         window.location.href = "./seminar-round.html";
       },
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -1033,12 +1033,12 @@ function updateTeam() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -1056,7 +1056,7 @@ function getNoTeam() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("NoTeam");
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
@@ -1066,12 +1066,12 @@ function getNoTeam() {
     },
     statusCode: {
       400: function() {
-        alert("NoTeam");
-        alert("错误的ID格式");
+        console.log("NoTeam");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("NoTeam");
-        alert("未找到课程");
+        console.log("NoTeam");
+        console.log("未找到课程");
       }
     }
   });
@@ -1094,22 +1094,22 @@ function createClass() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       201: function(data) {
         console.log(data);
-        alert("success");
+        console.log("success");
         window.location.href = "./seminar-round.html";
       },
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -1124,22 +1124,22 @@ function deleteCourse() {
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
       console.log(cid);
-      alert("wrong");
+      console.log("wrong");
     },
     success: function(data, textStatus, xhr) {
-      alert("成功");
+      console.log("成功");
       console.log(data);
     },
 
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       403: function() {
-        alert("用户权限不足");
+        console.log("用户权限不足");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -1158,16 +1158,16 @@ function getRoundScoreByCourse(cid) {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log(data[i]);
       }
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -1182,16 +1182,16 @@ function getSeminarScoreByRound(cid) {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log(data[i]);
       }
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -1211,16 +1211,16 @@ function getSeminarScoreByTeam(sid, tid) {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log(data[i]);
       }
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -1234,7 +1234,7 @@ function getTeamShareList() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("teamsharelist");
 
         for (let i = 0; i < data.length; i++) {
@@ -1244,12 +1244,12 @@ function getTeamShareList() {
     },
     statusCode: {
       400: function() {
-        alert("teamsharelist");
-        alert("错误的ID格式");
+        console.log("teamsharelist");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("teamsharelist");
-        alert("未找到课程");
+        console.log("teamsharelist");
+        console.log("未找到课程");
       }
     }
   });
@@ -1263,7 +1263,7 @@ function getSeminarShareList() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("seminarsharelist");
 
         for (let i = 0; i < data.length; i++) {
@@ -1273,12 +1273,12 @@ function getSeminarShareList() {
     },
     statusCode: {
       400: function() {
-        alert("seminarsharelist");
-        alert("错误的ID格式");
+        console.log("seminarsharelist");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("seminarsharelist");
-        alert("未找到课程");
+        console.log("seminarsharelist");
+        console.log("未找到课程");
       }
     }
   });
@@ -1293,22 +1293,22 @@ function deleteSeminarShare() {
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
       console.log(cid);
-      alert("wrong");
+      console.log("wrong");
     },
     success: function(data, textStatus, xhr) {
-      alert("成功");
+      console.log("成功");
       console.log(data);
     },
 
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       403: function() {
-        alert("用户权限不足");
+        console.log("用户权限不足");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -1326,22 +1326,22 @@ function deleteTeamShare() {
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
       console.log(cid);
-      alert("wrong");
+      console.log("wrong");
     },
     success: function(data, textStatus, xhr) {
-      alert("成功");
+      console.log("成功");
       console.log(data);
     },
 
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       403: function() {
-        alert("用户权限不足");
+        console.log("用户权限不足");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -1373,13 +1373,13 @@ function updateRound() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -1391,7 +1391,7 @@ function createRound() {
     courseId: Cookies.get("course")
   };
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "post",
     url: "http://xug98.cn/round",
@@ -1400,13 +1400,13 @@ function createRound() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -1418,7 +1418,7 @@ function createTeamShare() {
     subCourseId: "1"
   };
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "post",
     url: "http://xug98.cn/course/" +
@@ -1429,13 +1429,13 @@ function createTeamShare() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -1447,7 +1447,7 @@ function createSeminarShare() {
     subCourseId: "1"
   };
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "post",
     url: "http://xug98.cn/course/" +
@@ -1458,13 +1458,13 @@ function createSeminarShare() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -1478,7 +1478,7 @@ function getTeamShareTask() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("teamshare");
 
         for (let i = 0; i < data.length; i++) {
@@ -1488,12 +1488,12 @@ function getTeamShareTask() {
     },
     statusCode: {
       400: function() {
-        alert("teamshare");
-        alert("错误的ID格式");
+        console.log("teamshare");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("teamshare");
-        alert("未找到课程");
+        console.log("teamshare");
+        console.log("未找到课程");
       }
     }
   });
@@ -1507,7 +1507,7 @@ function getSeminarShareTask() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("seminarshare");
 
         for (let i = 0; i < data.length; i++) {
@@ -1517,12 +1517,12 @@ function getSeminarShareTask() {
     },
     statusCode: {
       400: function() {
-        alert("seminarshare");
-        alert("错误的ID格式");
+        console.log("seminarshare");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("seminarshare");
-        alert("未找到课程");
+        console.log("seminarshare");
+        console.log("未找到课程");
       }
     }
   });
@@ -1536,7 +1536,7 @@ function getTeamValidTask() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("teamvaild");
 
         for (let i = 0; i < data.length; i++) {
@@ -1546,12 +1546,12 @@ function getTeamValidTask() {
     },
     statusCode: {
       400: function() {
-        alert("teamvaild");
-        alert("错误的ID格式");
+        console.log("teamvaild");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("teamvaild");
-        alert("未找到课程");
+        console.log("teamvaild");
+        console.log("未找到课程");
       }
     }
   });
@@ -1571,12 +1571,12 @@ function updateTeamValid() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -1599,12 +1599,12 @@ function updateTeamShare() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -1628,12 +1628,12 @@ function updateSeminarShare() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -1660,7 +1660,7 @@ function getQuestionList() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        alert("获取成功");
+        console.log("获取成功");
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
         }
@@ -1668,14 +1668,14 @@ function getQuestionList() {
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -1696,16 +1696,16 @@ function updatePresentScoreByTeam() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log(data[i]);
       }
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -1727,16 +1727,16 @@ function updateQuestionScoreByTeam() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log(data[i]);
       }
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -1750,7 +1750,7 @@ function activeStudent() {
     email: "22@qq.com"
   };
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "put",
     url: "http://xug98.cn/student/active",
@@ -1759,20 +1759,20 @@ function activeStudent() {
     contentType: "application/json",
     success: function(textStatus, xhr) {
       console.log(data);
-      alert("注册成功");
+      console.log("注册成功");
 
       if (xhr.status === 200) {
-        alert("注册成功");
+        console.log("注册成功");
         window.location.href = "../common/login.html";
       }
     },
     error: function(data) {
       console.log(data);
-      alert("注册失败");
+      console.log("注册失败");
     },
     statusCode: {
       400: function() {
-        alert("无法注册！");
+        console.log("无法注册！");
       }
     }
   });
@@ -1786,7 +1786,7 @@ function getCurrentSeminar() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       if (xhr.status === 200) {
         $("#account").html(data.account);
         $("#email").val(data.email);
@@ -1795,11 +1795,11 @@ function getCurrentSeminar() {
     },
     statusCode: {
       401: function() {
-        alert("未登录!");
+        console.log("未登录!");
         window.location.href = "./login";
       },
       403: function() {
-        alert("未登录!");
+        console.log("未登录!");
         window.location.href = "./login";
       }
     }
@@ -1817,7 +1817,7 @@ function getCurrentAttendance() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       if (xhr.status === 200) {
         $("#account").html(data.account);
         $("#email").val(data.email);
@@ -1826,11 +1826,11 @@ function getCurrentAttendance() {
     },
     statusCode: {
       401: function() {
-        alert("未登录!");
+        console.log("未登录!");
         window.location.href = "./login";
       },
       403: function() {
-        alert("未登录!");
+        console.log("未登录!");
         window.location.href = "./login";
       }
     }
@@ -1850,16 +1850,16 @@ function getRoundScoreByTeam(sid, tid) {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log(data[i]);
       }
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -1874,22 +1874,22 @@ function deleteTeam() {
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
       console.log(cid);
-      alert("wrong");
+      console.log("wrong");
     },
     success: function(data, textStatus, xhr) {
-      alert("成功");
+      console.log("成功");
       console.log(data);
     },
 
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       403: function() {
-        alert("用户权限不足");
+        console.log("用户权限不足");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -1909,22 +1909,22 @@ function deleteTeamMember() {
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
       console.log(cid);
-      alert("wrong");
+      console.log("wrong");
     },
     success: function(data, textStatus, xhr) {
-      alert("成功");
+      console.log("成功");
       console.log(data);
     },
 
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       403: function() {
-        alert("用户权限不足");
+        console.log("用户权限不足");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -1944,7 +1944,7 @@ function getMyAttendance() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       if (xhr.status === 200) {
         $("#account").html(data.account);
         $("#email").val(data.email);
@@ -1953,11 +1953,11 @@ function getMyAttendance() {
     },
     statusCode: {
       401: function() {
-        alert("未登录!");
+        console.log("未登录!");
         window.location.href = "./login";
       },
       403: function() {
-        alert("未登录!");
+        console.log("未登录!");
         window.location.href = "./login";
       }
     }
@@ -1975,7 +1975,7 @@ function getAttendanceScore() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       if (xhr.status === 200) {
         $("#account").html(data.account);
         $("#email").val(data.email);
@@ -1984,11 +1984,11 @@ function getAttendanceScore() {
     },
     statusCode: {
       401: function() {
-        alert("未登录!");
+        console.log("未登录!");
         window.location.href = "./login";
       },
       403: function() {
-        alert("未登录!");
+        console.log("未登录!");
         window.location.href = "./login";
       }
     }
@@ -1999,7 +1999,7 @@ function createAttendance() {
     courseId: Cookies.get("course")
   };
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "post",
     url: "http://xug98.cn/seminar/" +
@@ -2012,13 +2012,13 @@ function createAttendance() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2032,22 +2032,22 @@ function deleteAttendance() {
     contentType: "application/json;",
     error: function(data, textStatus, xhr) {
       console.log(cid);
-      alert("wrong");
+      console.log("wrong");
     },
     success: function(data, textStatus, xhr) {
-      alert("成功");
+      console.log("成功");
       console.log(data);
     },
 
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       403: function() {
-        alert("用户权限不足");
+        console.log("用户权限不足");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -2066,12 +2066,12 @@ function updateAttendance() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2090,7 +2090,7 @@ function bindAdmin() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       if (xhr.status === 200) {
         window.localStorage.setItem("jwt", data.jwt);
         Cookies.set("id", data.id);
@@ -2103,7 +2103,7 @@ function bindAdmin() {
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2116,7 +2116,7 @@ function createTeacher() {
     name: "11111"
   };
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "post",
     url: "http://xug98.cn/teacher",
@@ -2125,13 +2125,13 @@ function createTeacher() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2144,7 +2144,7 @@ function updateTeacher() {
     name: "11111"
   };
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "put",
     url: "http://xug98.cn/teacher/" + Cookies.get("teacher") + "/information",
@@ -2153,13 +2153,13 @@ function updateTeacher() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2173,7 +2173,7 @@ function updateStudent() {
     name: "11111"
   };
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "put",
     url: "http://xug98.cn/student/" + Cookies.get("student") + "/information",
@@ -2182,13 +2182,13 @@ function updateStudent() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2197,7 +2197,7 @@ function deleteTeacher() {
 
 
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "delete",
     url: "http://xug98.cn/teacher/" + Cookies.get("teacher"),
@@ -2205,13 +2205,13 @@ function deleteTeacher() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2220,7 +2220,7 @@ function deleteStudent() {
 
 
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "delete",
     url: "http://xug98.cn/student/" + Cookies.get("student"),
@@ -2228,13 +2228,13 @@ function deleteStudent() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2244,7 +2244,7 @@ function resetTeacher() {
 
 
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "put",
     url: "http://xug98.cn/teacher/" + Cookies.get("teacher") + "/password",
@@ -2252,13 +2252,13 @@ function resetTeacher() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2267,7 +2267,7 @@ function resetStudent() {
 
 
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "put",
     url: "http://xug98.cn/student/" + Cookies.get("student") + "/password",
@@ -2275,13 +2275,13 @@ function resetStudent() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2293,7 +2293,7 @@ function searchTeacher() {
     identity: "1"
   };
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "delete",
     url: "http://xug98.cn/teacher/searchTeacher",
@@ -2301,13 +2301,13 @@ function searchTeacher() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2318,7 +2318,7 @@ function searchStudent() {
     identity: "1"
   };
   console.log(ata);
-  alert("input");
+  console.log("input");
   $.ajax({
     type: "delete",
     url: "http://xug98.cn/student/searchStudent",
@@ -2326,13 +2326,13 @@ function searchStudent() {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
       window.location.href = "./seminar-round.html";
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2345,7 +2345,7 @@ function getAllTeacher() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        alert("获取成功");
+        console.log("获取成功");
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
         }
@@ -2353,14 +2353,14 @@ function getAllTeacher() {
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -2373,7 +2373,7 @@ function getAllStudent() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        alert("获取成功");
+        console.log("获取成功");
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
         }
@@ -2381,14 +2381,14 @@ function getAllStudent() {
     },
     error: function(data) {
       console.log(data);
-      alert("fail");
+      console.log("fail");
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -2409,12 +2409,12 @@ function updateTeamShare(handletype,id) {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2435,12 +2435,12 @@ function updateSeminarShare(handletype,id) {
     contentType: "application/json",
     success: function(data, textStatus, xhr) {
       console.log(data);
-      alert("success");
+      console.log("success");
     },
     statusCode: {
       400: function() {
         $("#password").val("");
-        alert("用户名或密码错误！");
+        console.log("用户名或密码错误！");
       }
     }
   });
@@ -2456,7 +2456,7 @@ function getTeamShareTask() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("classlist");
         var content=document.getElementById("content");   //获取外围容器
         var str="";
@@ -2499,10 +2499,10 @@ function getTeamShareTask() {
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
@@ -2515,7 +2515,7 @@ function getSeminarShareTask() {
     contentType: "application/json;",
     success: function(data, textStatus, xhr) {
       if (xhr.status === 200) {
-        // alert("获取成功");
+        // console.log("获取成功");
         console.log("classlist");
         var content=document.getElementById("content");   //获取外围容器
         var str="";
@@ -2558,10 +2558,10 @@ function getSeminarShareTask() {
     },
     statusCode: {
       400: function() {
-        alert("错误的ID格式");
+        console.log("错误的ID格式");
       },
       404: function() {
-        alert("未找到课程");
+        console.log("未找到课程");
       }
     }
   });
