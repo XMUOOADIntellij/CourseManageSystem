@@ -27,7 +27,7 @@ function disconnect() {
     stompClient.disconnect();
   }
   setConnected(false);
-  alert("Disconnected");
+  console.log("Disconnected");
   return true;
 }
 

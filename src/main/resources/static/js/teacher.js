@@ -3256,7 +3256,7 @@ function updatePresentScore() {
             console.log(data);
             console.log("success");
             if (xhr.status === 200) {
-                alert("修改打分成功");
+                console.log("修改打分成功");
             }
         },
         statusCode: {
@@ -3288,7 +3288,7 @@ function updateQuestionScore() {
             console.log(data);
             console.log("success");
             if (xhr.status === 200) {
-                alert("修改打分成功");
+                console.log("修改打分成功");
             }
         },
         statusCode: {
