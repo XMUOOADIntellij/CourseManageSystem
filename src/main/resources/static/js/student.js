@@ -615,8 +615,12 @@ function createTeam() {
             alert("success");
             window.location.href = "./course-team.html";
         },
+        error:function(data) {
+            Cookies.set("team",data.id);
+            requestTeamValid();
+        },
         statusCode: {
-            201: function(data) {
+            200: function(data) {
                 console.log(data);
                 alert("success");
                 window.location.href = "./course-team.html";
@@ -1241,8 +1245,28 @@ function getMyAttendance() {
                 '                      <h4 class="m-0"><a onclick="deleteAttendance()">取消报名 </a></h4>\n' +
                 '                    </div>\n' +
                 '                  </div>\n' +
+                '                </div>' +
+                '  <div class="card p-3">\n' +
+                '                  <div class="d-flex align-items-center">\n' +
+                '                    <span class="stamp stamp-md bg-blue mr-3">\n' +
+                '                      <i class="fe fe-file-text"></i>\n' +
+                '                    </span>\n' +
+                '                    <div>\n' +
+                '                      <h4 class="m-0"><a href="./upload-ppt.html">PPT提交 </a></h4>\n' +
+                '                    </div>\n' +
+                '                  </div>\n' +
+                '                </div>\n' +
+                '                <div class="card p-3">\n' +
+                '                  <div class="d-flex align-items-center">\n' +
+                '                    <span class="stamp stamp-md bg-blue mr-3">\n' +
+                '                      <i class="fe fe-file-text"></i>\n' +
+                '                    </span>\n' +
+                '                    <div>\n' +
+                '                      <h4 class="m-0"><a href="./upload-report">报告提交 </a></h4>\n' +
+                '                    </div>\n' +
+                '                  </div>\n' +
                 '                </div>';
-            content.innerHTML=str;
+            content.innerHTML+=str;
         },
         statusCode: {
             400: function() {
@@ -1261,7 +1285,22 @@ function getMyAttendance() {
                     '                    </div>\n' +
                     '                  </div>\n' +
                     '                </div>';
-                content.innerHTML=str;
+                content.innerHTML+=str;
+            },
+            200: function() {
+                var content=document.getElementById("left-content");   //获取外围容器
+                var str="";
+                str+='        <div class="card p-3">\n' +
+                    '                  <div class="d-flex align-items-center">\n' +
+                    '                    <span class="stamp stamp-md bg-blue mr-3">\n' +
+                    '                      <i class="fe fe-file-text"></i>\n' +
+                    '                    </span>\n' +
+                    '                    <div>\n' +
+                    '                      <h4 class="m-0"><a onclick="createAttendance()">报名 </a></h4>\n' +
+                    '                    </div>\n' +
+                    '                  </div>\n' +
+                    '                </div>';
+                content.innerHTML+=str;
             }
         }
     });
@@ -1289,7 +1328,7 @@ function getMySeminar() {
                 alert("未登录!");
                 window.location.href = "./login";
             },
-            404: function() {
+            200: function() {
                 var content=document.getElementById("left-content");   //获取外围容器
                 var str="";
                 str+='                <div class="card">\n' +
@@ -1310,7 +1349,7 @@ function getMySeminar() {
                     '                    >\n' +
                     '                  </div>\n' +
                     '                </div>\n';
-                content.innerHTML=str;
+                content.innerHTML+=str;
             }
         }
     });
@@ -1353,7 +1392,7 @@ function getSeminarByClass() {
                     '                    </div>\n' +
                     '                  </div>\n' +
                     '                </div>';
-                content.innerHTML=str;
+                content.innerHTML+=str;
 
             }
             console.log(data);
