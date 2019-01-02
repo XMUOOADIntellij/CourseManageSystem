@@ -2417,7 +2417,7 @@ function getCourseInfo() {
 function getTeamValidTask() {
     $.ajax({
         type: "get",
-        url:  "/request/teamvaild",
+        url:  "http://xug98.cn/request/teamvaild",
         // url: "../../static/json/team-valid.json",
         dataType: "json",
         contentType: "application/json;",

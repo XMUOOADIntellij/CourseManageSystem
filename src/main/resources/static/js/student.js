@@ -615,22 +615,29 @@ function createTeam() {
             alert("success");
             window.location.href = "./course-team.html";
         },
-        error:function(data) {
-            Cookies.set("team",data.id);
-            requestTeamValid();
-        },
         statusCode: {
             200: function(data) {
                 console.log(data);
-                alert("success");
-                window.location.href = "./course-team.html";
-            },
-            statusCode: {
-                400: function() {
+                if(data.status==2) {
+                    Cookies.set("team",data.id);
                     var result = confirm("无法添加成员,确认发起特殊申请?");
                     if (result) {
                         window.location.herf="./course-team-request.html";
                     }
+                    else{
+                        window.location.href = "./course-team.html";
+                    }
+                }
+                if(data.status==1)
+                {
+                    alert("创建成功");
+                    window.location.href = "./course-team.html";
+                }
+            },
+            statusCode: {
+                400: function() {
+                    alert("无法添加成员");
+
                 }
             }
         }
@@ -697,11 +704,6 @@ function addTeamMembers() {
         success: function(data, textStatus, xhr) {
             console.log(data);
             alert("success");
-        },
-        error:function() {
-            alert("error");
-            let myTeam=Cookies.get("team");
-            requestTeamValid();
         },
         statusCode: {
             400: function() {
