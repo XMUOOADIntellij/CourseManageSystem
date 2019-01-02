@@ -1,6 +1,7 @@
 //页面跳转 Cookie缓存
 function jumpFromCourseHome(courseId){
   Cookies.set("course",courseId);
+  getClassByCourse(courseId);
 }
 function jumpFromRound(roundId){
   Cookies.set("round",roundId);
@@ -86,7 +87,7 @@ function getCourseListForSeminar() {
                         '                      <a\n' +
                         '                        class="btn btn-secondary btn-block"\n' +
                         '                        onclick="jumpFromCourseHome('+item.id+')"\n' +
-                        '                        href="./course-round.html"\n' +
+                        '                        href="./seminar-round.html"\n' +
                         '                        >查看详情</a\n' +
                         '                      >\n' +
                         '                    </div>\n' +
@@ -923,8 +924,7 @@ function getClassByCourse(){
             console.log(data);
             alert("getCurrentSeminar success");
             if (xhr.status === 200) {
-                Cookies.set("class",data.klassId);
-                Cookies.set("seminar",data.seminarId);
+                Cookies.set("class",data.id);
                 getAttendanceByClass();
             }
         },
@@ -946,6 +946,8 @@ function getClassByCourse(){
     });
 
 }
+
+
 
 //进行中
 function getAttendanceByClass() {

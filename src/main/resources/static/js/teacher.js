@@ -566,12 +566,7 @@ function getCourseListForSeminar() {
                         '                    <div class="card-category">'+item.courseName+'</div>\n' +
                         '                    <ul class="list-unstyled leading-loose">\n' +
                         '                      <li><strong>'+courseType+'课程</strong></li>\n' +
-                        '                      <li>\n' +
-                        '                        <i\n' +
-                        '                          aria-hidden="true"\n' +
-                        '                          class="fe fe-clock text-danger mr-2"\n' +
-                        '                        ></i>\n' +
-                        '                      </li>\n' +
+
                         '                    </ul>\n' +
                         '                    <div class="text-center mt-6">\n' +
                         '                      <a\n' +
