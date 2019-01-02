@@ -63,7 +63,7 @@
     <script src="../../static/js/student.js"></script>
 
   </head>
-  <body class="getSeminarByClass()">
+  <body onload="getMySeminar();getMyAttendance();getSeminarByClass()">
     <div class="page">
       <div class="page-main">
         <div class="header py-4">
@@ -170,7 +170,7 @@
               </ol>
             </nav>
             <div class="row row-cards">
-              <div class="col-md-6 col-lg-4">
+              <div class="col-md-6 col-lg-4" id="left-content">
                 <div class="card">
                   <div class="card-body text-center">
                     <div class="h3 my-5">正在进行</div>
@@ -201,7 +201,7 @@
                       <i class="fe fe-file-text"></i>
                     </span>
                     <div>
-                      <h4 class="m-0"><a href="./">报名 </a></h4>
+                      <h4 class="m-0"><a onclick="createAttendance()">报名 </a></h4>
                     </div>
                   </div>
                 </div>
@@ -237,7 +237,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="card p-3">
                   <div class="d-flex align-items-center">
                     <span class="stamp stamp-md bg-blue mr-3">
@@ -297,16 +296,33 @@
                               <label class="form-label">课次</label>
                               <input class="form-control" id="seminarSerial" name="example-text-input" placeholder="2016" type="text" disabled>
                             </div>
+                            <div class="form-group">
+                              <div class="row gutters-xs">
+
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-12">
+                            <label class="form-label">报名开始时间</label>
+                            <div class="row gutters-xs px-1">
+                              <input id="teamStartTime" />
+                            </div>
+                          </div>
+                          <div class="col-lg-12">
+                            <label class="form-label">报名结束时间</label>
+                            <div class="row gutters-xs px-1">
+                              <input id="teamEndTime" />
+                            </div>
+                          </div>
+                          <div class="col-lg-12">
+                            <label class="form-label">报告截止时间</label>
+                            <div class="row gutters-xs px-1">
+                              <input id="reportDdl" />
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div class="card-footer text-right">
-                        <a
-                                class="btn btn-primary btn-lg my-0"
-                                href="course-round-detail-setting.html"
-                        >修改轮次设置</a
-                        >
-                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -329,4 +345,21 @@
       </footer>
     </div>
   </body>
+  <script>
+    $("#teamStartTime").datetimepicker({
+      uiLibrary: "bootstrap4",
+      modal: true,
+      footer: true
+    });
+    $("#teamEndTime").datetimepicker({
+      uiLibrary: "bootstrap4",
+      modal: true,
+      footer: true
+    });
+    $("#reportDdl").datetimepicker({
+      uiLibrary: "bootstrap4",
+      modal: true,
+      footer: true
+    });
+  </script>
 </html>
