@@ -283,6 +283,8 @@ onload="onPomodoroTimer();connect();initProgress()"-->
     }
     document.getElementById(attendanceId).setAttribute("class","list-group-item list-group-item-action d-flex align-items-center active px-1 py-3");
     getAttendanceScore(attendanceId);
+    getQuestionScore(attendanceId);
+
   }
 
   function receiveQues(data){

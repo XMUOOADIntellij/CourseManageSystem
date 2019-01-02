@@ -15,7 +15,7 @@ function bindAdmin() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             if (xhr.status === 200) {
                 window.localStorage.setItem("jwt", data.jwt);
                 Cookies.set("id", data.id);
@@ -28,7 +28,7 @@ function bindAdmin() {
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
@@ -44,7 +44,7 @@ function getAllStudent() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 var content=document.getElementById("content");   //获取外围容器
                 var str="";
                 $.each(data, function(i, item) {
@@ -76,14 +76,14 @@ function getAllStudent() {
         },
         error: function(data) {
             console.log(data);
-            alert("fail");
+            console.log("fail");
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -96,14 +96,14 @@ function searchStudent() {
     if(ata=="") getAllStudent();
     else{
         console.log(ata);
-        alert("input");
+        console.log("input");
         $.ajax({
             type: "get",
             url: "http://xug98.cn/student/searchStudent",
             dataType: "json",
             contentType: "application/json",
             success: function(data, textStatus, xhr) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 var content=document.getElementById("content");   //获取外围容器
                 var str="";
                 $.each(data, function(i, item) {
@@ -135,7 +135,7 @@ function searchStudent() {
             statusCode: {
                 400: function() {
                     $("#identity").val("");
-                    alert("无此用户");
+                    console.log("无此用户");
                 }
             }
         });
@@ -153,7 +153,7 @@ function deleteStudent(studentId) {
             contentType: "application/json",
             success: function (data, textStatus, xhr) {
                 console.log(data);
-                alert("success");
+                console.log("success");
                 window.location.reload();
 
             },
@@ -174,7 +174,7 @@ function updateStudent() {
         name: $("#name").val()
     };
     console.log(ata);
-    alert("input");
+    console.log("input");
     $.ajax({
         type: "put",
         url: "http://xug98.cn/student/" + Cookies.get("student") + "/information",
@@ -183,13 +183,13 @@ function updateStudent() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             window.location.href = "./seminar-round.html";
         },
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
@@ -202,7 +202,7 @@ function getStudentInfo() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             if (xhr.status === 200) {
                 $("#account").val(data.account);
                 $("#email").val(data.email);
@@ -216,7 +216,7 @@ function resetStudent() {
     var result = confirm("确定重置学生密码?");
     if (result) {
         console.log(ata);
-        alert("input");
+        console.log("input");
         $.ajax({
             type: "put",
             url: "http://xug98.cn/student/" + Cookies.get("student") + "/password",
@@ -224,13 +224,13 @@ function resetStudent() {
             contentType: "application/json",
             success: function (data, textStatus, xhr) {
                 console.log(data);
-                alert("success");
+                console.log("success");
                 window.location.href = "./seminar-round.html";
             },
             statusCode: {
                 400: function () {
                     $("#password").val("");
-                    alert("用户名或密码错误！");
+                    console.log("用户名或密码错误！");
                 }
             }
         });
@@ -248,7 +248,7 @@ function getAllTeacher() {
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 var content=document.getElementById("content");   //获取外围容器
                 var str="";
                 $.each(data, function(i, item) {
@@ -280,14 +280,14 @@ function getAllTeacher() {
         },
         error: function(data) {
             console.log(data);
-            alert("fail");
+            console.log("fail");
         },
         statusCode: {
             400: function() {
-                alert("错误的ID格式");
+                console.log("错误的ID格式");
             },
             404: function() {
-                alert("未找到课程");
+                console.log("未找到课程");
             }
         }
     });
@@ -301,7 +301,7 @@ function createTeacher() {
         email:$("#email").val()
     };
     console.log(ata);
-    alert("input");
+    console.log("input");
     $.ajax({
         type: "post",
         url: "http://xug98.cn/teacher",
@@ -310,13 +310,13 @@ function createTeacher() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             window.location.href = "./teacher-home.html";
         },
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
@@ -329,14 +329,14 @@ function searchTeacher() {
     if(ata=="") getAllTeacher();
     else{
         console.log(ata);
-        alert("input");
+        console.log("input");
         $.ajax({
             type: "get",
             url: "http://xug98.cn/student/searchTeacher",
             dataType: "json",
             contentType: "application/json",
             success: function(data, textStatus, xhr) {
-                // alert("获取成功");
+                // console.log("获取成功");
                 var content=document.getElementById("content");   //获取外围容器
                 var str="";
                 $.each(data, function(i, item) {
@@ -368,7 +368,7 @@ function searchTeacher() {
             statusCode: {
                 400: function() {
                     $("#identity").val("");
-                    alert("无此用户");
+                    console.log("无此用户");
                 }
             }
         });
@@ -385,7 +385,7 @@ function deleteTeacher(teacherId) {
             contentType: "application/json",
             success: function (data, textStatus, xhr) {
                 console.log(data);
-                alert("success");
+                console.log("success");
                 window.location.reload();
 
             },
@@ -406,7 +406,7 @@ function updateTeacher() {
         name: $("#name").val()
     };
     console.log(ata);
-    alert("input");
+    console.log("input");
     $.ajax({
         type: "put",
         url: "http://xug98.cn/teacher/" + Cookies.get("teacher") + "/information",
@@ -415,13 +415,13 @@ function updateTeacher() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             window.location.href = "./seminar-round.html";
         },
         statusCode: {
             400: function() {
                 $("#password").val("");
-                alert("用户名或密码错误！");
+                console.log("用户名或密码错误！");
             }
         }
     });
@@ -434,7 +434,7 @@ function getTeacherInfo() {
         contentType: "application/json",
         success: function(data, textStatus, xhr) {
             console.log(data);
-            alert("success");
+            console.log("success");
             if (xhr.status === 200) {
                 $("#account").val(data.account);
                 $("#email").val(data.email);
@@ -449,7 +449,7 @@ function resetTeacher() {
     var result = confirm("确定重置教师密码?");
     if (result) {
         console.log(ata);
-        alert("input");
+        console.log("input");
         $.ajax({
             type: "put",
             url: "http://xug98.cn/teacher/" + Cookies.get("teacher") + "/password",
@@ -457,13 +457,13 @@ function resetTeacher() {
             contentType: "application/json",
             success: function (data, textStatus, xhr) {
                 console.log(data);
-                alert("success");
+                console.log("success");
                 window.location.href = "./seminar-round.html";
             },
             statusCode: {
                 400: function () {
                     $("#password").val("");
-                    alert("用户名或密码错误！");
+                    console.log("用户名或密码错误！");
                 }
             }
         });
