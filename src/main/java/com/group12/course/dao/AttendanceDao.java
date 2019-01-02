@@ -27,6 +27,9 @@ public class AttendanceDao {
     KlassSeminarDao klassSeminarDao;
 
     private Boolean orderExist(List<Attendance> attendanceList, Integer order) {
+        if(attendanceList!=null){
+            return true;
+        }
         for (Attendance item : attendanceList) {
             if (order.equals(item.getTeamOrder())) {
                 return true;
@@ -50,6 +53,7 @@ public class AttendanceDao {
                 record.getTeamOrder() != null &&
                 record.getPresented() != null) {
             KlassSeminar klassSeminar = record.getKlassSeminar();
+
             if ((!orderExist(listAttendanceByKlassSeminarId(klassSeminar.getId()), record.getTeamOrder()))
                     && orderLegal(klassSeminar.getSeminar(), record.getTeamOrder())) {
                 attendanceMapper.insertAttendance(record);
