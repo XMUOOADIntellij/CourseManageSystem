@@ -384,7 +384,7 @@ public class AttendanceService {
                     attendanceDao.updateAttendance(result);
                     attendanceDao.updateAttendance(attendance);
                 }
-                return null;
+                return result;
             } else {
                 throw new RecordNotFoundException("Attendance不存在");
             }

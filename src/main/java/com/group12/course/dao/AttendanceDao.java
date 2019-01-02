@@ -27,6 +27,9 @@ public class AttendanceDao {
     KlassSeminarDao klassSeminarDao;
 
     private Boolean orderExist(List<Attendance> attendanceList, Integer order) {
+        if(attendanceList!=null){
+            return true;
+        }
         for (Attendance item : attendanceList) {
             if (order.equals(item.getTeamOrder())) {
                 return true;
@@ -50,6 +53,7 @@ public class AttendanceDao {
                 record.getTeamOrder() != null &&
                 record.getPresented() != null) {
             KlassSeminar klassSeminar = record.getKlassSeminar();
+
             if ((!orderExist(listAttendanceByKlassSeminarId(klassSeminar.getId()), record.getTeamOrder()))
                     && orderLegal(klassSeminar.getSeminar(), record.getTeamOrder())) {
                 attendanceMapper.insertAttendance(record);
@@ -72,7 +76,7 @@ public class AttendanceDao {
         if (attendance != null) {
             klassSeminar = attendance.getKlassSeminar();
         } else {
-            throw new RecordNotFoundException("Attendance Not Found");
+            throw new RecordNotFoundException("没有找到已有的展示报名");
         }
 
         //若更改报名次序则验证，不更改则跳过
@@ -82,7 +86,7 @@ public class AttendanceDao {
         {
             return attendanceMapper.updateAttendance(record);
         } else {
-           throw new UnauthorizedOperationException("Only this Seminar's teacher can operate");
+           throw new UnauthorizedOperationException("该次序已经被选择");
         }
 
     }

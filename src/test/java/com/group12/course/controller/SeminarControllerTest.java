@@ -45,7 +45,6 @@ public class SeminarControllerTest  extends AbstractTransactionalJUnit4SpringCon
         request.put("maxTeam","3");
         request.put("visible","false");
         request.put("seminarSerial","2");
-        request.put("roundId","1");
         //request.put("enrollStartTime",LocalDateTime.now().toString());
 
         MvcResult mvcResult =

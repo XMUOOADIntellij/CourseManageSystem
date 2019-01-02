@@ -51,7 +51,7 @@ public class SeminarDao {
         if (course != null) {
 
             //如果是需要新建轮，则新建轮 插入->获取->设置
-            if (record.getRound() == null) {
+            if (record.getRound().getId()==0) {
                 record.setRound(
                         roundDao.getRound(
                                 roundDao.addRound(course.getId())));
