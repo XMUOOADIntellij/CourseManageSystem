@@ -54,6 +54,8 @@ public class TeacherService {
      * @return 处理数量，成功添加为1，否则为0
      * */
     public Teacher addTeacher(Teacher teacher){
+        teacher.setPassword("123456");
+        teacher.setActive(false);
         return teacherDao.addTeacher(teacher);
     }
 
