@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 
 @Component
-public class KlassRound implements Serializable {
+public class KlassRound  {
 
     private Klass klass;
 

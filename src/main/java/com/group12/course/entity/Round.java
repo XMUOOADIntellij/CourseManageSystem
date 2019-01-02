@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @date 2018/12/12
  * 0表示平均分，1表示最高分
  */
-public class Round implements Serializable {
+public class Round  {
     private Long id;
 
     private Integer roundSerial;

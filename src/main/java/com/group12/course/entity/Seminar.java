@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  */
 
 @Alias("seminar")
-public class Seminar implements Serializable {
+public class Seminar  {
     private Long id;
 
     /**

@@ -5,7 +5,7 @@ import java.io.Serializable;
  * @author Tan Xue
  */
 
-public class KlassStudent implements Serializable {
+public class KlassStudent  {
 
     private Klass klass;
 

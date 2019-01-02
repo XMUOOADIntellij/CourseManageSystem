@@ -12,7 +12,7 @@ import java.util.List;
  * @author Xu Gang
  * @date 2018年12月17日
  */
-public class TeamStrategy implements Serializable {
+public class TeamStrategy  {
     
     private Course course;
 

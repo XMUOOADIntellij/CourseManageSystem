@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author Xu Gang
  * @date 2018年12月17日
  */
-public class CourseMemberLimitStrategy extends Strategy implements Serializable {
+public class CourseMemberLimitStrategy extends Strategy  {
 
     private Course course;
 

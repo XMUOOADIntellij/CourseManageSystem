@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  */
 
 @Component
-public class Course implements Serializable {
+public class Course  {
     private Long id;
 
     private Teacher teacher;

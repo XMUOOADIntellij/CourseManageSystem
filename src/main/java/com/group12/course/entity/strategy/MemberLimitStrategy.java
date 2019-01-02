@@ -12,7 +12,7 @@ import java.util.List;
  * @author Xu Gang
  * @date 2018年12月17日
  */
-public class MemberLimitStrategy extends Strategy implements Serializable {
+public class MemberLimitStrategy extends Strategy  {
 
     private Integer minMember;
 

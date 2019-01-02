@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author Xu Gang
  * @date 2018年12月26日
  */
-public class Application implements Serializable {
+public class Application  {
 
     private Long id;
 

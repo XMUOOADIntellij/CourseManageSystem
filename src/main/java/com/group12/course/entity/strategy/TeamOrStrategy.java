@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @author Tan Xue
  */
-public class TeamOrStrategy extends Strategy implements Serializable {
+public class TeamOrStrategy extends Strategy  {
 
     private String strategyName;
 

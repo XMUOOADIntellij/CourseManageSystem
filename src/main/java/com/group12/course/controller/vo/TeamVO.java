@@ -12,7 +12,7 @@ import com.group12.course.entity.Team;
  * @author Xu Gang
  * @date 2018年12月26日
  */
-public class TeamVO implements Serializable {
+public class TeamVO  {
 
     private String name;
 
