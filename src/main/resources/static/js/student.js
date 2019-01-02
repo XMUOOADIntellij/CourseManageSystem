@@ -1339,7 +1339,21 @@ function getSeminarByClass() {
                 $("#teamStartTime").val(reconvertTime(data.enrollStartTime));
                 $("#teamEndTime").val(reconvertTime(data.enrollEndTime));
                 $("#reportDdl").val(reconvertTime(data.reportDdl));
-
+                var content=document.getElementById("left-content");   //获取外围容器
+                var str="";
+                str+='         <div class="card p-3">\n' +
+                    '                  <div class="d-flex align-items-center">\n' +
+                    '                    <span class="stamp stamp-md bg-blue mr-3">\n' +
+                    '                      <i class="fe fe-file-text"></i>\n' +
+                    '                    </span>\n' +
+                    '                    <div>\n' +
+                    '                      <h4 class="m-0">\n' +
+                    '                        <a href="seminar-round-detail-signup.html">报名情况 </a>\n' +
+                    '                      </h4>\n' +
+                    '                    </div>\n' +
+                    '                  </div>\n' +
+                    '                </div>';
+                content.innerHTML=str;
 
             }
             console.log(data);

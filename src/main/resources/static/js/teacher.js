@@ -2548,16 +2548,15 @@ function getTeamValidTask() {
         }
     });
 }
-function updateTeamValid(handletype,id,e) {
+function updateTeamValid(handletype,id) {
     let ata = {
         handletype: handletype
     };
     console.log(ata);
-    let obj=$(e);
-    alert(obj);
+
     $.ajax({
         type: "put",
-        url: ":8080/request/teamvalid/" +id,
+        url: "http://xug98.cn/request/teamvalid/" +id,
         dataType: "json",
         data: JSON.stringify(ata),
         contentType: "application/json",
@@ -2575,10 +2574,65 @@ function updateTeamValid(handletype,id,e) {
 
     window.location.reload();
 }
+function updateSeminarShare(handletype,id) {
+    let ata = {
+        handletype: handletype
+    };
+    console.log(ata);
+    let obj=$(e);
+    alert(obj);
+    $.ajax({
+        type: "put",
+        url: "http://xug98.cn/course/seminarshare/" +id,
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            }
+        }
+    });
+
+    window.location.reload();
+}
+function updateTeamShare(handletype,id) {
+    let ata = {
+        handletype: handletype
+    };
+    console.log(ata);
+    let obj=$(e);
+    alert(obj);
+    $.ajax({
+        type: "put",
+        url: "http://xug98.cn/course/teamshare/" +id,
+        dataType: "json",
+        data: JSON.stringify(ata),
+        contentType: "application/json",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+            alert("success");
+        },
+        statusCode: {
+            400: function() {
+                $("#password").val("");
+                alert("用户名或密码错误！");
+            }
+        }
+    });
+
+    window.location.reload();
+}
+
 function getTeamShareTask() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/" ,
+        url: "http://xug98.cn/course/teamshare" ,
         // url: "data.json",
         dataType: "json",
         contentType: "application/json;",
@@ -2586,43 +2640,117 @@ function getTeamShareTask() {
             if (xhr.status === 200) {
                 // alert("获取成功");
                 console.log("classlist");
-                var content=document.getElementById("content");   //获取外围容器
-                var str="";
+                let content=document.getElementById("content");   //获取外围容器
+                let str1="";
+                let str2="";
 
                 $.each(data, function(i, item) {
+                    let strUp='<i class="fe fe-thumbs-up mr-1"></i>';
+                    let strDown='<i class="fe fe-thumbs-down mr-1"></i>';
                     console.log(item);
-                    str +=' <div class="col-lg-4">\n' +
-                        '                <div class="card">\n' +
-                        '                  <div class="card-body d-flex flex-column">\n' +
-                        '                    <h4><a href="#">共享'+item.courseName+'课程 组队</a></h4>\n' +
-                        '                    <div class="text-muted">\n' +
-                        '                      '+item.teacherName+'老师，向您发起共享'+item.courseName+'课程组队的申请。\n' +
-                        '                    </div>\n' +
-                        '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
-                        '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
-                        '                      <div><a class="text-default">'+item.teacherName+'</a></div>\n' +
-                        '\n' +
-                        '                      <div class="ml-auto text-muted">\n' +
-                        '                        <a\n' +
-                        '                          href="javascript:void(0)"\n' +
-                        '                          class="icon d-none d-md-inline-block ml-3"\n' +
-                        '                          onclick="updateTeamShare("reject",'+item.id+')"\n' +
-                        '                          ><i class="fe fe-thumbs-down mr-1"></i\n' +
-                        '                        ></a>\n' +
-                        '                        <a\n' +
-                        '                          href="javascript:void(0)"\n' +
-                        '                          onclick="updateTeamShare("accept",'+item.id+')"\n' +
-                        '                          class="icon d-none d-md-inline-block ml-3"\n' +
-                        '                          ><i class="fe fe-thumbs-up mr-1"></i\n' +
-                        '                        ></a>\n' +
-                        '                      </div>\n' +
-                        '                    </div>\n' +
-                        '                  </div>\n' +
-                        '                </div>\n' +
-                        '              </div>';
-                });
-                content.innerHTML=str;
+                    let itemCourse=(item.team).mainCourse;
+                    let itemKlass=(item.team).klass;
+                    let itemTeacher=(itemCourse).teacher;
+                    if(item.status=='1') {
+                        strUp='<i class="fe fe-thumbs-up mr-1" style="color:#8BC34A;"></i>';
+                        str2 +=' <div class="col-lg-4">\n' +
+                            '                <div class="card">\n' +
+                            '                  <div class="card-body d-flex flex-column">\n' +
+                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 组队</a></h4>\n' +
+                            '                    <div class="text-muted">\n' +
+                            '                      '+itemCourse.courseName+'课程'+itemTeacher.teacherName+'老师向您申请分享组队\n' +
+                            '                    </div>\n' +
 
+                            '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
+                            '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
+                            '                      <div><a class="text-default">'+itemTeacher.teacherName+' </a></div>\n' +
+                            '\n' +
+                            '                      <div class="ml-auto text-muted">\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          class="icon ml-3"\n' +
+                            '                          onclick="updateTeamShare(\'reject\','+item.id+')"\n' +
+                            '                          >' +strDown+
+                            '</a>\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          onclick="updateTeamShare(\'accept\','+item.id+')"\n' +
+                            '                          class="icon  ml-3"\n' +
+                            '                          >' +strUp+
+                            '</a>\n' +
+                            '                      </div>\n' +
+                            '                    </div>\n' +
+                            '                  </div>\n' +
+                            '                </div>\n' +
+                            '              </div>';
+                    }
+                    if(item.status=='2') {
+                        strDown='<i class="fe fe-thumbs-down mr-1" style="color:#e57373;"></i>';
+                        str2 +=' <div class="col-lg-4">\n' +
+                            '                <div class="card">\n' +
+                            '                  <div class="card-body d-flex flex-column">\n' +
+                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 组队</a></h4>\n' +
+                            '                    <div class="text-muted">\n' +
+                            '                      '+itemCourse.courseName+'课程'+itemKlass.klassSerial+'班的'+itemStu.studentName+'同学向您申请组队\n' +
+                            '                    </div>\n' +
+                            '<div class="text-muted">原因：'+item.reason+'</div>'+
+                            '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
+                            '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
+                            '                      <div><a class="text-default">'+itemStu.studentName+' </a></div>\n' +
+                            '\n' +
+                            '                      <div class="ml-auto text-muted">\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          class="icon ml-3"\n' +
+                            '                          onclick="updateTeamValid(\'reject\','+item.id+')"\n' +
+                            '                          >' +strDown+
+                            '</a>\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          onclick="updateTeamValid(\'accept\','+item.id+',this)"\n' +
+                            '                          class="icon  ml-3"\n' +
+                            '                          >' +strUp+
+                            '</a>\n' +
+                            '                      </div>\n' +
+                            '                    </div>\n' +
+                            '                  </div>\n' +
+                            '                </div>\n' +
+                            '              </div>';
+                    }
+                    if(item.status=='0') {
+                        str1 +=' <div class="col-lg-4">\n' +
+                            '                <div class="card">\n' +
+                            '                  <div class="card-body d-flex flex-column">\n' +
+                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 组队</a></h4>\n' +
+                            '                    <div class="text-muted">\n' +
+                            '                      '+itemCourse.courseName+'课程'+itemKlass.klassSerial+'班的'+itemStu.studentName+'同学向您申请组队\n' +
+                            '                    </div>\n' +
+                            '<div class="text-muted">原因：'+item.reason+'</div>'+
+                            '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
+                            '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
+                            '                      <div><a class="text-default">'+itemStu.studentName+' </a></div>\n' +
+                            '\n' +
+                            '                      <div class="ml-auto text-muted">\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          class="icon ml-3"\n' +
+                            '                          onclick="updateTeamValid(\'reject\','+item.id+')"\n' +
+                            '                          >' +strDown+
+                            '</a>\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          onclick="updateTeamValid(\'accept\','+item.id+',this)"\n' +
+                            '                          class="icon  ml-3"\n' +
+                            '                          >' +strUp+
+                            '</a>\n' +
+                            '                      </div>\n' +
+                            '                    </div>\n' +
+                            '                  </div>\n' +
+                            '                </div>\n' +
+                            '              </div>';
+                    }
+                });
+                content.innerHTML+=str1+str2;
             }
         },
         statusCode: {
@@ -2638,50 +2766,124 @@ function getTeamShareTask() {
 function getSeminarShareTask() {
     $.ajax({
         type: "get",
-        url: "http://xug98.cn/request/teamvaild" ,
+        url: "http://xug98.cn/course/seminarshare" ,
         dataType: "json",
         contentType: "application/json;",
         success: function(data, textStatus, xhr) {
             if (xhr.status === 200) {
                 // alert("获取成功");
                 console.log("classlist");
-                var content=document.getElementById("content");   //获取外围容器
-                var str="";
+                let content=document.getElementById("content");   //获取外围容器
+                let str1="";
+                let str2="";
 
                 $.each(data, function(i, item) {
+                    let strUp='<i class="fe fe-thumbs-up mr-1"></i>';
+                    let strDown='<i class="fe fe-thumbs-down mr-1"></i>';
                     console.log(item);
-                    str +=' <div class="col-lg-4">\n' +
-                        '                <div class="card">\n' +
-                        '                  <div class="card-body d-flex flex-column">\n' +
-                        '                    <h4><a href="#">申请'+item.courseName+'课程 讨论课</a></h4>\n' +
-                        '                    <div class="text-muted">\n' +
-                        '                      '+item.teacherName+'老师，向您发起共享'+item.teacherName+'课程讨论课的申请。\n' +
-                        '                    </div>\n' +
-                        '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
-                        '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
-                        '                      <div><a class="text-default">'+item.teacherName+' 老师</a></div>\n' +
-                        '\n' +
-                        '                      <div class="ml-auto text-muted">\n' +
-                        '                        <a\n' +
-                        '                          href="javascript:void(0)"\n' +
-                        '                          class="icon d-none d-md-inline-block ml-3"\n' +
-                        '                          onclick="updateSeminarShare("reject",'+item.id+')"\n' +
-                        '                          ><i class="fe fe-thumbs-down mr-1"></i\n' +
-                        '                        ></a>\n' +
-                        '                        <a\n' +
-                        '                          href="javascript:void(0)"\n' +
-                        '                          onclick="updateSeminarShare("accept",'+item.id+')"\n' +
-                        '                          class="icon d-none d-md-inline-block ml-3"\n' +
-                        '                          ><i class="fe fe-thumbs-up mr-1"></i\n' +
-                        '                        ></a>\n' +
-                        '                      </div>\n' +
-                        '                    </div>\n' +
-                        '                  </div>\n' +
-                        '                </div>\n' +
-                        '              </div>';
-                });
-                content.innerHTML=str;
+                    let itemCourse=(item.team).mainCourse;
+                    let itemKlass=(item.team).klass;
+                    let itemTeacher=(itemCourse).teacher;
+                    if(item.status=='1') {
+                        strUp='<i class="fe fe-thumbs-up mr-1" style="color:#8BC34A;"></i>';
+                        str2 +=' <div class="col-lg-4">\n' +
+                            '                <div class="card">\n' +
+                            '                  <div class="card-body d-flex flex-column">\n' +
+                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 组队</a></h4>\n' +
+                            '                    <div class="text-muted">\n' +
+                            '                      '+itemCourse.courseName+'课程'+itemTeacher.teacherName+'老师向您申请分享讨论课'+
+                            '                    </div>\n' +
 
+                            '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
+                            '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
+                            '                      <div><a class="text-default">'+itemTeacher.teacherName+' </a></div>\n' +
+                            '\n' +
+                            '                      <div class="ml-auto text-muted">\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          class="icon ml-3"\n' +
+                            '                          onclick="updateSeminarShare(\'reject\','+item.id+','+item.status+')"\n' +
+                            '                          >' +strDown+
+                            '</a>\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          onclick="updateSeminarShare(\'accept\','+item.id+','+item.status+')"\n' +
+                            '                          class="icon  ml-3"\n' +
+                            '                          >' +strUp+
+                            '</a>\n' +
+                            '                      </div>\n' +
+                            '                    </div>\n' +
+                            '                  </div>\n' +
+                            '                </div>\n' +
+                            '              </div>';
+                    }
+                    if(item.status=='2') {
+                        strDown='<i class="fe fe-thumbs-down mr-1" style="color:#e57373;"></i>';
+                        str2 +=' <div class="col-lg-4">\n' +
+                            '                <div class="card">\n' +
+                            '                  <div class="card-body d-flex flex-column">\n' +
+                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 组队</a></h4>\n' +
+                            '                    <div class="text-muted">\n' +
+                            '                      '+itemCourse.courseName+'课程'+itemKlass.klassSerial+'班的'+itemStu.studentName+'同学向您申请组队\n' +
+                            '                    </div>\n' +
+                            '<div class="text-muted">原因：'+item.reason+'</div>'+
+                            '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
+                            '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
+                            '                      <div><a class="text-default">'+itemStu.studentName+' </a></div>\n' +
+                            '\n' +
+                            '                      <div class="ml-auto text-muted">\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          class="icon ml-3"\n' +
+                            '                          onclick="updateTeamValid(\'reject\','+item.id+')"\n' +
+                            '                          >' +strDown+
+                            '</a>\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          onclick="updateTeamValid(\'accept\','+item.id+',this)"\n' +
+                            '                          class="icon  ml-3"\n' +
+                            '                          >' +strUp+
+                            '</a>\n' +
+                            '                      </div>\n' +
+                            '                    </div>\n' +
+                            '                  </div>\n' +
+                            '                </div>\n' +
+                            '              </div>';
+                    }
+                    if(item.status=='0') {
+                        str1 +=' <div class="col-lg-4">\n' +
+                            '                <div class="card">\n' +
+                            '                  <div class="card-body d-flex flex-column">\n' +
+                            '                    <h4><a href="#">申请'+itemCourse.courseName+'课程 组队</a></h4>\n' +
+                            '                    <div class="text-muted">\n' +
+                            '                      '+itemCourse.courseName+'课程'+itemKlass.klassSerial+'班的'+itemStu.studentName+'同学向您申请组队\n' +
+                            '                    </div>\n' +
+                            '<div class="text-muted">原因：'+item.reason+'</div>'+
+                            '                    <div class="d-flex align-items-center pt-5 mt-auto">\n' +
+                            '                      <div class="avatar avatar-md mr-3">Lxm</div>\n' +
+                            '                      <div><a class="text-default">'+itemStu.studentName+' </a></div>\n' +
+                            '\n' +
+                            '                      <div class="ml-auto text-muted">\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          class="icon ml-3"\n' +
+                            '                          onclick="updateTeamValid(\'reject\','+item.id+')"\n' +
+                            '                          >' +strDown+
+                            '</a>\n' +
+                            '                        <a\n' +
+                            '                          href="javascript:void(0)"\n' +
+                            '                          onclick="updateTeamValid(\'accept\','+item.id+',this)"\n' +
+                            '                          class="icon  ml-3"\n' +
+                            '                          >' +strUp+
+                            '</a>\n' +
+                            '                      </div>\n' +
+                            '                    </div>\n' +
+                            '                  </div>\n' +
+                            '                </div>\n' +
+                            '              </div>';
+                    }
+                });
+                content.innerHTML+=str1+str2;
             }
         },
         statusCode: {
