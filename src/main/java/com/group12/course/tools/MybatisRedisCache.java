@@ -40,7 +40,6 @@ public class MybatisRedisCache implements Cache {
         if (id == null) {
             throw new IllegalArgumentException("Cache instances require an ID");
         }
-        //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>MybatisRedisCache:id=" + id);
         this.id = id;
     }
 
@@ -57,7 +56,6 @@ public class MybatisRedisCache implements Cache {
 
     @Override
     public void putObject(Object key, Object value) {
-        //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>putObject:" + key + "=" + value);
         redisClient.set(SerializeUtil.serialize(key.toString()), SerializeUtil.serialize(value));
 
         // 设置过期时间
@@ -67,7 +65,7 @@ public class MybatisRedisCache implements Cache {
     @Override
     public Object getObject(Object key) {
         Object value = SerializeUtil.unserialize(redisClient.get(SerializeUtil.serialize(key.toString())));
-        //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>getObject:" + key + "=" + value);
+        
         return value;
     }
 
