@@ -769,7 +769,7 @@ function updateClass(classId) {
     let formData = new FormData(content);
 
     $.ajax({
-        url: "http://xug98.cn/class/" + Cookies.get("class"),
+        url: "http://xug98.cn/class/" + classId,
         data: formData,
         processData: false,
         contentType: false,
@@ -2258,8 +2258,8 @@ function getCourseInfo() {
                 $("#reportPercentage").val(data.course.reportPercentage);
                 $("#questionPercentage").val(data.course.questionPercentage);
                 $("#presentationPercentage").val(data.course.presentationPercentage);
-                $("#teamStartTime").val(data.course.teamStartTime);
-                $("#teamEndTime").val(data.course.teamEndTime);
+                $("#teamStartTime").val(reconvertTime(data.course.teamStartTime));
+                $("#teamEndTime").val(reconvertTime(data.course.teamEndTime));
                 let strategyList=data.teamStrategyList;
             let content1=document.getElementById("content1");   //获取外围容器
             let content3=document.getElementById("content3");   //获取外围容器
