@@ -5,9 +5,7 @@ import com.group12.course.controller.vo.QuestionVO;
 import com.group12.course.dao.AttendanceDao;
 import com.group12.course.dao.QuestionDao;
 import com.group12.course.dao.TeacherDao;
-import com.group12.course.entity.Attendance;
-import com.group12.course.entity.Seminar;
-import com.group12.course.entity.Teacher;
+import com.group12.course.entity.*;
 import com.group12.course.service.AttendanceService;
 import com.group12.course.service.QuestionService;
 import com.group12.course.service.SeminarService;
@@ -41,10 +39,17 @@ public class SeminarServiceTest extends AbstractTransactionalJUnit4SpringContext
     public void testCreateSeminar(){
         Seminar seminar =new Seminar();
         seminar.setMaxTeam(5);
+        seminar.setCourse(new Course());
+        seminar.getCourse().setId(16L);
+        seminar.setRound(new Round());
+        seminar.getRound().setId(0L);
         seminar.setSeminarName("test");
         seminar.setSeminarSerial(4);
         seminar.setVisible(false);
-        //seminarService.createSeminar(seminar);
+
+        Teacher teacher = new Teacher();
+        teacher.setId(3L);
+        seminarService.createSeminar(seminar,teacher);
     }
 
     @Test
