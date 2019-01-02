@@ -627,7 +627,6 @@ function createTeam() {
                     else{
                         window.location.href = "./course-team.html";
                     }
-
                 }
                 if(data.status==1)
                 {

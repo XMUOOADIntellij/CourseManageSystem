@@ -440,6 +440,8 @@ onload="onPomodoroTimer();connect();initProgress()"-->
   }
 
   function receiveNext(data){
+    let myAttendanceId=data.id;
+    tabClick(myAttendanceId);
   }
   function receiveStatus(data){
     if(data.status==1){
