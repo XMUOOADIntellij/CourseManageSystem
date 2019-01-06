@@ -183,6 +183,7 @@ public class QuestionService {
                         result.setSelected(true);
                         questionDao.updateQuestion(result);
                     }
+                    
                     return result;
                 } else {
                     throw new UnauthorizedOperationException("只有当前课的老师可抽取提问");
