@@ -52,11 +52,7 @@ public class SeminarService {
                         teacher.getId())) {
                     //为record增加serial
                     List<Seminar> seminarList = seminarDao.listSeminarByCourseId(course.getId());
-                    if (seminarList == null) {
-                        record.setSeminarSerial(1);
-                    } else {
-                        record.setSeminarSerial(seminarList.size() + 1);
-                    }
+                    record.setSeminarSerial(seminarList==null?1:seminarList.size()+1);
                     return seminarDao.insertSeminar(record);
                 } else {
                     throw new UnauthorizedOperationException("不属于自己的课程不能创建讨论课");
