@@ -294,7 +294,7 @@
                     <div class="card">
                       <div class="card-header">
                         <h3 class="card-title mr-4">提问队列</h3>
-                        <span class="float-right"><span class="badge badge-primary" id="ques-number">0</span></span>                      </div>
+                        <span class="float-right"><span class="badge badge-primary" id="ques-number"></span></span>                      </div>
                       <div class="card-body">
                         <div>
                           <div class="mb-3">
@@ -365,22 +365,22 @@
   function setConnected(connected) {}
   //403
   function connect() {
-    var socket = new SockJS("/Socket");
+    var socket = new SockJS("http://xug98.cn/Socket");
     stompClient = Stomp.over(socket);
     stompClient.connect(
             {},
             function(frame) {
               setConnected(true);
               console.log("Connected: " + frame);
-              stompClient.subscribe("/seminarSocket/progress", function(greeting) {
+              stompClient.subscribe("http://xug98.cn/seminarSocket/progress", function(greeting) {
                 console.log(JSON.parse(greeting.body));
                 receiveStatus(JSON.parse(greeting.body));
               });
-              stompClient.subscribe("/seminarSocket/question", function(greeting) {
+              stompClient.subscribe("http://xug98.cn/seminarSocket/question", function(greeting) {
                 console.log(JSON.parse(greeting.body));
                 receiveQues(JSON.parse(greeting.body));
               });
-              stompClient.subscribe("/seminarSocket/attendance", function(greeting) {
+              stompClient.subscribe("http://xug98.cn/seminarSocket/attendance", function(greeting) {
                 console.log(JSON.parse(greeting.body));
                 receiveNext(JSON.parse(greeting.body));
               });
@@ -398,24 +398,24 @@
   }
 
   function pause() {
-    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/pause", {"jwt":localStorage.jwt}, null);
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/pause", {"jwt":localStorage.jwt}, null);
   }
   function start() {
 
-    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/start", {"jwt":localStorage.jwt}, null);
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/start", {"jwt":localStorage.jwt}, null);
   }
   function continu() {
 
-    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/continue", {"jwt":localStorage.jwt}, null);
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/continue", {"jwt":localStorage.jwt}, null);
   }
   function end() {
-    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/end", {"jwt":localStorage.jwt}, null);
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/end", {"jwt":localStorage.jwt}, null);
   }
   function next() {
-    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/next", {"jwt":localStorage.jwt}, null);
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/next", {"jwt":localStorage.jwt}, null);
   }
   function select() {
-    stompClient.send("/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/selectQuestion", {"jwt":localStorage.jwt}, null);
+    stompClient.send("http://xug98.cn/app/Socket/seminar/"+Cookies.get("seminar")+"/class/"+Cookies.get("class")+"/attendance/"+Cookies.get("attendance")+"/selectQuestion", {"jwt":localStorage.jwt}, null);
 
   }
 
