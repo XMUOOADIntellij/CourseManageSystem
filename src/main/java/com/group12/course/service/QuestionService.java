@@ -141,8 +141,9 @@ public class QuestionService {
                 if (klassSeminar.getKlass().getCourse().getTeacher().getId()
                         .equals(teacher.getId())) {
 
+                    // 本次讨论课的所有提问
                     List<Question> questionList = questionDao.listQuestionByKlassSeminarId(klassSeminar.getId());
-                    // 小组，此次讨论课被提问次数
+                    // <小组，此次讨论课被提问次数>
                     Map<Long, Integer> questionCount = new TreeMap<>();
 
                     // 计算提问数，提问被抽加一，提问没被抽减一
@@ -182,6 +183,7 @@ public class QuestionService {
                         result.setSelected(true);
                         questionDao.updateQuestion(result);
                     }
+                    
                     return result;
                 } else {
                     throw new UnauthorizedOperationException("只有当前课的老师可抽取提问");

@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * 与讨论课相关Dao层
+ *
  * @author Y Jiang
  * @date 2018/12/22
  */
@@ -47,43 +48,38 @@ public class SeminarDao {
         List<KlassSeminar> klassSeminarsRecord = new ArrayList<>();
         Course course = courseDao.getCourse(record.getCourse().getId());
 
-        // 判断当前课程存在
-        if (course != null) {
-
-            //如果是需要新建轮，则新建轮 插入->获取->设置
-            if (record.getRound().getId()==0) {
-                record.setRound(
-                        roundDao.getRound(
-                                roundDao.addRound(course.getId())));
-            }
-
-            //查找所有从课程
-            courseList = courseDao.getSubCourseBySeminarMainCourseId(course.getId());
-            courseList.add(course);
-            for(Course item:courseList){
-                courseIdList.add(item.getId());
-            }
-
-            //寻找主课程以及从课程下的班级
-            classRecord = klassDao.getAllKlassByCourseIdList(courseIdList);
-
-            //生成班级讨论课的记录
-            for (Klass klass : classRecord) {
-                KlassSeminar tempKlassSeminar = new KlassSeminar();
-                tempKlassSeminar.setKlass(klass);
-                tempKlassSeminar.setSeminar(record);
-                tempKlassSeminar.setSeminarStatus(0);
-                tempKlassSeminar.setReportDdl(null);
-                klassSeminarsRecord.add(tempKlassSeminar);
-            }
-            //插入讨论课记录
-            seminarMapper.insertSeminar(record);
-            //插入班级讨论课记录
-            klassSeminarDao.insertKlassSeminarList(klassSeminarsRecord);
-            return record.getId();
-        } else {
-            throw new InformationException("讨论课不属于任何课程");
+        //如果是需要新建轮，则新建轮 插入->获取->设置
+        if (record.getRound().getId() == 0) {
+            record.setRound(
+                    roundDao.getRound(
+                            roundDao.addRound(course.getId())));
         }
+
+        //查找所有从课程
+        courseList = courseDao.getSubCourseBySeminarMainCourseId(course.getId());
+        courseList.add(course);
+        for (Course item : courseList) {
+            courseIdList.add(item.getId());
+        }
+
+        //寻找主课程以及从课程下的班级
+        classRecord = klassDao.getAllKlassByCourseIdList(courseIdList);
+
+        //生成班级讨论课的记录
+        for (Klass klass : classRecord) {
+            KlassSeminar tempKlassSeminar = new KlassSeminar();
+            tempKlassSeminar.setKlass(klass);
+            tempKlassSeminar.setSeminar(record);
+            tempKlassSeminar.setSeminarStatus(0);
+            tempKlassSeminar.setReportDdl(null);
+            klassSeminarsRecord.add(tempKlassSeminar);
+        }
+        //插入讨论课记录
+        seminarMapper.insertSeminar(record);
+        //插入班级讨论课记录
+        klassSeminarDao.insertKlassSeminarList(klassSeminarsRecord);
+        return record.getId();
+
     }
 
     /**
@@ -123,16 +119,16 @@ public class SeminarDao {
 
     public List<Seminar> listSeminarByRoundId(Long roundId) {
         try {
-            return  seminarMapper.listSeminarByRoundId(roundId);
-        }catch (ConcurrentModificationException e){
+            return seminarMapper.listSeminarByRoundId(roundId);
+        } catch (ConcurrentModificationException e) {
             return seminarMapper.listSeminarByRoundId(roundId);
         }
     }
 
     public List<Seminar> listSeminarByCourseId(Long courseId) {
-        try{
-            return  seminarMapper.listSeminarByCourseId(courseId);
-        }catch (ConcurrentModificationException e){
+        try {
+            return seminarMapper.listSeminarByCourseId(courseId);
+        } catch (ConcurrentModificationException e) {
             return seminarMapper.listSeminarByCourseId(courseId);
         }
     }
