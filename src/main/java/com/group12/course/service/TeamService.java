@@ -123,7 +123,7 @@ public class TeamService {
             returnTeam.setStatus(teamIsInvalid);
             int i =teamDao.changeTeam(returnTeam);
             throw new InformationException("队伍不合法");
-            // 记得此处提醒前端相关状态码为409
+            // 记得此处提醒前端相关状态码为411
         }
         return returnTeam;
     }

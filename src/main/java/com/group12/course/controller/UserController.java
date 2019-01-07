@@ -39,9 +39,9 @@ public class UserController {
      * 
      * @param user 前端传入的用户对象
      * 若登陆成功，返回 200
-     * 若登陆失败，返回 400
+     * 若登陆失败，返回 400a
      * */
-    @PostMapping(value = "/login", produces = "application/json; charset=utf-8")
+    @PostMapping(value = "/login", produces = "application/json;charset=UTF-8")
     public void login(@RequestBody Teacher user, HttpServletResponse response)throws IOException {
         // 用于存储返回的数据的临时对象
         Teacher temp=new Teacher();
